@@ -17,7 +17,7 @@
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["components/*"],
-      "@/images/*": ["components/images/*"],
+      "@/svg/*": ["components/svg/*"],
       "@/pages/*": ["pages/*"],
       "@/styles/*": ["styles/*"],
       "@/lib/*": ["lib/*"],
