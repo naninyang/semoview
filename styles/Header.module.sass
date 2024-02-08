@@ -1,0 +1,50 @@
+@import './designSystem'
+
+header.header
+  .container
+    display: flex
+    justify-content: space-between
+    padding: rem(23) rem(17)
+
+    h1
+      span
+        +screen-reader-only
+
+      i
+        display: inline-block
+        width: rem(165)
+        height: rem(32)
+
+    nav
+      ol
+        display: flex
+        gap: rem(3)
+
+        li
+          a
+            position: relative
+            display: inline-block
+            padding: rem(9) rem(7)
+            font-size: rem(20)
+            font-weight: 700
+            color: $hex-dark
+            transition: all .7s cubic-bezier(.4,0,.2,1)
+
+            &::before
+              content: ''
+              display: block
+              background-color: $hex-accent
+              position: absolute
+              transform: translateX(-50%)
+              bottom: rem(3)
+              left: 50%
+              width: 0
+              height: rem(2)
+              transition: all .3s cubic-bezier(.4,0,.2,1)
+
+            &:hover, &:focus
+              font-weight: 800
+              color: $hex-accent
+
+              &::before
+                width: calc(100% - rem(14))
