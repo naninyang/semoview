@@ -28,33 +28,8 @@ body, pre, input, button, textarea, select
   text-rendering: optimizeLegibility
   -webkit-font-smoothing: antialiased
 
-body[data-theme="dark"]
-  --txt-subject: #{$hex-light-subject}
-  --txt-summary: #{$hex-light-summary}
-  --txt-blockquote: #{$hex-white}
-  --bg-primary: #{$hex-dark-summary}
-  --bg-secondary: #{$hex-dark-background}
-  --border: #{$hex-dark-border}
-  --bg-primary-opacity: rgba(0, 0, 0, .7)
-  --default-text: #{$hex-white}
-  --default-bg: #{$hex-black}
-
-body, body[data-theme="light"]
-  --txt-subject: #{$hex-dark-subject}
-  --txt-summary: #{$hex-dark-summary}
-  --txt-blockquote: #{$hex-black}
-  --bg-primary: #{$hex-light-summary}
-  --bg-secondary: #{$hex-light-background}
-  --border: #{$hex-light-border}
-  --bg-primary-opacity: rgba(255, 255, 255, .7)
-  --default-text: #{$hex-black}
-  --default-bg: #{$hex-white}
-
 body
   background-color: var(--default-bg)
-
-main
-  margin-top: calc(env(safe-area-inset-top) + rem(50))
 
 h1, h2, h3, h4, h5, h6
   margin-top: 0

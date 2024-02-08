@@ -3,15 +3,7 @@ export const hex: { [key: string]: string } = {
   white: '#fff',
   dark: '#332941',
   light: '#EEF5FF',
-  darkSubject: '#1A0505',
-  darkSummary: '#141414',
-  lightBorder: '#E3E5E8',
-  lightBackground: '#F4F6FA',
-  accent: '#EE9B00',
-  lightSubject: '#ADADAD',
-  lightSummary: '#CBCBCB',
-  darkBorder: '#313334',
-  darkBackground: '#272829',
+  accent: '#EF233C',
 };
 
 export const mq = {
