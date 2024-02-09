@@ -4,39 +4,68 @@ header.header
   .container
     display: flex
     justify-content: space-between
-    padding: rem(23) rem(17)
+    background-color: rgba($hex-light, .7)
+    backdrop-filter: saturate(180%) blur(rem(20))
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    padding: calc(env(safe-area-inset-top) + rem(23)) calc(env(safe-area-inset-top) + rem(17)) rem(23)
+
+    s
+      width: rem(50)
+
+      +mq(minSmall)
+        width: rem(190)
 
     h1
-      width: rem(165)
-      height: rem(32)
+      width: rem(120)
+      height: rem(23)
 
-      a
-        display: inline-block
+      +mq(minSmall)
         width: rem(165)
         height: rem(32)
+
+      a
+        display: block
+        width: rem(120)
+        height: rem(23)
+        line-height: 1
+
+        +mq(minSmall)
+          width: rem(165)
+          height: rem(32)
 
       span
         +screen-reader-only
 
       i
         display: inline-block
-        width: rem(165)
-        height: rem(32)
+        width: rem(120)
+        height: rem(23)
+
+        +mq(minSmall)
+          width: rem(165)
+          height: rem(32)
 
     nav
       ol
         display: flex
-        gap: rem(3)
+        gap: rem(2)
 
         li
           a
             position: relative
             display: inline-block
-            padding: rem(4) rem(7)
-            font-size: rem(20)
+            padding: rem(4) rem(2)
+            font-size: rem(14)
             font-weight: 700
             color: $hex-dark
             transition: all .7s cubic-bezier(.4,0,.2,1)
+
+            +mq(minSmall)
+              padding: rem(4) rem(7)
+              font-size: rem(20)
 
             &::before
               content: ''

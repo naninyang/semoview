@@ -1,0 +1,117 @@
+@import './designSystem'
+
+.jejeup
+  display: flex
+  flex-direction: column
+  gap: rem(25)
+  padding: 0 calc(env(safe-area-inset-right) + rem(15)) calc(env(safe-area-inset-left) + rem(15))
+
+  +mq(minLarge)
+    padding: 0 calc(env(safe-area-inset-right) + rem(25)) 0 calc(env(safe-area-inset-left) + rem(25))
+
+  .loading, .error
+    display: flex
+    flex: 1
+    align-items: center
+    color: $hex-accent
+
+  .error
+    gap: rem(15)
+
+  article
+    display: flex
+    flex-direction: column
+    width: 100%
+
+    +mq(minLarge)
+      width: 77%
+
+    .preview .youtube
+      padding: rem(12) 0 rem(24)
+
+    h1
+      font-size: rem(20)
+      font-weight: 700
+      line-height: 1.4
+
+    .detail
+      display: flex
+      gap: rem(12)
+      margin-bottom: rem(12)
+
+      img
+        border-radius: 100%
+        width: rem(40)
+        height: rem(40)
+
+      .user
+        display: flex
+        flex-direction: column
+        justify-content: center
+
+        cite
+          font-size: rem(16)
+          font-weight: 500
+          line-height: 1.375
+
+        time
+          font-size: rem(12)
+          line-height: 1.5
+
+    p
+      background-color: rgba($hex-dark, .2)
+      border-radius: rem(12)
+      padding: rem(12)
+      font-size: rem(14)
+      line-height: 1.42857143
+
+    .figcaption
+      display: flex
+      flex-direction: column
+      gap: rem(12)
+
+    .summary
+      display: flex
+      gap: rem(7)
+
+      dt
+        em
+          display: inline-flex
+          border: 2px solid $hex-accent
+          border-radius: rem(3)
+          padding: rem(2) rem(5)
+          font-size: rem(14)
+          font-weight: 700
+          font-style: normal
+          color: $hex-accent
+
+      dd
+        padding-top: rem(3)
+
+        strong
+          font-size: rem(16)
+          font-weight: 700
+          line-height: 1.125
+          color: $hex-dark
+
+    .info
+      display: flex
+      flex-direction: column
+      gap: rem(3)
+
+      > div
+        display: inline-flex
+        gap: rem(7)
+
+      dt, dd
+        font-size: rem(14)
+
+      dt
+        width: rem(70)
+        color: $hex-accent
+        white-space: nowrap
+
+      dd
+        +col
+        font-weight: 800
+        color: $hex-dark

@@ -86,3 +86,61 @@ address, cite
 
 iframe
   display: block
+
+main
+  margin-top: calc(env(safe-area-inset-top) + rem(78))
+
+.ptr
+  z-index: 1
+
+.ptr--dragging, .ptr--pull-down-treshold-breached
+  a
+    touch-action: none
+    user-select: none
+
+.ptr__pull-down--pull-more
+  text-align: center
+
+.top-link
+  position: fixed
+  top: calc(env(safe-area-inset-top) + rem(23))
+  left: calc(env(safe-area-inset-left) + rem(17))
+  z-index: 1050
+
+  a, button
+    background-color: transparent
+    transition: border .4s cubic-bezier(.4,0,.2,1)
+    display: inline-flex
+    align-items: center
+    gap: rem(5)
+    padding: 0 rem(5)
+    height: rem(23)
+
+    +mq(minSmall)
+      height: rem(32)
+
+    i
+      transition: transform .4s cubic-bezier(.4,0,.2,1)
+      width: rem(23)
+      height: rem(23)
+
+      +mq(minSmall)
+        width: rem(32)
+        height: rem(32)
+
+    span
+      transition: color .4s cubic-bezier(.4,0,.2,1)
+      font-size: rem(20)
+      font-weight: 700
+      line-height: 1
+      color: $hex-dark
+
+      +mq(maxExtraSmall)
+        +screen-reader-only
+
+    &:hover, &:focus
+      i
+        transform: translateX(rem(-5))
+
+      span
+        color: $hex-black

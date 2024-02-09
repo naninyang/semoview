@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import Anchor from './Anchor';
 import { vectors } from './vectors';
@@ -8,9 +9,11 @@ const JejeupLogo = styled.i({
 });
 
 export default function Header() {
+  const router = useRouter();
   return (
     <header className={styles.header}>
       <div className={styles.container}>
+        {router.pathname === '/' || router.pathname === '/jejeup' ? undefined : <s />}
         <h1>
           <Anchor href="/">
             <JejeupLogo />
@@ -20,7 +23,7 @@ export default function Header() {
         <nav>
           <ol>
             <li>
-              <Anchor href="/notices">공지사항</Anchor>
+              <Anchor href="/notices">문의&공지</Anchor>
             </li>
             <li>
               <Anchor href="/open-sources">오픈소스</Anchor>
