@@ -2,12 +2,12 @@
 
 .jejeup
   display: flex
-  flex-direction: column
+  justify-content: center
   gap: rem(25)
-  padding: 0 calc(env(safe-area-inset-right) + rem(15)) calc(env(safe-area-inset-left) + rem(15))
+  padding: rem(27) calc(env(safe-area-inset-right) + rem(15)) rem(57) calc(env(safe-area-inset-left) + rem(15))
 
   +mq(minLarge)
-    padding: 0 calc(env(safe-area-inset-right) + rem(25)) 0 calc(env(safe-area-inset-left) + rem(25))
+    padding: rem(57) calc(env(safe-area-inset-right) + rem(25)) rem(72) calc(env(safe-area-inset-left) + rem(25))
 
   .loading, .error
     display: flex
