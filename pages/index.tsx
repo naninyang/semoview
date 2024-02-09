@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+import Link from 'next/link';
 import PullToRefresh from 'react-simple-pull-to-refresh';
 import useSWRInfinite from 'swr/infinite';
 import { Masonry } from 'masonic';
 import { JejeupData } from 'types';
-import Seo, { originTitle } from '@/components/Seo';
+import Seo from '@/components/Seo';
 import { CategoryName } from '@/components/CategoryName';
 import { FormatDate } from '@/components/FormatDate';
 import styles from '@/styles/Home.module.sass';
-import Image from 'next/image';
-import Link from 'next/link';
 
 export const fetcher = (url: string) =>
   fetch(url).then((res) => {
@@ -29,7 +29,6 @@ export default function Home() {
 
   useEffect(() => {
     localStorage.removeItem('currentPage');
-    localStorage.setItem('currentPage', 'home');
   }, []);
 
   const router = useRouter();
