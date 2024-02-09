@@ -160,9 +160,8 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <Seo
-        pageTitles={`노클노플 - ${originTitle}`}
-        pageTitle="노클노플"
-        pageDescription="노 클릭, 노 플레이"
+        pageTitle="제목에 제목이 없어서 짜증나서 만든 사이트"
+        pageDescription="클릭하지 않아도 제목과 정보를 알 수 있게 도와드려요"
         pageImg={`https://nol2tr.dev1stud.io/og-image.webp?ts=${timestamp}`}
       />
       <h1>

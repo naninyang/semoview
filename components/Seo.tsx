@@ -11,7 +11,7 @@ interface Props {
   pageOgType?: string;
 }
 
-export const originTitle = '제목에 제목이 없어서 짜증나서 만든 사이트 A.K.A 제제없';
+export const originTitle = '제목에 제목이 없어서 짜증나서 만든 사이트';
 
 const Seo = ({ pageTitles, pageTitle, pageDescription, pageImg, pageImgWidth, pageImgHeight, pageOgType }: Props) => {
   const router = useRouter();
@@ -19,7 +19,7 @@ const Seo = ({ pageTitles, pageTitle, pageDescription, pageImg, pageImgWidth, pa
   const domain = 'https://jejeup.dev1stud.io';
 
   const defaultTitle = `${originTitle}`;
-  const defaultDescription = '클릭하지 않아도 주제를 알 수 있게 도와드려요';
+  const defaultDescription = '클릭하지 않아도 제목과 정보를 알 수 있게 도와드려요';
   const title = pageTitles || defaultTitle;
   const description = pageDescription || defaultDescription;
   const url = `${domain}${pagePath}`;

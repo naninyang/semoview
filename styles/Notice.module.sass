@@ -1,0 +1,146 @@
+@import './designSystem'
+
+.notice
+  display: flex
+  justify-content: center
+  gap: rem(25)
+  padding: rem(27) calc(env(safe-area-inset-right) + rem(15)) rem(57) calc(env(safe-area-inset-left) + rem(15))
+
+  +mq(minLarge)
+    padding: rem(57) calc(env(safe-area-inset-right) + rem(25)) rem(72) calc(env(safe-area-inset-left) + rem(25))
+
+  .content
+    max-width: rem(720)
+    width: 100%
+
+    h1
+      display: flex
+      align-items: flex-end
+      justify-content: center
+      gap: rem(7)
+      font-size: rem(64)
+      font-weight: 900
+      color: $hex-accent
+
+      em
+        font-size: rem(36)
+        font-weight: 300
+        font-style: normal
+
+    .summary
+      display: flex
+      flex-direction: column
+      gap: rem(12)
+      margin: rem(52)
+
+      p
+        display: flex
+        flex-direction: column
+        font-size: rem(20)
+        line-height: 1.3
+        text-align: center
+
+      .contact
+        margin: rem(52) 0 rem(32)
+        text-align: center
+
+        a
+          border: rem(2) solid $hex-accent
+          border-radius: rem(3)
+          padding: rem(12) rem(52)
+          font-size: rem(24)
+          font-weight: 900
+          line-height: 1
+          color: $hex-accent
+          transition: all .3s cubic-bezier(.4,0,.2,1)
+
+          &:hover, &:focus
+            background-color: $hex-accent
+            color: $hex-light
+
+    fieldset
+      display: flex
+      flex-direction: column
+      gap: rem(15)
+
+    .field-group
+      display: flex
+      flex-direction: column
+      gap: rem(5)
+
+    label
+      font-size: rem(14)
+      line-height: 1.57142857
+
+    textarea
+      height: rem(270)
+
+    input, textarea
+      transition: all .7s cubic-bezier(.4,0,.2,1)
+      background-color: $hex-white
+      outline: 1px solid rgba($hex-dark, .2)
+      border: 0
+      border-radius: rem(3)
+      padding: rem(10)
+      font-size: rem(14)
+      color: $hex-dark
+
+      &:focus-within, &:focus, &:hover
+        outline: 1px solid $hex-accent
+
+    .button-group
+      display: flex
+      flex-direction: column
+      gap: rem(2)
+
+    button[type="submit"]
+      transition: all .4s cubic-bezier(.4,0,.2,1)
+      background: transparent
+      border: 1px solid $hex-accent
+      border-radius: rem(5)
+      padding: rem(15)
+      font-size: rem(20)
+      font-weight: 900
+      color: $hex-accent
+
+      &:focus, &:hover
+        background: $hex-accent
+        color: $hex-white
+        outline: 2px solid var(--default-text)
+
+    .cancel
+      text-align: right
+
+      button
+        background-color: transparent
+        transition: border .4s cubic-bezier(.4,0,.2,1)
+        display: inline-flex
+        align-items: center
+        gap: rem(5)
+        padding: 0 rem(5)
+        height: rem(20)
+
+        +mq(minSmall)
+          height: rem(32)
+
+        i
+          transition: transform .4s cubic-bezier(.4,0,.2,1)
+          width: rem(16)
+          height: rem(16)
+
+        span
+          transition: color .4s cubic-bezier(.4,0,.2,1)
+          font-size: rem(16)
+          font-weight: 700
+          line-height: 1
+          color: $hex-dark
+
+          +mq(maxExtraSmall)
+            +screen-reader-only
+
+        &:hover, &:focus
+          i
+            transform: translateX(rem(-5))
+
+          span
+            color: $hex-black
