@@ -33,6 +33,19 @@ const Notices: NextPage<NoticeProps> = ({ notices }) => {
   const [deferredPrompt, setDeferredPrompt] = useState<Event | null>(null);
   const [deviceSafari, setDeviceSafari] = useState<string>();
 
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e: any) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    };
+  }, []);
+
   const onInstallPWA = () => {
     if (deferredPrompt) {
       const promptEvent = deferredPrompt as any;

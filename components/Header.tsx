@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import Anchor from './Anchor';
@@ -10,9 +11,39 @@ const JejeupLogo = styled.i({
 
 export default function Header() {
   const router = useRouter();
+  const [deferredPrompt, setDeferredPrompt] = useState<Event | null>(null);
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e: any) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    };
+  }, []);
+
+  const onInstallPWA = () => {
+    if (deferredPrompt) {
+      const promptEvent = deferredPrompt as any;
+      promptEvent.prompt();
+      promptEvent.userChoice.then((choiceResult: any) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the install prompt');
+        } else {
+          console.log('User dismissed the install prompt');
+        }
+        setDeferredPrompt(null);
+      });
+    }
+  };
   return (
     <header className={styles.header}>
       <div className={styles.container}>
+        <button type="button" onClick={onInstallPWA} style={{ display: 'none' }} />
         {router.pathname === '/' || router.pathname === '/jejeup' ? undefined : <s />}
         <h1>
           <Anchor href="/">
