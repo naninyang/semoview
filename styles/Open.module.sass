@@ -1,0 +1,97 @@
+@import './designSystem'
+
+.open
+  display: flex
+  justify-content: center
+  gap: rem(25)
+  padding: rem(27) calc(env(safe-area-inset-right) + rem(15)) rem(57) calc(env(safe-area-inset-left) + rem(15))
+
+  +mq(minLarge)
+    padding: rem(57) calc(env(safe-area-inset-right) + rem(25)) rem(72) calc(env(safe-area-inset-left) + rem(25))
+
+  .content
+    max-width: rem(720)
+    width: 100%
+
+    h1
+      display: flex
+      align-items: flex-end
+      justify-content: center
+      gap: rem(7)
+      font-size: rem(24)
+      font-weight: 900
+      color: $hex-accent
+
+      +mq(minSmall)
+        font-size: rem(64)
+
+      em
+        font-size: rem(16)
+        font-weight: 300
+        font-style: normal
+
+        +mq(minSmall)
+          font-size: rem(36)
+
+    dl
+      display: flex
+      justify-content: center
+      gap: rem(15)
+      margin: rem(17)
+      font-size: rem(16)
+
+      +mq(minSmall)
+        margin: rem(52)
+
+      +mq(maxMedium)
+        flex-direction: column
+        align-items: center
+
+      +mq(minLarge)
+        gap: rem(37)
+
+      div
+        display: flex
+        gap: rem(17)
+
+        +mq(maxMedium)
+          width: 100%
+          justify-content: center
+
+      dt, dd
+        line-height: 1
+
+        +mq(maxMedium)
+          +coln
+
+      dt
+        color: $hex-dark
+
+        +mq(maxMedium)
+          width: rem(165)
+          text-align: right
+
+      dd
+        font-weight: 900
+        color: $hex-accent
+
+        +mq(maxMedium)
+          width: rem(95)
+
+    hr
+      margin: rem(20) 0
+      border: 1px solid rgba($hex-dark, .2)
+
+      +mq(minLarge)
+        margin: rem(25) 0
+
+    .list
+      margin: rem(50) auto 0
+      width: 100%
+      max-width: rem(720)
+
+      & :last-of-type hr
+        display: none
+
+      pre, code
+        white-space: pre-wrap

@@ -162,7 +162,10 @@
     .button-group
       display: flex
       flex-direction: column
-      gap: rem(2)
+      gap: rem(7)
+
+      +mq(minSmall)
+        gap: rem(2)
 
     button[type="submit"]
       transition: all .4s cubic-bezier(.4,0,.2,1)
@@ -205,9 +208,6 @@
           font-weight: 700
           line-height: 1
           color: $hex-dark
-
-          +mq(maxExtraSmall)
-            +screen-reader-only
 
         &:hover, &:focus
           i
