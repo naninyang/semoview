@@ -34,9 +34,9 @@ const Notices: NextPage<NoticeProps> = ({ notices }) => {
   return (
     <main className={styles.notice}>
       <Seo
-        pageTitles={`안내사항 - ${originTitle}`}
-        pageTitle="안내사항"
-        pageDescription="제제없 공지를 확인하세요"
+        pageTitles={`문의 및 공지 - ${originTitle}`}
+        pageTitle="문의 및 공지"
+        pageDescription="제제없 문의 및 공지를 확인하세요"
         pageImg={`https://jejeup.dev1stud.io/og-image.webp?ts=${timestamp}`}
       />
       <div className="top-link">
@@ -64,7 +64,7 @@ const Notices: NextPage<NoticeProps> = ({ notices }) => {
           <p>
             ~제제없~에서는 그런 영상들을 모아서 <span>눌러보기 전에 어떤 영상인지 알려드립니다!</span>
           </p>
-          <p>관심없는 콘텐츠는 굳이 눌러서 시간 낭비할 필요 없지요. 😎</p>
+          <p>시간 낭비하지 맙시다! 😎</p>
           <div className={styles.contact}>
             <Anchor href="/notices/contact-us" target="_blank">
               문의하기
