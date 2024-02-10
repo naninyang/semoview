@@ -28,7 +28,7 @@ function OpenSources({ licenses }: { licenses: string[] }) {
         pageTitles={`오픈소스 - ${originTitle}`}
         pageTitle="오픈소스"
         pageDescription="'제제없'에서 사용한 오픈소스"
-        pageImg={`https://nol2tr.dev1stud.io/og-image.webp?ts=${timestamp}`}
+        pageImg={`https://jejeup.dev1stud.io/og-image.webp?ts=${timestamp}`}
       />
       <div className="top-link">
         {currentPage ? (

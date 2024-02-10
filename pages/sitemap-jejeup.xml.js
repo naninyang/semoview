@@ -1,4 +1,4 @@
-const JejeupAPI = 'https://nol2tr.dev1stud.io/api/sitemap';
+const JejeupAPI = 'https://jejeup.dev1stud.io/api/sitemap';
 // const JejeupAPI = 'http://localhost:3123/api/sitemap';
 
 function generateSiteMap(jejeups) {

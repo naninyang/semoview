@@ -26,7 +26,7 @@ const Notice = ({ notice }: { notice: NoticeParalinkData | null }) => {
             pageTitles={`${notice.attributes.subject} - ${originTitle}`}
             pageTitle={`${notice.attributes.subject}`}
             pageDescription={`${notice.attributes.description}`}
-            pageImg={`https://nol2tr.dev1stud.io/og-image.webp?ts=${timestamp}`}
+            pageImg={`https://jejeup.dev1stud.io/og-image.webp?ts=${timestamp}`}
           />
           <div className="top-link">
             <Anchor href="/notices">
