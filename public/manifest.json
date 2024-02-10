@@ -1,0 +1,20 @@
+{
+  "name": "제제없 JEJEUP",
+  "short_name": "제제없",
+  "description": "클릭하지 않아도 제목과 정보를 알 수 있게 도와드려요",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#eef5ff",
+  "background_color": "#eef5ff",
+  "display": "standalone"
+}
