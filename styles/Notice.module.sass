@@ -53,15 +53,23 @@
         +mq(minSmall)
           font-size: rem(20)
 
-      .contact
+      .button-group
+        display: flex
+        justify-content: center
+        align-items: center
         margin: rem(32) 0
+        gap: rem(12)
         text-align: center
 
         +mq(minSmall)
+          flex-direction: row
           margin: rem(52) 0 rem(32)
 
-        a
-          display: inline-block
+        a, button
+          display: inline-flex
+          background-color: transparent
+          width: rem(170)
+          justify-content: center
           border: rem(2) solid $hex-accent
           border-radius: rem(3)
           padding: rem(7) rem(32)
@@ -72,6 +80,7 @@
           transition: all .3s cubic-bezier(.4,0,.2,1)
 
           +mq(minSmall)
+            width: auto
             padding: rem(12) rem(52)
             font-size: rem(24)
 

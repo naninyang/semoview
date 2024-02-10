@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { GetServerSideProps, NextPage } from 'next';
+import { isSafari } from 'react-device-detect';
 import styled from '@emotion/styled';
 import { NoticeData } from 'types';
 import Seo, { originTitle } from '@/components/Seo';
@@ -28,6 +29,29 @@ const Notices: NextPage<NoticeProps> = ({ notices }) => {
   useEffect(() => {
     setNoticesData(notices);
   }, [notices]);
+
+  const [deferredPrompt, setDeferredPrompt] = useState<Event | null>(null);
+  const [deviceSafari, setDeviceSafari] = useState<string>();
+
+  const onInstallPWA = () => {
+    if (deferredPrompt) {
+      const promptEvent = deferredPrompt as any;
+      promptEvent.prompt();
+      promptEvent.userChoice.then((choiceResult: any) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the install prompt');
+        } else {
+          console.log('User dismissed the install prompt');
+        }
+        setDeferredPrompt(null);
+      });
+    }
+  };
+  useEffect(() => {
+    if (isSafari) {
+      setDeviceSafari('isSafari');
+    }
+  }, []);
 
   const timestamp = Date.now();
 
@@ -64,11 +88,15 @@ const Notices: NextPage<NoticeProps> = ({ notices }) => {
           <p>
             ~제제없~에서는 그런 영상들을 모아서 <span>눌러보기 전에 어떤 영상인지 알려드립니다!</span>
           </p>
-          <p>시간 낭비하지 맙시다! 😎</p>
-          <div className={styles.contact}>
+          <div className={styles['button-group']}>
             <Anchor href="/notices/contact-us" target="_blank">
               문의하기
             </Anchor>
+            {deviceSafari !== 'isSafari' && (
+              <button type="button" onClick={onInstallPWA}>
+                앱 내려받기
+              </button>
+            )}
           </div>
         </div>
         <div className={styles.notices}>
