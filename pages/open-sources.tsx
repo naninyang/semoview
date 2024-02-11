@@ -54,7 +54,7 @@ function OpenSources({ licenses }: { licenses: string[] }) {
             <dd>클로이 Chloe</dd>
           </div>
           <div>
-            <dt>Curator & informator</dt>
+            <dt>Curator & Informator</dt>
             <dd>클로이 Chloe</dd>
           </div>
         </dl>
