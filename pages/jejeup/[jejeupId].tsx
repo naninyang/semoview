@@ -2,14 +2,15 @@ import { useEffect, useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { JejeupData, JejeupPamalinkData } from 'types';
+import styled from '@emotion/styled';
+import { JejeupPamalinkData } from 'types';
 import Seo, { originTitle } from '@/components/Seo';
 import YouTubeController from '@/components/YouTubeController';
 import Anchor from '@/components/Anchor';
 import { vectors } from '@/components/vectors';
 import { CategoryName } from '@/components/CategoryName';
 import { FormatDate } from '@/components/FormatDate';
-import styled from '@emotion/styled';
+import { formatJaLang } from '@/components/formatJaLang';
 import styles from '@/styles/Jejeup.module.sass';
 
 const BackButton = styled.i({
@@ -103,9 +104,11 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
               <em>{CategoryName(jejeupData.attributes.category)}</em>
             </dt>
             <dd>
-              <strong>
-                {jejeupData.attributes.description} ({jejeupData.attributes.release})
-              </strong>
+              <strong
+                dangerouslySetInnerHTML={{
+                  __html: `${formatJaLang(jejeupData.attributes.description)} (${jejeupData.attributes.release})`,
+                }}
+              />
             </dd>
           </dl>
           <dl className={styles.info}>

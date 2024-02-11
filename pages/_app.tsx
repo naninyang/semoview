@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import type { AppProps } from 'next/app';
-import { Lato, Noto_Sans_KR } from 'next/font/google';
+import { Lato, Noto_Sans_JP, Noto_Sans_KR } from 'next/font/google';
 import localFont from 'next/font/local';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
@@ -16,6 +16,11 @@ const fontKR = Noto_Sans_KR({
 const fontEN = Lato({
   weight: ['100', '300', '400', '700', '900'],
   subsets: ['latin'],
+});
+
+const fontJP = Noto_Sans_JP({
+  weight: ['300', '400', '600', '700', '800'],
+  subsets: ['vietnamese'],
 });
 
 const NanumSquare = localFont({
@@ -115,8 +120,11 @@ export default function App({ Component, pageProps }: AppProps) {
           button,
           textarea,
           select {
-            font-family: ${NanumSquare.style.fontFamily}, monospace;
+            font-family: ${NanumSquare.style.fontFamily}, sans-serif;
             font-weight: 400;
+          }
+          span[lang='ja'] {
+            font-family: ${fontJP.style.fontFamily}, sans-serif;
           }
           .preview {
             font-family: ${fontKR.style.fontFamily};

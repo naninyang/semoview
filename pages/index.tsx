@@ -8,6 +8,7 @@ import { Masonry } from 'masonic';
 import { JejeupData } from 'types';
 import Seo from '@/components/Seo';
 import { CategoryName } from '@/components/CategoryName';
+import { formatJaLang } from '@/components/formatJaLang';
 import { FormatDate } from '@/components/FormatDate';
 import styles from '@/styles/Home.module.sass';
 
@@ -130,9 +131,7 @@ export default function Home() {
                 <em>{CategoryName(data.category)}</em>
               </dt>
               <dd>
-                <strong>
-                  {data.description} ({data.release})
-                </strong>
+                <strong dangerouslySetInnerHTML={{ __html: `${formatJaLang(data.description)} (${data.release})` }} />
               </dd>
             </dl>
           </Link>
