@@ -3,7 +3,7 @@
   "short_name": "제제없",
   "description": "클릭하지 않아도 제목과 정보를 알 수 있게 도와드려요",
   "scope": "/",
-  "start_url": "/",
+  "start_url": "https://jejeup.dev1stud.io",
   "theme_color": "#eef5ff",
   "background_color": "#eef5ff",
   "display": "standalone",
