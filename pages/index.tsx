@@ -9,7 +9,7 @@ import { JejeupData } from 'types';
 import Seo from '@/components/Seo';
 import { CategoryName } from '@/components/CategoryName';
 import { AnimeName } from '@/components/AnimeName';
-import { formatJaLang } from '@/components/formatJaLang';
+import { FormatJaLang } from '@/components/formatJaLang';
 import { FormatDate } from '@/components/FormatDate';
 import styles from '@/styles/Home.module.sass';
 import { RatingNumber } from '@/components/RatingNumber';
@@ -164,7 +164,7 @@ export default function Home() {
                 )}
               </dt>
               <dd>
-                <strong dangerouslySetInnerHTML={{ __html: `${formatJaLang(data.description)} (${data.release})` }} />
+                <strong dangerouslySetInnerHTML={{ __html: `${FormatJaLang(data.description)} (${data.release})` }} />
               </dd>
             </dl>
           </Link>
