@@ -12,7 +12,7 @@ import { CategoryName } from '@/components/CategoryName';
 import { AnimeName } from '@/components/AnimeName';
 import { RatingNumber } from '@/components/RatingNumber';
 import { FormatDate } from '@/components/FormatDate';
-import { FormatJaLang } from '@/components/formatJaLang';
+import { FormatLang } from '@/components/FormatLang';
 import styles from '@/styles/Jejeup.module.sass';
 
 const BackButton = styled.i({
@@ -149,7 +149,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
             <dd>
               <strong
                 dangerouslySetInnerHTML={{
-                  __html: `${FormatJaLang(jejeupData.attributes.description)} (${jejeupData.attributes.release})`,
+                  __html: `${FormatLang(jejeupData.attributes.description)} (${jejeupData.attributes.release})`,
                 }}
               />
             </dd>

@@ -9,10 +9,10 @@ import { JejeupData } from 'types';
 import Seo from '@/components/Seo';
 import { CategoryName } from '@/components/CategoryName';
 import { AnimeName } from '@/components/AnimeName';
-import { FormatJaLang } from '@/components/formatJaLang';
+import { RatingNumber } from '@/components/RatingNumber';
+import { FormatLang } from '@/components/FormatLang';
 import { FormatDate } from '@/components/FormatDate';
 import styles from '@/styles/Home.module.sass';
-import { RatingNumber } from '@/components/RatingNumber';
 
 export const fetcher = (url: string) =>
   fetch(url).then((res) => {
@@ -164,7 +164,7 @@ export default function Home() {
                 )}
               </dt>
               <dd>
-                <strong dangerouslySetInnerHTML={{ __html: `${FormatJaLang(data.description)} (${data.release})` }} />
+                <strong dangerouslySetInnerHTML={{ __html: `${FormatLang(data.description)} (${data.release})` }} />
               </dd>
             </dl>
           </Link>
