@@ -70,11 +70,13 @@
 
     .summary
       display: flex
+      flex-direction: column
       gap: rem(7)
 
       dt
         em
           display: inline-flex
+          margin-right: rem(3)
           border: 2px solid $hex-accent
           border-radius: rem(3)
           padding: rem(2) rem(5)
@@ -82,6 +84,56 @@
           font-weight: 700
           font-style: normal
           color: $hex-accent
+
+        i
+          display: inline-flex
+          margin-left: rem(3)
+          padding: rem(5)
+          font-size: rem(12)
+          font-weight: 800
+          font-style: normal
+          color: $hex-white
+
+          &.drama
+            background-color: #FFCB00
+            border-radius: rem(25)
+            color: $hex-black
+
+            &.d19
+              background-color: #D61D28
+              color: $hex-white
+
+          &.movie
+            border-radius: rem(3)
+            color: $hex-white
+
+            &.all
+              background-color: #00964B
+
+            &.b12
+              background-color: #EABC00
+
+            &.c15
+              background-color: #DC7317
+
+            &.d19
+              background-color: #D61D28
+
+          &.game
+            border-radius: rem(3)
+            color: $hex-white
+
+            &.all
+              background-color: #42A13F
+
+            &.b12
+              background-color: #4268AE
+
+            &.c15
+              background-color: #F8B845
+
+            &.d19
+              background-color: #A11438
 
       dd
         padding-top: rem(3)

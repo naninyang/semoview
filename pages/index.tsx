@@ -8,9 +8,11 @@ import { Masonry } from 'masonic';
 import { JejeupData } from 'types';
 import Seo from '@/components/Seo';
 import { CategoryName } from '@/components/CategoryName';
+import { AnimeName } from '@/components/AnimeName';
 import { formatJaLang } from '@/components/formatJaLang';
 import { FormatDate } from '@/components/FormatDate';
 import styles from '@/styles/Home.module.sass';
+import { RatingNumber } from '@/components/RatingNumber';
 
 export const fetcher = (url: string) =>
   fetch(url).then((res) => {
@@ -129,6 +131,37 @@ export default function Home() {
             <dl className={styles.summary}>
               <dt>
                 <em>{CategoryName(data.category)}</em>
+                {data.category === 'animation' && <em>{AnimeName(data.anime)}</em>}
+                {(data.category === 'drama' || data.anime === 'tva' || data.anime === 'ova') &&
+                  data.rating !== 'd19' && <i className={styles.drama}>{RatingNumber(data.rating)}</i>}
+                {(data.category === 'drama' || data.anime === 'tva' || data.anime === 'ova') &&
+                  data.rating === 'd19' && (
+                    <i className={`${styles.drama} ${styles.d19}`}>{RatingNumber(data.rating)}</i>
+                  )}
+                {(data.category === 'movie' || data.anime === 'movie') && data.rating === 'all' && (
+                  <i className={`${styles.movie} ${styles.all}`}>{RatingNumber(data.rating)}</i>
+                )}
+                {(data.category === 'movie' || data.anime === 'movie') && data.rating === 'b12' && (
+                  <i className={`${styles.movie} ${styles.b12}`}>{RatingNumber(data.rating)}</i>
+                )}
+                {(data.category === 'movie' || data.anime === 'movie') && data.rating === 'c15' && (
+                  <i className={`${styles.movie} ${styles.c15}`}>{RatingNumber(data.rating)}</i>
+                )}
+                {(data.category === 'movie' || data.anime === 'movie') && data.rating === 'd19' && (
+                  <i className={`${styles.movie} ${styles.d19}`}>{RatingNumber(data.rating)}</i>
+                )}
+                {data.category === 'game' && data.rating === 'all' && (
+                  <i className={`${styles.game} ${styles.all}`}>{RatingNumber(data.rating)}</i>
+                )}
+                {data.category === 'game' && data.rating === 'b12' && (
+                  <i className={`${styles.game} ${styles.b12}`}>{RatingNumber(data.rating)}</i>
+                )}
+                {data.category === 'game' && data.rating === 'c15' && (
+                  <i className={`${styles.game} ${styles.c15}`}>{RatingNumber(data.rating)}</i>
+                )}
+                {data.category === 'game' && data.rating === 'd19' && (
+                  <i className={`${styles.game} ${styles.d19}`}>{RatingNumber(data.rating)}</i>
+                )}
               </dt>
               <dd>
                 <strong dangerouslySetInnerHTML={{ __html: `${formatJaLang(data.description)} (${data.release})` }} />
@@ -137,6 +170,14 @@ export default function Home() {
           </Link>
           <dl className={styles.info}>
             <div>
+              <dt>제작국가</dt>
+              <dd>{data.country}</dd>
+            </div>
+            <div>
+              <dt>장르</dt>
+              <dd>{data.genre}</dd>
+            </div>
+            <div>
               <dt>퍼블리셔</dt>
               <dd>{data.publisher}</dd>
             </div>
@@ -144,6 +185,12 @@ export default function Home() {
               <dt>주요 제작자</dt>
               <dd>{data.creator}</dd>
             </div>
+            {data.category !== 'game' && (
+              <div>
+                <dt>주요 출연자</dt>
+                <dd>{data.cast}</dd>
+              </div>
+            )}
           </dl>
         </figcaption>
       </figure>

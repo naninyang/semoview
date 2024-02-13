@@ -31,8 +31,13 @@ export async function getJejeupData(page?: number) {
     video: data.attributes.video,
     vi: data.attributes.vi,
     description: data.attributes.description,
+    country: data.attributes.country,
+    rating: data.attributes.rating,
     category: data.attributes.category,
+    anime: data.attributes.anime,
+    genre: data.attributes.genre,
     release: data.attributes.release,
+    cast: data.attributes.cast,
     publisher: data.attributes.publisher,
     creator: data.attributes.creator,
   }));

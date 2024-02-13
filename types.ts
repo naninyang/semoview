@@ -5,8 +5,13 @@ export interface JejeupData {
   video: string;
   vi: string;
   description: string;
+  country: string;
+  rating: string;
   category: string;
+  anime: string;
+  genre: string;
   release: string;
+  cast: string;
   publisher: string;
   creator: string;
   jejeupMetaData?: {
@@ -33,8 +38,13 @@ export interface JejeupPamalinkData {
     video: string;
     vi: string;
     description: string;
+    country: string;
+    rating: string;
     category: string;
+    anime: string;
+    genre: string;
     release: string;
+    cast: string;
     publisher: string;
     creator: string;
   };

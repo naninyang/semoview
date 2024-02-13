@@ -9,6 +9,8 @@ import YouTubeController from '@/components/YouTubeController';
 import Anchor from '@/components/Anchor';
 import { vectors } from '@/components/vectors';
 import { CategoryName } from '@/components/CategoryName';
+import { AnimeName } from '@/components/AnimeName';
+import { RatingNumber } from '@/components/RatingNumber';
 import { FormatDate } from '@/components/FormatDate';
 import { formatJaLang } from '@/components/formatJaLang';
 import styles from '@/styles/Jejeup.module.sass';
@@ -102,6 +104,47 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
           <dl className={styles.summary}>
             <dt>
               <em>{CategoryName(jejeupData.attributes.category)}</em>
+              {jejeupData.attributes.category === 'animation' && <em>{AnimeName(jejeupData.attributes.anime)}</em>}
+              {(jejeupData.attributes.category === 'drama' ||
+                jejeupData.attributes.anime === 'tva' ||
+                jejeupData.attributes.anime === 'ova') &&
+                jejeupData.attributes.rating !== 'd19' && (
+                  <i className={styles.drama}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                )}
+              {(jejeupData.attributes.category === 'drama' ||
+                jejeupData.attributes.anime === 'tva' ||
+                jejeupData.attributes.anime === 'ova') &&
+                jejeupData.attributes.rating === 'd19' && (
+                  <i className={`${styles.drama} ${styles.d19}`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                )}
+              {(jejeupData.attributes.category === 'movie' || jejeupData.attributes.anime === 'movie') &&
+                jejeupData.attributes.rating === 'all' && (
+                  <i className={`${styles.movie} ${styles.all}`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                )}
+              {(jejeupData.attributes.category === 'movie' || jejeupData.attributes.anime === 'movie') &&
+                jejeupData.attributes.rating === 'b12' && (
+                  <i className={`${styles.movie} ${styles.b12}`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                )}
+              {(jejeupData.attributes.category === 'movie' || jejeupData.attributes.anime === 'movie') &&
+                jejeupData.attributes.rating === 'c15' && (
+                  <i className={`${styles.movie} ${styles.c15}`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                )}
+              {(jejeupData.attributes.category === 'movie' || jejeupData.attributes.anime === 'movie') &&
+                jejeupData.attributes.rating === 'd19' && (
+                  <i className={`${styles.movie} ${styles.d19}`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                )}
+              {jejeupData.attributes.category === 'game' && jejeupData.attributes.rating === 'all' && (
+                <i className={`${styles.game} ${styles.all}`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+              )}
+              {jejeupData.attributes.category === 'game' && jejeupData.attributes.rating === 'b12' && (
+                <i className={`${styles.game} ${styles.b12}`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+              )}
+              {jejeupData.attributes.category === 'game' && jejeupData.attributes.rating === 'c15' && (
+                <i className={`${styles.game} ${styles.c15}`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+              )}
+              {jejeupData.attributes.category === 'game' && jejeupData.attributes.rating === 'd19' && (
+                <i className={`${styles.game} ${styles.d19}`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+              )}
             </dt>
             <dd>
               <strong
@@ -113,6 +156,14 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
           </dl>
           <dl className={styles.info}>
             <div>
+              <dt>제작국가</dt>
+              <dd>{jejeupData.attributes.country}</dd>
+            </div>
+            <div>
+              <dt>장르</dt>
+              <dd>{jejeupData.attributes.genre}</dd>
+            </div>
+            <div>
               <dt>퍼블리셔</dt>
               <dd>{jejeupData.attributes.publisher}</dd>
             </div>
@@ -120,6 +171,12 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
               <dt>주요 제작자</dt>
               <dd>{jejeupData.attributes.creator}</dd>
             </div>
+            {jejeupData.attributes.category !== 'game' && (
+              <div>
+                <dt>주요 출연자</dt>
+                <dd>{jejeupData.attributes.cast}</dd>
+              </div>
+            )}
           </dl>
         </div>
       </article>
