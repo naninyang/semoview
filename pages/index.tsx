@@ -10,7 +10,7 @@ import { JejeupData } from 'types';
 import Seo from '@/components/Seo';
 import { CategoryName } from '@/components/CategoryName';
 import { AnimeName } from '@/components/AnimeName';
-import { RatingNumber } from '@/components/RatingNumber';
+import { RatingsDrama } from '@/components/RatingsDrama';
 import { FormatLang } from '@/components/FormatLang';
 import { FormatDate } from '@/components/FormatDate';
 import { vectors } from '@/components/vectors';
@@ -50,6 +50,38 @@ const WatchaOriginal = styled.i({
 const WavveOriginal = styled.i({
   width: rem(72),
   background: `url(${vectors.ott.wavve}) no-repeat 50% 50%/contain`,
+});
+
+const RatingFilmAll = styled.i({
+  background: `url(${vectors.ratings.film.all}) no-repeat 50% 50%/contain`,
+});
+
+const RatingFilmB12 = styled.i({
+  background: `url(${vectors.ratings.film.b12}) no-repeat 50% 50%/contain`,
+});
+
+const RatingFilmC15 = styled.i({
+  background: `url(${vectors.ratings.film.c15}) no-repeat 50% 50%/contain`,
+});
+
+const RatingFilmD18 = styled.i({
+  background: `url(${vectors.ratings.film.d18}) no-repeat 50% 50%/contain`,
+});
+
+const RatingGameAll = styled.i({
+  background: `url(${vectors.ratings.game.all}) no-repeat 50% 50%/contain`,
+});
+
+const RatingGameB12 = styled.i({
+  background: `url(${vectors.ratings.game.b12}) no-repeat 50% 50%/contain`,
+});
+
+const RatingGameC15 = styled.i({
+  background: `url(${vectors.ratings.game.c15}) no-repeat 50% 50%/contain`,
+});
+
+const RatingGameD19 = styled.i({
+  background: `url(${vectors.ratings.game.d19}) no-repeat 50% 50%/contain`,
 });
 
 export const fetcher = (url: string) =>
@@ -224,41 +256,57 @@ export default function Home() {
                   data.category === 'ott' ||
                   data.anime === 'tva' ||
                   data.anime === 'ova') &&
-                  data.rating !== 'd19' && <i className={`${styles.drama} number`}>{RatingNumber(data.rating)}</i>}
+                  data.rating !== 'd19' && <i className={`${styles.drama} number`}>{RatingsDrama(data.rating)}</i>}
                 {(data.category === 'drama' ||
                   data.category === 'ott' ||
                   data.anime === 'tva' ||
                   data.anime === 'ova') &&
                   data.rating === 'd19' && (
-                    <i className={`${styles.drama} ${styles.d19} number`}>{RatingNumber(data.rating)}</i>
+                    <i className={`${styles.drama} ${styles.d19} number`}>{RatingsDrama(data.rating)}</i>
                   )}
                 {(data.category === 'movie' || data.category === 'ottFilm' || data.anime === 'movie') &&
                   data.rating === 'all' && (
-                    <i className={`${styles.movie} ${styles.all} number`}>{RatingNumber(data.rating)}</i>
+                    <>
+                      <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
+                    </>
                   )}
                 {(data.category === 'movie' || data.category === 'ottFilm' || data.anime === 'movie') &&
                   data.rating === 'b12' && (
-                    <i className={`${styles.movie} ${styles.b12} number`}>{RatingNumber(data.rating)}</i>
+                    <>
+                      <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
+                    </>
                   )}
                 {(data.category === 'movie' || data.category === 'ottFilm' || data.anime === 'movie') &&
                   data.rating === 'c15' && (
-                    <i className={`${styles.movie} ${styles.c15} number`}>{RatingNumber(data.rating)}</i>
+                    <>
+                      <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
+                    </>
                   )}
                 {(data.category === 'movie' || data.category === 'ottFilm' || data.anime === 'movie') &&
                   data.rating === 'd19' && (
-                    <i className={`${styles.movie} ${styles.d19} number`}>{RatingNumber(data.rating)}</i>
+                    <>
+                      <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
+                    </>
                   )}
                 {data.category === 'game' && data.rating === 'all' && (
-                  <i className={`${styles.game} ${styles.all} number`}>{RatingNumber(data.rating)}</i>
+                  <>
+                    <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
+                  </>
                 )}
                 {data.category === 'game' && data.rating === 'b12' && (
-                  <i className={`${styles.game} ${styles.b12} number`}>{RatingNumber(data.rating)}</i>
+                  <>
+                    <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
+                  </>
                 )}
                 {data.category === 'game' && data.rating === 'c15' && (
-                  <i className={`${styles.game} ${styles.c15} number`}>{RatingNumber(data.rating)}</i>
+                  <>
+                    <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
+                  </>
                 )}
                 {data.category === 'game' && data.rating === 'd19' && (
-                  <i className={`${styles.game} ${styles.d19} number`}>{RatingNumber(data.rating)}</i>
+                  <>
+                    <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
+                  </>
                 )}
               </dt>
               <dd>

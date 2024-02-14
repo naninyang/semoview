@@ -10,7 +10,7 @@ import Anchor from '@/components/Anchor';
 import { vectors } from '@/components/vectors';
 import { CategoryName } from '@/components/CategoryName';
 import { AnimeName } from '@/components/AnimeName';
-import { RatingNumber } from '@/components/RatingNumber';
+import { RatingsDrama } from '@/components/RatingsDrama';
 import { FormatDate } from '@/components/FormatDate';
 import { FormatLang } from '@/components/FormatLang';
 import { rem } from '@/styles/designSystem';
@@ -54,6 +54,38 @@ const WatchaOriginal = styled.i({
 const WavveOriginal = styled.i({
   width: rem(72),
   background: `url(${vectors.ott.wavve}) no-repeat 50% 50%/contain`,
+});
+
+const RatingFilmAll = styled.i({
+  background: `url(${vectors.ratings.film.all}) no-repeat 50% 50%/contain`,
+});
+
+const RatingFilmB12 = styled.i({
+  background: `url(${vectors.ratings.film.b12}) no-repeat 50% 50%/contain`,
+});
+
+const RatingFilmC15 = styled.i({
+  background: `url(${vectors.ratings.film.c15}) no-repeat 50% 50%/contain`,
+});
+
+const RatingFilmD18 = styled.i({
+  background: `url(${vectors.ratings.film.d18}) no-repeat 50% 50%/contain`,
+});
+
+const RatingGameAll = styled.i({
+  background: `url(${vectors.ratings.game.all}) no-repeat 50% 50%/contain`,
+});
+
+const RatingGameB12 = styled.i({
+  background: `url(${vectors.ratings.game.b12}) no-repeat 50% 50%/contain`,
+});
+
+const RatingGameC15 = styled.i({
+  background: `url(${vectors.ratings.game.c15}) no-repeat 50% 50%/contain`,
+});
+
+const RatingGameD19 = styled.i({
+  background: `url(${vectors.ratings.game.d19}) no-repeat 50% 50%/contain`,
 });
 
 export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalinkData | null; musicData: any }) {
@@ -196,50 +228,66 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
                 jejeupData.attributes.anime === 'tva' ||
                 jejeupData.attributes.anime === 'ova') &&
                 jejeupData.attributes.rating !== 'd19' && (
-                  <i className={`${styles.drama} number`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                  <i className={`${styles.drama} number`}>{RatingsDrama(jejeupData.attributes.rating)}</i>
                 )}
               {(jejeupData.attributes.category === 'drama' ||
                 jejeupData.attributes.category === 'ott' ||
                 jejeupData.attributes.anime === 'tva' ||
                 jejeupData.attributes.anime === 'ova') &&
                 jejeupData.attributes.rating === 'd19' && (
-                  <i className={`${styles.drama} ${styles.d19} number`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                  <i className={`${styles.drama} ${styles.d19} number`}>{RatingsDrama(jejeupData.attributes.rating)}</i>
                 )}
               {(jejeupData.attributes.category === 'movie' ||
                 jejeupData.attributes.category === 'ottFilm' ||
                 jejeupData.attributes.anime === 'movie') &&
                 jejeupData.attributes.rating === 'all' && (
-                  <i className={`${styles.movie} ${styles.all} number`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                  <>
+                    <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
+                  </>
                 )}
               {(jejeupData.attributes.category === 'movie' ||
                 jejeupData.attributes.category === 'ottFilm' ||
                 jejeupData.attributes.anime === 'movie') &&
                 jejeupData.attributes.rating === 'b12' && (
-                  <i className={`${styles.movie} ${styles.b12} number`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                  <>
+                    <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
+                  </>
                 )}
               {(jejeupData.attributes.category === 'movie' ||
                 jejeupData.attributes.category === 'ottFilm' ||
                 jejeupData.attributes.anime === 'movie') &&
                 jejeupData.attributes.rating === 'c15' && (
-                  <i className={`${styles.movie} ${styles.c15} number`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                  <>
+                    <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
+                  </>
                 )}
               {(jejeupData.attributes.category === 'movie' ||
                 jejeupData.attributes.category === 'ottFilm' ||
                 jejeupData.attributes.anime === 'movie') &&
                 jejeupData.attributes.rating === 'd19' && (
-                  <i className={`${styles.movie} ${styles.d19} number`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                  <>
+                    <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
+                  </>
                 )}
               {jejeupData.attributes.category === 'game' && jejeupData.attributes.rating === 'all' && (
-                <i className={`${styles.game} ${styles.all} number`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                <>
+                  <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
+                </>
               )}
               {jejeupData.attributes.category === 'game' && jejeupData.attributes.rating === 'b12' && (
-                <i className={`${styles.game} ${styles.b12} number`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                <>
+                  <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
+                </>
               )}
               {jejeupData.attributes.category === 'game' && jejeupData.attributes.rating === 'c15' && (
-                <i className={`${styles.game} ${styles.c15} number`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                <>
+                  <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
+                </>
               )}
               {jejeupData.attributes.category === 'game' && jejeupData.attributes.rating === 'd19' && (
-                <i className={`${styles.game} ${styles.d19} number`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                <>
+                  <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
+                </>
               )}
             </dt>
             <dd>

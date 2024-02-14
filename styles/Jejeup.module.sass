@@ -112,6 +112,7 @@
 
         > i
           display: inline-flex
+          width: rem(24)
           height: rem(24)
           margin-left: rem(3)
           padding: rem(6) rem(5) rem(10)
@@ -130,37 +131,12 @@
               background-color: #D61D28
               color: $hex-white
 
-          &.movie
-            border-radius: rem(3)
-            color: $hex-white
+          &.rating
+            padding: 0
+            vertical-align: bottom
 
-            &.all
-              background-color: #00964B
-
-            &.b12
-              background-color: #EABC00
-
-            &.c15
-              background-color: #DC7317
-
-            &.d19
-              background-color: #D61D28
-
-          &.game
-            border-radius: rem(3)
-            color: $hex-white
-
-            &.all
-              background-color: #42A13F
-
-            &.b12
-              background-color: #4268AE
-
-            &.c15
-              background-color: #F8B845
-
-            &.d19
-              background-color: #A11438
+          &.rating + span
+            +screen-reader-only
 
       dd
         padding-top: rem(3)
@@ -173,6 +149,9 @@
 
           span
             font-weight: 600
+            white-space: break-spaces
+            word-wrap: break-word
+            word-break: normal
 
     .info
       display: flex
