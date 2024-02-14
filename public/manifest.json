@@ -3,11 +3,21 @@
   "short_name": "제제없",
   "description": "클릭하지 않아도 제목과 정보를 알 수 있게 도와드려요",
   "scope": "/",
-  "id": "https://jejeup.dev1stud.io/",
-  "start_url": "https://jejeup.dev1stud.io/",
+  "id": "/",
+  "start_url": "/",
   "theme_color": "#eef5ff",
   "background_color": "#eef5ff",
   "display": "standalone",
+  "orientation": "portrait",
+  "screenshots": [
+    {
+      "src": "/screenshots/screenshot-0.png",
+      "sizes": "1276x1836",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "스모디 앱의 홈스크린"
+    }
+  ],
   "icons": [
     {
       "src": "/favicon/android-chrome-192x192.png",

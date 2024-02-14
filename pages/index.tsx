@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import PullToRefresh from 'react-simple-pull-to-refresh';
 import useSWRInfinite from 'swr/infinite';
+import styled from '@emotion/styled';
 import { Masonry } from 'masonic';
 import { JejeupData } from 'types';
 import Seo from '@/components/Seo';
@@ -12,7 +13,44 @@ import { AnimeName } from '@/components/AnimeName';
 import { RatingNumber } from '@/components/RatingNumber';
 import { FormatLang } from '@/components/FormatLang';
 import { FormatDate } from '@/components/FormatDate';
+import { vectors } from '@/components/vectors';
+import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Home.module.sass';
+
+const AmazonOriginal = styled.i({
+  width: rem(52),
+  background: `url(${vectors.ott.amazon}) no-repeat 50% 50%/contain`,
+});
+
+const AppleOriginal = styled.i({
+  width: rem(42),
+  background: `url(${vectors.ott.apple}) no-repeat 50% 50%/contain`,
+});
+
+const DisneyOriginal = styled.i({
+  width: rem(29),
+  background: `url(${vectors.ott.disney}) no-repeat 50% 50%/contain`,
+});
+
+const NetflixOriginal = styled.i({
+  width: rem(59),
+  background: `url(${vectors.ott.netflix}) no-repeat 50% 50%/contain`,
+});
+
+const TvingOriginal = styled.i({
+  width: rem(63),
+  background: `url(${vectors.ott.tving}) no-repeat 50% 50%/contain`,
+});
+
+const WatchaOriginal = styled.i({
+  width: rem(55),
+  background: `url(${vectors.ott.watcha}) no-repeat 50% 50%/contain`,
+});
+
+const WavveOriginal = styled.i({
+  width: rem(72),
+  background: `url(${vectors.ott.wavve}) no-repeat 50% 50%/contain`,
+});
 
 export const fetcher = (url: string) =>
   fetch(url).then((res) => {
@@ -130,37 +168,97 @@ export default function Home() {
           <Link key={data.idx} href={`/jejeup/${data.idx}`} scroll={false} shallow={true}>
             <dl className={styles.summary}>
               <dt>
-                <em>{CategoryName(data.category)}</em>
+                {data.category !== 'ott' && <em>{CategoryName(data.category)}</em>}
                 {data.category === 'animation' && <em>{AnimeName(data.anime)}</em>}
-                {(data.category === 'drama' || data.anime === 'tva' || data.anime === 'ova') &&
-                  data.rating !== 'd19' && <i className={styles.drama}>{RatingNumber(data.rating)}</i>}
-                {(data.category === 'drama' || data.anime === 'tva' || data.anime === 'ova') &&
+                {data.ott === 'amazonOriginal' && (
+                  <cite>
+                    <AmazonOriginal /> 아마존 오리지널
+                  </cite>
+                )}
+                {data.ott === 'appleOriginal' && (
+                  <cite>
+                    <AppleOriginal /> 애플 티비+ 오리지널
+                  </cite>
+                )}
+                {data.ott === 'disneyOriginal' && (
+                  <cite>
+                    <DisneyOriginal /> 디즈니+ 오리지널
+                  </cite>
+                )}
+                {data.ott === 'netflixOriginal' && (
+                  <cite>
+                    <NetflixOriginal /> 넷플릭스 오리지널
+                  </cite>
+                )}
+                {data.ott === 'netflixFilm' && (
+                  <cite>
+                    <NetflixOriginal /> 넷플릭스 오리지널 영화
+                  </cite>
+                )}
+                {data.ott === 'netflixAnime' && (
+                  <cite>
+                    <NetflixOriginal /> 넷플릭스 오리지널 애니메이션
+                  </cite>
+                )}
+                {data.ott === 'netflixAnimeFilm' && (
+                  <cite>
+                    <NetflixOriginal /> 넷플릭스 오리지널 애니메이션 영화
+                  </cite>
+                )}
+                {data.ott === 'tvingOriginal' && (
+                  <cite>
+                    <TvingOriginal /> 티빙 오리지널
+                  </cite>
+                )}
+                {data.ott === 'watchaOriginal' && (
+                  <cite>
+                    <WatchaOriginal /> 왓챠 오리지널
+                  </cite>
+                )}
+                {data.ott === 'wavveOriginal' && (
+                  <cite>
+                    <WavveOriginal /> 웨이브 오리지널
+                  </cite>
+                )}
+                {(data.category === 'drama' ||
+                  data.category === 'ott' ||
+                  data.anime === 'tva' ||
+                  data.anime === 'ova') &&
+                  data.rating !== 'd19' && <i className={`${styles.drama} number`}>{RatingNumber(data.rating)}</i>}
+                {(data.category === 'drama' ||
+                  data.category === 'ott' ||
+                  data.anime === 'tva' ||
+                  data.anime === 'ova') &&
                   data.rating === 'd19' && (
-                    <i className={`${styles.drama} ${styles.d19}`}>{RatingNumber(data.rating)}</i>
+                    <i className={`${styles.drama} ${styles.d19} number`}>{RatingNumber(data.rating)}</i>
                   )}
-                {(data.category === 'movie' || data.anime === 'movie') && data.rating === 'all' && (
-                  <i className={`${styles.movie} ${styles.all}`}>{RatingNumber(data.rating)}</i>
-                )}
-                {(data.category === 'movie' || data.anime === 'movie') && data.rating === 'b12' && (
-                  <i className={`${styles.movie} ${styles.b12}`}>{RatingNumber(data.rating)}</i>
-                )}
-                {(data.category === 'movie' || data.anime === 'movie') && data.rating === 'c15' && (
-                  <i className={`${styles.movie} ${styles.c15}`}>{RatingNumber(data.rating)}</i>
-                )}
-                {(data.category === 'movie' || data.anime === 'movie') && data.rating === 'd19' && (
-                  <i className={`${styles.movie} ${styles.d19}`}>{RatingNumber(data.rating)}</i>
-                )}
+                {(data.category === 'movie' || data.category === 'ottFilm' || data.anime === 'movie') &&
+                  data.rating === 'all' && (
+                    <i className={`${styles.movie} ${styles.all} number`}>{RatingNumber(data.rating)}</i>
+                  )}
+                {(data.category === 'movie' || data.category === 'ottFilm' || data.anime === 'movie') &&
+                  data.rating === 'b12' && (
+                    <i className={`${styles.movie} ${styles.b12} number`}>{RatingNumber(data.rating)}</i>
+                  )}
+                {(data.category === 'movie' || data.category === 'ottFilm' || data.anime === 'movie') &&
+                  data.rating === 'c15' && (
+                    <i className={`${styles.movie} ${styles.c15} number`}>{RatingNumber(data.rating)}</i>
+                  )}
+                {(data.category === 'movie' || data.category === 'ottFilm' || data.anime === 'movie') &&
+                  data.rating === 'd19' && (
+                    <i className={`${styles.movie} ${styles.d19} number`}>{RatingNumber(data.rating)}</i>
+                  )}
                 {data.category === 'game' && data.rating === 'all' && (
-                  <i className={`${styles.game} ${styles.all}`}>{RatingNumber(data.rating)}</i>
+                  <i className={`${styles.game} ${styles.all} number`}>{RatingNumber(data.rating)}</i>
                 )}
                 {data.category === 'game' && data.rating === 'b12' && (
-                  <i className={`${styles.game} ${styles.b12}`}>{RatingNumber(data.rating)}</i>
+                  <i className={`${styles.game} ${styles.b12} number`}>{RatingNumber(data.rating)}</i>
                 )}
                 {data.category === 'game' && data.rating === 'c15' && (
-                  <i className={`${styles.game} ${styles.c15}`}>{RatingNumber(data.rating)}</i>
+                  <i className={`${styles.game} ${styles.c15} number`}>{RatingNumber(data.rating)}</i>
                 )}
                 {data.category === 'game' && data.rating === 'd19' && (
-                  <i className={`${styles.game} ${styles.d19}`}>{RatingNumber(data.rating)}</i>
+                  <i className={`${styles.game} ${styles.d19} number`}>{RatingNumber(data.rating)}</i>
                 )}
               </dt>
               <dd>

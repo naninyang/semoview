@@ -155,31 +155,56 @@
         gap: rem(7)
 
         dt
+          height: rem(24)
           white-space: nowrap
+          line-height: rem(24)
 
-          em
+          cite
             display: inline-flex
+            align-items: center
+            height: rem(24)
             margin-right: rem(3)
-            border: 2px solid $hex-accent
-            border-radius: rem(3)
-            padding: rem(2) rem(5)
             font-size: rem(14)
-            font-weight: 700
+            font-weight: 800
             font-style: normal
             color: $hex-accent
 
-          i
+            & + i
+              position: relative
+              top: rem(-3)
+
+            i
+              display: inline-block
+              margin-right: rem(7)
+              height: rem(16)
+
+          em
             display: inline-flex
+            height: rem(24)
+            margin-right: rem(3)
+            border: 2px solid $hex-accent
+            border-radius: rem(3)
+            padding: rem(3) rem(5)
+            font-size: rem(14)
+            font-weight: 700
+            line-height: 1
+            font-style: normal
+            color: $hex-accent
+
+          > i
+            display: inline-flex
+            height: rem(24)
             margin-left: rem(3)
-            padding: rem(5)
+            padding: rem(6) rem(5) rem(10)
             font-size: rem(12)
             font-weight: 800
             font-style: normal
+            line-height: 1
             color: $hex-white
 
             &.drama
               background-color: #FFCB00
-              border-radius: rem(25)
+              border-radius: rem(24)
               color: $hex-black
 
               &.d19

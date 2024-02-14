@@ -129,6 +129,7 @@ export default function App({ Component, pageProps }: AppProps) {
           .preview {
             font-family: ${fontKR.style.fontFamily};
           }
+          .number,
           time {
             font-family: ${fontEN.style.fontFamily};
           }

@@ -9,6 +9,7 @@ export interface JejeupData {
   rating: string;
   category: string;
   anime: string;
+  ott: string;
   genre: string;
   release: string;
   cast: string;
@@ -42,6 +43,7 @@ export interface JejeupPamalinkData {
     rating: string;
     category: string;
     anime: string;
+    ott: string;
     genre: string;
     release: string;
     cast: string;

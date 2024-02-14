@@ -34,6 +34,7 @@ export async function getJejeupData(page?: number) {
     country: data.attributes.country,
     rating: data.attributes.rating,
     category: data.attributes.category,
+    ott: data.attributes.ott,
     anime: data.attributes.anime,
     genre: data.attributes.genre,
     release: data.attributes.release,

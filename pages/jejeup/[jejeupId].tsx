@@ -13,11 +13,47 @@ import { AnimeName } from '@/components/AnimeName';
 import { RatingNumber } from '@/components/RatingNumber';
 import { FormatDate } from '@/components/FormatDate';
 import { FormatLang } from '@/components/FormatLang';
+import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Jejeup.module.sass';
 
 const BackButton = styled.i({
   display: 'block',
   background: `url(${vectors.backward}) no-repeat 50% 50%/contain`,
+});
+
+const AmazonOriginal = styled.i({
+  width: rem(52),
+  background: `url(${vectors.ott.amazon}) no-repeat 50% 50%/contain`,
+});
+
+const AppleOriginal = styled.i({
+  width: rem(42),
+  background: `url(${vectors.ott.apple}) no-repeat 50% 50%/contain`,
+});
+
+const DisneyOriginal = styled.i({
+  width: rem(29),
+  background: `url(${vectors.ott.disney}) no-repeat 50% 50%/contain`,
+});
+
+const NetflixOriginal = styled.i({
+  width: rem(59),
+  background: `url(${vectors.ott.netflix}) no-repeat 50% 50%/contain`,
+});
+
+const TvingOriginal = styled.i({
+  width: rem(63),
+  background: `url(${vectors.ott.tving}) no-repeat 50% 50%/contain`,
+});
+
+const WatchaOriginal = styled.i({
+  width: rem(55),
+  background: `url(${vectors.ott.watcha}) no-repeat 50% 50%/contain`,
+});
+
+const WavveOriginal = styled.i({
+  width: rem(72),
+  background: `url(${vectors.ott.wavve}) no-repeat 50% 50%/contain`,
 });
 
 export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalinkData | null; musicData: any }) {
@@ -103,47 +139,107 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
         <div className={styles.figcaption}>
           <dl className={styles.summary}>
             <dt>
-              <em>{CategoryName(jejeupData.attributes.category)}</em>
+              {jejeupData.attributes.category !== 'ott' && <em>{CategoryName(jejeupData.attributes.category)}</em>}
               {jejeupData.attributes.category === 'animation' && <em>{AnimeName(jejeupData.attributes.anime)}</em>}
+              {jejeupData.attributes.ott === 'amazonOriginal' && (
+                <cite>
+                  <AmazonOriginal /> 아마존 오리지널
+                </cite>
+              )}
+              {jejeupData.attributes.ott === 'appleOriginal' && (
+                <cite>
+                  <AppleOriginal /> 애플 티비+ 오리지널
+                </cite>
+              )}
+              {jejeupData.attributes.ott === 'disneyOriginal' && (
+                <cite>
+                  <DisneyOriginal /> 디즈니+ 오리지널
+                </cite>
+              )}
+              {jejeupData.attributes.ott === 'netflixOriginal' && (
+                <cite>
+                  <NetflixOriginal /> 넷플릭스 오리지널
+                </cite>
+              )}
+              {jejeupData.attributes.ott === 'netflixFilm' && (
+                <cite>
+                  <NetflixOriginal /> 넷플릭스 오리지널 영화
+                </cite>
+              )}
+              {jejeupData.attributes.ott === 'netflixAnime' && (
+                <cite>
+                  <NetflixOriginal /> 넷플릭스 오리지널 애니메이션
+                </cite>
+              )}
+              {jejeupData.attributes.ott === 'netflixAnimeFilm' && (
+                <cite>
+                  <NetflixOriginal /> 넷플릭스 오리지널 애니메이션 영화
+                </cite>
+              )}
+              {jejeupData.attributes.ott === 'tvingOriginal' && (
+                <cite>
+                  <TvingOriginal /> 티빙 오리지널
+                </cite>
+              )}
+              {jejeupData.attributes.ott === 'watchaOriginal' && (
+                <cite>
+                  <WatchaOriginal /> 왓챠 오리지널
+                </cite>
+              )}
+              {jejeupData.attributes.ott === 'wavveOriginal' && (
+                <cite>
+                  <WavveOriginal /> 웨이브 오리지널
+                </cite>
+              )}
               {(jejeupData.attributes.category === 'drama' ||
+                jejeupData.attributes.category === 'ott' ||
                 jejeupData.attributes.anime === 'tva' ||
                 jejeupData.attributes.anime === 'ova') &&
                 jejeupData.attributes.rating !== 'd19' && (
-                  <i className={styles.drama}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                  <i className={`${styles.drama} number`}>{RatingNumber(jejeupData.attributes.rating)}</i>
                 )}
               {(jejeupData.attributes.category === 'drama' ||
+                jejeupData.attributes.category === 'ott' ||
                 jejeupData.attributes.anime === 'tva' ||
                 jejeupData.attributes.anime === 'ova') &&
                 jejeupData.attributes.rating === 'd19' && (
-                  <i className={`${styles.drama} ${styles.d19}`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                  <i className={`${styles.drama} ${styles.d19} number`}>{RatingNumber(jejeupData.attributes.rating)}</i>
                 )}
-              {(jejeupData.attributes.category === 'movie' || jejeupData.attributes.anime === 'movie') &&
+              {(jejeupData.attributes.category === 'movie' ||
+                jejeupData.attributes.category === 'ottFilm' ||
+                jejeupData.attributes.anime === 'movie') &&
                 jejeupData.attributes.rating === 'all' && (
-                  <i className={`${styles.movie} ${styles.all}`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                  <i className={`${styles.movie} ${styles.all} number`}>{RatingNumber(jejeupData.attributes.rating)}</i>
                 )}
-              {(jejeupData.attributes.category === 'movie' || jejeupData.attributes.anime === 'movie') &&
+              {(jejeupData.attributes.category === 'movie' ||
+                jejeupData.attributes.category === 'ottFilm' ||
+                jejeupData.attributes.anime === 'movie') &&
                 jejeupData.attributes.rating === 'b12' && (
-                  <i className={`${styles.movie} ${styles.b12}`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                  <i className={`${styles.movie} ${styles.b12} number`}>{RatingNumber(jejeupData.attributes.rating)}</i>
                 )}
-              {(jejeupData.attributes.category === 'movie' || jejeupData.attributes.anime === 'movie') &&
+              {(jejeupData.attributes.category === 'movie' ||
+                jejeupData.attributes.category === 'ottFilm' ||
+                jejeupData.attributes.anime === 'movie') &&
                 jejeupData.attributes.rating === 'c15' && (
-                  <i className={`${styles.movie} ${styles.c15}`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                  <i className={`${styles.movie} ${styles.c15} number`}>{RatingNumber(jejeupData.attributes.rating)}</i>
                 )}
-              {(jejeupData.attributes.category === 'movie' || jejeupData.attributes.anime === 'movie') &&
+              {(jejeupData.attributes.category === 'movie' ||
+                jejeupData.attributes.category === 'ottFilm' ||
+                jejeupData.attributes.anime === 'movie') &&
                 jejeupData.attributes.rating === 'd19' && (
-                  <i className={`${styles.movie} ${styles.d19}`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                  <i className={`${styles.movie} ${styles.d19} number`}>{RatingNumber(jejeupData.attributes.rating)}</i>
                 )}
               {jejeupData.attributes.category === 'game' && jejeupData.attributes.rating === 'all' && (
-                <i className={`${styles.game} ${styles.all}`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                <i className={`${styles.game} ${styles.all} number`}>{RatingNumber(jejeupData.attributes.rating)}</i>
               )}
               {jejeupData.attributes.category === 'game' && jejeupData.attributes.rating === 'b12' && (
-                <i className={`${styles.game} ${styles.b12}`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                <i className={`${styles.game} ${styles.b12} number`}>{RatingNumber(jejeupData.attributes.rating)}</i>
               )}
               {jejeupData.attributes.category === 'game' && jejeupData.attributes.rating === 'c15' && (
-                <i className={`${styles.game} ${styles.c15}`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                <i className={`${styles.game} ${styles.c15} number`}>{RatingNumber(jejeupData.attributes.rating)}</i>
               )}
               {jejeupData.attributes.category === 'game' && jejeupData.attributes.rating === 'd19' && (
-                <i className={`${styles.game} ${styles.d19}`}>{RatingNumber(jejeupData.attributes.rating)}</i>
+                <i className={`${styles.game} ${styles.d19} number`}>{RatingNumber(jejeupData.attributes.rating)}</i>
               )}
             </dt>
             <dd>
