@@ -183,6 +183,11 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
                   <AppleOriginal /> 애플 티비+ 오리지널
                 </cite>
               )}
+              {jejeupData.attributes.ott === 'appleFilm' && (
+                <cite>
+                  <AppleOriginal /> 애플 티비+ 오리지널 영화
+                </cite>
+              )}
               {jejeupData.attributes.ott === 'disneyOriginal' && (
                 <cite>
                   <DisneyOriginal /> 디즈니+ 오리지널
