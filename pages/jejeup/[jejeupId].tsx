@@ -171,7 +171,9 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
         <div className={styles.figcaption}>
           <dl className={styles.summary}>
             <dt>
-              {jejeupData.attributes.category !== 'ott' && <em>{CategoryName(jejeupData.attributes.category)}</em>}
+              {jejeupData.attributes.category !== 'ott' && jejeupData.attributes.category !== 'ottFilm' && (
+                <em>{CategoryName(jejeupData.attributes.category)}</em>
+              )}
               {jejeupData.attributes.category === 'animation' && <em>{AnimeName(jejeupData.attributes.anime)}</em>}
               {jejeupData.attributes.ott === 'amazonOriginal' && (
                 <cite>

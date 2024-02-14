@@ -200,7 +200,7 @@ export default function Home() {
           <Link key={data.idx} href={`/jejeup/${data.idx}`} scroll={false} shallow={true}>
             <dl className={styles.summary}>
               <dt>
-                {data.category !== 'ott' && <em>{CategoryName(data.category)}</em>}
+                {data.category !== 'ott' && data.category !== 'ottFilm' && <em>{CategoryName(data.category)}</em>}
                 {data.category === 'animation' && <em>{AnimeName(data.anime)}</em>}
                 {data.ott === 'amazonOriginal' && (
                   <cite>
