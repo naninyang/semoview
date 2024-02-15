@@ -133,7 +133,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
         pageTitles={`${jejeupData.attributes.subject} - ${originTitle}`}
         pageTitle={`${jejeupData.attributes.subject}`}
         pageDescription={jejeupData.attributes.description}
-        pageImg={`https://i.ytimg.com/vi_webp/${jejeupData.attributes.video}/maxresdefault.webp`}
+        pageImg={jejeupData.jejeupMetaData.ogImage}
         pageOgType={'video.other'}
       />
       <div className="top-link">

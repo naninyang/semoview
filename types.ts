@@ -17,7 +17,7 @@ export interface JejeupData {
   creator: string;
   posterDefault: string;
   posterOther: string;
-  jejeupMetaData?: {
+  jejeupMetaData: {
     error: string;
     ogTitle: string;
     ogUrl: string;
@@ -54,7 +54,7 @@ export interface JejeupPamalinkData {
     posterDefault: string;
     posterOther: string;
   };
-  jejeupMetaData?: {
+  jejeupMetaData: {
     error: string;
     ogTitle: string;
     ogUrl: string;
