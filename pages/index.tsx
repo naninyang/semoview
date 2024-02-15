@@ -261,7 +261,15 @@ export default function Home() {
                   data.category === 'ott' ||
                   data.anime === 'tva' ||
                   data.anime === 'ova') &&
-                  data.rating !== 'd19' && <i className={`${styles.drama} number`}>{RatingsDrama(data.rating)}</i>}
+                  data.rating !== 'd19' && (
+                    <>
+                      {data.rating === 'all' ? (
+                        <i className={`${styles.drama} ${styles.all} number`}>{RatingsDrama(data.rating)}</i>
+                      ) : (
+                        <i className={`${styles.drama} number`}>{RatingsDrama(data.rating)}</i>
+                      )}
+                    </>
+                  )}
                 {(data.category === 'drama' ||
                   data.category === 'ott' ||
                   data.anime === 'tva' ||

@@ -235,7 +235,15 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
                 jejeupData.attributes.anime === 'tva' ||
                 jejeupData.attributes.anime === 'ova') &&
                 jejeupData.attributes.rating !== 'd19' && (
-                  <i className={`${styles.drama} number`}>{RatingsDrama(jejeupData.attributes.rating)}</i>
+                  <>
+                    {jejeupData.attributes.rating === 'all' ? (
+                      <i className={`${styles.drama} ${styles.all} number`}>
+                        {RatingsDrama(jejeupData.attributes.rating)}
+                      </i>
+                    ) : (
+                      <i className={`${styles.drama} number`}>{RatingsDrama(jejeupData.attributes.rating)}</i>
+                    )}
+                  </>
                 )}
               {(jejeupData.attributes.category === 'drama' ||
                 jejeupData.attributes.category === 'ott' ||
