@@ -152,7 +152,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
       <article className={styles['article-jejeup']}>
         {jejeupData.jejeupMetaData && !jejeupData.jejeupMetaData.error && (
           <div className={`${styles.preview} preview`}>
-            <YouTubeController videoId={jejeupData.attributes.video} vi={jejeupData.attributes.vi} />
+            <YouTubeController videoId={jejeupData.attributes.video} videoImage={jejeupData.jejeupMetaData.ogImage} />
             <div className={styles.youtube}>
               <h1>{jejeupData.jejeupMetaData.ogTitle}</h1>
               <div className={styles.detail}>

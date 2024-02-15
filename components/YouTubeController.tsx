@@ -8,8 +8,7 @@ import YouTubePlayer from './YouTubePlayer';
 
 interface Props {
   videoId: string;
-  start?: number;
-  vi: string;
+  videoImage: string;
 }
 
 const Container = styled.div<{ isDesktop?: boolean }>(({ isDesktop }) => ({
@@ -77,7 +76,7 @@ const Container = styled.div<{ isDesktop?: boolean }>(({ isDesktop }) => ({
   },
 }));
 
-const YouTubeController = ({ videoId, start, vi }: Props) => {
+const YouTubeController = ({ videoId, videoImage }: Props) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const handlePlay = () => {
@@ -88,21 +87,14 @@ const YouTubeController = ({ videoId, start, vi }: Props) => {
     <Container isDesktop={isDesktop}>
       {!isPlaying ? (
         <>
-          <Image
-            src={vi === 'missing' ? '/missing.webp' : `https://i.ytimg.com/vi_webp/${videoId}/${vi}.webp`}
-            width={640}
-            height={480}
-            unoptimized
-            priority
-            alt=""
-          />
+          <Image src={videoImage} width={640} height={480} unoptimized priority alt="" />
           <button type="button" onClick={handlePlay}>
             <i />
             <span>영상 재생하기</span>
           </button>
         </>
       ) : (
-        <YouTubePlayer videoId={videoId} start={start} />
+        <YouTubePlayer videoId={videoId} />
       )}
     </Container>
   );
