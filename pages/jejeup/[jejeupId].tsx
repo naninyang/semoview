@@ -170,7 +170,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
                   </time>
                 </div>
               </div>
-              <p>{jejeupData.jejeupMetaData.ogDescription}</p>
+              {jejeupData.jejeupMetaData.ogDescription && <p>{jejeupData.jejeupMetaData.ogDescription}</p>}
             </div>
           </div>
         )}
