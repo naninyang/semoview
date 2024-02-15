@@ -135,6 +135,8 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
         pageDescription={`${jejeupData.attributes.description} (${jejeupData.attributes.release})`}
         pageImg={jejeupData.jejeupMetaData.ogImage}
         pageOgType={'video.other'}
+        pageImgWidth={1920}
+        pageImgHeight={1080}
       />
       <div className="top-link">
         {savedScrollPosition ? (

@@ -17,7 +17,6 @@ const Seo = ({ pageTitles, pageTitle, pageDescription, pageImg, pageImgWidth, pa
   const router = useRouter();
   const pagePath = router.asPath;
   const domain = 'https://jejeup.dev1stud.io';
-
   const defaultTitle = `${originTitle}`;
   const defaultDescription = '클릭하지 않아도 제목과 정보를 알 수 있게 도와드려요';
   const title = pageTitles || defaultTitle;
@@ -43,6 +42,11 @@ const Seo = ({ pageTitles, pageTitle, pageDescription, pageImg, pageImgWidth, pa
       <meta property="og:image" content={imgUrl} />
       <meta property="og:image:width" content={String(imgWidth)} />
       <meta property="og:image:height" content={String(imgHeight)} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={pageTitle} />
+      <meta name="twitter:site" content={defaultTitle} />
+      <meta name="twitter:image" content={imgUrl} />
+      <meta name="twitter:description" content={description} />
       <link rel="canonical" href={url} />
       <link rel="alternate" href={url} hrefLang="ko-KR" />
     </Head>
