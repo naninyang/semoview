@@ -3,7 +3,6 @@ export interface JejeupData {
   idx: string;
   subject: string;
   video: string;
-  vi: string;
   description: string;
   country: string;
   rating: string;
@@ -37,7 +36,6 @@ export interface JejeupPamalinkData {
     idx: string;
     subject: string;
     video: string;
-    vi: string;
     description: string;
     country: string;
     rating: string;

@@ -29,7 +29,6 @@ export async function getJejeupData(page?: number) {
     idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
     subject: data.attributes.subject,
     video: data.attributes.video,
-    vi: data.attributes.vi,
     description: data.attributes.description,
     country: data.attributes.country,
     rating: data.attributes.rating,
