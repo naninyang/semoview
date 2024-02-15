@@ -170,7 +170,13 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
                   </time>
                 </div>
               </div>
-              {jejeupData.jejeupMetaData.ogDescription && <p>{jejeupData.jejeupMetaData.ogDescription}</p>}
+              {jejeupData.jejeupMetaData.ogDescription ? (
+                <p>{jejeupData.jejeupMetaData.ogDescription}</p>
+              ) : (
+                <p>
+                  <strong>유튜버가 더보기 정보를 등록하지 않았습니다.</strong>
+                </p>
+              )}
             </div>
           </div>
         )}
