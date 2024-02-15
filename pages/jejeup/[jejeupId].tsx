@@ -171,6 +171,11 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
         <div className={styles.figcaption}>
           <dl className={styles.summary}>
             <dt>
+              {jejeupData.attributes.ott === 'wavveOnly' && (
+                <cite>
+                  <WavveOriginal /> 웨이브 독점 스트리밍
+                </cite>
+              )}
               {jejeupData.attributes.category !== 'ott' && jejeupData.attributes.category !== 'ottFilm' && (
                 <em>{CategoryName(jejeupData.attributes.category)}</em>
               )}

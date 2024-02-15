@@ -27,7 +27,8 @@
     position: absolute
     top: auto!important
     right: auto!important
-    bottom: rem(-96)
+    bottom: rem(96)
+    z-index: 1080
     left: 0
     display: flex
     justify-content: center
@@ -36,7 +37,10 @@
     height: rem(1000)
 
     p
-      font-weight: 700
+      background-color: $hex-white
+      padding: rem(27) rem(72)
+      font-size: rem(20)
+      font-weight: 800
       color: $hex-accent
       text-align: center
 
@@ -163,7 +167,7 @@
             display: inline-flex
             align-items: center
             height: rem(24)
-            margin-right: rem(3)
+            margin-right: rem(5)
             font-size: rem(14)
             font-weight: 800
             font-style: normal
@@ -190,6 +194,7 @@
             line-height: 1
             font-style: normal
             color: $hex-accent
+            vertical-align: top
 
           > i
             display: inline-flex
@@ -218,7 +223,7 @@
 
             &.rating
               padding: 0
-              vertical-align: bottom
+              vertical-align: top
 
             &.rating + span
               +screen-reader-only

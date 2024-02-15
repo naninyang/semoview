@@ -200,6 +200,11 @@ export default function Home() {
           <Link key={data.idx} href={`/jejeup/${data.idx}`} scroll={false} shallow={true}>
             <dl className={styles.summary}>
               <dt>
+                {data.ott === 'wavveOnly' && (
+                  <cite>
+                    <WavveOriginal /> 웨이브 독점 스트리밍
+                  </cite>
+                )}
                 {data.category !== 'ott' && data.category !== 'ottFilm' && <em>{CategoryName(data.category)}</em>}
                 {data.category === 'animation' && <em>{AnimeName(data.anime)}</em>}
                 {data.ott === 'amazonOriginal' && (
