@@ -29,6 +29,7 @@ export async function getJejeupData(page?: number) {
     idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
     subject: data.attributes.subject,
     video: data.attributes.video,
+    ownerAvatar: data.attributes.ownerAvatar,
     description: data.attributes.description,
     country: data.attributes.country,
     rating: data.attributes.rating,
@@ -40,6 +41,8 @@ export async function getJejeupData(page?: number) {
     cast: data.attributes.cast,
     publisher: data.attributes.publisher,
     creator: data.attributes.creator,
+    posterDefault: data.attributes.posterDefault,
+    posterOther: data.attributes.posterOther,
   }));
 
   const jejeups = await Promise.all(

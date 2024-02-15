@@ -3,6 +3,7 @@ export interface JejeupData {
   idx: string;
   subject: string;
   video: string;
+  ownerAvatar: string;
   description: string;
   country: string;
   rating: string;
@@ -14,6 +15,8 @@ export interface JejeupData {
   cast: string;
   publisher: string;
   creator: string;
+  posterDefault: string;
+  posterOther: string;
   jejeupMetaData?: {
     error: string;
     ogTitle: string;
@@ -36,6 +39,7 @@ export interface JejeupPamalinkData {
     idx: string;
     subject: string;
     video: string;
+    ownerAvatar: string;
     description: string;
     country: string;
     rating: string;
@@ -47,6 +51,8 @@ export interface JejeupPamalinkData {
     cast: string;
     publisher: string;
     creator: string;
+    posterDefault: string;
+    posterOther: string;
   };
   jejeupMetaData?: {
     error: string;

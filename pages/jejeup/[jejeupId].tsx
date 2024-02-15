@@ -156,7 +156,13 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
             <div className={styles.youtube}>
               <h1>{jejeupData.jejeupMetaData.ogTitle}</h1>
               <div className={styles.detail}>
-                <Image src={`${jejeupData.jejeupMetaData.ownerAvatar}`} width="36" height="36" alt="" unoptimized />
+                <Image
+                  src={`${jejeupData.jejeupMetaData.ownerAvatar === null ? jejeupData.attributes.ownerAvatar : jejeupData.jejeupMetaData.ownerAvatar}`}
+                  width="36"
+                  height="36"
+                  alt=""
+                  unoptimized
+                />
                 <div className={styles.user}>
                   <cite>{jejeupData.jejeupMetaData.ownerName}</cite>
                   <time dateTime={jejeupData.jejeupMetaData.datePublished}>

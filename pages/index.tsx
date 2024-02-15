@@ -181,7 +181,13 @@ export default function Home() {
               <Image src={data.jejeupMetaData.ogImage} width="1920" height="1080" alt="" unoptimized />
               <div className={styles['preview-info']}>
                 <div className={styles.detail}>
-                  <Image src={`${data.jejeupMetaData.ownerAvatar}`} width="36" height="36" alt="" unoptimized />
+                  <Image
+                    src={`${data.jejeupMetaData.ownerAvatar === null ? data.ownerAvatar : data.jejeupMetaData.ownerAvatar}`}
+                    width="36"
+                    height="36"
+                    alt=""
+                    unoptimized
+                  />
                   <div className={`${styles['user-info']}`}>
                     <strong>{data.jejeupMetaData.ogTitle}</strong>{' '}
                     <div className={styles.user}>
