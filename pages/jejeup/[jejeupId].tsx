@@ -132,7 +132,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
       <Seo
         pageTitles={`${jejeupData.attributes.subject} - ${originTitle}`}
         pageTitle={`${jejeupData.attributes.subject}`}
-        pageDescription={jejeupData.attributes.description}
+        pageDescription={`${jejeupData.attributes.description} (${jejeupData.attributes.release})`}
         pageImg={jejeupData.jejeupMetaData.ogImage}
         pageOgType={'video.other'}
       />
