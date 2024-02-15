@@ -348,6 +348,37 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
               </div>
             )}
           </dl>
+          {(jejeupData.attributes.posterDefault || jejeupData.attributes.posterOther) && (
+            <div className={styles.posters}>
+              <h2>{jejeupData.attributes.category === 'game' ? '게임 공식 배너' : '포스터'}</h2>
+              <div
+                className={`${styles['poster-list']} ${jejeupData.attributes.category === 'game' ? styles['posters-game'] : styles['posters-other']}`}
+              >
+                {jejeupData.attributes.posterDefault && (
+                  <div className={styles.poster}>
+                    <Image
+                      src={jejeupData.attributes.posterDefault}
+                      alt=""
+                      width={jejeupData.attributes.category === 'game' ? 460 : 390}
+                      height={jejeupData.attributes.category === 'game' ? 215 : 560}
+                      unoptimized
+                    />
+                  </div>
+                )}
+                <div className={styles.poster}>
+                  {jejeupData.attributes.posterOther && (
+                    <Image
+                      src={jejeupData.attributes.posterOther}
+                      alt=""
+                      width={jejeupData.attributes.category === 'game' ? 460 : 390}
+                      height={jejeupData.attributes.category === 'game' ? 215 : 560}
+                      unoptimized
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </article>
     </main>

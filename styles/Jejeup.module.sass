@@ -182,3 +182,34 @@
         +col
         font-weight: 800
         color: $hex-dark
+
+    .posters
+      display: flex
+      flex-direction: column
+      gap: rem(7)
+      margin-top: rem(17)
+
+      h2
+        font-size: rem(20)
+        font-weight: 800
+
+      .poster-list
+        display: flex
+        gap: rem(12)
+
+        +mq(maxExtraSmall)
+          flex-direction: column
+
+        &.posters-game img
+          aspect-ratio: 460 / 215
+
+        &.posters-other img
+          aspect-ratio: 390 / 560
+
+        .poster
+          +col
+
+          img
+            width: 100%
+            height: auto
+            object-fit: contain
