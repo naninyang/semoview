@@ -356,6 +356,16 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
               </div>
             )}
           </dl>
+          {jejeupData.attributes.comment && (
+            <div className={styles.comment}>
+              <h2>큐레이터의 한줄평</h2>
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: jejeupData.attributes.comment.replace(/\n/g, '<br />'),
+                }}
+              />
+            </div>
+          )}
           {(jejeupData.attributes.posterDefault || jejeupData.attributes.posterOther) && (
             <div className={styles.posters}>
               <h2>{jejeupData.attributes.category === 'game' ? '게임 공식 배너' : '포스터'}</h2>

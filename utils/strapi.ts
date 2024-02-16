@@ -43,6 +43,7 @@ export async function getJejeupData(page?: number) {
     creator: data.attributes.creator,
     posterDefault: data.attributes.posterDefault,
     posterOther: data.attributes.posterOther,
+    comment: data.attributes.comment,
   }));
 
   const jejeups = await Promise.all(
