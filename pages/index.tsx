@@ -175,7 +175,7 @@ export default function Home() {
   const renderCard = ({ data }: { data: JejeupData }) => (
     <div className={styles.item}>
       <figure>
-        {data.jejeupMetaData && !data.jejeupMetaData.error ? (
+        {data.jejeupMetaData && data.jejeupMetaData.ogTitle !== ' - YouTube' ? (
           <div className={`${styles.preview} preview`}>
             <div className={styles['preview-container']}>
               <Image src={data.jejeupMetaData.ogImage} width="1920" height="1080" alt="" unoptimized />
@@ -204,10 +204,10 @@ export default function Home() {
         ) : (
           <div className={`${styles.preview} preview`}>
             <div className={styles['preview-container']}>
-              <Image src="/unkown.webp" width="1920" height="1080" alt="" unoptimized />
+              <Image src="/missing.webp" width="36" height="36" alt="" unoptimized />
               <div className={styles['preview-info']}>
                 <div className={styles.detail}>
-                  <Image src="/missing.webp" width="36" height="36" alt="" unoptimized />
+                  <Image src="/unknown.webp" width="1920" height="1080" alt="" unoptimized />
                   <div className={`${styles['user-info']}`}>
                     <strong>삭제된 영상</strong>
                     <div className={styles.user}>
