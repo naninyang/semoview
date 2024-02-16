@@ -175,7 +175,7 @@ export default function Home() {
   const renderCard = ({ data }: { data: JejeupData }) => (
     <div className={styles.item}>
       <figure>
-        {data.jejeupMetaData && !data.jejeupMetaData.error && (
+        {data.jejeupMetaData && !data.jejeupMetaData.error ? (
           <div className={`${styles.preview} preview`}>
             <div className={styles['preview-container']}>
               <Image src={data.jejeupMetaData.ogImage} width="1920" height="1080" alt="" unoptimized />
@@ -189,12 +189,30 @@ export default function Home() {
                     unoptimized
                   />
                   <div className={`${styles['user-info']}`}>
-                    <strong>{data.jejeupMetaData.ogTitle}</strong>{' '}
+                    <strong>{data.jejeupMetaData.ogTitle}</strong>
                     <div className={styles.user}>
                       <cite>{data.jejeupMetaData.ownerName}</cite>
                       <time dateTime={data.jejeupMetaData.datePublished}>
                         {FormatDate(`${data.jejeupMetaData.datePublished}`)}
                       </time>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className={`${styles.preview} preview`}>
+            <div className={styles['preview-container']}>
+              <Image src="/unkown.webp" width="1920" height="1080" alt="" unoptimized />
+              <div className={styles['preview-info']}>
+                <div className={styles.detail}>
+                  <Image src="/missing.webp" width="36" height="36" alt="" unoptimized />
+                  <div className={`${styles['user-info']}`}>
+                    <strong>삭제된 영상</strong>
+                    <div className={styles.user}>
+                      <cite>관리자에게 제보해 주세요</cite>
+                      <time>알 수 없는 시간</time>
                     </div>
                   </div>
                 </div>

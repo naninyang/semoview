@@ -133,7 +133,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
         pageTitles={`${jejeupData.attributes.subject} - ${originTitle}`}
         pageTitle={`${jejeupData.attributes.subject}`}
         pageDescription={`${jejeupData.attributes.description} (${jejeupData.attributes.release})`}
-        pageImg={jejeupData.jejeupMetaData.ogImage}
+        pageImg={jejeupData.jejeupMetaData.ogImage ? jejeupData.jejeupMetaData.ogImage : '/missing.webp'}
         pageOgType={'video.other'}
         pageImgWidth={1920}
         pageImgHeight={1080}
@@ -152,7 +152,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
         )}
       </div>
       <article className={styles['article-jejeup']}>
-        {jejeupData.jejeupMetaData && !jejeupData.jejeupMetaData.error && (
+        {jejeupData.jejeupMetaData && !jejeupData.jejeupMetaData.error ? (
           <div className={`${styles.preview} preview`}>
             <YouTubeController videoId={jejeupData.attributes.video} videoImage={jejeupData.jejeupMetaData.ogImage} />
             <div className={styles.youtube}>
@@ -179,6 +179,24 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
                   <strong>유튜버가 더보기 정보를 등록하지 않았습니다.</strong>
                 </p>
               )}
+            </div>
+          </div>
+        ) : (
+          <div className={`${styles.preview} preview`}>
+            <div className={styles['preview-container']}>
+              <Image src="/unkown.webp" width="1920" height="1080" alt="" unoptimized />
+              <div className={styles['preview-info']}>
+                <div className={styles.detail}>
+                  <Image src="/missing.webp" width="36" height="36" alt="" unoptimized />
+                  <div className={`${styles['user-info']}`}>
+                    <strong>삭제된 영상</strong>
+                    <div className={styles.user}>
+                      <cite>관리자에게 제보해 주세요</cite>
+                      <time>알 수 없는 시간</time>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         )}
