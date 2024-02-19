@@ -1,40 +1,77 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 제제없 jejeup
 
-## Getting Started
+제목과 썸네일에 어떤 영화/드라마/게임인지 표시가 안되어 있는 영상을 가져온 뒤
 
-First, run the development server:
+정보를 표시하여 이용자에게 알려주는 서비스.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 사용된 주요 기술
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Frontend
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- Next.js
+- react-device-detect
+- TypeScript
+- Emotion
+- SASS
+- Google YouTube iframe API
+- Masonry w/ Masonic
+- pull-to-refresh (without Mutate Caching)
+- PWA
+- SWR w/ useSWRInfinite
+- Strapi API
+- Node 18
+- vercel deployment
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### Web Opengraph Scrap API Server
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- Next.js
+- TypeScript
+- iconv
+- cheerio
+- vercel deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Backend
 
-## Learn More
+- AWS EC2
+- GCP (Compute Engine, Cloud DNS, Networking)
+- Nginx
+- PM2
+- MariaDB
+- Node 20 with fnm
+- Strapi
 
-To learn more about Next.js, take a look at the following resources:
+## Troubleshooting
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+이슈를 등록해 주시거나 [여기](https://jejeup.dev1stud.io/notices)를 이용해 주세요.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### 발견되거나 알려진 버그
 
-## Deploy on Vercel
+- Not Yet
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Supported PWA App. Download
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+PWA 형태의 앱 다운로드를 지원합니다.
+
+Google Chrome에서는 메뉴에 다운로드 링크가 있으며, Safari에서는 메인 화면에 내려받는 방법이 안내되어 있습니다.
+
+MS Windows, Apple macOS, Android, iOS, iPadOS 등 대부분의 모던 디바이스를 지원합니다.
+
+## 광고제안
+
+앞광고 표시한 영상으로 유튜브 주소를 주시면 올려드립니다.
+
+단, 제제없에 올리는 링크 역시 앞광고임이 표시가 되니 이점 유념해 주세요.
+
+광고제안 역시 트러블슈팅과 마찬가지로 [여기](https://jejeup.dev1stud.io/notices)에서 제안 받습니다. (이슈로 등록하지 마세요)
+
+## 주의사항 및 저작권
+
+이 서비스는 Vercel, AWS 그리고 Google과 관련이 없습니다.
+
+영상에 대한 저작권은 영상 유튜버/채널과 YouTube에 있습니다.
+
+오픈소스 외 개발코드는 클로이 Chloe에게 저작권이 있습니다.
+
+- 기획 & UX 디자인: 클로이 Chloe
+- 프론트엔드 & 백엔드 개발: 클로이 Chloe
+- 콘텐츠 큐레이팅 & 코멘트: 클로이 Chloe
