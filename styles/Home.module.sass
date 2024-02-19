@@ -47,12 +47,16 @@
 
   h1
     display: flex
-    align-items: flex-start
-    gap: rem(5)
+    align-items: flex-end
+    gap: rem(17)
     padding: rem(15) rem(7) rem(3)
     font-size: rem(20)
     font-weight: 800
     line-height: 1.2
+
+    span
+      display: flex
+      gap: rem(5)
 
     i::before
       content: '•'
@@ -60,6 +64,12 @@
       top: rem(-2)
       padding: 0 rem(4)
       font-size: rem(20)
+      font-style: normal
+      color: $hex-accent
+
+    em
+      font-size: rem(16)
+      font-weight: 900
       font-style: normal
       color: $hex-accent
 

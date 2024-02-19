@@ -17,6 +17,10 @@ import { vectors } from '@/components/vectors';
 import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Home.module.sass';
 
+interface Counts {
+  jejeup: number;
+}
+
 const AmazonOriginal = styled.i({
   width: rem(52),
   background: `url(${vectors.ott.amazon}) no-repeat 50% 50%/contain`,
@@ -390,6 +394,26 @@ export default function Home() {
   };
   const [columnCount, setColumnCount] = useState(1);
 
+  const [count, setCount] = useState<Counts | null>(null);
+
+  function formatNumber(value: number): string {
+    return value.toLocaleString();
+  }
+
+  async function fetchCountData() {
+    try {
+      const response = await fetch(`/api/count`);
+      const data = await response.json();
+      setCount(data);
+    } catch (err: any) {
+      console.error(err.message);
+    }
+  }
+
+  useEffect(() => {
+    fetchCountData();
+  }, []);
+
   return (
     <main className={styles.main}>
       <Seo
@@ -398,8 +422,11 @@ export default function Home() {
         pageImg={`https://jejeup.dev1stud.io/og-image.webp?ts=${timestamp}`}
       />
       <h1>
-        <i className="preview" />
-        클릭하지 않아도 제목과 정보를 알 수 있게 도와드려요 💃
+        <span>
+          <i className="preview" />
+          클릭하지 않아도 제목과 정보를 알 수 있게 도와드려요 💃
+        </span>
+        {count && <em>({formatNumber(count.jejeup)}개 콘텐츠)</em>}
       </h1>
       <div className={styles.list}>
         {isLoading && <div className={styles.loading}>이것저것 불러오는 중</div>}
