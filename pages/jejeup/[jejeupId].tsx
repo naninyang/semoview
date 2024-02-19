@@ -187,7 +187,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
             <div className={styles.youtube}>
               <h1>유튜버가 삭제했거나 비공개 처리한 영상입니다 ㅠㅠ</h1>
               <div className={styles.detail}>
-                <Image src="/missing.webp" width="36" height="36" alt="" unoptimized />
+                <Image src="/unknown.webp" width="36" height="36" alt="" unoptimized />
                 <div className={styles.user}>
                   <cite>관리자에게 제보해 주세요</cite>
                   <time>알 수 없는 시간</time>
