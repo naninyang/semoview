@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const amusementId = req.query.musicId as string;
+  const amusementId = req.query.amusementId as string;
   try {
     const response = await fetch(`${process.env.STRAPI_URL}/api/amusement-jejeups/${amusementId}`, {
       headers: {

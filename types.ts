@@ -53,11 +53,11 @@ export interface JejeupData {
     creator: string;
     cast: string;
     posterDefault: string;
-    postOther: string;
+    posterOther: string;
   };
 }
 
-export interface JejeupPamalinkData {
+export interface JejeupPermalinkData {
   attributes: {
     idx: string;
     subject: string;
@@ -113,12 +113,11 @@ export interface JejeupPamalinkData {
     creator: string;
     cast: string;
     posterDefault: string;
-    postOther: string;
+    posterOther: string;
   };
 }
 
 export interface AmusementData {
-  id: string;
   title: string;
   lang: string;
   titleOther: string;
@@ -137,7 +136,31 @@ export interface AmusementData {
   creator: string;
   cast: string;
   posterDefault: string;
-  postOther: string;
+  posterOther: string;
+}
+
+export interface AmusementPermalinkData {
+  attributes: {
+    title: string;
+    lang: string;
+    titleOther: string;
+    etc: string;
+    release: string;
+    original: string;
+    originalAuthor: string;
+    originTitle: string;
+    rating: string;
+    country: string;
+    category: string;
+    genre: string;
+    anime: string;
+    ott: string;
+    publisher: string;
+    creator: string;
+    cast: string;
+    posterDefault: string;
+    posterOther: string;
+  };
 }
 
 export interface NoticeData {
@@ -149,7 +172,7 @@ export interface NoticeData {
   created: string;
 }
 
-export interface NoticeParalinkData {
+export interface NoticePermalinkData {
   attributes: {
     idx: string;
     platform: string;

@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import styled from '@emotion/styled';
-import { NoticeParalinkData } from 'types';
+import { NoticePermalinkData } from 'types';
 import Seo, { originTitle } from '@/components/Seo';
 import Anchor from '@/components/Anchor';
 import { vectors } from '@/components/vectors';
@@ -11,7 +11,7 @@ const BackButton = styled.i({
   background: `url(${vectors.backward}) no-repeat 50% 50%/contain`,
 });
 
-const Notice = ({ notice }: { notice: NoticeParalinkData | null }) => {
+const Notice = ({ notice }: { notice: NoticePermalinkData | null }) => {
   const timestamp = Date.now();
   return (
     <main className={styles.notice}>
@@ -63,7 +63,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   if (noticeId && typeof noticeId === 'string') {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/notices/?id=${noticeId.substring(14)}`);
-    const data = (await response.json()) as { data: NoticeParalinkData[] };
+    const data = (await response.json()) as { data: NoticePermalinkData[] };
     notice = data.data;
   }
 

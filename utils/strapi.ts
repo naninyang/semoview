@@ -106,7 +106,6 @@ export async function getAmusementData(amusement: string) {
   const data = await response.json();
   const amusementData = data.data;
   const rowsData: AmusementData = {
-    id: amusementData.id,
     title: amusementData.attributes.title,
     lang: amusementData.attributes.lang,
     titleOther: amusementData.attributes.titleOther,
@@ -125,7 +124,7 @@ export async function getAmusementData(amusement: string) {
     creator: amusementData.attributes.creator,
     cast: amusementData.attributes.cast,
     posterDefault: amusementData.attributes.posterDefault,
-    postOther: amusementData.attributes.posterOther,
+    posterOther: amusementData.attributes.posterOther,
   };
 
   return rowsData;

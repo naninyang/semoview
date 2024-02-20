@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import styled from '@emotion/styled';
-import { JejeupPamalinkData } from 'types';
+import { JejeupPermalinkData } from 'types';
 import Seo, { originTitle } from '@/components/Seo';
 import YouTubeController from '@/components/YouTubeController';
 import Anchor from '@/components/Anchor';
@@ -88,7 +88,7 @@ const RatingGameD19 = styled.i({
   background: `url(${vectors.ratings.game.d19}) no-repeat 50% 50%/contain`,
 });
 
-export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalinkData | null; musicData: any }) {
+export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermalinkData | null }) {
   const router = useRouter();
   let savedScrollPosition;
 
@@ -129,6 +129,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
 
   return (
     <main className={styles.jejeup}>
+      {console.log('jejeupData: ', jejeupData)}
       <Seo
         pageTitles={`${jejeupData.attributes.subject} - ${originTitle}`}
         pageTitle={`${jejeupData.attributes.subject}`}
@@ -373,24 +374,24 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
           <dl className={styles.info}>
             <div>
               <dt>제작국가</dt>
-              <dd>{jejeupData.attributes.country}</dd>
+              <dd>{jejeupData.amusementData.country}</dd>
             </div>
             <div>
               <dt>장르</dt>
-              <dd>{jejeupData.attributes.genre}</dd>
+              <dd>{jejeupData.amusementData.genre}</dd>
             </div>
             <div>
               <dt>퍼블리셔</dt>
-              <dd>{jejeupData.attributes.publisher}</dd>
+              <dd>{jejeupData.amusementData.publisher}</dd>
             </div>
             <div>
               <dt>주요 제작자</dt>
-              <dd>{jejeupData.attributes.creator}</dd>
+              <dd>{jejeupData.amusementData.creator}</dd>
             </div>
-            {jejeupData.attributes.category !== 'game' && (
+            {jejeupData.amusementData.category !== 'game' && (
               <div>
                 <dt>주요 출연자</dt>
-                <dd>{jejeupData.attributes.cast}</dd>
+                <dd>{jejeupData.amusementData.cast}</dd>
               </div>
             )}
           </dl>
@@ -404,30 +405,30 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPamalin
               />
             </div>
           )}
-          {(jejeupData.attributes.posterDefault || jejeupData.attributes.posterOther) && (
+          {(jejeupData.amusementData.posterDefault || jejeupData.amusementData.posterOther) && (
             <div className={styles.posters}>
-              <h2>{jejeupData.attributes.category === 'game' ? '게임 공식 배너' : '포스터'}</h2>
+              <h2>{jejeupData.amusementData.category === 'game' ? '게임 공식 배너' : '포스터'}</h2>
               <div
-                className={`${styles['poster-list']} ${jejeupData.attributes.category === 'game' ? styles['posters-game'] : styles['posters-other']}`}
+                className={`${styles['poster-list']} ${jejeupData.amusementData.category === 'game' ? styles['posters-game'] : styles['posters-other']}`}
               >
-                {jejeupData.attributes.posterDefault && (
+                {jejeupData.amusementData.posterDefault && (
                   <div className={styles.poster}>
                     <Image
-                      src={jejeupData.attributes.posterDefault}
+                      src={jejeupData.amusementData.posterDefault}
                       alt=""
-                      width={jejeupData.attributes.category === 'game' ? 460 : 390}
-                      height={jejeupData.attributes.category === 'game' ? 215 : 560}
+                      width={jejeupData.amusementData.category === 'game' ? 460 : 390}
+                      height={jejeupData.amusementData.category === 'game' ? 215 : 560}
                       unoptimized
                     />
                   </div>
                 )}
                 <div className={styles.poster}>
-                  {jejeupData.attributes.posterOther && (
+                  {jejeupData.amusementData.posterOther && (
                     <Image
-                      src={jejeupData.attributes.posterOther}
+                      src={jejeupData.amusementData.posterOther}
                       alt=""
-                      width={jejeupData.attributes.category === 'game' ? 460 : 390}
-                      height={jejeupData.attributes.category === 'game' ? 215 : 560}
+                      width={jejeupData.amusementData.category === 'game' ? 460 : 390}
+                      height={jejeupData.amusementData.category === 'game' ? 215 : 560}
                       unoptimized
                     />
                   )}
@@ -447,7 +448,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   if (jejeupId && typeof jejeupId === 'string') {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/jejeups?id=${jejeupId.substring(14)}`);
-    const jejeupResponse = (await response.json()) as { data: JejeupPamalinkData };
+    const jejeupResponse = (await response.json()) as { data: JejeupPermalinkData };
     jejeupData = jejeupResponse;
   }
 
