@@ -11,7 +11,7 @@ import Seo from '@/components/Seo';
 import { CategoryName } from '@/components/CategoryName';
 import { AnimeName } from '@/components/AnimeName';
 import { RatingsDrama } from '@/components/RatingsDrama';
-import { FormatLang } from '@/components/FormatLang';
+import { OriginalName } from '@/components/OriginalName';
 import { FormatDate } from '@/components/FormatDate';
 import { vectors } from '@/components/vectors';
 import { rem } from '@/styles/designSystem';
@@ -228,159 +228,190 @@ export default function Home() {
           <Link key={data.idx} href={`/jejeup/${data.idx}`} scroll={false} shallow={true}>
             <dl className={styles.summary}>
               <dt>
-                {data.ott === 'wavveOnly' && (
+                {data.amusementData.ott === 'wavveOnly' && (
                   <cite>
                     <WavveOriginal /> 웨이브 독점 스트리밍
                   </cite>
                 )}
-                {data.category !== 'ott' && data.category !== 'ottFilm' && <em>{CategoryName(data.category)}</em>}
-                {data.category === 'animation' && <em>{AnimeName(data.anime)}</em>}
-                {data.ott === 'amazonOriginal' && (
+                {data.amusementData.category !== 'ott' && data.amusementData.category !== 'ottFilm' && (
+                  <em>{CategoryName(data.amusementData.category)}</em>
+                )}
+                {data.amusementData.category === 'animation' && <em>{AnimeName(data.amusementData.anime)}</em>}
+                {data.amusementData.ott === 'amazonOriginal' && (
                   <cite>
                     <AmazonOriginal /> 아마존 오리지널
                   </cite>
                 )}
-                {data.ott === 'appleOriginal' && (
+                {data.amusementData.ott === 'appleOriginal' && (
                   <cite>
                     <AppleOriginal /> 애플 티비+ 오리지널
                   </cite>
                 )}
-                {data.ott === 'appleFilm' && (
+                {data.amusementData.ott === 'appleFilm' && (
                   <cite>
                     <AppleOriginal /> 애플 티비+ 오리지널 영화
                   </cite>
                 )}
-                {data.ott === 'disneyOriginal' && (
+                {data.amusementData.ott === 'disneyOriginal' && (
                   <cite>
                     <DisneyOriginal /> 디즈니+ 오리지널
                   </cite>
                 )}
-                {data.ott === 'netflixOriginal' && (
+                {data.amusementData.ott === 'netflixOriginal' && (
                   <cite>
                     <NetflixOriginal /> 넷플릭스 오리지널
                   </cite>
                 )}
-                {data.ott === 'netflixFilm' && (
+                {data.amusementData.ott === 'netflixFilm' && (
                   <cite>
                     <NetflixOriginal /> 넷플릭스 오리지널 영화
                   </cite>
                 )}
-                {data.ott === 'netflixAnime' && (
+                {data.amusementData.ott === 'netflixAnime' && (
                   <cite>
                     <NetflixOriginal /> 넷플릭스 오리지널 애니메이션
                   </cite>
                 )}
-                {data.ott === 'netflixAnimeFilm' && (
+                {data.amusementData.ott === 'netflixAnimeFilm' && (
                   <cite>
                     <NetflixOriginal /> 넷플릭스 오리지널 애니메이션 영화
                   </cite>
                 )}
-                {data.ott === 'tvingOriginal' && (
+                {data.amusementData.ott === 'tvingOriginal' && (
                   <cite>
                     <TvingOriginal /> 티빙 오리지널
                   </cite>
                 )}
-                {data.ott === 'watchaOriginal' && (
+                {data.amusementData.ott === 'watchaOriginal' && (
                   <cite>
                     <WatchaOriginal /> 왓챠 오리지널
                   </cite>
                 )}
-                {data.ott === 'wavveOriginal' && (
+                {data.amusementData.ott === 'wavveOriginal' && (
                   <cite>
                     <WavveOriginal /> 웨이브 오리지널
                   </cite>
                 )}
-                {(data.category === 'drama' ||
-                  data.category === 'ott' ||
-                  data.anime === 'tva' ||
-                  data.anime === 'ova') &&
-                  data.rating !== 'd19' && (
+                {(data.amusementData.category === 'drama' ||
+                  data.amusementData.category === 'ott' ||
+                  data.amusementData.anime === 'tva' ||
+                  data.amusementData.anime === 'ova') &&
+                  data.amusementData.rating !== 'd19' && (
                     <>
-                      {data.rating === 'all' ? (
-                        <i className={`${styles.drama} ${styles.all} number`}>{RatingsDrama(data.rating)}</i>
+                      {data.amusementData.rating === 'all' ? (
+                        <i className={`${styles.drama} ${styles.all} number`}>
+                          {RatingsDrama(data.amusementData.rating)}
+                        </i>
                       ) : (
-                        <i className={`${styles.drama} number`}>{RatingsDrama(data.rating)}</i>
+                        <i className={`${styles.drama} number`}>{RatingsDrama(data.amusementData.rating)}</i>
                       )}
                     </>
                   )}
-                {(data.category === 'drama' ||
-                  data.category === 'ott' ||
-                  data.anime === 'tva' ||
-                  data.anime === 'ova') &&
-                  data.rating === 'd19' && (
-                    <i className={`${styles.drama} ${styles.d19} number`}>{RatingsDrama(data.rating)}</i>
+                {(data.amusementData.category === 'drama' ||
+                  data.amusementData.category === 'ott' ||
+                  data.amusementData.anime === 'tva' ||
+                  data.amusementData.anime === 'ova') &&
+                  data.amusementData.rating === 'd19' && (
+                    <i className={`${styles.drama} ${styles.d19} number`}>{RatingsDrama(data.amusementData.rating)}</i>
                   )}
-                {(data.category === 'movie' || data.category === 'ottFilm' || data.anime === 'movie') &&
-                  data.rating === 'all' && (
+                {(data.amusementData.category === 'movie' ||
+                  data.amusementData.category === 'ottFilm' ||
+                  data.amusementData.anime === 'movie') &&
+                  data.amusementData.rating === 'all' && (
                     <>
                       <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
                     </>
                   )}
-                {(data.category === 'movie' || data.category === 'ottFilm' || data.anime === 'movie') &&
-                  data.rating === 'b12' && (
+                {(data.amusementData.category === 'movie' ||
+                  data.amusementData.category === 'ottFilm' ||
+                  data.amusementData.anime === 'movie') &&
+                  data.amusementData.rating === 'b12' && (
                     <>
                       <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
                     </>
                   )}
-                {(data.category === 'movie' || data.category === 'ottFilm' || data.anime === 'movie') &&
-                  data.rating === 'c15' && (
+                {(data.amusementData.category === 'movie' ||
+                  data.amusementData.category === 'ottFilm' ||
+                  data.amusementData.anime === 'movie') &&
+                  data.amusementData.rating === 'c15' && (
                     <>
                       <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
                     </>
                   )}
-                {(data.category === 'movie' || data.category === 'ottFilm' || data.anime === 'movie') &&
-                  data.rating === 'd19' && (
+                {(data.amusementData.category === 'movie' ||
+                  data.amusementData.category === 'ottFilm' ||
+                  data.amusementData.anime === 'movie') &&
+                  data.amusementData.rating === 'd19' && (
                     <>
                       <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
                     </>
                   )}
-                {data.category === 'game' && data.rating === 'all' && (
+                {data.amusementData.category === 'game' && data.amusementData.rating === 'all' && (
                   <>
                     <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
                   </>
                 )}
-                {data.category === 'game' && data.rating === 'b12' && (
+                {data.amusementData.category === 'game' && data.amusementData.rating === 'b12' && (
                   <>
                     <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
                   </>
                 )}
-                {data.category === 'game' && data.rating === 'c15' && (
+                {data.amusementData.category === 'game' && data.amusementData.rating === 'c15' && (
                   <>
                     <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
                   </>
                 )}
-                {data.category === 'game' && data.rating === 'd19' && (
+                {data.amusementData.category === 'game' && data.amusementData.rating === 'd19' && (
                   <>
                     <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
                   </>
                 )}
               </dt>
               <dd>
-                <strong dangerouslySetInnerHTML={{ __html: `${FormatLang(data.description)} (${data.release})` }} />
+                <strong>
+                  {data.amusementData.lang === 'chineseBeonche' && (
+                    <span lang="zh-Hant">{data.amusementData.title} </span>
+                  )}
+                  {data.amusementData.lang === 'chineseGanche' && (
+                    <span lang="zh-Hans">{data.amusementData.title} </span>
+                  )}
+                  {data.amusementData.lang === 'english' && <span lang="en">{data.amusementData.title}</span>}
+                  {data.amusementData.lang === 'japanese' && <span lang="ja">{data.amusementData.title}</span>}
+                  {data.amusementData.lang === 'thai' && <span lang="th">{data.amusementData.title}</span>}
+                  {data.amusementData.lang === null && <span lang="ko">{data.amusementData.title}</span>}{' '}
+                  {data.amusementData.originalAuthor &&
+                    `('${data.amusementData.originalAuthor}'의 ${OriginalName(data.amusementData.original)} '${data.amusementData.originTitle}' 원작)`}
+                  {data.amusementData.titleOther && `(${data.amusementData.titleOther})`}{' '}
+                  {data.amusementData.originalAuthor === null && data.amusementData.original && (
+                    <span className={styles.origin}>동명의 {OriginalName(data.amusementData.original)} 원작</span>
+                  )}
+                  <time>{data.amusementData.release}</time>
+                </strong>
+                <em>{data.amusementData.etc && data.amusementData.etc}</em>
               </dd>
             </dl>
           </Link>
           <dl className={styles.info}>
             <div>
               <dt>제작국가</dt>
-              <dd>{data.country}</dd>
+              <dd>{data.amusementData.country}</dd>
             </div>
             <div>
               <dt>장르</dt>
-              <dd>{data.genre}</dd>
+              <dd>{data.amusementData.genre}</dd>
             </div>
             <div>
               <dt>퍼블리셔</dt>
-              <dd>{data.publisher}</dd>
+              <dd>{data.amusementData.publisher}</dd>
             </div>
             <div>
               <dt>주요 제작자</dt>
-              <dd>{data.creator}</dd>
+              <dd>{data.amusementData.creator}</dd>
             </div>
-            {data.category !== 'game' && (
+            {data.amusementData.category !== 'game' && (
               <div>
                 <dt>주요 출연자</dt>
-                <dd>{data.cast}</dd>
+                <dd>{data.amusementData.cast}</dd>
               </div>
             )}
           </dl>

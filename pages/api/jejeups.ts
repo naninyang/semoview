@@ -1,17 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getJejeupData } from '@/utils/strapi';
-import { JejeupData } from 'types';
-
-async function fetchPreviewMetadata(url: string) {
-  try {
-    const response = await fetch(`${process.env.PREVIEW_API_URL}?url=${encodeURIComponent(url)}`);
-    const previewResponse = await response.json();
-    return previewResponse;
-  } catch (error) {
-    console.error('Failed to fetch article metadata', error);
-    return {};
-  }
-}
+import { getAmusementData, getJejeupData } from '@/utils/strapi';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const id = req.query.id as string;
@@ -39,9 +27,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         `${process.env.PREVIEW_API_URL}?url=https://youtu.be/${encodeURIComponent(jejeupResponse.data.attributes.video)}`,
       );
       const jejeupMetaData = await jejeupMetaResponse.json();
+      const amusementData = await getAmusementData(jejeupResponse.data.attributes.title);
       const jejeups = {
         ...jejeupResponse.data,
         jejeupMetaData,
+        amusementData,
       };
       res.status(200).json(jejeups);
     } catch (error) {

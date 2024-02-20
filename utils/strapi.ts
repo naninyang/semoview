@@ -1,4 +1,4 @@
-import { JejeupData, NoticeData } from 'types';
+import { AmusementData, JejeupData, NoticeData } from 'types';
 
 const formatDate = (datetime: string) => {
   const date = new Date(datetime);
@@ -29,6 +29,7 @@ export async function getJejeupData(page?: number) {
     idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
     subject: data.attributes.subject,
     video: data.attributes.video,
+    title: data.attributes.title,
     ownerAvatar: data.attributes.ownerAvatar,
     description: data.attributes.description,
     country: data.attributes.country,
@@ -49,9 +50,11 @@ export async function getJejeupData(page?: number) {
   const jejeups = await Promise.all(
     rowsData.map(async (preview) => {
       const jejeupMetaData = await fetchPreviewMetadata(`https://youtu.be/${preview.video}`);
+      const amusementData = await getAmusementData(preview.title);
       return {
         ...preview,
         jejeupMetaData,
+        amusementData,
       };
     }),
   );
@@ -91,4 +94,39 @@ async function fetchPreviewMetadata(url: string) {
     console.error('Failed to fetch article metadata', error);
     return {};
   }
+}
+
+export async function getAmusementData(amusement: string) {
+  const response = await fetch(`${process.env.STRAPI_URL}/api/amusement-jejeups/${amusement}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
+    },
+  });
+  const data = await response.json();
+  const amusementData = data.data;
+  const rowsData: AmusementData = {
+    id: amusementData.id,
+    title: amusementData.attributes.title,
+    lang: amusementData.attributes.lang,
+    titleOther: amusementData.attributes.titleOther,
+    etc: amusementData.attributes.etc,
+    release: amusementData.attributes.release,
+    original: amusementData.attributes.original,
+    originalAuthor: amusementData.attributes.originalAuthor,
+    originTitle: amusementData.attributes.originTitle,
+    rating: amusementData.attributes.rating,
+    country: amusementData.attributes.country,
+    category: amusementData.attributes.category,
+    genre: amusementData.attributes.genre,
+    anime: amusementData.attributes.anime,
+    ott: amusementData.attributes.ott,
+    publisher: amusementData.attributes.publisher,
+    creator: amusementData.attributes.creator,
+    cast: amusementData.attributes.cast,
+    posterDefault: amusementData.attributes.posterDefault,
+    postOther: amusementData.attributes.posterOther,
+  };
+
+  return rowsData;
 }

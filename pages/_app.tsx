@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import type { AppProps } from 'next/app';
-import { Lato, Noto_Sans_JP, Noto_Sans_KR } from 'next/font/google';
+import { Lato, Noto_Sans_JP, Noto_Sans_KR, Noto_Sans_SC, Noto_Sans_TC, Noto_Sans_Thai } from 'next/font/google';
 import localFont from 'next/font/local';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
@@ -21,6 +21,21 @@ const fontEN = Lato({
 const fontJP = Noto_Sans_JP({
   weight: ['300', '400', '600', '700', '800'],
   subsets: ['vietnamese'],
+});
+
+const fontSC = Noto_Sans_SC({
+  weight: ['300', '400', '600', '700', '800'],
+  subsets: ['vietnamese'],
+});
+
+const fontTC = Noto_Sans_TC({
+  weight: ['300', '400', '600', '700', '800'],
+  subsets: ['vietnamese'],
+});
+
+const fontTH = Noto_Sans_Thai({
+  weight: ['300', '400', '600', '700', '800'],
+  subsets: ['thai'],
 });
 
 const NanumSquare = localFont({
@@ -125,6 +140,15 @@ export default function App({ Component, pageProps }: AppProps) {
           }
           span[lang='ja'] {
             font-family: ${fontJP.style.fontFamily}, sans-serif;
+          }
+          span[lang='th'] {
+            font-family: ${fontTH.style.fontFamily}, sans-serif;
+          }
+          span[lang='zh-Hans'] {
+            font-family: ${fontSC.style.fontFamily}, sans-serif;
+          }
+          span[lang='zh-Hant'] {
+            font-family: ${fontTC.style.fontFamily}, sans-serif;
           }
           .preview {
             font-family: ${fontKR.style.fontFamily};

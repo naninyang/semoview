@@ -257,6 +257,28 @@
               word-wrap: break-word
               word-break: normal
 
+              &[lang="en"], &[lang="ko"]
+                font-weight: 800
+
+              &.origin
+                padding-right: rem(7)
+                padding-left: rem(3)
+                font-weight: 400
+                font-size: rem(14)
+                color: rgba($hex-dark, .7)
+
+            time
+              padding-left: rem(3)
+              font-size: rem(14)
+              font-weight: 400
+              color: $hex-dark
+
+          em
+            display: block
+            font-size: rem(14)
+            font-style: normal
+            color: $hex-accent
+
       a:hover, a:focus
         .summary dd strong
           text-decoration: underline

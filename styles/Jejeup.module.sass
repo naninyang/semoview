@@ -165,6 +165,27 @@
             word-wrap: break-word
             word-break: normal
 
+            &[lang="en"], &[lang="ko"]
+              font-weight: 800
+
+            &.origin
+              padding-right: rem(7)
+              padding-left: rem(3)
+              font-weight: 400
+              font-size: rem(14)
+
+          time
+            padding-left: rem(3)
+            font-size: rem(14)
+            font-weight: 400
+            color: rgba($hex-dark, .7)
+
+        em
+          display: block
+          font-size: rem(14)
+          font-style: normal
+          color: $hex-accent
+
     .info
       display: flex
       flex-direction: column

@@ -18,6 +18,7 @@ export interface JejeupData {
   posterDefault: string;
   posterOther: string;
   comment: string;
+  title: string;
   jejeupMetaData: {
     error: string;
     ogTitle: string;
@@ -32,6 +33,27 @@ export interface JejeupData {
     ownerName?: string;
     pressPublished?: string;
     pressAvatar?: string;
+  };
+  amusementData: {
+    title: string;
+    lang: string;
+    titleOther: string;
+    etc: string;
+    release: string;
+    original: string;
+    originalAuthor: string;
+    originTitle: string;
+    rating: string;
+    country: string;
+    category: string;
+    genre: string;
+    anime: string;
+    ott: string;
+    publisher: string;
+    creator: string;
+    cast: string;
+    posterDefault: string;
+    postOther: string;
   };
 }
 
@@ -55,6 +77,7 @@ export interface JejeupPamalinkData {
     posterDefault: string;
     posterOther: string;
     comment: string;
+    title: string;
   };
   jejeupMetaData: {
     error: string;
@@ -71,6 +94,50 @@ export interface JejeupPamalinkData {
     pressPublished?: string;
     pressAvatar?: string;
   };
+  amusementData: {
+    title: string;
+    lang: string;
+    titleOther: string;
+    etc: string;
+    release: string;
+    original: string;
+    originalAuthor: string;
+    originTitle: string;
+    rating: string;
+    country: string;
+    category: string;
+    genre: string;
+    anime: string;
+    ott: string;
+    publisher: string;
+    creator: string;
+    cast: string;
+    posterDefault: string;
+    postOther: string;
+  };
+}
+
+export interface AmusementData {
+  id: string;
+  title: string;
+  lang: string;
+  titleOther: string;
+  etc: string;
+  release: string;
+  original: string;
+  originalAuthor: string;
+  originTitle: string;
+  rating: string;
+  country: string;
+  category: string;
+  genre: string;
+  anime: string;
+  ott: string;
+  publisher: string;
+  creator: string;
+  cast: string;
+  posterDefault: string;
+  postOther: string;
 }
 
 export interface NoticeData {
