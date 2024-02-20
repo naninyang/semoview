@@ -47,12 +47,18 @@
 
   h1
     display: flex
-    align-items: flex-end
-    gap: rem(17)
+    gap: rem(2)
     padding: rem(15) rem(7) rem(3)
     font-size: rem(20)
     font-weight: 800
     line-height: 1.2
+
+    +mq(maxSmall)
+      flex-direction: column
+
+    +mq(minMedium)
+      align-items: flex-end
+      gap: rem(17)
 
     span
       display: flex
@@ -72,6 +78,9 @@
       font-weight: 900
       font-style: normal
       color: $hex-accent
+
+      +mq(maxSmall)
+        padding-left: rem(17)
 
   .jejeup-content
     position: relative
