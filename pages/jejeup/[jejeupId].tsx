@@ -129,7 +129,6 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
 
   return (
     <main className={styles.jejeup}>
-      {console.log('jejeupData: ', jejeupData)}
       <Seo
         pageTitles={`${jejeupData.attributes.subject} - ${originTitle}`}
         pageTitle={`${jejeupData.attributes.subject}`}
