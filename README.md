@@ -45,7 +45,11 @@
 
 ### 발견되거나 알려진 버그
 
-- Not Yet
+- Not yet
+
+### TO-DO
+
+- 목록을 `SWR` 에서 `getServerSideProps`으로 변경
 
 ## Supported PWA App. Download
 
