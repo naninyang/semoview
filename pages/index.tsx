@@ -178,7 +178,7 @@ export default function Home() {
   const renderCard = ({ data }: { data: JejeupData }) => (
     <div className={styles.item}>
       <figure>
-        {data.jejeupMetaData && data.jejeupMetaData.ogTitle !== ' - YouTube' ? (
+        {Object.keys(data.jejeupMetaData).length > 0 ? (
           <div className={`${styles.preview} preview`}>
             <div className={styles['preview-container']}>
               <Image src={data.jejeupMetaData.ogImage} width="1920" height="1080" alt="" unoptimized />
