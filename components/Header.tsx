@@ -46,10 +46,22 @@ export default function Header() {
         <button type="button" onClick={onInstallPWA} style={{ display: 'none' }} />
         {router.pathname === '/' || router.pathname === '/jejeup' ? undefined : <s />}
         <h1>
-          <Anchor href="/">
-            <JejeupLogo />
-            <span>제목에 제목이 없어서 짜증나서 만든 사이트</span>
-          </Anchor>
+          {router.pathname === '/' ? (
+            <button
+              type="button"
+              onClick={() => {
+                (window.location.reload as (cache: boolean) => void)(true);
+              }}
+            >
+              <JejeupLogo />
+              <span>제목에 제목이 없어서 짜증나서 만든 사이트</span>
+            </button>
+          ) : (
+            <Anchor href="/">
+              <JejeupLogo />
+              <span>제목에 제목이 없어서 짜증나서 만든 사이트</span>
+            </Anchor>
+          )}
         </h1>
         <nav>
           <ol>

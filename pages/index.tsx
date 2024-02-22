@@ -420,9 +420,6 @@ export default function Home() {
     </div>
   );
 
-  const handleRefresh = async () => {
-    window.location.reload();
-  };
   const [columnCount, setColumnCount] = useState(1);
 
   const [count, setCount] = useState<Counts | null>(null);
@@ -469,15 +466,13 @@ export default function Home() {
         )}
         {!isLoading && !error && (
           <div className={styles['jejeup-content']}>
-            <PullToRefresh onRefresh={handleRefresh}>
-              <Masonry
-                items={jejeups || []}
-                columnCount={columnCount}
-                render={renderCard}
-                key={jejeups.length}
-                data-index={jejeups.length}
-              />
-            </PullToRefresh>
+            <Masonry
+              items={jejeups || []}
+              columnCount={columnCount}
+              render={renderCard}
+              key={jejeups.length}
+              data-index={jejeups.length}
+            />
             {isReachingEnd !== undefined && (
               <div ref={setTarget} className={styles.ref}>
                 {isReachingEnd === false && <p>이것저것 불러오는 중</p>}

@@ -15,7 +15,6 @@
 - SASS
 - Google YouTube iframe API
 - Masonry w/ Masonic
-- pull-to-refresh (without Mutate Caching)
 - PWA
 - SWR w/ useSWRInfinite
 - Strapi API
