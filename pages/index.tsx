@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
-import PullToRefresh from 'react-simple-pull-to-refresh';
 import useSWRInfinite from 'swr/infinite';
 import styled from '@emotion/styled';
 import { Masonry } from 'masonic';
