@@ -12,9 +12,10 @@ import { CategoryName } from '@/components/CategoryName';
 import { AnimeName } from '@/components/AnimeName';
 import { RatingsDrama } from '@/components/RatingsDrama';
 import { FormatDate } from '@/components/FormatDate';
+import { OriginalName } from '@/components/OriginalName';
+import { FormatDuration } from '@/components/FormatDuration';
 import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Jejeup.module.sass';
-import { OriginalName } from '@/components/OriginalName';
 
 const BackButton = styled.i({
   display: 'block',
@@ -154,7 +155,10 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
       <article className={styles['article-jejeup']}>
         {jejeupData.jejeupMetaData && jejeupData.jejeupMetaData.ogTitle !== ' - YouTube' ? (
           <div className={`${styles.preview} preview`}>
-            <YouTubeController videoId={jejeupData.attributes.video} videoImage={jejeupData.jejeupMetaData.ogImage} />
+            <div className={styles.video}>
+              <YouTubeController videoId={jejeupData.attributes.video} videoImage={jejeupData.jejeupMetaData.ogImage} />
+              <em>[{FormatDuration(jejeupData.jejeupMetaData.duration)}]</em>
+            </div>
             <div className={styles.youtube}>
               <h1>{jejeupData.jejeupMetaData.ogTitle}</h1>
               <div className={styles.detail}>

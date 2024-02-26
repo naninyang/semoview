@@ -21,6 +21,7 @@ export interface JejeupData {
     ownerName?: string;
     pressPublished?: string;
     pressAvatar?: string;
+    duration: string;
   };
   amusementData: {
     title: string;
@@ -69,6 +70,7 @@ export interface JejeupPermalinkData {
     ownerName?: string;
     pressPublished?: string;
     pressAvatar?: string;
+    duration: string;
   };
   amusementData: {
     title: string;

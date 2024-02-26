@@ -12,10 +12,10 @@ import { AnimeName } from '@/components/AnimeName';
 import { RatingsDrama } from '@/components/RatingsDrama';
 import { OriginalName } from '@/components/OriginalName';
 import { FormatDate } from '@/components/FormatDate';
+import { FormatDuration } from '@/components/FormatDuration';
 import { vectors } from '@/components/vectors';
 import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Home.module.sass';
-import { GetServerSideProps } from 'next';
 
 interface Counts {
   jejeup: number;
@@ -182,7 +182,10 @@ function Home() {
         {Object.keys(data.jejeupMetaData).length > 0 ? (
           <div className={`${styles.preview} preview`}>
             <div className={styles['preview-container']}>
-              <Image src={data.jejeupMetaData.ogImage} width="1920" height="1080" alt="" unoptimized />
+              <div className={styles.thumbnail}>
+                <Image src={data.jejeupMetaData.ogImage} width="1920" height="1080" alt="" unoptimized />
+                <em>{FormatDuration(data.jejeupMetaData.duration)}</em>
+              </div>
               <div className={styles['preview-info']}>
                 <div className={styles.detail}>
                   <Image

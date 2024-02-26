@@ -112,12 +112,30 @@
         flex-direction: column
         gap: rem(12)
 
-        > img
-          border-radius: rem(3)
+        .thumbnail
+          position: relative
           aspect-ratio: 1920 / 1080
-          object-fit: cover
-          width: auto!important
-          height: auto!important
+
+          img
+            display: block
+            border-radius: rem(3)
+            aspect-ratio: 1920 / 1080
+            object-fit: cover
+            width: 100%!important
+            height: auto!important
+
+          em
+            position: absolute
+            right: rem(4)
+            bottom: rem(4)
+            background-color: $hex-black
+            border-radius: rem(4)
+            padding: rem(3) rem(4)
+            font-size: rem(12)
+            font-weight: 700
+            font-style: normal
+            color: $hex-white
+            line-height: 1
 
         .preview-info
           display: flex
