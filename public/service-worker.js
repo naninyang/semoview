@@ -1,7 +1,7 @@
 const CACHE_NAME = 'jejeup-data';
 
 self.addEventListener('fetch', (event) => {
-  if (event.request.url.includes('/api/jejeups')) {
+  if (event.request.url.includes('/api/notices')) {
     event.respondWith(
       caches.open(CACHE_NAME).then((cache) => {
         return cache.match(event.request).then((response) => {
