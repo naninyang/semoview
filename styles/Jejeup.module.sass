@@ -57,6 +57,18 @@
             font-size: rem(12)
             line-height: 1.5
 
+      .worst
+        padding-bottom: rem(3)
+
+        button
+          background-color: $hex-accent
+          border-radius: rem(3)
+          padding: rem(3) rem(5)
+          font-size: rem(12)
+          font-weight: 800
+          text-transform: uppercase
+          color: $hex-white
+
       p
         background-color: rgba($hex-black, .05)
         border-radius: rem(12)
@@ -72,6 +84,17 @@
       display: flex
       flex-direction: column
       gap: rem(12)
+
+      .worst
+        padding-bottom: rem(7)
+
+        dt
+          +screen-reader-only
+
+        dd
+          font-size: rem(12)
+          font-weight: 900
+          color: $hex-accent
 
     .summary
       display: flex

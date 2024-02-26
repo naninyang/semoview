@@ -166,12 +166,35 @@
                     font-size: rem(14)
                     color: $hex-dark
 
+              .worst
+                padding-bottom: rem(3)
+
+                button
+                  background-color: $hex-accent
+                  border-radius: rem(3)
+                  padding: rem(3) rem(5)
+                  font-size: rem(12)
+                  font-weight: 800
+                  text-transform: uppercase
+                  color: $hex-white
+
     figcaption
       display: flex
       flex-direction: column
       gap: rem(7)
       border-top: 1px solid rgba($hex-dark, .2)
       padding: rem(12) rem(15) rem(15)
+
+      .worst
+        padding-bottom: rem(7)
+
+        dt
+          +screen-reader-only
+
+        dd
+          font-size: rem(12)
+          font-weight: 900
+          color: $hex-accent
 
       .summary
         display: flex

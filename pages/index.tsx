@@ -15,6 +15,7 @@ import { FormatDate } from '@/components/FormatDate';
 import { vectors } from '@/components/vectors';
 import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Home.module.sass';
+import { GetServerSideProps } from 'next';
 
 interface Counts {
   jejeup: number;
@@ -100,7 +101,7 @@ const getKey = (pageIndex: number, previousPageData: any) => {
   return `${process.env.NEXT_PUBLIC_API_URL}/api/jejeups?page=${pageIndex + 1}`;
 };
 
-export default function Home() {
+function Home() {
   const timestamp = Date.now();
 
   useEffect(() => {
@@ -199,6 +200,13 @@ export default function Home() {
                         {FormatDate(`${data.jejeupMetaData.datePublished}`)}
                       </time>
                     </div>
+                    {data.worst && (
+                      <div className={styles.worst}>
+                        <button type="button" className="number">
+                          Worst
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -225,6 +233,12 @@ export default function Home() {
         )}
         <figcaption>
           <Link key={data.idx} href={`/jejeup/${data.idx}`} scroll={false} shallow={true}>
+            {data.worst && (
+              <dl className={styles.worst}>
+                <dt>Worst 경고!</dt>
+                <dd>이 영상은 영상과 더보기에 그 어떤 정보도 존재하지 않는 최악의 영상입니다.</dd>
+              </dl>
+            )}
             <dl className={styles.summary}>
               <dt>
                 {data.amusementData.ott === 'wavveOnly' && (
@@ -483,3 +497,5 @@ export default function Home() {
     </main>
   );
 }
+
+export default Home;

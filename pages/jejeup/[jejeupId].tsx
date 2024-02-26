@@ -132,7 +132,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
       <Seo
         pageTitles={`${jejeupData.attributes.subject} - ${originTitle}`}
         pageTitle={`${jejeupData.attributes.subject}`}
-        pageDescription={`${jejeupData.attributes.description} (${jejeupData.attributes.release})`}
+        pageDescription={`${jejeupData.amusementData.title} (${jejeupData.amusementData.release})`}
         pageImg={jejeupData.jejeupMetaData.ogImage ? jejeupData.jejeupMetaData.ogImage : '/missing.webp'}
         pageOgType={'video.other'}
         pageImgWidth={1920}
@@ -179,6 +179,13 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                   <strong>유튜버가 더보기 정보를 등록하지 않았습니다.</strong>
                 </p>
               )}
+              {jejeupData.attributes.worst && (
+                <div className={styles.worst}>
+                  <button type="button" className="number">
+                    Worst
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         ) : (
@@ -200,6 +207,12 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
           </div>
         )}
         <div className={styles.figcaption}>
+          {jejeupData.attributes.worst && (
+            <dl className={styles.worst}>
+              <dt>Worst 경고!</dt>
+              <dd>이 영상은 영상과 더보기에 그 어떤 정보도 존재하지 않는 최악의 영상입니다.</dd>
+            </dl>
+          )}
           <dl className={styles.summary}>
             <dt>
               {jejeupData.amusementData.ott === 'wavveOnly' && (

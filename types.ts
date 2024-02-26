@@ -4,21 +4,9 @@ export interface JejeupData {
   subject: string;
   video: string;
   ownerAvatar: string;
-  description: string;
-  country: string;
-  rating: string;
-  category: string;
-  anime: string;
-  ott: string;
-  genre: string;
-  release: string;
-  cast: string;
-  publisher: string;
-  creator: string;
-  posterDefault: string;
-  posterOther: string;
   comment: string;
   title: string;
+  worst: boolean;
   jejeupMetaData: {
     error: string;
     ogTitle: string;
@@ -63,21 +51,9 @@ export interface JejeupPermalinkData {
     subject: string;
     video: string;
     ownerAvatar: string;
-    description: string;
-    country: string;
-    rating: string;
-    category: string;
-    anime: string;
-    ott: string;
-    genre: string;
-    release: string;
-    cast: string;
-    publisher: string;
-    creator: string;
-    posterDefault: string;
-    posterOther: string;
     comment: string;
     title: string;
+    worst: boolean;
   };
   jejeupMetaData: {
     error: string;
