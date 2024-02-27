@@ -12,9 +12,9 @@ const formatDate = (datetime: string) => {
   return `${year}${month}${day}${hours}${minutes}${seconds}`;
 };
 
-async function fetchInterviewData() {
-  const response = await fetch(
-    `${process.env.STRAPI_URL}/api/jejeup-jejeups?pagination[page]=1&pagination[pageSize]=10000`,
+async function fetchAllJejeupData() {
+  let response = await fetch(
+    `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=1&pagination[pageSize]=100`,
     {
       method: 'GET',
       headers: {
@@ -22,20 +22,36 @@ async function fetchInterviewData() {
       },
     },
   );
-  const sitemapResponse = await response.json();
-  return sitemapResponse.data;
+  let data = await response.json();
+  const pageCount = data.meta.pagination.pageCount;
+  let allNewsData = [];
+  for (let page = 1; page <= pageCount; page++) {
+    response = await fetch(
+      `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=100`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
+        },
+      },
+    );
+    data = await response.json();
+    allNewsData.push(...data.data);
+  }
+
+  return allNewsData;
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const jejeupData = await fetchInterviewData();
+    const allNewsData = await fetchAllJejeupData();
 
-    const jejeupDataProcessed = jejeupData.map((jejeupItem: any) => ({
-      idx: `jejeup/${formatDate(jejeupItem.attributes.createdAt)}${jejeupItem.id}`,
-      created: jejeupItem.attributes.createdAt,
+    const newsDataProcessed = allNewsData.map((newsItem: any) => ({
+      idx: `jejeup/${formatDate(newsItem.attributes.createdAt)}${newsItem.id}`,
+      created: newsItem.attributes.createdAt,
     }));
 
-    res.status(200).send(jejeupDataProcessed);
+    res.status(200).send(newsDataProcessed);
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
