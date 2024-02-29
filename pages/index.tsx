@@ -12,7 +12,6 @@ import { AnimeName } from '@/components/AnimeName';
 import { RatingsDrama } from '@/components/RatingsDrama';
 import { OriginalName } from '@/components/OriginalName';
 import { FormatDate } from '@/components/FormatDate';
-import { FormatDuration } from '@/components/FormatDuration';
 import { vectors } from '@/components/vectors';
 import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Home.module.sass';
@@ -139,6 +138,14 @@ function Home() {
   useEffect(() => {
     if (!target || isLoading) return;
   }, [target, isLoading]);
+
+  function FormatDuration(duration: string) {
+    const match = duration.match(/PT(\d+M)?(\d+S)?/);
+    if (!match) return '0:00';
+    const minutes = match[1] ? match[1].slice(0, -1) : '0';
+    const seconds = match[2] ? match[2].slice(0, -1) : '0';
+    return `${minutes}:${seconds.padStart(2, '0')}`;
+  }
 
   useEffect(() => {
     const preventScroll = (e: Event) => {

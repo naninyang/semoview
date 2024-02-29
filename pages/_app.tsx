@@ -9,7 +9,7 @@ import Header from '@/components/Header';
 import '@/styles/globals.sass';
 
 const fontKR = Noto_Sans_KR({
-  weight: ['400', '700'],
+  weight: ['400', '500', '600', '700', '800', '900'],
   subsets: ['cyrillic'],
 });
 

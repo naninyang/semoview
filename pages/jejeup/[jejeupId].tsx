@@ -13,7 +13,6 @@ import { AnimeName } from '@/components/AnimeName';
 import { RatingsDrama } from '@/components/RatingsDrama';
 import { FormatDate } from '@/components/FormatDate';
 import { OriginalName } from '@/components/OriginalName';
-import { FormatDuration } from '@/components/FormatDuration';
 import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Jejeup.module.sass';
 
@@ -109,6 +108,14 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
     return () => clearTimeout(timer);
   }, []);
 
+  function FormatDuration(duration: string) {
+    const match = duration.match(/PT(\d+M)?(\d+S)?/);
+    if (!match) return '0:00';
+    const minutes = match[1] ? match[1].slice(0, -1) : '0';
+    const seconds = match[2] ? match[2].slice(0, -1) : '0';
+    return `${minutes}분 ${seconds.padStart(2, '0')}초`;
+  }
+
   if (!jejeupData) {
     if (timeoutReached) {
       return (
@@ -157,7 +164,6 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
           <div className={`${styles.preview} preview`}>
             <div className={styles.video}>
               <YouTubeController videoId={jejeupData.attributes.video} videoImage={jejeupData.jejeupMetaData.ogImage} />
-              <em>[{FormatDuration(jejeupData.jejeupMetaData.duration)}]</em>
             </div>
             <div className={styles.youtube}>
               <h1>{jejeupData.jejeupMetaData.ogTitle}</h1>
@@ -177,7 +183,10 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                 </div>
               </div>
               {jejeupData.jejeupMetaData.ogDescription ? (
-                <p>{jejeupData.jejeupMetaData.ogDescription}</p>
+                <p>
+                  <em>{FormatDuration(jejeupData.jejeupMetaData.duration)}</em>{' '}
+                  {jejeupData.jejeupMetaData.ogDescription}
+                </p>
               ) : (
                 <p>
                   <strong>유튜버가 더보기 정보를 등록하지 않았습니다.</strong>
