@@ -88,6 +88,10 @@ const RatingGameD19 = styled.i({
   background: `url(${vectors.ratings.game.d19}) no-repeat 50% 50%/contain`,
 });
 
+const ClipboardIcon = styled.i({
+  background: `url(${vectors.share}) no-repeat 50% 50%/contain`,
+});
+
 export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermalinkData | null }) {
   const router = useRouter();
   let savedScrollPosition;
@@ -134,6 +138,18 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
       );
     }
   }
+
+  const copyToClipboard = () => {
+    const url = window.location.href;
+    navigator.clipboard
+      .writeText(url)
+      .then(() => {
+        alert('URL이 클립보드에 복사되었습니다!');
+      })
+      .catch((err) => {
+        console.error('URL 복사에 실패했습니다:', err);
+      });
+  };
 
   return (
     <main className={styles.jejeup}>
@@ -396,6 +412,11 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
               <em>{jejeupData.amusementData.etc && jejeupData.amusementData.etc}</em>
             </dd>
           </dl>
+          <div className={styles.function}>
+            <button onClick={copyToClipboard}>
+              <ClipboardIcon /> <span>URL 복사</span>
+            </button>
+          </div>
           <dl className={styles.info}>
             <div>
               <dt>제작국가</dt>
