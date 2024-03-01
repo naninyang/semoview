@@ -110,6 +110,17 @@
           font-weight: 900
           color: $hex-accent
 
+    .title
+      .title-list
+        display: flex
+        gap: rem(12)
+
+        +mq(maxExtraSmall)
+          flex-direction: column
+
+        .title-info
+          +col
+
     .summary
       display: flex
       flex-direction: column
@@ -270,7 +281,7 @@
         font-weight: 800
         color: $hex-dark
 
-    .comment, .posters
+    .title, .comment, .posters
       display: flex
       flex-direction: column
       gap: rem(7)
@@ -291,6 +302,7 @@
           width: rem(5)
           height: rem(20)
 
+    .comment, .posters
       p
         background-color: rgba($hex-accent, .05)
         border-radius: rem(3)

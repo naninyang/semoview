@@ -225,10 +225,12 @@ function Home() {
         ) : (
           <div className={`${styles.preview} preview`}>
             <div className={styles['preview-container']}>
-              <Image src="/missing.webp" width="36" height="36" alt="" unoptimized />
+              <div className={styles.thumbnail}>
+                <Image src="/missing.webp" width="1920" height="1080" alt="" unoptimized />
+              </div>
               <div className={styles['preview-info']}>
                 <div className={styles.detail}>
-                  <Image src="/unknown.webp" width="1920" height="1080" alt="" unoptimized />
+                  <Image src="/unknown.webp" width="36" height="36" alt="" unoptimized />
                   <div className={`${styles['user-info']}`}>
                     <strong>삭제된 영상</strong>
                     <div className={styles.user}>

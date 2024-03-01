@@ -27,13 +27,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         `${process.env.PREVIEW_API_URL}?url=https://youtu.be/${encodeURIComponent(jejeupResponse.data.attributes.video)}`,
       );
       const jejeupMetaData = await jejeupMetaResponse.json();
-      const amusementData = await getAmusementData(jejeupResponse.data.attributes.title);
-      const jejeups = {
-        ...jejeupResponse.data,
-        jejeupMetaData,
-        amusementData,
-      };
-      res.status(200).json(jejeups);
+      if (jejeupResponse.data.attributes.title2 === null) {
+        const amusementData = await getAmusementData(jejeupResponse.data.attributes.title);
+        const jejeups = {
+          ...jejeupResponse.data,
+          jejeupMetaData,
+          amusementData,
+        };
+        res.status(200).json(jejeups);
+      } else {
+        const amusementData = await getAmusementData(jejeupResponse.data.attributes.title);
+        const amusementData2 = await getAmusementData(jejeupResponse.data.attributes.title2);
+        const jejeups = {
+          ...jejeupResponse.data,
+          jejeupMetaData,
+          amusementData,
+          amusementData2,
+        };
+        res.status(200).json(jejeups);
+      }
     } catch (error) {
       res.status(500).json({ message: 'Server error' });
     }

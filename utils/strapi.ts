@@ -51,7 +51,7 @@ export async function getJejeupData(page?: number) {
 
 export async function getNoticeData() {
   const response = await fetch(
-    `${process.env.STRAPI_URL}/api/notice-nol2trs?sort[0]=id:desc&pagination[page]=1&pagination[pageSize]=1000`,
+    `${process.env.STRAPI_URL}/api/notice-nol2trs?sort[0]=id:desc&pagination[page]=1&pagination[pageSize]=100`,
     {
       method: 'GET',
       headers: {

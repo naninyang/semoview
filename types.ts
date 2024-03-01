@@ -54,6 +54,8 @@ export interface JejeupPermalinkData {
     ownerAvatar: string;
     comment: string;
     title: string;
+    title2: string;
+    title3?: string;
     worst: boolean;
   };
   jejeupMetaData: {
@@ -73,6 +75,27 @@ export interface JejeupPermalinkData {
     duration: string;
   };
   amusementData: {
+    title: string;
+    lang: string;
+    titleOther: string;
+    etc: string;
+    release: string;
+    original: string;
+    originalAuthor: string;
+    originTitle: string;
+    rating: string;
+    country: string;
+    category: string;
+    genre: string;
+    anime: string;
+    ott: string;
+    publisher: string;
+    creator: string;
+    cast: string;
+    posterDefault: string;
+    posterOther: string;
+  };
+  amusementData2: {
     title: string;
     lang: string;
     titleOther: string;
