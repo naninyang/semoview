@@ -8,6 +8,7 @@ export interface JejeupData {
   comment: string;
   title: string;
   worst: boolean;
+  createdAt: string;
   jejeups: {
     id: string;
     idx: string;
@@ -17,6 +18,7 @@ export interface JejeupData {
     comment: string;
     title: string;
     worst: boolean;
+    createdAt: string;
   };
   jejeupMetaData: {
     error: string;

@@ -102,12 +102,32 @@ function Home() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch(`/api/jejeups?page=${currentPage}`);
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+      const renewResponse = await fetch(`/api/renew?page=${currentPage}`);
+      const renewData = await renewResponse.json();
+      const renewValue = renewData.renew;
+      const cachedData = localStorage.getItem(`jejeupsData${currentPage}`);
+      let dataToUse;
+
+      if (cachedData) {
+        const parsedData = JSON.parse(cachedData);
+        if (parsedData.jejeups.length > 0 && parsedData.jejeups[0].createdAt) {
+          if (parsedData.jejeups[0].createdAt === renewValue) {
+            dataToUse = parsedData;
+          }
+        }
       }
-      const data = await response.json();
-      setData(data);
+
+      if (!dataToUse) {
+        const response = await fetch(`/api/jejeups?page=${currentPage}`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const newData = await response.json();
+        localStorage.setItem(`jejeupsData${currentPage}`, JSON.stringify(newData));
+        dataToUse = newData;
+      }
+
+      setData(dataToUse);
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);

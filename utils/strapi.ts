@@ -12,6 +12,22 @@ const formatDate = (datetime: string) => {
   return `${year}${month}${day}${hours}${minutes}${seconds}`;
 };
 
+export async function getRenew(page?: number) {
+  const response = await fetch(
+    `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=24`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
+      },
+    },
+  );
+  const jejeupResponse = await response.json();
+  const jejeupsData = jejeupResponse.data;
+  const jejeupsRenew = jejeupsData[0].attributes.createdAt;
+  return { renew: jejeupsRenew };
+}
+
 export async function getJejeupData(page?: number) {
   const response = await fetch(
     `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=24`,
@@ -27,6 +43,7 @@ export async function getJejeupData(page?: number) {
   const rowsData: JejeupData[] = jejeupsData.map((data: any) => ({
     id: `${data.id}`,
     idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+    createdAt: data.attributes.createdAt,
     subject: data.attributes.subject,
     video: data.attributes.video,
     ownerAvatar: data.attributes.ownerAvatar,
