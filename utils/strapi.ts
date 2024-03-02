@@ -14,7 +14,7 @@ const formatDate = (datetime: string) => {
 
 export async function getJejeupData(page?: number) {
   const response = await fetch(
-    `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=20`,
+    `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=24`,
     {
       method: 'GET',
       headers: {
@@ -34,7 +34,7 @@ export async function getJejeupData(page?: number) {
     title: data.attributes.title,
     worst: data.attributes.worst,
   }));
-
+  const pageCount = jejeupResponse.meta.pagination.pageCount;
   const jejeups = await Promise.all(
     rowsData.map(async (preview) => {
       const jejeupMetaData = await fetchPreviewMetadata(`https://youtu.be/${preview.video}`);
@@ -46,7 +46,7 @@ export async function getJejeupData(page?: number) {
       };
     }),
   );
-  return jejeups;
+  return { jejeups, pageCount: pageCount };
 }
 
 export async function getNoticeData() {

@@ -22,29 +22,6 @@
       text-decoration: underline
       color: $hex-accent
 
-  .ref
-    position: absolute
-    top: auto!important
-    right: auto!important
-    bottom: rem(96)
-    z-index: 1
-    left: 0
-    display: flex
-    justify-content: center
-    align-items: flex-end
-    width: 100%
-    height: rem(1000)
-
-    p
-      position: absolute
-      z-index: 7
-      background-color: $hex-white
-      padding: rem(27) rem(72)
-      font-size: rem(20)
-      font-weight: 800
-      color: $hex-accent
-      text-align: center
-
   h1
     display: flex
     gap: rem(2)
@@ -83,16 +60,28 @@
         padding-left: rem(17)
 
   .jejeup-content
-    position: relative
+    display: flex
     padding: rem(5) 0
-    min-height: 100dvh
     transition: all .4s cubic-bezier(.4,0,.2,1)
 
-  div[role="gridcell"]
-    transition: all .4s cubic-bezier(.4,0,.2,1)
+    +mq(maxExtraSmall)
+      flex-direction: column
+
+    +mq(minSmall)
+      flex-wrap: wrap
 
   .item
+    display: flex
     padding: rem(10)
+
+    +mq(minSmall)
+      width: 50%
+
+    +mq(minLarge)
+      width: 33.33%
+
+    +mq(minExtraLarge)
+      width: 25%
 
   figure
     transition: all .4s cubic-bezier(.4,0,.2,1)

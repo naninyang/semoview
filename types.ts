@@ -1,4 +1,5 @@
 export interface JejeupData {
+  pageCount: number;
   id: string;
   idx: string;
   subject: string;
@@ -7,6 +8,16 @@ export interface JejeupData {
   comment: string;
   title: string;
   worst: boolean;
+  jejeups: {
+    id: string;
+    idx: string;
+    subject: string;
+    video: string;
+    ownerAvatar: string;
+    comment: string;
+    title: string;
+    worst: boolean;
+  };
   jejeupMetaData: {
     error: string;
     ogTitle: string;
