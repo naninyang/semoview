@@ -11,8 +11,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (!response.ok) {
       throw new Error('Failed to fetch amusement data');
     }
-    const musicData = await response.json();
-    res.status(200).json(musicData);
+    const amusementData = await response.json();
+    res.status(200).json(amusementData);
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
   }

@@ -81,6 +81,8 @@ export async function getCategoryData(page?: number, pageSize?: number, category
   return categoryData.map((item: any) => {
     const attributes = item.attributes;
     return {
+      id: `${item.id}`,
+      idx: `${formatDate(attributes.createdAt)}${item.id}`,
       title: attributes.title,
       lang: attributes.lang,
       titleKorean: attributes.titleKorean,
@@ -150,6 +152,8 @@ export async function getAmusementData(amusement: string) {
   const amusementResponse = await response.json();
   const amusementData = amusementResponse.data;
   const rowsData: AmusementData = {
+    id: `${amusementData.id}`,
+    idx: `${formatDate(amusementData.attributes.createdAt)}${amusementData.id}`,
     title: amusementData.attributes.title,
     lang: amusementData.attributes.lang,
     titleKorean: amusementData.attributes.titleKorean,

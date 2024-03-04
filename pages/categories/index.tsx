@@ -9,6 +9,7 @@ import { vectors } from '@/components/vectors';
 import { RatingsDrama } from '@/components/RatingsDrama';
 import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Categories.module.sass';
+import Anchor from '@/components/Anchor';
 
 const AmazonOriginal = styled.i({
   width: rem(52),
@@ -177,12 +178,12 @@ function Categories() {
             <>
               <div className={styles.headline}>
                 <h2>드라마 리뷰</h2>
-                <Link href="/">더보기</Link>
+                <Anchor href="/amusement?category=drama">더보기</Anchor>
               </div>
               <section>
                 {Array.isArray(dramaData) &&
                   dramaData.map((amusement: AmusementData, index) => (
-                    <Link href="/" key={index}>
+                    <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
                         <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
                         <dl>
@@ -232,12 +233,12 @@ function Categories() {
             <>
               <div className={styles.headline}>
                 <h2>영화 리뷰</h2>
-                <Link href="/">더보기</Link>
+                <Anchor href="/amusement?category=movie">더보기</Anchor>
               </div>
               <section>
                 {Array.isArray(movieData) &&
                   movieData.map((amusement: AmusementData, index) => (
-                    <Link href="/" key={index}>
+                    <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
                         <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
                         <dl>
@@ -303,12 +304,12 @@ function Categories() {
             <>
               <div className={styles.headline}>
                 <h2>애니메이션 리뷰</h2>
-                <Link href="/">더보기</Link>
+                <Anchor href="/amusement?category=animation">더보기</Anchor>
               </div>
               <section>
                 {Array.isArray(animationData) &&
                   animationData.map((amusement: AmusementData, index) => (
-                    <Link href="/" key={index}>
+                    <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
                         <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
                         <dl>
@@ -398,12 +399,12 @@ function Categories() {
             <>
               <div className={styles.headline}>
                 <h2>OTT 오리지널 리뷰</h2>
-                <Link href="/">더보기</Link>
+                <Anchor href="/amusement?category=ott">더보기</Anchor>
               </div>
               <section>
                 {Array.isArray(ottData) &&
                   ottData.map((amusement: AmusementData, index) => (
-                    <Link href="/" key={index}>
+                    <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
                         <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
                         <dl>
@@ -541,12 +542,12 @@ function Categories() {
             <>
               <div className={styles.headline}>
                 <h2>게임 리뷰 & 게임 실황</h2>
-                <Link href="/">더보기</Link>
+                <Anchor href="/amusement?category=game">더보기</Anchor>
               </div>
               <section className={styles.game}>
                 {Array.isArray(gameData) &&
                   gameData.map((amusement: AmusementData, index) => (
-                    <Link href="/" key={index}>
+                    <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
                         <Image src={amusement.posterDefault} width="460" height="215" alt="" unoptimized />
                         <dl>

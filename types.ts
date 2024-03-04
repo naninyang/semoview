@@ -132,6 +132,8 @@ export interface JejeupPermalinkData {
 }
 
 export interface AmusementData {
+  id: string;
+  idx: string;
   title: string;
   lang: string;
   titleKorean: string;
@@ -158,6 +160,7 @@ export interface AmusementPermalinkData {
   attributes: {
     title: string;
     lang: string;
+    titleKorean: string;
     titleOther: string;
     etc: string;
     release: string;

@@ -5,6 +5,23 @@
   min-height: calc(100dvh - rem(78))
   font-size: rem(16)
 
+  .loading, .error
+    display: flex
+    justify-content: center
+    align-items: center
+    height: calc(100dvh - rem(133))
+    font-weight: 700
+    color: $hex-accent
+    text-align: center
+
+  .error
+    gap: rem(15)
+
+    button
+      background: none
+      text-decoration: underline
+      color: $hex-accent
+
   h1
     display: flex
     gap: rem(2)
@@ -49,9 +66,19 @@
       align-items: center
       padding: rem(52) 0 rem(17)
 
-      h2
+      h1, h2
         font-size: rem(24)
         font-weight: 800
+
+      .select
+        display: flex
+        gap: rem(7)
+
+        select, button
+          border: 1px solid rgba($hex-black, .7)
+          border-radius: rem(3)
+          padding: rem(3) rem(7)
+          font-weight: 800
 
       a
         font-size: rem(16)
