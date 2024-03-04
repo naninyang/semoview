@@ -551,23 +551,27 @@ function Categories() {
                         <Image src={amusement.posterDefault} width="460" height="215" alt="" unoptimized />
                         <dl>
                           <div>
-                            <dt>시청등급</dt>
+                            <dt>심의등급</dt>
                             <dd>
-                              {amusement.rating !== 'd19' && (
+                              {amusement.category === 'game' && amusement.rating === 'all' && (
                                 <>
-                                  {amusement.rating === 'all' ? (
-                                    <i className={`${styles.drama} ${styles.all} number`}>
-                                      {RatingsDrama(amusement.rating)}
-                                    </i>
-                                  ) : (
-                                    <i className={`${styles.drama} number`}>{RatingsDrama(amusement.rating)}</i>
-                                  )}
+                                  <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
                                 </>
                               )}
-                              {amusement.rating === 'd19' && (
-                                <i className={`${styles.drama} ${styles.d19} number`}>
-                                  {RatingsDrama(amusement.rating)}
-                                </i>
+                              {amusement.category === 'game' && amusement.rating === 'b12' && (
+                                <>
+                                  <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
+                                </>
+                              )}
+                              {amusement.category === 'game' && amusement.rating === 'c15' && (
+                                <>
+                                  <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
+                                </>
+                              )}
+                              {amusement.category === 'game' && amusement.rating === 'd19' && (
+                                <>
+                                  <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
+                                </>
                               )}
                             </dd>
                           </div>
