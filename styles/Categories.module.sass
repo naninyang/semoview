@@ -1,0 +1,189 @@
+@import './designSystem'
+
+.categories
+  padding: rem(7) calc(env(safe-area-inset-right) + rem(12)) rem(7) calc(env(safe-area-inset-left) + rem(12))
+  min-height: calc(100dvh - rem(78))
+  font-size: rem(16)
+
+  h1
+    display: flex
+    gap: rem(2)
+    padding: rem(15) rem(7) rem(3)
+    font-size: rem(20)
+    font-weight: 800
+    line-height: 1.2
+
+    +mq(maxSmall)
+      flex-direction: column
+
+    +mq(minMedium)
+      align-items: flex-end
+      gap: rem(17)
+
+    span
+      display: flex
+      gap: rem(5)
+
+    i::before
+      content: '•'
+      position: relative
+      top: rem(-2)
+      padding: 0 rem(4)
+      font-size: rem(20)
+      font-style: normal
+      color: $hex-accent
+
+    em
+      font-size: rem(16)
+      font-weight: 900
+      font-style: normal
+      color: $hex-accent
+
+      +mq(maxSmall)
+        padding-left: rem(17)
+
+  .content
+    .headline
+      display: flex
+      justify-content: space-between
+      align-items: center
+      padding: rem(52) 0 rem(17)
+
+      h2
+        font-size: rem(24)
+        font-weight: 800
+
+      a
+        font-size: rem(16)
+        font-weight: 800
+        color: $hex-dark
+
+        &:hover, &:focus
+          color: $hex-accent
+          border-bottom: rem(2) solid $hex-accent
+
+    section
+      display: flex
+      flex-wrap: wrap
+      gap: rem(12)
+
+      &.game
+        a
+          .thumbnail
+            img
+              aspect-ratio: 460 / 215
+
+            dl
+              top: auto
+              right: rem(7)
+              bottom: rem(7)
+              left: auto
+
+      a
+        display: flex
+        flex-direction: column
+        gap: rem(7)
+        padding-bottom: rem(12)
+        width: calc(33.33% - rem(12))
+        font-size: rem(14)
+
+        +mq(minSmall)
+          width: calc(25% - rem(12))
+
+        +mq(minMedium)
+          width: calc(20% - rem(12))
+
+        +mq(minLarge)
+          width: calc(16.66666667% - rem(12))
+
+        +mq(minExtraLarge)
+          width: calc(14.28571429% - rem(12))
+
+        +mq(maxSmall)
+          &:nth-of-type(5)
+            display: none
+
+        +mq(maxMedium)
+          &:nth-of-type(6)
+            display: none
+
+        +mq(maxLarge)
+          &:nth-of-type(7)
+            display: none
+
+        +mq(maxExtraSmall)
+          &:nth-of-type(5), &:nth-of-type(6)
+            display: flex
+
+        .thumbnail
+          position: relative
+
+          img
+            width: 100%
+            height: 100%
+            aspect-ratio: 390 / 560
+            object-fit: cover
+
+          dl
+            position: absolute
+            top: rem(7)
+            left: rem(7)
+            display: flex
+            align-items: center
+            gap: rem(7)
+
+            dt
+              +screen-reader-only
+
+            div
+              &.platform
+                dd
+                  background-color: $hex-black
+                  border-radius: rem(5)
+                  padding: rem(5)
+
+                i
+                  display: inline-block
+                  height: rem(16)
+
+              dd
+                span
+                  +screen-reader-only
+
+              &:last-of-type
+                dd
+                  i
+                    display: inline-flex
+                    width: rem(24)
+                    height: rem(24)
+                    margin-left: rem(3)
+                    padding: rem(6) 0 rem(10)
+                    font-size: rem(12)
+                    font-weight: 800
+                    font-style: normal
+                    line-height: 1
+                    color: $hex-white
+
+                    &.drama
+                      background-color: #FFCB00
+                      border-radius: rem(24)
+                      color: $hex-black
+                      justify-content: center
+
+                      &.all
+                        font-size: rem(10)
+
+                      &.d19
+                        background-color: #D61D28
+                        color: $hex-white
+
+        strong
+          font-weight: 800
+          color: $hex-dark
+          white-space: normal
+          word-break: keep-all
+          word-break: normal
+          line-height: 1.4375
+
+          +mq(minMedium)
+            font-size: rem(16)

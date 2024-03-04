@@ -66,6 +66,45 @@ export async function getJejeupData(page?: number) {
   return { jejeups, pageCount: pageCount };
 }
 
+export async function getCategoryData(page?: number, pageSize?: number, categoryName?: string) {
+  const response = await fetch(
+    `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[category][$contains]=${categoryName}`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
+      },
+    },
+  );
+  const categoryResponse = await response.json();
+  const categoryData = categoryResponse.data;
+  return categoryData.map((item: any) => {
+    const attributes = item.attributes;
+    return {
+      title: attributes.title,
+      lang: attributes.lang,
+      titleKorean: attributes.titleKorean,
+      titleOther: attributes.titleOther,
+      etc: attributes.etc,
+      release: attributes.release,
+      original: attributes.original,
+      originalAuthor: attributes.originalAuthor,
+      originTitle: attributes.originTitle,
+      rating: attributes.rating,
+      country: attributes.country,
+      category: attributes.category,
+      genre: attributes.genre,
+      anime: attributes.anime,
+      ott: attributes.ott,
+      publisher: attributes.publisher,
+      creator: attributes.creator,
+      cast: attributes.cast,
+      posterDefault: attributes.posterDefault,
+      posterOther: attributes.posterOther,
+    };
+  });
+}
+
 export async function getNoticeData() {
   const response = await fetch(
     `${process.env.STRAPI_URL}/api/notice-nol2trs?sort[0]=id:desc&pagination[page]=1&pagination[pageSize]=100`,
@@ -108,11 +147,12 @@ export async function getAmusementData(amusement: string) {
       Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
     },
   });
-  const data = await response.json();
-  const amusementData = data.data;
+  const amusementResponse = await response.json();
+  const amusementData = amusementResponse.data;
   const rowsData: AmusementData = {
     title: amusementData.attributes.title,
     lang: amusementData.attributes.lang,
+    titleKorean: amusementData.attributes.titleKorean,
     titleOther: amusementData.attributes.titleOther,
     etc: amusementData.attributes.etc,
     release: amusementData.attributes.release,

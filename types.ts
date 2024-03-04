@@ -134,6 +134,7 @@ export interface JejeupPermalinkData {
 export interface AmusementData {
   title: string;
   lang: string;
+  titleKorean: string;
   titleOther: string;
   etc: string;
   release: string;

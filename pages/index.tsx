@@ -11,9 +11,9 @@ import { RatingsDrama } from '@/components/RatingsDrama';
 import { OriginalName } from '@/components/OriginalName';
 import { FormatDate } from '@/components/FormatDate';
 import { vectors } from '@/components/vectors';
+import { Pagination } from '@/components/Pagination';
 import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Home.module.sass';
-import { Pagination } from '@/components/Pagination';
 
 interface Counts {
   jejeup: number;
