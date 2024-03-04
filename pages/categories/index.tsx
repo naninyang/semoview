@@ -6,8 +6,8 @@ import styled from '@emotion/styled';
 import { AmusementData } from 'types';
 import Seo from '@/components/Seo';
 import { vectors } from '@/components/vectors';
-import { rem } from '@/styles/designSystem';
 import { RatingsDrama } from '@/components/RatingsDrama';
+import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Categories.module.sass';
 
 const AmazonOriginal = styled.i({
@@ -458,22 +458,62 @@ function Categories() {
                           <div>
                             <dt>시청등급</dt>
                             <dd>
-                              {amusement.rating !== 'd19' && (
-                                <>
-                                  {amusement.rating === 'all' ? (
-                                    <i className={`${styles.drama} ${styles.all} number`}>
-                                      {RatingsDrama(amusement.rating)}
-                                    </i>
-                                  ) : (
-                                    <i className={`${styles.drama} number`}>{RatingsDrama(amusement.rating)}</i>
-                                  )}
-                                </>
-                              )}
-                              {amusement.rating === 'd19' && (
-                                <i className={`${styles.drama} ${styles.d19} number`}>
-                                  {RatingsDrama(amusement.rating)}
-                                </i>
-                              )}
+                              {(amusement.category === 'drama' ||
+                                amusement.category === 'ott' ||
+                                amusement.anime === 'tva' ||
+                                amusement.anime === 'ova') &&
+                                amusement.rating !== 'd19' && (
+                                  <>
+                                    {amusement.rating === 'all' ? (
+                                      <i className={`${styles.drama} ${styles.all} number`}>
+                                        {RatingsDrama(amusement.rating)}
+                                      </i>
+                                    ) : (
+                                      <i className={`${styles.drama} number`}>{RatingsDrama(amusement.rating)}</i>
+                                    )}
+                                  </>
+                                )}
+                              {(amusement.category === 'drama' ||
+                                amusement.category === 'ott' ||
+                                amusement.anime === 'tva' ||
+                                amusement.anime === 'ova') &&
+                                amusement.rating === 'd19' && (
+                                  <i className={`${styles.drama} ${styles.d19} number`}>
+                                    {RatingsDrama(amusement.rating)}
+                                  </i>
+                                )}
+                              {(amusement.category === 'movie' ||
+                                amusement.category === 'ottFilm' ||
+                                amusement.anime === 'movie') &&
+                                amusement.rating === 'all' && (
+                                  <>
+                                    <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
+                                  </>
+                                )}
+                              {(amusement.category === 'movie' ||
+                                amusement.category === 'ottFilm' ||
+                                amusement.anime === 'movie') &&
+                                amusement.rating === 'b12' && (
+                                  <>
+                                    <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
+                                  </>
+                                )}
+                              {(amusement.category === 'movie' ||
+                                amusement.category === 'ottFilm' ||
+                                amusement.anime === 'movie') &&
+                                amusement.rating === 'c15' && (
+                                  <>
+                                    <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
+                                  </>
+                                )}
+                              {(amusement.category === 'movie' ||
+                                amusement.category === 'ottFilm' ||
+                                amusement.anime === 'movie') &&
+                                amusement.rating === 'd19' && (
+                                  <>
+                                    <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
+                                  </>
+                                )}
                             </dd>
                           </div>
                         </dl>
