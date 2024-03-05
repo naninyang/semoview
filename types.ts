@@ -157,6 +157,7 @@ export interface AmusementData {
 }
 
 export interface AmusementPermalinkData {
+  id: string;
   attributes: {
     title: string;
     lang: string;

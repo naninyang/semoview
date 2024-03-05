@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 import styled from '@emotion/styled';
-import { AmusementPermalinkData } from 'types';
+import { AmusementPermalinkData, JejeupData } from 'types';
 import Seo from '@/components/Seo';
 import { CategoryName } from '@/components/CategoryName';
 import { AnimeName } from '@/components/AnimeName';
@@ -89,13 +89,37 @@ const RatingGameD19 = styled.i({
   background: `url(${vectors.ratings.game.d19}) no-repeat 50% 50%/contain`,
 });
 
-export default function Amusement({
-  amusementData,
-  musicData,
-}: {
-  amusementData: AmusementPermalinkData | null;
-  musicData: any;
-}) {
+export default function Amusement({ amusementData }: { amusementData: AmusementPermalinkData | null }) {
+  const router = useRouter();
+  const timestamp = Date.now();
+  const [data, setData] = useState<JejeupData | null>(null);
+
+  const [isJejeupsLoading, setIsJejeupsLoading] = useState(false);
+  const [isJejeupsError, setIsJejeupsError] = useState<null | string>(null);
+
+  const currentPage = Number(router.query.page) || 1;
+  const fetchData = async () => {
+    setIsJejeupsLoading(true);
+    setIsJejeupsError(null);
+    try {
+      const response =
+        amusementData && (await fetch(`/api/jejeuAmusement?page=${currentPage}&amusementId=${amusementData.id}`));
+      const newData = response && (await response.json());
+      setData(newData);
+    } catch (err) {
+      if (err instanceof Error) {
+        setIsJejeupsError(err.message);
+      } else {
+        setIsJejeupsError('An unknown error occurred');
+      }
+    } finally {
+      setIsJejeupsLoading(false);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, [currentPage]);
+
   const [timeoutReached, setTimeoutReached] = useState(false);
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -123,6 +147,14 @@ export default function Amusement({
       );
     }
   }
+  function FormatDuration(duration: string) {
+    const match = duration.match(/PT(\d+M)?(\d+S)?/);
+    if (!match) return '0:00';
+    const minutes = match[1] ? match[1].slice(0, -1) : '0';
+    const seconds = match[2] ? match[2].slice(0, -1) : '0';
+    return `${minutes}:${seconds.padStart(2, '0')}`;
+  }
+
   return (
     <main className={styles.amusement}>
       <div className="top-link">
@@ -387,7 +419,83 @@ export default function Amusement({
           />
         </div>
       </div>
-      <div className={styles.list}></div>
+      {isJejeupsError && (
+        <p className={styles.error}>
+          영상을 불러오지 못했습니다. 삭제된 영상이거나 인터넷 속도가 느립니다.{' '}
+          <Anchor href="/jejeups">뒤로가기</Anchor>
+        </p>
+      )}
+      {isJejeupsLoading && <p className={styles.loading}>목록 불러오는 중...</p>}
+      {data && !isJejeupsLoading && !isJejeupsError && (
+        <div className={styles.list}>
+          {Array.isArray(data.jejeups) &&
+            data.jejeups.map((jejeup: JejeupData) => (
+              <div className={styles.item} key={jejeup.id}>
+                {Object.keys(jejeup.jejeupMetaData).length > 0 ? (
+                  <Link key={jejeup.idx} href={`/jejeup/${jejeup.idx}`} scroll={false} shallow={true}>
+                    <div className={`${styles.preview} preview`}>
+                      <div className={styles['preview-container']}>
+                        <div className={styles.thumbnail}>
+                          <Image src={jejeup.jejeupMetaData.ogImage} width="1920" height="1080" alt="" unoptimized />
+                          <em>{FormatDuration(jejeup.jejeupMetaData.duration)}</em>
+                        </div>
+                        <div className={styles['preview-info']}>
+                          <div className={styles.detail}>
+                            <Image
+                              src={`${jejeup.jejeupMetaData.ownerAvatar === null ? jejeup.ownerAvatar : jejeup.jejeupMetaData.ownerAvatar}`}
+                              width="36"
+                              height="36"
+                              alt=""
+                              unoptimized
+                            />
+                            <div className={`${styles['user-info']}`}>
+                              <strong>{jejeup.jejeupMetaData.ogTitle}</strong>
+                              <div className={styles.user}>
+                                <cite>{jejeup.jejeupMetaData.ownerName}</cite>
+                                <time dateTime={jejeup.jejeupMetaData.datePublished}>
+                                  {FormatDate(`${jejeup.jejeupMetaData.datePublished}`)}
+                                </time>
+                              </div>
+                              {jejeup.worst && (
+                                <div className={styles.worst}>
+                                  <button type="button" className="number">
+                                    Worst
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                ) : (
+                  <Link key={jejeup.idx} href={`/jejeup/${jejeup.idx}`} scroll={false} shallow={true}>
+                    <div className={`${styles.preview} preview`}>
+                      <div className={styles['preview-container']}>
+                        <div className={styles.thumbnail}>
+                          <Image src="/missing.webp" width="1920" height="1080" alt="" unoptimized />
+                        </div>
+                        <div className={styles['preview-info']}>
+                          <div className={styles.detail}>
+                            <Image src="/unknown.webp" width="36" height="36" alt="" unoptimized />
+                            <div className={`${styles['user-info']}`}>
+                              <strong>삭제된 영상</strong>
+                              <div className={styles.user}>
+                                <cite>관리자에게 제보해 주세요</cite>
+                                <time>알 수 없는 시간</time>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                )}
+              </div>
+            ))}
+        </div>
+      )}
     </main>
   );
 }
@@ -395,7 +503,6 @@ export default function Amusement({
 export const getStaticProps: GetStaticProps = async (context) => {
   const amusementId = context.params?.amusementId;
   let amusementData = null;
-  // let musicData = null;
 
   if (amusementId && typeof amusementId === 'string') {
     const response = await fetch(
@@ -403,14 +510,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     );
     const amusementResponse = (await response.json()) as { data: AmusementPermalinkData };
     amusementData = amusementResponse.data;
-    // const musicResponse = await fetch(
-    //   `${process.env.NEXT_PUBLIC_API_URL}/api/musics?musicId=${newsicData.attributes.music}`,
-    // );
-    // const musicResponseData = (await musicResponse.json()) as { data: MusicParalinkData };
-    // musicData = musicResponseData.data;
   }
-
-  console.log('amusementData: ', amusementData);
 
   if (!amusementData) {
     return {
@@ -424,7 +524,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     props: {
       amusementData,
       idx: amusementId,
-      // musicData,
     },
     revalidate: 1,
   };

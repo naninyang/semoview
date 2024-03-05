@@ -107,6 +107,43 @@ export async function getCategoryData(page?: number, pageSize?: number, category
   });
 }
 
+export async function getJejeupAmusementData(page?: number, pageSize?: number, amusementId?: string) {
+  const response = await fetch(
+    `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[title][$contains]=${amusementId}`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
+      },
+    },
+  );
+  const jejeupAmusementResponse = await response.json();
+  const jejeupAmusementData = jejeupAmusementResponse.data;
+  const rowsData: JejeupData[] = jejeupAmusementData.map((data: any) => ({
+    id: `${data.id}`,
+    idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+    createdAt: data.attributes.createdAt,
+    subject: data.attributes.subject,
+    video: data.attributes.video,
+    ownerAvatar: data.attributes.ownerAvatar,
+    comment: data.attributes.comment,
+    title: data.attributes.title,
+    worst: data.attributes.worst,
+  }));
+  const jejeups = await Promise.all(
+    rowsData.map(async (preview) => {
+      const jejeupMetaData = await fetchPreviewMetadata(`https://youtu.be/${preview.video}`);
+      const amusementData = await getAmusementData(preview.title);
+      return {
+        ...preview,
+        jejeupMetaData,
+        amusementData,
+      };
+    }),
+  );
+  return { jejeups };
+}
+
 export async function getNoticeData() {
   const response = await fetch(
     `${process.env.STRAPI_URL}/api/notice-nol2trs?sort[0]=id:desc&pagination[page]=1&pagination[pageSize]=100`,
