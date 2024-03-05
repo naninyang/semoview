@@ -202,6 +202,8 @@
             font-size: rem(16)
 
   &:not(.amusement)
+    margin-top: calc(env(safe-area-inset-top) + rem(114))
+
     .headline
       gap: rem(7)
 
@@ -283,7 +285,7 @@
 
     .headline
       display: flex
-      padding: rem(52) 0 rem(17)
+      padding: rem(12) 0 rem(17)
       justify-content: flex-start
 
       +mq(maxSmall)
@@ -294,6 +296,7 @@
       +mq(minMedium)
         justify-content: space-between
         align-items: center
+        padding: rem(27) 0 rem(17)
 
       .select
         display: flex

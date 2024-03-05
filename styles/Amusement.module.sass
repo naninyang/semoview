@@ -1,7 +1,7 @@
 @import './designSystem'
 
 .amusement
-  padding: rem(7) env(safe-area-inset-right) rem(7) env(safe-area-inset-left)
+  padding: 0 env(safe-area-inset-right) rem(27) env(safe-area-inset-left)
   min-height: calc(100dvh - rem(78))
   font-size: rem(16)
 
@@ -15,6 +15,23 @@
     text-align: center
 
   .error
+    gap: rem(15)
+
+    button
+      background: none
+      text-decoration: underline
+      color: $hex-accent
+
+  .amusement-loading, .amusement-error
+    display: flex
+    justify-content: center
+    align-items: center
+    padding-top: rem(27)
+    font-weight: 700
+    color: $hex-accent
+    text-align: center
+
+  .amusement-error
     gap: rem(15)
 
     button
@@ -233,7 +250,7 @@
 
   .list
     display: flex
-    padding: rem(5) rem(6)
+    padding: rem(27) rem(12)
     transition: all .4s cubic-bezier(.4,0,.2,1)
 
     +mq(maxExtraSmall)

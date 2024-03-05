@@ -12,7 +12,6 @@ import { RatingsDrama } from '@/components/RatingsDrama';
 import { OriginalName } from '@/components/OriginalName';
 import { FormatDate } from '@/components/FormatDate';
 import { vectors } from '@/components/vectors';
-import { Pagination } from '@/components/Pagination';
 import Anchor from '@/components/Anchor';
 import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Amusement.module.sass';
@@ -445,12 +444,12 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
         </div>
       </div>
       {isJejeupsError && (
-        <p className={styles.error}>
+        <p className={styles['amusement-error']}>
           영상을 불러오지 못했습니다. 삭제된 영상이거나 인터넷 속도가 느립니다.{' '}
           <Anchor href="/jejeups">뒤로가기</Anchor>
         </p>
       )}
-      {isJejeupsLoading && <p className={styles.loading}>목록 불러오는 중...</p>}
+      {isJejeupsLoading && <p className={styles['amusement-loading']}>목록 불러오는 중...</p>}
       {data && !isJejeupsLoading && !isJejeupsError && (
         <div className={styles.list}>
           {Array.isArray(data.jejeups) &&
