@@ -93,11 +93,36 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
   const router = useRouter();
   const timestamp = Date.now();
   const [data, setData] = useState<JejeupData | null>(null);
-
   const [isJejeupsLoading, setIsJejeupsLoading] = useState(false);
   const [isJejeupsError, setIsJejeupsError] = useState<null | string>(null);
-
   const currentPage = Number(router.query.page) || 1;
+
+  useEffect(() => {
+    sessionStorage.setItem('location', router.asPath);
+  }, [router.asPath]);
+
+  useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      sessionStorage.setItem('location', url);
+    };
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router]);
+
+  const previousPageHandler = () => {
+    const previousPage = sessionStorage.getItem('location');
+    if (previousPage) {
+      router.back();
+    } else {
+      if (amusementData) {
+        if (amusementData.attributes.category === 'ottFilm') router.push('/amusement?category=ott');
+        else router.push(`/amusement?category=${amusementData.attributes.category}`);
+      }
+    }
+  };
+
   const fetchData = async () => {
     setIsJejeupsLoading(true);
     setIsJejeupsError(null);
@@ -158,17 +183,10 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
   return (
     <main className={styles.amusement}>
       <div className="top-link">
-        {amusementData.attributes.category === 'ottFilm' ? (
-          <Anchor href={`/amusement?category=ott`}>
-            <BackButton />
-            <span>뒤로가기</span>
-          </Anchor>
-        ) : (
-          <Anchor href={`/amusement?category=${amusementData.attributes.category}`}>
-            <BackButton />
-            <span>뒤로가기</span>
-          </Anchor>
-        )}
+        <button onClick={previousPageHandler} type="button">
+          <BackButton />
+          <span>뒤로가기</span>
+        </button>
       </div>
       <div className={styles.cover}>
         <div className={styles.background}>

@@ -94,12 +94,22 @@ const ClipboardIcon = styled.i({
 
 export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermalinkData | null }) {
   const router = useRouter();
-  let savedScrollPosition;
+  useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      sessionStorage.setItem('location', url);
+    };
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router]);
 
-  const handleBackClick = () => {
-    const savedScrollPosition = sessionStorage.getItem('scrollPosition_' + router.asPath);
-    if (savedScrollPosition) {
+  const previousPageHandler = () => {
+    const previousPage = sessionStorage.getItem('location');
+    if (previousPage) {
       router.back();
+    } else {
+      router.push('/');
     }
   };
 
@@ -108,7 +118,6 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
     const timer = setTimeout(() => {
       setTimeoutReached(true);
     }, 5000);
-
     return () => clearTimeout(timer);
   }, []);
 
@@ -163,17 +172,10 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
         pageImgHeight={1080}
       />
       <div className="top-link">
-        {savedScrollPosition ? (
-          <button onClick={handleBackClick}>
-            <BackButton />
-            <span>뒤로가기</span>
-          </button>
-        ) : (
-          <Anchor href="/">
-            <BackButton />
-            <span>뒤로가기</span>
-          </Anchor>
-        )}
+        <button onClick={previousPageHandler} type="button">
+          <BackButton />
+          <span>뒤로가기</span>
+        </button>
       </div>
       <article className={styles['article-jejeup']}>
         {jejeupData.jejeupMetaData && jejeupData.jejeupMetaData.ogTitle !== ' - YouTube' ? (

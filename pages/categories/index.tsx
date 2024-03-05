@@ -98,6 +98,10 @@ function Categories() {
     localStorage.removeItem('currentPage');
   }, []);
 
+  useEffect(() => {
+    sessionStorage.setItem('location', router.asPath);
+  }, [router.asPath]);
+
   const fetchData = async () => {
     setIsLoading(true);
     setError(null);

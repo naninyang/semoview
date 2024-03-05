@@ -49,13 +49,17 @@ const RatingGameD19 = styled.i({
 });
 
 function Amusement() {
+  const router = useRouter();
   const timestamp = Date.now();
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [categoryData, setCategoryData] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const router = useRouter();
   const currentPage = Number(router.query.page) || 1;
+
+  useEffect(() => {
+    sessionStorage.setItem('location', router.asPath);
+  }, [router.asPath]);
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCategory(event.target.value);
