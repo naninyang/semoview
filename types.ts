@@ -39,6 +39,7 @@ export interface JejeupData {
   amusementData: {
     title: string;
     lang: string;
+    titleKorean: string;
     titleOther: string;
     etc: string;
     release: string;
@@ -91,6 +92,7 @@ export interface JejeupPermalinkData {
     title: string;
     lang: string;
     titleOther: string;
+    titleKorean: string;
     etc: string;
     release: string;
     original: string;
@@ -112,6 +114,7 @@ export interface JejeupPermalinkData {
     title: string;
     lang: string;
     titleOther: string;
+    titleKorean: string;
     etc: string;
     release: string;
     original: string;

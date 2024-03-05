@@ -424,7 +424,13 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                         )}{' '}
                         {jejeupData.amusementData.originalAuthor &&
                           `('${jejeupData.amusementData.originalAuthor}'의 ${OriginalName(jejeupData.amusementData.original)} '${jejeupData.amusementData.originTitle}' 원작)`}
-                        {jejeupData.amusementData.titleOther && `(${jejeupData.amusementData.titleOther})`}{' '}
+                        {(jejeupData.amusementData.titleKorean || jejeupData.amusementData.titleOther) && (
+                          <>
+                            ({jejeupData.amusementData.titleKorean && jejeupData.amusementData.titleKorean}
+                            {jejeupData.amusementData.titleKorean && jejeupData.amusementData.titleOther && ' / '}
+                            {jejeupData.amusementData.titleOther && jejeupData.amusementData.titleOther})
+                          </>
+                        )}{' '}
                         {jejeupData.amusementData.originalAuthor === null && jejeupData.amusementData.original && (
                           <span className={styles.origin}>
                             동명의 {OriginalName(jejeupData.amusementData.original)} 원작
@@ -633,7 +639,13 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                         )}{' '}
                         {jejeupData.amusementData2.originalAuthor &&
                           `('${jejeupData.amusementData2.originalAuthor}'의 ${OriginalName(jejeupData.amusementData2.original)} '${jejeupData.amusementData2.originTitle}' 원작)`}
-                        {jejeupData.amusementData2.titleOther && `(${jejeupData.amusementData2.titleOther})`}{' '}
+                        {(jejeupData.amusementData.titleKorean || jejeupData.amusementData.titleOther) && (
+                          <>
+                            ({jejeupData.amusementData.titleKorean && jejeupData.amusementData.titleKorean}
+                            {jejeupData.amusementData.titleKorean && jejeupData.amusementData.titleOther && ' / '}
+                            {jejeupData.amusementData.titleOther && jejeupData.amusementData.titleOther})
+                          </>
+                        )}{' '}
                         {jejeupData.amusementData2.originalAuthor === null && jejeupData.amusementData2.original && (
                           <span className={styles.origin}>
                             동명의 {OriginalName(jejeupData.amusementData2.original)} 원작
