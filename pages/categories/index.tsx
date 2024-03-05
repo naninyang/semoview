@@ -3,13 +3,13 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 import styled from '@emotion/styled';
-import { AmusementData } from 'types';
+import { AmusementData, JejeupAmusementData } from 'types';
 import Seo from '@/components/Seo';
+import Anchor from '@/components/Anchor';
 import { vectors } from '@/components/vectors';
 import { RatingsDrama } from '@/components/RatingsDrama';
 import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Categories.module.sass';
-import Anchor from '@/components/Anchor';
 
 const AmazonOriginal = styled.i({
   width: rem(52),
@@ -78,14 +78,18 @@ const RatingGameD19 = styled.i({
   background: `url(${vectors.ratings.game.d19}) no-repeat 50% 50%/contain`,
 });
 
+const More = styled.i({
+  background: `url(${vectors.more}) no-repeat 50% 50%/contain`,
+});
+
 function Categories() {
   const router = useRouter();
   const timestamp = Date.now();
-  const [dramaData, setDaramaData] = useState<AmusementData | null>(null);
-  const [movieData, setMovieData] = useState<AmusementData | null>(null);
-  const [gameData, setGameData] = useState<AmusementData | null>(null);
-  const [animationData, setAnimationData] = useState<AmusementData | null>(null);
-  const [ottData, setOttData] = useState<AmusementData | null>(null);
+  const [dramaData, setDaramaData] = useState<JejeupAmusementData | null>(null);
+  const [movieData, setMovieData] = useState<JejeupAmusementData | null>(null);
+  const [gameData, setGameData] = useState<JejeupAmusementData | null>(null);
+  const [animationData, setAnimationData] = useState<JejeupAmusementData | null>(null);
+  const [ottData, setOttData] = useState<JejeupAmusementData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<null | string>(null);
   const currentPage = Number(router.query.page) || 1;
@@ -110,19 +114,19 @@ function Categories() {
       }
       const movieResponseData = await movieResponse.json();
 
-      const gameResponse = await fetch(`/api/category?page=1&pageSize=7&categoryName=game`);
+      const gameResponse = await fetch(`/api/category?categoryName=game&page=1&pageSize=7`);
       if (!gameResponse.ok) {
         throw new Error('Network response was not ok');
       }
       const gameResponseData = await gameResponse.json();
 
-      const animationResponse = await fetch(`/api/category?page=1&pageSize=7&categoryName=animation`);
+      const animationResponse = await fetch(`/api/category?categoryName=animation&page=1&pageSize=7`);
       if (!animationResponse.ok) {
         throw new Error('Network response was not ok');
       }
       const animationResponseData = await animationResponse.json();
 
-      const ottResponse = await fetch(`/api/category?page=1&pageSize=7&categoryName=ott`);
+      const ottResponse = await fetch(`/api/category?categoryName=ott&page=1&pageSize=7`);
       if (!ottResponse.ok) {
         throw new Error('Network response was not ok');
       }
@@ -178,11 +182,14 @@ function Categories() {
             <>
               <div className={styles.headline}>
                 <h2>드라마 리뷰</h2>
-                <Anchor href="/amusement?category=drama">더보기</Anchor>
+                <Anchor href="/amusement?category=drama&page=1">
+                  <span>더보기</span>
+                  <More />
+                </Anchor>
               </div>
               <section>
-                {Array.isArray(dramaData) &&
-                  dramaData.map((amusement: AmusementData, index) => (
+                {Array.isArray(dramaData.data) &&
+                  dramaData.data.map((amusement: AmusementData, index) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
                         <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
@@ -233,11 +240,14 @@ function Categories() {
             <>
               <div className={styles.headline}>
                 <h2>영화 리뷰</h2>
-                <Anchor href="/amusement?category=movie">더보기</Anchor>
+                <Anchor href="/amusement?category=movie&page=1">
+                  <span>더보기</span>
+                  <More />
+                </Anchor>
               </div>
               <section>
-                {Array.isArray(movieData) &&
-                  movieData.map((amusement: AmusementData, index) => (
+                {Array.isArray(movieData.data) &&
+                  movieData.data.map((amusement: AmusementData, index) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
                         <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
@@ -304,11 +314,14 @@ function Categories() {
             <>
               <div className={styles.headline}>
                 <h2>애니메이션 리뷰</h2>
-                <Anchor href="/amusement?category=animation">더보기</Anchor>
+                <Anchor href="/amusement?category=animation&page=1">
+                  <span>더보기</span>
+                  <More />
+                </Anchor>
               </div>
               <section>
-                {Array.isArray(animationData) &&
-                  animationData.map((amusement: AmusementData, index) => (
+                {Array.isArray(animationData.data) &&
+                  animationData.data.map((amusement: AmusementData, index) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
                         <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
@@ -399,11 +412,14 @@ function Categories() {
             <>
               <div className={styles.headline}>
                 <h2>OTT 오리지널 리뷰</h2>
-                <Anchor href="/amusement?category=ott">더보기</Anchor>
+                <Anchor href="/amusement?category=ott&page=1">
+                  <span>더보기</span>
+                  <More />
+                </Anchor>
               </div>
               <section>
-                {Array.isArray(ottData) &&
-                  ottData.map((amusement: AmusementData, index) => (
+                {Array.isArray(ottData.data) &&
+                  ottData.data.map((amusement: AmusementData, index) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
                         <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
@@ -542,11 +558,14 @@ function Categories() {
             <>
               <div className={styles.headline}>
                 <h2>게임 리뷰 & 게임 실황</h2>
-                <Anchor href="/amusement?category=game">더보기</Anchor>
+                <Anchor href="/amusement?category=game&page=1">
+                  <span>더보기</span>
+                  <More />
+                </Anchor>
               </div>
               <section className={styles.game}>
-                {Array.isArray(gameData) &&
-                  gameData.map((amusement: AmusementData, index) => (
+                {Array.isArray(gameData.data) &&
+                  gameData.data.map((amusement: AmusementData, index) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
                         <Image src={amusement.posterDefault} width="460" height="215" alt="" unoptimized />

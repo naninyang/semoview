@@ -22,7 +22,7 @@
       text-decoration: underline
       color: $hex-accent
 
-  h1
+  > h1
     display: flex
     gap: rem(2)
     padding: rem(15) rem(7) rem(3)
@@ -62,13 +62,15 @@
   .content
     .headline
       display: flex
-      justify-content: space-between
       align-items: center
       padding: rem(52) 0 rem(17)
 
       h1, h2
-        font-size: rem(24)
+        font-size: rem(20)
         font-weight: 800
+
+        +mq(minMedium)
+          font-size: rem(24)
 
       .select
         display: flex
@@ -80,14 +82,23 @@
           padding: rem(3) rem(7)
           font-weight: 800
 
+          +mq(maxSmall)
+            font-size: rem(14)
+
+        button
+          background-color: transparent
+
       a
-        font-size: rem(16)
         font-weight: 800
         color: $hex-dark
 
+        +mq(maxSmall)
+          font-size: rem(14)
+
         &:hover, &:focus
-          color: $hex-accent
-          border-bottom: rem(2) solid $hex-accent
+          span
+            color: $hex-accent
+            border-bottom: rem(2) solid $hex-accent
 
     section
       display: flex
@@ -107,14 +118,23 @@
               left: auto
 
       a
+        &:hover, &:focus
+          .thumbnail img
+            transform: scale(1.07)
+
+          strong
+            color: $hex-accent
+
         .thumbnail
           position: relative
+          overflow: hidden
 
           img
             width: 100%
             height: 100%
             aspect-ratio: 390 / 560
             object-fit: cover
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0s
 
           dl
             position: absolute
@@ -176,11 +196,35 @@
           word-break: keep-all
           word-break: normal
           line-height: 1.4375
+          transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0s
 
           +mq(minMedium)
             font-size: rem(16)
 
   &:not(.amusement)
+    .headline
+      gap: rem(7)
+
+      +mq(minMedium)
+        gap: rem(27)
+
+      a
+        display: inline-flex
+        align-items: center
+
+        &:hover, &:focus
+          span
+            border-bottom: 0
+
+        i
+          display: inline-block
+          width: rem(24)
+          height: rem(24)
+
+        +mq(maxSmall)
+          span
+            +screen-reader-only
+
     section
       a
         display: flex
@@ -219,6 +263,48 @@
             display: flex
 
   &.amusement
+    .unselect
+      display: flex
+      justify-content: center
+      align-items: center
+      gap: rem(7)
+      height: calc(100dvh - rem(133))
+      font-weight: 700
+      color: $hex-accent
+      text-align: center
+
+      select, button
+        border: rem(2) solid rgba($hex-black, .3)
+        padding: rem(7) rem(12)
+        font-size: rem(20)
+
+      button
+        background-color: transparent
+
+    .headline
+      display: flex
+      padding: rem(52) 0 rem(17)
+      justify-content: flex-start
+
+      +mq(maxSmall)
+        flex-direction: column
+        align-items: flex-start
+        gap: rem(7)
+
+      +mq(minMedium)
+        justify-content: space-between
+        align-items: center
+
+      .select
+        display: flex
+        gap: rem(7)
+
+        select, button
+          border: 1px solid rgba($hex-black, .7)
+          border-radius: rem(3)
+          padding: rem(3) rem(7)
+          font-weight: 800
+
     .content
       section
         a
@@ -244,3 +330,9 @@
           .thumbnail.game
             img
               aspect-ratio: 460 / 215
+
+            dl
+              top: auto
+              right: rem(7)
+              bottom: rem(7)
+              left: auto

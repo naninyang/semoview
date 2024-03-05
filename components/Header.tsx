@@ -43,8 +43,7 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        <button type="button" onClick={onInstallPWA} style={{ display: 'none' }} />
-        {router.pathname === '/' || router.pathname === '/jejeup' ? undefined : <s />}
+        {router.pathname === '/' || router.pathname === '/categories' ? undefined : <s />}
         <h1>
           {router.pathname === '/' ? (
             <button
@@ -74,6 +73,24 @@ export default function Header() {
           </ol>
         </nav>
       </div>
+      {(router.pathname === '/' || router.pathname === '/categories') && (
+        <div className={styles.tab}>
+          <nav>
+            <ol>
+              <li className={router.pathname === '/' ? styles.current : ''}>
+                <Anchor href="/">
+                  <span>영상 기준 정렬</span>
+                </Anchor>
+              </li>
+              <li className={router.pathname === '/categories' ? styles.current : ''}>
+                <Anchor href="/categories">
+                  <span>타이틀 기준 정렬</span>
+                </Anchor>
+              </li>
+            </ol>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }

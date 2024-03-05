@@ -158,10 +158,17 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
   return (
     <main className={styles.amusement}>
       <div className="top-link">
-        <Anchor href={`/amusement?category=${amusementData.attributes.category}`}>
-          <BackButton />
-          <span>뒤로가기</span>
-        </Anchor>
+        {amusementData.attributes.category === 'ottFilm' ? (
+          <Anchor href={`/amusement?category=ott`}>
+            <BackButton />
+            <span>뒤로가기</span>
+          </Anchor>
+        ) : (
+          <Anchor href={`/amusement?category=${amusementData.attributes.category}`}>
+            <BackButton />
+            <span>뒤로가기</span>
+          </Anchor>
+        )}
       </div>
       <div className={styles.cover}>
         <div className={styles.background}>

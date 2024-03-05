@@ -120,22 +120,18 @@ function Amusement() {
         </div>
       )}
       {!router.query.category && (
-        <div className={styles.selecting}>
-          <div>
-            <select value={selectedCategory} onChange={handleCategoryChange}>
-              <option value="">카테고리 선택</option>
-              <option value="drama">Drama</option>
-              <option value="movie">Movie</option>
-              <option value="game">Game</option>
-              <option value="animation">Animation</option>
-              <option value="ott">OTT</option>
-            </select>
-            <button onClick={handleCategorySubmit}>선택완료</button>
-          </div>
-          <p>선택한 카테고리가 없습니다. 카테고리를 선택해 주세요!</p>
+        <div className={styles.unselect}>
+          <select value={selectedCategory} onChange={handleCategoryChange}>
+            <option value="">카테고리 선택</option>
+            <option value="drama">드라마</option>
+            <option value="movie">영화</option>
+            <option value="game">게임</option>
+            <option value="animation">애니메이션</option>
+            <option value="ott">OTT 오리지널</option>
+          </select>
+          <button onClick={handleCategorySubmit}>선택</button>
         </div>
       )}
-      {console.log('categoryData: ', categoryData)}
       {categoryData && !isLoading && !error && (
         <div className={styles.content}>
           <div className={styles.headline}>
@@ -154,7 +150,7 @@ function Amusement() {
                 <option value={'movie'}>영화</option>
                 <option value={'game'}>게임</option>
                 <option value={'animation'}>애니메이션</option>
-                <option value={'ott'}>OTT</option>
+                <option value={'ott'}>OTT 오리지널</option>
               </select>
               <button onClick={handleCategorySubmit}>선택</button>
             </div>

@@ -3,6 +3,7 @@ export const vectors = {
   jejeup: require('./jejeup.svg'),
   play: require('./play.svg'),
   share: require('./share.svg'),
+  more: require('./more.svg'),
   ott: {
     amazon: require('./ott/amazon.svg'),
     apple: require('./ott/apple.svg'),

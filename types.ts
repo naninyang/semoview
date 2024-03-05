@@ -182,6 +182,33 @@ export interface AmusementPermalinkData {
   };
 }
 
+export interface JejeupAmusementData {
+  data: {
+    id: string;
+    idx: string;
+    title: string;
+    lang: string;
+    titleKorean: string;
+    titleOther: string;
+    etc: string;
+    release: string;
+    original: string;
+    originalAuthor: string;
+    originTitle: string;
+    rating: string;
+    country: string;
+    category: string;
+    genre: string;
+    anime: string;
+    ott: string;
+    publisher: string;
+    creator: string;
+    cast: string;
+    posterDefault: string;
+    posterOther: string;
+  };
+}
+
 export interface NoticeData {
   id: string;
   idx: string;

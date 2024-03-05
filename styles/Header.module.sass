@@ -1,17 +1,19 @@
 @import './designSystem'
 
 header.header
+  background-color: rgba($hex-white, .7)
+  backdrop-filter: saturate(180%) blur(rem(20))
+  position: fixed
+  top: 0
+  left: 0
+  z-index: 1030
+  width: 100%
+  padding: calc(env(safe-area-inset-top) + rem(23)) calc(env(safe-area-inset-right) + rem(19)) rem(23) calc(env(safe-area-inset-left) + rem(19))
+
   .container
     display: flex
     justify-content: space-between
-    background-color: rgba($hex-white, .7)
-    backdrop-filter: saturate(180%) blur(rem(20))
-    position: fixed
-    top: 0
-    left: 0
-    z-index: 1030
     width: 100%
-    padding: calc(env(safe-area-inset-top) + rem(23)) calc(env(safe-area-inset-right) + rem(19)) rem(23) calc(env(safe-area-inset-left) + rem(19))
 
     s
       width: rem(50)
@@ -87,3 +89,46 @@ header.header
 
               &::before
                 width: calc(100% - rem(14))
+
+  .tab
+    padding-top: rem(12)
+
+    nav, ol
+      width: 100%
+
+    ol
+      display: flex
+      gap: rem(27)
+
+      li
+        +col
+
+        &:first-of-type
+          text-align: right
+
+        a
+          position: relative
+          display: inline-block
+          padding: rem(7) rem(12)
+          color: $hex-dark
+          transition: all .7s cubic-bezier(.4,0,.2,1)
+
+          &::after
+            content: ''
+            position: absolute
+            bottom: 0
+            left: 50%
+            display: block
+            width: 0
+            height: rem(2)
+            background-color: transparent
+            transition: all .7s cubic-bezier(.4,0,.2,1)
+
+        &.current a
+          font-weight: 800
+          color: $hex-accent
+
+          &::after
+            left: 0
+            width: 100%
+            background-color: $hex-accent
