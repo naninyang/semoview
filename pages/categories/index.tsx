@@ -162,7 +162,7 @@ function Categories() {
     <main className={styles.categories}>
       <Seo
         pageTitle="제목에 제목이 없어서 짜증나서 만든 사이트"
-        pageDescription="클릭하지 않아도 제목과 정보를 알 수 있게 도와드려요"
+        pageDescription="클릭하지 않아도 타이틀의 제목과 정보를 알 수 있게 도와드려요"
         pageImg={`https://jejeup.dev1stud.io/og-image.webp?ts=${timestamp}`}
       />
       <h1>

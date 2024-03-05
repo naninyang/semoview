@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styled from '@emotion/styled';
 import { AmusementPermalinkData, JejeupData } from 'types';
-import Seo from '@/components/Seo';
+import Seo, { originTitle } from '@/components/Seo';
 import { CategoryName } from '@/components/CategoryName';
 import { AnimeName } from '@/components/AnimeName';
 import { RatingsDrama } from '@/components/RatingsDrama';
@@ -181,6 +181,12 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
 
   return (
     <main className={styles.amusement}>
+      <Seo
+        pageTitles={`${amusementData.attributes.titleKorean !== null ? amusementData.attributes.titleKorean : amusementData.attributes.title} - ${originTitle}`}
+        pageTitle={`${amusementData.attributes.titleKorean !== null ? amusementData.attributes.titleKorean : amusementData.attributes.title}`}
+        pageDescription={`'${amusementData.attributes.titleKorean !== null ? amusementData.attributes.titleKorean : amusementData.attributes.title}' 리뷰 영상을 모아서 한방에 즐기자!`}
+        pageImg={`https://jejeup.dev1stud.io/og-image.webp?ts=${timestamp}`}
+      />
       <div className="top-link">
         <button onClick={previousPageHandler} type="button">
           <BackButton />

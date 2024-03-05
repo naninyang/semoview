@@ -4,12 +4,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styled from '@emotion/styled';
 import { AmusementData } from 'types';
-import Seo from '@/components/Seo';
+import Seo, { originTitle } from '@/components/Seo';
 import { RatingsDrama } from '@/components/RatingsDrama';
 import { vectors } from '@/components/vectors';
 import { Pagination } from '@/components/Pagination';
 import Anchor from '@/components/Anchor';
 import styles from '@/styles/Categories.module.sass';
+import { CategoryName } from '@/components/CategoryName';
 
 const BackButton = styled.i({
   display: 'block',
@@ -104,8 +105,9 @@ function Amusement() {
   return (
     <main className={`${styles.categories} ${styles.amusement}`}>
       <Seo
-        pageTitle="제목에 제목이 없어서 짜증나서 만든 사이트"
-        pageDescription="클릭하지 않아도 제목과 정보를 알 수 있게 도와드려요"
+        pageTitles={`카테고리 선택 - ${originTitle}`}
+        pageTitle={`카테고리 선택`}
+        pageDescription="원하는 카테고리를 선택해 리뷰, 실황 영상을 즐겨보세요. 드라마, 영화, 애니, OTT 오리지널, 게임의 모든 것."
         pageImg={`https://jejeup.dev1stud.io/og-image.webp?ts=${timestamp}`}
       />
       <div className="top-link">
