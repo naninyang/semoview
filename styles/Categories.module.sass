@@ -107,41 +107,6 @@
               left: auto
 
       a
-        display: flex
-        flex-direction: column
-        gap: rem(7)
-        padding-bottom: rem(12)
-        width: calc(33.33% - rem(12))
-        font-size: rem(14)
-
-        +mq(minSmall)
-          width: calc(25% - rem(12))
-
-        +mq(minMedium)
-          width: calc(20% - rem(12))
-
-        +mq(minLarge)
-          width: calc(16.66666667% - rem(12))
-
-        +mq(minExtraLarge)
-          width: calc(14.28571429% - rem(12))
-
-        +mq(maxSmall)
-          &:nth-of-type(5)
-            display: none
-
-        +mq(maxMedium)
-          &:nth-of-type(6)
-            display: none
-
-        +mq(maxLarge)
-          &:nth-of-type(7)
-            display: none
-
-        +mq(maxExtraSmall)
-          &:nth-of-type(5), &:nth-of-type(6)
-            display: flex
-
         .thumbnail
           position: relative
 
@@ -214,3 +179,68 @@
 
           +mq(minMedium)
             font-size: rem(16)
+
+  &:not(.amusement)
+    section
+      a
+        display: flex
+        flex-direction: column
+        gap: rem(7)
+        padding-bottom: rem(12)
+        width: calc(33.33% - rem(12))
+        font-size: rem(14)
+
+        +mq(minSmall)
+          width: calc(25% - rem(12))
+
+        +mq(minMedium)
+          width: calc(20% - rem(12))
+
+        +mq(minLarge)
+          width: calc(16.66666667% - rem(12))
+
+        +mq(minExtraLarge)
+          width: calc(14.28571429% - rem(12))
+
+        +mq(maxSmall)
+          &:nth-of-type(5)
+            display: none
+
+        +mq(maxMedium)
+          &:nth-of-type(6)
+            display: none
+
+        +mq(maxLarge)
+          &:nth-of-type(7)
+            display: none
+
+        +mq(maxExtraSmall)
+          &:nth-of-type(5), &:nth-of-type(6)
+            display: flex
+
+  &.amusement
+    .content
+      section
+        a
+          display: flex
+          flex-direction: column
+          gap: rem(7)
+          padding-bottom: rem(12)
+          font-size: rem(14)
+          width: calc(50% - rem(12))
+
+          +mq(minSmall)
+            width: calc(25% - rem(12))
+
+          +mq(minMedium)
+            width: calc(20% - rem(12))
+
+          +mq(minLarge)
+            width: calc(16.66666667% - rem(12))
+
+          +mq(minExtraLarge)
+            width: calc(12.5% - rem(12))
+
+          .thumbnail.game
+            img
+              aspect-ratio: 460 / 215

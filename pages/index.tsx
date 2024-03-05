@@ -475,7 +475,7 @@ function Home() {
                   </figure>
                 </div>
               ))}
-            <Pagination currentPage={currentPage} pageCount={data.pageCount} />
+            <Pagination currentPage={currentPage} pageCount={data.pageCount} sorting={'jejeup'} />
           </div>
         )}
       </div>

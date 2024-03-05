@@ -158,7 +158,7 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
   return (
     <main className={styles.amusement}>
       <div className="top-link">
-        <Anchor href="/">
+        <Anchor href={`/amusement?category=${amusementData.attributes.category}`}>
           <BackButton />
           <span>뒤로가기</span>
         </Anchor>

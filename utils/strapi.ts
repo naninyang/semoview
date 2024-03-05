@@ -77,39 +77,38 @@ export async function getCategoryData(page?: number, pageSize?: number, category
     },
   );
   const categoryResponse = await response.json();
-  const categoryData = categoryResponse.data;
-  return categoryData.map((item: any) => {
-    const attributes = item.attributes;
-    return {
-      id: `${item.id}`,
-      idx: `${formatDate(attributes.createdAt)}${item.id}`,
-      title: attributes.title,
-      lang: attributes.lang,
-      titleKorean: attributes.titleKorean,
-      titleOther: attributes.titleOther,
-      etc: attributes.etc,
-      release: attributes.release,
-      original: attributes.original,
-      originalAuthor: attributes.originalAuthor,
-      originTitle: attributes.originTitle,
-      rating: attributes.rating,
-      country: attributes.country,
-      category: attributes.category,
-      genre: attributes.genre,
-      anime: attributes.anime,
-      ott: attributes.ott,
-      publisher: attributes.publisher,
-      creator: attributes.creator,
-      cast: attributes.cast,
-      posterDefault: attributes.posterDefault,
-      posterOther: attributes.posterOther,
-    };
-  });
+  const categoryResponseData = categoryResponse.data;
+  const data: AmusementData = categoryResponseData.map((data: any) => ({
+    id: `${data.id}`,
+    idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+    title: data.attributes.title,
+    lang: data.attributes.lang,
+    titleKorean: data.attributes.titleKorean,
+    titleOther: data.attributes.titleOther,
+    etc: data.attributes.etc,
+    release: data.attributes.release,
+    original: data.attributes.original,
+    originalAuthor: data.attributes.originalAuthor,
+    originTitle: data.attributes.originTitle,
+    rating: data.attributes.rating,
+    country: data.attributes.country,
+    category: data.attributes.category,
+    genre: data.attributes.genre,
+    anime: data.attributes.anime,
+    ott: data.attributes.ott,
+    publisher: data.attributes.publisher,
+    creator: data.attributes.creator,
+    cast: data.attributes.cast,
+    posterDefault: data.attributes.posterDefault,
+    posterOther: data.attributes.posterOther,
+  }));
+  const pageCount = categoryResponse.meta.pagination.pageCount;
+  return { data, pageCount: pageCount };
 }
 
 export async function getJejeupAmusementData(page?: number, pageSize?: number, amusementId?: string) {
   const response = await fetch(
-    `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[title][$contains]=${amusementId}`,
+    `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[title][$eq]=${amusementId}`,
     {
       method: 'GET',
       headers: {
@@ -130,6 +129,7 @@ export async function getJejeupAmusementData(page?: number, pageSize?: number, a
     title: data.attributes.title,
     worst: data.attributes.worst,
   }));
+  const pageCount = jejeupAmusementResponse.meta.pagination.pageCount;
   const jejeups = await Promise.all(
     rowsData.map(async (preview) => {
       const jejeupMetaData = await fetchPreviewMetadata(`https://youtu.be/${preview.video}`);
@@ -141,7 +141,7 @@ export async function getJejeupAmusementData(page?: number, pageSize?: number, a
       };
     }),
   );
-  return { jejeups };
+  return { jejeups, pageCount: pageCount };
 }
 
 export async function getNoticeData() {
