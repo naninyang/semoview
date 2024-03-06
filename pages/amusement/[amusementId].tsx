@@ -95,6 +95,7 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
   const [isJejeupsLoading, setIsJejeupsLoading] = useState(false);
   const [isJejeupsError, setIsJejeupsError] = useState<null | string>(null);
   const currentPage = Number(router.query.page) || 1;
+  const [isActive, setIsActive] = useState(true);
 
   useEffect(() => {
     sessionStorage.setItem('location', router.asPath);
@@ -171,6 +172,7 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
       );
     }
   }
+
   function FormatDuration(duration: string) {
     const match = duration.match(/PT(\d+M)?(\d+S)?/);
     if (!match) return '0:00';
@@ -178,6 +180,10 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
     const seconds = match[2] ? match[2].slice(0, -1) : '0';
     return `${minutes}:${seconds.padStart(2, '0')}`;
   }
+
+  const togglePoster = () => {
+    setIsActive(!isActive);
+  };
 
   return (
     <main className={styles.amusement}>
@@ -195,13 +201,26 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
       </div>
       <div className={styles.cover}>
         <div className={styles.background}>
-          <Image
-            src={amusementData.attributes.posterDefault}
-            alt=""
-            width={amusementData.attributes.category === 'game' ? 460 : 390}
-            height={amusementData.attributes.category === 'game' ? 215 : 560}
-            unoptimized
-          />
+          <div className={styles.images}>
+            <Image
+              src={amusementData.attributes.posterDefault}
+              alt=""
+              width={amusementData.attributes.category === 'game' ? 460 : 390}
+              height={amusementData.attributes.category === 'game' ? 215 : 560}
+              unoptimized
+              className={`${isActive ? styles.active : ''}`}
+            />
+            {amusementData.attributes.posterOther && (
+              <Image
+                src={amusementData.attributes.posterOther}
+                alt=""
+                width={amusementData.attributes.category === 'game' ? 460 : 390}
+                height={amusementData.attributes.category === 'game' ? 215 : 560}
+                unoptimized
+                className={`${!isActive ? styles.active : ''}`}
+              />
+            )}
+          </div>
           <div className={styles.dummy} />
         </div>
         <div className={styles.info}>
@@ -446,13 +465,39 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
         <div
           className={`${styles.poster} ${amusementData.attributes.category === 'game' ? styles['poster-game'] : ''}`}
         >
-          <Image
-            src={amusementData.attributes.posterDefault}
-            alt=""
-            width={amusementData.attributes.category === 'game' ? 460 : 390}
-            height={amusementData.attributes.category === 'game' ? 215 : 560}
-            unoptimized
-          />
+          <div className={styles.images}>
+            <Image
+              src={amusementData.attributes.posterDefault}
+              alt=""
+              width={amusementData.attributes.category === 'game' ? 460 : 390}
+              height={amusementData.attributes.category === 'game' ? 215 : 560}
+              unoptimized
+              className={`${isActive ? styles.active : ''}`}
+            />
+            {amusementData.attributes.posterOther && (
+              <Image
+                src={amusementData.attributes.posterOther}
+                alt=""
+                width={amusementData.attributes.category === 'game' ? 460 : 390}
+                height={amusementData.attributes.category === 'game' ? 215 : 560}
+                unoptimized
+                className={`${!isActive ? styles.active : ''}`}
+              />
+            )}
+          </div>
+          {amusementData.attributes.posterOther && (
+            <button type="button" onClick={togglePoster}>
+              <span>뒷면 보기</span>
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g opacity="1">
+                  <path
+                    d="M4.58333 2.25006L2.25 4.58339L4.58333 6.91673V5.16673H8.66667C10.2846 5.16673 11.5833 6.46542 11.5833 8.0834C11.5833 9.70137 10.2846 11.0001 8.66667 11.0001H2.83333V12.1667H8.66667C10.915 12.1667 12.75 10.3318 12.75 8.0834C12.75 5.83503 10.915 4.00006 8.66667 4.00006H4.58333V2.25006Z"
+                    fill="white"
+                  />
+                </g>
+              </svg>
+            </button>
+          )}
         </div>
       </div>
       {isJejeupsError && (
