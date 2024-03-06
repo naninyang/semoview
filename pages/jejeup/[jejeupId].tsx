@@ -244,6 +244,16 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
               <dd>이 영상은 영상과 더보기에 그 어떤 정보도 존재하지 않는 최악의 영상입니다.</dd>
             </dl>
           )}
+          {jejeupData.attributes.comment && (
+            <div className={styles.comment}>
+              <h2>큐레이터의 한줄평</h2>
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: jejeupData.attributes.comment.replace(/\n/g, '<br />'),
+                }}
+              />
+            </div>
+          )}
           <div className={styles.title}>
             <h2>타이틀 정보</h2>
             <div className={styles.function}>
@@ -684,16 +694,6 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
               )}
             </div>
           </div>
-          {jejeupData.attributes.comment && (
-            <div className={styles.comment}>
-              <h2>큐레이터의 한줄평</h2>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: jejeupData.attributes.comment.replace(/\n/g, '<br />'),
-                }}
-              />
-            </div>
-          )}
           {(jejeupData.amusementData.posterDefault || jejeupData.amusementData.posterOther) && (
             <div className={styles.posters}>
               <h2>{jejeupData.amusementData.category === 'game' ? '게임 공식 배너' : '포스터'}</h2>

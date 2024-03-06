@@ -238,6 +238,12 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                 <dd>{amusementData.attributes.titleOther}</dd>
               </div>
             )}
+            {amusementData.attributes.etc && (
+              <div>
+                <dt>추가 제목 또는 제목 설명</dt>
+                <dd>{amusementData.attributes.etc}</dd>
+              </div>
+            )}
             {amusementData.attributes.originalAuthor === null && amusementData.attributes.original && (
               <div>
                 <dt>원작</dt>
