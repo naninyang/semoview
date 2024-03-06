@@ -338,6 +338,28 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                 </dd>
               </div>
             )}
+            {amusementData.attributes.ott !== null && (
+              <div className={styles.link}>
+                <Anchor href={amusementData.attributes.ottAddr}>
+                  {amusementData.attributes.ott === 'amazonOriginal' && 'Amazon Prime Video'}
+                  {(amusementData.attributes.ott === 'appleOriginal' || amusementData.attributes.ott === 'appleFilm') &&
+                    'Apple TV+'}
+                  {amusementData.attributes.ott === 'disneyOriginal' && '디즈니+ 오리지널'}
+                  {(amusementData.attributes.ott === 'netflixOriginal' ||
+                    amusementData.attributes.ott === 'netflixFilm' ||
+                    amusementData.attributes.ott === 'netflixAnime' ||
+                    amusementData.attributes.ott === 'netflixAnimeFilm') &&
+                    'NETFLIX'}
+                  {amusementData.attributes.ott === 'tvingOriginal' ||
+                    (amusementData.attributes.ott === 'tvingOnly' && 'TVING')}
+                  {amusementData.attributes.ott === 'watchaOriginal' ||
+                    (amusementData.attributes.ott === 'watchaExclusive' && 'WATCHA')}
+                  {amusementData.attributes.ott === 'wavveOriginal' ||
+                    (amusementData.attributes.ott === 'wavveOnly' && 'Wavve')}
+                  에서 시청하기
+                </Anchor>
+              </div>
+            )}
             <div className={styles.item}>
               {amusementData.attributes.category !== 'ott' && amusementData.attributes.category !== 'ottFilm' && (
                 <div className={styles.category}>

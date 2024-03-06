@@ -141,7 +141,6 @@ export async function getJejeupAmusementData(page?: number, pageSize?: number, a
       };
     }),
   );
-  console.log('jejeups: ', jejeups);
   return { jejeups, pageCount: pageCount };
 }
 

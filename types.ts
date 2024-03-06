@@ -179,6 +179,7 @@ export interface AmusementPermalinkData {
     genre: string;
     anime: string;
     ott: string;
+    ottAddr: string;
     publisher: string;
     creator: string;
     cast: string;
