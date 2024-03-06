@@ -356,7 +356,12 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
               </div>
               <div className={styles.release}>
                 <dt>제작년도</dt>
-                <dd>{amusementData.attributes.release === '?' ? '알 수 없음' : amusementData.attributes.release}년</dd>
+                <dd>
+                  {amusementData.attributes.release === '?'
+                    ? '출시일을 알 수 없거나 출시예정작'
+                    : amusementData.attributes.release}
+                  년
+                </dd>
               </div>
               <div className={styles.rating}>
                 <dt>등급</dt>
@@ -458,6 +463,16 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
               <div>
                 <dt>주요 출연자</dt>
                 <dd>{amusementData.attributes.cast}</dd>
+              </div>
+            )}
+            {amusementData.attributes.synopsys && (
+              <div className={styles.synopsys}>
+                <dt>시놉시스</dt>
+                <dd
+                  dangerouslySetInnerHTML={{
+                    __html: amusementData.attributes.synopsys.replace(/\n/g, '<br />'),
+                  }}
+                />
               </div>
             )}
           </dl>

@@ -55,6 +55,7 @@ export interface JejeupData {
     publisher: string;
     creator: string;
     cast: string;
+    synopsys: string;
     posterDefault: string;
     posterOther: string;
   };
@@ -107,6 +108,7 @@ export interface JejeupPermalinkData {
     publisher: string;
     creator: string;
     cast: string;
+    synopsys: string;
     posterDefault: string;
     posterOther: string;
   };
@@ -180,6 +182,7 @@ export interface AmusementPermalinkData {
     publisher: string;
     creator: string;
     cast: string;
+    synopsys: string;
     posterDefault: string;
     posterOther: string;
   };
