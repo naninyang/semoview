@@ -1,6 +1,6 @@
 import { AmusementData, JejeupData, NoticeData } from 'types';
 
-const formatDate = (datetime: string) => {
+export const formatDate = (datetime: string) => {
   const date = new Date(datetime);
   const year = date.getFullYear();
   const month = (date.getMonth() + 1).toString().padStart(2, '0');

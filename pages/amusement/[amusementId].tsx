@@ -4,7 +4,8 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 import styled from '@emotion/styled';
-import { AmusementPermalinkData, JejeupData } from 'types';
+import { AmusementPermalinkData, JejeupAmusementData, JejeupData } from 'types';
+import { formatDate } from '@/utils/strapi';
 import Seo, { originTitle } from '@/components/Seo';
 import { CategoryName } from '@/components/CategoryName';
 import { AnimeName } from '@/components/AnimeName';
@@ -96,6 +97,11 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
   const [isJejeupsError, setIsJejeupsError] = useState<null | string>(null);
   const currentPage = Number(router.query.page) || 1;
   const [isActive, setIsActive] = useState(true);
+  const [relation1, setRelation1] = useState<AmusementPermalinkData | null>(null);
+  const [relation2, setRelation2] = useState<AmusementPermalinkData | null>(null);
+  const [isRelationLoading, setIsRelationLoading] = useState(false);
+  const [isRelationError, setIsRelationError] = useState<null | string>(null);
+  const [selectedRelation, setSelectedRelation] = useState<string>('');
 
   useEffect(() => {
     sessionStorage.setItem('location', router.asPath);
@@ -123,6 +129,56 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
     }
   };
 
+  const relation = async () => {
+    if (amusementData) {
+      if (amusementData.attributes.relation1) {
+        setIsRelationLoading(true);
+        setIsRelationError(null);
+        try {
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/api/amusement?amusementId=${amusementData.attributes.relation1}`,
+          );
+          const amusementResponse = (await response.json()) as { data: AmusementPermalinkData };
+          setRelation1(amusementResponse.data);
+        } catch (err) {
+          if (err instanceof Error) {
+            setIsRelationError(err.message);
+          } else {
+            setIsRelationError('An unknown error occurred');
+          }
+        } finally {
+          setIsRelationLoading(false);
+        }
+      }
+      if (amusementData.attributes.relation2) {
+        setIsRelationLoading(true);
+        setIsRelationError(null);
+        try {
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/api/amusement?amusementId=${amusementData.attributes.relation2}`,
+          );
+          const amusementResponse = (await response.json()) as { data: AmusementPermalinkData };
+          setRelation2(amusementResponse.data);
+        } catch (err) {
+          if (err instanceof Error) {
+            setIsRelationError(err.message);
+          } else {
+            setIsRelationError('An unknown error occurred');
+          }
+        } finally {
+          setIsRelationLoading(false);
+        }
+      }
+    }
+  };
+
+  const handleRelationChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedRelation(event.target.value);
+  };
+  const handleRelationSubmit = () => {
+    router.push(`${selectedRelation}`);
+  };
+
   const fetchData = async () => {
     setIsJejeupsLoading(true);
     setIsJejeupsError(null);
@@ -144,6 +200,10 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
   useEffect(() => {
     fetchData();
   }, [currentPage]);
+
+  useEffect(() => {
+    relation();
+  }, [amusementData]);
 
   const [timeoutReached, setTimeoutReached] = useState(false);
   useEffect(() => {
@@ -184,6 +244,47 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
   const togglePoster = () => {
     setIsActive(!isActive);
   };
+
+  function RelationSelect() {
+    if (
+      amusementData &&
+      amusementData.attributes.relation1 !== null &&
+      relation1 !== null &&
+      !isRelationLoading &&
+      !isRelationError
+    ) {
+      return (
+        <div className={styles.relation}>
+          <dt>다른 버전 보기</dt>
+          <dd>
+            <select value={selectedRelation} onChange={handleRelationChange}>
+              <option value={router.asPath}>{amusementData.attributes.title}</option>
+              {relation1 !== null && (
+                <option
+                  value={`/amusement/${formatDate(relation1.attributes.createdAt)}${amusementData.attributes.relation1}`}
+                >
+                  {relation1.attributes.title}
+                </option>
+              )}
+              {amusementData.attributes.relation2 !== null &&
+                relation2 !== null &&
+                !isRelationLoading &&
+                !isRelationError && (
+                  <option
+                    value={`/amusement/${formatDate(relation2.attributes.createdAt)}${amusementData.attributes.relation2}`}
+                  >
+                    {relation2.attributes.title}
+                  </option>
+                )}
+            </select>
+            <button type="button" onClick={handleRelationSubmit}>
+              이동
+            </button>
+          </dd>
+        </div>
+      );
+    }
+  }
 
   return (
     <main className={styles.amusement}>
@@ -235,10 +336,10 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                 <dt>원제</dt>
                 <dd>
                   {amusementData.attributes.lang === 'chineseBeonche' && (
-                    <span lang="zh-Hant">{amusementData.attributes.title} </span>
+                    <span lang="zh-Hant">{amusementData.attributes.title}</span>
                   )}
                   {amusementData.attributes.lang === 'chineseGanche' && (
-                    <span lang="zh-Hans">{amusementData.attributes.title} </span>
+                    <span lang="zh-Hans">{amusementData.attributes.title}</span>
                   )}
                   {amusementData.attributes.lang === 'english' && (
                     <span lang="en">{amusementData.attributes.title}</span>
@@ -350,27 +451,34 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
             )}
             {amusementData.attributes.ott !== null && amusementData.attributes.ottAddr !== null && (
               <div className={styles.link}>
-                <Anchor href={amusementData.attributes.ottAddr}>
-                  {amusementData.attributes.ott === 'amazonOriginal' && 'Amazon Prime Video'}
-                  {(amusementData.attributes.ott === 'appleOriginal' || amusementData.attributes.ott === 'appleFilm') &&
-                    'Apple TV+'}
-                  {amusementData.attributes.ott === 'disneyOriginal' && 'Disney+'}
-                  {(amusementData.attributes.ott === 'netflixOriginal' ||
-                    amusementData.attributes.ott === 'netflixFilm' ||
-                    amusementData.attributes.ott === 'netflixAnime' ||
-                    amusementData.attributes.ott === 'netflixAnimeFilm') &&
-                    'NETFLIX'}
-                  {(amusementData.attributes.ott === 'tvingOriginal' || amusementData.attributes.ott === 'tvingOnly') &&
-                    'TVING'}
-                  {(amusementData.attributes.ott === 'watchaOriginal' ||
-                    amusementData.attributes.ott === 'watchaExclusive') &&
-                    'WATCHA'}
-                  {(amusementData.attributes.ott === 'wavveOriginal' || amusementData.attributes.ott === 'wavveOnly') &&
-                    'Wavve'}
-                  에서 시청하기
-                </Anchor>
+                <dt>OTT에서 보기</dt>
+                <dd>
+                  <Anchor href={amusementData.attributes.ottAddr}>
+                    {amusementData.attributes.ott === 'amazonOriginal' && 'Amazon Prime Video'}
+                    {(amusementData.attributes.ott === 'appleOriginal' ||
+                      amusementData.attributes.ott === 'appleFilm') &&
+                      'Apple TV+'}
+                    {amusementData.attributes.ott === 'disneyOriginal' && 'Disney+'}
+                    {(amusementData.attributes.ott === 'netflixOriginal' ||
+                      amusementData.attributes.ott === 'netflixFilm' ||
+                      amusementData.attributes.ott === 'netflixAnime' ||
+                      amusementData.attributes.ott === 'netflixAnimeFilm') &&
+                      'NETFLIX'}
+                    {(amusementData.attributes.ott === 'tvingOriginal' ||
+                      amusementData.attributes.ott === 'tvingOnly') &&
+                      'TVING'}
+                    {(amusementData.attributes.ott === 'watchaOriginal' ||
+                      amusementData.attributes.ott === 'watchaExclusive') &&
+                      'WATCHA'}
+                    {(amusementData.attributes.ott === 'wavveOriginal' ||
+                      amusementData.attributes.ott === 'wavveOnly') &&
+                      'Wavve'}
+                    에서 시청하기
+                  </Anchor>
+                </dd>
               </div>
             )}
+            <RelationSelect />
             <div className={styles.item}>
               {amusementData.attributes.category !== 'ott' && amusementData.attributes.category !== 'ottFilm' && (
                 <div className={styles.category}>
@@ -535,7 +643,7 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
           </div>
           {amusementData.attributes.posterOther && (
             <button type="button" onClick={togglePoster}>
-              <span>뒷면 보기</span>
+              <span>다른 이미지 보기</span>
               <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g opacity="1">
                   <path

@@ -186,6 +186,9 @@ export interface AmusementPermalinkData {
     synopsys: string;
     posterDefault: string;
     posterOther: string;
+    relation1: string;
+    relation2: string;
+    createdAt: string;
   };
 }
 

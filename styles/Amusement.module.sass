@@ -158,11 +158,21 @@
               display: inline-block
               height: rem(18)
 
-        .link
+        .relation dd
+          display: flex
+          gap: rem(7)
+
+        .link, .relation
           padding: rem(7) 0
 
-          a
+          dd
+            border: 0
+            border-radius: 0
+            padding: 0
+
+          a, select, button
             background-color: $hex-white
+            border: 0
             border-radius: rem(3)
             padding: rem(5) rem(7)
             color: $hex-accent

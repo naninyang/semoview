@@ -133,21 +133,25 @@ export default function App({ Component, pageProps }: AppProps) {
           pre,
           input,
           button,
-          textarea,
-          select {
+          textarea {
             font-family: ${NanumSquare.style.fontFamily}, sans-serif;
             font-weight: 400;
           }
-          span[lang='ja'] {
+          select {
+            font-family: ${fontJP.style.fontFamily}, ${fontTH.style.fontFamily}, ${fontSC.style.fontFamily},
+              ${fontTC.style.fontFamily}, ${fontKR.style.fontFamily}, sans-serif;
+            font-weight: 400;
+          }
+          [lang='ja'] {
             font-family: ${fontJP.style.fontFamily}, sans-serif;
           }
-          span[lang='th'] {
+          [lang='th'] {
             font-family: ${fontTH.style.fontFamily}, sans-serif;
           }
-          span[lang='zh-Hans'] {
+          [lang='zh-Hans'] {
             font-family: ${fontSC.style.fontFamily}, sans-serif;
           }
-          span[lang='zh-Hant'] {
+          [lang='zh-Hant'] {
             font-family: ${fontTC.style.fontFamily}, sans-serif;
           }
           .preview {
