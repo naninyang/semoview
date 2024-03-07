@@ -348,7 +348,7 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                 </dd>
               </div>
             )}
-            {amusementData.attributes.ott !== null && (
+            {amusementData.attributes.ott !== null && amusementData.attributes.ottAddr !== null && (
               <div className={styles.link}>
                 <Anchor href={amusementData.attributes.ottAddr}>
                   {amusementData.attributes.ott === 'amazonOriginal' && 'Amazon Prime Video'}
