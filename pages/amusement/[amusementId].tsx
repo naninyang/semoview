@@ -275,49 +275,44 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
               <div className={styles.platform}>
                 <dt>플랫폼</dt>
                 <dd>
-                  {amusementData.attributes.ott === 'wavveOnly' && (
-                    <>
-                      <WavveOriginal /> 웨이브 독점 스트리밍
-                    </>
-                  )}
                   {amusementData.attributes.ott === 'amazonOriginal' && (
                     <>
-                      <AmazonOriginal /> 아마존 오리지널
+                      <AmazonOriginal /> Amazon Prime Video
                     </>
                   )}
                   {amusementData.attributes.ott === 'appleOriginal' && (
                     <>
-                      <AppleOriginal /> 애플 티비+ 오리지널
+                      <AppleOriginal /> An Apple Original
                     </>
                   )}
                   {amusementData.attributes.ott === 'appleFilm' && (
                     <>
-                      <AppleOriginal /> 애플 티비+ 오리지널 영화
+                      <AppleOriginal /> An Apple Original Film
                     </>
                   )}
                   {amusementData.attributes.ott === 'disneyOriginal' && (
                     <>
-                      <DisneyOriginal /> 디즈니+ 오리지널
+                      <DisneyOriginal /> Disney Plus Original
                     </>
                   )}
                   {amusementData.attributes.ott === 'netflixOriginal' && (
                     <>
-                      <NetflixOriginal /> 넷플릭스 오리지널
+                      <NetflixOriginal /> NETFLIX Original
                     </>
                   )}
                   {amusementData.attributes.ott === 'netflixFilm' && (
                     <>
-                      <NetflixOriginal /> 넷플릭스 오리지널 영화
+                      <NetflixOriginal /> NETFLIX Original Film
                     </>
                   )}
                   {amusementData.attributes.ott === 'netflixAnime' && (
                     <>
-                      <NetflixOriginal /> 넷플릭스 오리지널 애니메이션
+                      <NetflixOriginal /> NETFLIX Original Animation
                     </>
                   )}
                   {amusementData.attributes.ott === 'netflixAnimeFilm' && (
                     <>
-                      <NetflixOriginal /> 넷플릭스 오리지널 애니메이션 영화
+                      <NetflixOriginal /> NETFLIX Original Animation Film
                     </>
                   )}
                   {amusementData.attributes.ott === 'tvingOriginal' && (
@@ -325,14 +320,29 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                       <TvingOriginal /> 티빙 오리지널
                     </>
                   )}
+                  {amusementData.attributes.ott === 'tvingOnly' && (
+                    <>
+                      <TvingOriginal /> 오직 티빙에서
+                    </>
+                  )}
                   {amusementData.attributes.ott === 'watchaOriginal' && (
                     <>
                       <WatchaOriginal /> 왓챠 오리지널
                     </>
                   )}
+                  {amusementData.attributes.ott === 'watchaExclusive' && (
+                    <>
+                      <WatchaOriginal /> 오직 왓챠에서
+                    </>
+                  )}
                   {amusementData.attributes.ott === 'wavveOriginal' && (
                     <>
                       <WavveOriginal /> 웨이브 오리지널
+                    </>
+                  )}
+                  {amusementData.attributes.ott === 'wavveOnly' && (
+                    <>
+                      <WavveOriginal /> 오직 웨이브에서
                     </>
                   )}
                 </dd>
@@ -344,18 +354,19 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                   {amusementData.attributes.ott === 'amazonOriginal' && 'Amazon Prime Video'}
                   {(amusementData.attributes.ott === 'appleOriginal' || amusementData.attributes.ott === 'appleFilm') &&
                     'Apple TV+'}
-                  {amusementData.attributes.ott === 'disneyOriginal' && '디즈니+ 오리지널'}
+                  {amusementData.attributes.ott === 'disneyOriginal' && 'Disney+'}
                   {(amusementData.attributes.ott === 'netflixOriginal' ||
                     amusementData.attributes.ott === 'netflixFilm' ||
                     amusementData.attributes.ott === 'netflixAnime' ||
                     amusementData.attributes.ott === 'netflixAnimeFilm') &&
                     'NETFLIX'}
-                  {amusementData.attributes.ott === 'tvingOriginal' ||
-                    (amusementData.attributes.ott === 'tvingOnly' && 'TVING')}
-                  {amusementData.attributes.ott === 'watchaOriginal' ||
-                    (amusementData.attributes.ott === 'watchaExclusive' && 'WATCHA')}
-                  {amusementData.attributes.ott === 'wavveOriginal' ||
-                    (amusementData.attributes.ott === 'wavveOnly' && 'Wavve')}
+                  {(amusementData.attributes.ott === 'tvingOriginal' || amusementData.attributes.ott === 'tvingOnly') &&
+                    'TVING'}
+                  {(amusementData.attributes.ott === 'watchaOriginal' ||
+                    amusementData.attributes.ott === 'watchaExclusive') &&
+                    'WATCHA'}
+                  {(amusementData.attributes.ott === 'wavveOriginal' || amusementData.attributes.ott === 'wavveOnly') &&
+                    'Wavve'}
                   에서 시청하기
                 </Anchor>
               </div>
