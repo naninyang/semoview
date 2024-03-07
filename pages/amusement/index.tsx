@@ -133,7 +133,7 @@ function Amusement() {
             <option value="movie">영화</option>
             <option value="game">게임</option>
             <option value="animation">애니메이션</option>
-            <option value="ott">OTT 오리지널</option>
+            <option value="ott">오직 OTT에서</option>
           </select>
           <button onClick={handleCategorySubmit}>선택</button>
         </div>
@@ -146,8 +146,8 @@ function Amusement() {
               {categoryData.data[0].category === 'movie' && '영화 사회에서는 영원한 우방도, 영원한 적도 없다!'}
               {categoryData.data[0].category === 'game' && '게임은 끝날 때까지 끝난 게 아니다!'}
               {categoryData.data[0].category === 'animation' && '애니입니다만, 문제라도?'}
-              {categoryData.data[0].category === 'ott' ||
-                (categoryData.data[0].category === 'ottFilm' && 'OTT 오리지널이 이렇게 재밌을 리가 없어')}
+              {(categoryData.data[0].category === 'ott' || categoryData.data[0].category === 'ottFilm') &&
+                '퇴근 후, 이세계 OTT에서만 볼 수 있는 콘텐츠를'}
             </h1>
             <div className={styles.select}>
               <select onChange={handleCategoryChange} defaultValue={selectedCategory}>
@@ -156,7 +156,7 @@ function Amusement() {
                 <option value={'movie'}>영화</option>
                 <option value={'game'}>게임</option>
                 <option value={'animation'}>애니메이션</option>
-                <option value={'ott'}>OTT 오리지널</option>
+                <option value={'ott'}>오직 OTT에서</option>
               </select>
               <button onClick={handleCategorySubmit}>선택</button>
             </div>
