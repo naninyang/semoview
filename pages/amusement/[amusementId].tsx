@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 import styled from '@emotion/styled';
-import { AmusementPermalinkData, JejeupAmusementData, JejeupData } from 'types';
+import { AmusementPermalinkData, JejeupData } from 'types';
 import { formatDate } from '@/utils/strapi';
 import Seo, { originTitle } from '@/components/Seo';
 import { CategoryName } from '@/components/CategoryName';
@@ -24,17 +24,17 @@ const BackButton = styled.i({
 
 const AmazonOriginal = styled.i({
   width: rem(52),
-  background: `url(${vectors.ott.amazon}) no-repeat 50% 50%/contain`,
+  background: `url(${vectors.ott.amazon2}) no-repeat 50% 50%/contain`,
 });
 
 const AppleOriginal = styled.i({
   width: rem(42),
-  background: `url(${vectors.ott.apple}) no-repeat 50% 50%/contain`,
+  background: `url(${vectors.ott.apple2}) no-repeat 50% 50%/contain`,
 });
 
 const DisneyOriginal = styled.i({
   width: rem(29),
-  background: `url(${vectors.ott.disney}) no-repeat 50% 50%/contain`,
+  background: `url(${vectors.ott.disney2}) no-repeat 50% 50%/contain`,
 });
 
 const NetflixOriginal = styled.i({
@@ -43,18 +43,33 @@ const NetflixOriginal = styled.i({
 });
 
 const TvingOriginal = styled.i({
-  width: rem(63),
-  background: `url(${vectors.ott.tving}) no-repeat 50% 50%/contain`,
+  width: rem(105),
+  background: `url(${vectors.ott.tvingOrigin}) no-repeat 50% 50%/contain`,
+});
+
+const TvingOnly = styled.i({
+  width: rem(70),
+  background: `url(${vectors.ott.tvingOnly}) no-repeat 50% 50%/contain`,
 });
 
 const WatchaOriginal = styled.i({
   width: rem(55),
-  background: `url(${vectors.ott.watcha}) no-repeat 50% 50%/contain`,
+  background: `url(${vectors.ott.watchaOrigin}) no-repeat 50% 50%/contain`,
+});
+
+const WatchaOnly = styled.i({
+  width: rem(70),
+  background: `url(${vectors.ott.watchaOnly}) no-repeat 50% 50%/contain`,
 });
 
 const WavveOriginal = styled.i({
   width: rem(72),
-  background: `url(${vectors.ott.wavve}) no-repeat 50% 50%/contain`,
+  background: `url(${vectors.ott.wavveOrigin}) no-repeat 50% 50%/contain`,
+});
+
+const WavveOnly = styled.i({
+  width: rem(50),
+  background: `url(${vectors.ott.wavveOnly}) no-repeat 50% 50%/contain`,
 });
 
 const RatingFilmAll = styled.i({
@@ -423,7 +438,7 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                   )}
                   {amusementData.attributes.ott === 'tvingOnly' && (
                     <>
-                      <TvingOriginal /> 오직 티빙에서
+                      <TvingOnly /> 오직 티빙에서
                     </>
                   )}
                   {amusementData.attributes.ott === 'watchaOriginal' && (
@@ -433,7 +448,7 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                   )}
                   {amusementData.attributes.ott === 'watchaExclusive' && (
                     <>
-                      <WatchaOriginal /> 오직 왓챠에서
+                      <WatchaOnly /> 오직 왓챠에서
                     </>
                   )}
                   {amusementData.attributes.ott === 'wavveOriginal' && (
@@ -443,7 +458,7 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                   )}
                   {amusementData.attributes.ott === 'wavveOnly' && (
                     <>
-                      <WavveOriginal /> 오직 웨이브에서
+                      <WavveOnly /> 오직 웨이브에서
                     </>
                   )}
                 </dd>

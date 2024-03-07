@@ -6,10 +6,13 @@ export const vectors = {
   more: require('./more.svg'),
   ott: {
     amazon: require('./ott/amazon.svg'),
+    amazon2: require('./ott/amazon2.svg'),
     amazonIcon: require('./ott/amazon-icon.svg'),
     apple: require('./ott/apple.svg'),
+    apple2: require('./ott/apple2.svg'),
     appleIcon: require('./ott/apple-icon.svg'),
     disney: require('./ott/disney.svg'),
+    disney2: require('./ott/disney2.svg'),
     disneyIcon: require('./ott/disney-icon.svg'),
     netflix: require('./ott/netflix.svg'),
     netflixIcon: require('./ott/netflix-icon.svg'),
