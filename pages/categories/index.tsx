@@ -415,7 +415,7 @@ function Categories() {
           {ottData && (
             <>
               <div className={styles.headline}>
-                <h2>OTT 오리지널 리뷰</h2>
+                <h2>OTT 오리지널 & OTT 온리 콘텐츠 리뷰</h2>
                 <Anchor href="/amusement?category=ott&page=1">
                   <span>더보기</span>
                   <More />
