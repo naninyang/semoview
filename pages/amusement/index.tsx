@@ -10,7 +10,34 @@ import { vectors } from '@/components/vectors';
 import { Pagination } from '@/components/Pagination';
 import Anchor from '@/components/Anchor';
 import styles from '@/styles/Categories.module.sass';
-import { CategoryName } from '@/components/CategoryName';
+
+const AmazonIcon = styled.i({
+  background: `url(${vectors.ott.amazonIcon}) no-repeat 50% 50%/contain`,
+});
+
+const AppleIcon = styled.i({
+  background: `url(${vectors.ott.appleIcon}) no-repeat 50% 50%/contain`,
+});
+
+const DisneyIcon = styled.i({
+  background: `url(${vectors.ott.disneyIcon}) no-repeat 50% 50%/contain`,
+});
+
+const NetflixIcon = styled.i({
+  background: `url(${vectors.ott.netflixIcon}) no-repeat 50% 50%/contain`,
+});
+
+const TvingIcon = styled.i({
+  background: `url(${vectors.ott.tvingIcon}) no-repeat 50% 50%/contain`,
+});
+
+const WatchaIcon = styled.i({
+  background: `url(${vectors.ott.watchaIcon}) no-repeat 50% 50%/contain`,
+});
+
+const WavveIcon = styled.i({
+  background: `url(${vectors.ott.wavveIcon}) no-repeat 50% 50%/contain`,
+});
 
 const BackButton = styled.i({
   display: 'block',
@@ -147,7 +174,7 @@ function Amusement() {
               {categoryData.data[0].category === 'game' && '게임은 끝날 때까지 끝난 게 아니다!'}
               {categoryData.data[0].category === 'animation' && '애니입니다만, 문제라도?'}
               {(categoryData.data[0].category === 'ott' || categoryData.data[0].category === 'ottFilm') &&
-                '퇴근 후, 이세계 OTT에서만 볼 수 있는 콘텐츠를'}
+                '퇴근 후, 이세계 OTT에서만 볼 수 있는 콘텐츠를.'}
             </h1>
             <div className={styles.select}>
               <select onChange={handleCategoryChange} defaultValue={selectedCategory}>
@@ -177,6 +204,49 @@ function Amusement() {
                         unoptimized
                       />
                       <dl>
+                        <div className={styles.platform}>
+                          <dt>플랫폼</dt>
+                          <dd>
+                            {amusement.ott === 'amazonOriginal' && (
+                              <>
+                                <AmazonIcon /> <span>Amazon Prime Video</span>
+                              </>
+                            )}
+                            {(amusement.ott === 'appleOriginal' || amusement.ott === 'appleFilm') && (
+                              <>
+                                <AppleIcon /> <span>An Apple Original</span>
+                              </>
+                            )}
+                            {amusement.ott === 'disneyOriginal' && (
+                              <>
+                                <DisneyIcon /> <span>Disney Plus Original</span>
+                              </>
+                            )}
+                            {(amusement.ott === 'netflixOriginal' ||
+                              amusement.ott === 'netflixFilm' ||
+                              amusement.ott === 'netflixAnime' ||
+                              amusement.ott === 'netflixAnimeFilm') && (
+                              <>
+                                <NetflixIcon /> <span>NETFLIX Original</span>
+                              </>
+                            )}
+                            {(amusement.ott === 'tvingOriginal' || amusement.ott === 'tvingOnly') && (
+                              <>
+                                <TvingIcon /> <span>티빙 오리지널</span>
+                              </>
+                            )}
+                            {(amusement.ott === 'watchaOriginal' || amusement.ott === 'watchaExclusive') && (
+                              <>
+                                <WatchaIcon /> <span>왓챠 오리지널</span>
+                              </>
+                            )}
+                            {(amusement.ott === 'wavveOriginal' || amusement.ott === 'wavveOnly') && (
+                              <>
+                                <WavveIcon /> <span>웨이브 오리지널</span>
+                              </>
+                            )}
+                          </dd>
+                        </div>
                         <div>
                           <dt>{categoryData.data[0].category === 'game' ? '심의등급' : '시청등급'}</dt>
                           <dd>

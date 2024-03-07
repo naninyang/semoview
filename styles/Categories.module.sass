@@ -126,6 +126,7 @@
         .thumbnail
           position: relative
           overflow: hidden
+          border-radius: rem(13)
 
           img
             width: 100%
@@ -136,31 +137,37 @@
 
           dl
             position: absolute
-            top: rem(7)
-            left: rem(7)
+            top: 0
+            left: 0
             display: flex
             align-items: center
             gap: rem(3)
+            width: 100%
 
             dt
               +screen-reader-only
 
             div
               &.platform
-                dd
-                  background-color: $hex-black
-                  border-radius: rem(5)
-                  padding: rem(4) rem(0)
+                position: absolute
+                top: 0
+                right: 0
 
                 i
                   display: inline-block
-                  height: rem(12)
+                  width: rem(45)
+                  height: rem(45)
+                  border-radius: 0 0 0 rem(13)
 
               dd
                 span
                   +screen-reader-only
 
               &:last-of-type
+                position: absolute
+                top: rem(7)
+                left: rem(7)
+
                 dd
                   i
                     display: inline-flex

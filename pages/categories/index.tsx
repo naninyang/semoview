@@ -8,42 +8,34 @@ import Seo from '@/components/Seo';
 import Anchor from '@/components/Anchor';
 import { vectors } from '@/components/vectors';
 import { RatingsDrama } from '@/components/RatingsDrama';
-import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Categories.module.sass';
 
-const AmazonOriginal = styled.i({
-  width: rem(52),
-  background: `url(${vectors.ott.amazon}) no-repeat 50% 50%/contain`,
+const AmazonIcon = styled.i({
+  background: `url(${vectors.ott.amazonIcon}) no-repeat 50% 50%/contain`,
 });
 
-const AppleOriginal = styled.i({
-  width: rem(42),
-  background: `url(${vectors.ott.apple}) no-repeat 50% 50%/contain`,
+const AppleIcon = styled.i({
+  background: `url(${vectors.ott.appleIcon}) no-repeat 50% 50%/contain`,
 });
 
-const DisneyOriginal = styled.i({
-  width: rem(29),
-  background: `url(${vectors.ott.disney}) no-repeat 50% 50%/contain`,
+const DisneyIcon = styled.i({
+  background: `url(${vectors.ott.disneyIcon}) no-repeat 50% 50%/contain`,
 });
 
-const NetflixOriginal = styled.i({
-  width: rem(59),
-  background: `url(${vectors.ott.netflix}) no-repeat 50% 50%/contain`,
+const NetflixIcon = styled.i({
+  background: `url(${vectors.ott.netflixIcon}) no-repeat 50% 50%/contain`,
 });
 
-const TvingOriginal = styled.i({
-  width: rem(63),
-  background: `url(${vectors.ott.tving}) no-repeat 50% 50%/contain`,
+const TvingIcon = styled.i({
+  background: `url(${vectors.ott.tvingIcon}) no-repeat 50% 50%/contain`,
 });
 
-const WatchaOriginal = styled.i({
-  width: rem(55),
-  background: `url(${vectors.ott.watcha}) no-repeat 50% 50%/contain`,
+const WatchaIcon = styled.i({
+  background: `url(${vectors.ott.watchaIcon}) no-repeat 50% 50%/contain`,
 });
 
-const WavveOriginal = styled.i({
-  width: rem(72),
-  background: `url(${vectors.ott.wavve}) no-repeat 50% 50%/contain`,
+const WavveIcon = styled.i({
+  background: `url(${vectors.ott.wavveIcon}) no-repeat 50% 50%/contain`,
 });
 
 const RatingFilmAll = styled.i({
@@ -433,17 +425,17 @@ function Categories() {
                             <dd>
                               {amusement.ott === 'amazonOriginal' && (
                                 <>
-                                  <AmazonOriginal /> <span>아마존 오리지널</span>
+                                  <AmazonIcon /> <span>Amazon Prime Video</span>
                                 </>
                               )}
                               {(amusement.ott === 'appleOriginal' || amusement.ott === 'appleFilm') && (
                                 <>
-                                  <AppleOriginal /> <span>애플TV 플러스 오리지널</span>
+                                  <AppleIcon /> <span>An Apple Original</span>
                                 </>
                               )}
                               {amusement.ott === 'disneyOriginal' && (
                                 <>
-                                  <DisneyOriginal /> <span>디즈니 플러스 오리지널</span>
+                                  <DisneyIcon /> <span>Disney Plus Original</span>
                                 </>
                               )}
                               {(amusement.ott === 'netflixOriginal' ||
@@ -451,27 +443,22 @@ function Categories() {
                                 amusement.ott === 'netflixAnime' ||
                                 amusement.ott === 'netflixAnimeFilm') && (
                                 <>
-                                  <NetflixOriginal /> <span>넷플릭스 오리지널</span>
+                                  <NetflixIcon /> <span>NETFLIX Original</span>
                                 </>
                               )}
-                              {amusement.ott === 'tvingOriginal' && (
+                              {(amusement.ott === 'tvingOriginal' || amusement.ott === 'tvingOnly') && (
                                 <>
-                                  <TvingOriginal /> <span>티빙 오리지널</span>
+                                  <TvingIcon /> <span>티빙 오리지널</span>
                                 </>
                               )}
-                              {amusement.ott === 'watchaOriginal' && (
+                              {(amusement.ott === 'watchaOriginal' || amusement.ott === 'watchaExclusive') && (
                                 <>
-                                  <WatchaOriginal /> <span>왓챠 오리지널</span>
+                                  <WatchaIcon /> <span>왓챠 오리지널</span>
                                 </>
                               )}
-                              {amusement.ott === 'wavveOriginal' && (
+                              {(amusement.ott === 'wavveOriginal' || amusement.ott === 'wavveOnly') && (
                                 <>
-                                  <WavveOriginal /> <span>웨이브 오리지널</span>
-                                </>
-                              )}
-                              {amusement.ott === 'wavveOnly' && (
-                                <>
-                                  <WavveOriginal /> <span>오직 웨이브에서</span>
+                                  <WavveIcon /> <span>웨이브 오리지널</span>
                                 </>
                               )}
                             </dd>
