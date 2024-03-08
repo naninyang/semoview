@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { GA_TRACKING_ID, pageview } from '@/lib/gtag';
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import '@/styles/globals.sass';
 
 const fontKR = Noto_Sans_KR({
@@ -165,6 +166,7 @@ export default function App({ Component, pageProps }: AppProps) {
       </style>
       <Header />
       <Component {...pageProps} />
+      <Footer />
     </>
   );
 }
