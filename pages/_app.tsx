@@ -138,7 +138,8 @@ export default function App({ Component, pageProps }: AppProps) {
             font-family: ${NanumSquare.style.fontFamily}, sans-serif;
             font-weight: 400;
           }
-          select {
+          select,
+          .lang {
             font-family: ${fontJP.style.fontFamily}, ${fontTH.style.fontFamily}, ${fontSC.style.fontFamily},
               ${fontTC.style.fontFamily}, ${fontKR.style.fontFamily}, sans-serif;
             font-weight: 400;

@@ -413,7 +413,7 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
             {amusementData.attributes.titleOther && (
               <div>
                 <dt>다른 제목</dt>
-                <dd>{amusementData.attributes.titleOther}</dd>
+                <dd className="lang">{amusementData.attributes.titleOther}</dd>
               </div>
             )}
             {amusementData.attributes.etc && (

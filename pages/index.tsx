@@ -471,7 +471,9 @@ function Home() {
                               <>
                                 ({jejeup.amusementData.titleKorean && jejeup.amusementData.titleKorean}
                                 {jejeup.amusementData.titleKorean && jejeup.amusementData.titleOther && ' / '}
-                                {jejeup.amusementData.titleOther && jejeup.amusementData.titleOther})
+                                <span className="lang">
+                                  {jejeup.amusementData.titleOther && jejeup.amusementData.titleOther})
+                                </span>
                               </>
                             )}{' '}
                             {jejeup.amusementData.originalAuthor === null && jejeup.amusementData.original && (
@@ -481,7 +483,7 @@ function Home() {
                             )}
                             <time>{jejeup.amusementData.release}</time>
                           </strong>
-                          <em>{jejeup.amusementData.etc && jejeup.amusementData.etc}</em>
+                          <em className="lang">{jejeup.amusementData.etc && jejeup.amusementData.etc}</em>
                         </dd>
                       </dl>
                       <dl className={styles.info}>

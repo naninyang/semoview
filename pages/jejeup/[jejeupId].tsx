@@ -488,7 +488,9 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                           <>
                             ({jejeupData.amusementData.titleKorean && jejeupData.amusementData.titleKorean}
                             {jejeupData.amusementData.titleKorean && jejeupData.amusementData.titleOther && ' / '}
-                            {jejeupData.amusementData.titleOther && jejeupData.amusementData.titleOther})
+                            <span className="lang">
+                              {jejeupData.amusementData.titleOther && jejeupData.amusementData.titleOther})
+                            </span>
                           </>
                         )}{' '}
                         {jejeupData.amusementData.originalAuthor === null && jejeupData.amusementData.original && (
@@ -498,7 +500,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                         )}
                         <time>{jejeupData.amusementData.release}</time>
                       </strong>
-                      <em>{jejeupData.amusementData.etc && jejeupData.amusementData.etc}</em>
+                      <em className="lang">{jejeupData.amusementData.etc && jejeupData.amusementData.etc}</em>
                     </dd>
                   </dl>
                   <dl className={styles.info}>
