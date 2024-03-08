@@ -241,6 +241,7 @@ export async function getAmusementData(amusement: string) {
     originalAuthor: amusementData.attributes.originalAuthor,
     originTitle: amusementData.attributes.originTitle,
     rating: amusementData.attributes.rating,
+    ratingCustom: amusementData.attributes.ratingCustom,
     country: amusementData.attributes.country,
     category: amusementData.attributes.category,
     genre: amusementData.attributes.genre,

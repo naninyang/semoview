@@ -175,6 +175,10 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
       });
   };
 
+  const customRatingHandler = () => {
+    alert('한국에 정식 발매된 타이틀이 아닙니다. 해당 심의등급은 제제없 자체설정 심의등급입니다.');
+  };
+
   return (
     <main className={styles.jejeup}>
       <Seo
@@ -436,6 +440,14 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                           <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
                         </>
                       )}
+                      {jejeupData.amusementData.ratingCustom && (
+                        <div className={styles.custom}>
+                          <button type="button" onClick={customRatingHandler}>
+                            <i />
+                            <span>제제없 자체설정 심의등급 안내</span>
+                          </button>
+                        </div>
+                      )}
                       {jejeupData.amusementData.ottAddr && (
                         <Anchor href={jejeupData.amusementData.ottAddr}>
                           {jejeupData.amusementData.ott === 'amazonOriginal' && 'Amazon Prime Video'}
@@ -460,12 +472,6 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                           에서 시청하기
                         </Anchor>
                       )}
-                      {/* {jejeupData.amusementData.ratingCustom && (
-                        <button type="button">
-                          <i />
-                          <span>제제없 자체설정 심의등급 안내</span>
-                        </button>
-                      )} */}
                     </dt>
                     <dd>
                       <strong>
@@ -680,6 +686,14 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                         <>
                           <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
                         </>
+                      )}
+                      {jejeupData.amusementData2.ratingCustom && (
+                        <div className={styles.custom}>
+                          <button type="button" onClick={customRatingHandler}>
+                            <i />
+                            <span>제제없 자체설정 심의등급 안내</span>
+                          </button>
+                        </div>
                       )}
                       {jejeupData.amusementData2.ottAddr && (
                         <Anchor href={jejeupData.amusementData2.ottAddr}>

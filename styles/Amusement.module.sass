@@ -226,7 +226,7 @@
               border: 0
               padding: 0
 
-              i
+              > i
                 display: inline-flex
                 align-items: center
                 width: rem(30)
@@ -260,6 +260,28 @@
 
               span
                 +screen-reader-only
+
+              .custom
+                display: inline-flex
+                margin-left: rem(5)
+
+                button
+                  background-color: white
+                  border: rem(2) solid $hex-accent
+                  border-radius: 100%
+                  width: rem(20)
+                  height: rem(20)
+                  text-align: center
+
+                  i::before
+                    content: '?'
+                    font-size: rem(14)
+                    font-weight: 800
+                    font-style: normal
+                    color: $hex-accent
+
+                  span
+                    +screen-reader-only
 
       .staff
         display: flex

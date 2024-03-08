@@ -160,6 +160,10 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
       });
   };
 
+  const customRatingHandler = () => {
+    alert('한국에 정식 발매된 타이틀이 아닙니다. 해당 심의등급은 제제없 자체설정 심의등급입니다.');
+  };
+
   const relation = async () => {
     if (amusementData) {
       if (amusementData.attributes.relation1) {
@@ -620,6 +624,14 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                     <>
                       <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
                     </>
+                  )}
+                  {amusementData.attributes.ratingCustom && (
+                    <div className={styles.custom}>
+                      <button type="button" onClick={customRatingHandler}>
+                        <i />
+                        <span>제제없 자체설정 심의등급 안내</span>
+                      </button>
+                    </div>
                   )}
                 </dd>
               </div>

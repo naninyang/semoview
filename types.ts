@@ -101,6 +101,7 @@ export interface JejeupPermalinkData {
     originalAuthor: string;
     originTitle: string;
     rating: string;
+    ratingCustom: string;
     country: string;
     category: string;
     genre: string;
@@ -125,6 +126,7 @@ export interface JejeupPermalinkData {
     originalAuthor: string;
     originTitle: string;
     rating: string;
+    ratingCustom: string;
     country: string;
     category: string;
     genre: string;
@@ -152,6 +154,7 @@ export interface AmusementData {
   originalAuthor: string;
   originTitle: string;
   rating: string;
+  ratingCustom: string;
   country: string;
   category: string;
   genre: string;
@@ -178,6 +181,7 @@ export interface AmusementPermalinkData {
     originalAuthor: string;
     originTitle: string;
     rating: string;
+    ratingCustom: string;
     country: string;
     category: string;
     genre: string;
