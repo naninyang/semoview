@@ -218,10 +218,33 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
     setIsJejeupsLoading(true);
     setIsJejeupsError(null);
     try {
-      const response =
-        amusementData && (await fetch(`/api/jejeuAmusement?page=${currentPage}&amusementId=${amusementData.id}`));
-      const newData = response && (await response.json());
-      setData(newData);
+      const renewResponse =
+        amusementData && (await fetch(`/api/renewAmusement?page=${currentPage}&amusementId=${amusementData.id}`));
+      const renewData = renewResponse && (await renewResponse.json());
+      const renewValue = renewData.renew;
+      const cachedData = amusementData && localStorage.getItem(`amusementData${currentPage}${amusementData.id}`);
+      let dataToUse;
+
+      if (cachedData) {
+        const parsedData = JSON.parse(cachedData);
+        if (parsedData.jejeups.length > 0 && parsedData.jejeups[0].createdAt) {
+          if (parsedData.jejeups[0].createdAt === renewValue) {
+            dataToUse = parsedData;
+          }
+        }
+      }
+
+      if (!dataToUse && amusementData) {
+        const response = await fetch(`/api/jejeuAmusement?page=${currentPage}&amusementId=${amusementData.id}`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const newData = await response.json();
+        localStorage.setItem(`amusementData${currentPage}${amusementData.id}`, JSON.stringify(newData));
+        dataToUse = newData;
+      }
+
+      setData(dataToUse);
     } catch (err) {
       if (err instanceof Error) {
         setIsJejeupsError(err.message);

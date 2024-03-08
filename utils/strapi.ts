@@ -146,6 +146,22 @@ export async function getCategoryData(page?: number, pageSize?: number, category
   }
 }
 
+export async function getRenewAmusement(page?: number, pageSize?: number, amusementId?: string) {
+  const response = await fetch(
+    `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[title][$eq]=${amusementId}`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
+      },
+    },
+  );
+  const jejeupAmusementResponse = await response.json();
+  const jejeupAmusementData = jejeupAmusementResponse.data;
+  const jejeupAmusementRenew = jejeupAmusementData;
+  return { renew: jejeupAmusementRenew };
+}
+
 export async function getJejeupAmusementData(page?: number, pageSize?: number, amusementId?: string) {
   const response = await fetch(
     `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[title][$eq]=${amusementId}`,
