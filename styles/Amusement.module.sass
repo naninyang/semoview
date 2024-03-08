@@ -130,7 +130,29 @@
         dt
           +screen-reader-only
 
+      .function
+        display: flex
+        gap: rem(17)
+
+        button
+          display: flex
+          flex-direction: column
+          justify-content: center
+          align-items: center
+          gap: rem(3)
+          background-color: transparent
+
+          i
+            display: block
+            width: rem(39)
+            height: rem(39)
+
+          span
+            font-size: rem(14)
+            color: $hex-light
+
       .title
+        +col
         font-size: rem(14)
 
       .summary

@@ -43,17 +43,32 @@ const NetflixOriginal = styled.i({
 
 const TvingOriginal = styled.i({
   width: rem(63),
-  background: `url(${vectors.ott.tving}) no-repeat 50% 50%/contain`,
+  background: `url(${vectors.ott.tvingOrigin2}) no-repeat 50% 50%/contain`,
+});
+
+const TvingOnly = styled.i({
+  width: rem(70),
+  background: `url(${vectors.ott.tvingOnly2}) no-repeat 50% 50%/contain`,
 });
 
 const WatchaOriginal = styled.i({
   width: rem(55),
-  background: `url(${vectors.ott.watcha}) no-repeat 50% 50%/contain`,
+  background: `url(${vectors.ott.watchaOrigin2}) no-repeat 50% 50%/contain`,
+});
+
+const WatchaOnly = styled.i({
+  width: rem(70),
+  background: `url(${vectors.ott.watchaOnly2}) no-repeat 50% 50%/contain`,
 });
 
 const WavveOriginal = styled.i({
   width: rem(72),
-  background: `url(${vectors.ott.wavve}) no-repeat 50% 50%/contain`,
+  background: `url(${vectors.ott.wavveOrigin2}) no-repeat 50% 50%/contain`,
+});
+
+const WavveOnly = styled.i({
+  width: rem(50),
+  background: `url(${vectors.ott.wavveOnly2}) no-repeat 50% 50%/contain`,
 });
 
 const RatingFilmAll = styled.i({
@@ -266,11 +281,6 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                 <div className={styles['title-info']}>
                   <dl className={styles.summary}>
                     <dt>
-                      {jejeupData.amusementData.ott === 'wavveOnly' && (
-                        <cite>
-                          <WavveOriginal /> 웨이브 독점 스트리밍
-                        </cite>
-                      )}
                       {jejeupData.amusementData.category !== 'ott' &&
                         jejeupData.amusementData.category !== 'ottFilm' && (
                           <em>{CategoryName(jejeupData.amusementData.category)}</em>
@@ -280,42 +290,42 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                       )}
                       {jejeupData.amusementData.ott === 'amazonOriginal' && (
                         <cite>
-                          <AmazonOriginal /> 아마존 오리지널
+                          <AmazonOriginal /> Amazon Prime Video
                         </cite>
                       )}
                       {jejeupData.amusementData.ott === 'appleOriginal' && (
                         <cite>
-                          <AppleOriginal /> 애플 티비+ 오리지널
+                          <AppleOriginal /> An Apple Original
                         </cite>
                       )}
                       {jejeupData.amusementData.ott === 'appleFilm' && (
                         <cite>
-                          <AppleOriginal /> 애플 티비+ 오리지널 영화
+                          <AppleOriginal /> An Apple Original Film
                         </cite>
                       )}
                       {jejeupData.amusementData.ott === 'disneyOriginal' && (
                         <cite>
-                          <DisneyOriginal /> 디즈니+ 오리지널
+                          <DisneyOriginal /> Disney+ Original
                         </cite>
                       )}
                       {jejeupData.amusementData.ott === 'netflixOriginal' && (
                         <cite>
-                          <NetflixOriginal /> 넷플릭스 오리지널
+                          <NetflixOriginal /> NETFLIX Original
                         </cite>
                       )}
                       {jejeupData.amusementData.ott === 'netflixFilm' && (
                         <cite>
-                          <NetflixOriginal /> 넷플릭스 오리지널 영화
+                          <NetflixOriginal /> NETFLIX Original Film
                         </cite>
                       )}
                       {jejeupData.amusementData.ott === 'netflixAnime' && (
                         <cite>
-                          <NetflixOriginal /> 넷플릭스 오리지널 애니메이션
+                          <NetflixOriginal /> NETFLIX Original Animation
                         </cite>
                       )}
                       {jejeupData.amusementData.ott === 'netflixAnimeFilm' && (
                         <cite>
-                          <NetflixOriginal /> 넷플릭스 오리지널 애니메이션 영화
+                          <NetflixOriginal /> NETFLIX Original Animation Film
                         </cite>
                       )}
                       {jejeupData.amusementData.ott === 'tvingOriginal' && (
@@ -323,14 +333,29 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                           <TvingOriginal /> 티빙 오리지널
                         </cite>
                       )}
+                      {jejeupData.amusementData.ott === 'tvingOnly' && (
+                        <cite>
+                          <TvingOnly /> 오직 티빙에서
+                        </cite>
+                      )}
                       {jejeupData.amusementData.ott === 'watchaOriginal' && (
                         <cite>
                           <WatchaOriginal /> 왓챠 오리지널
                         </cite>
                       )}
+                      {jejeupData.amusementData.ott === 'watchaExclusive' && (
+                        <cite>
+                          <WatchaOnly /> 오직 왓챠에서
+                        </cite>
+                      )}
                       {jejeupData.amusementData.ott === 'wavveOriginal' && (
                         <cite>
                           <WavveOriginal /> 웨이브 오리지널
+                        </cite>
+                      )}
+                      {jejeupData.amusementData.ott === 'wavveOnly' && (
+                        <cite>
+                          <WavveOnly /> 오직 웨이브에서
                         </cite>
                       )}
                       {(jejeupData.amusementData.category === 'drama' ||

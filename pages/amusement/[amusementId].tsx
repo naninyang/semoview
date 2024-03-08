@@ -22,6 +22,10 @@ const BackButton = styled.i({
   background: `url(${vectors.backward}) no-repeat 50% 50%/contain`,
 });
 
+const ClipboardIcon = styled.i({
+  background: `url(${vectors.share2}) no-repeat 50% 50%/contain`,
+});
+
 const AmazonOriginal = styled.i({
   width: rem(52),
   background: `url(${vectors.ott.amazon2}) no-repeat 50% 50%/contain`,
@@ -142,6 +146,18 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
         else router.push(`/amusement?category=${amusementData.attributes.category}`);
       }
     }
+  };
+
+  const copyToClipboard = () => {
+    const url = window.location.href;
+    navigator.clipboard
+      .writeText(url)
+      .then(() => {
+        alert('URL이 클립보드에 복사되었습니다!');
+      })
+      .catch((err) => {
+        console.error('URL 복사에 실패했습니다:', err);
+      });
   };
 
   const relation = async () => {
@@ -386,114 +402,121 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
               </div>
             )}
           </dl>
+          <div className={styles.function}>
+            <dl className={styles.summary}>
+              {amusementData.attributes.ott !== null && (
+                <div className={styles.platform}>
+                  <dt>플랫폼</dt>
+                  <dd>
+                    {amusementData.attributes.ott === 'amazonOriginal' && (
+                      <>
+                        <AmazonOriginal /> Amazon Prime Video
+                      </>
+                    )}
+                    {amusementData.attributes.ott === 'appleOriginal' && (
+                      <>
+                        <AppleOriginal /> An Apple Original
+                      </>
+                    )}
+                    {amusementData.attributes.ott === 'appleFilm' && (
+                      <>
+                        <AppleOriginal /> An Apple Original Film
+                      </>
+                    )}
+                    {amusementData.attributes.ott === 'disneyOriginal' && (
+                      <>
+                        <DisneyOriginal /> Disney Plus Original
+                      </>
+                    )}
+                    {amusementData.attributes.ott === 'netflixOriginal' && (
+                      <>
+                        <NetflixOriginal /> NETFLIX Original
+                      </>
+                    )}
+                    {amusementData.attributes.ott === 'netflixFilm' && (
+                      <>
+                        <NetflixOriginal /> NETFLIX Original Film
+                      </>
+                    )}
+                    {amusementData.attributes.ott === 'netflixAnime' && (
+                      <>
+                        <NetflixOriginal /> NETFLIX Original Animation
+                      </>
+                    )}
+                    {amusementData.attributes.ott === 'netflixAnimeFilm' && (
+                      <>
+                        <NetflixOriginal /> NETFLIX Original Animation Film
+                      </>
+                    )}
+                    {amusementData.attributes.ott === 'tvingOriginal' && (
+                      <>
+                        <TvingOriginal /> 티빙 오리지널
+                      </>
+                    )}
+                    {amusementData.attributes.ott === 'tvingOnly' && (
+                      <>
+                        <TvingOnly /> 오직 티빙에서
+                      </>
+                    )}
+                    {amusementData.attributes.ott === 'watchaOriginal' && (
+                      <>
+                        <WatchaOriginal /> 왓챠 오리지널
+                      </>
+                    )}
+                    {amusementData.attributes.ott === 'watchaExclusive' && (
+                      <>
+                        <WatchaOnly /> 오직 왓챠에서
+                      </>
+                    )}
+                    {amusementData.attributes.ott === 'wavveOriginal' && (
+                      <>
+                        <WavveOriginal /> 웨이브 오리지널
+                      </>
+                    )}
+                    {amusementData.attributes.ott === 'wavveOnly' && (
+                      <>
+                        <WavveOnly /> 오직 웨이브에서
+                      </>
+                    )}
+                  </dd>
+                </div>
+              )}
+              {amusementData.attributes.ott !== null && amusementData.attributes.ottAddr !== null && (
+                <div className={styles.link}>
+                  <dt>OTT에서 보기</dt>
+                  <dd>
+                    <Anchor href={amusementData.attributes.ottAddr}>
+                      {amusementData.attributes.ott === 'amazonOriginal' && 'Amazon Prime Video'}
+                      {(amusementData.attributes.ott === 'appleOriginal' ||
+                        amusementData.attributes.ott === 'appleFilm') &&
+                        'Apple TV+'}
+                      {amusementData.attributes.ott === 'disneyOriginal' && 'Disney+'}
+                      {(amusementData.attributes.ott === 'netflixOriginal' ||
+                        amusementData.attributes.ott === 'netflixFilm' ||
+                        amusementData.attributes.ott === 'netflixAnime' ||
+                        amusementData.attributes.ott === 'netflixAnimeFilm') &&
+                        'NETFLIX'}
+                      {(amusementData.attributes.ott === 'tvingOriginal' ||
+                        amusementData.attributes.ott === 'tvingOnly') &&
+                        'TVING'}
+                      {(amusementData.attributes.ott === 'watchaOriginal' ||
+                        amusementData.attributes.ott === 'watchaExclusive') &&
+                        'WATCHA'}
+                      {(amusementData.attributes.ott === 'wavveOriginal' ||
+                        amusementData.attributes.ott === 'wavveOnly') &&
+                        'Wavve'}
+                      에서 시청하기
+                    </Anchor>
+                  </dd>
+                </div>
+              )}
+              <RelationSelect />
+            </dl>
+            <button onClick={copyToClipboard}>
+              <ClipboardIcon /> <span>URL 복사</span>
+            </button>
+          </div>
           <dl className={styles.summary}>
-            {amusementData.attributes.ott !== null && (
-              <div className={styles.platform}>
-                <dt>플랫폼</dt>
-                <dd>
-                  {amusementData.attributes.ott === 'amazonOriginal' && (
-                    <>
-                      <AmazonOriginal /> Amazon Prime Video
-                    </>
-                  )}
-                  {amusementData.attributes.ott === 'appleOriginal' && (
-                    <>
-                      <AppleOriginal /> An Apple Original
-                    </>
-                  )}
-                  {amusementData.attributes.ott === 'appleFilm' && (
-                    <>
-                      <AppleOriginal /> An Apple Original Film
-                    </>
-                  )}
-                  {amusementData.attributes.ott === 'disneyOriginal' && (
-                    <>
-                      <DisneyOriginal /> Disney Plus Original
-                    </>
-                  )}
-                  {amusementData.attributes.ott === 'netflixOriginal' && (
-                    <>
-                      <NetflixOriginal /> NETFLIX Original
-                    </>
-                  )}
-                  {amusementData.attributes.ott === 'netflixFilm' && (
-                    <>
-                      <NetflixOriginal /> NETFLIX Original Film
-                    </>
-                  )}
-                  {amusementData.attributes.ott === 'netflixAnime' && (
-                    <>
-                      <NetflixOriginal /> NETFLIX Original Animation
-                    </>
-                  )}
-                  {amusementData.attributes.ott === 'netflixAnimeFilm' && (
-                    <>
-                      <NetflixOriginal /> NETFLIX Original Animation Film
-                    </>
-                  )}
-                  {amusementData.attributes.ott === 'tvingOriginal' && (
-                    <>
-                      <TvingOriginal /> 티빙 오리지널
-                    </>
-                  )}
-                  {amusementData.attributes.ott === 'tvingOnly' && (
-                    <>
-                      <TvingOnly /> 오직 티빙에서
-                    </>
-                  )}
-                  {amusementData.attributes.ott === 'watchaOriginal' && (
-                    <>
-                      <WatchaOriginal /> 왓챠 오리지널
-                    </>
-                  )}
-                  {amusementData.attributes.ott === 'watchaExclusive' && (
-                    <>
-                      <WatchaOnly /> 오직 왓챠에서
-                    </>
-                  )}
-                  {amusementData.attributes.ott === 'wavveOriginal' && (
-                    <>
-                      <WavveOriginal /> 웨이브 오리지널
-                    </>
-                  )}
-                  {amusementData.attributes.ott === 'wavveOnly' && (
-                    <>
-                      <WavveOnly /> 오직 웨이브에서
-                    </>
-                  )}
-                </dd>
-              </div>
-            )}
-            {amusementData.attributes.ott !== null && amusementData.attributes.ottAddr !== null && (
-              <div className={styles.link}>
-                <dt>OTT에서 보기</dt>
-                <dd>
-                  <Anchor href={amusementData.attributes.ottAddr}>
-                    {amusementData.attributes.ott === 'amazonOriginal' && 'Amazon Prime Video'}
-                    {(amusementData.attributes.ott === 'appleOriginal' ||
-                      amusementData.attributes.ott === 'appleFilm') &&
-                      'Apple TV+'}
-                    {amusementData.attributes.ott === 'disneyOriginal' && 'Disney+'}
-                    {(amusementData.attributes.ott === 'netflixOriginal' ||
-                      amusementData.attributes.ott === 'netflixFilm' ||
-                      amusementData.attributes.ott === 'netflixAnime' ||
-                      amusementData.attributes.ott === 'netflixAnimeFilm') &&
-                      'NETFLIX'}
-                    {(amusementData.attributes.ott === 'tvingOriginal' ||
-                      amusementData.attributes.ott === 'tvingOnly') &&
-                      'TVING'}
-                    {(amusementData.attributes.ott === 'watchaOriginal' ||
-                      amusementData.attributes.ott === 'watchaExclusive') &&
-                      'WATCHA'}
-                    {(amusementData.attributes.ott === 'wavveOriginal' ||
-                      amusementData.attributes.ott === 'wavveOnly') &&
-                      'Wavve'}
-                    에서 시청하기
-                  </Anchor>
-                </dd>
-              </div>
-            )}
-            <RelationSelect />
             <div className={styles.item}>
               {amusementData.attributes.category !== 'ott' && amusementData.attributes.category !== 'ottFilm' && (
                 <div className={styles.category}>
