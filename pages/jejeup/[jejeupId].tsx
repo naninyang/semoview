@@ -109,20 +109,11 @@ const ClipboardIcon = styled.i({
 
 export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermalinkData | null }) {
   const router = useRouter();
-  useEffect(() => {
-    const handleRouteChange = (url: string) => {
-      sessionStorage.setItem('location', url);
-    };
-    router.events.on('routeChangeComplete', handleRouteChange);
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
-    };
-  }, [router]);
 
   const previousPageHandler = () => {
     const previousPage = sessionStorage.getItem('location');
     if (previousPage) {
-      router.back();
+      router.push(`${previousPage}`);
     } else {
       router.push('/');
     }

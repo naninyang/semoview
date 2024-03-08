@@ -87,11 +87,7 @@ function Categories() {
   const currentPage = Number(router.query.page) || 1;
 
   useEffect(() => {
-    localStorage.removeItem('currentPage');
-  }, []);
-
-  useEffect(() => {
-    sessionStorage.setItem('location', router.asPath);
+    sessionStorage.setItem('category', router.asPath);
   }, [router.asPath]);
 
   const fetchData = async () => {

@@ -86,7 +86,7 @@ function Amusement() {
   const currentPage = Number(router.query.page) || 1;
 
   useEffect(() => {
-    sessionStorage.setItem('location', router.asPath);
+    sessionStorage.setItem('amuement', router.asPath);
   }, [router.asPath]);
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {

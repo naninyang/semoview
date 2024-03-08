@@ -137,9 +137,9 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
   }, [router]);
 
   const previousPageHandler = () => {
-    const previousPage = sessionStorage.getItem('location');
+    const previousPage = sessionStorage.getItem('amusement');
     if (previousPage) {
-      router.back();
+      router.push(`${previousPage}`);
     } else {
       if (amusementData) {
         if (amusementData.attributes.category === 'ottFilm') router.push('/amusement?category=ott');
