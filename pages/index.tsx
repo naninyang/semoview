@@ -253,9 +253,7 @@ function Home() {
                                   </div>
                                   {jejeup.worst && (
                                     <div className={styles.worst}>
-                                      <button type="button" className="number">
-                                        Worst
-                                      </button>
+                                      <strong className="number">Worst</strong>
                                     </div>
                                   )}
                                 </div>
