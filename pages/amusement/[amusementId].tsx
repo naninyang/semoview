@@ -425,7 +425,7 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                     )}
                     {amusementData.attributes.ott === 'disneyOriginal' && (
                       <>
-                        <DisneyOriginal /> Disney Plus Original
+                        <DisneyOriginal /> Disney+ Original
                       </>
                     )}
                     {amusementData.attributes.ott === 'netflixOriginal' && (

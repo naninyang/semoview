@@ -132,23 +132,26 @@
 
       .function
         display: flex
+        align-items: flex-end
         gap: rem(17)
 
-        button
+        > button
           display: flex
           flex-direction: column
           justify-content: center
           align-items: center
           gap: rem(3)
           background-color: transparent
+          margin-bottom: rem(7)
 
           i
             display: block
-            width: rem(39)
-            height: rem(39)
+            width: rem(57)
+            height: rem(57)
 
           span
             font-size: rem(14)
+            font-weight: 800
             color: $hex-light
 
       .title
@@ -194,6 +197,7 @@
 
           a, select, button
             background-color: $hex-white
+            height: rem(35)
             border: 0
             border-radius: rem(3)
             padding: rem(5) rem(7)

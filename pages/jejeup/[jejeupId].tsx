@@ -275,25 +275,6 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
               <button onClick={copyToClipboard}>
                 <ClipboardIcon /> <span>URL 복사</span>
               </button>
-              <Anchor href={jejeupData.amusementData.ottAddr}>
-                {jejeupData.amusementData.ott === 'amazonOriginal' && 'Amazon Prime Video'}
-                {(jejeupData.amusementData.ott === 'appleOriginal' || jejeupData.amusementData.ott === 'appleFilm') &&
-                  'Apple TV+'}
-                {jejeupData.amusementData.ott === 'disneyOriginal' && 'Disney+'}
-                {(jejeupData.amusementData.ott === 'netflixOriginal' ||
-                  jejeupData.amusementData.ott === 'netflixFilm' ||
-                  jejeupData.amusementData.ott === 'netflixAnime' ||
-                  jejeupData.amusementData.ott === 'netflixAnimeFilm') &&
-                  'NETFLIX'}
-                {(jejeupData.amusementData.ott === 'tvingOriginal' || jejeupData.amusementData.ott === 'tvingOnly') &&
-                  'TVING'}
-                {(jejeupData.amusementData.ott === 'watchaOriginal' ||
-                  jejeupData.amusementData.ott === 'watchaExclusive') &&
-                  'WATCHA'}
-                {(jejeupData.amusementData.ott === 'wavveOriginal' || jejeupData.amusementData.ott === 'wavveOnly') &&
-                  'Wavve'}
-                에서 시청하기
-              </Anchor>
             </div>
             <div className={styles['title-list']}>
               {jejeupData.attributes.title && (
@@ -455,6 +436,36 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                           <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
                         </>
                       )}
+                      {jejeupData.amusementData.ottAddr && (
+                        <Anchor href={jejeupData.amusementData.ottAddr}>
+                          {jejeupData.amusementData.ott === 'amazonOriginal' && 'Amazon Prime Video'}
+                          {(jejeupData.amusementData.ott === 'appleOriginal' ||
+                            jejeupData.amusementData.ott === 'appleFilm') &&
+                            'Apple TV+'}
+                          {jejeupData.amusementData.ott === 'disneyOriginal' && 'Disney+'}
+                          {(jejeupData.amusementData.ott === 'netflixOriginal' ||
+                            jejeupData.amusementData.ott === 'netflixFilm' ||
+                            jejeupData.amusementData.ott === 'netflixAnime' ||
+                            jejeupData.amusementData.ott === 'netflixAnimeFilm') &&
+                            'NETFLIX'}
+                          {(jejeupData.amusementData.ott === 'tvingOriginal' ||
+                            jejeupData.amusementData.ott === 'tvingOnly') &&
+                            'TVING'}
+                          {(jejeupData.amusementData.ott === 'watchaOriginal' ||
+                            jejeupData.amusementData.ott === 'watchaExclusive') &&
+                            'WATCHA'}
+                          {(jejeupData.amusementData.ott === 'wavveOriginal' ||
+                            jejeupData.amusementData.ott === 'wavveOnly') &&
+                            'Wavve'}
+                          에서 시청하기
+                        </Anchor>
+                      )}
+                      {/* {jejeupData.amusementData.ratingCustom && (
+                        <button type="button">
+                          <i />
+                          <span>제제없 자체설정 심의등급 안내</span>
+                        </button>
+                      )} */}
                     </dt>
                     <dd>
                       <strong>
@@ -669,6 +680,30 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                         <>
                           <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
                         </>
+                      )}
+                      {jejeupData.amusementData2.ottAddr && (
+                        <Anchor href={jejeupData.amusementData2.ottAddr}>
+                          {jejeupData.amusementData2.ott === 'amazonOriginal' && 'Amazon Prime Video'}
+                          {(jejeupData.amusementData2.ott === 'appleOriginal' ||
+                            jejeupData.amusementData2.ott === 'appleFilm') &&
+                            'Apple TV+'}
+                          {jejeupData.amusementData2.ott === 'disneyOriginal' && 'Disney+'}
+                          {(jejeupData.amusementData2.ott === 'netflixOriginal' ||
+                            jejeupData.amusementData2.ott === 'netflixFilm' ||
+                            jejeupData.amusementData2.ott === 'netflixAnime' ||
+                            jejeupData.amusementData2.ott === 'netflixAnimeFilm') &&
+                            'NETFLIX'}
+                          {(jejeupData.amusementData2.ott === 'tvingOriginal' ||
+                            jejeupData.amusementData2.ott === 'tvingOnly') &&
+                            'TVING'}
+                          {(jejeupData.amusementData2.ott === 'watchaOriginal' ||
+                            jejeupData.amusementData2.ott === 'watchaExclusive') &&
+                            'WATCHA'}
+                          {(jejeupData.amusementData2.ott === 'wavveOriginal' ||
+                            jejeupData.amusementData2.ott === 'wavveOnly') &&
+                            'Wavve'}
+                          에서 시청하기
+                        </Anchor>
                       )}
                     </dt>
                     <dd>

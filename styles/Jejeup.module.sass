@@ -130,8 +130,6 @@
       gap: rem(7)
 
       dt
-        height: rem(24)
-        white-space: nowrap
         line-height: rem(24)
 
         cite
@@ -174,6 +172,7 @@
           display: inline-flex
           width: rem(24)
           height: rem(24)
+          margin-right: rem(7)
           margin-left: rem(3)
           padding: rem(6) 0 rem(10)
           font-size: rem(12)
@@ -201,6 +200,19 @@
 
           &.rating + span
             +screen-reader-only
+
+        a
+          display: inline-flex
+          height: rem(24)
+          border: 2px solid $hex-black
+          border-radius: rem(3)
+          padding: rem(3) rem(5)
+          font-size: rem(14)
+          font-weight: 700
+          line-height: 1
+          font-style: normal
+          color: $hex-black
+          vertical-align: top
 
       dd
         padding-top: rem(3)
