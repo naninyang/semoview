@@ -698,7 +698,7 @@ function Categories() {
                       <div className={styles.thumbnail}>
                         <Image src={amusement.posterDefault} width="460" height="215" alt="" unoptimized />
                         <dl>
-                          <div>
+                          <div className={styles.game}>
                             <dt>심의등급</dt>
                             <dd>
                               {amusement.category === 'game' && amusement.rating === 'all' && (

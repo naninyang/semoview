@@ -204,50 +204,52 @@ function Amusement() {
                         unoptimized
                       />
                       <dl>
-                        <div className={styles.platform}>
-                          <dt>플랫폼</dt>
-                          <dd>
-                            {amusement.ott === 'amazonOriginal' && (
-                              <>
-                                <AmazonIcon /> <span>Amazon Prime Video</span>
-                              </>
-                            )}
-                            {(amusement.ott === 'appleOriginal' || amusement.ott === 'appleFilm') && (
-                              <>
-                                <AppleIcon /> <span>An Apple Original</span>
-                              </>
-                            )}
-                            {amusement.ott === 'disneyOriginal' && (
-                              <>
-                                <DisneyIcon /> <span>Disney Plus Original</span>
-                              </>
-                            )}
-                            {(amusement.ott === 'netflixOriginal' ||
-                              amusement.ott === 'netflixFilm' ||
-                              amusement.ott === 'netflixAnime' ||
-                              amusement.ott === 'netflixAnimeFilm') && (
-                              <>
-                                <NetflixIcon /> <span>NETFLIX Original</span>
-                              </>
-                            )}
-                            {(amusement.ott === 'tvingOriginal' || amusement.ott === 'tvingOnly') && (
-                              <>
-                                <TvingIcon /> <span>티빙 오리지널</span>
-                              </>
-                            )}
-                            {(amusement.ott === 'watchaOriginal' || amusement.ott === 'watchaExclusive') && (
-                              <>
-                                <WatchaIcon /> <span>왓챠 오리지널</span>
-                              </>
-                            )}
-                            {(amusement.ott === 'wavveOriginal' || amusement.ott === 'wavveOnly') && (
-                              <>
-                                <WavveIcon /> <span>웨이브 오리지널</span>
-                              </>
-                            )}
-                          </dd>
-                        </div>
-                        <div>
+                        {amusement.ott !== null && (
+                          <div className={styles.platform}>
+                            <dt>플랫폼</dt>
+                            <dd>
+                              {amusement.ott === 'amazonOriginal' && (
+                                <>
+                                  <AmazonIcon /> <span>Amazon Prime Video</span>
+                                </>
+                              )}
+                              {(amusement.ott === 'appleOriginal' || amusement.ott === 'appleFilm') && (
+                                <>
+                                  <AppleIcon /> <span>An Apple Original</span>
+                                </>
+                              )}
+                              {amusement.ott === 'disneyOriginal' && (
+                                <>
+                                  <DisneyIcon /> <span>Disney Plus Original</span>
+                                </>
+                              )}
+                              {(amusement.ott === 'netflixOriginal' ||
+                                amusement.ott === 'netflixFilm' ||
+                                amusement.ott === 'netflixAnime' ||
+                                amusement.ott === 'netflixAnimeFilm') && (
+                                <>
+                                  <NetflixIcon /> <span>NETFLIX Original</span>
+                                </>
+                              )}
+                              {(amusement.ott === 'tvingOriginal' || amusement.ott === 'tvingOnly') && (
+                                <>
+                                  <TvingIcon /> <span>티빙 오리지널</span>
+                                </>
+                              )}
+                              {(amusement.ott === 'watchaOriginal' || amusement.ott === 'watchaExclusive') && (
+                                <>
+                                  <WatchaIcon /> <span>왓챠 오리지널</span>
+                                </>
+                              )}
+                              {(amusement.ott === 'wavveOriginal' || amusement.ott === 'wavveOnly') && (
+                                <>
+                                  <WavveIcon /> <span>웨이브 오리지널</span>
+                                </>
+                              )}
+                            </dd>
+                          </div>
+                        )}
+                        <div className={categoryData.data[0].category === 'game' ? styles.game : ''}>
                           <dt>{categoryData.data[0].category === 'game' ? '심의등급' : '시청등급'}</dt>
                           <dd>
                             {(amusement.category === 'drama' ||
