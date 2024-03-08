@@ -246,6 +246,7 @@ export async function getAmusementData(amusement: string) {
     genre: amusementData.attributes.genre,
     anime: amusementData.attributes.anime,
     ott: amusementData.attributes.ott,
+    ottAddr: amusementData.attributes.ottAddr,
     publisher: amusementData.attributes.publisher,
     creator: amusementData.attributes.creator,
     cast: amusementData.attributes.cast,

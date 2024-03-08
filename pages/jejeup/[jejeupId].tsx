@@ -275,6 +275,25 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
               <button onClick={copyToClipboard}>
                 <ClipboardIcon /> <span>URL 복사</span>
               </button>
+              <Anchor href={jejeupData.amusementData.ottAddr}>
+                {jejeupData.amusementData.ott === 'amazonOriginal' && 'Amazon Prime Video'}
+                {(jejeupData.amusementData.ott === 'appleOriginal' || jejeupData.amusementData.ott === 'appleFilm') &&
+                  'Apple TV+'}
+                {jejeupData.amusementData.ott === 'disneyOriginal' && 'Disney+'}
+                {(jejeupData.amusementData.ott === 'netflixOriginal' ||
+                  jejeupData.amusementData.ott === 'netflixFilm' ||
+                  jejeupData.amusementData.ott === 'netflixAnime' ||
+                  jejeupData.amusementData.ott === 'netflixAnimeFilm') &&
+                  'NETFLIX'}
+                {(jejeupData.amusementData.ott === 'tvingOriginal' || jejeupData.amusementData.ott === 'tvingOnly') &&
+                  'TVING'}
+                {(jejeupData.amusementData.ott === 'watchaOriginal' ||
+                  jejeupData.amusementData.ott === 'watchaExclusive') &&
+                  'WATCHA'}
+                {(jejeupData.amusementData.ott === 'wavveOriginal' || jejeupData.amusementData.ott === 'wavveOnly') &&
+                  'Wavve'}
+                에서 시청하기
+              </Anchor>
             </div>
             <div className={styles['title-list']}>
               {jejeupData.attributes.title && (
