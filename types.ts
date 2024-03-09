@@ -47,6 +47,7 @@ export interface JejeupData {
     originalAuthor: string;
     originTitle: string;
     rating: string;
+    ratingCustom: string;
     country: string;
     category: string;
     genre: string;

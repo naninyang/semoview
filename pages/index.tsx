@@ -190,6 +190,12 @@ function Home() {
     fetchCountData();
   }, []);
 
+  const customRatingHandler = () => {
+    alert(
+      '한국 심의가 없거나 한국에 정식 발매된 타이틀이 아닙니다.\n해당 심의등급은 제제없 자체설정 심의등급입니다.\n따라서 제제없 심의등급은 법적구속력이 없습니다.',
+    );
+  };
+
   return (
     <main className={styles.main}>
       <Seo
@@ -445,6 +451,14 @@ function Home() {
                             <>
                               <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
                             </>
+                          )}
+                          {jejeup.amusementData.ratingCustom && (
+                            <div className={styles.custom}>
+                              <button type="button" onClick={customRatingHandler}>
+                                <i />
+                                <span>제제없 자체설정 심의등급 안내</span>
+                              </button>
+                            </div>
                           )}
                         </dt>
                         <dd>

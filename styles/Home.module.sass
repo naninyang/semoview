@@ -280,6 +280,31 @@
             &.rating + span
               +screen-reader-only
 
+          span + .custom
+              margin-left: rem(1)
+
+          .custom
+            display: inline-flex
+            margin-left: rem(5)
+            margin-right: rem(7)
+
+            button
+              background-color: transparent
+              border: rem(2) solid $hex-accent
+              border-radius: 100%
+              width: rem(20)
+              height: rem(20)
+
+              i::before
+                content: '?'
+                font-size: rem(14)
+                font-weight: 800
+                font-style: normal
+                color: $hex-accent
+
+              span
+                +screen-reader-only
+
         dd
           padding-top: rem(3)
 
