@@ -161,7 +161,9 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
   };
 
   const customRatingHandler = () => {
-    alert('한국에 정식 발매된 타이틀이 아닙니다. 해당 심의등급은 제제없 자체설정 심의등급입니다.');
+    alert(
+      '한국 심의가 없거나 한국에 정식 발매된 타이틀이 아닙니다.\n해당 심의등급은 제제없 자체설정 심의등급입니다.\n따라서 제제없 심의등급은 법적구속력이 없습니다.',
+    );
   };
 
   const relation = async () => {
@@ -560,15 +562,12 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                 <dt>제작국가</dt>
                 <dd>{amusementData.attributes.country === '?' ? '알 수 없음' : amusementData.attributes.country}</dd>
               </div>
-              <div className={styles.release}>
-                <dt>제작년도</dt>
-                <dd>
-                  {amusementData.attributes.release === '?'
-                    ? '출시일을 알 수 없거나 출시예정작'
-                    : amusementData.attributes.release}
-                  년
-                </dd>
-              </div>
+              {amusementData.attributes.release !== '?' && (
+                <div className={styles.release}>
+                  <dt>제작년도</dt>
+                  <dd>{amusementData.attributes.release}년</dd>
+                </div>
+              )}
               <div className={styles.rating}>
                 <dt>등급</dt>
                 <dd>
@@ -671,7 +670,7 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
             </div>
             <div>
               <dt>주요 제작자</dt>
-              <dd>{amusementData.attributes.creator}</dd>
+              <dd>{amusementData.attributes.creator === '?' ? '알 수 없음' : amusementData.attributes.creator}</dd>
             </div>
             {amusementData.attributes.category !== 'game' && (
               <div>
