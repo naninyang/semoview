@@ -171,39 +171,103 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
       if (amusementData.attributes.relation1) {
         setIsRelationLoading(true);
         setIsRelationError(null);
+        setIsJejeupsLoading(true);
+        setIsJejeupsError(null);
         try {
           const response = await fetch(
             `${process.env.NEXT_PUBLIC_API_URL}/api/amusement?amusementId=${amusementData.attributes.relation1}`,
           );
           const amusementResponse = (await response.json()) as { data: AmusementPermalinkData };
           setRelation1(amusementResponse.data);
+          const renewResponse =
+            amusementData && (await fetch(`/api/renewAmusement?page=${currentPage}&amusementId=${amusementData.id}`));
+          const renewData = renewResponse && (await renewResponse.json());
+          const renewValue = renewData.renew;
+          const cachedData = amusementData && localStorage.getItem(`amusementData${currentPage}${amusementData.id}`);
+          let dataToUse;
+
+          if (cachedData) {
+            const parsedData = JSON.parse(cachedData);
+            if (parsedData.jejeups.length > 0 && parsedData.jejeups[0].createdAt) {
+              if (parsedData.jejeups[0].createdAt === renewValue) {
+                dataToUse = parsedData;
+              }
+            }
+          }
+
+          if (!dataToUse && amusementData) {
+            const response = await fetch(`/api/jejeuAmusement?page=${currentPage}&amusementId=${amusementData.id}`);
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            const newData = await response.json();
+            localStorage.setItem(`amusementData${currentPage}${amusementData.id}`, JSON.stringify(newData));
+            dataToUse = newData;
+          }
+
+          setData(dataToUse);
         } catch (err) {
           if (err instanceof Error) {
             setIsRelationError(err.message);
+            setIsJejeupsError(err.message);
           } else {
             setIsRelationError('An unknown error occurred');
+            setIsJejeupsError('An unknown error occurred');
           }
         } finally {
           setIsRelationLoading(false);
+          setIsJejeupsLoading(false);
         }
       }
       if (amusementData.attributes.relation2) {
         setIsRelationLoading(true);
         setIsRelationError(null);
+        setIsJejeupsLoading(true);
+        setIsJejeupsError(null);
         try {
           const response = await fetch(
             `${process.env.NEXT_PUBLIC_API_URL}/api/amusement?amusementId=${amusementData.attributes.relation2}`,
           );
           const amusementResponse = (await response.json()) as { data: AmusementPermalinkData };
           setRelation2(amusementResponse.data);
+          const renewResponse =
+            amusementData && (await fetch(`/api/renewAmusement?page=${currentPage}&amusementId=${amusementData.id}`));
+          const renewData = renewResponse && (await renewResponse.json());
+          const renewValue = renewData.renew;
+          const cachedData = amusementData && localStorage.getItem(`amusementData${currentPage}${amusementData.id}`);
+          let dataToUse;
+
+          if (cachedData) {
+            const parsedData = JSON.parse(cachedData);
+            if (parsedData.jejeups.length > 0 && parsedData.jejeups[0].createdAt) {
+              if (parsedData.jejeups[0].createdAt === renewValue) {
+                dataToUse = parsedData;
+              }
+            }
+          }
+
+          if (!dataToUse && amusementData) {
+            const response = await fetch(`/api/jejeuAmusement?page=${currentPage}&amusementId=${amusementData.id}`);
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            const newData = await response.json();
+            localStorage.setItem(`amusementData${currentPage}${amusementData.id}`, JSON.stringify(newData));
+            dataToUse = newData;
+          }
+
+          setData(dataToUse);
         } catch (err) {
           if (err instanceof Error) {
             setIsRelationError(err.message);
+            setIsJejeupsError(err.message);
           } else {
             setIsRelationError('An unknown error occurred');
+            setIsJejeupsError('An unknown error occurred');
           }
         } finally {
           setIsRelationLoading(false);
+          setIsJejeupsLoading(false);
         }
       }
     }
