@@ -168,7 +168,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
 
   const customRatingHandler = () => {
     alert(
-      '한국 심의가 없거나 한국에 정식 발매된 타이틀이 아닙니다.\n해당 심의등급은 제제없 자체설정 심의등급입니다.\n따라서 제제없 심의등급은 법적구속력이 없습니다.',
+      '대한민국에서 시청/심의등급이 없거나 대한민국에 정식 발매된 타이틀이 아닙니다.\n해당 시청/심의등급은 제제없 자체설정 시청/심의등급입니다.\n따라서 제제없 심의등급은 법적구속력이 없습니다.\n\n자세한 내용은 공지사항을 참고하세요.',
     );
   };
 
