@@ -354,6 +354,19 @@
 
     .content
       section
+        &.game
+          a
+            width: calc(100% - rem(12))
+
+            +mq(minSmall)
+              width: calc(50% - rem(12))
+
+            +mq(minMedium)
+              width: calc(25% - rem(12))
+
+            +mq(minExtraLarge)
+              width: calc(16.66666667% - rem(12))
+
         a
           display: flex
           flex-direction: column
@@ -364,9 +377,6 @@
 
           +mq(minSmall)
             width: calc(25% - rem(12))
-
-          +mq(minMedium)
-            width: calc(20% - rem(12))
 
           +mq(minLarge)
             width: calc(16.66666667% - rem(12))
