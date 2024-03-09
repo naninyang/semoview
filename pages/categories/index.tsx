@@ -3,11 +3,12 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 import styled from '@emotion/styled';
-import { AmusementData, JejeupAmusementData } from 'types';
+import { AmusementData, Counts, JejeupAmusementData } from 'types';
 import Seo from '@/components/Seo';
 import Anchor from '@/components/Anchor';
 import { vectors } from '@/components/vectors';
 import { RatingsDrama } from '@/components/RatingsDrama';
+import { formatNumber } from '@/components/FormatNumber';
 import styles from '@/styles/Categories.module.sass';
 
 const AmazonIcon = styled.i({
@@ -144,6 +145,22 @@ function Categories() {
     fetchData();
   }, [currentPage]);
 
+  const [count, setCount] = useState<Counts | null>(null);
+
+  async function fetchCountData() {
+    try {
+      const response = await fetch(`/api/count`);
+      const data = await response.json();
+      setCount(data);
+    } catch (err: any) {
+      console.error(err.message);
+    }
+  }
+
+  useEffect(() => {
+    fetchCountData();
+  }, []);
+
   const data = dramaData && movieData && gameData && animationData && ottData;
 
   return (
@@ -158,6 +175,7 @@ function Categories() {
           <i className="preview" />
           카테고리별 보고싶다? 골라보세요 💁‍♀️
         </span>
+        {count && <em>({formatNumber(count.amusement)}개 타이틀)</em>}
       </h1>
       {isLoading && <div className={styles.loading}>이것저것 불러오는 중</div>}
       {error && (

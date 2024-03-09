@@ -10,10 +10,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       },
     });
     const jejeupData = await jejeupResponse.json();
-
     const jejeupCount = jejeupData.meta.pagination.total;
 
-    res.status(200).send({ jejeup: jejeupCount });
+    const amusementAPI = `${process.env.STRAPI_URL}/api/amusement-jejeups`;
+    const amusementResponse = await fetch(amusementAPI, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
+      },
+    });
+    const amusementData = await amusementResponse.json();
+    const amusementCount = amusementData.meta.pagination.total;
+
+    res.status(200).send({ jejeup: jejeupCount, amusement: amusementCount });
   } else {
     console.log('Unsupported method');
   }

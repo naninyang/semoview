@@ -3,21 +3,18 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 import styled from '@emotion/styled';
-import { JejeupData } from 'types';
+import { Counts, JejeupData } from 'types';
 import Seo from '@/components/Seo';
 import { CategoryName } from '@/components/CategoryName';
 import { AnimeName } from '@/components/AnimeName';
 import { RatingsDrama } from '@/components/RatingsDrama';
 import { OriginalName } from '@/components/OriginalName';
 import { FormatDate } from '@/components/FormatDate';
+import { formatNumber } from '@/components/FormatNumber';
 import { vectors } from '@/components/vectors';
 import { Pagination } from '@/components/Pagination';
 import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Home.module.sass';
-
-interface Counts {
-  jejeup: number;
-}
 
 const AmazonOriginal = styled.i({
   width: rem(52),
@@ -172,10 +169,6 @@ function Home() {
 
   const [count, setCount] = useState<Counts | null>(null);
 
-  function formatNumber(value: number): string {
-    return value.toLocaleString();
-  }
-
   async function fetchCountData() {
     try {
       const response = await fetch(`/api/count`);
@@ -208,7 +201,7 @@ function Home() {
           <i className="preview" />
           클릭하지 않아도 제목과 정보를 알 수 있게 도와드려요 💃
         </span>
-        {count && <em>({formatNumber(count.jejeup)}개 콘텐츠)</em>}
+        {count && <em>({formatNumber(count.jejeup)}개 영상)</em>}
       </h1>
       <div className={styles.list}>
         {isLoading && <div className={styles.loading}>이것저것 불러오는 중</div>}

@@ -174,7 +174,8 @@ function Amusement() {
               {categoryData.data[0].category === 'game' && '게임은 끝날 때까지 끝난 게 아니다!'}
               {categoryData.data[0].category === 'animation' && '애니입니다만, 문제라도?'}
               {(categoryData.data[0].category === 'ott' || categoryData.data[0].category === 'ottFilm') &&
-                '퇴근 후, 이세계 OTT에서만 볼 수 있는 콘텐츠를.'}
+                '퇴근 후, 이세계 OTT에서만 볼 수 있는 콘텐츠를.'}{' '}
+              {categoryData.data.length > 0 && <span>({categoryData.data.length}개 타이틀)</span>}
             </h1>
             <div className={styles.select}>
               <select onChange={handleCategoryChange} defaultValue={selectedCategory}>

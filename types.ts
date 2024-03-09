@@ -248,3 +248,8 @@ export interface NoticePermalinkData {
     createdAt: string;
   };
 }
+
+export interface Counts {
+  jejeup: number;
+  amusement: number;
+}
