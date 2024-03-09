@@ -106,7 +106,7 @@ function Categories() {
       }
       const movieResponseData = await movieResponse.json();
 
-      const gameResponse = await fetch(`/api/category?categoryName=game&page=1&pageSize=7`);
+      const gameResponse = await fetch(`/api/category?categoryName=game&page=1&pageSize=5`);
       if (!gameResponse.ok) {
         throw new Error('Network response was not ok');
       }

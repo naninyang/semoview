@@ -242,6 +242,38 @@
             +screen-reader-only
 
     section
+      &.game
+        a
+          width: calc(50% - rem(12))
+
+          +mq(minSmall)
+            width: calc(50% - rem(12))
+
+          +mq(minMedium)
+            width: calc(33.33% - rem(12))
+
+          +mq(minLarge)
+            width: calc(25% - rem(12))
+
+          +mq(minExtraLarge)
+            width: calc(20% - rem(12))
+
+          +mq(maxSmall)
+            &:nth-of-type(3)
+              display: none
+
+          +mq(maxMedium)
+            &:nth-of-type(4)
+              display: none
+
+          +mq(maxLarge)
+            &:nth-of-type(5)
+              display: none
+
+          +mq(maxExtraSmall)
+            &:nth-of-type(3), &:nth-of-type(4)
+              display: flex
+
       a
         display: flex
         flex-direction: column
