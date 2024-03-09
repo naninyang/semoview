@@ -14,9 +14,7 @@
 - Emotion
 - SASS
 - Google YouTube iframe API
-- Masonry w/ Masonic
 - PWA
-- SWR w/ useSWRInfinite
 - Strapi API
 - Node 18
 - vercel deployment
@@ -49,7 +47,7 @@
 
 ### TO-DO
 
-- 목록을 `SWR` 에서 `getServerSideProps`으로 변경
+- Not yet
 
 ## Supported PWA App. Download
 
@@ -61,9 +59,7 @@ MS Windows, Apple macOS, Android, iOS, iPadOS 등 대부분의 모던 디바이�
 
 ## 광고제안
 
-앞광고 표시한 영상으로 유튜브 주소를 주시면 올려드립니다.
-
-단, 제제없에 올리는 링크 역시 앞광고임이 표시가 되니 이점 유념해 주세요.
+광고용으로 유튜브에 올린 영상 주소를 알려주시면 스폰서 표시를 하고 올려드립니다.
 
 광고제안 역시 트러블슈팅과 마찬가지로 [여기](https://jejeup.dev1stud.io/notices)에서 제안 받습니다. (이슈로 등록하지 마세요)
 

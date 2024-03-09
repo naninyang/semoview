@@ -76,6 +76,7 @@ function ContactForm() {
         </h1>
         <div className={styles.summary}>
           <p>오타, 탈자, 버그 등 발견시 수정 요청해 주세요</p>
+          <p>광고 제안도 받습니다.</p>
           <p>도움을 주시는 모든 분들께 감사의 말씀을 올립니다. 🥰</p>
           <p>
             <span>모든 항목은 필수 입력입니다.</span> 이름과 이메일은 답변 목적으로만 사용됩니다.
