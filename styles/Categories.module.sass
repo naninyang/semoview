@@ -80,6 +80,12 @@
         +mq(minMedium)
           font-size: rem(16)
 
+      h2 a
+        color: $hex-dark
+
+        &:hover, &:focus
+          color: $hex-accent
+
       .select
         display: flex
         gap: rem(7)
@@ -94,7 +100,7 @@
           +mq(maxSmall)
             font-size: rem(14)
 
-      a
+      > a
         font-weight: 800
         color: $hex-dark
 
@@ -105,6 +111,10 @@
           span
             color: $hex-accent
             border-bottom: rem(2) solid $hex-accent
+
+          svg
+            path
+              fill: $hex-accent
 
     section
       display: flex
@@ -232,7 +242,7 @@
       +mq(minMedium)
         gap: rem(27)
 
-      a
+      > a
         display: inline-flex
         align-items: center
 
@@ -240,7 +250,7 @@
           span
             border-bottom: 0
 
-        i
+        svg
           display: inline-block
           width: rem(24)
           height: rem(24)

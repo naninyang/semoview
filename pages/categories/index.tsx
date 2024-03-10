@@ -71,10 +71,6 @@ const RatingGameD19 = styled.i({
   background: `url(${vectors.ratings.game.d19}) no-repeat 50% 50%/contain`,
 });
 
-const More = styled.i({
-  background: `url(${vectors.more}) no-repeat 50% 50%/contain`,
-});
-
 function Categories() {
   const router = useRouter();
   const timestamp = Date.now();
@@ -191,10 +187,17 @@ function Categories() {
           {dramaData && (
             <>
               <div className={styles.headline}>
-                <h2>드라마 리뷰</h2>
+                <h2>
+                  <Anchor href="/amusement?category=drama&page=1">드라마 리뷰</Anchor>
+                </h2>
                 <Anchor href="/amusement?category=drama&page=1">
                   <span>더보기</span>
-                  <More />
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                      fill="black"
+                    />
+                  </svg>
                 </Anchor>
               </div>
               <section>
@@ -294,10 +297,17 @@ function Categories() {
           {movieData && (
             <>
               <div className={styles.headline}>
-                <h2>영화 리뷰</h2>
+                <h2>
+                  <Anchor href="/amusement?category=movie&page=1">영화 리뷰</Anchor>
+                </h2>
                 <Anchor href="/amusement?category=movie&page=1">
                   <span>더보기</span>
-                  <More />
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                      fill="black"
+                    />
+                  </svg>
                 </Anchor>
               </div>
               <section>
@@ -414,10 +424,17 @@ function Categories() {
           {animationData && (
             <>
               <div className={styles.headline}>
-                <h2>애니메이션 리뷰</h2>
+                <h2>
+                  <Anchor href="/amusement?category=animation&page=1">애니메이션 리뷰</Anchor>
+                </h2>
                 <Anchor href="/amusement?category=animation&page=1">
                   <span>더보기</span>
-                  <More />
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                      fill="black"
+                    />
+                  </svg>
                 </Anchor>
               </div>
               <section>
@@ -558,10 +575,17 @@ function Categories() {
           {ottData && (
             <>
               <div className={styles.headline}>
-                <h2>OTT 오리지널 & OTT 온리 콘텐츠 리뷰</h2>
+                <h2>
+                  <Anchor href="/amusement?category=ott&page=1">OTT 오리지널 & OTT 온리 콘텐츠 리뷰</Anchor>
+                </h2>
                 <Anchor href="/amusement?category=ott&page=1">
                   <span>더보기</span>
-                  <More />
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                      fill="black"
+                    />
+                  </svg>
                 </Anchor>
               </div>
               <section>
@@ -699,10 +723,17 @@ function Categories() {
           {gameData && (
             <>
               <div className={styles.headline}>
-                <h2>게임 리뷰 & 게임 실황</h2>
+                <h2>
+                  <Anchor href="/amusement?category=game&page=1">게임 리뷰 & 실황</Anchor>
+                </h2>
                 <Anchor href="/amusement?category=game&page=1">
                   <span>더보기</span>
-                  <More />
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                      fill="black"
+                    />
+                  </svg>
                 </Anchor>
               </div>
               <section className={styles.game}>
