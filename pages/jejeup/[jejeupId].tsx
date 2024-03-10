@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import styled from '@emotion/styled';
 import { JejeupPermalinkData } from 'types';
+import { formatDate } from '@/utils/strapi';
 import Seo, { originTitle } from '@/components/Seo';
 import YouTubeController from '@/components/YouTubeController';
 import Anchor from '@/components/Anchor';
@@ -15,7 +16,6 @@ import { FormatDate } from '@/components/FormatDate';
 import { OriginalName } from '@/components/OriginalName';
 import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Jejeup.module.sass';
-import { formatDate } from '@/utils/strapi';
 
 const BackButton = styled.i({
   display: 'block',

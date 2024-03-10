@@ -126,16 +126,6 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
     sessionStorage.setItem('location', router.asPath);
   }, [router.asPath]);
 
-  useEffect(() => {
-    const handleRouteChange = (url: string) => {
-      sessionStorage.setItem('location', url);
-    };
-    router.events.on('routeChangeComplete', handleRouteChange);
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
-    };
-  }, [router]);
-
   const previousPageHandler = () => {
     const previousPage = sessionStorage.getItem('amusement');
     if (previousPage) {
