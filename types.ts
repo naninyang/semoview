@@ -60,6 +60,8 @@ export interface JejeupData {
     synopsys: string;
     posterDefault: string;
     posterOther: string;
+    relation1: string;
+    relation2: string;
   };
 }
 
@@ -74,6 +76,9 @@ export interface JejeupPermalinkData {
     title2: string;
     title3?: string;
     worst: boolean;
+    relation1: string;
+    relation2: string;
+    createdAt: string;
   };
   jejeupMetaData: {
     error: string;
@@ -115,6 +120,8 @@ export interface JejeupPermalinkData {
     synopsys: string;
     posterDefault: string;
     posterOther: string;
+    relation1: string;
+    relation2: string;
   };
   amusementData2: {
     title: string;
@@ -139,6 +146,8 @@ export interface JejeupPermalinkData {
     cast: string;
     posterDefault: string;
     posterOther: string;
+    relation1: string;
+    relation2: string;
   };
 }
 

@@ -98,6 +98,27 @@
         strong
           color: $hex-accent
 
+        dl
+          display: flex
+
+          &:first-of-type
+            margin-top: rem(12)
+
+          dt
+            white-space: nowrap
+
+            &::after
+              content: ': '
+              padding-right: rem(3)
+
+          dd
+            +col
+
+            a
+              font-weight: 800
+              color: $hex-accent
+              text-decoration: underline
+
     .figcaption
       display: flex
       flex-direction: column

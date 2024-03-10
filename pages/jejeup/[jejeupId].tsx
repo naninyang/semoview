@@ -15,6 +15,7 @@ import { FormatDate } from '@/components/FormatDate';
 import { OriginalName } from '@/components/OriginalName';
 import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Jejeup.module.sass';
+import { formatDate } from '@/utils/strapi';
 
 const BackButton = styled.i({
   display: 'block',
@@ -109,6 +110,57 @@ const ClipboardIcon = styled.i({
 
 export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermalinkData | null }) {
   const router = useRouter();
+  const [relation1, setRelation1] = useState<JejeupPermalinkData | null>(null);
+  const [relation2, setRelation2] = useState<JejeupPermalinkData | null>(null);
+  const [isRelationLoading, setIsRelationLoading] = useState(false);
+  const [isRelationError, setIsRelationError] = useState<null | string>(null);
+
+  const relation = async () => {
+    if (jejeupData) {
+      if (jejeupData.attributes.relation1) {
+        setIsRelationLoading(true);
+        setIsRelationError(null);
+        try {
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/api/jejeups?id=${jejeupData.attributes.relation1}`,
+          );
+          const jejeupResponse = await response.json();
+          setRelation1(jejeupResponse);
+        } catch (err) {
+          if (err instanceof Error) {
+            setIsRelationError(err.message);
+          } else {
+            setIsRelationError('An unknown error occurred');
+          }
+        } finally {
+          setIsRelationLoading(false);
+        }
+      }
+      if (jejeupData.attributes.relation2) {
+        setIsRelationLoading(true);
+        setIsRelationError(null);
+        try {
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/api/jejeups?id=${jejeupData.attributes.relation2}`,
+          );
+          const jejeupResponse = (await response.json()) as { data: JejeupPermalinkData };
+          setRelation2(jejeupResponse.data);
+        } catch (err) {
+          if (err instanceof Error) {
+            setIsRelationError(err.message);
+          } else {
+            setIsRelationError('An unknown error occurred');
+          }
+        } finally {
+          setIsRelationLoading(false);
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    relation();
+  }, [jejeupData]);
 
   const previousPageHandler = () => {
     const previousPage = sessionStorage.getItem('location');
@@ -214,8 +266,32 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
               </div>
               {jejeupData.jejeupMetaData.ogDescription ? (
                 <p>
-                  <em>{FormatDuration(jejeupData.jejeupMetaData.duration)}</em>{' '}
+                  <em>{FormatDuration(jejeupData.jejeupMetaData.duration)}</em>
                   {jejeupData.jejeupMetaData.ogDescription}
+                  {relation1 && !isRelationLoading && !isRelationError && (
+                    <dl>
+                      <dt>관련 영상</dt>
+                      <dd>
+                        <Anchor
+                          href={`/jejeup/${formatDate(relation1.attributes.createdAt)}${jejeupData.attributes.relation1}`}
+                        >
+                          {relation1.attributes.subject}
+                        </Anchor>
+                      </dd>
+                    </dl>
+                  )}
+                  {relation2 && !isRelationLoading && !isRelationError && (
+                    <dl>
+                      <dt>관련 영상</dt>
+                      <dd>
+                        <Anchor
+                          href={`/jejeup/${formatDate(relation2.attributes.createdAt)}${jejeupData.attributes.relation2}`}
+                        >
+                          {relation2.attributes.subject}
+                        </Anchor>
+                      </dd>
+                    </dl>
+                  )}
                 </p>
               ) : (
                 <p>
