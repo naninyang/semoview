@@ -8,6 +8,7 @@ interface PostData {
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
+  site: string;
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -23,6 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         },
         body: JSON.stringify({
           data: {
+            site: 'jejeup',
             subject,
             guestName,
             guestEmail,

@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import Seo, { originTitle } from '@/components/Seo';
-import Anchor from '@/components/Anchor';
 import { vectors } from '@/components/vectors';
 import styles from '@/styles/Notice.module.sass';
 
