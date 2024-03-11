@@ -368,6 +368,11 @@ function Categories() {
                                     <WavveIcon /> <span>웨이브 오리지널</span>
                                   </>
                                 )}
+                                {amusement.ott === 'paramount' && (
+                                  <>
+                                    <ParamountIcon /> <span>Paramount+</span>
+                                  </>
+                                )}
                               </dd>
                             </div>
                           )}
@@ -493,6 +498,11 @@ function Categories() {
                                 {(amusement.ott === 'wavveOriginal' || amusement.ott === 'wavveOnly') && (
                                   <>
                                     <WavveIcon /> <span>웨이브 오리지널</span>
+                                  </>
+                                )}
+                                {amusement.ott === 'paramount' && (
+                                  <>
+                                    <ParamountIcon /> <span>Paramount+</span>
                                   </>
                                 )}
                               </dd>
@@ -648,6 +658,11 @@ function Categories() {
                               {(amusement.ott === 'wavveOriginal' || amusement.ott === 'wavveOnly') && (
                                 <>
                                   <WavveIcon /> <span>웨이브 오리지널</span>
+                                </>
+                              )}
+                              {amusement.ott === 'paramount' && (
+                                <>
+                                  <ParamountIcon /> <span>Paramount+</span>
                                 </>
                               )}
                             </dd>
