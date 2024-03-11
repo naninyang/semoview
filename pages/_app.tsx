@@ -120,9 +120,15 @@ export default function App({ Component, pageProps }: AppProps) {
             font-family: ${fontJP.style.fontFamily}, ${fontTH.style.fontFamily}, ${fontSC.style.fontFamily},
               ${fontTC.style.fontFamily}, ${fontKR.style.fontFamily}, sans-serif;
             font-weight: 400;
+            white-space: break-spaces;
+            word-wrap: break-word;
+            word-break: normal;
           }
           [lang='ja'] {
             font-family: ${fontJP.style.fontFamily}, sans-serif;
+            white-space: break-spaces;
+            word-wrap: break-word;
+            word-break: normal;
           }
           [lang='th'] {
             font-family: ${fontTH.style.fontFamily}, sans-serif;
