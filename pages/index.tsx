@@ -514,9 +514,16 @@ function Home() {
                             <dt>주요 제작자</dt>
                             <dd>{jejeup.amusementData.creator}</dd>
                           </div>
-                          {jejeup.amusementData.category !== 'game' && (
+                          {jejeup.amusementData.cast !== null && (
                             <div>
-                              <dt>주요 출연자</dt>
+                              {jejeup.amusementData.category !== 'animation' &&
+                              jejeup.amusementData.category !== 'ottAnime' &&
+                              jejeup.amusementData.category !== 'ottAnimeFilm' &&
+                              jejeup.amusementData.category !== 'game' ? (
+                                <dt>주요 출연자</dt>
+                              ) : (
+                                <dt>주요 성우</dt>
+                              )}
                               <dd>{jejeup.amusementData.cast}</dd>
                             </div>
                           )}
