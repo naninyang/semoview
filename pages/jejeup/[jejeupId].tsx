@@ -436,6 +436,11 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                           <WavveOnly /> 오직 웨이브에서
                         </cite>
                       )}
+                      {jejeupData.amusementData.ott === 'paramount' && (
+                        <cite>
+                          <Paramount /> Paramaount+
+                        </cite>
+                      )}
                       {(jejeupData.amusementData.category === 'drama' ||
                         jejeupData.amusementData.category === 'ott_drama' ||
                         jejeupData.amusementData.category === 'ott_anime' ||
