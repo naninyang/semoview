@@ -358,10 +358,9 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                         jejeupData.amusementData.category !== 'ott_anime_film' && (
                           <em>{CategoryName(jejeupData.amusementData.category)}</em>
                         )}
-                      {jejeupData.amusementData.category === 'anime' ||
-                        (jejeupData.amusementData.category === 'ott_anime' && (
-                          <em>{AnimeName(jejeupData.amusementData.anime)}</em>
-                        ))}
+                      {jejeupData.amusementData.category === 'anime' && (
+                        <em>{AnimeName(jejeupData.amusementData.anime)}</em>
+                      )}
                       {jejeupData.amusementData.ott === 'amazonOriginal' && (
                         <cite>
                           <AmazonOriginal /> Amazon Prime Video
@@ -568,29 +567,39 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                         )}
                         {jejeupData.amusementData.lang === null && (
                           <span lang="ko">{jejeupData.amusementData.title}</span>
-                        )}{' '}
-                        {jejeupData.amusementData.originalAuthor &&
-                          `('${jejeupData.amusementData.originalAuthor}'의 ${OriginalName(jejeupData.amusementData.original)} '${jejeupData.amusementData.originTitle}' 원작)`}
-                        {(jejeupData.amusementData.titleKorean || jejeupData.amusementData.titleOther) && (
-                          <>
-                            ({jejeupData.amusementData.titleKorean && jejeupData.amusementData.titleKorean}
-                            {jejeupData.amusementData.titleKorean && jejeupData.amusementData.titleOther && ' / '}
-                            <span className="lang">
-                              {jejeupData.amusementData.titleOther && jejeupData.amusementData.titleOther})
-                            </span>
-                          </>
-                        )}{' '}
-                        {jejeupData.amusementData.originalAuthor === null && jejeupData.amusementData.original && (
-                          <span className={styles.origin}>
-                            동명의 {OriginalName(jejeupData.amusementData.original)} 원작
-                          </span>
                         )}
+                        {jejeupData.amusementData.originalAuthor &&
+                          jejeupData.amusementData.original &&
+                          jejeupData.amusementData.originTitle && (
+                            <span>
+                              &apos;{jejeupData.amusementData.originalAuthor}&apos;의{' '}
+                              {OriginalName(jejeupData.amusementData.original)} &apos;
+                              {jejeupData.amusementData.originTitle}&apos; 원작
+                            </span>
+                          )}
+                        {jejeupData.amusementData.original !== null &&
+                          jejeupData.amusementData.originTitle === null &&
+                          jejeupData.amusementData.originalAuthor !== null && (
+                            <span className={styles.origin}>
+                              동명의 {OriginalName(jejeupData.amusementData.original)} 원작
+                            </span>
+                          )}
                         <time>{jejeupData.amusementData.release}</time>
                       </strong>
-                      <em className="lang">{jejeupData.amusementData.etc && jejeupData.amusementData.etc}</em>
+                      {jejeupData.amusementData.etc !== null && (
+                        <em className="lang">{jejeupData.amusementData.etc}</em>
+                      )}
                     </dd>
                   </dl>
                   <dl className={styles.info}>
+                    {jejeupData.amusementData.original !== null &&
+                      jejeupData.amusementData.originTitle === null &&
+                      jejeupData.amusementData.originalAuthor !== null && (
+                        <div>
+                          <dt>원작자</dt>
+                          <dd>{jejeupData.amusementData.originalAuthor}</dd>
+                        </div>
+                      )}
                     <div>
                       <dt>제작국가</dt>
                       <dd>{jejeupData.amusementData.country}</dd>
@@ -627,13 +636,10 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                 <div className={styles['title-info']}>
                   <dl className={styles.summary}>
                     <dt>
-                      {jejeupData.amusementData2.ott === 'wavveOnly' && (
-                        <cite>
-                          <WavveOriginal /> 웨이브 독점 스트리밍
-                        </cite>
-                      )}
-                      {jejeupData.amusementData2.category !== 'ott' &&
-                        jejeupData.amusementData2.category !== 'ottFilm' && (
+                      {jejeupData.amusementData2.category !== 'ott_drama' &&
+                        jejeupData.amusementData2.category !== 'ott_film' &&
+                        jejeupData.amusementData2.category !== 'ott_anime' &&
+                        jejeupData.amusementData2.category !== 'ott_anime_film' && (
                           <em>{CategoryName(jejeupData.amusementData2.category)}</em>
                         )}
                       {jejeupData.amusementData2.category === 'anime' && (
@@ -641,42 +647,42 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                       )}
                       {jejeupData.amusementData2.ott === 'amazonOriginal' && (
                         <cite>
-                          <AmazonOriginal /> 아마존 오리지널
+                          <AmazonOriginal /> Amazon Prime Video
                         </cite>
                       )}
                       {jejeupData.amusementData2.ott === 'appleOriginal' && (
                         <cite>
-                          <AppleOriginal /> 애플 티비+ 오리지널
+                          <AppleOriginal /> An Apple Original
                         </cite>
                       )}
                       {jejeupData.amusementData2.ott === 'appleFilm' && (
                         <cite>
-                          <AppleOriginal /> 애플 티비+ 오리지널 영화
+                          <AppleOriginal /> An Apple Original Film
                         </cite>
                       )}
                       {jejeupData.amusementData2.ott === 'disneyOriginal' && (
                         <cite>
-                          <DisneyOriginal /> 디즈니+ 오리지널
+                          <DisneyOriginal /> Disney+ Original
                         </cite>
                       )}
                       {jejeupData.amusementData2.ott === 'netflixOriginal' && (
                         <cite>
-                          <NetflixOriginal /> 넷플릭스 오리지널
+                          <NetflixOriginal /> NETFLIX Original
                         </cite>
                       )}
                       {jejeupData.amusementData2.ott === 'netflixFilm' && (
                         <cite>
-                          <NetflixOriginal /> 넷플릭스 오리지널 영화
+                          <NetflixOriginal /> NETFLIX Original Film
                         </cite>
                       )}
                       {jejeupData.amusementData2.ott === 'netflixAnime' && (
                         <cite>
-                          <NetflixOriginal /> 넷플릭스 오리지널 애니메이션
+                          <NetflixOriginal /> NETFLIX Original Animation
                         </cite>
                       )}
                       {jejeupData.amusementData2.ott === 'netflixAnimeFilm' && (
                         <cite>
-                          <NetflixOriginal /> 넷플릭스 오리지널 애니메이션 영화
+                          <NetflixOriginal /> NETFLIX Original Animation Film
                         </cite>
                       )}
                       {jejeupData.amusementData2.ott === 'tvingOriginal' && (
@@ -684,9 +690,19 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                           <TvingOriginal /> 티빙 오리지널
                         </cite>
                       )}
+                      {jejeupData.amusementData2.ott === 'tvingOnly' && (
+                        <cite>
+                          <TvingOnly /> 오직 티빙에서
+                        </cite>
+                      )}
                       {jejeupData.amusementData2.ott === 'watchaOriginal' && (
                         <cite>
                           <WatchaOriginal /> 왓챠 오리지널
+                        </cite>
+                      )}
+                      {jejeupData.amusementData2.ott === 'watchaExclusive' && (
+                        <cite>
+                          <WatchaOnly /> 오직 왓챠에서
                         </cite>
                       )}
                       {jejeupData.amusementData2.ott === 'wavveOriginal' && (
@@ -694,8 +710,14 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                           <WavveOriginal /> 웨이브 오리지널
                         </cite>
                       )}
+                      {jejeupData.amusementData2.ott === 'wavveOnly' && (
+                        <cite>
+                          <WavveOnly /> 오직 웨이브에서
+                        </cite>
+                      )}
                       {(jejeupData.amusementData2.category === 'drama' ||
-                        jejeupData.amusementData2.category === 'ott' ||
+                        jejeupData.amusementData2.category === 'ott_drama' ||
+                        jejeupData.amusementData2.category === 'ott_anime' ||
                         jejeupData.amusementData2.anime === 'tva' ||
                         jejeupData.amusementData2.anime === 'ova') &&
                         jejeupData.amusementData2.rating !== 'd19' && (
@@ -712,7 +734,8 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                           </>
                         )}
                       {(jejeupData.amusementData2.category === 'drama' ||
-                        jejeupData.amusementData2.category === 'ott' ||
+                        jejeupData.amusementData2.category === 'ott_drama' ||
+                        jejeupData.amusementData2.category === 'ott_anime' ||
                         jejeupData.amusementData2.anime === 'tva' ||
                         jejeupData.amusementData2.anime === 'ova') &&
                         jejeupData.amusementData2.rating === 'd19' && (
@@ -721,7 +744,8 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                           </i>
                         )}
                       {(jejeupData.amusementData2.category === 'film' ||
-                        jejeupData.amusementData2.category === 'ottFilm' ||
+                        jejeupData.amusementData2.category === 'ott_anime_film' ||
+                        jejeupData.amusementData2.category === 'ott_film' ||
                         jejeupData.amusementData2.anime === 'film') &&
                         jejeupData.amusementData2.rating === 'all' && (
                           <>
@@ -729,7 +753,8 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                           </>
                         )}
                       {(jejeupData.amusementData2.category === 'film' ||
-                        jejeupData.amusementData2.category === 'ottFilm' ||
+                        jejeupData.amusementData2.category === 'ott_anime_film' ||
+                        jejeupData.amusementData2.category === 'ott_film' ||
                         jejeupData.amusementData2.anime === 'film') &&
                         jejeupData.amusementData2.rating === 'b12' && (
                           <>
@@ -737,7 +762,8 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                           </>
                         )}
                       {(jejeupData.amusementData2.category === 'film' ||
-                        jejeupData.amusementData2.category === 'ottFilm' ||
+                        jejeupData.amusementData2.category === 'ott_anime_film' ||
+                        jejeupData.amusementData2.category === 'ott_film' ||
                         jejeupData.amusementData2.anime === 'film') &&
                         jejeupData.amusementData2.rating === 'c15' && (
                           <>
@@ -745,7 +771,8 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                           </>
                         )}
                       {(jejeupData.amusementData2.category === 'film' ||
-                        jejeupData.amusementData2.category === 'ottFilm' ||
+                        jejeupData.amusementData2.category === 'ott_anime_film' ||
+                        jejeupData.amusementData2.category === 'ott_film' ||
                         jejeupData.amusementData2.anime === 'film') &&
                         jejeupData.amusementData2.rating === 'd19' && (
                           <>
@@ -824,27 +851,39 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                         )}
                         {jejeupData.amusementData2.lang === null && (
                           <span lang="ko">{jejeupData.amusementData2.title}</span>
-                        )}{' '}
-                        {jejeupData.amusementData2.originalAuthor &&
-                          `('${jejeupData.amusementData2.originalAuthor}'의 ${OriginalName(jejeupData.amusementData2.original)} '${jejeupData.amusementData2.originTitle}' 원작)`}
-                        {(jejeupData.amusementData.titleKorean || jejeupData.amusementData.titleOther) && (
-                          <>
-                            ({jejeupData.amusementData.titleKorean && jejeupData.amusementData.titleKorean}
-                            {jejeupData.amusementData.titleKorean && jejeupData.amusementData.titleOther && ' / '}
-                            {jejeupData.amusementData.titleOther && jejeupData.amusementData.titleOther})
-                          </>
-                        )}{' '}
-                        {jejeupData.amusementData2.originalAuthor === null && jejeupData.amusementData2.original && (
-                          <span className={styles.origin}>
-                            동명의 {OriginalName(jejeupData.amusementData2.original)} 원작
-                          </span>
                         )}
+                        {jejeupData.amusementData2.originalAuthor &&
+                          jejeupData.amusementData2.original &&
+                          jejeupData.amusementData2.originTitle && (
+                            <span>
+                              &apos;{jejeupData.amusementData2.originalAuthor}&apos;의{' '}
+                              {OriginalName(jejeupData.amusementData2.original)} &apos;
+                              {jejeupData.amusementData2.originTitle}&apos; 원작
+                            </span>
+                          )}
+                        {jejeupData.amusementData2.original !== null &&
+                          jejeupData.amusementData2.originTitle === null &&
+                          jejeupData.amusementData2.originalAuthor !== null && (
+                            <span className={styles.origin}>
+                              동명의 {OriginalName(jejeupData.amusementData2.original)} 원작
+                            </span>
+                          )}
                         <time>{jejeupData.amusementData2.release}</time>
                       </strong>
-                      <em>{jejeupData.amusementData2.etc && jejeupData.amusementData2.etc}</em>
+                      {jejeupData.amusementData2.etc !== null && (
+                        <em className="lang">{jejeupData.amusementData2.etc}</em>
+                      )}
                     </dd>
                   </dl>
                   <dl className={styles.info}>
+                    {jejeupData.amusementData2.original !== null &&
+                      jejeupData.amusementData2.originTitle === null &&
+                      jejeupData.amusementData2.originalAuthor !== null && (
+                        <div>
+                          <dt>원작자</dt>
+                          <dd>{jejeupData.amusementData2.originalAuthor}</dd>
+                        </div>
+                      )}
                     <div>
                       <dt>제작국가</dt>
                       <dd>{jejeupData.amusementData2.country}</dd>
@@ -861,9 +900,16 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                       <dt>주요 제작자</dt>
                       <dd>{jejeupData.amusementData2.creator}</dd>
                     </div>
-                    {jejeupData.amusementData2.category !== 'game' && (
+                    {jejeupData.amusementData2.cast !== null && (
                       <div>
-                        <dt>주요 출연자</dt>
+                        {jejeupData.amusementData2.category !== 'anime' &&
+                        jejeupData.amusementData2.category !== 'ottAnime' &&
+                        jejeupData.amusementData2.category !== 'ottAnimeFilm' &&
+                        jejeupData.amusementData2.category !== 'game' ? (
+                          <dt>주요 출연자</dt>
+                        ) : (
+                          <dt>주요 성우</dt>
+                        )}
                         <dd>{jejeupData.amusementData2.cast}</dd>
                       </div>
                     )}
@@ -893,10 +939,10 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                   {jejeupData.attributes.title2 === null ? (
                     jejeupData.amusementData.posterOther && (
                       <Image
-                        src={jejeupData.amusementData.posterOther}
+                        src={jejeupData.amusementData2.posterOther}
                         alt=""
-                        width={jejeupData.amusementData.category === 'game' ? 460 : 390}
-                        height={jejeupData.amusementData.category === 'game' ? 215 : 560}
+                        width={jejeupData.amusementData2.category === 'game' ? 460 : 390}
+                        height={jejeupData.amusementData2.category === 'game' ? 215 : 560}
                         unoptimized
                       />
                     )
@@ -904,8 +950,8 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                     <Image
                       src={jejeupData.amusementData2.posterDefault}
                       alt=""
-                      width={jejeupData.amusementData.category === 'game' ? 460 : 390}
-                      height={jejeupData.amusementData.category === 'game' ? 215 : 560}
+                      width={jejeupData.amusementData2.category === 'game' ? 460 : 390}
+                      height={jejeupData.amusementData2.category === 'game' ? 215 : 560}
                       unoptimized
                     />
                   )}

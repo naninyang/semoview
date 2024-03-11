@@ -303,10 +303,9 @@ function Home() {
                               jejeup.amusementData.category !== 'ott_anime_film' && (
                                 <em>{CategoryName(jejeup.amusementData.category)}</em>
                               )}
-                            {jejeup.amusementData.category === 'anime' ||
-                              (jejeup.amusementData.category === 'ott_anime' && (
-                                <em>{AnimeName(jejeup.amusementData.anime)}</em>
-                              ))}
+                            {jejeup.amusementData.category === 'anime' && (
+                              <em>{AnimeName(jejeup.amusementData.anime)}</em>
+                            )}
                             {jejeup.amusementData.ott === 'amazonOriginal' && (
                               <cite>
                                 <AmazonOriginal /> Amazon Prime Video
@@ -489,29 +488,45 @@ function Home() {
                               )}
                               {jejeup.amusementData.lang === null && (
                                 <span lang="ko">{jejeup.amusementData.title}</span>
-                              )}{' '}
-                              {jejeup.amusementData.originalAuthor &&
-                                `('${jejeup.amusementData.originalAuthor}'의 ${OriginalName(jejeup.amusementData.original)} '${jejeup.amusementData.originTitle}' 원작)`}
-                              {(jejeup.amusementData.titleKorean || jejeup.amusementData.titleOther) && (
-                                <>
-                                  ({jejeup.amusementData.titleKorean && jejeup.amusementData.titleKorean}
-                                  {jejeup.amusementData.titleKorean && jejeup.amusementData.titleOther && ' / '}
-                                  <span className="lang">
-                                    {jejeup.amusementData.titleOther && jejeup.amusementData.titleOther})
-                                  </span>
-                                </>
-                              )}{' '}
-                              {jejeup.amusementData.originalAuthor === null && jejeup.amusementData.original && (
-                                <span className={styles.origin}>
-                                  동명의 {OriginalName(jejeup.amusementData.original)} 원작
+                              )}
+                              {jejeup.amusementData.titleKorean !== null && (
+                                <span>{jejeup.amusementData.titleKorean && jejeup.amusementData.titleKorean}</span>
+                              )}
+                              {jejeup.amusementData.titleOther !== null && (
+                                <span className="lang">
+                                  {jejeup.amusementData.titleOther && jejeup.amusementData.titleOther}
                                 </span>
                               )}
+                              {jejeup.amusementData.originalAuthor &&
+                                jejeup.amusementData.original &&
+                                jejeup.amusementData.originTitle && (
+                                  <span>
+                                    &apos;{jejeup.amusementData.originalAuthor}&apos;의{' '}
+                                    {OriginalName(jejeup.amusementData.original)} &apos;
+                                    {jejeup.amusementData.originTitle}&apos; 원작
+                                  </span>
+                                )}
+                              {jejeup.amusementData.original !== null &&
+                                jejeup.amusementData.originTitle === null &&
+                                jejeup.amusementData.originalAuthor !== null && (
+                                  <span className={styles.origin}>
+                                    동명의 {OriginalName(jejeup.amusementData.original)} 원작
+                                  </span>
+                                )}
                               <time>{jejeup.amusementData.release}</time>
                             </strong>
-                            <em className="lang">{jejeup.amusementData.etc && jejeup.amusementData.etc}</em>
+                            {jejeup.amusementData.etc !== null && <em className="lang">{jejeup.amusementData.etc}</em>}
                           </dd>
                         </dl>
                         <dl className={styles.info}>
+                          {jejeup.amusementData.original !== null &&
+                            jejeup.amusementData.originTitle === null &&
+                            jejeup.amusementData.originalAuthor !== null && (
+                              <div>
+                                <dt>원작자</dt>
+                                <dd>{jejeup.amusementData.originalAuthor}</dd>
+                              </div>
+                            )}
                           <div>
                             <dt>제작국가</dt>
                             <dd>{jejeup.amusementData.country}</dd>

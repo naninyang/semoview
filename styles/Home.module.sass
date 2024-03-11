@@ -309,26 +309,32 @@
           padding-top: rem(3)
 
           strong
-            font-size: rem(16)
-            font-weight: 800
+            display: flex
+            flex-direction: column
             line-height: 1.125
             color: $hex-dark
 
             span
+              font-size: rem(14)
               font-weight: 600
+              color: rgba($hex-dark, .5)
+              +line-abbr(1, 18, 1.1)
+
+              &[lang]
+                +line-abbr(1, 22, 1.1)
+                margin-bottom: rem(5)
+                font-size: rem(20)
+                color: $hex-dark
 
               &[lang="en"], &[lang="ko"]
                 font-weight: 800
 
               &.origin
-                padding-right: rem(7)
-                padding-left: rem(3)
                 font-weight: 400
                 font-size: rem(14)
                 color: rgba($hex-dark, .7)
 
             time
-              padding-left: rem(3)
               font-size: rem(14)
               font-weight: 400
               color: $hex-dark
@@ -364,3 +370,4 @@
           +col
           font-weight: 800
           color: $hex-dark
+          +line-abbr(1, 16, 1.1)
