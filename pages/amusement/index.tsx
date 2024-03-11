@@ -178,7 +178,7 @@ function Amusement() {
                 categoryData.data[0].category === 'ott_anime_film' ||
                 categoryData.data[0].category === 'ott_film') &&
                 '퇴근 후, 이세계 OTT에서만 볼 수 있는 콘텐츠를.'}{' '}
-              {categoryData.data.length > 0 && <span>({categoryData.data.length}개 타이틀)</span>}
+              {categoryData.total > 0 && <span>({categoryData.total}개 타이틀)</span>}
             </h1>
             <div className={styles.select}>
               <select onChange={handleCategoryChange} defaultValue={selectedCategory}>

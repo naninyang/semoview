@@ -104,7 +104,8 @@ export async function getCategoryData(page?: number, pageSize?: number, category
       posterOther: data.attributes.posterOther,
     }));
     const pageCount = categoryResponse.meta.pagination.pageCount;
-    return { data, pageCount: pageCount };
+    const total = categoryResponse.meta.pagination.total;
+    return { data, pageCount: pageCount, total: total };
   } else {
     const response = await fetch(
       `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[category][$contains]=${categoryName}`,
@@ -142,7 +143,8 @@ export async function getCategoryData(page?: number, pageSize?: number, category
       posterOther: data.attributes.posterOther,
     }));
     const pageCount = categoryResponse.meta.pagination.pageCount;
-    return { data, pageCount: pageCount };
+    const total = categoryResponse.meta.pagination.total;
+    return { data, pageCount: pageCount, total: total };
   }
 }
 
