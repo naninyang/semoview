@@ -32,6 +32,8 @@ export const vectors = {
     wavveOrigin: require('./ott/wavve-original.svg'),
     wavveOnly2: require('./ott/wavve-only2.svg'),
     wavveOrigin2: require('./ott/wavve-original2.svg'),
+    paramountIcon: require('./ott/paramount-icon.svg'),
+    paramount: require('./ott/paramount.svg'),
   },
   ratings: {
     film: {

@@ -72,6 +72,11 @@ const WavveOnly = styled.i({
   background: `url(${vectors.ott.wavveOnly2}) no-repeat 50% 50%/contain`,
 });
 
+const Paramount = styled.i({
+  width: rem(81),
+  background: `url(${vectors.ott.paramount}) no-repeat 50% 50%/contain`,
+});
+
 const RatingFilmAll = styled.i({
   background: `url(${vectors.ratings.film.all}) no-repeat 50% 50%/contain`,
 });
@@ -544,6 +549,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                           {(jejeupData.amusementData.ott === 'wavveOriginal' ||
                             jejeupData.amusementData.ott === 'wavveOnly') &&
                             'Wavve'}
+                          {jejeupData.amusementData.ott === 'paramount' && 'TVING'}
                           에서 시청하기
                         </Anchor>
                       )}
@@ -715,6 +721,11 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                           <WavveOnly /> 오직 웨이브에서
                         </cite>
                       )}
+                      {jejeupData.amusementData2.ott === 'paramount' && (
+                        <cite>
+                          <Paramount /> Paramount+
+                        </cite>
+                      )}
                       {(jejeupData.amusementData2.category === 'drama' ||
                         jejeupData.amusementData2.category === 'ott_drama' ||
                         jejeupData.amusementData2.category === 'ott_anime' ||
@@ -828,6 +839,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                           {(jejeupData.amusementData2.ott === 'wavveOriginal' ||
                             jejeupData.amusementData2.ott === 'wavveOnly') &&
                             'Wavve'}
+                          {jejeupData.amusementData2.ott === 'paramount' && 'TVING'}
                           에서 시청하기
                         </Anchor>
                       )}

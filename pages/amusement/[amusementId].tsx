@@ -76,6 +76,11 @@ const WavveOnly = styled.i({
   background: `url(${vectors.ott.wavveOnly}) no-repeat 50% 50%/contain`,
 });
 
+const Paramount = styled.i({
+  width: rem(81),
+  background: `url(${vectors.ott.paramount}) no-repeat 50% 50%/contain`,
+});
+
 const RatingFilmAll = styled.i({
   background: `url(${vectors.ratings.film.all}) no-repeat 50% 50%/contain`,
 });
@@ -571,6 +576,11 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                         <WavveOnly /> 오직 웨이브에서
                       </>
                     )}
+                    {amusementData.attributes.ott === 'paramount' && (
+                      <>
+                        <Paramount /> Paramount+
+                      </>
+                    )}
                   </dd>
                 </div>
               )}
@@ -598,6 +608,7 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                       {(amusementData.attributes.ott === 'wavveOriginal' ||
                         amusementData.attributes.ott === 'wavveOnly') &&
                         'Wavve'}
+                      {amusementData.attributes.ott === 'paramount' && 'TVING'}
                       에서 시청하기
                     </Anchor>
                   </dd>

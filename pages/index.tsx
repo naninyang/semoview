@@ -66,6 +66,11 @@ const WavveOnly = styled.i({
   background: `url(${vectors.ott.wavveOnly2}) no-repeat 50% 50%/contain`,
 });
 
+const Paramount = styled.i({
+  width: rem(81),
+  background: `url(${vectors.ott.paramount}) no-repeat 50% 50%/contain`,
+});
+
 const RatingFilmAll = styled.i({
   background: `url(${vectors.ratings.film.all}) no-repeat 50% 50%/contain`,
 });
@@ -374,6 +379,11 @@ function Home() {
                             {jejeup.amusementData.ott === 'wavveOnly' && (
                               <cite>
                                 <WavveOnly /> 오직 웨이브에서
+                              </cite>
+                            )}
+                            {jejeup.amusementData.ott === 'paramount' && (
+                              <cite>
+                                <Paramount /> Paramount+
                               </cite>
                             )}
                             {(jejeup.amusementData.category === 'drama' ||

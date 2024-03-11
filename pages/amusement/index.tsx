@@ -39,6 +39,10 @@ const WavveIcon = styled.i({
   background: `url(${vectors.ott.wavveIcon}) no-repeat 50% 50%/contain`,
 });
 
+const ParamountIcon = styled.i({
+  background: `url(${vectors.ott.paramountIcon}) no-repeat 50% 50%/contain`,
+});
+
 const BackButton = styled.i({
   display: 'block',
   background: `url(${vectors.backward}) no-repeat 50% 50%/contain`,
@@ -245,6 +249,11 @@ function Amusement() {
                             {(amusement.ott === 'wavveOriginal' || amusement.ott === 'wavveOnly') && (
                               <>
                                 <WavveIcon /> <span>웨이브 오리지널</span>
+                              </>
+                            )}
+                            {amusement.ott === 'paramount' && (
+                              <>
+                                <ParamountIcon /> <span>Paramount+</span>
                               </>
                             )}
                           </dd>
