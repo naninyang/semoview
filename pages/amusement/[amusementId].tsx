@@ -605,21 +605,26 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
           </div>
           <dl className={styles.summary}>
             <div className={styles.item}>
-              {amusementData.attributes.category !== 'ott' && amusementData.attributes.category !== 'ottFilm' && (
-                <div className={styles.category}>
-                  <dt>카테고리</dt>
-                  <dd>
-                    <em>{CategoryName(amusementData.attributes.category)}</em>
-                    {amusementData.attributes.category === 'animation' && (
-                      <em>{AnimeName(amusementData.attributes.anime)}</em>
-                    )}
-                  </dd>
+              {amusementData.attributes.category !== 'ott_drama' &&
+                amusementData.attributes.category !== 'ott_anime' &&
+                amusementData.attributes.category !== 'ott_anime_film' &&
+                amusementData.attributes.category !== 'ott_film' && (
+                  <div className={styles.category}>
+                    <dt>카테고리</dt>
+                    <dd>
+                      <em>{CategoryName(amusementData.attributes.category)}</em>
+                      {amusementData.attributes.category === 'anime' && (
+                        <em>{AnimeName(amusementData.attributes.anime)}</em>
+                      )}
+                    </dd>
+                  </div>
+                )}
+              {amusementData.attributes.country !== '?' && (
+                <div className={styles.country}>
+                  <dt>제작국가</dt>
+                  <dd>{amusementData.attributes.country}</dd>
                 </div>
               )}
-              <div className={styles.country}>
-                <dt>제작국가</dt>
-                <dd>{amusementData.attributes.country === '?' ? '알 수 없음' : amusementData.attributes.country}</dd>
-              </div>
               {amusementData.attributes.release !== '?' && (
                 <div className={styles.release}>
                   <dt>제작년도</dt>
@@ -630,7 +635,8 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                 <dt>등급</dt>
                 <dd>
                   {(amusementData.attributes.category === 'drama' ||
-                    amusementData.attributes.category === 'ott' ||
+                    amusementData.attributes.category === 'ott_drama' ||
+                    amusementData.attributes.category === 'ott_anime' ||
                     amusementData.attributes.anime === 'tva' ||
                     amusementData.attributes.anime === 'ova') &&
                     amusementData.attributes.rating !== 'd19' && (
@@ -645,7 +651,8 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                       </>
                     )}
                   {(amusementData.attributes.category === 'drama' ||
-                    amusementData.attributes.category === 'ott' ||
+                    amusementData.attributes.category === 'ott_drama' ||
+                    amusementData.attributes.category === 'ott_anime' ||
                     amusementData.attributes.anime === 'tva' ||
                     amusementData.attributes.anime === 'ova') &&
                     amusementData.attributes.rating === 'd19' && (
@@ -653,33 +660,37 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                         {RatingsDrama(amusementData.attributes.rating)}
                       </i>
                     )}
-                  {(amusementData.attributes.category === 'movie' ||
-                    amusementData.attributes.category === 'ottFilm' ||
-                    amusementData.attributes.anime === 'movie') &&
+                  {(amusementData.attributes.category === 'film' ||
+                    amusementData.attributes.category === 'ott_anime_film' ||
+                    amusementData.attributes.category === 'ott_film' ||
+                    amusementData.attributes.anime === 'film') &&
                     amusementData.attributes.rating === 'all' && (
                       <>
                         <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
                       </>
                     )}
-                  {(amusementData.attributes.category === 'movie' ||
-                    amusementData.attributes.category === 'ottFilm' ||
-                    amusementData.attributes.anime === 'movie') &&
+                  {(amusementData.attributes.category === 'film' ||
+                    amusementData.attributes.category === 'ott_anime_film' ||
+                    amusementData.attributes.category === 'ott_film' ||
+                    amusementData.attributes.anime === 'film') &&
                     amusementData.attributes.rating === 'b12' && (
                       <>
                         <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
                       </>
                     )}
-                  {(amusementData.attributes.category === 'movie' ||
-                    amusementData.attributes.category === 'ottFilm' ||
-                    amusementData.attributes.anime === 'movie') &&
+                  {(amusementData.attributes.category === 'film' ||
+                    amusementData.attributes.category === 'ott_anime_film' ||
+                    amusementData.attributes.category === 'ott_film' ||
+                    amusementData.attributes.anime === 'film') &&
                     amusementData.attributes.rating === 'c15' && (
                       <>
                         <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
                       </>
                     )}
-                  {(amusementData.attributes.category === 'movie' ||
-                    amusementData.attributes.category === 'ottFilm' ||
-                    amusementData.attributes.anime === 'movie') &&
+                  {(amusementData.attributes.category === 'film' ||
+                    amusementData.attributes.category === 'ott_anime_film' ||
+                    amusementData.attributes.category === 'ott_film' ||
+                    amusementData.attributes.anime === 'film') &&
                     amusementData.attributes.rating === 'd19' && (
                       <>
                         <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
@@ -738,7 +749,7 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
               <>
                 {amusementData.attributes.cast !== null && (
                   <div>
-                    {amusementData.attributes.category !== 'animation' &&
+                    {amusementData.attributes.category !== 'anime' &&
                     amusementData.attributes.category !== 'ottAnime' &&
                     amusementData.attributes.category !== 'ottAnimeFilm' &&
                     amusementData.attributes.category !== 'game' ? (

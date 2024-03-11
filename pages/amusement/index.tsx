@@ -157,9 +157,9 @@ function Amusement() {
           <select value={selectedCategory} onChange={handleCategoryChange}>
             <option value="">카테고리 선택</option>
             <option value="drama">드라마</option>
-            <option value="movie">영화</option>
+            <option value="film">영화</option>
             <option value="game">게임</option>
-            <option value="animation">애니메이션</option>
+            <option value="anime">애니메이션</option>
             <option value="ott">오직 OTT에서</option>
           </select>
           <button onClick={handleCategorySubmit}>선택</button>
@@ -170,9 +170,9 @@ function Amusement() {
           <div className={styles.headline}>
             <h1>
               {categoryData.data[0].category === 'drama' && '개가 짖어도 드라마는 정주행 할 수밖에 없다!'}
-              {categoryData.data[0].category === 'movie' && '영화 사회에서는 영원한 우방도, 영원한 적도 없다!'}
+              {categoryData.data[0].category === 'film' && '영화 사회에서는 영원한 우방도, 영원한 적도 없다!'}
               {categoryData.data[0].category === 'game' && '게임은 끝날 때까지 끝난 게 아니다!'}
-              {categoryData.data[0].category === 'animation' && '애니입니다만, 문제라도?'}
+              {categoryData.data[0].category === 'anime' && '애니입니다만, 문제라도?'}
               {(categoryData.data[0].category === 'ott' || categoryData.data[0].category === 'ottFilm') &&
                 '퇴근 후, 이세계 OTT에서만 볼 수 있는 콘텐츠를.'}{' '}
               {categoryData.data.length > 0 && <span>({categoryData.data.length}개 타이틀)</span>}
@@ -181,9 +181,9 @@ function Amusement() {
               <select onChange={handleCategoryChange} defaultValue={selectedCategory}>
                 <option value="">카테고리 선택</option>
                 <option value={'drama'}>드라마</option>
-                <option value={'movie'}>영화</option>
+                <option value={'film'}>영화</option>
                 <option value={'game'}>게임</option>
-                <option value={'animation'}>애니메이션</option>
+                <option value={'anime'}>애니메이션</option>
                 <option value={'ott'}>오직 OTT에서</option>
               </select>
               <button onClick={handleCategorySubmit}>선택</button>
@@ -251,7 +251,8 @@ function Amusement() {
                         <dt>{categoryData.data[0].category === 'game' ? '심의등급' : '시청등급'}</dt>
                         <dd>
                           {(amusement.category === 'drama' ||
-                            amusement.category === 'ott' ||
+                            amusement.category === 'ott_drama' ||
+                            amusement.category === 'ott_anime' ||
                             amusement.anime === 'tva' ||
                             amusement.anime === 'ova') &&
                             amusement.rating !== 'd19' && (
@@ -266,39 +267,44 @@ function Amusement() {
                               </>
                             )}
                           {(amusement.category === 'drama' ||
-                            amusement.category === 'ott' ||
+                            amusement.category === 'ott_drama' ||
+                            amusement.category === 'ott_anime' ||
                             amusement.anime === 'tva' ||
                             amusement.anime === 'ova') &&
                             amusement.rating === 'd19' && (
                               <i className={`${styles.drama} ${styles.d19} number`}>{RatingsDrama(amusement.rating)}</i>
                             )}
-                          {(amusement.category === 'movie' ||
-                            amusement.category === 'ottFilm' ||
-                            amusement.anime === 'movie') &&
+                          {(amusement.category === 'film' ||
+                            amusement.category === 'ott_film' ||
+                            amusement.category === 'ott_anime_film' ||
+                            amusement.anime === 'film') &&
                             amusement.rating === 'all' && (
                               <>
                                 <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
                               </>
                             )}
-                          {(amusement.category === 'movie' ||
-                            amusement.category === 'ottFilm' ||
-                            amusement.anime === 'movie') &&
+                          {(amusement.category === 'film' ||
+                            amusement.category === 'ott_film' ||
+                            amusement.category === 'ott_anime_film' ||
+                            amusement.anime === 'film') &&
                             amusement.rating === 'b12' && (
                               <>
                                 <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
                               </>
                             )}
-                          {(amusement.category === 'movie' ||
-                            amusement.category === 'ottFilm' ||
-                            amusement.anime === 'movie') &&
+                          {(amusement.category === 'film' ||
+                            amusement.category === 'ott_film' ||
+                            amusement.category === 'ott_anime_film' ||
+                            amusement.anime === 'film') &&
                             amusement.rating === 'c15' && (
                               <>
                                 <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
                               </>
                             )}
-                          {(amusement.category === 'movie' ||
-                            amusement.category === 'ottFilm' ||
-                            amusement.anime === 'movie') &&
+                          {(amusement.category === 'film' ||
+                            amusement.category === 'ott_film' ||
+                            amusement.category === 'ott_anime_film' ||
+                            amusement.anime === 'film') &&
                             amusement.rating === 'd19' && (
                               <>
                                 <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
