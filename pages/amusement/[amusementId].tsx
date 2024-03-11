@@ -718,19 +718,34 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
               <dt>장르</dt>
               <dd>{amusementData.attributes.genre}</dd>
             </div>
-            <div>
-              <dt>퍼블리셔</dt>
-              <dd>{amusementData.attributes.publisher === '?' ? '알 수 없음' : amusementData.attributes.publisher}</dd>
-            </div>
-            <div>
-              <dt>주요 제작자</dt>
-              <dd>{amusementData.attributes.creator === '?' ? '알 수 없음' : amusementData.attributes.creator}</dd>
-            </div>
-            {amusementData.attributes.category !== 'game' && (
+            {amusementData.attributes.publisher !== '?' && (
               <div>
-                <dt>주요 출연자</dt>
-                <dd>{amusementData.attributes.cast}</dd>
+                <dt>퍼블리셔</dt>
+                <dd>{amusementData.attributes.publisher}</dd>
               </div>
+            )}
+            {amusementData.attributes.creator !== '?' && (
+              <div>
+                <dt>주요 제작자</dt>
+                <dd>{amusementData.attributes.creator}</dd>
+              </div>
+            )}
+            {amusementData.attributes.cast !== '?' && (
+              <>
+                {amusementData.attributes.cast !== null && (
+                  <div>
+                    {amusementData.attributes.category !== 'animation' &&
+                    amusementData.attributes.category !== 'ottAnime' &&
+                    amusementData.attributes.category !== 'ottAnimeFilm' &&
+                    amusementData.attributes.category !== 'game' ? (
+                      <dt>주요 출연자</dt>
+                    ) : (
+                      <dt>주요 성우</dt>
+                    )}
+                    <dd>{amusementData.attributes.cast}</dd>
+                  </div>
+                )}
+              </>
             )}
             {amusementData.attributes.synopsys && (
               <div className={styles.synopsys}>
