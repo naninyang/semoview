@@ -372,12 +372,16 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
           <dt>다른 버전 보기</dt>
           <dd>
             <select value={selectedRelation} onChange={handleRelationChange}>
-              <option value={router.asPath}>{amusementData.attributes.title}</option>
+              <option value={router.asPath}>
+                {amusementData.attributes.titleKorean
+                  ? amusementData.attributes.titleKorean
+                  : amusementData.attributes.title}
+              </option>
               {relation1 !== null && (
                 <option
                   value={`/amusement/${formatDate(relation1.attributes.createdAt)}${amusementData.attributes.relation1}`}
                 >
-                  {relation1.attributes.title}
+                  {relation1.attributes.titleKorean ? relation1.attributes.titleKorean : relation1.attributes.title}
                 </option>
               )}
               {amusementData.attributes.relation2 !== null &&
@@ -387,7 +391,7 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                   <option
                     value={`/amusement/${formatDate(relation2.attributes.createdAt)}${amusementData.attributes.relation2}`}
                   >
-                    {relation2.attributes.title}
+                    {relation2.attributes.titleKorean ? relation2.attributes.titleKorean : relation2.attributes.title}
                   </option>
                 )}
             </select>
