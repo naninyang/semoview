@@ -46,16 +46,16 @@
     position: relative
     padding: rem(27) rem(19)
 
-    +mq(maxExtraSmall)
+    +mq(maxSmall)
       flex-direction: column-reverse
 
-    +mq(minSmall)
+    +mq(minMedium)
       justify-content: space-between
 
-    +mq(minMedium)
+    +mq(minLarge)
       padding: rem(52)
 
-    +mq(minLarge)
+    +mq(minExtraLarge)
       gap: rem(57)
       padding: rem(102)
 
@@ -115,17 +115,32 @@
         color: $hex-white
         line-height: 1.11458333
 
+        &.long
+          font-size: rem(20)
+
         +mq(minSmall)
           font-size: rem(32)
+
+          &.long
+            font-size: rem(24)
 
         +mq(minMedium)
           font-size: rem(48)
 
+          &.long
+            font-size: rem(30)
+
         +mq(minLarge)
           font-size: rem(64)
 
+          &.long
+            font-size: rem(32)
+
         +mq(minExtraLarge)
           font-size: rem(96)
+
+          &.long
+            font-size: rem(48)
 
       .title, .summary
         dt
@@ -157,6 +172,10 @@
       .title
         +col
         font-size: rem(14)
+        line-height: 1.42857143
+
+        +mq(minMedium)
+          font-size: rem(16)
 
       .summary
         display: flex

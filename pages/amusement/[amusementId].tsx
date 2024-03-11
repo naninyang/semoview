@@ -443,11 +443,17 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
           <div className={styles.dummy} />
         </div>
         <div className={styles.info}>
-          <h1>
-            {amusementData.attributes.titleKorean !== null
-              ? amusementData.attributes.titleKorean
-              : amusementData.attributes.title}
-          </h1>
+          {amusementData.attributes.titleKorean !== null ? (
+            amusementData.attributes.titleKorean.length >= 30 ? (
+              <h1 className={styles.long}>{amusementData.attributes.titleKorean}</h1>
+            ) : (
+              <h1>{amusementData.attributes.titleKorean}</h1>
+            )
+          ) : amusementData.attributes.title.length >= 30 ? (
+            <h1 className={styles.long}>{amusementData.attributes.title}</h1>
+          ) : (
+            <h1>{amusementData.attributes.title}</h1>
+          )}
           <dl className={styles.title}>
             {amusementData.attributes.titleKorean !== null && (
               <div>
