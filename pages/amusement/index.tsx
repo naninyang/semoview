@@ -173,7 +173,10 @@ function Amusement() {
               {categoryData.data[0].category === 'film' && '영화 사회에서는 영원한 우방도, 영원한 적도 없다!'}
               {categoryData.data[0].category === 'game' && '게임은 끝날 때까지 끝난 게 아니다!'}
               {categoryData.data[0].category === 'anime' && '애니입니다만, 문제라도?'}
-              {(categoryData.data[0].category === 'ott' || categoryData.data[0].category === 'ottFilm') &&
+              {(categoryData.data[0].category === 'ott_drama' ||
+                categoryData.data[0].category === 'ott_anime' ||
+                categoryData.data[0].category === 'ott_anime_film' ||
+                categoryData.data[0].category === 'ott_film') &&
                 '퇴근 후, 이세계 OTT에서만 볼 수 있는 콘텐츠를.'}{' '}
               {categoryData.data.length > 0 && <span>({categoryData.data.length}개 타이틀)</span>}
             </h1>
