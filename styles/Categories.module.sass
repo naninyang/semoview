@@ -144,7 +144,10 @@
         .thumbnail
           position: relative
           overflow: hidden
-          border-radius: rem(13)
+          border-radius: rem(3)
+
+          +mq(minSmall)
+            border-radius: rem(7)
 
           img
             display: block
@@ -174,9 +177,14 @@
 
                 i
                   display: inline-block
-                  width: rem(45)
-                  height: rem(45)
-                  border-radius: 0 0 0 rem(13)
+                  border-radius: 0 0 0 rem(3)
+                  width: rem(37)
+                  height: rem(37)
+
+                  +mq(minSmall)
+                    border-radius: 0 0 0 rem(7)
+                    width: rem(43)
+                    height: rem(43)
 
               dd
                 span

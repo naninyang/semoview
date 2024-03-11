@@ -217,7 +217,11 @@ function Home() {
           <div className={styles['jejeup-content']}>
             {Array.isArray(data.jejeups) &&
               data.jejeups
-                .filter((jejeup) => jejeup.jejeupMetaData.error !== 'Failed to fetch data')
+                .filter(
+                  (jejeup) =>
+                    jejeup.jejeupMetaData.error !== 'Failed to fetch data' &&
+                    jejeup.jejeupMetaData.ogTitle !== ' - YouTube',
+                )
                 .map((jejeup: JejeupData) => (
                   <div className={styles.item} key={jejeup.id}>
                     <figure>
