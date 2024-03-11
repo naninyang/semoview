@@ -951,10 +951,10 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                   {jejeupData.attributes.title2 === null ? (
                     jejeupData.amusementData.posterOther && (
                       <Image
-                        src={jejeupData.amusementData2.posterOther}
+                        src={jejeupData.amusementData.posterOther}
                         alt=""
-                        width={jejeupData.amusementData2.category === 'game' ? 460 : 390}
-                        height={jejeupData.amusementData2.category === 'game' ? 215 : 560}
+                        width={jejeupData.amusementData.category === 'game' ? 460 : 390}
+                        height={jejeupData.amusementData.category === 'game' ? 215 : 560}
                         unoptimized
                       />
                     )
