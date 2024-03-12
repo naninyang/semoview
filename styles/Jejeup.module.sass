@@ -223,6 +223,7 @@
             padding: 0
             vertical-align: bottom
 
+          &.drama + span,
           &.rating + span
             +screen-reader-only
 
@@ -265,31 +266,46 @@
         padding-top: rem(3)
 
         strong
-          font-size: rem(16)
-          font-weight: 800
+          display: flex
+          flex-direction: column
           line-height: 1.125
           color: $hex-dark
 
+          +mq(maxExtraSmall)
+            gap: rem(2)
+
+          +mq(minSmall)
+            line-height: rem(20)
+
           span
+            font-size: rem(14)
             font-weight: 600
-            white-space: break-spaces
-            word-wrap: break-word
-            word-break: normal
+            color: rgba($hex-dark, .5)
+
+            +mq(minSmall)
+              +ellipsis
+
+            &.title
+              margin-bottom: rem(5)
+              font-size: rem(20)
+              font-weight: 800
+              color: $hex-dark
+
+              +mq(minSmall)
+                +ellipsis
 
             &[lang="en"], &[lang="ko"]
               font-weight: 800
 
             &.origin
-              padding-right: rem(7)
-              padding-left: rem(3)
               font-weight: 400
               font-size: rem(14)
+              color: rgba($hex-dark, .7)
 
           time
-            padding-left: rem(3)
             font-size: rem(14)
             font-weight: 400
-            color: rgba($hex-dark, .7)
+            color: $hex-dark
 
         em
           display: block
