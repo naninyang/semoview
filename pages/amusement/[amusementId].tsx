@@ -493,12 +493,23 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                 <dd>{amusementData.attributes.etc}</dd>
               </div>
             )}
-            {amusementData.attributes.originalAuthor === null && amusementData.attributes.original && (
-              <div>
-                <dt>원작</dt>
-                <dd>동명의 {OriginalName(amusementData.attributes.original)} 원작</dd>
-              </div>
-            )}
+            {amusementData.attributes.originalAuthor &&
+              amusementData.attributes.original &&
+              amusementData.attributes.originTitle && (
+                <span>
+                  &apos;{amusementData.attributes.originalAuthor}&apos;의{' '}
+                  {OriginalName(amusementData.attributes.original)} &apos;
+                  {amusementData.attributes.originTitle}&apos; 원작
+                </span>
+              )}
+            {amusementData.attributes.original !== null &&
+              amusementData.attributes.originTitle === null &&
+              amusementData.attributes.originalAuthor !== null && (
+                <div>
+                  <dt>원작</dt>
+                  <dd>동명의 {OriginalName(amusementData.attributes.original)} 원작</dd>
+                </div>
+              )}
           </dl>
           <div className={styles.function}>
             <dl className={styles.summary}>
@@ -746,6 +757,14 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
             </div>
           </dl>
           <dl className={styles.staff}>
+            {amusementData.attributes.original !== null &&
+              amusementData.attributes.originTitle === null &&
+              amusementData.attributes.originalAuthor !== null && (
+                <div>
+                  <dt>원작자</dt>
+                  <dd>{amusementData.attributes.originalAuthor}</dd>
+                </div>
+              )}
             <div>
               <dt>장르</dt>
               <dd>{amusementData.attributes.genre}</dd>
