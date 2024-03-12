@@ -447,7 +447,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                         jejeupData.amusementData.anime === 'tva' ||
                         jejeupData.amusementData.anime === 'ova') && (
                         <>
-                          {jejeupData.amusementData.rating !== 'd19' && jejeupData.amusementData.rating === 'all' ? (
+                          {jejeupData.amusementData.rating === 'all' ? (
                             <>
                               <i className={`${styles.drama} ${styles.all} number`}>
                                 {RatingsDrama(jejeupData.amusementData.rating)}
@@ -456,18 +456,21 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                             </>
                           ) : (
                             <>
-                              <i className={`${styles.drama} number`}>
-                                {RatingsDrama(jejeupData.amusementData.rating)}
-                              </i>
-                              <span>세 이상 이용가</span>
-                            </>
-                          )}
-                          {jejeupData.amusementData.rating === 'd19' && (
-                            <>
-                              <i className={`${styles.drama} ${styles.d19} number`}>
-                                {RatingsDrama(jejeupData.amusementData.rating)}
-                              </i>
-                              <span>세 미만 이용불가</span>
+                              {jejeupData.amusementData.rating === 'd19' ? (
+                                <>
+                                  <i className={`${styles.drama} ${styles.d19} number`}>
+                                    {RatingsDrama(jejeupData.amusementData.rating)}
+                                  </i>
+                                  <span>세 미만 이용불가</span>
+                                </>
+                              ) : (
+                                <>
+                                  <i className={`${styles.drama} number`}>
+                                    {RatingsDrama(jejeupData.amusementData.rating)}
+                                  </i>
+                                  <span>세 이상 이용가</span>
+                                </>
+                              )}
                             </>
                           )}
                         </>
@@ -737,7 +740,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                         jejeupData.amusementData2.anime === 'tva' ||
                         jejeupData.amusementData2.anime === 'ova') && (
                         <>
-                          {jejeupData.amusementData2.rating !== 'd19' && jejeupData.amusementData2.rating === 'all' ? (
+                          {jejeupData.amusementData2.rating === 'all' ? (
                             <>
                               <i className={`${styles.drama} ${styles.all} number`}>
                                 {RatingsDrama(jejeupData.amusementData2.rating)}
@@ -746,18 +749,21 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                             </>
                           ) : (
                             <>
-                              <i className={`${styles.drama} number`}>
-                                {RatingsDrama(jejeupData.amusementData2.rating)}
-                              </i>
-                              <span>세 이상 이용가</span>
-                            </>
-                          )}
-                          {jejeupData.amusementData2.rating === 'd19' && (
-                            <>
-                              <i className={`${styles.drama} ${styles.d19} number`}>
-                                {RatingsDrama(jejeupData.amusementData2.rating)}
-                              </i>
-                              <span>세 미만 이용불가</span>
+                              {jejeupData.amusementData2.rating === 'd19' ? (
+                                <>
+                                  <i className={`${styles.drama} ${styles.d19} number`}>
+                                    {RatingsDrama(jejeupData.amusementData2.rating)}
+                                  </i>
+                                  <span>세 미만 이용불가</span>
+                                </>
+                              ) : (
+                                <>
+                                  <i className={`${styles.drama} number`}>
+                                    {RatingsDrama(jejeupData.amusementData2.rating)}
+                                  </i>
+                                  <span>세 이상 이용가</span>
+                                </>
+                              )}
                             </>
                           )}
                         </>

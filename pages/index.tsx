@@ -392,7 +392,7 @@ function Home() {
                               jejeup.amusementData.anime === 'tva' ||
                               jejeup.amusementData.anime === 'ova') && (
                               <>
-                                {jejeup.amusementData.rating !== 'd19' && jejeup.amusementData.rating === 'all' ? (
+                                {jejeup.amusementData.rating === 'all' ? (
                                   <>
                                     <i className={`${styles.drama} ${styles.all} number`}>
                                       {RatingsDrama(jejeup.amusementData.rating)}
@@ -401,18 +401,21 @@ function Home() {
                                   </>
                                 ) : (
                                   <>
-                                    <i className={`${styles.drama} number`}>
-                                      {RatingsDrama(jejeup.amusementData.rating)}
-                                    </i>
-                                    <span>세 이상 이용가</span>
-                                  </>
-                                )}
-                                {jejeup.amusementData.rating === 'd19' && (
-                                  <>
-                                    <i className={`${styles.drama} ${styles.d19} number`}>
-                                      {RatingsDrama(jejeup.amusementData.rating)}
-                                    </i>
-                                    <span>세 미만 이용불가</span>
+                                    {jejeup.amusementData.rating === 'd19' ? (
+                                      <>
+                                        <i className={`${styles.drama} ${styles.d19} number`}>
+                                          {RatingsDrama(jejeup.amusementData.rating)}
+                                        </i>
+                                        <span>세 미만 이용불가</span>
+                                      </>
+                                    ) : (
+                                      <>
+                                        <i className={`${styles.drama} number`}>
+                                          {RatingsDrama(jejeup.amusementData.rating)}
+                                        </i>
+                                        <span>세 이상 이용가</span>
+                                      </>
+                                    )}
                                   </>
                                 )}
                               </>
