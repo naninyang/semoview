@@ -129,9 +129,6 @@
             line-height: 1
 
         .preview-info
-          display: flex
-          flex-direction: column
-
           .detail
             display: flex
             gap: rem(7)
@@ -145,6 +142,7 @@
               display: flex
               flex-direction: column
               gap: rem(4)
+              +col
               color: $hex-dark
 
               strong
@@ -314,17 +312,24 @@
             line-height: 1.125
             color: $hex-dark
 
+            +mq(minSmall)
+              line-height: rem(20)
+
             span
               font-size: rem(14)
               font-weight: 600
               color: rgba($hex-dark, .5)
-              +line-abbr(1, 18, 1.1)
+
+              +mq(minSmall)
+                +ellipsis
 
               &[lang]
-                +line-abbr(1, 22, 1.1)
                 margin-bottom: rem(5)
                 font-size: rem(20)
                 color: $hex-dark
+
+                +mq(minSmall)
+                  +ellipsis
 
               &[lang="en"], &[lang="ko"]
                 font-weight: 800
@@ -370,4 +375,6 @@
           +col
           font-weight: 800
           color: $hex-dark
-          +line-abbr(1, 16, 1.1)
+
+          +mq(minSmall)
+            +ellipsis
