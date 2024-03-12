@@ -275,6 +275,7 @@
               padding: 0
               vertical-align: bottom
 
+            &.drama + span,
             &.rating + span
               +screen-reader-only
 
@@ -312,6 +313,9 @@
             line-height: 1.125
             color: $hex-dark
 
+            +mq(maxExtraSmall)
+              gap: rem(2)
+
             +mq(minSmall)
               line-height: rem(20)
 
@@ -323,9 +327,10 @@
               +mq(minSmall)
                 +ellipsis
 
-              &[lang]
+              &.title
                 margin-bottom: rem(5)
                 font-size: rem(20)
+                font-weight: 800
                 color: $hex-dark
 
                 +mq(minSmall)

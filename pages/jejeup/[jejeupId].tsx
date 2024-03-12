@@ -438,91 +438,89 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                       )}
                       {jejeupData.amusementData.ott === 'paramount' && (
                         <cite>
-                          <Paramount /> Paramaount+
+                          <Paramount /> Paramaount+에서 스트리밍 중
                         </cite>
                       )}
                       {(jejeupData.amusementData.category === 'drama' ||
                         jejeupData.amusementData.category === 'ott_drama' ||
                         jejeupData.amusementData.category === 'ott_anime' ||
                         jejeupData.amusementData.anime === 'tva' ||
-                        jejeupData.amusementData.anime === 'ova') &&
-                        jejeupData.amusementData.rating !== 'd19' && (
-                          <>
-                            {jejeupData.amusementData.rating === 'all' ? (
+                        jejeupData.amusementData.anime === 'ova') && (
+                        <>
+                          {jejeupData.amusementData.rating !== 'd19' && jejeupData.amusementData.rating === 'all' ? (
+                            <>
                               <i className={`${styles.drama} ${styles.all} number`}>
                                 {RatingsDrama(jejeupData.amusementData.rating)}
                               </i>
-                            ) : (
+                              <span>전체 이용가</span>
+                            </>
+                          ) : (
+                            <>
                               <i className={`${styles.drama} number`}>
                                 {RatingsDrama(jejeupData.amusementData.rating)}
                               </i>
-                            )}
-                          </>
-                        )}
-                      {(jejeupData.amusementData.category === 'drama' ||
-                        jejeupData.amusementData.category === 'ott_drama' ||
-                        jejeupData.amusementData.category === 'ott_anime' ||
-                        jejeupData.amusementData.anime === 'tva' ||
-                        jejeupData.amusementData.anime === 'ova') &&
-                        jejeupData.amusementData.rating === 'd19' && (
-                          <i className={`${styles.drama} ${styles.d19} number`}>
-                            {RatingsDrama(jejeupData.amusementData.rating)}
-                          </i>
-                        )}
-                      {(jejeupData.amusementData.category === 'film' ||
-                        jejeupData.amusementData.category === 'ott_anime_film' ||
-                        jejeupData.amusementData.category === 'ott_film' ||
-                        jejeupData.amusementData.anime === 'film') &&
-                        jejeupData.amusementData.rating === 'all' && (
-                          <>
-                            <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
-                          </>
-                        )}
-                      {(jejeupData.amusementData.category === 'film' ||
-                        jejeupData.amusementData.category === 'ott_anime_film' ||
-                        jejeupData.amusementData.category === 'ott_film' ||
-                        jejeupData.amusementData.anime === 'film') &&
-                        jejeupData.amusementData.rating === 'b12' && (
-                          <>
-                            <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
-                          </>
-                        )}
-                      {(jejeupData.amusementData.category === 'film' ||
-                        jejeupData.amusementData.category === 'ott_anime_film' ||
-                        jejeupData.amusementData.category === 'ott_film' ||
-                        jejeupData.amusementData.anime === 'film') &&
-                        jejeupData.amusementData.rating === 'c15' && (
-                          <>
-                            <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
-                          </>
-                        )}
-                      {(jejeupData.amusementData.category === 'film' ||
-                        jejeupData.amusementData.category === 'ott_anime_film' ||
-                        jejeupData.amusementData.category === 'ott_film' ||
-                        jejeupData.amusementData.anime === 'film') &&
-                        jejeupData.amusementData.rating === 'd19' && (
-                          <>
-                            <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
-                          </>
-                        )}
-                      {jejeupData.amusementData.category === 'game' && jejeupData.amusementData.rating === 'all' && (
-                        <>
-                          <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
+                              <span>세 이상 이용가</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData.rating === 'd19' && (
+                            <>
+                              <i className={`${styles.drama} ${styles.d19} number`}>
+                                {RatingsDrama(jejeupData.amusementData.rating)}
+                              </i>
+                              <span>세 미만 이용불가</span>
+                            </>
+                          )}
                         </>
                       )}
-                      {jejeupData.amusementData.category === 'game' && jejeupData.amusementData.rating === 'b12' && (
+                      {(jejeupData.amusementData.category === 'film' ||
+                        jejeupData.amusementData.category === 'ott_anime_film' ||
+                        jejeupData.amusementData.category === 'ott_film' ||
+                        jejeupData.amusementData.anime === 'film') && (
                         <>
-                          <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
+                          {jejeupData.amusementData.rating === 'all' && (
+                            <>
+                              <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData.rating === 'b12' && (
+                            <>
+                              <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData.rating === 'c15' && (
+                            <>
+                              <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData.rating === 'd19' && (
+                            <>
+                              <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
+                            </>
+                          )}
                         </>
                       )}
-                      {jejeupData.amusementData.category === 'game' && jejeupData.amusementData.rating === 'c15' && (
+                      {jejeupData.amusementData.category === 'game' && (
                         <>
-                          <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
-                        </>
-                      )}
-                      {jejeupData.amusementData.category === 'game' && jejeupData.amusementData.rating === 'd19' && (
-                        <>
-                          <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
+                          {jejeupData.amusementData.rating === 'all' && (
+                            <>
+                              <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData.rating === 'b12' && (
+                            <>
+                              <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData.rating === 'c15' && (
+                            <>
+                              <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData.rating === 'd19' && (
+                            <>
+                              <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
+                            </>
+                          )}
                         </>
                       )}
                       {jejeupData.amusementData.ratingCustom && (
@@ -561,6 +559,11 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                     </dt>
                     <dd>
                       <strong>
+                        <span className={styles.title}>
+                          {jejeupData.amusementData.titleKorean
+                            ? jejeupData.amusementData.titleKorean
+                            : jejeupData.amusementData.title}
+                        </span>
                         {jejeupData.amusementData.lang === 'chineseBeonche' && (
                           <span lang="zh-Hant">{jejeupData.amusementData.title} </span>
                         )}
@@ -575,9 +578,6 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                         )}
                         {jejeupData.amusementData.lang === 'thai' && (
                           <span lang="th">{jejeupData.amusementData.title}</span>
-                        )}
-                        {jejeupData.amusementData.lang === null && (
-                          <span lang="ko">{jejeupData.amusementData.title}</span>
                         )}
                         {jejeupData.amusementData.originalAuthor &&
                           jejeupData.amusementData.original &&
@@ -728,91 +728,89 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                       )}
                       {jejeupData.amusementData2.ott === 'paramount' && (
                         <cite>
-                          <Paramount /> Paramount+
+                          <Paramount /> Paramaount+에서 스트리밍 중
                         </cite>
                       )}
                       {(jejeupData.amusementData2.category === 'drama' ||
                         jejeupData.amusementData2.category === 'ott_drama' ||
                         jejeupData.amusementData2.category === 'ott_anime' ||
                         jejeupData.amusementData2.anime === 'tva' ||
-                        jejeupData.amusementData2.anime === 'ova') &&
-                        jejeupData.amusementData2.rating !== 'd19' && (
-                          <>
-                            {jejeupData.amusementData2.rating === 'all' ? (
+                        jejeupData.amusementData2.anime === 'ova') && (
+                        <>
+                          {jejeupData.amusementData2.rating !== 'd19' && jejeupData.amusementData2.rating === 'all' ? (
+                            <>
                               <i className={`${styles.drama} ${styles.all} number`}>
                                 {RatingsDrama(jejeupData.amusementData2.rating)}
                               </i>
-                            ) : (
+                              <span>전체 이용가</span>
+                            </>
+                          ) : (
+                            <>
                               <i className={`${styles.drama} number`}>
                                 {RatingsDrama(jejeupData.amusementData2.rating)}
                               </i>
-                            )}
-                          </>
-                        )}
-                      {(jejeupData.amusementData2.category === 'drama' ||
-                        jejeupData.amusementData2.category === 'ott_drama' ||
-                        jejeupData.amusementData2.category === 'ott_anime' ||
-                        jejeupData.amusementData2.anime === 'tva' ||
-                        jejeupData.amusementData2.anime === 'ova') &&
-                        jejeupData.amusementData2.rating === 'd19' && (
-                          <i className={`${styles.drama} ${styles.d19} number`}>
-                            {RatingsDrama(jejeupData.amusementData2.rating)}
-                          </i>
-                        )}
-                      {(jejeupData.amusementData2.category === 'film' ||
-                        jejeupData.amusementData2.category === 'ott_anime_film' ||
-                        jejeupData.amusementData2.category === 'ott_film' ||
-                        jejeupData.amusementData2.anime === 'film') &&
-                        jejeupData.amusementData2.rating === 'all' && (
-                          <>
-                            <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
-                          </>
-                        )}
-                      {(jejeupData.amusementData2.category === 'film' ||
-                        jejeupData.amusementData2.category === 'ott_anime_film' ||
-                        jejeupData.amusementData2.category === 'ott_film' ||
-                        jejeupData.amusementData2.anime === 'film') &&
-                        jejeupData.amusementData2.rating === 'b12' && (
-                          <>
-                            <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
-                          </>
-                        )}
-                      {(jejeupData.amusementData2.category === 'film' ||
-                        jejeupData.amusementData2.category === 'ott_anime_film' ||
-                        jejeupData.amusementData2.category === 'ott_film' ||
-                        jejeupData.amusementData2.anime === 'film') &&
-                        jejeupData.amusementData2.rating === 'c15' && (
-                          <>
-                            <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
-                          </>
-                        )}
-                      {(jejeupData.amusementData2.category === 'film' ||
-                        jejeupData.amusementData2.category === 'ott_anime_film' ||
-                        jejeupData.amusementData2.category === 'ott_film' ||
-                        jejeupData.amusementData2.anime === 'film') &&
-                        jejeupData.amusementData2.rating === 'd19' && (
-                          <>
-                            <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
-                          </>
-                        )}
-                      {jejeupData.amusementData2.category === 'game' && jejeupData.amusementData2.rating === 'all' && (
-                        <>
-                          <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
+                              <span>세 이상 이용가</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData2.rating === 'd19' && (
+                            <>
+                              <i className={`${styles.drama} ${styles.d19} number`}>
+                                {RatingsDrama(jejeupData.amusementData2.rating)}
+                              </i>
+                              <span>세 미만 이용불가</span>
+                            </>
+                          )}
                         </>
                       )}
-                      {jejeupData.amusementData2.category === 'game' && jejeupData.amusementData2.rating === 'b12' && (
+                      {(jejeupData.amusementData2.category === 'film' ||
+                        jejeupData.amusementData2.category === 'ott_anime_film' ||
+                        jejeupData.amusementData2.category === 'ott_film' ||
+                        jejeupData.amusementData2.anime === 'film') && (
                         <>
-                          <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
+                          {jejeupData.amusementData2.rating === 'all' && (
+                            <>
+                              <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData2.rating === 'b12' && (
+                            <>
+                              <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData2.rating === 'c15' && (
+                            <>
+                              <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData2.rating === 'd19' && (
+                            <>
+                              <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
+                            </>
+                          )}
                         </>
                       )}
-                      {jejeupData.amusementData2.category === 'game' && jejeupData.amusementData2.rating === 'c15' && (
+                      {jejeupData.amusementData2.category === 'game' && (
                         <>
-                          <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
-                        </>
-                      )}
-                      {jejeupData.amusementData2.category === 'game' && jejeupData.amusementData2.rating === 'd19' && (
-                        <>
-                          <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
+                          {jejeupData.amusementData2.rating === 'all' && (
+                            <>
+                              <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData2.rating === 'b12' && (
+                            <>
+                              <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData2.rating === 'c15' && (
+                            <>
+                              <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData2.rating === 'd19' && (
+                            <>
+                              <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
+                            </>
+                          )}
                         </>
                       )}
                       {jejeupData.amusementData2.ratingCustom && (
@@ -851,6 +849,11 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                     </dt>
                     <dd>
                       <strong>
+                        <span className={styles.title}>
+                          {jejeupData.amusementData2.titleKorean
+                            ? jejeupData.amusementData2.titleKorean
+                            : jejeupData.amusementData2.title}
+                        </span>
                         {jejeupData.amusementData2.lang === 'chineseBeonche' && (
                           <span lang="zh-Hant">{jejeupData.amusementData2.title} </span>
                         )}
@@ -865,9 +868,6 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                         )}
                         {jejeupData.amusementData2.lang === 'thai' && (
                           <span lang="th">{jejeupData.amusementData2.title}</span>
-                        )}
-                        {jejeupData.amusementData2.lang === null && (
-                          <span lang="ko">{jejeupData.amusementData2.title}</span>
                         )}
                         {jejeupData.amusementData2.originalAuthor &&
                           jejeupData.amusementData2.original &&

@@ -578,7 +578,7 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                     )}
                     {amusementData.attributes.ott === 'paramount' && (
                       <>
-                        <Paramount /> Paramount+
+                        <Paramount /> Paramount+에서 스트리밍 중
                       </>
                     )}
                   </dd>

@@ -253,7 +253,7 @@ function Amusement() {
                             )}
                             {amusement.ott === 'paramount' && (
                               <>
-                                <ParamountIcon /> <span>Paramount+</span>
+                                <ParamountIcon /> <span>Paramount+에서 스트리밍 중</span>
                               </>
                             )}
                           </dd>
