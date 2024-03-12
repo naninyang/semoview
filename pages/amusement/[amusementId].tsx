@@ -666,83 +666,94 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                     amusementData.attributes.category === 'ott_drama' ||
                     amusementData.attributes.category === 'ott_anime' ||
                     amusementData.attributes.anime === 'tva' ||
-                    amusementData.attributes.anime === 'ova') &&
-                    amusementData.attributes.rating !== 'd19' && (
-                      <>
-                        {amusementData.attributes.rating === 'all' ? (
+                    amusementData.attributes.anime === 'ova') && (
+                    <>
+                      {amusementData.attributes.rating === 'all' ? (
+                        <>
                           <i className={`${styles.drama} ${styles.all} number`}>
                             {RatingsDrama(amusementData.attributes.rating)}
                           </i>
-                        ) : (
-                          <i className={`${styles.drama} number`}>{RatingsDrama(amusementData.attributes.rating)}</i>
-                        )}
-                      </>
-                    )}
-                  {(amusementData.attributes.category === 'drama' ||
-                    amusementData.attributes.category === 'ott_drama' ||
-                    amusementData.attributes.category === 'ott_anime' ||
-                    amusementData.attributes.anime === 'tva' ||
-                    amusementData.attributes.anime === 'ova') &&
-                    amusementData.attributes.rating === 'd19' && (
-                      <i className={`${styles.drama} ${styles.d19} number`}>
-                        {RatingsDrama(amusementData.attributes.rating)}
-                      </i>
-                    )}
-                  {(amusementData.attributes.category === 'film' ||
-                    amusementData.attributes.category === 'ott_anime_film' ||
-                    amusementData.attributes.category === 'ott_film' ||
-                    amusementData.attributes.anime === 'film') &&
-                    amusementData.attributes.rating === 'all' && (
-                      <>
-                        <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
-                      </>
-                    )}
-                  {(amusementData.attributes.category === 'film' ||
-                    amusementData.attributes.category === 'ott_anime_film' ||
-                    amusementData.attributes.category === 'ott_film' ||
-                    amusementData.attributes.anime === 'film') &&
-                    amusementData.attributes.rating === 'b12' && (
-                      <>
-                        <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
-                      </>
-                    )}
-                  {(amusementData.attributes.category === 'film' ||
-                    amusementData.attributes.category === 'ott_anime_film' ||
-                    amusementData.attributes.category === 'ott_film' ||
-                    amusementData.attributes.anime === 'film') &&
-                    amusementData.attributes.rating === 'c15' && (
-                      <>
-                        <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
-                      </>
-                    )}
-                  {(amusementData.attributes.category === 'film' ||
-                    amusementData.attributes.category === 'ott_anime_film' ||
-                    amusementData.attributes.category === 'ott_film' ||
-                    amusementData.attributes.anime === 'film') &&
-                    amusementData.attributes.rating === 'd19' && (
-                      <>
-                        <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
-                      </>
-                    )}
-                  {amusementData.attributes.category === 'game' && amusementData.attributes.rating === 'all' && (
-                    <>
-                      <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
+                          <span>전체 이용가</span>
+                        </>
+                      ) : (
+                        <>
+                          {amusementData.attributes.rating === 'd19' ? (
+                            <>
+                              <i className={`${styles.drama} ${styles.d19} number`}>
+                                {RatingsDrama(amusementData.attributes.rating)}
+                              </i>
+                              <span>세 미만 이용불가</span>
+                            </>
+                          ) : (
+                            <>
+                              <i className={`${styles.drama} number`}>
+                                {RatingsDrama(amusementData.attributes.rating)}
+                              </i>
+                              <span>세 이상 이용가</span>
+                            </>
+                          )}
+                        </>
+                      )}
                     </>
                   )}
-                  {amusementData.attributes.category === 'game' && amusementData.attributes.rating === 'b12' && (
+                  {(amusementData.attributes.category === 'film' ||
+                    amusementData.attributes.category === 'ott_anime_film' ||
+                    amusementData.attributes.category === 'ott_film' ||
+                    amusementData.attributes.anime === 'film') && (
                     <>
-                      <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
+                      {amusementData.attributes.rating === 'all' && (
+                        <>
+                          <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
+                        </>
+                      )}
+                      {amusementData.attributes.rating === 'b12' && (
+                        <>
+                          <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
+                        </>
+                      )}
+                      {amusementData.attributes.rating === 'c15' && (
+                        <>
+                          <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
+                        </>
+                      )}
+                      {amusementData.attributes.rating === 'd19' && (
+                        <>
+                          <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
+                        </>
+                      )}
                     </>
                   )}
-                  {amusementData.attributes.category === 'game' && amusementData.attributes.rating === 'c15' && (
+                  {amusementData.attributes.category === 'game' && (
                     <>
-                      <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
+                      {amusementData.attributes.rating === 'all' && (
+                        <>
+                          <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
+                        </>
+                      )}
+                      {amusementData.attributes.rating === 'b12' && (
+                        <>
+                          <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
+                        </>
+                      )}
+                      {amusementData.attributes.rating === 'c15' && (
+                        <>
+                          <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
+                        </>
+                      )}
+                      {amusementData.attributes.rating === 'd19' && (
+                        <>
+                          <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
+                        </>
+                      )}
                     </>
                   )}
-                  {amusementData.attributes.category === 'game' && amusementData.attributes.rating === 'd19' && (
-                    <>
-                      <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
-                    </>
+                  {amusementData.attributes.ratingCustom && (
+                    <div className={styles.custom}>
+                      <button type="button" onClick={customRatingHandler}>
+                        <i />
+                        <span>제제없 자체설정 심의등급 안내</span>
+                      </button>
+                    </div>
                   )}
                   {amusementData.attributes.ratingCustom && (
                     <div className={styles.custom}>
