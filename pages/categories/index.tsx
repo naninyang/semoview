@@ -166,7 +166,8 @@ function Categories() {
   return (
     <main className={styles.categories}>
       <Seo
-        pageTitle={`리뷰 카테고리 선택하기 - ${originTitle}`}
+        pageTitles={`리뷰 카테고리 선택하기 - ${originTitle}`}
+        pageTitle={`리뷰 카테고리 선택하기`}
         pageDescription="Only OTT / 영화 / 애니메이션 / 드라마 / 애니메이션 영화 / 게임"
         pageImg={`https://jejeup.dev1stud.io/og-categories.webp?ts=${timestamp}`}
       />
