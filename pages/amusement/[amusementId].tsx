@@ -647,7 +647,7 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                   {amusementData.attributes.category !== 'anime_film' && (
                     <em>{CategoryName(amusementData.attributes.category)}</em>
                   )}
-                  {amusementData.attributes.anime !== 'null' && <em>{AnimeName(amusementData.attributes.anime)}</em>}
+                  {amusementData.attributes.anime !== null && <em>{AnimeName(amusementData.attributes.anime)}</em>}
                 </dd>
               </div>
               {amusementData.attributes.country !== '?' && (
