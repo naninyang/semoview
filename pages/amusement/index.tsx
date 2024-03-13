@@ -43,6 +43,34 @@ const ParamountIcon = styled.i({
   background: `url(${vectors.ott.paramountIcon}) no-repeat 50% 50%/contain`,
 });
 
+const EnaIcon = styled.i({
+  background: `url(${vectors.broadcast.enaIcon}) no-repeat 50% 50%/contain`,
+});
+
+const JtbcIcon = styled.i({
+  background: `url(${vectors.broadcast.jtbcIcon}) no-repeat 50% 50%/contain`,
+});
+
+const Kbs2Icon = styled.i({
+  background: `url(${vectors.broadcast.kbs2Icon}) no-repeat 50% 50%/contain`,
+});
+
+const MbcIcon = styled.i({
+  background: `url(${vectors.broadcast.mbcIcon}) no-repeat 50% 50%/contain`,
+});
+
+const OcnIcon = styled.i({
+  background: `url(${vectors.broadcast.ocnIcon}) no-repeat 50% 50%/contain`,
+});
+
+const SbsIcon = styled.i({
+  background: `url(${vectors.broadcast.sbsIcon}) no-repeat 50% 50%/contain`,
+});
+
+const TvnIcon = styled.i({
+  background: `url(${vectors.broadcast.tvnIcon}) no-repeat 50% 50%/contain`,
+});
+
 const BackButton = styled.i({
   display: 'block',
   background: `url(${vectors.backward}) no-repeat 50% 50%/contain`,
@@ -215,6 +243,48 @@ function Amusement({ categoryQuery }: { categoryQuery: string }) {
                       unoptimized
                     />
                     <dl>
+                      {amusement.broadcast !== null && (
+                        <div className={`${styles.broadcast} ${amusement.ott !== null ? styles.broadcasts : ''}`}>
+                          <dt>방송국</dt>
+                          <dd>
+                            {amusement.broadcast === 'ENA' && (
+                              <>
+                                <EnaIcon /> <span>ENA</span>
+                              </>
+                            )}
+                            {amusement.broadcast === 'JTBC' && (
+                              <>
+                                <JtbcIcon /> <span>JTBC</span>
+                              </>
+                            )}
+                            {amusement.broadcast === 'KBS2' && (
+                              <>
+                                <Kbs2Icon /> <span>KBS 2TV</span>
+                              </>
+                            )}
+                            {amusement.broadcast === 'MBC' && (
+                              <>
+                                <MbcIcon /> <span>MBC</span>
+                              </>
+                            )}
+                            {amusement.broadcast === 'OCN' && (
+                              <>
+                                <OcnIcon /> <span>OCN</span>
+                              </>
+                            )}
+                            {amusement.broadcast === 'SBS' && (
+                              <>
+                                <SbsIcon /> <span>SBS</span>
+                              </>
+                            )}
+                            {amusement.broadcast === 'tvN' && (
+                              <>
+                                <TvnIcon /> <span>tvN</span>
+                              </>
+                            )}
+                          </dd>
+                        </div>
+                      )}
                       {amusement.ott !== null && (
                         <div className={styles.platform}>
                           <dt>플랫폼</dt>

@@ -71,6 +71,41 @@ const Paramount = styled.i({
   background: `url(${vectors.ott.paramount}) no-repeat 50% 50%/contain`,
 });
 
+const Ena = styled.i({
+  width: rem(37),
+  background: `url(${vectors.broadcast.ena}) no-repeat 0 50%/contain`,
+});
+
+const Jtbc = styled.i({
+  width: rem(27),
+  background: `url(${vectors.broadcast.jtbc}) no-repeat 0 50%/contain`,
+});
+
+const Kbs2tv = styled.i({
+  width: rem(43),
+  background: `url(${vectors.broadcast.kbs2tv}) no-repeat 0 50%/contain`,
+});
+
+const Mbc = styled.i({
+  width: rem(49),
+  background: `url(${vectors.broadcast.mbc}) no-repeat 0 50%/contain`,
+});
+
+const Ocn = styled.i({
+  width: rem(42),
+  background: `url(${vectors.broadcast.ocn}) no-repeat 0 50%/contain`,
+});
+
+const Sbs = styled.i({
+  width: rem(31),
+  background: `url(${vectors.broadcast.sbs}) no-repeat 0 50%/contain`,
+});
+
+const Tvn = styled.i({
+  width: rem(34),
+  background: `url(${vectors.broadcast.tvn}) no-repeat 0 50%/contain`,
+});
+
 const RatingFilmAll = styled.i({
   background: `url(${vectors.ratings.film.all}) no-repeat 50% 50%/contain`,
 });
@@ -523,7 +558,44 @@ function Home() {
                                     동명의 {OriginalName(jejeup.amusementData.original)} 원작
                                   </span>
                                 )}
-                              <time>{jejeup.amusementData.release}</time>
+                              <time>
+                                {jejeup.amusementData.broadcast === 'ENA' && (
+                                  <>
+                                    <Ena /> <span>ENA</span>
+                                  </>
+                                )}
+                                {jejeup.amusementData.broadcast === 'JTBC' && (
+                                  <>
+                                    <Jtbc /> <span>JTBC</span>
+                                  </>
+                                )}
+                                {jejeup.amusementData.broadcast === 'KBS2' && (
+                                  <>
+                                    <Kbs2tv /> <span>KBS 2TV</span>
+                                  </>
+                                )}
+                                {jejeup.amusementData.broadcast === 'MBC' && (
+                                  <>
+                                    <Mbc /> <span>MBC</span>
+                                  </>
+                                )}
+                                {jejeup.amusementData.broadcast === 'OCN' && (
+                                  <>
+                                    <Ocn /> <span>OCN</span>
+                                  </>
+                                )}
+                                {jejeup.amusementData.broadcast === 'SBS' && (
+                                  <>
+                                    <Sbs /> <span>SBS</span>
+                                  </>
+                                )}
+                                {jejeup.amusementData.broadcast === 'tvN' && (
+                                  <>
+                                    <Tvn /> <span>tvN</span>
+                                  </>
+                                )}
+                                <em>{jejeup.amusementData.release}</em>
+                              </time>
                             </strong>
                             {jejeup.amusementData.etc !== null && <em className="lang">{jejeup.amusementData.etc}</em>}
                           </dd>

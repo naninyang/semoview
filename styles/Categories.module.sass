@@ -170,10 +170,10 @@
               +screen-reader-only
 
             div
+              &.broadcast,
               &.platform
                 position: absolute
                 top: 0
-                right: 0
 
                 i
                   display: inline-block
@@ -189,6 +189,22 @@
               dd
                 span
                   +screen-reader-only
+
+              &.broadcast
+                right: 0
+
+                &.broadcasts
+                  right: rem(37)
+
+                  +mq(minSmall)
+                    right: rem(43)
+
+                  & + .platform
+                    i
+                      border-radius: 0
+
+              &.platform
+                right: 0
 
               &:last-of-type
                 position: absolute

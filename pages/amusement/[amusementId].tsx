@@ -81,6 +81,41 @@ const Paramount = styled.i({
   background: `url(${vectors.ott.paramount}) no-repeat 50% 50%/contain`,
 });
 
+const Ena = styled.i({
+  width: rem(37),
+  background: `url(${vectors.broadcast.ena2}) no-repeat 0 50%/contain`,
+});
+
+const Jtbc = styled.i({
+  width: rem(27),
+  background: `url(${vectors.broadcast.jtbc2}) no-repeat 0 50%/contain`,
+});
+
+const Kbs2tv = styled.i({
+  width: rem(43),
+  background: `url(${vectors.broadcast.kbs2tv2}) no-repeat 0 50%/contain`,
+});
+
+const Mbc = styled.i({
+  width: rem(49),
+  background: `url(${vectors.broadcast.mbc2}) no-repeat 0 50%/contain`,
+});
+
+const Ocn = styled.i({
+  width: rem(42),
+  background: `url(${vectors.broadcast.ocn2}) no-repeat 0 50%/contain`,
+});
+
+const Sbs = styled.i({
+  width: rem(31),
+  background: `url(${vectors.broadcast.sbs2}) no-repeat 0 50%/contain`,
+});
+
+const Tvn = styled.i({
+  width: rem(34),
+  background: `url(${vectors.broadcast.tvn2}) no-repeat 0 50%/contain`,
+});
+
 const RatingFilmAll = styled.i({
   background: `url(${vectors.ratings.film.all}) no-repeat 50% 50%/contain`,
 });
@@ -645,7 +680,44 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                 <dt>카테고리</dt>
                 <dd>
                   {amusementData.attributes.category !== 'anime_film' && (
-                    <em>{CategoryName(amusementData.attributes.category)}</em>
+                    <em>
+                      {amusementData.attributes.broadcast === 'ENA' && (
+                        <>
+                          <Ena /> <span>ENA</span>
+                        </>
+                      )}
+                      {amusementData.attributes.broadcast === 'JTBC' && (
+                        <>
+                          <Jtbc /> <span>JTBC</span>
+                        </>
+                      )}
+                      {amusementData.attributes.broadcast === 'KBS2' && (
+                        <>
+                          <Kbs2tv /> <span>KBS 2TV</span>
+                        </>
+                      )}
+                      {amusementData.attributes.broadcast === 'MBC' && (
+                        <>
+                          <Mbc /> <span>MBC</span>
+                        </>
+                      )}
+                      {amusementData.attributes.broadcast === 'OCN' && (
+                        <>
+                          <Ocn /> <span>OCN</span>
+                        </>
+                      )}
+                      {amusementData.attributes.broadcast === 'SBS' && (
+                        <>
+                          <Sbs /> <span>SBS</span>
+                        </>
+                      )}
+                      {amusementData.attributes.broadcast === 'tvN' && (
+                        <>
+                          <Tvn /> <span>tvN</span>
+                        </>
+                      )}
+                      {CategoryName(amusementData.attributes.category)}
+                    </em>
                   )}
                   {amusementData.attributes.anime !== null && <em>{AnimeName(amusementData.attributes.anime)}</em>}
                 </dd>

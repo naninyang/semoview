@@ -345,9 +345,23 @@
                 color: rgba($hex-dark, .7)
 
             time
-              font-size: rem(14)
-              font-weight: 400
-              color: $hex-dark
+              display: flex
+              align-items: center
+              gap: rem(7)
+              margin-top: rem(3)
+
+              em
+                font-size: rem(14)
+                font-weight: 400
+                line-height: 1
+                color: $hex-dark
+
+              i
+                display: inline-block
+                height: rem(14)
+
+              span
+                +screen-reader-only
 
           em
             display: block
