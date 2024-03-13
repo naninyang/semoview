@@ -217,7 +217,7 @@ function Amusement() {
                           <dd>
                             {amusement.ott === 'amazonOriginal' && (
                               <>
-                                <AmazonIcon /> <span>Amazon Prime Video</span>
+                                <AmazonIcon /> <span>AMAZON ORIGINAL</span>
                               </>
                             )}
                             {(amusement.ott === 'appleOriginal' || amusement.ott === 'appleFilm') && (

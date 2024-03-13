@@ -368,7 +368,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                       )}
                       {jejeupData.amusementData.ott === 'amazonOriginal' && (
                         <cite>
-                          <AmazonOriginal /> Amazon Prime Video
+                          <AmazonOriginal /> AMAZON ORIGINAL
                         </cite>
                       )}
                       {jejeupData.amusementData.ott === 'appleOriginal' && (
@@ -536,7 +536,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                       )}
                       {jejeupData.amusementData.ottAddr && (
                         <Anchor href={jejeupData.amusementData.ottAddr}>
-                          {jejeupData.amusementData.ott === 'amazonOriginal' && 'Amazon Prime Video'}
+                          {jejeupData.amusementData.ott === 'amazonOriginal' && 'AMAZON ORIGINAL'}
                           {(jejeupData.amusementData.ott === 'appleOriginal' ||
                             jejeupData.amusementData.ott === 'appleFilm') &&
                             'Apple TV+'}
@@ -661,7 +661,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                       )}
                       {jejeupData.amusementData2.ott === 'amazonOriginal' && (
                         <cite>
-                          <AmazonOriginal /> Amazon Prime Video
+                          <AmazonOriginal /> AMAZON ORIGINAL
                         </cite>
                       )}
                       {jejeupData.amusementData2.ott === 'appleOriginal' && (
@@ -829,7 +829,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                       )}
                       {jejeupData.amusementData2.ottAddr && (
                         <Anchor href={jejeupData.amusementData2.ottAddr}>
-                          {jejeupData.amusementData2.ott === 'amazonOriginal' && 'Amazon Prime Video'}
+                          {jejeupData.amusementData2.ott === 'amazonOriginal' && 'AMAZON ORIGINAL'}
                           {(jejeupData.amusementData2.ott === 'appleOriginal' ||
                             jejeupData.amusementData2.ott === 'appleFilm') &&
                             'Apple TV+'}

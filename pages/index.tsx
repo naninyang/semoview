@@ -313,7 +313,7 @@ function Home() {
                             )}
                             {jejeup.amusementData.ott === 'amazonOriginal' && (
                               <cite>
-                                <AmazonOriginal /> Amazon Prime Video
+                                <AmazonOriginal /> AMAZON ORIGINAL
                               </cite>
                             )}
                             {jejeup.amusementData.ott === 'appleOriginal' && (

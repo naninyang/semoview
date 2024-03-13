@@ -527,7 +527,7 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                   <dd>
                     {amusementData.attributes.ott === 'amazonOriginal' && (
                       <>
-                        <AmazonOriginal /> Amazon Prime Video
+                        <AmazonOriginal /> AMAZON ORIGINAL
                       </>
                     )}
                     {amusementData.attributes.ott === 'appleOriginal' && (
@@ -608,7 +608,7 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                   <dt>OTT에서 보기</dt>
                   <dd>
                     <Anchor href={amusementData.attributes.ottAddr}>
-                      {amusementData.attributes.ott === 'amazonOriginal' && 'Amazon Prime Video'}
+                      {amusementData.attributes.ott === 'amazonOriginal' && 'AMAZON ORIGINAL'}
                       {(amusementData.attributes.ott === 'appleOriginal' ||
                         amusementData.attributes.ott === 'appleFilm') &&
                         'Apple TV+'}
