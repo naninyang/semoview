@@ -138,9 +138,17 @@ function Amusement({ categoryQuery }: { categoryQuery: string }) {
   return (
     <main className={`${styles.categories} ${styles.amusement}`}>
       <Seo
-        pageTitles={`카테고리 선택 - ${originTitle}`}
-        pageTitle={`카테고리 선택`}
-        pageDescription="원하는 카테고리를 선택해 리뷰, 실황 영상을 즐겨보세요. 드라마, 영화, 애니, OTT 오리지널, 게임의 모든 것."
+        pageTitles={`${categoryQuery === 'drama' ? '개가 짖어도 드라마는 정주행 할 수밖에 없다!' : ''}
+              ${categoryQuery === 'film' ? '영화 사회에서는 영원한 우방도, 영원한 적도 없다!' : ''}
+              ${categoryQuery === 'game' ? '게임은 끝날 때까지 끝난 게 아니다!' : ''}
+              ${categoryQuery === 'anime' ? '애니입니다만, 문제라도?' : ''}
+              ${categoryQuery === 'ott' ? '퇴근 후, 이세계 OTT에서만 볼 수 있는 콘텐츠를.' : ''} - ${originTitle}`}
+        pageTitle={`${categoryQuery === 'drama' ? '개가 짖어도 드라마는 정주행 할 수밖에 없다!' : ''}
+              ${categoryQuery === 'film' ? '영화 사회에서는 영원한 우방도, 영원한 적도 없다!' : ''}
+              ${categoryQuery === 'game' ? '게임은 끝날 때까지 끝난 게 아니다!' : ''}
+              ${categoryQuery === 'anime' ? '애니입니다만, 문제라도?' : ''}
+              ${categoryQuery === 'ott' ? '퇴근 후, 이세계 OTT에서만 볼 수 있는 콘텐츠를.' : ''}`}
+        pageDescription="원하는 카테고리를 선택해 리뷰영상을 즐겨보세요. 드라마, 영화, 애니, OTT 오리지널, 게임의 모든 것"
         pageImg={`https://jejeup.dev1stud.io/og-${categoryQuery}.webp?ts=${timestamp}`}
       />
       <div className="top-link">
