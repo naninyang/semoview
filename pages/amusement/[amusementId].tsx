@@ -755,14 +755,6 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                       </button>
                     </div>
                   )}
-                  {amusementData.attributes.ratingCustom && (
-                    <div className={styles.custom}>
-                      <button type="button" onClick={customRatingHandler}>
-                        <i />
-                        <span>제제없 자체설정 심의등급 안내</span>
-                      </button>
-                    </div>
-                  )}
                 </dd>
               </div>
             </div>
