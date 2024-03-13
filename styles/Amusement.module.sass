@@ -185,11 +185,24 @@
         flex-direction: column
         gap: rem(3)
 
-        dd
-          border: 1px solid $hex-white
-          border-radius: rem(3)
-          padding: rem(5) rem(7)
-          color: $hex-white
+        .item
+          .category
+            dd
+              display: flex
+              gap: rem(7)
+
+              em
+                border: 1px solid $hex-white
+                border-radius: rem(3)
+                padding: rem(5) rem(7)
+                color: $hex-white
+
+          .country, .release
+            dd
+              border: 1px solid $hex-white
+              border-radius: rem(3)
+              padding: rem(5) rem(7)
+              color: $hex-white
 
         .platform
           dd

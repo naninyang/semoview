@@ -137,7 +137,15 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
       router.push(`${previousPage}`);
     } else {
       if (amusementData) {
-        if (amusementData.attributes.category === 'ottFilm') router.push('/amusement?category=ott');
+        if (
+          amusementData.attributes.category === 'ott_drama' ||
+          amusementData.attributes.category === 'ott_anime' ||
+          amusementData.attributes.category === 'ott_anime_film' ||
+          amusementData.attributes.category === 'ott_film'
+        )
+          router.push('/amusement?category=ott');
+        else if (amusementData.attributes.category === 'anime' || amusementData.attributes.category === 'anime_film')
+          router.push('/amusement?category=anime');
         else router.push(`/amusement?category=${amusementData.attributes.category}`);
       }
     }
@@ -633,20 +641,15 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
           </div>
           <dl className={styles.summary}>
             <div className={styles.item}>
-              {amusementData.attributes.category !== 'ott_drama' &&
-                amusementData.attributes.category !== 'ott_anime' &&
-                amusementData.attributes.category !== 'ott_anime_film' &&
-                amusementData.attributes.category !== 'ott_film' && (
-                  <div className={styles.category}>
-                    <dt>카테고리</dt>
-                    <dd>
-                      <em>{CategoryName(amusementData.attributes.category)}</em>
-                      {amusementData.attributes.category === 'anime' && (
-                        <em>{AnimeName(amusementData.attributes.anime)}</em>
-                      )}
-                    </dd>
-                  </div>
-                )}
+              <div className={styles.category}>
+                <dt>카테고리</dt>
+                <dd>
+                  {amusementData.attributes.category !== 'anime_film' && (
+                    <em>{CategoryName(amusementData.attributes.category)}</em>
+                  )}
+                  {amusementData.attributes.anime !== 'null' && <em>{AnimeName(amusementData.attributes.anime)}</em>}
+                </dd>
+              </div>
               {amusementData.attributes.country !== '?' && (
                 <div className={styles.country}>
                   <dt>제작국가</dt>
