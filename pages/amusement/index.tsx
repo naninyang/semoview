@@ -80,7 +80,7 @@ const RatingGameD19 = styled.i({
   background: `url(${vectors.ratings.game.d19}) no-repeat 50% 50%/contain`,
 });
 
-function Amusement() {
+function Amusement({ categoryQuery }: { categoryQuery: string }) {
   const router = useRouter();
   const timestamp = Date.now();
   const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -141,7 +141,7 @@ function Amusement() {
         pageTitles={`카테고리 선택 - ${originTitle}`}
         pageTitle={`카테고리 선택`}
         pageDescription="원하는 카테고리를 선택해 리뷰, 실황 영상을 즐겨보세요. 드라마, 영화, 애니, OTT 오리지널, 게임의 모든 것."
-        pageImg={`https://jejeup.dev1stud.io/og-image.webp?ts=${timestamp}`}
+        pageImg={`https://jejeup.dev1stud.io/og-${categoryQuery}.webp?ts=${timestamp}`}
       />
       <div className="top-link">
         <Anchor href="/categories">
@@ -378,3 +378,11 @@ function Amusement() {
 }
 
 export default Amusement;
+
+export async function getServerSideProps(context: any) {
+  return {
+    props: {
+      categoryQuery: context.query.category || '',
+    },
+  };
+}
