@@ -666,13 +666,13 @@ function Home() {
                           )}
                           {jejeup.amusementData.publisher !== '?' && (
                             <div>
-                              <dt>퍼블리셔</dt>
+                              <dt>{jejeup.amusementData.category === 'game' ? '유통/배급' : '퍼블리셔'}</dt>
                               <dd>{jejeup.amusementData.publisher}</dd>
                             </div>
                           )}
                           {jejeup.amusementData.creator !== '?' && (
                             <div>
-                              <dt>주요 제작자</dt>
+                              <dt>{jejeup.amusementData.category === 'game' ? '개발' : '주요 제작자'}</dt>
                               <dd>{jejeup.amusementData.creator}</dd>
                             </div>
                           )}
