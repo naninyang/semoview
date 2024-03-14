@@ -669,7 +669,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                               <Tvn /> <span>tvN</span>
                             </>
                           )}
-                          {jejeupData.amusementData.release}
+                          {jejeupData.amusementData.release !== '?' && jejeupData.amusementData.release}
                         </time>
                       </strong>
                       {jejeupData.amusementData.etc !== null && (
@@ -686,22 +686,30 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                           <dd>{jejeupData.amusementData.originalAuthor}</dd>
                         </div>
                       )}
-                    <div>
-                      <dt>제작국가</dt>
-                      <dd>{jejeupData.amusementData.country}</dd>
-                    </div>
-                    <div>
-                      <dt>장르</dt>
-                      <dd>{jejeupData.amusementData.genre}</dd>
-                    </div>
-                    <div>
-                      <dt>퍼블리셔</dt>
-                      <dd>{jejeupData.amusementData.publisher}</dd>
-                    </div>
-                    <div>
-                      <dt>주요 제작자</dt>
-                      <dd>{jejeupData.amusementData.creator}</dd>
-                    </div>
+                    {jejeupData.amusementData.country !== '?' && (
+                      <div>
+                        <dt>제작국가</dt>
+                        <dd>{jejeupData.amusementData.country}</dd>
+                      </div>
+                    )}
+                    {jejeupData.amusementData.genre !== '?' && (
+                      <div>
+                        <dt>장르</dt>
+                        <dd>{jejeupData.amusementData.genre}</dd>
+                      </div>
+                    )}
+                    {jejeupData.amusementData.publisher !== '?' && (
+                      <div>
+                        <dt>{jejeupData.amusementData.category === 'game' ? '유통/배급' : '퍼블리싱'}</dt>
+                        <dd>{jejeupData.amusementData.publisher}</dd>
+                      </div>
+                    )}
+                    {jejeupData.amusementData.creator !== '?' && (
+                      <div>
+                        <dt>{jejeupData.amusementData.category === 'game' ? '개발' : '주요 제작자'}</dt>
+                        <dd>{jejeupData.amusementData.creator}</dd>
+                      </div>
+                    )}
                     {jejeupData.amusementData.cast !== null && (
                       <div>
                         {jejeupData.amusementData.category !== 'anime' &&
@@ -979,27 +987,35 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                           <dd>{jejeupData.amusementData2.originalAuthor}</dd>
                         </div>
                       )}
-                    <div>
-                      <dt>제작국가</dt>
-                      <dd>{jejeupData.amusementData2.country}</dd>
-                    </div>
-                    <div>
-                      <dt>장르</dt>
-                      <dd>{jejeupData.amusementData2.genre}</dd>
-                    </div>
-                    <div>
-                      <dt>퍼블리셔</dt>
-                      <dd>{jejeupData.amusementData2.publisher}</dd>
-                    </div>
-                    <div>
-                      <dt>주요 제작자</dt>
-                      <dd>{jejeupData.amusementData2.creator}</dd>
-                    </div>
+                    {jejeupData.amusementData2.country !== '?' && (
+                      <div>
+                        <dt>제작국가</dt>
+                        <dd>{jejeupData.amusementData2.country}</dd>
+                      </div>
+                    )}
+                    {jejeupData.amusementData2.genre !== '?' && (
+                      <div>
+                        <dt>장르</dt>
+                        <dd>{jejeupData.amusementData2.genre}</dd>
+                      </div>
+                    )}
+                    {jejeupData.amusementData2.publisher !== '?' && (
+                      <div>
+                        <dt>{jejeupData.amusementData2.category === 'game' ? '유통/배급' : '퍼블리싱'}</dt>
+                        <dd>{jejeupData.amusementData2.publisher}</dd>
+                      </div>
+                    )}
+                    {jejeupData.amusementData2.creator !== '?' && (
+                      <div>
+                        <dt>{jejeupData.amusementData2.category === 'game' ? '개발' : '주요 제작자'}</dt>
+                        <dd>{jejeupData.amusementData2.creator}</dd>
+                      </div>
+                    )}
                     {jejeupData.amusementData2.cast !== null && (
                       <div>
                         {jejeupData.amusementData2.category !== 'anime' &&
-                        jejeupData.amusementData2.category !== 'ottAnime' &&
-                        jejeupData.amusementData2.category !== 'ottAnimeFilm' &&
+                        jejeupData.amusementData2.category !== 'ott_anime' &&
+                        jejeupData.amusementData2.category !== 'ott_anime_film' &&
                         jejeupData.amusementData2.category !== 'game' ? (
                           <dt>주요 출연자</dt>
                         ) : (

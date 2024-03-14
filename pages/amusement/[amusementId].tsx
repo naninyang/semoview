@@ -843,19 +843,21 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                   <dd>{amusementData.attributes.originalAuthor}</dd>
                 </div>
               )}
-            <div>
-              <dt>장르</dt>
-              <dd>{amusementData.attributes.genre}</dd>
-            </div>
+            {amusementData.attributes.genre !== '?' && (
+              <div>
+                <dt>장르</dt>
+                <dd>{amusementData.attributes.genre}</dd>
+              </div>
+            )}
             {amusementData.attributes.publisher !== '?' && (
               <div>
-                <dt>퍼블리셔</dt>
+                <dt>{amusementData.attributes.category === 'game' ? '유통/배급' : '퍼블리싱'}</dt>
                 <dd>{amusementData.attributes.publisher}</dd>
               </div>
             )}
             {amusementData.attributes.creator !== '?' && (
               <div>
-                <dt>주요 제작자</dt>
+                <dt>{amusementData.attributes.category === 'game' ? '개발' : '주요 제작자'}</dt>
                 <dd>{amusementData.attributes.creator}</dd>
               </div>
             )}

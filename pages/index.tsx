@@ -609,27 +609,35 @@ function Home() {
                                 <dd>{jejeup.amusementData.originalAuthor}</dd>
                               </div>
                             )}
-                          <div>
-                            <dt>제작국가</dt>
-                            <dd>{jejeup.amusementData.country}</dd>
-                          </div>
-                          <div>
-                            <dt>장르</dt>
-                            <dd>{jejeup.amusementData.genre}</dd>
-                          </div>
-                          <div>
-                            <dt>퍼블리셔</dt>
-                            <dd>{jejeup.amusementData.publisher}</dd>
-                          </div>
-                          <div>
-                            <dt>주요 제작자</dt>
-                            <dd>{jejeup.amusementData.creator}</dd>
-                          </div>
+                          {jejeup.amusementData.country !== '?' && (
+                            <div>
+                              <dt>제작국가</dt>
+                              <dd>{jejeup.amusementData.country}</dd>
+                            </div>
+                          )}
+                          {jejeup.amusementData.genre !== '?' && (
+                            <div>
+                              <dt>장르</dt>
+                              <dd>{jejeup.amusementData.genre}</dd>
+                            </div>
+                          )}
+                          {jejeup.amusementData.publisher !== '?' && (
+                            <div>
+                              <dt>퍼블리셔</dt>
+                              <dd>{jejeup.amusementData.publisher}</dd>
+                            </div>
+                          )}
+                          {jejeup.amusementData.creator !== '?' && (
+                            <div>
+                              <dt>주요 제작자</dt>
+                              <dd>{jejeup.amusementData.creator}</dd>
+                            </div>
+                          )}
                           {jejeup.amusementData.cast !== null && (
                             <div>
                               {jejeup.amusementData.category !== 'anime' &&
-                              jejeup.amusementData.category !== 'ottAnime' &&
-                              jejeup.amusementData.category !== 'ottAnimeFilm' &&
+                              jejeup.amusementData.category !== 'ott_anime' &&
+                              jejeup.amusementData.category !== 'ott_anime_film' &&
                               jejeup.amusementData.category !== 'game' ? (
                                 <dt>주요 출연자</dt>
                               ) : (
