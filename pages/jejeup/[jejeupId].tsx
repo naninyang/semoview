@@ -901,7 +901,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                       )}
                       {jejeupData.amusementData2.ottAddr && (
                         <Anchor href={jejeupData.amusementData2.ottAddr}>
-                          {jejeupData.amusementData2.ott === 'amazonOriginal' && 'AMAZON ORIGINAL'}
+                          {jejeupData.amusementData2.ott === 'amazonOriginal' && 'Prime Video'}
                           {(jejeupData.amusementData2.ott === 'appleOriginal' ||
                             jejeupData.amusementData2.ott === 'appleFilm') &&
                             'Apple TV+'}
