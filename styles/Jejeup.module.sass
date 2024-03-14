@@ -178,6 +178,7 @@
 
         em
           display: inline-flex
+          align-items: center
           height: rem(24)
           margin-right: rem(3)
           border: 2px solid $hex-accent
@@ -189,6 +190,42 @@
           font-style: normal
           color: $hex-accent
           vertical-align: top
+
+          &.ENA
+            border-color: #3B31E0
+            color: #3B31E0
+
+          &.JTBC
+            border-color: #F0047F
+            color: #F0047F
+
+          &.KBS2
+            border-color: #FAB700
+            color: #FAB700
+
+          &.MBC
+            border-color: #42515E
+            color: #42515E
+
+          &.OCN
+            border-color: #FFB514
+            color: #FFB514
+
+          &.SBS
+            border-color: #005A91
+            color: #005A91
+
+          &.tvN
+            border-color: #FA0029
+            color: #FA0029
+
+          i
+            display: inline-block
+            margin-right: rem(5)
+            height: rem(14)
+
+          span
+            +screen-reader-only
 
           & + i.rating
             vertical-align: top
@@ -307,25 +344,10 @@
             align-items: center
             gap: rem(7)
             margin-top: rem(3)
-
-            em
-              font-size: rem(14)
-              font-weight: 400
-              line-height: 1
-              color: $hex-dark
-
-            i
-              display: inline-block
-              height: rem(14)
-
-            span
-              +screen-reader-only
-
-        em
-          display: block
-          font-size: rem(14)
-          font-style: normal
-          color: $hex-accent
+            font-size: rem(14)
+            font-weight: 400
+            line-height: 1
+            color: $hex-dark
 
         em
           display: block

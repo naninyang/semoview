@@ -393,11 +393,91 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                   <dl className={styles.summary}>
                     <dt>
                       {jejeupData.amusementData.category !== 'ott_drama' &&
-                        jejeupData.amusementData.category !== 'ott_film' &&
-                        jejeupData.amusementData.category !== 'ott_anime' &&
-                        jejeupData.amusementData.category !== 'ott_anime_film' && (
-                          <em>{CategoryName(jejeupData.amusementData.category)}</em>
-                        )}
+                      jejeupData.amusementData.category !== 'ott_film' &&
+                      jejeupData.amusementData.category !== 'ott_anime' &&
+                      jejeupData.amusementData.category !== 'ott_anime_film' ? (
+                        <em className={styles[jejeupData.amusementData.broadcast]}>
+                          {jejeupData.amusementData.broadcast === 'ENA' && (
+                            <>
+                              <Ena /> <span>ENA</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData.broadcast === 'JTBC' && (
+                            <>
+                              <Jtbc /> <span>JTBC</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData.broadcast === 'KBS2' && (
+                            <>
+                              <Kbs2tv /> <span>KBS 2TV</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData.broadcast === 'MBC' && (
+                            <>
+                              <Mbc /> <span>MBC</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData.broadcast === 'OCN' && (
+                            <>
+                              <Ocn /> <span>OCN</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData.broadcast === 'SBS' && (
+                            <>
+                              <Sbs /> <span>SBS</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData.broadcast === 'tvN' && (
+                            <>
+                              <Tvn /> <span>tvN</span>
+                            </>
+                          )}
+                          {CategoryName(jejeupData.amusementData.category)}
+                        </em>
+                      ) : (
+                        <>
+                          {jejeupData.amusementData.broadcast !== null && (
+                            <em className={styles[jejeupData.amusementData.broadcast]}>
+                              {jejeupData.amusementData.broadcast === 'ENA' && (
+                                <>
+                                  <Ena /> <span>ENA</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData.broadcast === 'JTBC' && (
+                                <>
+                                  <Jtbc /> <span>JTBC</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData.broadcast === 'KBS2' && (
+                                <>
+                                  <Kbs2tv /> <span>KBS 2TV</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData.broadcast === 'MBC' && (
+                                <>
+                                  <Mbc /> <span>MBC</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData.broadcast === 'OCN' && (
+                                <>
+                                  <Ocn /> <span>OCN</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData.broadcast === 'SBS' && (
+                                <>
+                                  <Sbs /> <span>SBS</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData.broadcast === 'tvN' && (
+                                <>
+                                  <Tvn /> <span>tvN</span>
+                                </>
+                              )}
+                              드라마
+                            </em>
+                          )}
+                        </>
+                      )}
                       {jejeupData.amusementData.category === 'anime' && (
                         <em>{AnimeName(jejeupData.amusementData.anime)}</em>
                       )}
@@ -633,44 +713,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                               동명의 {OriginalName(jejeupData.amusementData.original)} 원작
                             </span>
                           )}
-                        <time>
-                          {jejeupData.amusementData.broadcast === 'ENA' && (
-                            <>
-                              <Ena /> <span>ENA</span>
-                            </>
-                          )}
-                          {jejeupData.amusementData.broadcast === 'JTBC' && (
-                            <>
-                              <Jtbc /> <span>JTBC</span>
-                            </>
-                          )}
-                          {jejeupData.amusementData.broadcast === 'KBS2' && (
-                            <>
-                              <Kbs2tv /> <span>KBS 2TV</span>
-                            </>
-                          )}
-                          {jejeupData.amusementData.broadcast === 'MBC' && (
-                            <>
-                              <Mbc /> <span>MBC</span>
-                            </>
-                          )}
-                          {jejeupData.amusementData.broadcast === 'OCN' && (
-                            <>
-                              <Ocn /> <span>OCN</span>
-                            </>
-                          )}
-                          {jejeupData.amusementData.broadcast === 'SBS' && (
-                            <>
-                              <Sbs /> <span>SBS</span>
-                            </>
-                          )}
-                          {jejeupData.amusementData.broadcast === 'tvN' && (
-                            <>
-                              <Tvn /> <span>tvN</span>
-                            </>
-                          )}
-                          {jejeupData.amusementData.release !== '?' && jejeupData.amusementData.release}
-                        </time>
+                        {jejeupData.amusementData.release !== '?' && <time>{jejeupData.amusementData.release}</time>}
                       </strong>
                       {jejeupData.amusementData.etc !== null && (
                         <em className="lang">{jejeupData.amusementData.etc}</em>
@@ -731,11 +774,91 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                   <dl className={styles.summary}>
                     <dt>
                       {jejeupData.amusementData2.category !== 'ott_drama' &&
-                        jejeupData.amusementData2.category !== 'ott_film' &&
-                        jejeupData.amusementData2.category !== 'ott_anime' &&
-                        jejeupData.amusementData2.category !== 'ott_anime_film' && (
-                          <em>{CategoryName(jejeupData.amusementData2.category)}</em>
-                        )}
+                      jejeupData.amusementData2.category !== 'ott_film' &&
+                      jejeupData.amusementData2.category !== 'ott_anime' &&
+                      jejeupData.amusementData2.category !== 'ott_anime_film' ? (
+                        <em className={styles[jejeupData.amusementData2.broadcast]}>
+                          {jejeupData.amusementData2.broadcast === 'ENA' && (
+                            <>
+                              <Ena /> <span>ENA</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData2.broadcast === 'JTBC' && (
+                            <>
+                              <Jtbc /> <span>JTBC</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData2.broadcast === 'KBS2' && (
+                            <>
+                              <Kbs2tv /> <span>KBS 2TV</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData2.broadcast === 'MBC' && (
+                            <>
+                              <Mbc /> <span>MBC</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData2.broadcast === 'OCN' && (
+                            <>
+                              <Ocn /> <span>OCN</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData2.broadcast === 'SBS' && (
+                            <>
+                              <Sbs /> <span>SBS</span>
+                            </>
+                          )}
+                          {jejeupData.amusementData2.broadcast === 'tvN' && (
+                            <>
+                              <Tvn /> <span>tvN</span>
+                            </>
+                          )}
+                          {CategoryName(jejeupData.amusementData2.category)}
+                        </em>
+                      ) : (
+                        <>
+                          {jejeupData.amusementData2.broadcast !== null && (
+                            <em className={styles[jejeupData.amusementData2.broadcast]}>
+                              {jejeupData.amusementData2.broadcast === 'ENA' && (
+                                <>
+                                  <Ena /> <span>ENA</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData2.broadcast === 'JTBC' && (
+                                <>
+                                  <Jtbc /> <span>JTBC</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData2.broadcast === 'KBS2' && (
+                                <>
+                                  <Kbs2tv /> <span>KBS 2TV</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData2.broadcast === 'MBC' && (
+                                <>
+                                  <Mbc /> <span>MBC</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData2.broadcast === 'OCN' && (
+                                <>
+                                  <Ocn /> <span>OCN</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData2.broadcast === 'SBS' && (
+                                <>
+                                  <Sbs /> <span>SBS</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData2.broadcast === 'tvN' && (
+                                <>
+                                  <Tvn /> <span>tvN</span>
+                                </>
+                              )}
+                              드라마
+                            </em>
+                          )}
+                        </>
+                      )}
                       {jejeupData.amusementData2.category === 'anime' && (
                         <em>{AnimeName(jejeupData.amusementData2.anime)}</em>
                       )}
@@ -971,7 +1094,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                               동명의 {OriginalName(jejeupData.amusementData2.original)} 원작
                             </span>
                           )}
-                        <time>{jejeupData.amusementData2.release}</time>
+                        {jejeupData.amusementData2.release !== null && <time>{jejeupData.amusementData2.release}</time>}
                       </strong>
                       {jejeupData.amusementData2.etc !== null && (
                         <em className="lang">{jejeupData.amusementData2.etc}</em>
