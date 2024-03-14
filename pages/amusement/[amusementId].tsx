@@ -864,8 +864,8 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                 {amusementData.attributes.cast !== null && (
                   <div>
                     {amusementData.attributes.category !== 'anime' &&
-                    amusementData.attributes.category !== 'ottAnime' &&
-                    amusementData.attributes.category !== 'ottAnimeFilm' &&
+                    amusementData.attributes.category !== 'ott_anime' &&
+                    amusementData.attributes.category !== 'ott_anime_film' &&
                     amusementData.attributes.category !== 'game' ? (
                       <dt>주요 출연자</dt>
                     ) : (
@@ -971,9 +971,7 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                                 </div>
                                 {jejeup.worst && (
                                   <div className={styles.worst}>
-                                    <button type="button" className="number">
-                                      Worst
-                                    </button>
+                                    <strong className="number">Worst</strong>
                                   </div>
                                 )}
                               </div>

@@ -705,8 +705,8 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                     {jejeupData.amusementData.cast !== null && (
                       <div>
                         {jejeupData.amusementData.category !== 'anime' &&
-                        jejeupData.amusementData.category !== 'ottAnime' &&
-                        jejeupData.amusementData.category !== 'ottAnimeFilm' &&
+                        jejeupData.amusementData.category !== 'ott_anime' &&
+                        jejeupData.amusementData.category !== 'ott_anime_film' &&
                         jejeupData.amusementData.category !== 'game' ? (
                           <dt>주요 출연자</dt>
                         ) : (
