@@ -431,6 +431,7 @@
     display: flex
     padding: rem(27) rem(12)
     transition: all .4s cubic-bezier(.4,0,.2,1)
+    background-color: $hex-black
 
     +mq(maxExtraSmall)
       flex-direction: column
@@ -508,13 +509,13 @@
                 display: flex
                 flex-direction: column
                 gap: rem(4)
-                color: $hex-dark
+                color: $hex-light
 
                 strong
                   +line-abbr(2, 36, 18px)
                   font-size: rem(14)
                   font-weight: 700
-                  color: $hex-dark
+                  color: $hex-light
 
                 .user
                   font-size: rem(14)
@@ -525,14 +526,14 @@
                     display: inline-flex
                     align-items: center
                     font-size: rem(14)
-                    color: $hex-dark
+                    color: $hex-light
 
                   cite
                     &::after
                       content: '•'
                       padding: 0 rem(4)
                       font-size: rem(14)
-                      color: $hex-dark
+                      color: $hex-light
 
                 .worst
                   padding-bottom: rem(3)
@@ -545,4 +546,4 @@
                     font-size: rem(12)
                     font-weight: 800
                     text-transform: uppercase
-                    color: $hex-white
+                    color: $hex-black
