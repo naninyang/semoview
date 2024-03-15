@@ -651,7 +651,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                       )}
                       {jejeupData.amusementData.ottAddr && (
                         <Anchor href={jejeupData.amusementData.ottAddr}>
-                          {jejeupData.amusementData.ott === 'amazonOriginal' && 'AMAZON ORIGINAL'}
+                          {jejeupData.amusementData.ott === 'amazonOriginal' && 'Prime Video'}
                           {(jejeupData.amusementData.ott === 'appleOriginal' ||
                             jejeupData.amusementData.ott === 'appleFilm') &&
                             'Apple TV+'}
@@ -696,6 +696,9 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                         )}
                         {jejeupData.amusementData.lang === 'thai' && (
                           <span lang="th">{jejeupData.amusementData.title}</span>
+                        )}
+                        {jejeupData.amusementData.titleOther !== null && (
+                          <span className="lang">{jejeupData.amusementData.titleOther}</span>
                         )}
                         {jejeupData.amusementData.originalAuthor &&
                           jejeupData.amusementData.original &&
@@ -1078,6 +1081,9 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                         {jejeupData.amusementData2.lang === 'thai' && (
                           <span lang="th">{jejeupData.amusementData2.title}</span>
                         )}
+                        {jejeupData.amusementData2.titleOther !== null && (
+                          <span className="lang">{jejeupData.amusementData.titleOther}</span>
+                        )}
                         {jejeupData.amusementData2.originalAuthor &&
                           jejeupData.amusementData2.original &&
                           jejeupData.amusementData2.originTitle && (
@@ -1094,7 +1100,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                               동명의 {OriginalName(jejeupData.amusementData2.original)} 원작
                             </span>
                           )}
-                        {jejeupData.amusementData2.release !== null && <time>{jejeupData.amusementData2.release}</time>}
+                        {jejeupData.amusementData2.release !== '?' && <time>{jejeupData.amusementData2.release}</time>}
                       </strong>
                       {jejeupData.amusementData2.etc !== null && (
                         <em className="lang">{jejeupData.amusementData2.etc}</em>

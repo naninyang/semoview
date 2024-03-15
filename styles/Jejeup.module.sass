@@ -427,9 +427,12 @@
         background-color: rgba($hex-accent, .05)
         border-radius: rem(3)
         padding: rem(12)
-        font-size: rem(16)
+        font-size: rem(14)
         font-weight: 700
         line-height: 1.375
+
+        +mq(minSmall)
+          font-size: rem(16)
 
     .posters
       .poster-list

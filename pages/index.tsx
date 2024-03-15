@@ -618,9 +618,7 @@ function Home() {
                                 <span lang="th">{jejeup.amusementData.title}</span>
                               )}
                               {jejeup.amusementData.titleOther !== null && (
-                                <span className="lang">
-                                  {jejeup.amusementData.titleOther && jejeup.amusementData.titleOther}
-                                </span>
+                                <span className="lang">{jejeup.amusementData.titleOther}</span>
                               )}
                               {jejeup.amusementData.originalAuthor &&
                                 jejeup.amusementData.original &&
@@ -638,7 +636,7 @@ function Home() {
                                     동명의 {OriginalName(jejeup.amusementData.original)} 원작
                                   </span>
                                 )}
-                              {jejeup.amusementData.release !== null && <time>{jejeup.amusementData.release}</time>}
+                              {jejeup.amusementData.release !== '?' && <time>{jejeup.amusementData.release}</time>}
                             </strong>
                             {jejeup.amusementData.etc !== null && <em className="lang">{jejeup.amusementData.etc}</em>}
                           </dd>
