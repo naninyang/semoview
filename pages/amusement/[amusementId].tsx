@@ -458,7 +458,8 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
         pageTitles={`${amusementData.attributes.titleKorean !== null ? amusementData.attributes.titleKorean : amusementData.attributes.title} - ${originTitle}`}
         pageTitle={`${amusementData.attributes.titleKorean !== null ? amusementData.attributes.titleKorean : amusementData.attributes.title}`}
         pageDescription={`'${amusementData.attributes.titleKorean !== null ? amusementData.attributes.titleKorean : amusementData.attributes.title}' 리뷰 영상을 모아서 한방에 즐기자!`}
-        pageImg={`https://jejeup.dev1stud.io/og-image.webp?ts=${timestamp}`}
+        pageImg={`https://cdn.dev1stud.io/jejeup/_/${amusementData.id}-og.webp?ts=${timestamp}`}
+        pageTwt={`https://cdn.dev1stud.io/jejeup/_/${amusementData.id}-twt.webp?ts=${timestamp}`}
       />
       <div className="top-link">
         <button onClick={previousPageHandler} type="button">

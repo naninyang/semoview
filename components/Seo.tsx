@@ -6,6 +6,7 @@ interface Props {
   pageTitle: string;
   pageDescription: string;
   pageImg?: string;
+  pageTwt?: string;
   pageImgWidth?: number;
   pageImgHeight?: number;
   pageOgType?: string;
@@ -13,7 +14,16 @@ interface Props {
 
 export const originTitle = '제제없';
 
-const Seo = ({ pageTitles, pageTitle, pageDescription, pageImg, pageImgWidth, pageImgHeight, pageOgType }: Props) => {
+const Seo = ({
+  pageTitles,
+  pageTitle,
+  pageDescription,
+  pageImg,
+  pageImgWidth,
+  pageImgHeight,
+  pageOgType,
+  pageTwt,
+}: Props) => {
   const router = useRouter();
   const pagePath = router.asPath;
   const domain = 'https://jejeup.dev1stud.io';
@@ -23,6 +33,7 @@ const Seo = ({ pageTitles, pageTitle, pageDescription, pageImg, pageImgWidth, pa
   const description = pageDescription || defaultDescription;
   const url = `${domain}${pagePath}`;
   const imgUrl = `${pageImg}`;
+  const imgTwt = pageTwt || pageImg;
   const imgWidth = pageImgWidth || 1280;
   const imgHeight = pageImgHeight || 630;
   const ogType = pageOgType || 'website';
@@ -45,7 +56,7 @@ const Seo = ({ pageTitles, pageTitle, pageDescription, pageImg, pageImgWidth, pa
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={pageTitle} />
       <meta name="twitter:site" content={defaultTitle} />
-      <meta name="twitter:image" content={imgUrl} />
+      <meta name="twitter:image" content={imgTwt} />
       <meta name="twitter:description" content={description} />
       <link rel="canonical" href={url} />
       <link rel="alternate" href={url} hrefLang="ko-KR" />
