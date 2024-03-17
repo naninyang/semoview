@@ -433,6 +433,9 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                             </>
                           )}
                           {CategoryName(jejeupData.amusementData.category)}
+                          {jejeupData.amusementData.ott === null &&
+                            jejeupData.amusementData.ottAddr !== null &&
+                            ' / 단편영화'}
                         </em>
                       ) : (
                         <>
@@ -649,7 +652,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                           </button>
                         </div>
                       )}
-                      {jejeupData.amusementData.ottAddr && (
+                      {jejeupData.amusementData.ott !== null && jejeupData.amusementData.ottAddr !== null && (
                         <Anchor href={jejeupData.amusementData.ottAddr}>
                           {jejeupData.amusementData.ott === 'amazonOriginal' && 'Prime Video'}
                           {(jejeupData.amusementData.ott === 'appleOriginal' ||
@@ -672,6 +675,11 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                             'Wavve'}
                           {jejeupData.amusementData.ott === 'paramount' && 'TVING'}
                           에서 시청하기
+                        </Anchor>
+                      )}
+                      {jejeupData.amusementData.ott === null && jejeupData.amusementData.ottAddr !== null && (
+                        <Anchor href={jejeupData.amusementData.ottAddr}>
+                          단편영화 &apos;{jejeupData.amusementData.title}&apos; 보러가기
                         </Anchor>
                       )}
                     </dt>
@@ -817,6 +825,9 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                             </>
                           )}
                           {CategoryName(jejeupData.amusementData2.category)}
+                          {jejeupData.amusementData2.ott === null &&
+                            jejeupData.amusementData2.ottAddr !== null &&
+                            ' / 단편영화'}
                         </em>
                       ) : (
                         <>
@@ -1033,7 +1044,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                           </button>
                         </div>
                       )}
-                      {jejeupData.amusementData2.ottAddr && (
+                      {jejeupData.amusementData2.ott !== null && jejeupData.amusementData2.ottAddr !== null && (
                         <Anchor href={jejeupData.amusementData2.ottAddr}>
                           {jejeupData.amusementData2.ott === 'amazonOriginal' && 'Prime Video'}
                           {(jejeupData.amusementData2.ott === 'appleOriginal' ||
@@ -1056,6 +1067,11 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                             'Wavve'}
                           {jejeupData.amusementData2.ott === 'paramount' && 'TVING'}
                           에서 시청하기
+                        </Anchor>
+                      )}
+                      {jejeupData.amusementData2.ott === null && jejeupData.amusementData2.ottAddr !== null && (
+                        <Anchor href={jejeupData.amusementData2.ottAddr}>
+                          단편영화 &apos;{jejeupData.amusementData2.title}&apos; 보러가기
                         </Anchor>
                       )}
                     </dt>

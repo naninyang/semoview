@@ -669,6 +669,17 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                   </dd>
                 </div>
               )}
+              {amusementData.attributes.ott === null && amusementData.attributes.ottAddr !== null && (
+                <div className={styles.link}>
+                  <dt>단편영화 보기</dt>
+                  <dd>
+                    <Anchor href={amusementData.attributes.ottAddr}>
+                      단편영화 &apos;{amusementData.attributes.title}&apos; 보러가기
+                    </Anchor>
+                  </dd>
+                </div>
+              )}
+
               <RelationSelect />
             </dl>
             <button onClick={copyToClipboard}>
@@ -719,6 +730,9 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                       )}
                       {CategoryName(amusementData.attributes.category)}
                     </em>
+                  )}
+                  {amusementData.attributes.ott === null && amusementData.attributes.ottAddr !== null && (
+                    <em>단편영화</em>
                   )}
                   {amusementData.attributes.anime !== null && <em>{AnimeName(amusementData.attributes.anime)}</em>}
                 </dd>
