@@ -52,6 +52,8 @@ export interface JejeupData {
     category: string;
     genre: string;
     anime: string;
+    animeBroadcast1: string;
+    animeBroadcast2: string;
     ott: string;
     ottAddr: string;
     broadcast: string;
@@ -113,6 +115,8 @@ export interface JejeupPermalinkData {
     category: string;
     genre: string;
     anime: string;
+    animeBroadcast1: string;
+    animeBroadcast2: string;
     ott: string;
     ottAddr: string;
     broadcast: string;
@@ -141,6 +145,8 @@ export interface JejeupPermalinkData {
     category: string;
     genre: string;
     anime: string;
+    animeBroadcast1: string;
+    animeBroadcast2: string;
     ott: string;
     ottAddr: string;
     broadcast: string;
@@ -172,6 +178,8 @@ export interface AmusementData {
   category: string;
   genre: string;
   anime: string;
+  animeBroadcast1: string;
+  animeBroadcast2: string;
   ott: string;
   ottAddr: string;
   broadcast: string;
@@ -200,6 +208,8 @@ export interface AmusementPermalinkData {
     category: string;
     genre: string;
     anime: string;
+    animeBroadcast1: string;
+    animeBroadcast2: string;
     ott: string;
     ottAddr: string;
     broadcast: string;

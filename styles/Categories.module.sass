@@ -171,7 +171,9 @@
 
             div
               &.broadcast,
-              &.platform
+              &.platform,
+              &.anime1,
+              &.anime2
                 position: absolute
                 top: 0
 
@@ -190,7 +192,7 @@
                 span
                   +screen-reader-only
 
-              &.broadcast
+              &.broadcast, &.anime1
                 right: 0
 
                 &.broadcasts
@@ -202,6 +204,15 @@
                   & + .platform
                     i
                       border-radius: 0
+
+              &.anime2
+                right: rem(37)
+
+                +mq(minSmall)
+                  right: rem(43)
+
+                & + .anime1 i
+                  border-radius: 0
 
               &.platform
                 right: 0

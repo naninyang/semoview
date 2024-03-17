@@ -112,6 +112,71 @@ const Tvn = styled.i({
   background: `url(${vectors.broadcast.tvn}) no-repeat 0 50%/contain`,
 });
 
+const Anibox = styled.i({
+  width: rem(48),
+  background: `url(${vectors.anime.anibox}) no-repeat 0 50%/contain`,
+});
+
+const Animax = styled.i({
+  width: rem(40),
+  background: `url(${vectors.anime.animax}) no-repeat 0 50%/contain`,
+});
+
+const Aniplus = styled.i({
+  width: rem(93),
+  background: `url(${vectors.anime.aniplus}) no-repeat 0 50%/contain`,
+});
+
+const Atx = styled.i({
+  width: rem(22),
+  background: `url(${vectors.anime.atx}) no-repeat 0 50%/contain`,
+});
+
+const Daewon = styled.i({
+  width: rem(44),
+  background: `url(${vectors.anime.daewon}) no-repeat 0 50%/contain`,
+});
+
+const Fujitv = styled.i({
+  width: rem(81),
+  background: `url(${vectors.anime.fujitv}) no-repeat 0 50%/contain`,
+});
+
+const Mbs = styled.i({
+  width: rem(42),
+  background: `url(${vectors.anime.mbs}) no-repeat 0 50%/contain`,
+});
+
+const Nippontv = styled.i({
+  width: rem(30),
+  background: `url(${vectors.anime.nippontv}) no-repeat 0 50%/contain`,
+});
+
+const Tbs = styled.i({
+  width: rem(31),
+  background: `url(${vectors.anime.tbs}) no-repeat 0 50%/contain`,
+});
+
+const Tokyomx = styled.i({
+  width: rem(108),
+  background: `url(${vectors.anime.tokyomx}) no-repeat 0 50%/contain`,
+});
+
+const Tooniverse = styled.i({
+  width: rem(93),
+  background: `url(${vectors.anime.tooniverse}) no-repeat 0 50%/contain`,
+});
+
+const Tvtokyo = styled.i({
+  width: rem(42),
+  background: `url(${vectors.anime.tvtokyo}) no-repeat 0 50%/contain`,
+});
+
+const Wowow = styled.i({
+  width: rem(108),
+  background: `url(${vectors.anime.wowow}) no-repeat 0 50%/contain`,
+});
+
 const RatingFilmAll = styled.i({
   background: `url(${vectors.ratings.film.all}) no-repeat 50% 50%/contain`,
 });
@@ -432,10 +497,80 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                               <Tvn /> <span>tvN</span>
                             </>
                           )}
+                          {(jejeupData.amusementData.animeBroadcast1 !== null ||
+                            jejeupData.amusementData.animeBroadcast2 !== null) && (
+                            <>
+                              {jejeupData.amusementData.animeBroadcast1 === 'tokyomx' && (
+                                <>
+                                  <Tokyomx /> <span>도쿄 MX</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData.animeBroadcast1 === 'tvtokyo' && (
+                                <>
+                                  <Tvtokyo /> <span>테레비 도쿄</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData.animeBroadcast1 === 'fujitv' && (
+                                <>
+                                  <Fujitv /> <span>후지 테레비</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData.animeBroadcast1 === 'mbs' && (
+                                <>
+                                  <Mbs /> <span>MBS</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData.animeBroadcast1 === 'tbs' && (
+                                <>
+                                  <Tbs /> <span>TBS</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData.animeBroadcast1 === 'atx' && (
+                                <>
+                                  <Atx /> <span>AT-X</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData.animeBroadcast1 === 'nippontv' && (
+                                <>
+                                  <Nippontv /> <span>닛폰 테레비</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData.animeBroadcast1 === 'wowow' && (
+                                <>
+                                  <Wowow /> <span>WOWOW</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData.animeBroadcast2 === 'aniplus' && (
+                                <>
+                                  | <Aniplus /> <span>애니플러스</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData.animeBroadcast2 === 'daewon' && (
+                                <>
+                                  | <Daewon /> <span>애니원</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData.animeBroadcast2 === 'anibox' && (
+                                <>
+                                  | <Anibox /> <span>애니박스</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData.animeBroadcast2 === 'tooniverse' && (
+                                <>
+                                  | <Tooniverse /> <span>투니버스</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData.animeBroadcast2 === 'animax' && (
+                                <>
+                                  | <Animax /> <span>애니맥스</span>
+                                </>
+                              )}
+                            </>
+                          )}
                           {CategoryName(jejeupData.amusementData.category)}
                           {jejeupData.amusementData.ott === null &&
                             jejeupData.amusementData.ottAddr !== null &&
-                            ' / 단편영화'}
+                            ' | 단편영화'}
                         </em>
                       ) : (
                         <>
@@ -824,10 +959,80 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                               <Tvn /> <span>tvN</span>
                             </>
                           )}
+                          {(jejeupData.amusementData2.animeBroadcast1 !== null ||
+                            jejeupData.amusementData2.animeBroadcast2 !== null) && (
+                            <>
+                              {jejeupData.amusementData2.animeBroadcast1 === 'tokyomx' && (
+                                <>
+                                  <Tokyomx /> <span>도쿄 MX</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData2.animeBroadcast1 === 'tvtokyo' && (
+                                <>
+                                  <Tvtokyo /> <span>테레비 도쿄</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData2.animeBroadcast1 === 'fujitv' && (
+                                <>
+                                  <Fujitv /> <span>후지 테레비</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData2.animeBroadcast1 === 'mbs' && (
+                                <>
+                                  <Mbs /> <span>MBS</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData2.animeBroadcast1 === 'tbs' && (
+                                <>
+                                  <Tbs /> <span>TBS</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData2.animeBroadcast1 === 'atx' && (
+                                <>
+                                  <Atx /> <span>AT-X</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData2.animeBroadcast1 === 'nippontv' && (
+                                <>
+                                  <Nippontv /> <span>닛폰 테레비</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData2.animeBroadcast1 === 'wowow' && (
+                                <>
+                                  <Wowow /> <span>WOWOW</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData2.animeBroadcast2 === 'aniplus' && (
+                                <>
+                                  | <Aniplus /> <span>애니플러스</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData2.animeBroadcast2 === 'daewon' && (
+                                <>
+                                  | <Daewon /> <span>애니원</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData2.animeBroadcast2 === 'anibox' && (
+                                <>
+                                  | <Anibox /> <span>애니박스</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData2.animeBroadcast2 === 'tooniverse' && (
+                                <>
+                                  | <Tooniverse /> <span>투니버스</span>
+                                </>
+                              )}
+                              {jejeupData.amusementData2.animeBroadcast2 === 'animax' && (
+                                <>
+                                  | <Animax /> <span>애니맥스</span>
+                                </>
+                              )}
+                            </>
+                          )}
                           {CategoryName(jejeupData.amusementData2.category)}
                           {jejeupData.amusementData2.ott === null &&
                             jejeupData.amusementData2.ottAddr !== null &&
-                            ' / 단편영화'}
+                            ' | 단편영화'}
                         </em>
                       ) : (
                         <>

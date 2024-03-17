@@ -116,6 +116,71 @@ const Tvn = styled.i({
   background: `url(${vectors.broadcast.tvn2}) no-repeat 0 50%/contain`,
 });
 
+const Anibox = styled.i({
+  width: rem(48),
+  background: `url(${vectors.anime.anibox2}) no-repeat 0 50%/contain`,
+});
+
+const Animax = styled.i({
+  width: rem(40),
+  background: `url(${vectors.anime.animax2}) no-repeat 0 50%/contain`,
+});
+
+const Aniplus = styled.i({
+  width: rem(93),
+  background: `url(${vectors.anime.aniplus2}) no-repeat 0 50%/contain`,
+});
+
+const Atx = styled.i({
+  width: rem(22),
+  background: `url(${vectors.anime.atx2}) no-repeat 0 50%/contain`,
+});
+
+const Daewon = styled.i({
+  width: rem(44),
+  background: `url(${vectors.anime.daewon2}) no-repeat 0 50%/contain`,
+});
+
+const Fujitv = styled.i({
+  width: rem(81),
+  background: `url(${vectors.anime.fujitv2}) no-repeat 0 50%/contain`,
+});
+
+const Mbs = styled.i({
+  width: rem(42),
+  background: `url(${vectors.anime.mbs2}) no-repeat 0 50%/contain`,
+});
+
+const Nippontv = styled.i({
+  width: rem(30),
+  background: `url(${vectors.anime.nippontv2}) no-repeat 0 50%/contain`,
+});
+
+const Tbs = styled.i({
+  width: rem(31),
+  background: `url(${vectors.anime.tbs2}) no-repeat 0 50%/contain`,
+});
+
+const Tokyomx = styled.i({
+  width: rem(108),
+  background: `url(${vectors.anime.tokyomx2}) no-repeat 0 50%/contain`,
+});
+
+const Tooniverse = styled.i({
+  width: rem(93),
+  background: `url(${vectors.anime.tooniverse2}) no-repeat 0 50%/contain`,
+});
+
+const Tvtokyo = styled.i({
+  width: rem(42),
+  background: `url(${vectors.anime.tvtokyo2}) no-repeat 0 50%/contain`,
+});
+
+const Wowow = styled.i({
+  width: rem(108),
+  background: `url(${vectors.anime.wowow2}) no-repeat 0 50%/contain`,
+});
+
 const RatingFilmAll = styled.i({
   background: `url(${vectors.ratings.film.all}) no-repeat 50% 50%/contain`,
 });
@@ -733,6 +798,76 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                       {amusementData.attributes.broadcast === 'tvN' && (
                         <>
                           <Tvn /> <span>tvN</span>
+                        </>
+                      )}
+                      {(amusementData.attributes.animeBroadcast1 !== null ||
+                        amusementData.attributes.animeBroadcast2 !== null) && (
+                        <>
+                          {amusementData.attributes.animeBroadcast1 === 'tokyomx' && (
+                            <>
+                              <Tokyomx /> <span>도쿄 MX</span>
+                            </>
+                          )}
+                          {amusementData.attributes.animeBroadcast1 === 'tvtokyo' && (
+                            <>
+                              <Tvtokyo /> <span>테레비 도쿄</span>
+                            </>
+                          )}
+                          {amusementData.attributes.animeBroadcast1 === 'fujitv' && (
+                            <>
+                              <Fujitv /> <span>후지 테레비</span>
+                            </>
+                          )}
+                          {amusementData.attributes.animeBroadcast1 === 'mbs' && (
+                            <>
+                              <Mbs /> <span>MBS</span>
+                            </>
+                          )}
+                          {amusementData.attributes.animeBroadcast1 === 'tbs' && (
+                            <>
+                              <Tbs /> <span>TBS</span>
+                            </>
+                          )}
+                          {amusementData.attributes.animeBroadcast1 === 'atx' && (
+                            <>
+                              <Atx /> <span>AT-X</span>
+                            </>
+                          )}
+                          {amusementData.attributes.animeBroadcast1 === 'nippontv' && (
+                            <>
+                              <Nippontv /> <span>닛폰 테레비</span>
+                            </>
+                          )}
+                          {amusementData.attributes.animeBroadcast1 === 'wowow' && (
+                            <>
+                              | <Wowow /> <span>WOWOW</span>
+                            </>
+                          )}
+                          {amusementData.attributes.animeBroadcast2 === 'aniplus' && (
+                            <>
+                              | <Aniplus /> <span>애니플러스</span>
+                            </>
+                          )}
+                          {amusementData.attributes.animeBroadcast2 === 'daewon' && (
+                            <>
+                              | <Daewon /> <span>애니원</span>
+                            </>
+                          )}
+                          {amusementData.attributes.animeBroadcast2 === 'anibox' && (
+                            <>
+                              | <Anibox /> <span>애니박스</span>
+                            </>
+                          )}
+                          {amusementData.attributes.animeBroadcast2 === 'tooniverse' && (
+                            <>
+                              | <Tooniverse /> <span>투니버스</span>
+                            </>
+                          )}
+                          {amusementData.attributes.animeBroadcast2 === 'animax' && (
+                            <>
+                              | <Animax /> <span>애니맥스</span>
+                            </>
+                          )}
                         </>
                       )}
                       {CategoryName(amusementData.attributes.category)}

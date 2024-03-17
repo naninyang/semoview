@@ -71,6 +71,58 @@ const TvnIcon = styled.i({
   background: `url(${vectors.broadcast.tvnIcon}) no-repeat 50% 50%/contain`,
 });
 
+const AniboxIcon = styled.i({
+  background: `url(${vectors.anime.aniboxIcon}) no-repeat 0 50%/contain`,
+});
+
+const AnimaxIcon = styled.i({
+  background: `url(${vectors.anime.animaxIcon}) no-repeat 0 50%/contain`,
+});
+
+const AniplusIcon = styled.i({
+  background: `url(${vectors.anime.aniplusIcon}) no-repeat 0 50%/contain`,
+});
+
+const AtxIcon = styled.i({
+  background: `url(${vectors.anime.atxIcon}) no-repeat 0 50%/contain`,
+});
+
+const DaewonIcon = styled.i({
+  background: `url(${vectors.anime.daewonIcon}) no-repeat 0 50%/contain`,
+});
+
+const FujitvIcon = styled.i({
+  background: `url(${vectors.anime.fujitvIcon}) no-repeat 0 50%/contain`,
+});
+
+const MbsIcon = styled.i({
+  background: `url(${vectors.anime.mbsIcon}) no-repeat 0 50%/contain`,
+});
+
+const NippontvIcon = styled.i({
+  background: `url(${vectors.anime.nippontvIcon}) no-repeat 0 50%/contain`,
+});
+
+const TbsIcon = styled.i({
+  background: `url(${vectors.anime.tbsIcon}) no-repeat 0 50%/contain`,
+});
+
+const TokyomxIcon = styled.i({
+  background: `url(${vectors.anime.tokyomxIcon}) no-repeat 0 50%/contain`,
+});
+
+const TooniverseIcon = styled.i({
+  background: `url(${vectors.anime.tooniverseIcon}) no-repeat 0 50%/contain`,
+});
+
+const TvtokyoIcon = styled.i({
+  background: `url(${vectors.anime.tvtokyoIcon}) no-repeat 0 50%/contain`,
+});
+
+const WowowIcon = styled.i({
+  background: `url(${vectors.anime.wowowIcon}) no-repeat 0 50%/contain`,
+});
+
 const RatingFilmAll = styled.i({
   background: `url(${vectors.ratings.film.all}) no-repeat 50% 50%/contain`,
 });
@@ -567,6 +619,89 @@ function Categories() {
                                 {amusement.ott === 'paramount' && (
                                   <>
                                     <ParamountIcon /> <span>Paramount+에서 스트리밍 중</span>
+                                  </>
+                                )}
+                              </dd>
+                            </div>
+                          )}
+                          {amusement.animeBroadcast2 !== null && (
+                            <div
+                              className={`${styles.anime2} ${amusement.animeBroadcast1 !== null ? styles.anime2 : ''}`}
+                            >
+                              <dt>방송사</dt>
+                              <dd>
+                                {amusement.animeBroadcast2 === 'aniplus' && (
+                                  <>
+                                    <AniplusIcon /> <span>애니플러스</span>
+                                  </>
+                                )}
+                                {amusement.animeBroadcast2 === 'daewon' && (
+                                  <>
+                                    <DaewonIcon /> <span>애니원</span>
+                                  </>
+                                )}
+                                {amusement.animeBroadcast2 === 'anibox' && (
+                                  <>
+                                    <AniboxIcon /> <span>애니박스</span>
+                                  </>
+                                )}
+                                {amusement.animeBroadcast2 === 'tooniverse' && (
+                                  <>
+                                    <TooniverseIcon /> <span>투니버스</span>
+                                  </>
+                                )}
+                                {amusement.animeBroadcast2 === 'animax' && (
+                                  <>
+                                    <AniboxIcon /> <span>애니박스</span>
+                                  </>
+                                )}
+                              </dd>
+                            </div>
+                          )}
+                          {amusement.animeBroadcast1 !== null && (
+                            <div
+                              className={`${styles.anime1} ${amusement.animeBroadcast1 !== null ? styles.anime1 : ''}`}
+                            >
+                              <dt>방송사</dt>
+                              <dd>
+                                {amusement.animeBroadcast1 === 'tokyomx' && (
+                                  <>
+                                    <TokyomxIcon /> <span>도쿄 MX</span>
+                                  </>
+                                )}
+                                {amusement.animeBroadcast1 === 'tvtokyo' && (
+                                  <>
+                                    <TvtokyoIcon /> <span>테레비 도쿄</span>
+                                  </>
+                                )}
+                                {amusement.animeBroadcast1 === 'fujitv' && (
+                                  <>
+                                    <FujitvIcon /> <span>후지 테레비</span>
+                                  </>
+                                )}
+                                {amusement.animeBroadcast1 === 'mbs' && (
+                                  <>
+                                    <MbsIcon /> <span>MBS</span>
+                                  </>
+                                )}
+                                {amusement.animeBroadcast1 === 'tbs' && (
+                                  <>
+                                    <TbsIcon /> <span>TBS</span>
+                                  </>
+                                )}
+                                {amusement.animeBroadcast1 === 'atx' && (
+                                  <>
+                                    <AtxIcon /> <span>AT-X</span>
+                                  </>
+                                )}
+                                {amusement.animeBroadcast1 === 'nippontv' && (
+                                  <>
+                                    <NippontvIcon /> <span>닛폰 테레비</span>
+                                  </>
+                                )}
+                                {amusement.animeBroadcast1 === 'wowow' && (
+                                  <>
+                                    <WowowIcon /> <span>WOWOW</span>
                                   </>
                                 )}
                               </dd>
