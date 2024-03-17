@@ -567,6 +567,9 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                               )}
                             </>
                           )}
+                          {jejeupData.amusementData.category === 'game' &&
+                            jejeupData.amusementData.isMobile &&
+                            '모바일 '}
                           {CategoryName(jejeupData.amusementData.category)}
                           {jejeupData.amusementData.ott === null &&
                             jejeupData.amusementData.ottAddr !== null &&
@@ -1029,6 +1032,9 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                               )}
                             </>
                           )}
+                          {jejeupData.amusementData2.category === 'game' &&
+                            jejeupData.amusementData2.isMobile &&
+                            '모바일 '}
                           {CategoryName(jejeupData.amusementData2.category)}
                           {jejeupData.amusementData2.ott === null &&
                             jejeupData.amusementData2.ottAddr !== null &&

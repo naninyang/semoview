@@ -512,6 +512,7 @@ function Home() {
                                     )}
                                   </>
                                 )}
+                                {jejeup.amusementData.category === 'game' && jejeup.amusementData.isMobile && '모바일 '}
                                 {CategoryName(jejeup.amusementData.category)}
                               </em>
                             ) : (

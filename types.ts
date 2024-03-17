@@ -50,6 +50,7 @@ export interface JejeupData {
     ratingCustom: string;
     country: string;
     category: string;
+    isMobile: boolean;
     genre: string;
     anime: string;
     animeBroadcast1: string;
@@ -113,6 +114,7 @@ export interface JejeupPermalinkData {
     ratingCustom: string;
     country: string;
     category: string;
+    isMobile: boolean;
     genre: string;
     anime: string;
     animeBroadcast1: string;
@@ -143,6 +145,7 @@ export interface JejeupPermalinkData {
     ratingCustom: string;
     country: string;
     category: string;
+    isMobile: boolean;
     genre: string;
     anime: string;
     animeBroadcast1: string;
@@ -176,6 +179,7 @@ export interface AmusementData {
   ratingCustom: string;
   country: string;
   category: string;
+  isMobile: boolean;
   genre: string;
   anime: string;
   animeBroadcast1: string;
@@ -206,6 +210,7 @@ export interface AmusementPermalinkData {
     ratingCustom: string;
     country: string;
     category: string;
+    isMobile: boolean;
     genre: string;
     anime: string;
     animeBroadcast1: string;
@@ -241,6 +246,7 @@ export interface JejeupAmusementData {
     rating: string;
     country: string;
     category: string;
+    isMobile: boolean;
     genre: string;
     anime: string;
     ott: string;

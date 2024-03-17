@@ -870,6 +870,7 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                           )}
                         </>
                       )}
+                      {amusementData.attributes.category === 'game' && amusementData.attributes.isMobile && '모바일 '}
                       {CategoryName(amusementData.attributes.category)}
                     </em>
                   )}
