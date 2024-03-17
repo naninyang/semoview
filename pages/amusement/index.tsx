@@ -413,7 +413,7 @@ function Amusement({ categoryQuery }: { categoryQuery: string }) {
                             )}
                             {amusement.animeBroadcast2 === 'animax' && (
                               <>
-                                <AniboxIcon /> <span>애니박스</span>
+                                <AnimaxIcon /> <span>애니박스</span>
                               </>
                             )}
                           </dd>
