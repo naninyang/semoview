@@ -679,7 +679,14 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                   </dd>
                 </div>
               )}
-
+              {isRelationLoading && (
+                <div className={styles.relation}>
+                  <dt>다른 버전 보기</dt>
+                  <dd>
+                    <em>목록 불러오는 중...</em>
+                  </dd>
+                </div>
+              )}
               <RelationSelect />
             </dl>
             <button onClick={copyToClipboard}>
