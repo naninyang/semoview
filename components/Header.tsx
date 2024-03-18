@@ -84,7 +84,7 @@ export default function Header() {
               </li>
               <li className={router.pathname === '/categories' ? styles.current : ''}>
                 <Anchor href="/categories">
-                  <span>타이틀 기준 정렬</span>
+                  <span>작품 기준 정렬</span>
                 </Anchor>
               </li>
             </ol>

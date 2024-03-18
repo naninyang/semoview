@@ -256,7 +256,7 @@ function Categories() {
           <i className="preview" />
           카테고리별 보고싶다? 골라보세요 💁‍♀️
         </span>
-        {count && <em>({formatNumber(count.amusement)}개 타이틀)</em>}
+        {count && <em>({formatNumber(count.amusement)}개 작품)</em>}
       </h1>
       {isLoading && <div className={styles.loading}>이것저것 불러오는 중</div>}
       {error && (

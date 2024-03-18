@@ -325,7 +325,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
 
   const customRatingHandler = () => {
     alert(
-      '대한민국에서 시청/심의등급이 없거나 대한민국에 정식 발매된 타이틀이 아닙니다.\n해당 시청/심의등급은 제제없 자체설정 시청/심의등급입니다.\n따라서 제제없 심의등급은 법적구속력이 없습니다.\n\n자세한 내용은 공지사항을 참고하세요.',
+      '대한민국에서 시청/심의등급이 없거나 대한민국에 정식 발매된 작품이 아닙니다.\n해당 시청/심의등급은 제제없 자체설정 시청/심의등급입니다.\n따라서 제제없 심의등급은 법적구속력이 없습니다.\n\n자세한 내용은 공지사항을 참고하세요.',
     );
   };
 
@@ -446,7 +446,7 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
             </div>
           )}
           <div className={styles.title}>
-            <h2>타이틀 정보</h2>
+            <h2>작품 정보</h2>
             <div className={styles.function}>
               <button onClick={copyToClipboard}>
                 <ClipboardIcon /> <span>URL 복사</span>

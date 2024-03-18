@@ -268,7 +268,7 @@ function Amusement({ categoryQuery }: { categoryQuery: string }) {
               {category === 'game' && '게임은 끝날 때까지 끝난 게 아니다!'}
               {category === 'anime' && '애니입니다만, 문제라도?'}
               {category === 'ott' && '퇴근 후, 이세계 OTT에서만 볼 수 있는 콘텐츠를.'}{' '}
-              {categoryData.total > 0 && <span>({categoryData.total}개 타이틀)</span>}
+              {categoryData.total > 0 && <span>({categoryData.total}개 작품)</span>}
             </h1>
             <div className={styles.select}>
               <select onChange={handleCategoryChange} defaultValue={selectedCategory}>

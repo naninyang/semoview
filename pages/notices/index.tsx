@@ -96,7 +96,7 @@ const Notices: NextPage<NoticeProps> = ({ notices }) => {
         </h1>
         <div className={styles.summary}>
           <p>
-            평소에 유튜버들이 <span>영화/드라마/게임의 타이틀을</span> 영상 제목에 넣지 않아 불쾌하셨나요?
+            평소에 유튜버들이 <span>영화/드라마/게임의 작품을</span> 영상 제목에 넣지 않아 불쾌하셨나요?
           </p>
           <p>
             ~제제없~에서는 그런 영상들을 모아서 <span>눌러보기 전에 어떤 영상인지 알려드립니다!</span>
