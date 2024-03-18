@@ -15,6 +15,7 @@ import { vectors } from '@/components/vectors';
 import { Pagination } from '@/components/Pagination';
 import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Home.module.sass';
+import { GetServerSideProps } from 'next';
 
 const AmazonOriginal = styled.i({
   width: rem(52),
@@ -203,13 +204,9 @@ const RatingGameD19 = styled.i({
   background: `url(${vectors.ratings.game.d19}) no-repeat 50% 50%/contain`,
 });
 
-function Home() {
+function Home({ data, error, currentPage }: { data: any; error: string; currentPage: number }) {
   const router = useRouter();
   const timestamp = Date.now();
-  const [data, setData] = useState<JejeupData | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<null | string>(null);
-  const currentPage = Number(router.query.page) || 1;
 
   useEffect(() => {
     localStorage.removeItem('currentPage');
@@ -218,51 +215,6 @@ function Home() {
   useEffect(() => {
     sessionStorage.setItem('location', router.asPath);
   }, [router.asPath]);
-
-  const fetchData = async () => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const renewResponse = await fetch(`/api/renew?page=${currentPage}`);
-      const renewData = await renewResponse.json();
-      const renewValue = renewData.renew;
-      const cachedData = localStorage.getItem(`jejeupsData${currentPage}`);
-      let dataToUse;
-
-      if (cachedData) {
-        const parsedData = JSON.parse(cachedData);
-        if (parsedData.jejeups.length > 0 && parsedData.jejeups[0].createdAt) {
-          if (parsedData.jejeups[0].createdAt === renewValue) {
-            dataToUse = parsedData;
-          }
-        }
-      }
-
-      if (!dataToUse) {
-        const response = await fetch(`/api/jejeups?page=${currentPage}`);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const newData = await response.json();
-        localStorage.setItem(`jejeupsData${currentPage}`, JSON.stringify(newData));
-        dataToUse = newData;
-      }
-
-      setData(dataToUse);
-    } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError('An unknown error occurred');
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, [currentPage]);
 
   function FormatDuration(duration: string) {
     const match = duration.match(/PT(\d+M)?(\d+S)?/);
@@ -309,7 +261,6 @@ function Home() {
         {count && <em>({formatNumber(count.jejeup)}개 영상)</em>}
       </h1>
       <div className={styles.list}>
-        {isLoading && <div className={styles.loading}>이것저것 불러오는 중</div>}
         {error && (
           <div className={styles.error}>
             <p>데이터를 불러오는데 실패했습니다.</p>
@@ -318,12 +269,12 @@ function Home() {
             </button>
           </div>
         )}
-        {data && !isLoading && !error && (
+        {data && !error && (
           <div className={styles['jejeup-content']}>
             {Array.isArray(data.jejeups) &&
               data.jejeups
                 .filter(
-                  (jejeup) =>
+                  (jejeup: JejeupData) =>
                     jejeup.jejeupMetaData.error !== 'Failed to fetch data' &&
                     jejeup.jejeupMetaData.ogTitle !== ' - YouTube',
                 )
@@ -837,6 +788,7 @@ function Home() {
                   </div>
                 ))}
             <Pagination currentPage={currentPage} pageCount={data.pageCount} sorting={'jejeup'} />
+            {console.log('currentPage: ', currentPage)}
           </div>
         )}
       </div>
@@ -845,3 +797,27 @@ function Home() {
 }
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const currentPage = Number(context.query.page) || 1;
+  let data = null;
+  let error = null;
+
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/jejeups?page=${currentPage}`);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    data = await response.json();
+  } catch (err) {
+    error = err instanceof Error ? err.message : 'An unknown error occurred';
+  }
+
+  return {
+    props: {
+      data,
+      error,
+      currentPage,
+    },
+  };
+};
