@@ -388,7 +388,9 @@ function Amusement({ categoryQuery }: { categoryQuery: string }) {
                         </div>
                       )}
                       {amusement.animeBroadcast2 !== null && (
-                        <div className={`${styles.anime2} ${amusement.animeBroadcast1 !== null ? styles.anime2 : ''}`}>
+                        <div
+                          className={`${styles.anime2} ${amusement.animeBroadcast1 === null ? styles.anime2only : ''}`}
+                        >
                           <dt>방송사</dt>
                           <dd>
                             {amusement.animeBroadcast2 === 'aniplus' && (

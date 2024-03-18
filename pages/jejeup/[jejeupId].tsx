@@ -542,27 +542,33 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                               )}
                               {jejeupData.amusementData.animeBroadcast2 === 'aniplus' && (
                                 <>
-                                  | <Aniplus /> <span>애니플러스</span>
+                                  {jejeupData.amusementData.animeBroadcast1 !== null && '|'}
+                                  <Aniplus />
+                                  <span>애니플러스</span> 방영{' '}
                                 </>
                               )}
                               {jejeupData.amusementData.animeBroadcast2 === 'daewon' && (
                                 <>
-                                  | <Daewon /> <span>애니원</span>
+                                  {jejeupData.amusementData.animeBroadcast1 !== null && '|'}
+                                  <Daewon /> <span>애니원</span> 방영{' '}
                                 </>
                               )}
                               {jejeupData.amusementData.animeBroadcast2 === 'anibox' && (
                                 <>
-                                  | <Anibox /> <span>애니박스</span>
+                                  {jejeupData.amusementData.animeBroadcast1 !== null && '|'}
+                                  <Anibox /> <span>애니박스</span> 방영{' '}
                                 </>
                               )}
                               {jejeupData.amusementData.animeBroadcast2 === 'tooniverse' && (
                                 <>
-                                  | <Tooniverse /> <span>투니버스</span>
+                                  {jejeupData.amusementData.animeBroadcast1 !== null && '|'}
+                                  <Tooniverse /> <span>투니버스</span> 방영{' '}
                                 </>
                               )}
                               {jejeupData.amusementData.animeBroadcast2 === 'animax' && (
                                 <>
-                                  | <Animax /> <span>애니맥스</span>
+                                  {jejeupData.amusementData.animeBroadcast1 !== null && '|'}
+                                  <Animax /> <span>애니맥스</span> 방영{' '}
                                 </>
                               )}
                             </>
