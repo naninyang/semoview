@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -15,7 +16,6 @@ import { vectors } from '@/components/vectors';
 import { Pagination } from '@/components/Pagination';
 import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Home.module.sass';
-import { GetServerSideProps } from 'next';
 
 const AmazonOriginal = styled.i({
   width: rem(52),

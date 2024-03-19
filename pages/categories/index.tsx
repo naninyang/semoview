@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -155,75 +156,29 @@ const RatingGameD19 = styled.i({
   background: `url(${vectors.ratings.game.d19}) no-repeat 50% 50%/contain`,
 });
 
-function Categories() {
+function Categories({
+  dramaData,
+  filmData,
+  gameData,
+  animeData,
+  ottData,
+  error,
+  currentPage,
+}: {
+  dramaData: any;
+  filmData: any;
+  gameData: any;
+  animeData: any;
+  ottData: any;
+  error: string;
+  currentPage: number;
+}) {
   const router = useRouter();
   const timestamp = Date.now();
-  const [dramaData, setDaramaData] = useState<JejeupAmusementData | null>(null);
-  const [filmData, setMovieData] = useState<JejeupAmusementData | null>(null);
-  const [gameData, setGameData] = useState<JejeupAmusementData | null>(null);
-  const [animeData, setAnimationData] = useState<JejeupAmusementData | null>(null);
-  const [ottData, setOttData] = useState<JejeupAmusementData | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<null | string>(null);
-  const currentPage = Number(router.query.page) || 1;
 
   useEffect(() => {
     sessionStorage.setItem('category', router.asPath);
   }, [router.asPath]);
-
-  const fetchData = async () => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const dramaResponse = await fetch(`/api/category?page=1&pageSize=7&categoryName=drama`);
-      if (!dramaResponse.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const dramaResponseData = await dramaResponse.json();
-
-      const filmResponse = await fetch(`/api/category?page=1&pageSize=7&categoryName=film`);
-      if (!filmResponse.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const filmResponseData = await filmResponse.json();
-
-      const gameResponse = await fetch(`/api/category?categoryName=game&page=1&pageSize=5`);
-      if (!gameResponse.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const gameResponseData = await gameResponse.json();
-
-      const animeResponse = await fetch(`/api/category?categoryName=anime&page=1&pageSize=7`);
-      if (!animeResponse.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const animeResponseData = await animeResponse.json();
-
-      const ottResponse = await fetch(`/api/category?categoryName=ott&page=1&pageSize=7`);
-      if (!ottResponse.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const ottResponseData = await ottResponse.json();
-
-      setDaramaData(dramaResponseData);
-      setMovieData(filmResponseData);
-      setGameData(gameResponseData);
-      setAnimationData(animeResponseData);
-      setOttData(ottResponseData);
-    } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError('An unknown error occurred');
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, [currentPage]);
 
   const [count, setCount] = useState<Counts | null>(null);
 
@@ -241,14 +196,12 @@ function Categories() {
     fetchCountData();
   }, []);
 
-  const data = dramaData && filmData && gameData && animeData && ottData;
-
   return (
     <main className={styles.categories}>
       <Seo
         pageTitles={`리뷰 카테고리 선택하기 - ${originTitle}`}
         pageTitle={`리뷰 카테고리 선택하기`}
-        pageDescription="Only OTT / 영화 / 애니메이션 / 드라마 / 애니메이션 영화 / 게임"
+        pageDescription="OTT / 영화 / 애니메이션 / 애니메이션 영화 / 드라마 / 게임"
         pageImg={`https://jejeup.dev1stud.io/og-categories.webp?ts=${timestamp}`}
       />
       <h1>
@@ -258,7 +211,6 @@ function Categories() {
         </span>
         {count && <em>({formatNumber(count.amusement)}개 작품)</em>}
       </h1>
-      {isLoading && <div className={styles.loading}>이것저것 불러오는 중</div>}
       {error && (
         <div className={styles.error}>
           <p>데이터를 불러오는데 실패했습니다.</p>
@@ -267,7 +219,7 @@ function Categories() {
           </button>
         </div>
       )}
-      {data && !isLoading && !error && (
+      {!error && (
         <div className={styles.content}>
           {dramaData && (
             <>
@@ -287,7 +239,7 @@ function Categories() {
               </div>
               <section>
                 {Array.isArray(dramaData.data) &&
-                  dramaData.data.map((amusement: AmusementData, index) => (
+                  dramaData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
                         <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
@@ -443,7 +395,7 @@ function Categories() {
               </div>
               <section>
                 {Array.isArray(filmData.data) &&
-                  filmData.data.map((amusement: AmusementData, index) => (
+                  filmData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
                         <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
@@ -569,7 +521,7 @@ function Categories() {
               </div>
               <section>
                 {Array.isArray(animeData.data) &&
-                  animeData.data.map((amusement: AmusementData, index) => (
+                  animeData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
                         <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
@@ -757,7 +709,7 @@ function Categories() {
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?category=ott&page=1">OTT 오리지널 & OTT 온리 콘텐츠 리뷰</Anchor>
+                  <Anchor href="/amusement?category=ott&page=1">OTT 오리지널 & 온리 콘텐츠 리뷰</Anchor>
                 </h2>
                 <Anchor href="/amusement?category=ott&page=1">
                   <span>더보기</span>
@@ -771,7 +723,7 @@ function Categories() {
               </div>
               <section>
                 {Array.isArray(ottData.data) &&
-                  ottData.data.map((amusement: AmusementData, index) => (
+                  ottData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
                         <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
@@ -941,7 +893,7 @@ function Categories() {
               </div>
               <section className={styles.game}>
                 {Array.isArray(gameData.data) &&
-                  gameData.data.map((amusement: AmusementData, index) => (
+                  gameData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
                         <Image src={amusement.posterDefault} width="460" height="215" alt="" unoptimized />
@@ -1001,3 +953,59 @@ function Categories() {
 }
 
 export default Categories;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const currentPage = Number(context.query.page) || 1;
+  let dramaData = null;
+  let filmData = null;
+  let gameData = null;
+  let animeData = null;
+  let ottData = null;
+  let error = null;
+
+  try {
+    const drama = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/category?page=1&pageSize=7&categoryName=drama`);
+    if (!drama.ok) {
+      throw new Error('Network response was not ok');
+    }
+    dramaData = await drama.json();
+
+    const film = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/category?page=1&pageSize=7&categoryName=film`);
+    if (!film.ok) {
+      throw new Error('Network response was not ok');
+    }
+    filmData = await film.json();
+
+    const game = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/category?categoryName=game&page=1&pageSize=5`);
+    if (!game.ok) {
+      throw new Error('Network response was not ok');
+    }
+    gameData = await game.json();
+
+    const anime = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/category?categoryName=anime&page=1&pageSize=7`);
+    if (!anime.ok) {
+      throw new Error('Network response was not ok');
+    }
+    animeData = await anime.json();
+
+    const ott = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/category?categoryName=ott&page=1&pageSize=7`);
+    if (!ott.ok) {
+      throw new Error('Network response was not ok');
+    }
+    ottData = await ott.json();
+  } catch (err) {
+    error = err instanceof Error ? err.message : 'An unknown error occurred';
+  }
+
+  return {
+    props: {
+      dramaData,
+      filmData,
+      gameData,
+      animeData,
+      ottData,
+      error,
+      currentPage,
+    },
+  };
+};
