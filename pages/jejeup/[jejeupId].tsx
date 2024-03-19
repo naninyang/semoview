@@ -367,7 +367,7 @@ export default function JejeupDetail({
                           (relation: any) =>
                             jejeupId !== relation.idx && (
                               <dd key={relation.idx}>
-                                <a href={`/jejeup/${relation.idx}`}>{relation.subject}</a>
+                                <Anchor href={`/jejeup/${relation.idx}`}>{relation.subject}</Anchor>
                               </dd>
                             ),
                         )}
