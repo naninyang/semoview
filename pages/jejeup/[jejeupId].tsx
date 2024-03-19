@@ -353,7 +353,13 @@ export default function JejeupDetail({
                 <div className={styles.seemore}>
                   <em>{FormatDuration(jejeupData.jejeupMetaData.duration)}</em>
                   {jejeupData.jejeupMetaData.ogDescription}
-                  {jejeupData.attributes.relations && relations && (
+                  {isLoading && (
+                    <dl>
+                      <dt>관련 영상</dt>
+                      <dd>관련 영상 로딩 중...</dd>
+                    </dl>
+                  )}
+                  {jejeupData.attributes.relations && relations && !isLoading && !error && (
                     <dl>
                       <dt>관련 영상</dt>
                       {Array.isArray(relations) &&
