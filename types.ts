@@ -99,6 +99,7 @@ export interface JejeupPermalinkData {
     worst: boolean;
     relation1: string;
     relation2: string;
+    relations: string;
     createdAt: string;
   };
   jejeupMetaData: {

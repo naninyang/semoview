@@ -1,4 +1,4 @@
-import { AmusementData, JejeupData, NoticeData } from 'types';
+import { AmusementData, JejeupData, JejeupPermalinkData, NoticeData } from 'types';
 
 export const formatDate = (datetime: string) => {
   const date = new Date(datetime);
@@ -284,6 +284,32 @@ export async function getAmusementData(amusement: string) {
     posterDefault: amusementData.attributes.posterDefault,
     posterOther: amusementData.attributes.posterOther,
   };
+
+  return rowsData;
+}
+
+export async function getRelationsData(relations: string) {
+  const response = await fetch(
+    `${process.env.STRAPI_URL}/api/jejeup-jejeups/?sort[0]=id:desc&pagination[page]=1&pagination[pageSize]=100&filters[relations][$contains]=${relations}`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
+      },
+    },
+  );
+  const relationsResponse = await response.json();
+  const relationsData = relationsResponse.data;
+  const rowsData: JejeupData[] = relationsData.map((data: any) => ({
+    idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+    createdAt: data.attributes.createdAt,
+    subject: data.attributes.subject,
+    video: data.attributes.video,
+    ownerAvatar: data.attributes.ownerAvatar,
+    comment: data.attributes.comment,
+    title: data.attributes.title,
+    relations: data.attributes.relations,
+  }));
 
   return rowsData;
 }

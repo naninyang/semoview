@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import styled from '@emotion/styled';
-import { JejeupPermalinkData } from 'types';
+import { JejeupData, JejeupPermalinkData } from 'types';
 import { formatDate } from '@/utils/strapi';
 import Seo, { originTitle } from '@/components/Seo';
 import YouTubeController from '@/components/YouTubeController';
@@ -213,58 +213,38 @@ const ClipboardIcon = styled.i({
   background: `url(${vectors.share}) no-repeat 50% 50%/contain`,
 });
 
-export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermalinkData | null }) {
+export default function JejeupDetail({
+  jejeupData,
+  jejeupId,
+}: {
+  jejeupData: JejeupPermalinkData | null;
+  jejeupId: number;
+}) {
   const router = useRouter();
-  const [relation1, setRelation1] = useState<JejeupPermalinkData | null>(null);
-  const [relation2, setRelation2] = useState<JejeupPermalinkData | null>(null);
-  const [isRelationLoading, setIsRelationLoading] = useState(false);
-  const [isRelationError, setIsRelationError] = useState<null | string>(null);
+  const [relations, setRelations] = useState<JejeupData | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const relation = async () => {
+  const loadRelations = async () => {
     if (jejeupData) {
-      if (jejeupData.attributes.relation1) {
-        setIsRelationLoading(true);
-        setIsRelationError(null);
+      if (jejeupData.attributes.relations) {
+        setIsLoading(true);
+        setError(null);
         try {
-          const response = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}/api/jejeups?id=${jejeupData.attributes.relation1}`,
-          );
-          const jejeupResponse = await response.json();
-          setRelation1(jejeupResponse);
+          const response = await fetch(`/api/relations?relations=${jejeupData.attributes.relations}`);
+          const relationsResponse = await response.json();
+          setRelations(relationsResponse);
         } catch (err) {
-          if (err instanceof Error) {
-            setIsRelationError(err.message);
-          } else {
-            setIsRelationError('An unknown error occurred');
-          }
+          console.error(err);
         } finally {
-          setIsRelationLoading(false);
-        }
-      }
-      if (jejeupData.attributes.relation2) {
-        setIsRelationLoading(true);
-        setIsRelationError(null);
-        try {
-          const response = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}/api/jejeups?id=${jejeupData.attributes.relation2}`,
-          );
-          const jejeupResponse = (await response.json()) as { data: JejeupPermalinkData };
-          setRelation2(jejeupResponse.data);
-        } catch (err) {
-          if (err instanceof Error) {
-            setIsRelationError(err.message);
-          } else {
-            setIsRelationError('An unknown error occurred');
-          }
-        } finally {
-          setIsRelationLoading(false);
+          setIsLoading(false);
         }
       }
     }
   };
 
   useEffect(() => {
-    relation();
+    loadRelations();
   }, [jejeupData]);
 
   const previousPageHandler = () => {
@@ -370,38 +350,28 @@ export default function JejeupDetail({ jejeupData }: { jejeupData: JejeupPermali
                 </div>
               </div>
               {jejeupData.jejeupMetaData.ogDescription ? (
-                <p>
+                <div className={styles.seemore}>
                   <em>{FormatDuration(jejeupData.jejeupMetaData.duration)}</em>
                   {jejeupData.jejeupMetaData.ogDescription}
-                  {relation1 && !isRelationLoading && !isRelationError && (
+                  {jejeupData.attributes.relations && relations && (
                     <dl>
                       <dt>관련 영상</dt>
-                      <dd>
-                        <Anchor
-                          href={`/jejeup/${formatDate(relation1.attributes.createdAt)}${jejeupData.attributes.relation1}`}
-                        >
-                          {relation1.attributes.subject}
-                        </Anchor>
-                      </dd>
+                      {Array.isArray(relations) &&
+                        relations.map(
+                          (relation: any) =>
+                            jejeupId !== relation.idx && (
+                              <dd key={relation.idx}>
+                                <a href={`/jejeup/${relation.idx}`}>{relation.subject}</a>
+                              </dd>
+                            ),
+                        )}
                     </dl>
                   )}
-                  {relation2 && !isRelationLoading && !isRelationError && (
-                    <dl>
-                      <dt>관련 영상</dt>
-                      <dd>
-                        <Anchor
-                          href={`/jejeup/${formatDate(relation2.attributes.createdAt)}${jejeupData.attributes.relation2}`}
-                        >
-                          {relation2.attributes.subject}
-                        </Anchor>
-                      </dd>
-                    </dl>
-                  )}
-                </p>
+                </div>
               ) : (
-                <p>
+                <div className={styles.seemore}>
                   <strong>유튜버가 더보기 정보를 등록하지 않았습니다.</strong>
-                </p>
+                </div>
               )}
               {jejeupData.attributes.worst && (
                 <div className={styles.worst}>
@@ -1458,6 +1428,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   return {
     props: {
+      jejeupId,
       jejeupData,
     },
     revalidate: 1,
