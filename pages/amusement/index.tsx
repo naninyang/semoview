@@ -160,15 +160,22 @@ const RatingGameD19 = styled.i({
   background: `url(${vectors.ratings.game.d19}) no-repeat 50% 50%/contain`,
 });
 
-function Amusement({ categoryQuery }: { categoryQuery: string }) {
+function Amusement({
+  categoryQuery,
+  categoryData,
+  category,
+  currentPage,
+  error,
+}: {
+  categoryQuery: string;
+  categoryData: any;
+  category: string;
+  currentPage: number;
+  error: string;
+}) {
   const router = useRouter();
   const timestamp = Date.now();
   const [selectedCategory, setSelectedCategory] = useState<string>('');
-  const [categoryData, setCategoryData] = useState<any>(null);
-  const [category, setCategory] = useState<any>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const currentPage = Number(router.query.page) || 1;
 
   useEffect(() => {
     sessionStorage.setItem('amuement', router.asPath);
@@ -184,36 +191,6 @@ function Amusement({ categoryQuery }: { categoryQuery: string }) {
       router.push(`/amusement?category=${selectedCategory}&page=1`);
     }
   };
-
-  useEffect(() => {
-    const { category } = router.query;
-    if (!category) return;
-
-    const fetchData = async () => {
-      setIsLoading(true);
-      setError(null);
-      setCategory(category);
-
-      try {
-        const response = await fetch(`/api/category?categoryName=${category}&page=${currentPage}&pageSize=48`);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const responseData = await response.json();
-        setCategoryData(responseData);
-      } catch (err) {
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError('An unknown error occurred');
-        }
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [router.query]);
 
   return (
     <main className={`${styles.categories} ${styles.amusement}`}>
@@ -237,7 +214,6 @@ function Amusement({ categoryQuery }: { categoryQuery: string }) {
           <span>뒤로가기</span>
         </Anchor>
       </div>
-      {isLoading && <div className={styles.loading}>이것저것 불러오는 중</div>}
       {error && (
         <div className={styles.error}>
           <p>데이터를 불러오는데 실패했습니다.</p>
@@ -259,7 +235,7 @@ function Amusement({ categoryQuery }: { categoryQuery: string }) {
           <button onClick={handleCategorySubmit}>선택</button>
         </div>
       )}
-      {categoryData && !isLoading && !error && (
+      {!error && categoryData && (
         <div className={styles.content}>
           <div className={styles.headline}>
             <h1>
@@ -591,9 +567,23 @@ function Amusement({ categoryQuery }: { categoryQuery: string }) {
 export default Amusement;
 
 export async function getServerSideProps(context: any) {
-  return {
-    props: {
-      categoryQuery: context.query.category || '',
-    },
-  };
+  const { query } = context;
+  const category = query.category || null;
+  const currentPage = Number(query.page) || 1;
+  let categoryData = null;
+  let error = null;
+
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/category?categoryName=${category}&page=${currentPage}&pageSize=48`,
+    );
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    categoryData = await response.json();
+  } catch (err) {
+    error = err instanceof Error ? err.message : 'An unknown error occurred';
+  }
+
+  return { props: { categoryQuery: context.query.category || '', categoryData, category, currentPage, error } };
 }
