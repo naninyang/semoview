@@ -69,6 +69,23 @@ export interface JejeupData {
   };
 }
 
+export interface JejeupMetaData {
+  error: string;
+  ogTitle: string;
+  ogUrl: string;
+  ogImage: string;
+  ogDescription: string;
+  ogSiteName?: string;
+  twitterSite?: string;
+  twitterCreator?: string;
+  datePublished?: string;
+  ownerAvatar?: string;
+  ownerName?: string;
+  pressPublished?: string;
+  pressAvatar?: string;
+  duration: string;
+}
+
 export interface JejeupPermalinkData {
   attributes: {
     idx: string;

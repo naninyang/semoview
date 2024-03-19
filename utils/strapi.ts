@@ -234,7 +234,7 @@ export async function getNoticeData() {
   return notices;
 }
 
-async function fetchPreviewMetadata(url: string) {
+export async function fetchPreviewMetadata(url: string) {
   try {
     const response = await fetch(`${process.env.PREVIEW_API_URL}?url=${encodeURIComponent(url)}`);
     const previewResponse = await response.json();
