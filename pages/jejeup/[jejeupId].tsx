@@ -231,7 +231,7 @@ export default function JejeupDetail({
         setIsLoading(true);
         setError(null);
         try {
-          const response = await fetch(`/api/relations?relations=${jejeupData.attributes.relations}`);
+          const response = await fetch(`/api/relations?relations=${jejeupData.attributes.relations}&type=jejeup`);
           const relationsResponse = await response.json();
           setRelations(relationsResponse);
         } catch (err) {

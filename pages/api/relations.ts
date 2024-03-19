@@ -3,8 +3,9 @@ import { getRelationsData } from '@/utils/strapi';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const relations = req.query.relations as string;
+  const type = req.query.type as string;
   try {
-    const data = await getRelationsData(relations);
+    const data = await getRelationsData(relations, type);
     res.status(200).json(data);
   } catch (error) {
     console.error(error);

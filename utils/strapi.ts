@@ -288,28 +288,74 @@ export async function getAmusementData(amusement: string) {
   return rowsData;
 }
 
-export async function getRelationsData(relations: string) {
-  const response = await fetch(
-    `${process.env.STRAPI_URL}/api/jejeup-jejeups/?sort[0]=id:desc&pagination[page]=1&pagination[pageSize]=100&filters[relations][$contains]=${relations}`,
-    {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
+export async function getRelationsData(relations: string, type: string) {
+  if (type === 'jejeup') {
+    const response = await fetch(
+      `${process.env.STRAPI_URL}/api/jejeup-jejeups/?sort[0]=id:desc&pagination[page]=1&pagination[pageSize]=100&filters[relations][$contains]=${relations}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
+        },
       },
-    },
-  );
-  const relationsResponse = await response.json();
-  const relationsData = relationsResponse.data;
-  const rowsData: JejeupData[] = relationsData.map((data: any) => ({
-    idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
-    createdAt: data.attributes.createdAt,
-    subject: data.attributes.subject,
-    video: data.attributes.video,
-    ownerAvatar: data.attributes.ownerAvatar,
-    comment: data.attributes.comment,
-    title: data.attributes.title,
-    relations: data.attributes.relations,
-  }));
+    );
+    const relationsResponse = await response.json();
+    const relationsData = relationsResponse.data;
+    const rowsData: JejeupData[] = relationsData.map((data: any) => ({
+      idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+      createdAt: data.attributes.createdAt,
+      subject: data.attributes.subject,
+      video: data.attributes.video,
+      ownerAvatar: data.attributes.ownerAvatar,
+      comment: data.attributes.comment,
+      title: data.attributes.title,
+      relations: data.attributes.relations,
+    }));
 
-  return rowsData;
+    return rowsData;
+  } else {
+    const response = await fetch(
+      `${process.env.STRAPI_URL}/api/amusement-jejeups/?sort[0]=id:desc&pagination[page]=1&pagination[pageSize]=100&filters[relations][$contains]=${relations}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
+        },
+      },
+    );
+    const relationsResponse = await response.json();
+    const relationsData = relationsResponse.data;
+    const rowsData: AmusementData[] = relationsData.map((data: any) => ({
+      idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+      title: data.attributes.title,
+      lang: data.attributes.lang,
+      titleKorean: data.attributes.titleKorean,
+      titleOther: data.attributes.titleOther,
+      etc: data.attributes.etc,
+      release: data.attributes.release,
+      original: data.attributes.original,
+      originalAuthor: data.attributes.originalAuthor,
+      originTitle: data.attributes.originTitle,
+      rating: data.attributes.rating,
+      ratingCustom: data.attributes.ratingCustom,
+      country: data.attributes.country,
+      category: data.attributes.category,
+      isMobile: data.attributes.isMobile,
+      genre: data.attributes.genre,
+      anime: data.attributes.anime,
+      animeBroadcast1: data.attributes.animeBroadcast1,
+      animeBroadcast2: data.attributes.animeBroadcast2,
+      ott: data.attributes.ott,
+      ottAddr: data.attributes.ottAddr,
+      broadcast: data.attributes.broadcast,
+      publisher: data.attributes.publisher,
+      creator: data.attributes.creator,
+      cast: data.attributes.cast,
+      posterDefault: data.attributes.posterDefault,
+      posterOther: data.attributes.posterOther,
+      relations: data.attributes.relations,
+    }));
+
+    return rowsData;
+  }
 }
