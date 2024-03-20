@@ -171,8 +171,9 @@ export async function getRenewAmusement(page?: number, pageSize?: number, amusem
 }
 
 export async function getJejeupAmusementData(page?: number, pageSize?: number, amusementId?: string) {
+  const amusementNumber = `'${amusementId}'`;
   const response = await fetch(
-    `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$or][0][title][$eq]=${amusementId}&filters[$or][1][title2][$eq]=${amusementId}`,
+    `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[amusements][$contains]=${amusementNumber}`,
     {
       method: 'GET',
       headers: {

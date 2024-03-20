@@ -28,8 +28,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         `${process.env.PREVIEW_API_URL}?url=https://youtu.be/${encodeURIComponent(jejeupResponse.data.attributes.video)}`,
       );
       const jejeupMetaData = await jejeupMetaResponse.json();
-      const amusementSource = jejeupResponse.data.attributes.amusements || jejeupResponse.data.attributes.title;
-      const amusementTitles: string[] = amusementSource.split(',').map((title: string) => title.trim());
+      const amusementSource = jejeupResponse.data.attributes.isAmusements
+        ? jejeupResponse.data.attributes.amusements
+        : jejeupResponse.data.attributes.title;
+      const amusementTitles: string[] = amusementSource
+        .split(',')
+        .map((title: string) => title.trim().replace(/'/g, ''));
       const amusementMap = amusementTitles.map((title) => getAmusementData(title));
       const amusementData = await Promise.all(amusementMap);
 
