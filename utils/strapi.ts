@@ -30,7 +30,7 @@ export async function getRenew(page?: number) {
 
 export async function getJejeupData(page?: number) {
   const response = await fetch(
-    `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=12`,
+    `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=48`,
     {
       method: 'GET',
       headers: {
