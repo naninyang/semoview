@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 import styled from '@emotion/styled';
-import { AmusementPermalinkData, JejeupData } from 'types';
+import { AmusementData, AmusementPermalinkData, JejeupData } from 'types';
 import { formatDate } from '@/utils/strapi';
 import Seo, { originTitle } from '@/components/Seo';
 import { CategoryName } from '@/components/CategoryName';
@@ -213,7 +213,13 @@ const RatingGameD19 = styled.i({
   background: `url(${vectors.ratings.game.d19}) no-repeat 50% 50%/contain`,
 });
 
-export default function Amusement({ amusementData }: { amusementData: AmusementPermalinkData | null }) {
+export default function Amusement({
+  amusementData,
+  amusementId,
+}: {
+  amusementData: AmusementPermalinkData | null;
+  amusementId: number;
+}) {
   const router = useRouter();
   const timestamp = Date.now();
   const [data, setData] = useState<JejeupData | null>(null);
@@ -221,15 +227,65 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
   const [isJejeupsError, setIsJejeupsError] = useState<null | string>(null);
   const currentPage = Number(router.query.page) || 1;
   const [isActive, setIsActive] = useState(true);
-  const [relation1, setRelation1] = useState<AmusementPermalinkData | null>(null);
-  const [relation2, setRelation2] = useState<AmusementPermalinkData | null>(null);
-  const [isRelationLoading, setIsRelationLoading] = useState(false);
-  const [isRelationError, setIsRelationError] = useState<null | string>(null);
+  const [relations, setRelations] = useState<AmusementData | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [selectedRelation, setSelectedRelation] = useState<string>('');
 
   useEffect(() => {
     sessionStorage.setItem('location', router.asPath);
   }, [router.asPath]);
+
+  const loadRelations = async () => {
+    if (amusementData) {
+      if (amusementData.attributes.relations) {
+        setIsLoading(true);
+        setError(null);
+        setIsJejeupsLoading(true);
+        setIsJejeupsError(null);
+        try {
+          const response = await fetch(`/api/relations?relations=${amusementData.attributes.relations}&type=amusement`);
+          const relationsResponse = await response.json();
+          setRelations(relationsResponse);
+          const renewResponse =
+            amusementData && (await fetch(`/api/renewAmusement?page=${currentPage}&amusementId=${amusementData.id}`));
+          const renewData = renewResponse && (await renewResponse.json());
+          const renewValue = renewData.renew;
+          const cachedData = amusementData && localStorage.getItem(`amusementData${currentPage}${amusementData.id}`);
+          let dataToUse;
+
+          if (cachedData) {
+            const parsedData = JSON.parse(cachedData);
+            if (parsedData.jejeups.length > 0 && parsedData.jejeups[0].createdAt) {
+              if (parsedData.jejeups[0].createdAt === renewValue) {
+                dataToUse = parsedData;
+              }
+            }
+          }
+
+          if (!dataToUse && amusementData) {
+            const response = await fetch(`/api/jejeuAmusement?page=${currentPage}&amusementId=${amusementData.id}`);
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            const newData = await response.json();
+            localStorage.setItem(`amusementData${currentPage}${amusementData.id}`, JSON.stringify(newData));
+            dataToUse = newData;
+          }
+          setData(dataToUse);
+        } catch (err) {
+          console.error(err);
+        } finally {
+          setIsLoading(false);
+          setIsJejeupsLoading(false);
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    loadRelations();
+  }, [amusementData]);
 
   const previousPageHandler = () => {
     const previousPage = sessionStorage.getItem('amusement');
@@ -269,118 +325,20 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
     );
   };
 
-  const relation = async () => {
-    if (amusementData) {
-      if (amusementData.attributes.relation1) {
-        setIsRelationLoading(true);
-        setIsRelationError(null);
-        setIsJejeupsLoading(true);
-        setIsJejeupsError(null);
-        try {
-          const response = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}/api/amusement?amusementId=${amusementData.attributes.relation1}`,
-          );
-          const amusementResponse = (await response.json()) as { data: AmusementPermalinkData };
-          setRelation1(amusementResponse.data);
-          const renewResponse =
-            amusementData && (await fetch(`/api/renewAmusement?page=${currentPage}&amusementId=${amusementData.id}`));
-          const renewData = renewResponse && (await renewResponse.json());
-          const renewValue = renewData.renew;
-          const cachedData = amusementData && localStorage.getItem(`amusementData${currentPage}${amusementData.id}`);
-          let dataToUse;
-
-          if (cachedData) {
-            const parsedData = JSON.parse(cachedData);
-            if (parsedData.jejeups.length > 0 && parsedData.jejeups[0].createdAt) {
-              if (parsedData.jejeups[0].createdAt === renewValue) {
-                dataToUse = parsedData;
-              }
-            }
-          }
-
-          if (!dataToUse && amusementData) {
-            const response = await fetch(`/api/jejeuAmusement?page=${currentPage}&amusementId=${amusementData.id}`);
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-            const newData = await response.json();
-            localStorage.setItem(`amusementData${currentPage}${amusementData.id}`, JSON.stringify(newData));
-            dataToUse = newData;
-          }
-
-          setData(dataToUse);
-        } catch (err) {
-          if (err instanceof Error) {
-            setIsRelationError(err.message);
-            setIsJejeupsError(err.message);
-          } else {
-            setIsRelationError('An unknown error occurred');
-            setIsJejeupsError('An unknown error occurred');
-          }
-        } finally {
-          setIsRelationLoading(false);
-          setIsJejeupsLoading(false);
-        }
-      }
-      if (amusementData.attributes.relation2) {
-        setIsRelationLoading(true);
-        setIsRelationError(null);
-        setIsJejeupsLoading(true);
-        setIsJejeupsError(null);
-        try {
-          const response = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}/api/amusement?amusementId=${amusementData.attributes.relation2}`,
-          );
-          const amusementResponse = (await response.json()) as { data: AmusementPermalinkData };
-          setRelation2(amusementResponse.data);
-          const renewResponse =
-            amusementData && (await fetch(`/api/renewAmusement?page=${currentPage}&amusementId=${amusementData.id}`));
-          const renewData = renewResponse && (await renewResponse.json());
-          const renewValue = renewData.renew;
-          const cachedData = amusementData && localStorage.getItem(`amusementData${currentPage}${amusementData.id}`);
-          let dataToUse;
-
-          if (cachedData) {
-            const parsedData = JSON.parse(cachedData);
-            if (parsedData.jejeups.length > 0 && parsedData.jejeups[0].createdAt) {
-              if (parsedData.jejeups[0].createdAt === renewValue) {
-                dataToUse = parsedData;
-              }
-            }
-          }
-
-          if (!dataToUse && amusementData) {
-            const response = await fetch(`/api/jejeuAmusement?page=${currentPage}&amusementId=${amusementData.id}`);
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-            const newData = await response.json();
-            localStorage.setItem(`amusementData${currentPage}${amusementData.id}`, JSON.stringify(newData));
-            dataToUse = newData;
-          }
-
-          setData(dataToUse);
-        } catch (err) {
-          if (err instanceof Error) {
-            setIsRelationError(err.message);
-            setIsJejeupsError(err.message);
-          } else {
-            setIsRelationError('An unknown error occurred');
-            setIsJejeupsError('An unknown error occurred');
-          }
-        } finally {
-          setIsRelationLoading(false);
-          setIsJejeupsLoading(false);
-        }
+  useEffect(() => {
+    if (Array.isArray(relations) && relations.length > 0) {
+      const defaultRelation = relations.find((relation) => relation.idx !== amusementId);
+      if (defaultRelation) {
+        setSelectedRelation(`/amusement/${defaultRelation.idx}`);
       }
     }
-  };
+  }, [relations, amusementId]);
 
   const handleRelationChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedRelation(event.target.value);
   };
   const handleRelationSubmit = () => {
-    router.push(`${selectedRelation}`);
+    router.push({ pathname: selectedRelation });
   };
 
   const fetchData = async () => {
@@ -428,10 +386,6 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
     fetchData();
   }, [currentPage]);
 
-  useEffect(() => {
-    relation();
-  }, [amusementData]);
-
   const [timeoutReached, setTimeoutReached] = useState(false);
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -473,16 +427,10 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
   };
 
   function RelationSelect() {
-    if (
-      amusementData &&
-      amusementData.attributes.relation1 !== null &&
-      relation1 !== null &&
-      !isRelationLoading &&
-      !isRelationError
-    ) {
+    if (amusementData && amusementData.attributes.relations !== null && !isLoading && !error) {
       return (
         <div className={styles.relation}>
-          <dt>다른 버전 보기</dt>
+          <dt>시리즈 선택</dt>
           <dd>
             <select value={selectedRelation} onChange={handleRelationChange}>
               <option value={router.asPath}>
@@ -490,23 +438,14 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                   ? amusementData.attributes.titleKorean
                   : amusementData.attributes.title}
               </option>
-              {relation1 !== null && (
-                <option
-                  value={`/amusement/${formatDate(relation1.attributes.createdAt)}${amusementData.attributes.relation1}`}
-                >
-                  {relation1.attributes.titleKorean ? relation1.attributes.titleKorean : relation1.attributes.title}
-                </option>
-              )}
-              {amusementData.attributes.relation2 !== null &&
-                relation2 !== null &&
-                !isRelationLoading &&
-                !isRelationError && (
-                  <option
-                    value={`/amusement/${formatDate(relation2.attributes.createdAt)}${amusementData.attributes.relation2}`}
-                  >
-                    {relation2.attributes.titleKorean ? relation2.attributes.titleKorean : relation2.attributes.title}
-                  </option>
-                )}
+              {Array.isArray(relations) &&
+                relations
+                  .filter((relation) => relation.idx !== amusementId)
+                  .map((relation) => (
+                    <option key={relation.idx} value={`/amusement/${relation.idx}`}>
+                      {relation.titleKorean ? relation.titleKorean : relation.title}
+                    </option>
+                  ))}
             </select>
             <button type="button" onClick={handleRelationSubmit}>
               이동
@@ -599,7 +538,7 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
             {amusementData.attributes.etc && (
               <div>
                 <dt>추가 제목 또는 제목 설명</dt>
-                <dd>{amusementData.attributes.etc}</dd>
+                <dd className="lang">{amusementData.attributes.etc}</dd>
               </div>
             )}
             {amusementData.attributes.originalAuthor &&
@@ -744,7 +683,7 @@ export default function Amusement({ amusementData }: { amusementData: AmusementP
                   </dd>
                 </div>
               )}
-              {isRelationLoading && (
+              {isLoading && (
                 <div className={styles.relation}>
                   <dt>다른 버전 보기</dt>
                   <dd>
@@ -1199,7 +1138,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: {
       amusementData,
-      idx: amusementId,
+      amusementId,
     },
     revalidate: 1,
   };

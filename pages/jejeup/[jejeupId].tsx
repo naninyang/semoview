@@ -363,14 +363,13 @@ export default function JejeupDetail({
                     <dl>
                       <dt>관련 영상</dt>
                       {Array.isArray(relations) &&
-                        relations.map(
-                          (relation: any) =>
-                            jejeupId !== relation.idx && (
-                              <dd key={relation.idx}>
-                                <Anchor href={`/jejeup/${relation.idx}`}>{relation.subject}</Anchor>
-                              </dd>
-                            ),
-                        )}
+                        relations
+                          .filter((relation) => relation.idx !== jejeupId)
+                          .map((relation) => (
+                            <dd key={relation.idx}>
+                              <Anchor href={`/jejeup/${relation.idx}`}>{relation.subject}</Anchor>
+                            </dd>
+                          ))}
                     </dl>
                   )}
                 </div>
