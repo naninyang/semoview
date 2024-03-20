@@ -64,8 +64,7 @@ export interface JejeupData {
     synopsys: string;
     posterDefault: string;
     posterOther: string;
-    relation1: string;
-    relation2: string;
+    relations: string;
   };
 }
 
