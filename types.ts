@@ -93,9 +93,8 @@ export interface JejeupPermalinkData {
     ownerAvatar: string;
     comment: string;
     title: string;
-    title2: string;
-    title3?: string;
     worst: boolean;
+    amusements: string;
     relations: string;
     createdAt: string;
   };

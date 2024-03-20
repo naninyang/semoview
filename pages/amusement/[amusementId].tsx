@@ -264,7 +264,7 @@ export default function Amusement({
           }
 
           if (!dataToUse && amusementData) {
-            const response = await fetch(`/api/jejeuAmusement?page=${currentPage}&amusementId=${amusementData.id}`);
+            const response = await fetch(`/api/jejeupAmusement?page=${currentPage}&amusementId=${amusementData.id}`);
             if (!response.ok) {
               throw new Error('Network response was not ok');
             }
@@ -362,7 +362,7 @@ export default function Amusement({
       }
 
       if (!dataToUse && amusementData) {
-        const response = await fetch(`/api/jejeuAmusement?page=${currentPage}&amusementId=${amusementData.id}`);
+        const response = await fetch(`/api/jejeupAmusement?page=${currentPage}&amusementId=${amusementData.id}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
