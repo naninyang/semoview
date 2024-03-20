@@ -54,11 +54,9 @@ export async function getJejeupData(page?: number) {
   const pageCount = jejeupResponse.meta.pagination.pageCount;
   const jejeups = await Promise.all(
     rowsData.map(async (preview) => {
-      const jejeupMetaData = await fetchPreviewMetadata(`https://youtu.be/${preview.video}`);
       const amusementData = await getAmusementData(preview.title);
       return {
         ...preview,
-        jejeupMetaData,
         amusementData,
       };
     }),
