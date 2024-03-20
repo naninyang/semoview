@@ -858,31 +858,16 @@ export default function JejeupDetail({
             </div>
           </div>
           <div className={styles.posters}>
-            <h2>{jejeupData.amusementData.category === 'game' ? '게임 공식 배너' : '포스터'}</h2>
-            <div
-              className={`${styles['poster-list']} ${jejeupData.amusementData.category === 'game' ? styles['posters-game'] : styles['posters-other']}`}
-            >
-              {Array.isArray(jejeupData.amusementData) && jejeupData.amusementData.length > 1 ? (
-                <>
-                  {Array.isArray(jejeupData.amusementData) &&
-                    jejeupData.amusementData.map((data, index) => (
-                      <div className={styles.poster} key={index}>
-                        <Image
-                          src={data.posterDefault}
-                          alt=""
-                          width={data.category === 'game' ? 460 : 390}
-                          height={data.category === 'game' ? 215 : 560}
-                          unoptimized
-                        />
-                      </div>
-                    ))}
-                </>
-              ) : (
-                <>
-                  {Array.isArray(jejeupData.amusementData) &&
-                    jejeupData.amusementData.map((data, index) => (
-                      <React.Fragment key={index}>
-                        <div className={styles.poster}>
+            {Array.isArray(jejeupData.amusementData) && (
+              <>
+                <h2>{jejeupData.amusementData[0].category === 'game' ? '배너/썸네일' : '비주얼/포스터'}</h2>
+                <div
+                  className={`${styles['poster-list']} ${jejeupData.amusementData[0].category === 'game' ? styles['posters-game'] : styles['posters-other']}`}
+                >
+                  {jejeupData.amusementData.length > 1 ? (
+                    <>
+                      {jejeupData.amusementData.map((data, index) => (
+                        <div className={styles.poster} key={index}>
                           <Image
                             src={data.posterDefault}
                             alt=""
@@ -891,22 +876,39 @@ export default function JejeupDetail({
                             unoptimized
                           />
                         </div>
-                        {data.posterOther && (
+                      ))}
+                    </>
+                  ) : (
+                    <>
+                      {jejeupData.amusementData.map((data, index) => (
+                        <React.Fragment key={index}>
                           <div className={styles.poster}>
                             <Image
-                              src={data.posterOther}
+                              src={data.posterDefault}
                               alt=""
                               width={data.category === 'game' ? 460 : 390}
                               height={data.category === 'game' ? 215 : 560}
                               unoptimized
                             />
                           </div>
-                        )}
-                      </React.Fragment>
-                    ))}
-                </>
-              )}
-            </div>
+                          {data.posterOther && (
+                            <div className={styles.poster}>
+                              <Image
+                                src={data.posterOther}
+                                alt=""
+                                width={data.category === 'game' ? 460 : 390}
+                                height={data.category === 'game' ? 215 : 560}
+                                unoptimized
+                              />
+                            </div>
+                          )}
+                        </React.Fragment>
+                      ))}
+                    </>
+                  )}
+                </div>
+              </>
+            )}
           </div>
         </div>
       </article>
