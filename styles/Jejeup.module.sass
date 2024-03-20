@@ -134,273 +134,290 @@
           color: $hex-accent
 
     .title
+      .function
+        display: flex
+        gap: rem(17)
+        align-items: center
+        padding: rem(7) 0
+
+        button, a
+          display: flex
+          align-items: center
+          gap: rem(6)
+          height: rem(36)
+          background-color: rgba($hex-black, .1)
+          border-radius: rem(36)
+          padding: 0 rem(16)
+          font-size: rem(14)
+          font-weight: 800
+          color: $hex-black
+          line-height: 1
+
+          i
+            display: inline-block
+            width: rem(24)
+            height: rem(24)
+
       .title-list
+        .title-info
+          width: calc(45% - rem(6))
+
+          .info-container
+            flex-grow: 1
+
+      .title-item
+        .poster
+          width: calc(50% - rem(6))
+
+      .title-list, .title-item
         display: flex
         gap: rem(12)
-
-        +mq(maxExtraSmall)
-          flex-direction: column
+        overflow: auto
+        padding-bottom: rem(23)
 
         .title-info
           display: flex
           flex-direction: column
           gap: rem(17)
-          +col
 
-    .summary
-      display: flex
-      flex-direction: column
-      gap: rem(7)
+        .summary
+          display: flex
+          flex-direction: column
+          gap: rem(7)
 
-      dt
-        display: flex
-        flex-wrap: wrap
-        gap: rem(7)
-        line-height: rem(24)
+          dt
+            display: flex
+            flex-wrap: wrap
+            gap: rem(7)
+            line-height: rem(24)
 
-        cite
-          display: inline-flex
-          align-items: center
-          height: rem(24)
-          font-size: rem(14)
-          font-weight: 800
-          font-style: normal
-          color: $hex-accent
-
-          i
-            display: inline-block
-            margin-right: rem(7)
-            height: rem(16)
-
-        em
-          display: inline-flex
-          align-items: center
-          height: rem(24)
-          border: 2px solid $hex-accent
-          border-radius: rem(3)
-          padding: rem(3) rem(5)
-          font-size: rem(14)
-          font-weight: 700
-          line-height: 1
-          font-style: normal
-          color: $hex-accent
-          vertical-align: top
-
-          &.ENA
-            border-color: #3B31E0
-            color: #3B31E0
-
-          &.JTBC
-            border-color: #F0047F
-            color: #F0047F
-
-          &.KBS2
-            border-color: #FAB700
-            color: #FAB700
-
-          &.MBC
-            border-color: #42515E
-            color: #42515E
-
-          &.OCN
-            border-color: #FFB514
-            color: #FFB514
-
-          &.SBS
-            border-color: #005A91
-            color: #005A91
-
-          &.tvN
-            border-color: #FA0029
-            color: #FA0029
-
-          i
-            display: inline-block
-            margin-right: rem(5)
-            height: rem(14)
-
-            & ~ i
-              margin-left: rem(5)
-
-          span
-            +screen-reader-only
-
-          & + i.rating
-            vertical-align: top
-
-        > i
-          display: inline-flex
-          width: rem(24)
-          height: rem(24)
-          padding: rem(6) 0 rem(10)
-          font-size: rem(12)
-          font-weight: 800
-          font-style: normal
-          line-height: 1
-          color: $hex-white
-
-          &.drama
-            background-color: #FFCB00
-            border-radius: rem(24)
-            color: $hex-black
-            justify-content: center
-
-            &.all
-              font-size: rem(10)
-
-            &.d19
-              background-color: #D61D28
-              color: $hex-white
-
-          &.rating
-            padding: 0
-            vertical-align: bottom
-
-          &.drama + span,
-          &.rating + span
-            +screen-reader-only
-
-        .custom
-          display: inline-flex
-          align-items: center
-
-          button
-            background-color: transparent
-            border: rem(2) solid $hex-accent
-            border-radius: 100%
-            width: rem(20)
-            height: rem(20)
-
-            i::before
-              content: '?'
+            cite
+              display: inline-flex
+              align-items: center
+              height: rem(24)
               font-size: rem(14)
               font-weight: 800
               font-style: normal
               color: $hex-accent
 
-            span
-              +screen-reader-only
+              i
+                display: inline-block
+                margin-right: rem(7)
+                height: rem(16)
 
-        a
-          display: inline-flex
-          height: rem(24)
-          border: 2px solid $hex-black
-          border-radius: rem(3)
-          padding: rem(3) rem(5)
-          font-size: rem(14)
-          font-weight: 700
-          line-height: 1
-          font-style: normal
-          color: $hex-black
-          vertical-align: top
+            em
+              display: inline-flex
+              align-items: center
+              height: rem(24)
+              border: 2px solid $hex-accent
+              border-radius: rem(3)
+              padding: rem(3) rem(5)
+              font-size: rem(14)
+              font-weight: 700
+              line-height: 1
+              font-style: normal
+              color: $hex-accent
+              vertical-align: top
 
-      dd
-        padding-top: rem(3)
+              &.ENA
+                border-color: #3B31E0
+                color: #3B31E0
 
-        strong
-          display: flex
-          flex-direction: column
-          line-height: 1.125
-          color: $hex-dark
+              &.JTBC
+                border-color: #F0047F
+                color: #F0047F
 
-          +mq(maxExtraSmall)
-            gap: rem(2)
+              &.KBS2
+                border-color: #FAB700
+                color: #FAB700
 
-          +mq(minSmall)
-            line-height: rem(20)
+              &.MBC
+                border-color: #42515E
+                color: #42515E
 
-          span
-            font-size: rem(14)
-            font-weight: 600
-            color: rgba($hex-dark, .5)
+              &.OCN
+                border-color: #FFB514
+                color: #FFB514
 
-            +mq(minSmall)
-              +ellipsis
+              &.SBS
+                border-color: #005A91
+                color: #005A91
 
-            &.title
-              margin-bottom: rem(5)
-              font-size: rem(20)
+              &.tvN
+                border-color: #FA0029
+                color: #FA0029
+
+              i
+                display: inline-block
+                margin-right: rem(5)
+                height: rem(14)
+
+                & ~ i
+                  margin-left: rem(5)
+
+              span
+                +screen-reader-only
+
+              & + i.rating
+                vertical-align: top
+
+            > i
+              display: inline-flex
+              width: rem(24)
+              height: rem(24)
+              padding: rem(6) 0 rem(10)
+              font-size: rem(12)
               font-weight: 800
+              font-style: normal
+              line-height: 1
+              color: $hex-white
+
+              &.drama
+                background-color: #FFCB00
+                border-radius: rem(24)
+                color: $hex-black
+                justify-content: center
+
+                &.all
+                  font-size: rem(10)
+
+                &.d19
+                  background-color: #D61D28
+                  color: $hex-white
+
+              &.rating
+                padding: 0
+                vertical-align: bottom
+
+              &.drama + span,
+              &.rating + span
+                +screen-reader-only
+
+            .custom
+              display: inline-flex
+              align-items: center
+
+              button
+                background-color: transparent
+                border: rem(2) solid $hex-accent
+                border-radius: 100%
+                width: rem(20)
+                height: rem(20)
+
+                i::before
+                  content: '?'
+                  font-size: rem(14)
+                  font-weight: 800
+                  font-style: normal
+                  color: $hex-accent
+
+                span
+                  +screen-reader-only
+
+            a
+              display: inline-flex
+              height: rem(24)
+              border: 2px solid $hex-black
+              border-radius: rem(3)
+              padding: rem(3) rem(5)
+              font-size: rem(14)
+              font-weight: 700
+              line-height: 1
+              font-style: normal
+              color: $hex-black
+              vertical-align: top
+
+          dd
+            padding-top: rem(3)
+
+            strong
+              display: flex
+              flex-direction: column
+              line-height: 1.125
               color: $hex-dark
 
+              +mq(maxExtraSmall)
+                gap: rem(2)
+
               +mq(minSmall)
-                +ellipsis
+                line-height: rem(20)
 
-            &[lang="en"], &[lang="ko"]
-              font-weight: 800
+              span
+                font-size: rem(14)
+                font-weight: 600
+                color: rgba($hex-dark, .5)
 
-            &.origin
-              font-weight: 400
+                &.title
+                  margin-bottom: rem(5)
+                  font-size: rem(20)
+                  font-weight: 800
+                  color: $hex-dark
+
+                &[lang="en"], &[lang="ko"]
+                  font-weight: 800
+
+                &.origin
+                  font-weight: 400
+                  font-size: rem(14)
+                  color: rgba($hex-dark, .7)
+
+              time
+                display: flex
+                align-items: center
+                gap: rem(7)
+                margin-top: rem(3)
+                font-size: rem(14)
+                font-weight: 400
+                line-height: 1
+                color: $hex-dark
+
+            em
+              display: block
               font-size: rem(14)
-              color: rgba($hex-dark, .7)
+              font-style: normal
+              color: $hex-accent
 
-          time
-            display: flex
-            align-items: center
+        .info
+          display: flex
+          flex-direction: column
+          gap: rem(3)
+
+          > div
+            display: inline-flex
             gap: rem(7)
-            margin-top: rem(3)
+
+          dt, dd
             font-size: rem(14)
-            font-weight: 400
-            line-height: 1
+
+          dt
+            width: rem(70)
+            color: $hex-accent
+            white-space: nowrap
+
+          dd
+            +col
+            font-weight: 800
             color: $hex-dark
 
-        em
-          display: block
-          font-size: rem(14)
-          font-style: normal
-          color: $hex-accent
+        .poster
+          &.posters-game img
+            aspect-ratio: 460 / 215
 
-    .function
-      display: flex
-      gap: rem(17)
-      align-items: center
-      padding: rem(7) 0
+          &.posters-other img
+            aspect-ratio: 390 / 560
 
-      button, a
-        display: flex
-        align-items: center
-        gap: rem(6)
-        height: rem(36)
-        background-color: rgba($hex-black, .1)
-        border-radius: rem(36)
-        padding: 0 rem(16)
-        font-size: rem(14)
-        font-weight: 800
-        color: $hex-black
-        line-height: 1
+          img
+            width: 100%
+            height: auto
+            object-fit: cover
 
-        i
-          display: inline-block
-          width: rem(24)
-          height: rem(24)
-
-    .info
-      display: flex
-      flex-direction: column
-      gap: rem(3)
-
-      > div
-        display: inline-flex
-        gap: rem(7)
-
-      dt, dd
-        font-size: rem(14)
-
-      dt
-        width: rem(70)
-        color: $hex-accent
-        white-space: nowrap
-
-      dd
-        +col
-        font-weight: 800
-        color: $hex-dark
+    .comment, .posters
+      margin-top: rem(17)
 
     .title, .comment, .posters
       display: flex
       flex-direction: column
       gap: rem(7)
-      margin-top: rem(17)
 
       h2
         display: flex
