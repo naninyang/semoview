@@ -367,21 +367,62 @@
             display: flex
 
   &.amusement
-    .unselect
+    .welcome
       display: flex
-      justify-content: center
-      align-items: center
-      gap: rem(7)
+      flex-direction: column
+      gap: rem(17)
       height: calc(100dvh - rem(133))
-      font-weight: 700
-      color: $hex-accent
-      text-align: center
 
-      select, button
+      h1
+        padding-top: rem(12)
+        font-size: rem(20)
+        font-weight: 800
+
+        +mq(minMedium)
+          padding-top: rem(27)
+          font-size: rem(24)
+
+      .unselect
+        display: flex
+        flex-direction: column
+        flex-grow: 1
+        justify-content: center
+        align-items: center
+        gap: rem(7)
+        font-weight: 700
+        color: $hex-accent
+        text-align: center
+
+      button
+        background-color: $hex-accent
+        border: rem(2) solid $hex-accent
+        color: $hex-white
+        font-weight: 800
+
+      select
         background-color: $hex-white
         border: rem(2) solid rgba($hex-black, .3)
-        padding: rem(7) rem(12)
-        font-size: rem(20)
+
+      select, button
+        width: 100%
+        max-width: rem(370)
+        border-radius: rem(3)
+        padding: rem(3) rem(7)
+        font-size: rem(16)
+
+        +mq(minMedium)
+          max-width: rem(570)
+          padding: rem(7) rem(12)
+          font-size: rem(20)
+
+      .visual
+        margin-top: rem(27)
+
+        svg
+          max-width: rem(345)
+          width: 100%
+          height: auto
+          aspect-ratio: 345 / 294
 
     .headline
       display: flex
