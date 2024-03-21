@@ -44,7 +44,7 @@
     align-items: center
     gap: rem(27)
     position: relative
-    padding: rem(27) rem(19)
+    padding: rem(27) rem(19) rem(72)
 
     +mq(maxSmall)
       flex-direction: column-reverse
@@ -53,11 +53,11 @@
       justify-content: space-between
 
     +mq(minLarge)
-      padding: rem(52)
+      padding: rem(52) rem(52) rem(162)
 
     +mq(minExtraLarge)
       gap: rem(57)
-      padding: rem(102)
+      padding: rem(102) rem(102) rem(327)
 
     .background
       position: absolute
@@ -440,10 +440,12 @@
           transform: perspective(600px) rotateY(-180deg)
 
   .list
-    display: flex
-    padding: rem(27) rem(12)
     transition: all .4s cubic-bezier(.4,0,.2,1)
     background-color: $hex-black
+    display: flex
+    position: relative
+    margin-top: rem(-57)
+    padding: 0 rem(12) rem(27)
 
     +mq(maxExtraSmall)
       flex-direction: column
@@ -451,9 +453,34 @@
     +mq(minSmall)
       flex-wrap: wrap
 
+    +mq(minLarge)
+      margin-top: rem(-117)
+
+    +mq(minExtraLarge)
+      margin-top: rem(-237)
+
+    &::before
+      content: ''
+      display: block
+      position: absolute
+      top: 0
+      left: 0
+      z-index: 2
+      width: 100%
+      height: rem(57)
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, #000 100%)
+
+      +mq(minLarge)
+        height: rem(117)
+
+      +mq(minExtraLarge)
+        height: rem(237)
+
     .item
       display: flex
       padding: rem(7)
+      position: relative
+      z-index: 7
 
       +mq(minSmall)
         width: 50%
