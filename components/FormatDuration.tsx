@@ -8,8 +8,8 @@ export function formatDuration(duration: string) {
   const minutes = totalMinutes % 60;
 
   if (hours > 0) {
-    return `${hours}시간 ${minutes}분 ${seconds}초`;
+    return `${hours}:${minutes}:${seconds}`;
   } else {
-    return `${minutes}분 ${seconds}초`;
+    return `${minutes}:${seconds}`;
   }
 }
