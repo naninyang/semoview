@@ -427,7 +427,14 @@ export default function Amusement({
   };
 
   function RelationSelect() {
-    if (amusementData && amusementData.attributes.relations !== null && !isLoading && !error) {
+    if (
+      Array.isArray(relations) &&
+      relations.length > 1 &&
+      amusementData &&
+      amusementData.attributes.relations !== null &&
+      !isLoading &&
+      !error
+    ) {
       return (
         <div className={styles.relation}>
           <dt>시리즈 선택</dt>
@@ -438,14 +445,13 @@ export default function Amusement({
                   ? amusementData.attributes.titleKorean
                   : amusementData.attributes.title}
               </option>
-              {Array.isArray(relations) &&
-                relations
-                  .filter((relation) => relation.idx !== amusementId)
-                  .map((relation) => (
-                    <option key={relation.idx} value={`/amusement/${relation.idx}`}>
-                      {relation.titleKorean ? relation.titleKorean : relation.title}
-                    </option>
-                  ))}
+              {relations
+                .filter((relation) => relation.idx !== amusementId)
+                .map((relation) => (
+                  <option key={relation.idx} value={`/amusement/${relation.idx}`}>
+                    {relation.titleKorean ? relation.titleKorean : relation.title}
+                  </option>
+                ))}
             </select>
             <button type="button" onClick={handleRelationSubmit}>
               이동
