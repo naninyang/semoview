@@ -557,7 +557,9 @@ export default function JejeupDetail({
                                         )}
                                       </>
                                     )}
-                                    {data.category === 'game' && data.isMobile && '모바일 '}
+                                    {(data.category === 'game' || data.category === 'game_fan') &&
+                                      data.isMobile &&
+                                      '모바일 '}
                                     {CategoryName(data.category)}
                                     {data.ott === null && data.ottAddr !== null && ' | 단편영화'}
                                   </em>
@@ -740,7 +742,7 @@ export default function JejeupDetail({
                                     )}
                                   </>
                                 )}
-                                {data.category === 'game' && (
+                                {(data.category === 'game' || data.category === 'game_fan') && (
                                   <>
                                     {data.rating === 'all' && (
                                       <>
@@ -841,13 +843,19 @@ export default function JejeupDetail({
                               )}
                               {data.publisher !== '?' && (
                                 <div>
-                                  <dt>{data.category === 'game' ? '유통/배급' : '퍼블리싱'}</dt>
+                                  <dt>
+                                    {data.category === 'game' || data.category === 'game_fan'
+                                      ? '유통/배급'
+                                      : '퍼블리싱'}
+                                  </dt>
                                   <dd>{data.publisher}</dd>
                                 </div>
                               )}
                               {data.creator !== '?' && (
                                 <div>
-                                  <dt>{data.category === 'game' ? '개발' : '주요 제작자'}</dt>
+                                  <dt>
+                                    {data.category === 'game' || data.category === 'game_fan' ? '개발' : '주요 제작자'}
+                                  </dt>
                                   <dd>{data.creator}</dd>
                                 </div>
                               )}
@@ -867,13 +875,13 @@ export default function JejeupDetail({
                             </dl>
                           </div>
                           <div
-                            className={`${styles.poster} ${data.category === 'game' ? styles['posters-game'] : styles['posters-other']}`}
+                            className={`${styles.poster} ${data.category === 'game' || data.category === 'game_fan' ? styles['posters-game'] : styles['posters-other']}`}
                           >
                             <Image
                               src={data.posterDefault}
                               alt=""
-                              width={data.category === 'game' ? 460 : 390}
-                              height={data.category === 'game' ? 215 : 560}
+                              width={data.category === 'game' || data.category === 'game_fan' ? 460 : 390}
+                              height={data.category === 'game' || data.category === 'game_fan' ? 215 : 560}
                               unoptimized
                             />
                           </div>
@@ -1003,8 +1011,13 @@ export default function JejeupDetail({
                                   )}
                                 </>
                               )}
-                              {data.category === 'game' && data.isMobile && '모바일 '}
+                              {(data.category === 'game' ||
+                                data.category === 'game_fan' ||
+                                data.category === 'game_fan') &&
+                                data.isMobile &&
+                                '모바일 '}
                               {CategoryName(data.category)}
+                              {data.category === 'game_fan' && '팬 게임'}
                               {data.ott === null && data.ottAddr !== null && ' | 단편영화'}
                             </em>
                           ) : (
@@ -1184,7 +1197,7 @@ export default function JejeupDetail({
                               )}
                             </>
                           )}
-                          {data.category === 'game' && (
+                          {(data.category === 'game' || data.category === 'game_fan') && (
                             <>
                               {data.rating === 'all' && (
                                 <>
@@ -1281,13 +1294,15 @@ export default function JejeupDetail({
                         )}
                         {data.publisher !== '?' && (
                           <div>
-                            <dt>{data.category === 'game' ? '유통/배급' : '퍼블리싱'}</dt>
+                            <dt>
+                              {data.category === 'game' || data.category === 'game_fan' ? '유통/배급' : '퍼블리싱'}
+                            </dt>
                             <dd>{data.publisher}</dd>
                           </div>
                         )}
                         {data.creator !== '?' && (
                           <div>
-                            <dt>{data.category === 'game' ? '개발' : '주요 제작자'}</dt>
+                            <dt>{data.category === 'game' || data.category === 'game_fan' ? '개발' : '주요 제작자'}</dt>
                             <dd>{data.creator}</dd>
                           </div>
                         )}
@@ -1312,16 +1327,30 @@ export default function JejeupDetail({
           </div>
           {Array.isArray(jejeupData.amusementData) && jejeupData.amusementData.length == 1 && (
             <div className={styles.posters}>
-              <h2>{jejeupData.amusementData[0].category === 'game' ? '배너/썸네일' : '비주얼/포스터'}</h2>
+              <h2>
+                {jejeupData.amusementData[0].category === 'game' || jejeupData.amusementData[0].category === 'game_fan'
+                  ? '배너/썸네일'
+                  : '비주얼/포스터'}
+              </h2>
               <div
-                className={`${styles['poster-list']} ${jejeupData.amusementData[0].category === 'game' ? styles['posters-game'] : styles['posters-other']}`}
+                className={`${styles['poster-list']} ${jejeupData.amusementData[0].category === 'game' || jejeupData.amusementData[0].category === 'game_fan' ? styles['posters-game'] : styles['posters-other']}`}
               >
                 <div className={styles.poster}>
                   <Image
                     src={jejeupData.amusementData[0].posterDefault}
                     alt=""
-                    width={jejeupData.amusementData[0].category === 'game' ? 460 : 390}
-                    height={jejeupData.amusementData[0].category === 'game' ? 215 : 560}
+                    width={
+                      jejeupData.amusementData[0].category === 'game' ||
+                      jejeupData.amusementData[0].category === 'game_fan'
+                        ? 460
+                        : 390
+                    }
+                    height={
+                      jejeupData.amusementData[0].category === 'game' ||
+                      jejeupData.amusementData[0].category === 'game_fan'
+                        ? 215
+                        : 560
+                    }
                     unoptimized
                   />
                 </div>
@@ -1330,8 +1359,18 @@ export default function JejeupDetail({
                     <Image
                       src={jejeupData.amusementData[0].posterOther}
                       alt=""
-                      width={jejeupData.amusementData[0].category === 'game' ? 460 : 390}
-                      height={jejeupData.amusementData[0].category === 'game' ? 215 : 560}
+                      width={
+                        jejeupData.amusementData[0].category === 'game' ||
+                        jejeupData.amusementData[0].category === 'game_fan'
+                          ? 460
+                          : 390
+                      }
+                      height={
+                        jejeupData.amusementData[0].category === 'game' ||
+                        jejeupData.amusementData[0].category === 'game_fan'
+                          ? 215
+                          : 560
+                      }
                       unoptimized
                     />
                   </div>

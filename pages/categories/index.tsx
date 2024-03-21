@@ -162,16 +162,16 @@ function Categories({
   gameData,
   animeData,
   ottData,
+  fanData,
   error,
-  currentPage,
 }: {
   dramaData: any;
   filmData: any;
   gameData: any;
   animeData: any;
   ottData: any;
+  fanData: any;
   error: string;
-  currentPage: number;
 }) {
   const router = useRouter();
   const timestamp = Date.now();
@@ -946,6 +946,78 @@ function Categories({
               </section>
             </>
           )}
+          {gameData && (
+            <>
+              <div className={styles.headline}>
+                <h2>
+                  <Anchor href="/amusement?category=game_fan&page=1">팬 게임 실황</Anchor>
+                </h2>
+                <Anchor href="/amusement?category=game_fan&page=1">
+                  <span>더보기</span>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                      fill="black"
+                    />
+                  </svg>
+                </Anchor>
+              </div>
+              <section className={styles.game}>
+                {Array.isArray(fanData.data) &&
+                  fanData.data.map((amusement: AmusementData, index: number) => (
+                    <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
+                      <div className={styles.thumbnail}>
+                        <Image src={amusement.posterDefault} width="460" height="215" alt="" unoptimized />
+                        <dl>
+                          <div className={styles.game}>
+                            <dt>심의등급</dt>
+                            <dd>
+                              {amusement.rating === 'all' && (
+                                <>
+                                  <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
+                                </>
+                              )}
+                              {amusement.rating === 'b12' && (
+                                <>
+                                  <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
+                                </>
+                              )}
+                              {amusement.rating === 'c15' && (
+                                <>
+                                  <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
+                                </>
+                              )}
+                              {amusement.rating === 'd19' && (
+                                <>
+                                  <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
+                                </>
+                              )}
+                            </dd>
+                          </div>
+                        </dl>
+                      </div>
+                      <strong>
+                        <strong>
+                          {amusement.category === 'game_fan' && <cite>{amusement.relations} 팬게임:</cite>}
+                          {amusement.titleKorean != null ? (
+                            amusement.titleKorean
+                          ) : (
+                            <>
+                              {amusement.lang === 'chineseBeonche' && <span lang="zh-Hant">{amusement.title} </span>}
+                              {amusement.lang === 'chineseGanche' && <span lang="zh-Hans">{amusement.title} </span>}
+                              {amusement.lang === 'english' && <span lang="en">{amusement.title}</span>}
+                              {amusement.lang === 'japanese' && <span lang="ja">{amusement.title}</span>}
+                              {amusement.lang === 'thai' && <span lang="th">{amusement.title}</span>}
+                              {amusement.lang === null && <span lang="ko">{amusement.title}</span>}
+                            </>
+                          )}
+                        </strong>
+                      </strong>
+                    </Link>
+                  ))}
+              </section>
+            </>
+          )}
         </div>
       )}
     </main>
@@ -961,6 +1033,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let gameData = null;
   let animeData = null;
   let ottData = null;
+  let fanData = null;
   let error = null;
 
   try {
@@ -981,6 +1054,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       throw new Error('Network response was not ok');
     }
     gameData = await game.json();
+
+    const fan = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/category?categoryName=game_fan&page=1&pageSize=5`);
+    if (!fan.ok) {
+      throw new Error('Network response was not ok');
+    }
+    fanData = await fan.json();
 
     const anime = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/category?categoryName=anime&page=1&pageSize=7`);
     if (!anime.ok) {
@@ -1004,6 +1083,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       gameData,
       animeData,
       ottData,
+      fanData,
       error,
       currentPage,
     },

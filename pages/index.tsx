@@ -492,7 +492,11 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                                   )}
                                 </>
                               )}
-                              {jejeup.amusementData.category === 'game' && jejeup.amusementData.isMobile && '모바일 '}
+                              {(jejeup.amusementData.category === 'game' ||
+                                jejeup.amusementData.category === 'game_fan') &&
+                                jejeup.amusementData.isMobile &&
+                                '모바일 '}
+                              {jejeup.amusementData.category === 'game_fan' && '팬 게임'}
                               {jejeup.amusementData.animeBroadcast1 === null &&
                                 jejeup.amusementData.animeBroadcast2 === null &&
                                 CategoryName(jejeup.amusementData.category)}

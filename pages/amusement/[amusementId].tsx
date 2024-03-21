@@ -477,8 +477,16 @@ export default function Amusement({
             <Image
               src={amusementData.attributes.posterDefault}
               alt=""
-              width={amusementData.attributes.category === 'game' ? 460 : 390}
-              height={amusementData.attributes.category === 'game' ? 215 : 560}
+              width={
+                amusementData.attributes.category === 'game_fan' || amusementData.attributes.category === 'game_fan'
+                  ? 460
+                  : 390
+              }
+              height={
+                amusementData.attributes.category === 'game_fan' || amusementData.attributes.category === 'game_fan'
+                  ? 215
+                  : 560
+              }
               unoptimized
               className={`${isActive ? styles.active : ''}`}
             />
@@ -486,8 +494,16 @@ export default function Amusement({
               <Image
                 src={amusementData.attributes.posterOther}
                 alt=""
-                width={amusementData.attributes.category === 'game' ? 460 : 390}
-                height={amusementData.attributes.category === 'game' ? 215 : 560}
+                width={
+                  amusementData.attributes.category === 'game_fan' || amusementData.attributes.category === 'game_fan'
+                    ? 460
+                    : 390
+                }
+                height={
+                  amusementData.attributes.category === 'game_fan' || amusementData.attributes.category === 'game_fan'
+                    ? 215
+                    : 560
+                }
                 unoptimized
                 className={`${!isActive ? styles.active : ''}`}
               />
@@ -814,8 +830,12 @@ export default function Amusement({
                           )}
                         </>
                       )}
-                      {amusementData.attributes.category === 'game' && amusementData.attributes.isMobile && '모바일 '}
+                      {(amusementData.attributes.category === 'game' ||
+                        amusementData.attributes.category === 'game_fan') &&
+                        amusementData.attributes.isMobile &&
+                        '모바일 '}
                       {CategoryName(amusementData.attributes.category)}
+                      {amusementData.attributes.category === 'game_fan' && '팬 게임'}
                     </em>
                   )}
                   {amusementData.attributes.ott === null && amusementData.attributes.ottAddr !== null && (
@@ -900,30 +920,31 @@ export default function Amusement({
                       )}
                     </>
                   )}
-                  {amusementData.attributes.category === 'game' && (
-                    <>
-                      {amusementData.attributes.rating === 'all' && (
-                        <>
-                          <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
-                        </>
-                      )}
-                      {amusementData.attributes.rating === 'b12' && (
-                        <>
-                          <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
-                        </>
-                      )}
-                      {amusementData.attributes.rating === 'c15' && (
-                        <>
-                          <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
-                        </>
-                      )}
-                      {amusementData.attributes.rating === 'd19' && (
-                        <>
-                          <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
-                        </>
-                      )}
-                    </>
-                  )}
+                  {amusementData.attributes.category === 'game' ||
+                    (amusementData.attributes.category === 'game_fan' && (
+                      <>
+                        {amusementData.attributes.rating === 'all' && (
+                          <>
+                            <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
+                          </>
+                        )}
+                        {amusementData.attributes.rating === 'b12' && (
+                          <>
+                            <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
+                          </>
+                        )}
+                        {amusementData.attributes.rating === 'c15' && (
+                          <>
+                            <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
+                          </>
+                        )}
+                        {amusementData.attributes.rating === 'd19' && (
+                          <>
+                            <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
+                          </>
+                        )}
+                      </>
+                    ))}
                   {amusementData.attributes.ratingCustom && (
                     <div className={styles.custom}>
                       <button type="button" onClick={customRatingHandler}>
@@ -953,13 +974,21 @@ export default function Amusement({
             )}
             {amusementData.attributes.publisher !== '?' && (
               <div>
-                <dt>{amusementData.attributes.category === 'game' ? '유통/배급' : '퍼블리싱'}</dt>
+                <dt>
+                  {amusementData.attributes.category === 'game' || amusementData.attributes.category === 'game_fan'
+                    ? '유통/배급'
+                    : '퍼블리싱'}
+                </dt>
                 <dd>{amusementData.attributes.publisher}</dd>
               </div>
             )}
             {amusementData.attributes.creator !== '?' && (
               <div>
-                <dt>{amusementData.attributes.category === 'game' ? '개발' : '주요 제작자'}</dt>
+                <dt>
+                  {amusementData.attributes.category === 'game' || amusementData.attributes.category === 'game_fan'
+                    ? '개발'
+                    : '주요 제작자'}
+                </dt>
                 <dd>{amusementData.attributes.creator}</dd>
               </div>
             )}
@@ -993,14 +1022,22 @@ export default function Amusement({
           </dl>
         </div>
         <div
-          className={`${styles.poster} ${amusementData.attributes.category === 'game' ? styles['poster-game'] : ''}`}
+          className={`${styles.poster} ${amusementData.attributes.category === 'game' || amusementData.attributes.category === 'game_fan' ? styles['poster-game'] : ''}`}
         >
           <div className={styles.images}>
             <Image
               src={amusementData.attributes.posterDefault}
               alt=""
-              width={amusementData.attributes.category === 'game' ? 460 : 390}
-              height={amusementData.attributes.category === 'game' ? 215 : 560}
+              width={
+                amusementData.attributes.category === 'game' || amusementData.attributes.category === 'game_fan'
+                  ? 460
+                  : 390
+              }
+              height={
+                amusementData.attributes.category === 'game' || amusementData.attributes.category === 'game_fan'
+                  ? 215
+                  : 560
+              }
               unoptimized
               className={`${isActive ? styles.active : ''}`}
             />
@@ -1008,8 +1045,16 @@ export default function Amusement({
               <Image
                 src={amusementData.attributes.posterOther}
                 alt=""
-                width={amusementData.attributes.category === 'game' ? 460 : 390}
-                height={amusementData.attributes.category === 'game' ? 215 : 560}
+                width={
+                  amusementData.attributes.category === 'game' || amusementData.attributes.category === 'game_fan'
+                    ? 460
+                    : 390
+                }
+                height={
+                  amusementData.attributes.category === 'game' || amusementData.attributes.category === 'game_fan'
+                    ? 215
+                    : 560
+                }
                 unoptimized
                 className={`${!isActive ? styles.active : ''}`}
               />

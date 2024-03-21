@@ -147,6 +147,7 @@ export async function getCategoryData(page?: number, pageSize?: number, category
       cast: data.attributes.cast,
       posterDefault: data.attributes.posterDefault,
       posterOther: data.attributes.posterOther,
+      relations: data.attributes.relations,
     }));
     const pageCount = categoryResponse.meta.pagination.pageCount;
     const total = categoryResponse.meta.pagination.total;
@@ -282,6 +283,7 @@ export async function getAmusementData(amusement: string) {
     cast: amusementData.attributes.cast,
     posterDefault: amusementData.attributes.posterDefault,
     posterOther: amusementData.attributes.posterOther,
+    relations: amusementData.attributes.relations,
   };
 
   return rowsData;

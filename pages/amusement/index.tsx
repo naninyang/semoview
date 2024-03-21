@@ -236,6 +236,7 @@ function Amusement({
               <option value="drama">드라마</option>
               <option value="anime">애니메이션</option>
               <option value="game">게임</option>
+              <option value="game_fan">팬게임</option>
             </select>
             <button onClick={handleCategorySubmit}>선택</button>
             <div className={styles.visual}>
@@ -450,6 +451,7 @@ function Amusement({
               {category === 'drama' && '개가 짖어도 드라마는 정주행 할 수밖에 없다!'}
               {category === 'film' && '영화 사회에서는 영원한 우방도, 영원한 적도 없다!'}
               {category === 'game' && '게임은 끝날 때까지 끝난 게 아니다!'}
+              {category === 'game_fan' && '이세계 팬게임'}
               {category === 'anime' && '애니입니다만, 문제라도?'}
               {category === 'ott' && '퇴근 후, 이세계 OTT에서만 볼 수 있는 콘텐츠를.'}{' '}
               {categoryData.total > 0 && <span>({categoryData.total}개 작품)</span>}
@@ -462,19 +464,22 @@ function Amusement({
                 <option value="drama">드라마</option>
                 <option value="anime">애니메이션</option>
                 <option value="game">게임</option>
+                <option value="game_fan">팬게임</option>
               </select>
               <button onClick={handleCategorySubmit}>선택</button>
             </div>
           </div>
           {Array.isArray(categoryData.data) && (
-            <section className={category === 'game' ? styles.game : ''}>
+            <section className={category === 'game' || category === 'game_fan' ? styles.game : ''}>
               {categoryData.data.map((amusement: AmusementData, index: number) => (
                 <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                  <div className={`${styles.thumbnail} ${category === 'game' ? styles.game : ''}`}>
+                  <div
+                    className={`${styles.thumbnail} ${category === 'game' || category === 'game_fan' ? styles.game : ''}`}
+                  >
                     <Image
                       src={amusement.posterDefault}
-                      width={category === 'game' ? 460 : 390}
-                      height={category === 'game' ? 215 : 560}
+                      width={category === 'game' || category === 'game_fan' ? 460 : 390}
+                      height={category === 'game' || category === 'game_fan' ? 215 : 560}
                       alt=""
                       unoptimized
                     />
@@ -652,8 +657,8 @@ function Amusement({
                           </dd>
                         </div>
                       )}
-                      <div className={category === 'game' ? styles.game : ''}>
-                        <dt>{category === 'game' ? '심의등급' : '시청등급'}</dt>
+                      <div className={category === 'game' || category === 'game_fan' ? styles.game : ''}>
+                        <dt>{category === 'game' || category === 'game_fan' ? '심의등급' : '시청등급'}</dt>
                         <dd>
                           {(amusement.category === 'drama' ||
                             amusement.category === 'ott_drama' ||
@@ -714,7 +719,7 @@ function Amusement({
                               )}
                             </>
                           )}
-                          {amusement.category === 'game' && (
+                          {(amusement.category === 'game' || amusement.category === 'game_fan') && (
                             <>
                               {amusement.rating === 'all' && (
                                 <>
@@ -743,6 +748,7 @@ function Amusement({
                     </dl>
                   </div>
                   <strong>
+                    {amusement.category === 'game_fan' && <cite>{amusement.relations} 팬게임:</cite>}
                     {amusement.titleKorean != null ? (
                       amusement.titleKorean
                     ) : (
