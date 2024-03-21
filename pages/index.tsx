@@ -10,7 +10,8 @@ import { CategoryName } from '@/components/CategoryName';
 import { AnimeName } from '@/components/AnimeName';
 import { RatingsDrama } from '@/components/RatingsDrama';
 import { OriginalName } from '@/components/OriginalName';
-import { FormatDate } from '@/components/FormatDate';
+import { formatDate } from '@/components/FormatDate';
+import { formatDuration } from '@/components/FormatDuration';
 import { formatNumber } from '@/components/FormatNumber';
 import { vectors } from '@/components/vectors';
 import { Pagination } from '@/components/Pagination';
@@ -216,14 +217,6 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
     sessionStorage.setItem('location', router.asPath);
   }, [router.asPath]);
 
-  function FormatDuration(duration: string) {
-    const match = duration.match(/PT(\d+M)?(\d+S)?/);
-    if (!match) return '0:00';
-    const minutes = match[1] ? match[1].slice(0, -1) : '0';
-    const seconds = match[2] ? match[2].slice(0, -1) : '0';
-    return `${minutes}:${seconds.padStart(2, '0')}`;
-  }
-
   const [count, setCount] = useState<Counts | null>(null);
 
   async function fetchCountData() {
@@ -275,7 +268,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                 <div className={styles['preview-container']}>
                   <div className={styles.thumbnail}>
                     <Image src={jejeupMetaData.ogImage} width="1920" height="1080" alt="" unoptimized />
-                    <em>{FormatDuration(jejeupMetaData.duration)}</em>
+                    <em>{formatDuration(jejeupMetaData.duration)}</em>
                   </div>
                   <div className={styles['preview-info']}>
                     <div className={styles.detail}>
@@ -291,7 +284,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                         <div className={styles.user}>
                           <cite>{jejeupMetaData.ownerName}</cite>
                           <time dateTime={jejeupMetaData.datePublished}>
-                            {FormatDate(`${jejeupMetaData.datePublished}`)}
+                            {formatDate(`${jejeupMetaData.datePublished}`)}
                           </time>
                         </div>
                         {jejeup.worst && (

@@ -5,13 +5,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styled from '@emotion/styled';
 import { AmusementData, AmusementPermalinkData, JejeupData } from 'types';
-import { formatDate } from '@/utils/strapi';
 import Seo, { originTitle } from '@/components/Seo';
 import { CategoryName } from '@/components/CategoryName';
 import { AnimeName } from '@/components/AnimeName';
 import { RatingsDrama } from '@/components/RatingsDrama';
 import { OriginalName } from '@/components/OriginalName';
-import { FormatDate } from '@/components/FormatDate';
+import { formatDate } from '@/components/FormatDate';
+import { formatDuration } from '@/components/FormatDuration';
 import { vectors } from '@/components/vectors';
 import Anchor from '@/components/Anchor';
 import { rem } from '@/styles/designSystem';
@@ -412,14 +412,6 @@ export default function Amusement({
         </main>
       );
     }
-  }
-
-  function FormatDuration(duration: string) {
-    const match = duration.match(/PT(\d+M)?(\d+S)?/);
-    if (!match) return '0:00';
-    const minutes = match[1] ? match[1].slice(0, -1) : '0';
-    const seconds = match[2] ? match[2].slice(0, -1) : '0';
-    return `${minutes}:${seconds.padStart(2, '0')}`;
   }
 
   const togglePoster = () => {
@@ -1105,7 +1097,7 @@ export default function Amusement({
                         <div className={styles['preview-container']}>
                           <div className={styles.thumbnail}>
                             <Image src={jejeup.jejeupMetaData.ogImage} width="1920" height="1080" alt="" unoptimized />
-                            <em>{FormatDuration(jejeup.jejeupMetaData.duration)}</em>
+                            <em>{formatDuration(jejeup.jejeupMetaData.duration)}</em>
                           </div>
                           <div className={styles['preview-info']}>
                             <div className={styles.detail}>
@@ -1121,7 +1113,7 @@ export default function Amusement({
                                 <div className={styles.user}>
                                   <cite>{jejeup.jejeupMetaData.ownerName}</cite>
                                   <time dateTime={jejeup.jejeupMetaData.datePublished}>
-                                    {FormatDate(`${jejeup.jejeupMetaData.datePublished}`)}
+                                    {formatDate(`${jejeup.jejeupMetaData.datePublished}`)}
                                   </time>
                                 </div>
                                 {jejeup.worst && (

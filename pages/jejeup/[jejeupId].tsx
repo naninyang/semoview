@@ -12,7 +12,8 @@ import { vectors } from '@/components/vectors';
 import { CategoryName } from '@/components/CategoryName';
 import { AnimeName } from '@/components/AnimeName';
 import { RatingsDrama } from '@/components/RatingsDrama';
-import { FormatDate } from '@/components/FormatDate';
+import { formatDuration } from '@/components/FormatDuration';
+import { formatDate } from '@/components/FormatDate';
 import { OriginalName } from '@/components/OriginalName';
 import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Jejeup.module.sass';
@@ -265,14 +266,6 @@ export default function JejeupDetail({
     return () => clearTimeout(timer);
   }, []);
 
-  function FormatDuration(duration: string) {
-    const match = duration.match(/PT(\d+M)?(\d+S)?/);
-    if (!match) return '0:00';
-    const minutes = match[1] ? match[1].slice(0, -1) : '0';
-    const seconds = match[2] ? match[2].slice(0, -1) : '0';
-    return `${minutes}분 ${seconds.padStart(2, '0')}초`;
-  }
-
   if (!jejeupData) {
     if (timeoutReached) {
       return (
@@ -350,13 +343,13 @@ export default function JejeupDetail({
                 <div className={styles.user}>
                   <cite>{jejeupData.jejeupMetaData.ownerName}</cite>
                   <time dateTime={jejeupData.jejeupMetaData.datePublished}>
-                    {FormatDate(`${jejeupData.jejeupMetaData.datePublished}`)}
+                    {formatDate(`${jejeupData.jejeupMetaData.datePublished}`)}
                   </time>
                 </div>
               </div>
               {jejeupData.jejeupMetaData.ogDescription ? (
                 <div className={styles.seemore}>
-                  <em>{FormatDuration(jejeupData.jejeupMetaData.duration)}</em>
+                  <em>{formatDuration(jejeupData.jejeupMetaData.duration)}</em>
                   {jejeupData.jejeupMetaData.ogDescription}
                   {isLoading && (
                     <dl>
