@@ -8,8 +8,14 @@ export default function Footer() {
           &copy; Copyrights <strong>DEV1.studio</strong> <span>All rights reserved.</span>
         </p>
         <p className={styles.copyrights}>
-          모든 영상은 YouTube 및 각 영상 제작자에게 저작권이 있으며,{' '}
-          <span>영상에서 사용된 원본 소스는 원본 소스 제작사에게 저작권이 있습니다.</span>
+          모든 영상은 YouTube 및 각 영상 제작자에게 저작권이 있으며, 영상에서 사용된 원본 소스는 원본 소스 제작사에게
+          저작권이 있습니다.{' '}
+          <span>
+            OTT 및 방송국의 브랜드 로고는 각 OTT 플랫폼 서비스 및 방송사에 권리가 있으며 영상 리뷰 속 OTT 콘텐츠는 OTT
+            서비스 구독 이후 시청 가능합니다.
+          </span>{' '}
+          OTT는 Amazon(Prime Video), Apple TV+, Disney+, NETFLIX, TVING/Paramount+ WATCHA, Wavve의 콘텐츠를 다루고
+          있으며, 드라마는 KBS 2TV, MBC, SBS, OCN, JTBC, tvN의 콘텐츠를 다루고 있습니다.
         </p>
         <p className={styles.scp}>
           SCP 재단 로고를 포함한 SCP 재단 관련 콘텐츠는 Creative Commons Sharelike 3.0에 따라 라이선스가 부여되며, 모든
