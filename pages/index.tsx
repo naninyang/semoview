@@ -248,6 +248,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
         const jejeupMeta = await fetch(`/api/metadata?url=https://youtu.be/${jejeup.video}`);
         const jejeupMetaDataResponse = await jejeupMeta.json();
         setJejeupMetaData(jejeupMetaDataResponse);
+        console.log('jejeupMetaDataResponse: ', jejeupMetaDataResponse);
         console.log('jejeupMetaData: ', jejeupMetaData);
       } catch {
         return { error: 'Failed to fetch data' };
@@ -262,9 +263,10 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
 
     return (
       <>
+        {console.log('jejeupMetaData1: ', jejeupMetaData)}
         {!isLoading && jejeupMetaData ? (
           <>
-            {console.log('jejeupMetaData: ', jejeupMetaData)}
+            {console.log('jejeupMetaData2: ', jejeupMetaData)}
             {Object.keys(jejeupMetaData).length > 0 ? (
               <div className={`${styles.preview} preview`}>
                 <div className={styles['preview-container']}>
