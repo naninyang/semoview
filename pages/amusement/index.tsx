@@ -194,7 +194,6 @@ function Amusement({
 
   return (
     <main className={`${styles.categories} ${styles.amusement}`}>
-      {console.log('categoryQuery: ', categoryQuery)}
       <Seo
         pageTitles={`${categoryQuery === 'drama' ? '개가 짖어도 드라마는 정주행 할 수밖에 없다!' : ''}
               ${categoryQuery === 'film' ? '영화 사회에서는 영원한 우방도, 영원한 적도 없다!' : ''}
