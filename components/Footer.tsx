@@ -15,7 +15,7 @@ export default function Footer() {
             서비스 구독 이후 시청 가능합니다.
           </span>{' '}
           OTT는 Amazon(Prime Video), Apple TV+, Disney+, NETFLIX, TVING/Paramount+ WATCHA, Wavve, 드라마는 KBS 2TV, MBC,
-          SBS, OCN, JTBC, tvN의 콘텐츠를 다루고 있습니다.
+          SBS, OCN, ENA, JTBC, tvN의 콘텐츠를 다루고 있습니다.
         </p>
         <p className={styles.scp}>
           SCP 재단 로고를 포함한 SCP 재단 관련 콘텐츠는 Creative Commons Sharelike 3.0에 따라 라이선스가 부여되며, 모든
