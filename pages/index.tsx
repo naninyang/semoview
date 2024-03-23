@@ -248,6 +248,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
         const jejeupMetaData = await fetch(`/api/metadata?url=https://youtu.be/${jejeup.video}`);
         const jejeupMetaDataResponse = await jejeupMetaData.json();
         setJejeupMetaData(jejeupMetaDataResponse);
+        console.log('jejeupMetaData: ', jejeupMetaData);
       } catch {
         return { error: 'Failed to fetch data' };
       }
