@@ -251,8 +251,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
         console.log('jejeupMetaDataResponse: ', jejeupMetaDataResponse);
         console.log('jejeupMetaData: ', jejeupMetaData);
       } catch (err) {
-        console.error('Failed to fetch data: ', err);
-        return { error: 'Failed to fetch data' };
+        return { error: 'Failed to fetch data', message: err };
       }
     };
 
