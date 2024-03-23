@@ -263,6 +263,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
       <>
         {!isLoading && jejeupMetaData ? (
           <>
+            {console.log('jejeupMetaData: ', jejeupMetaData)}
             {Object.keys(jejeupMetaData).length > 0 ? (
               <div className={`${styles.preview} preview`}>
                 <div className={styles['preview-container']}>
