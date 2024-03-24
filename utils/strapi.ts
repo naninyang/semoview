@@ -245,6 +245,17 @@ export async function fetchPreviewMetadata(url: string) {
   }
 }
 
+export async function fetchMetadata(url: string) {
+  try {
+    const response = await fetch(`${process.env.PREVIEW_NEW_API_URL}?url=${encodeURIComponent(url)}`);
+    const previewResponse = await response.json();
+    return previewResponse;
+  } catch (error) {
+    console.error('Failed to fetch article metadata', error);
+    return {};
+  }
+}
+
 export async function getAmusementData(amusement: string) {
   const response = await fetch(`${process.env.STRAPI_URL}/api/amusement-jejeups/${amusement}`, {
     method: 'GET',
