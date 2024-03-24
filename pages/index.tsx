@@ -325,7 +325,13 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
               <div className={`${styles.preview} preview`}>
                 <div className={styles['preview-container']}>
                   <div className={styles.thumbnail}>
-                    <Image src={jejeup.video} width="1920" height="1080" alt="" unoptimized />
+                    <Image
+                      src={`https://i.ytimg.com/vi/${jejeup.video}/maxresdefault.jpg`}
+                      width="1920"
+                      height="1080"
+                      alt=""
+                      unoptimized
+                    />
                   </div>
                   <div className={styles['preview-info']}>
                     <div className={styles.detail}>
