@@ -273,7 +273,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                       </div>
                       <div className={styles['preview-info']}>
                         <div className={styles.detail}>
-                          <Image src="/unknown.webp" width="36" height="36" alt="" unoptimized />
+                          {/* <Image src="/unknown.webp" width="36" height="36" alt="" unoptimized /> */}
                           <div className={`${styles['user-info']}`}>
                             <strong>삭제된 영상</strong>
                             <div className={styles.user}>
@@ -290,17 +290,17 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                     <div className={styles['preview-container']}>
                       <div className={styles.thumbnail}>
                         <Image src={jejeupMetaData.ogImage} width="1920" height="1080" alt="" unoptimized />
-                        <em>{formatDuration(jejeupMetaData.duration)}</em>
+                        {/* <em>{formatDuration(jejeupMetaData.duration)}</em> */}
                       </div>
                       <div className={styles['preview-info']}>
                         <div className={styles.detail}>
-                          <Image
+                          {/* <Image
                             src={`${jejeupMetaData.ownerAvatar === null ? jejeup.ownerAvatar : jejeupMetaData.ownerAvatar}`}
                             width="36"
                             height="36"
                             alt=""
                             unoptimized
-                          />
+                          /> */}
                           <div className={`${styles['user-info']}`}>
                             <strong>{jejeupMetaData.ogTitle}</strong>
                             <div className={styles.user}>

@@ -25,7 +25,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
       const jejeupResponse = await response.json();
       const jejeupMetaResponse = await fetch(
-        `${process.env.PREVIEW_API_URL}?url=https://youtu.be/${encodeURIComponent(jejeupResponse.data.attributes.video)}`,
+        `${process.env.PREVIEW_OLD_API_URL}?url=https://youtu.be/${encodeURIComponent(jejeupResponse.data.attributes.video)}`,
       );
       const jejeupMetaData = await jejeupMetaResponse.json();
       const amusementSource = jejeupResponse.data.attributes.isAmusements
