@@ -259,20 +259,6 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
       setIsLoading(false);
     }, []);
 
-    const ImageLoader = ({ thumbnail }: { thumbnail: string }) => {
-      const [imageUrl, setImageUrl] = useState('');
-      return (
-        <Image
-          src={imageUrl}
-          width="1920"
-          height="1080"
-          alt=""
-          unoptimized
-          onError={() => setImageUrl(`https://i.ytimg.com/vi/${thumbnail}/mqdefault.jpg`)}
-        />
-      );
-    };
-
     return (
       <>
         {!isLoading && jejeupMetaData ? (
@@ -339,7 +325,13 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
               <div className={`${styles.preview} preview`}>
                 <div className={styles['preview-container']}>
                   <div className={styles.thumbnail}>
-                    <ImageLoader thumbnail={jejeup.video} />
+                    <Image
+                      src={`https://i.ytimg.com/vi/${jejeup.video}/mqdefault.jpg`}
+                      width="1920"
+                      height="1080"
+                      alt=""
+                      unoptimized
+                    />
                   </div>
                   <div className={styles['preview-info']}>
                     <div className={styles.detail}>
