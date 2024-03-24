@@ -290,7 +290,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                     <div className={styles['preview-container']}>
                       <div className={styles.thumbnail}>
                         <Image src={jejeupMetaData.ogImage} width="1920" height="1080" alt="" unoptimized />
-                        {/* <em>{formatDuration(jejeupMetaData.duration)}</em> */}
+                        <em>{formatDuration(jejeupMetaData.duration)}</em>
                       </div>
                       <div className={styles['preview-info']}>
                         <div className={styles.detail}>
