@@ -260,7 +260,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
     }, []);
 
     const ImageLoader = ({ thumbnail }: { thumbnail: string }) => {
-      const [imageUrl, setImageUrl] = useState(`https://i.ytimg.com/vi/${thumbnail}/maxresdefault.jpg`);
+      const [imageUrl, setImageUrl] = useState('');
       return (
         <Image
           src={imageUrl}
