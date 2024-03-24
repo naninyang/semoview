@@ -34,15 +34,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const { url } = req.query;
   try {
     const metaData = await fetchMetaData(url as string);
-    const filteredData = {
-      ownerName: metaData?.author,
-      datePublished: metaData?.date,
-      ogDescription: metaData?.description,
-      ogImage: metaData?.image,
-      ogTitle: metaData?.title,
-      ogUrl: metaData?.url,
-    };
-    return res.status(200).json(filteredData);
+    if (metaData) {
+      const filteredData = {
+        ownerName: metaData.author,
+        datePublished: metaData.date,
+        ogDescription: metaData.description,
+        ogImage: metaData.image,
+        ogTitle: metaData.title,
+        ogUrl: metaData.url,
+      };
+      return res.status(200).json(filteredData);
+    } else {
+      return res.status(404).json({ error: 'Metadata not found' });
+    }
   } catch (error) {
     return res.status(500).json({ error: 'Failed to fetch data' });
   }
