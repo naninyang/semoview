@@ -322,7 +322,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                 )}
               </>
             ) : (
-              <p className={styles.metaloading}>로딩 중...</p>
+              <p className={styles.metaloading}>찐 ?로딩 중...</p>
             )}
           </>
         ) : (
