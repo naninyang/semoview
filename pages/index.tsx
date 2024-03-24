@@ -261,20 +261,16 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
 
     const ImageLoader = ({ thumbnail }: { thumbnail: string }) => {
       const [imageUrl, setImageUrl] = useState(`https://i.ytimg.com/vi/${thumbnail}/maxresdefault.jpg`);
-
-      const handleError = () => {
-        if (imageUrl.includes('maxresdefault')) {
-          setImageUrl(`https://i.ytimg.com/vi/${thumbnail}/sddefault.jpg`);
-        } else if (imageUrl.includes('sddefault')) {
-          setImageUrl(`https://i.ytimg.com/vi/${thumbnail}/hqdefault.jpg`);
-        } else if (imageUrl.includes('hqdefault')) {
-          setImageUrl(`https://i.ytimg.com/vi/${thumbnail}/mqdefault.jpg`);
-        } else if (imageUrl.includes('mqdefault')) {
-          setImageUrl(`https://i.ytimg.com/vi/${thumbnail}/default.jpg`);
-        }
-      };
-
-      return <Image src={imageUrl} width="1920" height="1080" alt="" unoptimized onError={handleError} />;
+      return (
+        <Image
+          src={imageUrl}
+          width="1920"
+          height="1080"
+          alt=""
+          unoptimized
+          onError={() => setImageUrl(`https://i.ytimg.com/vi/${thumbnail}/mqdefault.jpg`)}
+        />
+      );
     };
 
     return (
