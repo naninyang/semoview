@@ -1101,13 +1101,6 @@ export default function Amusement({
                           </div>
                           <div className={styles['preview-info']}>
                             <div className={styles.detail}>
-                              <Image
-                                src={`${jejeup.jejeupMetaData.ownerAvatar === null ? jejeup.ownerAvatar : jejeup.jejeupMetaData.ownerAvatar}`}
-                                width="36"
-                                height="36"
-                                alt=""
-                                unoptimized
-                              />
                               <div className={`${styles['user-info']}`}>
                                 <strong>{jejeup.jejeupMetaData.ogTitle}</strong>
                                 <div className={styles.user}>
