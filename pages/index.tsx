@@ -263,7 +263,6 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
       <>
         {!isLoading && jejeupMetaData ? (
           <>
-            {console.log('jejeupMetaData: ', jejeupMetaData)}
             {Object.keys(jejeupMetaData).length > 0 ? (
               <>
                 {jejeupMetaData.error === 'Failed to fetch data' || jejeupMetaData.ogTitle === ' - YouTube' ? (
