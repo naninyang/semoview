@@ -1083,68 +1083,96 @@ export default function Amusement({
       {data && !isJejeupsLoading && !isJejeupsError && (
         <div className={styles.list}>
           {Array.isArray(data.jejeups) &&
-            data.jejeups
-              .filter(
-                (jejeup) =>
-                  jejeup.jejeupMetaData.error !== 'Failed to fetch data' &&
-                  jejeup.jejeupMetaData.ogTitle !== ' - YouTube',
-              )
-              .map((jejeup: JejeupData) => (
-                <div className={styles.item} key={jejeup.id}>
+            data.jejeups.map((jejeup: JejeupData) => (
+              <div className={styles.item} key={jejeup.id}>
+                <Link key={jejeup.idx} href={`/jejeup/${jejeup.idx}`} scroll={false} shallow={true}>
                   {Object.keys(jejeup.jejeupMetaData).length > 0 ? (
-                    <Link key={jejeup.idx} href={`/jejeup/${jejeup.idx}`} scroll={false} shallow={true}>
-                      <div className={`${styles.preview} preview`}>
-                        <div className={styles['preview-container']}>
-                          <div className={styles.thumbnail}>
-                            <Image src={jejeup.jejeupMetaData.ogImage} width="1920" height="1080" alt="" unoptimized />
-                            <em>{formatDuration(jejeup.jejeupMetaData.duration)}</em>
-                          </div>
-                          <div className={styles['preview-info']}>
-                            <div className={styles.detail}>
-                              <div className={`${styles['user-info']}`}>
-                                <strong>{jejeup.jejeupMetaData.ogTitle}</strong>
-                                <div className={styles.user}>
-                                  <cite>{jejeup.jejeupMetaData.ownerName}</cite>
-                                  <time dateTime={jejeup.jejeupMetaData.datePublished}>
-                                    {formatDate(`${jejeup.jejeupMetaData.datePublished}`)}
-                                  </time>
-                                </div>
-                                {jejeup.worst && (
-                                  <div className={styles.worst}>
-                                    <strong className="number">Worst</strong>
+                    <>
+                      {jejeup.error === 'Failed to fetch data' || jejeup.ogTitle === ' - YouTube' ? (
+                        <div className={`${styles.preview} preview`}>
+                          <div className={styles['preview-container']}>
+                            <div className={styles.thumbnail}>
+                              <Image src="/missing.webp" width="1920" height="1080" alt="" unoptimized />
+                            </div>
+                            <div className={styles['preview-info']}>
+                              <div className={styles.detail}>
+                                {/* <Image src="/unknown.webp" width="36" height="36" alt="" unoptimized /> */}
+                                <div className={`${styles['user-info']}`}>
+                                  <strong>삭제된 영상</strong>
+                                  <div className={styles.user}>
+                                    <cite>관리자에게 제보해 주세요</cite>
+                                    <time>알 수 없는 시간</time>
                                   </div>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </Link>
-                  ) : (
-                    <Link key={jejeup.idx} href={`/jejeup/${jejeup.idx}`} scroll={false} shallow={true}>
-                      <div className={`${styles.preview} preview`}>
-                        <div className={styles['preview-container']}>
-                          <div className={styles.thumbnail}>
-                            <Image src="/missing.webp" width="1920" height="1080" alt="" unoptimized />
-                          </div>
-                          <div className={styles['preview-info']}>
-                            <div className={styles.detail}>
-                              <Image src="/unknown.webp" width="36" height="36" alt="" unoptimized />
-                              <div className={`${styles['user-info']}`}>
-                                <strong>삭제된 영상</strong>
-                                <div className={styles.user}>
-                                  <cite>관리자에게 제보해 주세요</cite>
-                                  <time>알 수 없는 시간</time>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
+                      ) : (
+                        <div className={`${styles.preview} preview`}>
+                          <div className={styles['preview-container']}>
+                            <div className={styles.thumbnail}>
+                              <Image
+                                src={jejeup.jejeupMetaData.ogImage}
+                                width="1920"
+                                height="1080"
+                                alt=""
+                                unoptimized
+                              />
+                              <em>{formatDuration(jejeup.jejeupMetaData.duration)}</em>
+                            </div>
+                            <div className={styles['preview-info']}>
+                              <div className={styles.detail}>
+                                <div className={`${styles['user-info']}`}>
+                                  <strong>{jejeup.jejeupMetaData.ogTitle}</strong>
+                                  <div className={styles.user}>
+                                    <cite>{jejeup.jejeupMetaData.ownerName}</cite>
+                                    <time dateTime={jejeup.jejeupMetaData.datePublished}>
+                                      {formatDate(`${jejeup.jejeupMetaData.datePublished}`)}
+                                    </time>
+                                  </div>
+                                  {jejeup.worst && (
+                                    <div className={styles.worst}>
+                                      <strong className="number">Worst</strong>
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <div className={`${styles.preview} preview`}>
+                      <div className={styles['preview-container']}>
+                        <div className={styles.thumbnail}>
+                          <Image
+                            src={`https://i.ytimg.com/vi/${jejeup.video}/mqdefault.jpg`}
+                            width="1920"
+                            height="1080"
+                            alt=""
+                            unoptimized
+                          />
+                        </div>
+                        <div className={styles['preview-info']}>
+                          <div className={styles.detail}>
+                            <div className={`${styles['user-info']}`}>
+                              <strong>{jejeup.subject}</strong>
+                              {jejeup.worst && (
+                                <div className={styles.worst}>
+                                  <strong className="number">Worst</strong>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    </Link>
+                    </div>
                   )}
-                </div>
-              ))}
+                </Link>
+              </div>
+            ))}
         </div>
       )}
     </main>
