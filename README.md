@@ -41,11 +41,11 @@
 
 ### 발견되거나 알려진 버그
 
-- Not yet
+- 영상에 이상이 없는데 없는 영상이라고 에러 뜨는 현상 (메인)
 
 ### TO-DO
 
-- Not yet
+- 메인 목록 속도 이슈 (작업 중)
 
 ## Supported PWA App. Download
 
