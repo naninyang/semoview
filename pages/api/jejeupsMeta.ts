@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { VercelRequest, VercelResponse } from '@vercel/node';
 import metascraper from 'metascraper';
 import metascraperAuthor from 'metascraper-author';
 import metascraperDate from 'metascraper-date';
@@ -30,7 +30,7 @@ async function fetchMetaData(url: string) {
   }
 }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: VercelRequest, res: VercelResponse) {
   const { url } = req.query;
   try {
     const metaData = await fetchMetaData(url as string);
