@@ -9,6 +9,8 @@ export interface JejeupData {
   title: string;
   worst: boolean;
   createdAt: string;
+  error: string;
+  ogTitle: string;
   jejeups: {
     id: string;
     idx: string;
