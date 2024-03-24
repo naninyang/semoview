@@ -322,7 +322,25 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                 )}
               </>
             ) : (
-              <p className={styles.metaloading}>찐 ?로딩 중...</p>
+              <div className={`${styles.preview} preview`}>
+                <div className={styles['preview-container']}>
+                  <div className={styles.thumbnail}>
+                    <Image src={jejeup.video} width="1920" height="1080" alt="" unoptimized />
+                  </div>
+                  <div className={styles['preview-info']}>
+                    <div className={styles.detail}>
+                      <div className={`${styles['user-info']}`}>
+                        <strong>{jejeup.subject}</strong>
+                        {jejeup.worst && (
+                          <div className={styles.worst}>
+                            <strong className="number">Worst</strong>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             )}
           </>
         ) : (
