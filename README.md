@@ -13,7 +13,7 @@
 - SASS
 - Google YouTube iframe API
 - PWA
-- Strapi API
+- Strapi rest API
 - Node 18
 - vercel deployment
 
@@ -21,8 +21,8 @@
 
 - Next.js
 - TypeScript
-- iconv
-- cheerio
+- jsdom
+- Node 18
 - vercel deployment
 
 ### Backend
