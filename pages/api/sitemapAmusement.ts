@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 async function fetchAllJejeupData() {
   let response = await fetch(
-    `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=1&pagination[pageSize]=100`,
+    `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=1&pagination[pageSize]=100`,
     {
       method: 'GET',
       headers: {
@@ -16,7 +16,7 @@ async function fetchAllJejeupData() {
   let allNewsData = [];
   for (let page = 1; page <= pageCount; page++) {
     response = await fetch(
-      `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=100`,
+      `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=100`,
       {
         method: 'GET',
         headers: {
@@ -36,7 +36,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const allNewsData = await fetchAllJejeupData();
 
     const newsDataProcessed = allNewsData.map((newsItem: any) => ({
-      idx: `jejeup/${formatDate(newsItem.attributes.createdAt)}${newsItem.id}`,
+      idx: `amusement/${formatDate(newsItem.attributes.createdAt)}${newsItem.id}`,
       created: newsItem.attributes.createdAt,
     }));
 
