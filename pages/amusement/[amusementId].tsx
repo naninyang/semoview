@@ -692,7 +692,11 @@ export default function Amusement({
                   <dt>단편영화 보기</dt>
                   <dd>
                     <Anchor href={amusementData.attributes.ottAddr}>
-                      단편영화 &apos;{amusementData.attributes.title}&apos; 보러가기
+                      단편영화 &apos;
+                      {amusementData.attributes.titleKorean
+                        ? amusementData.attributes.titleKorean
+                        : amusementData.attributes.title}
+                      &apos; 보러가기
                     </Anchor>
                   </dd>
                 </div>

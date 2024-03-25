@@ -1240,7 +1240,9 @@ export default function JejeupDetail({
                             </Anchor>
                           )}
                           {data.ott === null && data.ottAddr !== null && (
-                            <Anchor href={data.ottAddr}>단편영화 &apos;{data.title}&apos; 보러가기</Anchor>
+                            <Anchor href={data.ottAddr}>
+                              단편영화 &apos;{data.titleKorean ? data.titleKorean : data.title}&apos; 보러가기
+                            </Anchor>
                           )}
                         </dt>
                         <dd>
