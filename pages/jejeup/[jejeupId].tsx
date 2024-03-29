@@ -334,7 +334,7 @@ export default function JejeupDetail({
               <h1>{jejeupData.jejeupMetaData.ogTitle}</h1>
               <div className={styles.detail}>
                 <Image
-                  src={`${jejeupData.jejeupMetaData.ownerAvatar === null ? jejeupData.attributes.ownerAvatar : jejeupData.jejeupMetaData.ownerAvatar}`}
+                  src={`${jejeupData.jejeupMetaData.ownerAvatar === undefined ? jejeupData.attributes.ownerAvatar : jejeupData.jejeupMetaData.ownerAvatar}`}
                   width="36"
                   height="36"
                   alt=""
