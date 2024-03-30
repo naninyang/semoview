@@ -99,6 +99,7 @@ export interface JejeupPermalinkData {
     amusements: string;
     relations: string;
     createdAt: string;
+    publishedAt: string;
   };
   jejeupMetaData: {
     error: string;
