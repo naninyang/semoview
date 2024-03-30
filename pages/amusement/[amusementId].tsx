@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 import styled from '@emotion/styled';
-import { AmusementData, AmusementPermalinkData, JejeupData } from 'types';
+import { AmusementData, AmusementPermalinkData, JejeupData, JejeupMetaData } from 'types';
 import Seo, { originTitle } from '@/components/Seo';
 import { CategoryName } from '@/components/CategoryName';
 import { AnimeName } from '@/components/AnimeName';
@@ -370,7 +370,6 @@ export default function Amusement({
         localStorage.setItem(`amusementData${currentPage}${amusementData.id}`, JSON.stringify(newData));
         dataToUse = newData;
       }
-
       setData(dataToUse);
     } catch (err) {
       if (err instanceof Error) {
@@ -382,6 +381,7 @@ export default function Amusement({
       setIsJejeupsLoading(false);
     }
   };
+
   useEffect(() => {
     fetchData();
   }, [currentPage]);
@@ -454,30 +454,165 @@ export default function Amusement({
     }
   }
 
-  const handleReportClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
-    const jejeupVideo = event.currentTarget.getAttribute('data-video');
+  function JejeupMeta({ jejeup }: { jejeup: any }) {
+    const [jejeupMetaData, setJejeupMetaData] = useState<JejeupMetaData | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const maxRetries = 7;
 
-    try {
-      const response = await fetch('/api/unpublish', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ jejeupVideo: jejeupVideo }),
-      });
+    const fetchMetadata = async (currentRetryCount = 0) => {
+      try {
+        const jejeupMeta = await fetch(`/api/metadata?url=https://youtu.be/${jejeup.video}`);
+        const jejeupMetaDataResponse = await jejeupMeta.json();
 
-      if (response.ok) {
-        alert('신고 성공! 감사합니다 ☺️');
-      } else {
-        const errorData = await response.json();
-        console.log(errorData.error);
+        if (
+          Array.isArray(jejeupMetaDataResponse) === false &&
+          Object.keys(jejeupMetaDataResponse).length === 0 &&
+          currentRetryCount < maxRetries
+        ) {
+          setTimeout(() => fetchMetadata(currentRetryCount + 1), 5000);
+        } else {
+          setJejeupMetaData(jejeupMetaDataResponse);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    useEffect(() => {
+      setIsLoading(true);
+      fetchMetadata().finally(() => setIsLoading(false));
+    }, []);
+
+    const handleReportClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
+      const jejeupVideo = event.currentTarget.getAttribute('data-video');
+
+      try {
+        const response = await fetch('/api/unpublish', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ jejeupVideo: jejeupVideo }),
+        });
+
+        if (response.ok) {
+          alert('신고 성공! 감사합니다 ☺️');
+        } else {
+          const errorData = await response.json();
+          console.log(errorData.error);
+          alert('서버 오류입니다. 잠시 뒤 다시 시도해 주세요 😭');
+        }
+      } catch (error) {
+        console.error('Error:', error);
         alert('서버 오류입니다. 잠시 뒤 다시 시도해 주세요 😭');
       }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('서버 오류입니다. 잠시 뒤 다시 시도해 주세요 😭');
-    }
-  };
+    };
+
+    return (
+      <>
+        {!isLoading && jejeupMetaData ? (
+          <>
+            {Object.keys(jejeupMetaData).length > 0 ? (
+              <>
+                {jejeupMetaData.error === 'Failed to fetch data' || jejeupMetaData.ogTitle === ' - YouTube' ? (
+                  <div className={`${styles.preview} ${styles['preview-dummy']}`}>
+                    <div className={styles.notice}>
+                      <p>유튜버가 삭제했거나 비공개 처리한 영상입니다.</p>
+                      <p>
+                        <button type="button" data-video={jejeup.video} onClick={handleReportClick}>
+                          신고
+                        </button>
+                        해 주세요.
+                      </p>
+                    </div>
+                    <div className={styles['preview-container']}>
+                      <div className={styles.thumbnail}>
+                        <div className={`${styles.dummy} ${styles.skeleton}`} />
+                      </div>
+                      <div className={styles['preview-info']}>
+                        <div className={styles.detail}>
+                          <div className={`${styles['user-info']}`}>
+                            <strong className={styles.skeleton} />
+                            <div className={styles.user}>
+                              <cite>
+                                <i className={styles.skeleton} />
+                              </cite>
+                              <time className={styles.skeleton} />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <Link key={jejeup.idx} href={`/jejeup/${jejeup.idx}`} scroll={false} shallow={true}>
+                    <div className={`${styles.preview} preview`}>
+                      <div className={styles['preview-container']}>
+                        <div className={styles.thumbnail}>
+                          <Image src={jejeupMetaData.ogImage} width="1920" height="1080" alt="" unoptimized />
+                          <em>{formatDuration(jejeupMetaData.duration)}</em>
+                        </div>
+                        <div className={styles['preview-info']}>
+                          <div className={styles.detail}>
+                            <div className={`${styles['user-info']}`}>
+                              <strong>{jejeupMetaData.ogTitle}</strong>
+                              <div className={styles.user}>
+                                <cite>{jejeupMetaData.ownerName}</cite>
+                                <time dateTime={jejeupMetaData.datePublished}>
+                                  {formatDate(`${jejeupMetaData.datePublished}`)}
+                                </time>
+                              </div>
+                              {jejeup.worst && (
+                                <div className={styles.worst}>
+                                  <strong className="number">Worst</strong>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                )}
+              </>
+            ) : (
+              <div className={`${styles.preview} ${styles['preview-dummy']}`}>
+                <div className={styles.notice}>
+                  <p>유튜버가 삭제했거나 비공개 처리한 영상입니다.</p>
+                  <p>
+                    <button type="button" data-video={jejeup.video} onClick={handleReportClick}>
+                      신고
+                    </button>
+                    해 주세요.
+                  </p>
+                </div>
+                <div className={styles['preview-container']}>
+                  <div className={styles.thumbnail}>
+                    <div className={`${styles.dummy} ${styles.skeleton}`} />
+                  </div>
+                  <div className={styles['preview-info']}>
+                    <div className={styles.detail}>
+                      <div className={`${styles['user-info']}`}>
+                        <strong className={styles.skeleton} />
+                        <div className={styles.user}>
+                          <cite>
+                            <i className={styles.skeleton} />
+                          </cite>
+                          <time className={styles.skeleton} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </>
+        ) : (
+          <p className={styles.metaloading}>로딩 중...</p>
+        )}
+      </>
+    );
+  }
 
   return (
     <main className={styles.amusement}>
@@ -1114,107 +1249,7 @@ export default function Amusement({
           {Array.isArray(data.jejeups) &&
             data.jejeups.map((jejeup: JejeupData) => (
               <div className={styles.item} key={jejeup.id}>
-                {Object.keys(jejeup.jejeupMetaData).length > 0 ? (
-                  <>
-                    {jejeup.jejeupMetaData.error === 'Failed to fetch data' ||
-                    jejeup.jejeupMetaData.ogTitle === ' - YouTube' ? (
-                      <div className={`${styles.preview} ${styles['preview-dummy']}`}>
-                        <div className={styles.notice}>
-                          <p>유튜버가 삭제했거나 비공개 처리한 영상입니다.</p>
-                          <p>
-                            <button type="button" data-video={jejeup.video} onClick={handleReportClick}>
-                              신고
-                            </button>
-                            해 주세요.
-                          </p>
-                        </div>
-                        <div className={styles['preview-container']}>
-                          <div className={styles.thumbnail}>
-                            <div className={`${styles.dummy} ${styles.skeleton}`} />
-                          </div>
-                          <div className={styles['preview-info']}>
-                            <div className={styles.detail}>
-                              <div className={`${styles['user-info']}`}>
-                                <strong className={styles.skeleton} />
-                                <div className={styles.user}>
-                                  <cite>
-                                    <i className={styles.skeleton} />
-                                  </cite>
-                                  <time className={styles.skeleton} />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                      <Link key={jejeup.idx} href={`/jejeup/${jejeup.idx}`} scroll={false} shallow={true}>
-                        <div className={`${styles.preview} preview`}>
-                          <div className={styles['preview-container']}>
-                            <div className={styles.thumbnail}>
-                              <Image
-                                src={jejeup.jejeupMetaData.ogImage}
-                                width="1920"
-                                height="1080"
-                                alt=""
-                                unoptimized
-                              />
-                              <em>{formatDuration(jejeup.jejeupMetaData.duration)}</em>
-                            </div>
-                            <div className={styles['preview-info']}>
-                              <div className={styles.detail}>
-                                <div className={`${styles['user-info']}`}>
-                                  <strong>{jejeup.jejeupMetaData.ogTitle}</strong>
-                                  <div className={styles.user}>
-                                    <cite>{jejeup.jejeupMetaData.ownerName}</cite>
-                                    <time dateTime={jejeup.jejeupMetaData.datePublished}>
-                                      {formatDate(`${jejeup.jejeupMetaData.datePublished}`)}
-                                    </time>
-                                  </div>
-                                  {jejeup.worst && (
-                                    <div className={styles.worst}>
-                                      <strong className="number">Worst</strong>
-                                    </div>
-                                  )}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </Link>
-                    )}
-                  </>
-                ) : (
-                  <div className={`${styles.preview} ${styles['preview-dummy']}`}>
-                    <div className={styles.notice}>
-                      <p>유튜버가 삭제했거나 비공개 처리한 영상입니다.</p>
-                      <p>
-                        <button type="button" data-video={jejeup.video} onClick={handleReportClick}>
-                          신고
-                        </button>
-                        해 주세요.
-                      </p>
-                    </div>
-                    <div className={styles['preview-container']}>
-                      <div className={styles.thumbnail}>
-                        <div className={`${styles.dummy} ${styles.skeleton}`} />
-                      </div>
-                      <div className={styles['preview-info']}>
-                        <div className={styles.detail}>
-                          <div className={`${styles['user-info']}`}>
-                            <strong className={styles.skeleton} />
-                            <div className={styles.user}>
-                              <cite>
-                                <i className={styles.skeleton} />
-                              </cite>
-                              <time className={styles.skeleton} />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
+                <JejeupMeta key={jejeup.idx} jejeup={jejeup} />
               </div>
             ))}
         </div>
