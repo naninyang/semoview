@@ -326,63 +326,85 @@ export default function JejeupDetail({
       </div>
       <article className={styles['article-jejeup']}>
         {jejeupData.jejeupMetaData && jejeupData.jejeupMetaData.ogTitle !== ' - YouTube' ? (
-          <div className={`${styles.preview} preview`}>
-            <div className={styles.video}>
-              <YouTubeController videoId={jejeupData.attributes.video} videoImage={jejeupData.jejeupMetaData.ogImage} />
-            </div>
-            <div className={styles.youtube}>
-              <h1>{jejeupData.jejeupMetaData.ogTitle}</h1>
-              <div className={styles.detail}>
-                <Image
-                  src={`${jejeupData.jejeupMetaData.ownerAvatar === undefined ? jejeupData.attributes.ownerAvatar : jejeupData.jejeupMetaData.ownerAvatar}`}
-                  width="36"
-                  height="36"
-                  alt=""
-                  unoptimized
-                />
-                <div className={styles.user}>
-                  <cite>{jejeupData.jejeupMetaData.ownerName}</cite>
-                  <time dateTime={jejeupData.jejeupMetaData.datePublished}>
-                    {formatDate(`${jejeupData.jejeupMetaData.datePublished}`)}
-                  </time>
+          jejeupData.jejeupMetaData.ogTitle === ' - YouTube' || jejeupData.jejeupMetaData.ogTitle === undefined ? (
+            <div className={`${styles.preview} preview`}>
+              <YouTubeController videoId={jejeupData.attributes.video} videoImage="/missing.webp" />
+              <div className={styles.youtube}>
+                <h1>유튜버가 삭제했거나 비공개 처리한 영상</h1>
+                <div className={styles.detail}>
+                  <Image src="/unknown.webp" width="36" height="36" alt="" unoptimized />
+                  <div className={styles.user}>
+                    <cite>관리자에게 제보해 주세요</cite>
+                    <time>알 수 없는 시간</time>
+                  </div>
                 </div>
+                <p>
+                  <strong>유튜버가 영상을 삭제했거나 비공개 처리한 영상입니다. 관리자에게 제보해 주세요.</strong>
+                </p>
               </div>
-              {jejeupData.jejeupMetaData.ogDescription ? (
-                <div className={styles.seemore}>
-                  <em>{formatDuration(jejeupData.jejeupMetaData.duration)}</em>
-                  {jejeupData.jejeupMetaData.ogDescription}
-                  {isLoading && (
-                    <dl>
-                      <dt>관련 영상</dt>
-                      <dd>관련 영상 로딩 중...</dd>
-                    </dl>
-                  )}
-                  {jejeupData.attributes.relations && relations && !isLoading && !error && (
-                    <dl>
-                      <dt>관련 영상</dt>
-                      {Array.isArray(relations) &&
-                        relations
-                          .filter((relation) => relation.idx !== jejeupId)
-                          .map((relation) => (
-                            <dd key={relation.idx}>
-                              <Anchor href={`/jejeup/${relation.idx}`}>{relation.subject}</Anchor>
-                            </dd>
-                          ))}
-                    </dl>
-                  )}
-                </div>
-              ) : (
-                <div className={styles.seemore}>
-                  <strong>유튜버가 더보기 정보를 등록하지 않았습니다.</strong>
-                </div>
-              )}
-              {jejeupData.attributes.worst && (
-                <div className={styles.worst}>
-                  <strong className="number">Worst</strong>
-                </div>
-              )}
             </div>
-          </div>
+          ) : (
+            <div className={`${styles.preview} preview`}>
+              <div className={styles.video}>
+                <YouTubeController
+                  videoId={jejeupData.attributes.video}
+                  videoImage={jejeupData.jejeupMetaData.ogImage}
+                />
+              </div>
+              <div className={styles.youtube}>
+                <h1>{jejeupData.jejeupMetaData.ogTitle}</h1>
+                <div className={styles.detail}>
+                  <Image
+                    src={`${jejeupData.jejeupMetaData.ownerAvatar === undefined ? jejeupData.attributes.ownerAvatar : jejeupData.jejeupMetaData.ownerAvatar}`}
+                    width="36"
+                    height="36"
+                    alt=""
+                    unoptimized
+                  />
+                  <div className={styles.user}>
+                    <cite>{jejeupData.jejeupMetaData.ownerName}</cite>
+                    <time dateTime={jejeupData.jejeupMetaData.datePublished}>
+                      {formatDate(`${jejeupData.jejeupMetaData.datePublished}`)}
+                    </time>
+                  </div>
+                </div>
+                {jejeupData.jejeupMetaData.ogDescription ? (
+                  <div className={styles.seemore}>
+                    <em>{formatDuration(jejeupData.jejeupMetaData.duration)}</em>
+                    {jejeupData.jejeupMetaData.ogDescription}
+                    {isLoading && (
+                      <dl>
+                        <dt>관련 영상</dt>
+                        <dd>관련 영상 로딩 중...</dd>
+                      </dl>
+                    )}
+                    {jejeupData.attributes.relations && relations && !isLoading && !error && (
+                      <dl>
+                        <dt>관련 영상</dt>
+                        {Array.isArray(relations) &&
+                          relations
+                            .filter((relation) => relation.idx !== jejeupId)
+                            .map((relation) => (
+                              <dd key={relation.idx}>
+                                <Anchor href={`/jejeup/${relation.idx}`}>{relation.subject}</Anchor>
+                              </dd>
+                            ))}
+                      </dl>
+                    )}
+                  </div>
+                ) : (
+                  <div className={styles.seemore}>
+                    <strong>유튜버가 더보기 정보를 등록하지 않았습니다.</strong>
+                  </div>
+                )}
+                {jejeupData.attributes.worst && (
+                  <div className={styles.worst}>
+                    <strong className="number">Worst</strong>
+                  </div>
+                )}
+              </div>
+            </div>
+          )
         ) : (
           <div className={`${styles.preview} preview`}>
             <YouTubeController videoId={jejeupData.attributes.video} videoImage="/missing.webp" />
