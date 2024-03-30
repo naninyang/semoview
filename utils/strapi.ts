@@ -198,7 +198,7 @@ export async function getJejeupAmusementData(page?: number, pageSize?: number, a
   const pageCount = jejeupAmusementResponse.meta.pagination.pageCount;
   const jejeups = await Promise.all(
     rowsData.map(async (preview) => {
-      const jejeupMetaData = await fetchPreviewMetadata(`https://youtu.be/${preview.video}`);
+      const jejeupMetaData = await fetchMetadata(`https://youtu.be/${preview.video}`);
       const amusementData = await getAmusementData(preview.title);
       return {
         ...preview,
@@ -232,17 +232,6 @@ export async function getNoticeData() {
   }));
 
   return notices;
-}
-
-export async function fetchPreviewMetadata(url: string) {
-  try {
-    const response = await fetch(`${process.env.PREVIEW_NEW_API_URL}?url=${encodeURIComponent(url)}`);
-    const previewResponse = await response.json();
-    return previewResponse;
-  } catch (error) {
-    console.error('Failed to fetch article metadata', error);
-    return {};
-  }
 }
 
 export async function fetchMetadata(url: string) {
