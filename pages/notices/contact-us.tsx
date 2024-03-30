@@ -22,7 +22,7 @@ function ContactForm() {
     publishedAt: new Date().toISOString(),
   });
 
-  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
