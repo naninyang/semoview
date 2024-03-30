@@ -37,8 +37,17 @@
 
         .youtube
           h1
-            width: 77%
-            height: rem(28)
+            button
+              background-color: transparent
+              border: 0
+              padding: 0
+              color: $hex-accent
+              font-size: rem(20)
+              font-weight: 800
+              text-decoration: underline
+
+              +mq(maxExtraSmall)
+                font-size: rem(16)
 
           .detail
             .avatar
@@ -55,18 +64,6 @@
               time
                 width: rem(137)
                 height: rem(16)
-
-          .nomore
-            font-size: rem(16)
-            line-height: 1.25
-
-            button
-              background-color: transparent
-              border: 0
-              padding: 0
-              color: $hex-accent
-              font-weight: 800
-              text-decoration: underline
 
       .youtube
         padding: rem(12) 0 rem(24)

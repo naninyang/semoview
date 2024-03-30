@@ -359,7 +359,13 @@ export default function JejeupDetail({
                 <div className={`${styles.preview}  ${styles['preview-dummy']}`}>
                   <div className={`${styles.dummy} ${styles.skeleton}`} />
                   <div className={styles.youtube}>
-                    <h1 className={styles.skeleton} />
+                    <h1>
+                      유튜버가 영상을 삭제했거나 비공개 처리한 영상입니다. 관리자에게{' '}
+                      <button type="button" data-video={jejeupData.attributes.video} onClick={handleReportClick}>
+                        신고
+                      </button>
+                      해 주세요.
+                    </h1>
                     <div className={styles.detail}>
                       <div className={`${styles.avatar} ${styles.skeleton}`} />
                       <div className={styles.user}>
@@ -367,15 +373,6 @@ export default function JejeupDetail({
                         <time className={styles.skeleton} />
                       </div>
                     </div>
-                    <p className={`${styles.learnmore} ${styles.nomore}`}>
-                      <strong>
-                        유튜버가 영상을 삭제했거나 비공개 처리한 영상입니다. 관리자에게{' '}
-                        <button type="button" data-video={jejeupData.attributes.video} onClick={handleReportClick}>
-                          신고
-                        </button>
-                        해 주세요.
-                      </strong>
-                    </p>
                   </div>
                 </div>
               ) : (
@@ -444,7 +441,13 @@ export default function JejeupDetail({
               <div className={`${styles.preview}  ${styles['preview-dummy']}`}>
                 <div className={`${styles.dummy} ${styles.skeleton}`} />
                 <div className={styles.youtube}>
-                  <h1 className={styles.skeleton} />
+                  <h1>
+                    유튜버가 영상을 삭제했거나 비공개 처리한 영상입니다. 관리자에게{' '}
+                    <button type="button" data-video={jejeupData.attributes.video} onClick={handleReportClick}>
+                      신고
+                    </button>
+                    해 주세요.
+                  </h1>
                   <div className={styles.detail}>
                     <div className={`${styles.avatar} ${styles.skeleton}`} />
                     <div className={styles.user}>
@@ -452,15 +455,6 @@ export default function JejeupDetail({
                       <time className={styles.skeleton} />
                     </div>
                   </div>
-                  <p className={`${styles.learnmore} ${styles.nomore}`}>
-                    <strong>
-                      유튜버가 영상을 삭제했거나 비공개 처리한 영상입니다. 관리자에게{' '}
-                      <button type="button" data-video={jejeupData.attributes.video} onClick={handleReportClick}>
-                        신고
-                      </button>
-                      해 주세요.
-                    </strong>
-                  </p>
                 </div>
               </div>
             )}
