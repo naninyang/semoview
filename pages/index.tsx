@@ -285,6 +285,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
         } else {
           const errorData = await response.json();
           console.log(errorData.error);
+          alert('서버 오류입니다. 잠시 뒤 다시 시도해 주세요 😭');
         }
       } catch (error) {
         console.error('Error:', error);
