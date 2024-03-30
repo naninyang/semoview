@@ -400,15 +400,15 @@ export default function Amusement({
       return (
         <main className={styles.jejeup}>
           <p className={styles.error}>
-            영상을 불러오지 못했습니다. 삭제된 영상이거나 인터넷 속도가 느립니다.{' '}
-            <Anchor href="/jejeups">뒤로가기</Anchor>
+            작품을 불러오지 못했습니다. 삭제된 작품이거나 인터넷 속도가 느립니다.{' '}
+            <Anchor href="/amusement">뒤로가기</Anchor>
           </p>
         </main>
       );
     } else {
       return (
         <main className={styles.jejeup}>
-          <p className={styles.loading}>영상 불러오는 중...</p>
+          <p className={styles.loading}>작품 불러오는 중...</p>
         </main>
       );
     }

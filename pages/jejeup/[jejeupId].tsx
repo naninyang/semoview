@@ -303,6 +303,29 @@ export default function JejeupDetail({
     );
   };
 
+  const handleReportClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    const jejeupVideo = event.currentTarget.getAttribute('data-video');
+
+    try {
+      const response = await fetch('/api/unpublish', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ jejeupVideo: jejeupVideo }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Something went wrong!');
+      }
+
+      alert('신고 성공! 감사합니다 ☺️');
+    } catch (error) {
+      console.error('Error:', error);
+      alert('서버 오류입니다. 잠시 뒤 다시 시도해 주세요 😭');
+    }
+  };
+
   return (
     <main className={styles.jejeup}>
       <Seo
@@ -311,7 +334,7 @@ export default function JejeupDetail({
         pageDescription={
           Array.isArray(jejeupData.amusementData) && jejeupData.amusementData.length > 0
             ? `${jejeupData.amusementData[0].titleKorean ? jejeupData.amusementData[0].titleKorean : jejeupData.amusementData[0].title} (${jejeupData.amusementData[0].release})`
-            : '서버 에러'
+            : '서버 에러 또는 삭제/비공개된 영상'
         }
         pageImg={jejeupData.jejeupMetaData.ogImage ? jejeupData.jejeupMetaData.ogImage : '/missing.webp'}
         pageOgType={'video.other'}
@@ -327,19 +350,25 @@ export default function JejeupDetail({
       <article className={styles['article-jejeup']}>
         {jejeupData.jejeupMetaData && jejeupData.jejeupMetaData.ogTitle !== ' - YouTube' ? (
           jejeupData.jejeupMetaData.ogTitle === ' - YouTube' || jejeupData.jejeupMetaData.ogTitle === undefined ? (
-            <div className={`${styles.preview} preview`}>
-              <YouTubeController videoId={jejeupData.attributes.video} videoImage="/missing.webp" />
+            <div className={`${styles.preview}  ${styles['preview-dummy']}`}>
+              <div className={`${styles.dummy} ${styles.skeleton}`} />
               <div className={styles.youtube}>
-                <h1>유튜버가 삭제했거나 비공개 처리한 영상</h1>
+                <h1 className={styles.skeleton} />
                 <div className={styles.detail}>
-                  <Image src="/unknown.webp" width="36" height="36" alt="" unoptimized />
+                  <div className={`${styles.avatar} ${styles.skeleton}`} />
                   <div className={styles.user}>
-                    <cite>관리자에게 제보해 주세요</cite>
-                    <time>알 수 없는 시간</time>
+                    <cite className={styles.skeleton} />
+                    <time className={styles.skeleton} />
                   </div>
                 </div>
-                <p>
-                  <strong>유튜버가 영상을 삭제했거나 비공개 처리한 영상입니다. 관리자에게 제보해 주세요.</strong>
+                <p className={`${styles.learnmore} ${styles.nomore}`}>
+                  <strong>
+                    유튜버가 영상을 삭제했거나 비공개 처리한 영상입니다. 관리자에게{' '}
+                    <button type="button" data-video={jejeupData.attributes.video} onClick={handleReportClick}>
+                      신고
+                    </button>
+                    해 주세요.
+                  </strong>
                 </p>
               </div>
             </div>
@@ -369,7 +398,7 @@ export default function JejeupDetail({
                   </div>
                 </div>
                 {jejeupData.jejeupMetaData.ogDescription ? (
-                  <div className={styles.seemore}>
+                  <div className={styles.learnmore}>
                     <em>{formatDuration(jejeupData.jejeupMetaData.duration)}</em>
                     {jejeupData.jejeupMetaData.ogDescription}
                     {isLoading && (
@@ -393,7 +422,7 @@ export default function JejeupDetail({
                     )}
                   </div>
                 ) : (
-                  <div className={styles.seemore}>
+                  <div className={styles.learnmore}>
                     <strong>유튜버가 더보기 정보를 등록하지 않았습니다.</strong>
                   </div>
                 )}

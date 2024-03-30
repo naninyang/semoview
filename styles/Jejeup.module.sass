@@ -25,6 +25,49 @@
     width: 100%
 
     .preview
+      &.preview-dummy
+        .skeleton
+          background: linear-gradient(90deg, #eeeeee 25%, #dddddd 50%, #eeeeee 75%)
+          background-size: 200% 100%
+          animation: loading 1.5s infinite
+
+        .dummy
+          border-radius: rem(12)
+          aspect-ratio: 1920 / 1080
+
+        .youtube
+          h1
+            width: 77%
+            height: rem(28)
+
+          .detail
+            .avatar
+              border-radius: 100%
+              width: rem(40)
+              height: rem(40)
+
+            .user
+              cite
+                margin-bottom: rem(4)
+                width: rem(72)
+                height: rem(20)
+
+              time
+                width: rem(137)
+                height: rem(16)
+
+          .nomore
+            font-size: rem(16)
+            line-height: 1.25
+
+            button
+              background-color: transparent
+              border: 0
+              padding: 0
+              color: $hex-accent
+              font-weight: 800
+              text-decoration: underline
+
       .youtube
         padding: rem(12) 0 rem(24)
 
@@ -76,7 +119,7 @@
           text-transform: uppercase
           color: $hex-white
 
-      .seemore
+      .learnmore
         background-color: rgba($hex-black, .05)
         border-radius: rem(12)
         padding: rem(12)
@@ -475,3 +518,10 @@
             width: 100%
             height: auto
             object-fit: cover
+
+@keyframes loading
+  0%
+    background-position: 200% 0
+
+  100%
+    background-position: -200% 0
