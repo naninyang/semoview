@@ -244,7 +244,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
     const [isLoading, setIsLoading] = useState(true);
 
     const [retryCount, setRetryCount] = useState(0);
-    const maxRetries = 3;
+    const maxRetries = 7;
 
     const fetchMetadata = async () => {
       try {
