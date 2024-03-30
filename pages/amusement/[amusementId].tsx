@@ -371,7 +371,26 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
           )}
         </>
       ) : (
-        <p className={styles.metaloading}>로딩 중...</p>
+        <div className={`${styles.preview} ${styles['preview-dummy']}`}>
+          <div className={styles['preview-container']}>
+            <div className={styles.thumbnail}>
+              <div className={`${styles.dummy} ${styles.skeleton}`} />
+            </div>
+            <div className={styles['preview-info']}>
+              <div className={styles.detail}>
+                <div className={`${styles['user-info']}`}>
+                  <strong className={styles.skeleton} />
+                  <div className={styles.user}>
+                    <cite>
+                      <i className={styles.skeleton} />
+                    </cite>
+                    <time className={styles.skeleton} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </>
   );
