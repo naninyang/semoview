@@ -280,11 +280,12 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
           body: JSON.stringify({ jejeupVideo: jejeupVideo }),
         });
 
-        if (!response.ok) {
-          throw new Error('Something went wrong!');
+        if (response.ok) {
+          alert('신고 성공! 감사합니다 ☺️');
+        } else {
+          const errorData = await response.json();
+          console.log(errorData.error);
         }
-
-        alert('신고 성공! 감사합니다 ☺️');
       } catch (error) {
         console.error('Error:', error);
         alert('서버 오류입니다. 잠시 뒤 다시 시도해 주세요 😭');

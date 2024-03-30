@@ -26,8 +26,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         throw new Error('API Error');
       }
 
-      const contactResponse = await response.json();
-      res.status(200).json(contactResponse);
+      const unpublishResponse = await response.json();
+      res.status(200).json(unpublishResponse);
     } catch (error) {
       res.status(500).json({ message: 'Server Error' });
     }

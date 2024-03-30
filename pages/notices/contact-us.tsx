@@ -22,7 +22,7 @@ function ContactForm() {
     publishedAt: new Date().toISOString(),
   });
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     try {
@@ -35,7 +35,7 @@ function ContactForm() {
       });
 
       if (response.ok) {
-        alert('제출 완료되었어요. 감사합니다.');
+        alert('제출 완료되었어요. 감사합니다 ☺️');
         router.push('/');
       } else {
         const errorData = await response.json();
@@ -43,6 +43,7 @@ function ContactForm() {
       }
     } catch (error) {
       console.error(error);
+      alert('서버 오류입니다. 잠시 뒤 다시 시도해 주세요 😭');
     }
   };
 
