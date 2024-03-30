@@ -242,18 +242,19 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
   function JejeupMeta({ jejeup }: { jejeup: any }) {
     const [jejeupMetaData, setJejeupMetaData] = useState<JejeupMetaData | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const maxRetries = 7;
 
-    const [retryCount, setRetryCount] = useState(0);
-    const maxRetries = 27;
-
-    const fetchMetadata = async () => {
+    const fetchMetadata = async (currentRetryCount = 0) => {
       try {
         const jejeupMeta = await fetch(`/api/metadata?url=https://youtu.be/${jejeup.video}`);
         const jejeupMetaDataResponse = await jejeupMeta.json();
 
-        if (Array.isArray(jejeupMetaDataResponse) && jejeupMetaDataResponse.length === 0 && retryCount < maxRetries) {
-          setRetryCount(retryCount + 1);
-          setTimeout(fetchMetadata, 3000);
+        if (
+          Array.isArray(jejeupMetaDataResponse) === false &&
+          Object.keys(jejeupMetaDataResponse).length === 0 &&
+          currentRetryCount < maxRetries
+        ) {
+          setTimeout(() => fetchMetadata(currentRetryCount + 1), 5000);
         } else {
           setJejeupMetaData(jejeupMetaDataResponse);
         }
@@ -264,9 +265,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
 
     useEffect(() => {
       setIsLoading(true);
-      fetchMetadata().finally(() => {
-        setIsLoading(false);
-      });
+      fetchMetadata().finally(() => setIsLoading(false));
     }, []);
 
     const handleReportClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
