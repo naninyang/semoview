@@ -372,6 +372,9 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
         </>
       ) : (
         <div className={`${styles.preview} ${styles['preview-dummy']}`}>
+          <div className={styles.notice} hidden>
+            <p>불러오는 중</p>
+          </div>
           <div className={styles['preview-container']}>
             <div className={styles.thumbnail}>
               <div className={`${styles.dummy} ${styles.skeleton}`} />
