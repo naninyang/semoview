@@ -263,12 +263,16 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
       }
     };
 
+    const handleRetry = () => {
+      fetchMetadata();
+    };
+
     useEffect(() => {
       setIsLoading(true);
       fetchMetadata().finally(() => setIsLoading(false));
     }, []);
 
-    const handleReportClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    const handleReport = async (event: React.MouseEvent<HTMLButtonElement>) => {
       const jejeupVideo = event.currentTarget.getAttribute('data-video');
 
       try {
@@ -304,7 +308,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                     <div className={styles.notice}>
                       <p>유튜버가 삭제했거나 비공개 처리한 영상입니다.</p>
                       <p>
-                        <button type="button" data-video={jejeup.video} onClick={handleReportClick}>
+                        <button type="button" data-video={jejeup.video} onClick={handleReport}>
                           신고
                         </button>
                         해 주세요.
@@ -363,10 +367,10 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
             ) : (
               <div className={`${styles.preview} ${styles['preview-dummy']}`}>
                 <div className={styles.notice}>
-                  <p>유튜버가 삭제했거나 비공개 처리한 영상입니다.</p>
+                  <p>알 수 없는 사유로 불러오지 못했습니다.</p>
                   <p>
-                    <button type="button" data-video={jejeup.video} onClick={handleReportClick}>
-                      신고
+                    <button type="button" data-video={jejeup.video} onClick={handleRetry}>
+                      새로고침
                     </button>
                     해 주세요.
                   </p>
