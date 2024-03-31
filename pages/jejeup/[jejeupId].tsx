@@ -328,7 +328,7 @@ export default function JejeupDetail({
     );
   };
 
-  const handleReportClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleReport = async (event: React.MouseEvent<HTMLButtonElement>) => {
     const jejeupVideo = event.currentTarget.getAttribute('data-video');
 
     try {
@@ -389,7 +389,7 @@ export default function JejeupDetail({
                       <div className={styles.youtube}>
                         <h1>
                           유튜버가 영상을 삭제했거나 비공개 처리한 영상입니다. 관리자에게{' '}
-                          <button type="button" data-video={jejeupData.attributes.video} onClick={handleReportClick}>
+                          <button type="button" data-video={jejeupData.attributes.video} onClick={handleReport}>
                             신고
                           </button>
                           해 주세요.
@@ -471,7 +471,7 @@ export default function JejeupDetail({
                     <div className={styles.youtube}>
                       <h1>
                         유튜버가 영상을 삭제했거나 비공개 처리한 영상입니다. 관리자에게{' '}
-                        <button type="button" data-video={jejeupData.attributes.video} onClick={handleReportClick}>
+                        <button type="button" data-video={jejeupData.attributes.video} onClick={handleReport}>
                           신고
                         </button>
                         해 주세요.

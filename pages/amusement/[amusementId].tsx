@@ -719,6 +719,29 @@ export default function Amusement({
     }
   }
 
+  const handleRequest = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    const jejeupAmusement = event.currentTarget.getAttribute('data-video');
+
+    try {
+      const response = await fetch('/api/unpublish', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ jejeupAmusement: jejeupAmusement }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Something went wrong!');
+      }
+
+      alert('요청 성공! 감사합니다 ☺️');
+    } catch (error) {
+      console.error('Error:', error);
+      alert('서버 오류입니다. 잠시 뒤 다시 시도해 주세요 😭');
+    }
+  };
+
   return (
     <main className={styles.amusement}>
       <Seo
@@ -1351,12 +1374,24 @@ export default function Amusement({
       {isJejeupsLoading && <p className={styles['amusement-loading']}>목록 불러오는 중...</p>}
       {data && !isJejeupsLoading && !isJejeupsError && (
         <div className={styles.list}>
-          {Array.isArray(data.jejeups) &&
+          {Object.keys(data.jejeups).length > 0 && Array.isArray(data.jejeups) ? (
             data.jejeups.map((jejeup: JejeupData) => (
               <div className={styles.item} key={jejeup.id}>
                 <JejeupMeta key={jejeup.idx} jejeup={jejeup} />
               </div>
-            ))}
+            ))
+          ) : (
+            <div className={styles.warning}>
+              <p>이 작품을 리뷰한 영상이 삭제되어 남아있는 영상이 없습니다.</p>
+              <p>
+                운영자에게 영상 등록을{' '}
+                <button type="button" data-video={amusementData.id} onClick={handleRequest}>
+                  요청
+                </button>{' '}
+                해 주세요!
+              </p>
+            </div>
+          )}
         </div>
       )}
     </main>

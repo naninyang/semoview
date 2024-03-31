@@ -465,7 +465,7 @@
       content: ''
       display: block
       position: absolute
-      top: 0
+      top: 1px
       left: 0
       z-index: 2
       width: 100%
@@ -478,11 +478,36 @@
       +mq(minExtraLarge)
         height: rem(237)
 
-    .item
+    .warning, .item
       display: flex
-      padding: rem(23) rem(7)
       position: relative
       z-index: 7
+
+    .warning
+      display: flex
+      justify-content: center
+      align-items: center
+      flex-direction: column
+      gap: rem(7)
+      width: 100%
+      height: rem(270)
+
+      p
+        text-align: center
+        font-weight: 800
+        line-height: 1.25
+        color: $hex-white
+
+        button
+          background-color: transparent
+          border: 0
+          padding: 0
+          color: yellow
+          font-weight: 800
+          text-decoration: underline
+
+    .item
+      padding: rem(23) rem(7)
 
       +mq(minSmall)
         width: 50%
