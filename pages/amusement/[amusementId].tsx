@@ -15,9 +15,9 @@ import { formatDate } from '@/components/FormatDate';
 import { formatDuration } from '@/components/FormatDuration';
 import { vectors } from '@/components/vectors';
 import Anchor from '@/components/Anchor';
+import YouTubeController from '@/components/YouTubeController';
 import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Amusement.module.sass';
-import YouTubeController from '@/components/YouTubeController';
 
 const BackButton = styled.i({
   display: 'block',
