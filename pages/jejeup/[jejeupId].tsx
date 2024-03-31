@@ -353,7 +353,10 @@ export default function JejeupDetail({
 
   return (
     <main className={styles.jejeup}>
-      {console.log('jejeupData: ', jejeupData)}
+      {(() => {
+        console.log('jejeupData: ', jejeupData);
+        return null;
+      })()}{' '}
       <Seo
         pageTitles={`${jejeupData.attributes ? jejeupData.attributes.subject : '없는 페이지'} - ${originTitle}`}
         pageTitle={`${jejeupData.attributes ? jejeupData.attributes.subject : '없는 페이지'}`}
