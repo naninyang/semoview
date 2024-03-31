@@ -9,14 +9,16 @@
   +mq(minLarge)
     padding: rem(15) calc(env(safe-area-inset-right) + rem(25)) rem(72) calc(env(safe-area-inset-left) + rem(25))
 
-  .loading, .error
-    display: flex
-    flex: 1
-    align-items: center
-    color: $hex-accent
+  &.jejeup-loading
+    min-height: calc(100dvh - rem(78))
 
-  .error
-    gap: rem(15)
+  .loading
+    display: flex
+    flex-grow: 1
+    align-items: center
+    justify-content: center
+    text-align: center
+    color: $hex-accent
 
   article
     display: flex

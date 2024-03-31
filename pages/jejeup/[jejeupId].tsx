@@ -5,6 +5,7 @@ import Image from 'next/image';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import styled from '@emotion/styled';
 import { JejeupData, JejeupPermalinkData } from 'types';
+import { formatDateDetail } from '@/utils/strapi';
 import Seo, { originTitle } from '@/components/Seo';
 import YouTubeController from '@/components/YouTubeController';
 import Anchor from '@/components/Anchor';
@@ -270,15 +271,39 @@ export default function JejeupDetail({
     if (timeoutReached) {
       return (
         <main className={styles.jejeup}>
-          <p className={styles.error}>
-            영상을 불러오지 못했습니다. 삭제된 영상이거나 인터넷 속도가 느립니다.{' '}
-            <Anchor href="/jejeups">뒤로가기</Anchor>
-          </p>
+          <div className="top-link">
+            <Anchor href="/">
+              <BackButton />
+              <span>뒤로가기</span>
+            </Anchor>
+          </div>
+          <article className={styles['article-jejeup']}>
+            <div className={`${styles.preview} preview`}>
+              <div className={styles.video}>
+                <YouTubeController
+                  videoId={'ARJ5bXkof30'}
+                  videoImage={'https://i.ytimg.com/vi/ARJ5bXkof30/hqdefault.jpg'}
+                />
+              </div>
+              <div className={styles.youtube}>
+                <h1>없는 페이지이므로 체념하고 돌아가세요! 404 NOT FOUND PAGE!</h1>
+              </div>
+            </div>
+          </article>
         </main>
       );
     } else {
       return (
-        <main className={styles.jejeup}>
+        <main className={`${styles.jejeup} ${styles['jejeup-loading']}`}>
+          <Seo
+            pageTitles={`404 NOT FOUND - ${originTitle}`}
+            pageTitle={`404 NOT FOUND`}
+            pageDescription={`서버 에러 또는 삭제/비공개된 영상`}
+            pageImg={`https://jejeup.dev1stud.io/missing.webp`}
+            pageOgType={'video.other'}
+            pageImgWidth={1920}
+            pageImgHeight={1080}
+          />
           <p className={styles.loading}>영상 불러오는 중...</p>
         </main>
       );
@@ -1500,7 +1525,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
   if (jejeupId && typeof jejeupId === 'string') {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/jejeups?id=${jejeupId.substring(14)}`);
     const jejeupResponse = (await response.json()) as { data: JejeupPermalinkData };
-    jejeupData = jejeupResponse;
+    if (
+      jejeupResponse.attributes?.createdAt &&
+      formatDateDetail(jejeupResponse.attributes.createdAt) === jejeupId.substring(0, 14)
+    ) {
+      jejeupData = jejeupResponse;
+    }
   }
 
   if (!jejeupData) {
