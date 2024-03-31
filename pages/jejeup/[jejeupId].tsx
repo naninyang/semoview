@@ -1525,10 +1525,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
   if (jejeupId && typeof jejeupId === 'string') {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/jejeups?id=${jejeupId.substring(14)}`);
     const jejeupResponse = (await response.json()) as { data: JejeupPermalinkData };
-    if (
-      jejeupResponse.attributes?.createdAt &&
-      formatDateDetail(jejeupResponse.attributes.createdAt) === jejeupId.substring(0, 14)
-    ) {
+    let createdAt = jejeupResponse.data?.attributes?.createdAt;
+
+    if (createdAt && formatDateDetail(createdAt) === jejeupId.substring(0, 14)) {
       jejeupData = jejeupResponse;
     }
   }

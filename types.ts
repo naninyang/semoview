@@ -178,6 +178,10 @@ export interface JejeupPermalinkData {
   };
 }
 
+export interface JejeupResponse {
+  data: JejeupPermalinkData;
+}
+
 export interface AmusementData {
   id: string;
   idx: string;
