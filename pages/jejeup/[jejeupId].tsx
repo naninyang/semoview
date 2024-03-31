@@ -339,7 +339,7 @@ export default function JejeupDetail({
         pageImg={
           jejeupData.jejeupMetaData && jejeupData.jejeupMetaData.ogImage
             ? jejeupData.jejeupMetaData.ogImage
-            : '/missing.webp'
+            : 'https://jejeup.dev1stud.io/missing.webp'
         }
         pageOgType={'video.other'}
         pageImgWidth={1920}

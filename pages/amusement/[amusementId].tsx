@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styled from '@emotion/styled';
 import { AmusementData, AmusementPermalinkData, JejeupData, JejeupMetaData } from 'types';
+import { formatDateDetail } from '@/utils/strapi';
 import Seo, { originTitle } from '@/components/Seo';
 import { CategoryName } from '@/components/CategoryName';
 import { AnimeName } from '@/components/AnimeName';
@@ -16,6 +17,7 @@ import { vectors } from '@/components/vectors';
 import Anchor from '@/components/Anchor';
 import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Amusement.module.sass';
+import YouTubeController from '@/components/YouTubeController';
 
 const BackButton = styled.i({
   display: 'block',
@@ -408,10 +410,10 @@ export default function Amusement({
 }) {
   const router = useRouter();
   const timestamp = Date.now();
+  const currentPage = Number(router.query.page) || 1;
   const [data, setData] = useState<JejeupData | null>(null);
   const [isJejeupsLoading, setIsJejeupsLoading] = useState(false);
   const [isJejeupsError, setIsJejeupsError] = useState<null | string>(null);
-  const currentPage = Number(router.query.page) || 1;
   const [isActive, setIsActive] = useState(true);
   const [relations, setRelations] = useState<AmusementData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -584,16 +586,93 @@ export default function Amusement({
   if (!amusementData) {
     if (timeoutReached) {
       return (
-        <main className={styles.jejeup}>
-          <p className={styles.error}>
-            작품을 불러오지 못했습니다. 삭제된 작품이거나 인터넷 속도가 느립니다.{' '}
-            <Anchor href="/amusement">뒤로가기</Anchor>
-          </p>
+        <main className={`${styles.amusement} ${styles.error}`}>
+          <div className="top-link">
+            <Anchor href="/amusement">
+              <BackButton />
+              <span>뒤로가기</span>
+            </Anchor>
+          </div>
+          <div className={styles.cover}>
+            <div className={styles.background}>
+              <div className={styles.images}>
+                <Image
+                  src="https://i.ytimg.com/vi/Ezo69U5bar4/hq720.jpg"
+                  alt=""
+                  width="1920"
+                  height="1080"
+                  unoptimized
+                  className={`${isActive ? styles.active : ''}`}
+                />
+              </div>
+              <div className={styles.dummy} />
+            </div>
+            <div className={styles.info}>
+              <h1 className={styles.long}>404 NOT FOUND</h1>
+              <dl className={styles.title}>
+                <div>
+                  <dt>원제</dt>
+                  <dd>
+                    <span lang="ko">체념 by 이영현</span>
+                  </dd>
+                </div>
+                <div>
+                  <dt>추가설명</dt>
+                  <dd className="lang">없는 페이지이므로 체념하고 되돌아가세요</dd>
+                </div>
+              </dl>
+              <dl className={styles.summary}>
+                <div className={styles.item}>
+                  <div className={styles.category}>
+                    <dt>카테고리</dt>
+                    <dd>
+                      <em>404 페이지 없음 안내 페이지</em>
+                    </dd>
+                  </div>
+                  <div className={styles.country}>
+                    <dt>영상 제작국가</dt>
+                    <dd>대한민국에서 영상 제작</dd>
+                  </div>
+                  <div className={styles.release}>
+                    <dt>영상 제작년도</dt>
+                    <dd>2021년 영상 제작</dd>
+                  </div>
+                  <div className={styles.rating}>
+                    <dt>등급</dt>
+                    <dd>
+                      <i className={`${styles.drama} ${styles.all} number`}>{RatingsDrama('all')}</i>
+                      <span>전체 이용가</span>
+                    </dd>
+                  </div>
+                </div>
+              </dl>
+              <dl className={styles.staff}>
+                <div>
+                  <dt>영상 제작사</dt>
+                  <dd>It`s Live</dd>
+                </div>
+              </dl>
+            </div>
+            <div className={`${styles.poster} ${styles.mv}`}>
+              <div className={`${styles.images}`}>
+                <YouTubeController
+                  videoId={'Ezo69U5bar4'}
+                  videoImage={'https://i.ytimg.com/vi/Ezo69U5bar4/hq720.jpg'}
+                />
+              </div>
+            </div>
+          </div>
         </main>
       );
     } else {
       return (
-        <main className={styles.jejeup}>
+        <main className={styles.amusement}>
+          <Seo
+            pageTitles={`404 NOT FOUND - ${originTitle}`}
+            pageTitle={`404 NOT FOUND`}
+            pageDescription={`존재하지 않는 작품일걸요?`}
+            pageImg={`https://jejeup.dev1stud.io/missing.webp`}
+          />
           <p className={styles.loading}>작품 불러오는 중...</p>
         </main>
       );
@@ -1293,7 +1372,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
       `${process.env.NEXT_PUBLIC_API_URL}/api/amusement?amusementId=${amusementId.substring(14)}`,
     );
     const amusementResponse = (await response.json()) as { data: AmusementPermalinkData };
-    amusementData = amusementResponse.data;
+    amusementData =
+      formatDateDetail(amusementResponse.data.attributes.createdAt) === amusementId.substring(0, 14) &&
+      amusementResponse.data;
   }
 
   if (!amusementData) {

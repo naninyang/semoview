@@ -5,7 +5,7 @@
   min-height: calc(100dvh - rem(78))
   font-size: rem(16)
 
-  .loading, .error
+  .loading
     display: flex
     justify-content: center
     align-items: center
@@ -14,13 +14,8 @@
     color: $hex-accent
     text-align: center
 
-  .error
-    gap: rem(15)
-
-    button
-      background: none
-      text-decoration: underline
-      color: $hex-accent
+  &.error
+    min-height: 0
 
   .amusement-loading, .amusement-error
     display: flex
@@ -398,46 +393,53 @@
         img
           aspect-ratio: 460 / 215
 
-      button
-        position: relative
-        display: inline-flex
-        gap: rem(7)
-        background-color: transparent
-        margin-top: rem(17)
-        border: 1px solid $hex-white
-        border-radius: rem(38)
-        padding: rem(7) rem(23)
-        font-size: rem(20)
-        color: $hex-white
+      &.mv
+        width: rem(407)
 
-        span
-          +screen-reader-only
+        .images
+          aspect-ratio: 1920 / 1080
 
-        svg
-          width: rem(20)
-          height: rem(20)
+      &:not(.mv)
+        button
+          position: relative
+          display: inline-flex
+          gap: rem(7)
+          background-color: transparent
+          margin-top: rem(17)
+          border: 1px solid $hex-white
+          border-radius: rem(38)
+          padding: rem(7) rem(23)
+          font-size: rem(20)
+          color: $hex-white
 
-      .images
-        aspect-ratio: 390 / 560
-        position: relative
+          span
+            +screen-reader-only
 
-      img
-        position: absolute
-        top: 0
-        left: 0
-        display: block
-        width: 100%
-        height: auto
-        aspect-ratio: 390 / 560
-        object-fit: cover
-        transition: transform .5s cubic-bezier(.4,0,.2,1)
-        box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px
+          svg
+            width: rem(20)
+            height: rem(20)
 
-        &.active
-          z-index: 1
+        .images
+          aspect-ratio: 390 / 560
+          position: relative
 
-        &:not(.active)
-          transform: perspective(600px) rotateY(-180deg)
+        img
+          position: absolute
+          top: 0
+          left: 0
+          display: block
+          width: 100%
+          height: auto
+          aspect-ratio: 390 / 560
+          object-fit: cover
+          transition: transform .5s cubic-bezier(.4,0,.2,1)
+          box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px
+
+          &.active
+            z-index: 1
+
+          &:not(.active)
+            transform: perspective(600px) rotateY(-180deg)
 
   .list
     transition: all .4s cubic-bezier(.4,0,.2,1)
