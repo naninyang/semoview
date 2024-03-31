@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import styled from '@emotion/styled';
-import { JejeupData, JejeupPermalinkData } from 'types';
+import { JejeupData, JejeupPermalinkData, JejeupResponse } from 'types';
 import { formatDateDetail } from '@/utils/strapi';
 import Seo, { originTitle } from '@/components/Seo';
 import YouTubeController from '@/components/YouTubeController';
@@ -1524,8 +1524,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   if (jejeupId && typeof jejeupId === 'string') {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/jejeups?id=${jejeupId.substring(14)}`);
-    const jejeupResponse = (await response.json()) as { data: JejeupPermalinkData };
-    let createdAt = jejeupResponse.data?.attributes?.createdAt;
+    const jejeupResponse = await response.json();
+    let createdAt = jejeupResponse.attributes?.createdAt;
 
     if (createdAt && formatDateDetail(createdAt) === jejeupId.substring(0, 14)) {
       jejeupData = jejeupResponse;
