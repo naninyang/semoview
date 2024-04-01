@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 interface PostData {
   jejeupVideo: string;
   jejeupAmusement: string;
+  site: string;
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -20,6 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           data: {
             videoId: jejeupVideo,
             amusementId: jejeupAmusement,
+            site: 'jejeup',
           },
         }),
       });
