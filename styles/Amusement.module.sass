@@ -378,20 +378,42 @@
               font-weight: 440
 
     .poster
-      width: rem(370)!important
+      width: rem(370)
       text-align: center
 
-      +mq(maxExtraSmall)
-        width: 72% !important
-
       &.poster-game
-        width: rem(407)!important
+        width: rem(407)
 
         .images
-          aspect-ratio: 460 / 215!important
+          aspect-ratio: 460 / 215
 
         img
-          aspect-ratio: 460 / 215!important
+          aspect-ratio: 460 / 215
+
+      +mq(maxExtraSmall)
+        width: 92% !important
+
+      .images
+        aspect-ratio: 390 / 560
+        position: relative
+
+      img
+        position: absolute
+        top: 0
+        left: 0
+        display: block
+        width: 100%
+        height: auto
+        aspect-ratio: 390 / 560
+        object-fit: cover
+        transition: transform .5s cubic-bezier(.4,0,.2,1)
+        box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px
+
+        &.active
+          z-index: 1
+
+        &:not(.active)
+          transform: perspective(600px) rotateY(-180deg)
 
       &.mv
         width: rem(407)
@@ -418,28 +440,6 @@
           svg
             width: rem(20)
             height: rem(20)
-
-        .images
-          aspect-ratio: 390 / 560
-          position: relative
-
-        img
-          position: absolute
-          top: 0
-          left: 0
-          display: block
-          width: 100%
-          height: auto
-          aspect-ratio: 390 / 560
-          object-fit: cover
-          transition: transform .5s cubic-bezier(.4,0,.2,1)
-          box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px
-
-          &.active
-            z-index: 1
-
-          &:not(.active)
-            transform: perspective(600px) rotateY(-180deg)
 
   .list
     transition: all .4s cubic-bezier(.4,0,.2,1)
