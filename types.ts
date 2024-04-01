@@ -98,6 +98,7 @@ export interface JejeupPermalinkData {
     worst: boolean;
     amusements: string;
     relations: string;
+    embeddingOff: boolean;
     createdAt: string;
     publishedAt: string;
   };

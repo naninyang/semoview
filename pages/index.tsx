@@ -351,9 +351,18 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                                   {formatDate(`${jejeupMetaData.datePublished}`)}
                                 </time>
                               </div>
-                              {jejeup.worst && (
-                                <div className={styles.worst}>
-                                  <strong className="number">Worst</strong>
+                              {(jejeup.worst || jejeup.embeddingOff) && (
+                                <div className={styles.option}>
+                                  {jejeup.worst && (
+                                    <div className={styles.worst}>
+                                      <strong className="number">Worst</strong>
+                                    </div>
+                                  )}
+                                  {jejeup.embeddingOff && (
+                                    <div className={styles.embed}>
+                                      <strong className="preview">퍼가기 금지 콘텐츠</strong>
+                                    </div>
+                                  )}
                                 </div>
                               )}
                             </div>

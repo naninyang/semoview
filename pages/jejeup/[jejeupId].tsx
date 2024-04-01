@@ -406,10 +406,30 @@ export default function JejeupDetail({
                   ) : (
                     <div className={`${styles.preview} preview`}>
                       <div className={styles.video}>
-                        <YouTubeController
-                          videoId={jejeupData.attributes.video}
-                          videoImage={jejeupData.jejeupMetaData.ogImage}
-                        />
+                        {jejeupData.attributes.embeddingOff ? (
+                          <div className={styles.embeddingOff}>
+                            <Image
+                              src={jejeupData.jejeupMetaData.ogImage}
+                              width={1920}
+                              height={1080}
+                              alt=""
+                              unoptimized
+                              priority
+                            />
+                            <div>
+                              <p>유튜버가 유튜브에서만 재생할 수 있도록 설정한 콘텐츠 입니다.</p>
+                              <p>
+                                <Anchor href={`https://youtu.be/${jejeupData.attributes.video}`}>여기</Anchor>를 누르면
+                                유튜브로 이동합니다.
+                              </p>
+                            </div>
+                          </div>
+                        ) : (
+                          <YouTubeController
+                            videoId={jejeupData.attributes.video}
+                            videoImage={jejeupData.jejeupMetaData.ogImage}
+                          />
+                        )}
                       </div>
                       <div className={styles.youtube}>
                         <h1>{jejeupData.jejeupMetaData.ogTitle}</h1>
@@ -460,6 +480,18 @@ export default function JejeupDetail({
                         {jejeupData.attributes.worst && (
                           <div className={styles.worst}>
                             <strong className="number">Worst</strong>
+                          </div>
+                        )}
+                        {(jejeupData.attributes.embeddingOff === null ||
+                          jejeupData.attributes.embeddingOff === false) && (
+                          <div className={styles.embed}>
+                            <p>
+                              🚫 이 영상이 유튜브에서만 볼 수 있게 설정된 영상이라면 관리자에게{' '}
+                              <button type="button" data-video={jejeupData.attributes.video} onClick={handleReport}>
+                                알려
+                              </button>
+                              주세요.
+                            </p>
                           </div>
                         )}
                       </div>

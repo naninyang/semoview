@@ -585,7 +585,7 @@
           .preview-info
             .detail
               .user-info
-                strong
+                > strong
                   width: 100%
                   height: rem(18)
 
@@ -677,8 +677,9 @@
                       font-size: rem(14)
                       color: $hex-light
 
-                .worst
-                  padding-bottom: rem(3)
+                .option
+                  display: flex
+                  gap: rem(12)
 
                   strong
                     display: inline-flex
@@ -688,7 +689,7 @@
                     font-size: rem(12)
                     font-weight: 800
                     text-transform: uppercase
-                    color: $hex-black
+                    color: $hex-white
 
 @keyframes loading
   0%

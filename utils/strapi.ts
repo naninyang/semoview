@@ -62,6 +62,7 @@ export async function getJejeupData(page?: number) {
     comment: data.attributes.comment,
     title: data.attributes.title,
     worst: data.attributes.worst,
+    embeddingOff: data.attributes.embeddingOff,
   }));
   const pageCount = jejeupResponse.meta.pagination.pageCount;
   const jejeups = await Promise.all(
@@ -206,6 +207,7 @@ export async function getJejeupAmusementData(page?: number, pageSize?: number, a
     comment: data.attributes.comment,
     title: data.attributes.title,
     worst: data.attributes.worst,
+    embeddingOff: data.attributes.embeddingOff,
   }));
   const pageCount = jejeupAmusementResponse.meta.pagination.pageCount;
   const jejeups = await Promise.all(
