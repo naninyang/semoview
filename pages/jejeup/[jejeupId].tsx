@@ -1374,6 +1374,11 @@ export default function JejeupDetail({
                                       단편영화 &apos;{data.titleKorean ? data.titleKorean : data.title}&apos; 보러가기
                                     </Anchor>
                                   )}
+                                  {data.category === 'game_fan' && (
+                                    <Anchor href={`/amusement/${data.idx}`}>
+                                      &apos;{data.relations}&apos;의 다른 팬 게임 보러가기
+                                    </Anchor>
+                                  )}
                                 </dt>
                                 <dd>
                                   <strong>

@@ -264,7 +264,9 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
     };
 
     const handleRetry = () => {
-      fetchMetadata();
+      setJejeupMetaData(null);
+      setIsLoading(true);
+      fetchMetadata().finally(() => setIsLoading(false));
     };
 
     useEffect(() => {

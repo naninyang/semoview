@@ -240,7 +240,9 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
   };
 
   const handleRetry = () => {
-    fetchMetadata();
+    setJejeupMetaData(null);
+    setIsJejeupMetaLoading(true);
+    fetchMetadata().finally(() => setIsJejeupMetaLoading(false));
   };
 
   useEffect(() => {
