@@ -998,8 +998,9 @@ function Categories({
                       </div>
                       <strong>
                         <strong>
-                          {amusement.category === 'game_fan' && <cite>{amusement.relations} 팬게임:</cite>}
-                          {amusement.titleKorean != null ? (
+                          {amusement.category === 'game_fan' ? (
+                            `'${amusement.title}' 팬게임 콜렉션`
+                          ) : amusement.titleKorean != null ? (
                             amusement.titleKorean
                           ) : (
                             <>

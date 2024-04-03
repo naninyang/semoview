@@ -783,7 +783,8 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                               )}
                             </>
                           )}
-                          {jejeup.amusementData.category === 'game' && (
+                          {(jejeup.amusementData.category === 'game' ||
+                            jejeup.amusementData.category === 'game_fan') && (
                             <>
                               {jejeup.amusementData.rating === 'all' && (
                                 <>
@@ -819,9 +820,11 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                         <dd>
                           <strong>
                             <span className={styles.title}>
-                              {jejeup.amusementData.titleKorean
-                                ? jejeup.amusementData.titleKorean
-                                : jejeup.amusementData.title}
+                              {jejeup.amusementData.category === 'game_fan'
+                                ? `'${jejeup.amusementData.title}'의 팬 게임 콜렉션`
+                                : jejeup.amusementData.titleKorean
+                                  ? jejeup.amusementData.titleKorean
+                                  : jejeup.amusementData.title}
                             </span>
                             {jejeup.amusementData.lang === 'chineseBeonche' && (
                               <span lang="zh-Hant">{jejeup.amusementData.title} </span>

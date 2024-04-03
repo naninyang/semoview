@@ -983,6 +983,7 @@ export default function JejeupDetail({
                                       {data.cast !== null && (
                                         <div>
                                           {data.category !== 'anime' &&
+                                          data.category !== 'anime_film' &&
                                           data.category !== 'ott_anime' &&
                                           data.category !== 'ott_anime_film' &&
                                           data.category !== 'game' ? (
@@ -1383,7 +1384,11 @@ export default function JejeupDetail({
                                 <dd>
                                   <strong>
                                     <span className={styles.title}>
-                                      {data.titleKorean ? data.titleKorean : data.title}
+                                      {data.category === 'game_fan'
+                                        ? `'${data.title} 팬 게임 콜렉션`
+                                        : data.titleKorean
+                                          ? data.titleKorean
+                                          : data.title}
                                     </span>
                                     {data.lang === 'chineseBeonche' && <span lang="zh-Hant">{data.title} </span>}
                                     {data.lang === 'chineseGanche' && <span lang="zh-Hans">{data.title} </span>}
@@ -1451,6 +1456,7 @@ export default function JejeupDetail({
                                 {data.cast !== null && (
                                   <div>
                                     {data.category !== 'anime' &&
+                                    data.category !== 'anime_film' &&
                                     data.category !== 'ott_anime' &&
                                     data.category !== 'ott_anime_film' &&
                                     data.category !== 'game' ? (

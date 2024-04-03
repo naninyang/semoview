@@ -818,7 +818,11 @@ export default function Amusement({
           ) : amusementData.attributes.title.length >= 30 ? (
             <h1 className={styles.long}>{amusementData.attributes.title}</h1>
           ) : (
-            <h1>{amusementData.attributes.title}</h1>
+            <h1>
+              {amusementData.attributes.category === 'game_fan'
+                ? `'${amusementData.attributes.title}' 팬 게임 콜렉션`
+                : amusementData.attributes.title}
+            </h1>
           )}
           <dl className={styles.title}>
             {amusementData.attributes.titleKorean !== null && (
@@ -1221,31 +1225,31 @@ export default function Amusement({
                       )}
                     </>
                   )}
-                  {amusementData.attributes.category === 'game' ||
-                    (amusementData.attributes.category === 'game_fan' && (
-                      <>
-                        {amusementData.attributes.rating === 'all' && (
-                          <>
-                            <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
-                          </>
-                        )}
-                        {amusementData.attributes.rating === 'b12' && (
-                          <>
-                            <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
-                          </>
-                        )}
-                        {amusementData.attributes.rating === 'c15' && (
-                          <>
-                            <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
-                          </>
-                        )}
-                        {amusementData.attributes.rating === 'd19' && (
-                          <>
-                            <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
-                          </>
-                        )}
-                      </>
-                    ))}
+                  {(amusementData.attributes.category === 'game' ||
+                    amusementData.attributes.category === 'game_fan') && (
+                    <>
+                      {amusementData.attributes.rating === 'all' && (
+                        <>
+                          <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
+                        </>
+                      )}
+                      {amusementData.attributes.rating === 'b12' && (
+                        <>
+                          <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
+                        </>
+                      )}
+                      {amusementData.attributes.rating === 'c15' && (
+                        <>
+                          <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
+                        </>
+                      )}
+                      {amusementData.attributes.rating === 'd19' && (
+                        <>
+                          <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
+                        </>
+                      )}
+                    </>
+                  )}
                   {amusementData.attributes.ratingCustom && (
                     <div className={styles.custom}>
                       <button type="button" onClick={customRatingHandler}>
