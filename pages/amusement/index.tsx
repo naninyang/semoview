@@ -198,12 +198,14 @@ function Amusement({
         pageTitles={`${categoryQuery === 'drama' ? '개가 짖어도 드라마는 정주행 할 수밖에 없다!' : ''}
               ${categoryQuery === 'film' ? '영화 사회에서는 영원한 우방도, 영원한 적도 없다!' : ''}
               ${categoryQuery === 'game' ? '게임은 끝날 때까지 끝난 게 아니다!' : ''}
+              ${categoryQuery === 'game_fan' ? '이세계 팬 게임 모음' : ''}
               ${categoryQuery === 'anime' ? '애니입니다만, 문제라도?' : ''}
               ${categoryQuery === 'ott' ? '퇴근 후, 이세계 OTT에서만 볼 수 있는 콘텐츠를.' : ''}
               ${categoryQuery === '' ? '카테고리 선택' : ''} - ${originTitle}`}
         pageTitle={`${categoryQuery === 'drama' ? '개가 짖어도 드라마는 정주행 할 수밖에 없다!' : ''}
               ${categoryQuery === 'film' ? '영화 사회에서는 영원한 우방도, 영원한 적도 없다!' : ''}
               ${categoryQuery === 'game' ? '게임은 끝날 때까지 끝난 게 아니다!' : ''}
+              ${categoryQuery === 'game_fan' ? '이세계 팬 게임 모음' : ''}
               ${categoryQuery === 'anime' ? '애니입니다만, 문제라도?' : ''}
               ${categoryQuery === 'ott' ? '퇴근 후, 이세계 OTT에서만 볼 수 있는 콘텐츠를.' : ''}
               ${categoryQuery === '' ? '카테고리 선택' : ''}`}
@@ -235,7 +237,7 @@ function Amusement({
               <option value="drama">드라마</option>
               <option value="anime">애니메이션</option>
               <option value="game">게임</option>
-              <option value="game_fan">팬게임</option>
+              <option value="game_fan">팬 게임</option>
             </select>
             <button onClick={handleCategorySubmit}>선택</button>
             <div className={styles.visual}>
@@ -450,7 +452,7 @@ function Amusement({
               {category === 'drama' && '개가 짖어도 드라마는 정주행 할 수밖에 없다!'}
               {category === 'film' && '영화 사회에서는 영원한 우방도, 영원한 적도 없다!'}
               {category === 'game' && '게임은 끝날 때까지 끝난 게 아니다!'}
-              {category === 'game_fan' && '이세계 팬게임'}
+              {category === 'game_fan' && '이세계 팬 게임 모음'}
               {category === 'anime' && '애니입니다만, 문제라도?'}
               {category === 'ott' && '퇴근 후, 이세계 OTT에서만 볼 수 있는 콘텐츠를.'}{' '}
               {categoryData.total > 0 && <span>({categoryData.total}개 작품)</span>}
@@ -463,7 +465,7 @@ function Amusement({
                 <option value="drama">드라마</option>
                 <option value="anime">애니메이션</option>
                 <option value="game">게임</option>
-                <option value="game_fan">팬게임</option>
+                <option value="game_fan">팬 게임</option>
               </select>
               <button onClick={handleCategorySubmit}>선택</button>
             </div>

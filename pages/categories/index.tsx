@@ -950,7 +950,7 @@ function Categories({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?category=game_fan&page=1">팬 게임 실황</Anchor>
+                  <Anchor href="/amusement?category=game_fan&page=1">팬 게임 콜렉션</Anchor>
                 </h2>
                 <Anchor href="/amusement?category=game_fan&page=1">
                   <span>더보기</span>
@@ -999,7 +999,7 @@ function Categories({
                       <strong>
                         <strong>
                           {amusement.category === 'game_fan' ? (
-                            `'${amusement.title}' 팬게임 콜렉션`
+                            `'${amusement.title}' 팬 게임 콜렉션`
                           ) : amusement.titleKorean != null ? (
                             amusement.titleKorean
                           ) : (
