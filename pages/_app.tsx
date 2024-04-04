@@ -9,14 +9,14 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import '@/styles/globals.sass';
 
-const fontKR = Noto_Sans_KR({
-  weight: ['400', '500', '600', '700', '800', '900'],
-  subsets: ['cyrillic'],
-});
-
 const fontEN = Lato({
   weight: ['100', '300', '400', '700', '900'],
   subsets: ['latin'],
+});
+
+const fontKR = Noto_Sans_KR({
+  weight: ['400', '500', '600', '700', '800', '900'],
+  subsets: ['cyrillic'],
 });
 
 const fontJP = Noto_Sans_JP({
@@ -125,19 +125,19 @@ export default function App({ Component, pageProps }: AppProps) {
             word-break: normal;
           }
           [lang='ja'] {
-            font-family: ${fontJP.style.fontFamily}, ${fontKR.style.fontFamily}, sans-serif;
+            font-family: ${fontEN.style.fontFamily}, ${fontJP.style.fontFamily}, ${fontKR.style.fontFamily}, sans-serif;
             white-space: break-spaces;
             word-wrap: break-word;
             word-break: normal;
           }
           [lang='th'] {
-            font-family: ${fontTH.style.fontFamily}, ${fontKR.style.fontFamily}, sans-serif;
+            font-family: ${fontEN.style.fontFamily}, ${fontTH.style.fontFamily}, ${fontKR.style.fontFamily}, sans-serif;
           }
           [lang='zh-Hans'] {
-            font-family: ${fontSC.style.fontFamily}, ${fontKR.style.fontFamily}, sans-serif;
+            font-family: ${fontEN.style.fontFamily}, ${fontSC.style.fontFamily}, ${fontKR.style.fontFamily}, sans-serif;
           }
           [lang='zh-Hant'] {
-            font-family: ${fontTC.style.fontFamily}, ${fontKR.style.fontFamily}, sans-serif;
+            font-family: ${fontEN.style.fontFamily}, ${fontTC.style.fontFamily}, ${fontKR.style.fontFamily}, sans-serif;
           }
           .preview {
             font-family: ${fontEN.style.fontFamily}, ${fontKR.style.fontFamily}, sans-serif;
