@@ -117,34 +117,34 @@ export default function App({ Component, pageProps }: AppProps) {
           }
           select,
           .lang {
-            font-family: ${fontJP.style.fontFamily}, ${fontTH.style.fontFamily}, ${fontSC.style.fontFamily},
-              ${fontTC.style.fontFamily}, ${fontKR.style.fontFamily}, sans-serif;
+            font-family: ${fontEN.style.fontFamily}, ${fontJP.style.fontFamily}, ${fontTH.style.fontFamily},
+              ${fontSC.style.fontFamily}, ${fontTC.style.fontFamily}, ${fontKR.style.fontFamily}, sans-serif;
             font-weight: 400;
             white-space: break-spaces;
             word-wrap: break-word;
             word-break: normal;
           }
           [lang='ja'] {
-            font-family: ${fontJP.style.fontFamily}, sans-serif;
+            font-family: ${fontJP.style.fontFamily}, ${fontKR.style.fontFamily}, sans-serif;
             white-space: break-spaces;
             word-wrap: break-word;
             word-break: normal;
           }
           [lang='th'] {
-            font-family: ${fontTH.style.fontFamily}, sans-serif;
+            font-family: ${fontTH.style.fontFamily}, ${fontKR.style.fontFamily}, sans-serif;
           }
           [lang='zh-Hans'] {
-            font-family: ${fontSC.style.fontFamily}, sans-serif;
+            font-family: ${fontSC.style.fontFamily}, ${fontKR.style.fontFamily}, sans-serif;
           }
           [lang='zh-Hant'] {
-            font-family: ${fontTC.style.fontFamily}, sans-serif;
+            font-family: ${fontTC.style.fontFamily}, ${fontKR.style.fontFamily}, sans-serif;
           }
           .preview {
-            font-family: ${fontKR.style.fontFamily};
+            font-family: ${fontEN.style.fontFamily}, ${fontKR.style.fontFamily}, sans-serif;
           }
           .number,
           time {
-            font-family: ${fontEN.style.fontFamily};
+            font-family: ${fontEN.style.fontFamily}, sans-serif;
           }
         `}
       </style>
