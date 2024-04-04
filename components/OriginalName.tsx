@@ -5,6 +5,7 @@ export const OriginalName = (org: string) => {
     drama: '드라마',
     film: '영화',
     novel: '소설',
+    lightNovel: '라이트노벨',
     webtoon: '웹툰',
   };
   return names[org] || '';
