@@ -279,18 +279,21 @@
         dt
           display: flex
           flex-wrap: wrap
+          align-items: center
           gap: rem(7)
 
           cite
             display: inline-flex
-            align-items: center
-            height: rem(24)
+            padding-top: rem(1)
+            // min-height: rem(23)
             font-size: rem(14)
             font-weight: 800
             font-style: normal
             color: $hex-accent
 
             i
+              position: relative
+              top: rem(-1)
               display: inline-block
               margin-right: rem(7)
               height: rem(18)

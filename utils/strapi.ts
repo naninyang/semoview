@@ -78,7 +78,12 @@ export async function getJejeupData(page?: number) {
 }
 
 export async function getCategoryData(page?: number, pageSize?: number, categoryName?: string) {
-  if (categoryName === 'ott' || categoryName === 'ottFilm') {
+  if (
+    categoryName === 'ott_drama' ||
+    categoryName === 'ott_film' ||
+    categoryName === 'ott_anime' ||
+    categoryName === 'ott_anime_film'
+  ) {
     const response = await fetch(
       `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[ott][$null]=false`,
       {

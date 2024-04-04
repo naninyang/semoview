@@ -794,6 +794,7 @@ export default function JejeupDetail({
                                           </cite>
                                         )}
                                         {(data.category === 'drama' ||
+                                          data.category === 'anime_film' ||
                                           data.category === 'ott_drama' ||
                                           data.category === 'ott_anime' ||
                                           data.anime === 'tva' ||
@@ -1295,6 +1296,7 @@ export default function JejeupDetail({
                                     </>
                                   )}
                                   {(data.category === 'film' ||
+                                    data.category === 'anime_film' ||
                                     data.category === 'ott_anime_film' ||
                                     data.category === 'ott_film' ||
                                     data.anime === 'film') && (

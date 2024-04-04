@@ -1023,7 +1023,7 @@ export default function Amusement({
               <div className={styles.category}>
                 <dt>카테고리</dt>
                 <dd>
-                  {amusementData.attributes.category !== 'anime_film' && (
+                  {amusementData.attributes.category !== 'anime_film' ? (
                     <em>
                       {amusementData.attributes.broadcast === 'ENA' && (
                         <>
@@ -1142,6 +1142,8 @@ export default function Amusement({
                       {CategoryName(amusementData.attributes.category)}
                       {amusementData.attributes.category === 'game_fan' && '팬 게임'}
                     </em>
+                  ) : (
+                    <em>{CategoryName(amusementData.attributes.category)}</em>
                   )}
                   {amusementData.attributes.ott === null && amusementData.attributes.ottAddr !== null && (
                     <em>단편영화</em>
@@ -1199,6 +1201,7 @@ export default function Amusement({
                     </>
                   )}
                   {(amusementData.attributes.category === 'film' ||
+                    amusementData.attributes.category === 'anime_film' ||
                     amusementData.attributes.category === 'ott_anime_film' ||
                     amusementData.attributes.category === 'ott_film' ||
                     amusementData.attributes.anime === 'film') && (
