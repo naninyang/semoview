@@ -454,6 +454,7 @@ function Categories({
                             <dt>시청등급</dt>
                             <dd>
                               {(amusement.category === 'film' ||
+                                amusement.category === 'anime_film' ||
                                 amusement.category === 'ott_anime_film' ||
                                 amusement.category === 'ott_film' ||
                                 amusement.anime === 'film') && (

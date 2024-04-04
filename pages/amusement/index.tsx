@@ -694,6 +694,7 @@ function Amusement({
                             </>
                           )}
                           {(amusement.category === 'film' ||
+                            amusement.category === 'anime_film' ||
                             amusement.category === 'ott_anime_film' ||
                             amusement.category === 'ott_film' ||
                             amusement.anime === 'film') && (
