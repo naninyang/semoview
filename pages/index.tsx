@@ -205,6 +205,16 @@ const RatingGameD19 = styled.i({
   background: `url(${vectors.ratings.game.d19}) no-repeat 50% 50%/contain`,
 });
 
+export function Amusements({ jejeup }: { jejeup: any }) {
+  const items = jejeup.split(',');
+  const result = items.length - 1;
+  return (
+    <p>
+      <strong>본 작품 외 {result}개 작품 리뷰가 추가로 존재함</strong>
+    </p>
+  );
+}
+
 function Home({ data, error, currentPage }: { data: any; error: string; currentPage: number }) {
   const router = useRouter();
   const timestamp = Date.now();
@@ -473,6 +483,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                           <dd>이 영상은 영상과 더보기에 그 어떤 정보도 존재하지 않는 최악의 영상입니다.</dd>
                         </dl>
                       )}
+                      {jejeup.isAmusements && <Amusements jejeup={jejeup.amusements} />}
                       <dl className={styles.summary}>
                         <dt>
                           {jejeup.amusementData.category !== 'ott_drama' &&

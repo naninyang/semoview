@@ -8,6 +8,8 @@ export interface JejeupData {
   comment: string;
   title: string;
   worst: boolean;
+  isAmusements: boolean;
+  amusements: string;
   createdAt: string;
   error: string;
   ogTitle: string;

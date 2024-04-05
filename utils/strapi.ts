@@ -62,6 +62,8 @@ export async function getJejeupData(page?: number) {
     comment: data.attributes.comment,
     title: data.attributes.title,
     worst: data.attributes.worst,
+    isAmusements: data.attributes.isAmusements,
+    amusements: data.attributes.amusements,
     embeddingOff: data.attributes.embeddingOff,
   }));
   const pageCount = jejeupResponse.meta.pagination.pageCount;
