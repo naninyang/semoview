@@ -458,7 +458,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
           <i className="preview" />
           클릭하지 않아도 제목과 정보를 알 수 있게 도와드려요 💃
         </span>
-        {count && <em>({formatNumber(count.jejeup)}개 영상)</em>}
+        {count && <em>({formatNumber(count.jejeup)}개 리뷰/실황)</em>}
       </h1>
       <div className={styles.list}>
         {error && (
