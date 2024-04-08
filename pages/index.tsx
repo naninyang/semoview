@@ -794,8 +794,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                               )}
                             </>
                           )}
-                          {(jejeup.amusementData.category === 'game' ||
-                            jejeup.amusementData.category === 'game_fan') && (
+                          {jejeup.amusementData.category === 'game' && (
                             <>
                               {jejeup.amusementData.rating === 'all' && (
                                 <>

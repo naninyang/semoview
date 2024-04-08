@@ -855,7 +855,7 @@ export default function JejeupDetail({
                                             )}
                                           </>
                                         )}
-                                        {(data.category === 'game' || data.category === 'game_fan') && (
+                                        {data.category === 'game' && (
                                           <>
                                             {data.rating === 'all' && (
                                               <>
@@ -1323,7 +1323,7 @@ export default function JejeupDetail({
                                       )}
                                     </>
                                   )}
-                                  {(data.category === 'game' || data.category === 'game_fan') && (
+                                  {data.category === 'game' && (
                                     <>
                                       {data.rating === 'all' && (
                                         <>

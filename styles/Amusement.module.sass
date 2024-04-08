@@ -386,8 +386,7 @@
                       height: rem(24)
 
             a,
-            & > button,
-            em
+            & > button
               background-color: $hex-white
               height: rem(35)
               border: 0
@@ -398,6 +397,21 @@
 
               +mq(maxExtraSmall)
                 font-size: rem(14)
+
+            em
+              display: flex
+              justify-content: space-between
+              align-items: center
+              width: 100%
+              height: rem(35)
+              border: rem(2) solid $hex-accent
+              border-radius: rem(3)
+              padding: rem(7)
+              background-color: rgba($hex-black, .35)
+              color: $hex-white
+              text-align: left
+              line-height: 1.25
+              font-weight: 800
 
         .item
           display: flex

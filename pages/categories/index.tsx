@@ -931,33 +931,35 @@ function Categories({
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
                         <Image src={amusement.posterDefault} width="460" height="215" alt="" unoptimized />
-                        <dl>
-                          <div className={styles.game}>
-                            <dt>심의등급</dt>
-                            <dd>
-                              {amusement.rating === 'all' && (
-                                <>
-                                  <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
-                                </>
-                              )}
-                              {amusement.rating === 'b12' && (
-                                <>
-                                  <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
-                                </>
-                              )}
-                              {amusement.rating === 'c15' && (
-                                <>
-                                  <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
-                                </>
-                              )}
-                              {amusement.rating === 'd19' && (
-                                <>
-                                  <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
-                                </>
-                              )}
-                            </dd>
-                          </div>
-                        </dl>
+                        {amusement.category !== 'game_fan' && (
+                          <dl>
+                            <div className={styles.game}>
+                              <dt>심의등급</dt>
+                              <dd>
+                                {amusement.rating === 'all' && (
+                                  <>
+                                    <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
+                                  </>
+                                )}
+                                {amusement.rating === 'b12' && (
+                                  <>
+                                    <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
+                                  </>
+                                )}
+                                {amusement.rating === 'c15' && (
+                                  <>
+                                    <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
+                                  </>
+                                )}
+                                {amusement.rating === 'd19' && (
+                                  <>
+                                    <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
+                                  </>
+                                )}
+                              </dd>
+                            </div>
+                          </dl>
+                        )}
                       </div>
                       <strong>
                         <strong>
@@ -1004,33 +1006,6 @@ function Categories({
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
                         <Image src={amusement.posterDefault} width="460" height="215" alt="" unoptimized />
-                        <dl>
-                          <div className={styles.game}>
-                            <dt>심의등급</dt>
-                            <dd>
-                              {amusement.rating === 'all' && (
-                                <>
-                                  <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
-                                </>
-                              )}
-                              {amusement.rating === 'b12' && (
-                                <>
-                                  <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
-                                </>
-                              )}
-                              {amusement.rating === 'c15' && (
-                                <>
-                                  <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
-                                </>
-                              )}
-                              {amusement.rating === 'd19' && (
-                                <>
-                                  <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
-                                </>
-                              )}
-                            </dd>
-                          </div>
-                        </dl>
                       </div>
                       <strong>
                         <strong>&apos;{amusement.title}&apos; 팬 게임 콜렉션</strong>
