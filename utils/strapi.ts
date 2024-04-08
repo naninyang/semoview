@@ -303,6 +303,7 @@ export async function getAmusementData(amusement: string) {
     posterDefault: amusementData.attributes.posterDefault,
     posterOther: amusementData.attributes.posterOther,
     relations: amusementData.attributes.relations,
+    order: amusementData.attributes.order,
   };
 
   return rowsData;
@@ -374,6 +375,7 @@ export async function getRelationsData(relations: string, type: string) {
       posterDefault: data.attributes.posterDefault,
       posterOther: data.attributes.posterOther,
       relations: data.attributes.relations,
+      order: data.attributes.order,
     }));
 
     return rowsData;

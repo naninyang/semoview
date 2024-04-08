@@ -427,6 +427,7 @@ export default function Amusement({
   const [isJejeupsError, setIsJejeupsError] = useState<null | string>(null);
   const [isActive, setIsActive] = useState(true);
   const [relations, setRelations] = useState<AmusementData | null>(null);
+  const [isRelationsOpen, setIsRelationsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedRelation, setSelectedRelation] = useState<string>('');
@@ -526,19 +527,13 @@ export default function Amusement({
 
   useEffect(() => {
     if (Array.isArray(relations) && relations.length > 0) {
-      const defaultRelation = relations.find((relation) => relation.idx !== amusementId);
+      const sortedRelations = [...relations].sort((a, b) => a.order - b.order);
+      const defaultRelation = sortedRelations.find((relation) => relation.idx !== amusementId);
       if (defaultRelation) {
         setSelectedRelation(`/amusement/${defaultRelation.idx}`);
       }
     }
   }, [relations, amusementId]);
-
-  const handleRelationChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedRelation(event.target.value);
-  };
-  const handleRelationSubmit = () => {
-    router.push({ pathname: selectedRelation });
-  };
 
   const fetchData = async () => {
     setIsJejeupsLoading(true);
@@ -593,6 +588,32 @@ export default function Amusement({
 
     return () => clearTimeout(timer);
   }, []);
+
+  const [selectedStatus, setSelectedStatus] = useState(
+    new Array(Array.isArray(relations) ? relations.length : 0).fill(false),
+  );
+  useEffect(() => {
+    if (Array.isArray(relations) && relations.length > 0) {
+      setSelectedStatus(new Array(relations.length).fill(false));
+    }
+  }, [relations]);
+  const handleRelationChange = (index: number, path: string) => {
+    const updatedStatus = new Array(Array.isArray(relations) ? relations.length : 0).fill(false);
+    updatedStatus[index] = true;
+
+    setSelectedStatus(updatedStatus);
+    setSelectedRelation(path);
+    if (isRelationsOpen) {
+      setIsRelationsOpen(false);
+    } else {
+      setIsRelationsOpen(true);
+    }
+  };
+
+  const handleRelationSubmit = () => {
+    setIsRelationsOpen(false);
+    router.push({ pathname: selectedRelation });
+  };
 
   if (!amusementData) {
     if (timeoutReached) {
@@ -703,24 +724,27 @@ export default function Amusement({
       !isLoading &&
       !error
     ) {
+      const isAllFalse = selectedStatus.every((status) => !status);
       return (
-        <div className={styles.relation}>
+        <div className={`${styles.relation} ${isRelationsOpen ? styles['relation-open'] : ''}`}>
           <dt>시리즈 선택</dt>
           <dd>
-            <select value={selectedRelation} onChange={handleRelationChange}>
-              <option value={router.asPath}>
-                {amusementData.attributes.titleKorean
-                  ? amusementData.attributes.titleKorean
-                  : amusementData.attributes.title}
-              </option>
+            <ul
+              className={`${isRelationsOpen ? styles['relation-open'] : ''} ${isAllFalse ? styles['relation-default'] : ''}`}
+            >
               {relations
-                .filter((relation) => relation.idx !== amusementId)
-                .map((relation) => (
-                  <option key={relation.idx} value={`/amusement/${relation.idx}`}>
-                    {relation.titleKorean ? relation.titleKorean : relation.title}
-                  </option>
+                .sort((a, b) => parseInt(a.order, 10) - parseInt(b.order, 10))
+                .map((relation, index) => (
+                  <li
+                    key={index}
+                    className={`${selectedStatus[index] ? styles['relation-selected'] : ''} ${router.asPath === `/amusement/${relation.idx}` ? styles['relation-current'] : ''}`}
+                  >
+                    <button onClick={() => handleRelationChange(index, `/amusement/${relation.idx}`)} type="button">
+                      {relation.titleKorean ? relation.titleKorean : relation.title}
+                    </button>
+                  </li>
                 ))}
-            </select>
+            </ul>
             <button type="button" onClick={handleRelationSubmit}>
               이동
             </button>

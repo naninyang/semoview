@@ -215,6 +215,7 @@ export interface AmusementData {
   posterDefault: string;
   posterOther: string;
   relations: string;
+  order: string;
 }
 
 export interface AmusementPermalinkData {
