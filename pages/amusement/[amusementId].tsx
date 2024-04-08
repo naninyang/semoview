@@ -533,16 +533,6 @@ export default function Amusement({
     );
   };
 
-  useEffect(() => {
-    if (Array.isArray(relations) && relations.length > 0) {
-      const sortedRelations = [...relations].sort((a, b) => a.order - b.order);
-      const defaultRelation = sortedRelations.find((relation) => relation.idx !== amusementId);
-      if (defaultRelation) {
-        setSelectedRelation(`/amusement/${defaultRelation.idx}`);
-      }
-    }
-  }, [relations, amusementId]);
-
   const fetchData = async () => {
     setIsJejeupsLoading(true);
     setIsJejeupsError(null);
@@ -619,8 +609,12 @@ export default function Amusement({
   };
 
   const handleRelationSubmit = () => {
-    setIsRelationsOpen(false);
-    router.push({ pathname: selectedRelation });
+    if (!selectedRelation) {
+      alert('작품을 선택해 주세요');
+    } else {
+      setIsRelationsOpen(false);
+      router.push({ pathname: selectedRelation });
+    }
   };
 
   if (!amusementData) {
