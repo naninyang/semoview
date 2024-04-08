@@ -961,7 +961,9 @@ function Categories({
                       </div>
                       <strong>
                         <strong>
-                          {amusement.titleKorean != null ? (
+                          {amusement.category === 'game_fan' ? (
+                            `'${amusement.title}' 팬 게임 콜렉션`
+                          ) : amusement.titleKorean != null ? (
                             amusement.titleKorean
                           ) : (
                             <>
@@ -980,7 +982,7 @@ function Categories({
               </section>
             </>
           )}
-          {gameData && (
+          {fanData && (
             <>
               <div className={styles.headline}>
                 <h2>
@@ -1031,22 +1033,7 @@ function Categories({
                         </dl>
                       </div>
                       <strong>
-                        <strong>
-                          {amusement.category === 'game_fan' ? (
-                            `'${amusement.title}' 팬 게임 콜렉션`
-                          ) : amusement.titleKorean != null ? (
-                            amusement.titleKorean
-                          ) : (
-                            <>
-                              {amusement.lang === 'chineseBeonche' && <span lang="zh-Hant">{amusement.title} </span>}
-                              {amusement.lang === 'chineseGanche' && <span lang="zh-Hans">{amusement.title} </span>}
-                              {amusement.lang === 'english' && <span lang="en">{amusement.title}</span>}
-                              {amusement.lang === 'japanese' && <span lang="ja">{amusement.title}</span>}
-                              {amusement.lang === 'thai' && <span lang="th">{amusement.title}</span>}
-                              {amusement.lang === null && <span lang="ko">{amusement.title}</span>}
-                            </>
-                          )}
-                        </strong>
+                        <strong>&apos;{amusement.title}&apos; 팬 게임 콜렉션</strong>
                       </strong>
                     </Link>
                   ))}
