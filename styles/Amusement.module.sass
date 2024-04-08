@@ -287,6 +287,23 @@
                   .relation-current
                     display: flex
 
+                  li
+                    button
+                      i
+                        display: none
+
+                    &:first-of-type
+                      button
+                        display: flex
+                        justify-content: space-between
+                        align-items: center
+                        gap: rem(7)
+
+                        i
+                          display: inline-block
+                          width: rem(24)
+                          height: rem(24)
+
               &.relation-default
                 padding: 0
 
@@ -350,6 +367,9 @@
                   width: 100%
 
                   button
+                    display: flex
+                    justify-content: space-between
+                    align-items: center
                     width: 100%
                     border: rem(2) solid $hex-accent
                     border-radius: rem(3)
@@ -359,6 +379,11 @@
                     text-align: left
                     line-height: 1.25
                     font-weight: 800
+
+                    i
+                      display: inline-block
+                      width: rem(24)
+                      height: rem(24)
 
             a,
             & > button,

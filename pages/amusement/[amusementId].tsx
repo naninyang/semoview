@@ -215,6 +215,14 @@ const RatingGameD19 = styled.i({
   background: `url(${vectors.ratings.game.d19}) no-repeat 50% 50%/contain`,
 });
 
+const UpIcon = styled.i({
+  background: `url(${vectors.up}) no-repeat 50% 50%/contain`,
+});
+
+const DownIcon = styled.i({
+  background: `url(${vectors.down}) no-repeat 50% 50%/contain`,
+});
+
 export function JejeupMeta({ jejeup }: { jejeup: any }) {
   const [jejeupMetaData, setJejeupMetaData] = useState<JejeupMetaData | null>(null);
   const [isJejeupMetaLoading, setIsJejeupMetaLoading] = useState(true);
@@ -741,6 +749,7 @@ export default function Amusement({
                   >
                     <button onClick={() => handleRelationChange(index, `/amusement/${relation.idx}`)} type="button">
                       {relation.titleKorean ? relation.titleKorean : relation.title}
+                      {isRelationsOpen ? <UpIcon /> : <DownIcon />}
                     </button>
                   </li>
                 ))}

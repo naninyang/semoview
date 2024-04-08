@@ -5,6 +5,8 @@ export const vectors = {
   share: require('./share.svg'),
   share2: require('./share2.svg'),
   more: require('./more.svg'),
+  up: require('./up.svg'),
+  down: require('./down.svg'),
   ott: {
     amazon: require('./ott/amazon.svg'),
     amazon2: require('./ott/amazon2.svg'),
