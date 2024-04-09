@@ -879,20 +879,20 @@ export default function Amusement({
             )}
             {amusementData.attributes.titleOther && (
               <div>
-                <dt>다른 제목</dt>
+                <dt>작품의 다른 언어 제목</dt>
                 <dd className="lang">{amusementData.attributes.titleOther}</dd>
               </div>
             )}
             {amusementData.attributes.etc && (
-              <div>
-                <dt>추가 제목 또는 제목 설명</dt>
+              <div className={styles.accent}>
+                <dt>작품 추가설명</dt>
                 <dd className="lang">{amusementData.attributes.etc}</dd>
               </div>
             )}
             {amusementData.attributes.originalAuthor &&
               amusementData.attributes.original &&
               amusementData.attributes.originTitle && (
-                <span>
+                <span className={styles.accent}>
                   &apos;{amusementData.attributes.originalAuthor}&apos;의{' '}
                   {OriginalName(amusementData.attributes.original)} &apos;
                   {amusementData.attributes.originTitle}&apos; 원작
@@ -901,7 +901,7 @@ export default function Amusement({
             {amusementData.attributes.original !== null &&
               amusementData.attributes.originTitle === null &&
               amusementData.attributes.originalAuthor !== null && (
-                <div>
+                <div className={styles.accent}>
                   <dt>원작</dt>
                   <dd>동명의 {OriginalName(amusementData.attributes.original)} 원작</dd>
                 </div>
@@ -1190,13 +1190,28 @@ export default function Amusement({
               )}
               {amusementData.attributes.release !== '?' && (
                 <div className={styles.release}>
-                  <dt>제작년도</dt>
+                  <dt>
+                    {(amusementData.attributes.category === 'drama' ||
+                      amusementData.attributes.category === 'ott_drama' ||
+                      amusementData.attributes.category === 'ott_anime' ||
+                      amusementData.attributes.anime === 'tva' ||
+                      amusementData.attributes.anime === 'ova') &&
+                      '방영'}
+                    {(amusementData.attributes.category === 'film' ||
+                      amusementData.attributes.category === 'anime_film' ||
+                      amusementData.attributes.category === 'ott_anime_film' ||
+                      amusementData.attributes.category === 'ott_film' ||
+                      amusementData.attributes.anime === 'film') &&
+                      '상영'}
+                    {amusementData.attributes.category === 'game' && '출시'}
+                    년도
+                  </dt>
                   <dd>{amusementData.attributes.release}년</dd>
                 </div>
               )}
               {amusementData.attributes.category !== 'game_fan' && (
                 <div className={styles.rating}>
-                  <dt>등급</dt>
+                  <dt>{amusementData.attributes.category === 'game' ? '심의등급' : '시청등급'}</dt>
                   <dd>
                     {(amusementData.attributes.category === 'drama' ||
                       amusementData.attributes.category === 'ott_drama' ||

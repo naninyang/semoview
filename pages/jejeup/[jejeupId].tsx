@@ -981,19 +981,6 @@ export default function JejeupDetail({
                                               {data.titleOther}
                                             </span>
                                           )}
-                                          {data.originalAuthor && data.original && data.originTitle && (
-                                            <span>
-                                              &apos;{data.originalAuthor}&apos;의 {OriginalName(data.original)} &apos;
-                                              {data.originTitle}&apos; 원작
-                                            </span>
-                                          )}
-                                          {data.original !== null &&
-                                            data.originTitle === null &&
-                                            data.originalAuthor !== null && (
-                                              <span className={styles.origin}>
-                                                동명의 {OriginalName(data.original)} 원작
-                                              </span>
-                                            )}
                                           {data.release !== '?' && (
                                             <>
                                               {(data.category === 'drama' ||
@@ -1016,10 +1003,27 @@ export default function JejeupDetail({
                                             </>
                                           )}
                                         </strong>
-                                        {data.etc !== null && (
-                                          <em className="lang" aria-label="작품 추가설명">
-                                            {data.etc}
-                                          </em>
+                                        {(data.original !== null || data.etc !== null) && (
+                                          <p>
+                                            {data.originalAuthor && data.original && data.originTitle && (
+                                              <span>
+                                                &apos;{data.originalAuthor}&apos;의 {OriginalName(data.original)} &apos;
+                                                {data.originTitle}&apos; 원작
+                                              </span>
+                                            )}
+                                            {data.original !== null &&
+                                              data.originTitle === null &&
+                                              data.originalAuthor !== null && (
+                                                <span className={styles.origin}>
+                                                  동명의 {OriginalName(data.original)} 원작
+                                                </span>
+                                              )}
+                                            {data.etc !== null && (
+                                              <em className="lang" aria-label="작품 추가설명">
+                                                {data.etc}
+                                              </em>
+                                            )}
+                                          </p>
                                         )}
                                       </dd>
                                     </dl>
@@ -1477,17 +1481,6 @@ export default function JejeupDetail({
                                         {data.titleOther}
                                       </span>
                                     )}
-                                    {data.originalAuthor && data.original && data.originTitle && (
-                                      <span>
-                                        &apos;{data.originalAuthor}&apos;의 {OriginalName(data.original)} &apos;
-                                        {data.originTitle}&apos; 원작
-                                      </span>
-                                    )}
-                                    {data.original !== null &&
-                                      data.originTitle === null &&
-                                      data.originalAuthor !== null && (
-                                        <span className={styles.origin}>동명의 {OriginalName(data.original)} 원작</span>
-                                      )}
                                     {data.release !== '?' && (
                                       <>
                                         {(data.category === 'drama' ||
@@ -1504,10 +1497,28 @@ export default function JejeupDetail({
                                       </>
                                     )}
                                   </strong>
-                                  {data.etc !== null && (
-                                    <em className="lang" aria-label="작품 추가설명">
-                                      {data.etc}
-                                    </em>
+                                  {(data.original !== null || data.etc !== null) && (
+                                    <p>
+                                      {data.originalAuthor && data.original && data.originTitle && (
+                                        <span>
+                                          &apos;{data.originalAuthor}&apos;의 {OriginalName(data.original)} &apos;
+                                          {data.originTitle}&apos; 원작
+                                        </span>
+                                      )}
+                                      {data.original !== null &&
+                                        data.originTitle === null &&
+                                        data.originalAuthor !== null && (
+                                          <span className={styles.origin}>
+                                            동명의 {OriginalName(data.original)} 원작
+                                          </span>
+                                        )}
+                                      {data.original !== null && data.etc !== null && ' | '}
+                                      {data.etc !== null && (
+                                        <em className="lang" aria-label="작품 추가설명">
+                                          {data.etc}
+                                        </em>
+                                      )}
+                                    </p>
                                   )}
                                 </dd>
                               </dl>

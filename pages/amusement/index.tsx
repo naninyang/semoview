@@ -662,7 +662,7 @@ function Amusement({
                           </div>
                         )}
                         <div className={category === 'game' || category === 'game_fan' ? styles.game : ''}>
-                          <dt>{category === 'game' || category === 'game_fan' ? '심의등급' : '시청등급'}</dt>
+                          <dt>{category === 'game' ? '심의등급' : '시청등급'}</dt>
                           <dd>
                             {(amusement.category === 'drama' ||
                               amusement.category === 'ott_drama' ||
