@@ -279,6 +279,10 @@ export default function JejeupDetail({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
+
   const loadRelations = async () => {
     if (jejeupData) {
       if (jejeupData.attributes && jejeupData.attributes.relations) {

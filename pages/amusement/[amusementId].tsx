@@ -441,6 +441,10 @@ export default function Amusement({
   const [selectedRelation, setSelectedRelation] = useState<string>('');
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  });
+
+  useEffect(() => {
     sessionStorage.setItem('location', router.asPath);
   }, [router.asPath]);
 
