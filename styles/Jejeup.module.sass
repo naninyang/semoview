@@ -70,10 +70,23 @@
       .youtube
         padding: rem(12) 0 rem(24)
 
+        &.more
+          h1
+            overflow: visible
+            text-overflow: clip
+            white-space: normal
+
+          .learnmore
+            max-height: none
+
+            &::after
+              display: none
+
       h1
         font-size: rem(20)
         font-weight: 700
         line-height: 1.4
+        +ellipsis
 
         +mq(maxExtraSmall)
           font-size: rem(16)
@@ -116,6 +129,7 @@
         display: flex
         gap: rem(12)
         margin: rem(12) 0
+        position: relative
 
         img
           border-radius: 100%
@@ -135,6 +149,16 @@
           time
             font-size: rem(12)
             line-height: 1.5
+
+        button
+          position: absolute
+          top: 0
+          right: 0
+          background-color: transparent
+          padding: rem(12) rem(5)
+          font-size: rem(14)
+          font-weight: 800
+          color: $hex-accent
 
       .worst
         padding-bottom: rem(3)
@@ -166,13 +190,27 @@
             vertical-align: text-bottom
 
       .learnmore
-        background-color: rgba($hex-black, .05)
+        background-color: #F2F2F2
         border-radius: rem(12)
         padding: rem(12)
         font-size: rem(14)
         font-weight: 500
         word-break: break-word
         line-height: 1.42857143
+        max-height: rem(94)
+        overflow: hidden
+        position: relative
+
+        &::after
+          content: ''
+          display: block
+          position: absolute
+          border-radius: 0 0 rem(12)
+          bottom: 0
+          left: 0
+          width: 100%
+          height: rem(40)
+          background: linear-gradient(180deg, rgba(#F2F2F2, 0) 0%,#F2F2F2 50%, #F2F2F2 100%)
 
         em
           display: block

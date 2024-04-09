@@ -314,6 +314,11 @@ export default function JejeupDetail({
     }
   };
 
+  const [isMore, setIsMore] = useState(false);
+  const moreToggle = () => {
+    setIsMore(!isMore);
+  };
+
   const [timeoutReached, setTimeoutReached] = useState(false);
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -486,7 +491,7 @@ export default function JejeupDetail({
                           />
                         )}
                       </div>
-                      <div className={styles.youtube}>
+                      <div className={`${styles.youtube} ${isMore ? styles.more : ''}`}>
                         <h1>{jejeupData.jejeupMetaData.ogTitle}</h1>
                         <div className={styles.detail}>
                           <Image
@@ -502,6 +507,9 @@ export default function JejeupDetail({
                               {formatDate(`${jejeupData.jejeupMetaData.datePublished}`)}
                             </time>
                           </div>
+                          <button type="button" onClick={moreToggle}>
+                            {isMore ? '닫기' : '더 보기'}
+                          </button>
                         </div>
                         {jejeupData.jejeupMetaData.ogDescription ? (
                           <div className={styles.learnmore}>
