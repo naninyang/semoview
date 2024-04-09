@@ -10,6 +10,7 @@ export const OriginalName = (org: string) => {
     game: '게임',
     fairytale: '동화',
     memoirs: '회고록',
+    music: '노래',
   };
   return names[org] || '';
 };
