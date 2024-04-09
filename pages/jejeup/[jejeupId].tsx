@@ -578,7 +578,7 @@ export default function JejeupDetail({
                   )}
                   {jejeupData.attributes.review && (
                     <div className={styles.comment}>
-                      <h2>큐레이터의 한줄평</h2>
+                      <h2>큐레이터의 영상/작품 리뷰</h2>
                       <ReviewContent data={jejeupData.attributes.review} />
                     </div>
                   )}
@@ -841,7 +841,6 @@ export default function JejeupDetail({
                                           </cite>
                                         )}
                                         {(data.category === 'drama' ||
-                                          data.category === 'anime_film' ||
                                           data.category === 'ott_drama' ||
                                           data.category === 'ott_anime' ||
                                           data.anime === 'tva' ||
@@ -876,6 +875,7 @@ export default function JejeupDetail({
                                           </>
                                         )}
                                         {(data.category === 'film' ||
+                                          data.category === 'anime_film' ||
                                           data.category === 'ott_anime_film' ||
                                           data.category === 'ott_film' ||
                                           data.anime === 'film') && (
@@ -960,15 +960,23 @@ export default function JejeupDetail({
                                       </dt>
                                       <dd>
                                         <strong>
-                                          <span className={styles.title}>
-                                            {data.titleKorean ? data.titleKorean : data.title}
+                                          <span className={styles.title} aria-label="작품명">
+                                            {data.category === 'game_fan'
+                                              ? `'${data.title}'의 팬 게임 콜렉션`
+                                              : data.titleKorean
+                                                ? data.titleKorean
+                                                : data.v.title}
                                           </span>
                                           {data.lang === 'chineseBeonche' && <span lang="zh-Hant">{data.title} </span>}
                                           {data.lang === 'chineseGanche' && <span lang="zh-Hans">{data.title} </span>}
                                           {data.lang === 'english' && <span lang="en">{data.title}</span>}
                                           {data.lang === 'japanese' && <span lang="ja">{data.title}</span>}
                                           {data.lang === 'thai' && <span lang="th">{data.title}</span>}
-                                          {data.titleOther !== null && <span className="lang">{data.titleOther}</span>}
+                                          {data.titleOther !== null && (
+                                            <span className="lang" aria-label="작품의 다른 언어 제목">
+                                              {data.titleOther}
+                                            </span>
+                                          )}
                                           {data.originalAuthor && data.original && data.originTitle && (
                                             <span>
                                               &apos;{data.originalAuthor}&apos;의 {OriginalName(data.original)} &apos;
@@ -982,9 +990,33 @@ export default function JejeupDetail({
                                                 동명의 {OriginalName(data.original)} 원작
                                               </span>
                                             )}
-                                          {data.release !== '?' && <time>{data.release}</time>}
+                                          {data.release !== '?' && (
+                                            <>
+                                              {(data.category === 'drama' ||
+                                                data.category === 'ott_drama' ||
+                                                data.category === 'ott_anime' ||
+                                                data.anime === 'tva' ||
+                                                data.anime === 'ova') && (
+                                                <time aria-label="방영년도">{data.release}</time>
+                                              )}
+                                              {(data.category === 'film' ||
+                                                data.category === 'anime_film' ||
+                                                data.category === 'ott_anime_film' ||
+                                                data.category === 'ott_film' ||
+                                                data.anime === 'film') && (
+                                                <time aria-label="상영년도">{data.release}</time>
+                                              )}
+                                              {data.category === 'game' && (
+                                                <time aria-label="출시년도">{data.release}</time>
+                                              )}
+                                            </>
+                                          )}
                                         </strong>
-                                        {data.etc !== null && <em className="lang">{data.etc}</em>}
+                                        {data.etc !== null && (
+                                          <em className="lang" aria-label="작품 추가설명">
+                                            {data.etc}
+                                          </em>
+                                        )}
                                       </dd>
                                     </dl>
                                     <dl className={styles.info}>
@@ -1010,21 +1042,13 @@ export default function JejeupDetail({
                                       )}
                                       {data.publisher !== '?' && (
                                         <div>
-                                          <dt>
-                                            {data.category === 'game' || data.category === 'game_fan'
-                                              ? '유통/배급'
-                                              : '퍼블리싱'}
-                                          </dt>
+                                          <dt>{data.category === 'game' ? '유통/배급' : '퍼블리싱'}</dt>
                                           <dd>{data.publisher}</dd>
                                         </div>
                                       )}
                                       {data.creator !== '?' && (
                                         <div>
-                                          <dt>
-                                            {data.category === 'game' || data.category === 'game_fan'
-                                              ? '개발'
-                                              : '주요 제작자'}
-                                          </dt>
+                                          <dt>{data.category === 'game' ? '개발' : '주요 제작자'}</dt>
                                           <dd>{data.creator}</dd>
                                         </div>
                                       )}
@@ -1432,7 +1456,7 @@ export default function JejeupDetail({
                                 </dt>
                                 <dd>
                                   <strong>
-                                    <span className={styles.title}>
+                                    <span className={styles.title} aria-label="작품명">
                                       {data.category === 'game_fan'
                                         ? `'${data.title} 팬 게임 콜렉션`
                                         : data.titleKorean
@@ -1444,7 +1468,11 @@ export default function JejeupDetail({
                                     {data.lang === 'english' && <span lang="en">{data.title}</span>}
                                     {data.lang === 'japanese' && <span lang="ja">{data.title}</span>}
                                     {data.lang === 'thai' && <span lang="th">{data.title}</span>}
-                                    {data.titleOther !== null && <span className="lang">{data.titleOther}</span>}
+                                    {data.titleOther !== null && (
+                                      <span className="lang" aria-label="작품의 다른 언어 제목">
+                                        {data.titleOther}
+                                      </span>
+                                    )}
                                     {data.originalAuthor && data.original && data.originTitle && (
                                       <span>
                                         &apos;{data.originalAuthor}&apos;의 {OriginalName(data.original)} &apos;
@@ -1456,9 +1484,27 @@ export default function JejeupDetail({
                                       data.originalAuthor !== null && (
                                         <span className={styles.origin}>동명의 {OriginalName(data.original)} 원작</span>
                                       )}
-                                    {data.release !== '?' && <time>{data.release}</time>}
+                                    {data.release !== '?' && (
+                                      <>
+                                        {(data.category === 'drama' ||
+                                          data.category === 'ott_drama' ||
+                                          data.category === 'ott_anime' ||
+                                          data.anime === 'tva' ||
+                                          data.anime === 'ova') && <time aria-label="방영년도">{data.release}</time>}
+                                        {(data.category === 'film' ||
+                                          data.category === 'anime_film' ||
+                                          data.category === 'ott_anime_film' ||
+                                          data.category === 'ott_film' ||
+                                          data.anime === 'film') && <time aria-label="상영년도">{data.release}</time>}
+                                        {data.category === 'game' && <time aria-label="출시년도">{data.release}</time>}
+                                      </>
+                                    )}
                                   </strong>
-                                  {data.etc !== null && <em className="lang">{data.etc}</em>}
+                                  {data.etc !== null && (
+                                    <em className="lang" aria-label="작품 추가설명">
+                                      {data.etc}
+                                    </em>
+                                  )}
                                 </dd>
                               </dl>
                               <dl className={styles.info}>
@@ -1484,21 +1530,13 @@ export default function JejeupDetail({
                                 )}
                                 {data.publisher !== '?' && (
                                   <div>
-                                    <dt>
-                                      {data.category === 'game' || data.category === 'game_fan'
-                                        ? '유통/배급'
-                                        : '퍼블리싱'}
-                                    </dt>
+                                    <dt>{data.category === 'game' ? '유통/배급' : '퍼블리싱'}</dt>
                                     <dd>{data.publisher}</dd>
                                   </div>
                                 )}
                                 {data.creator !== '?' && (
                                   <div>
-                                    <dt>
-                                      {data.category === 'game' || data.category === 'game_fan'
-                                        ? '개발'
-                                        : '주요 제작자'}
-                                    </dt>
+                                    <dt>{data.category === 'game' ? '개발' : '주요 제작자'}</dt>
                                     <dd>{data.creator}</dd>
                                   </div>
                                 )}

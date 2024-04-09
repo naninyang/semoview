@@ -768,6 +768,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                             </>
                           )}
                           {(jejeup.amusementData.category === 'film' ||
+                            jejeup.amusementData.category === 'anime_film' ||
                             jejeup.amusementData.category === 'ott_anime_film' ||
                             jejeup.amusementData.category === 'ott_film' ||
                             jejeup.amusementData.anime === 'film') && (
@@ -829,7 +830,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                         </dt>
                         <dd>
                           <strong>
-                            <span className={styles.title}>
+                            <span className={styles.title} aria-label="작품명">
                               {jejeup.amusementData.category === 'game_fan'
                                 ? `'${jejeup.amusementData.title}'의 팬 게임 콜렉션`
                                 : jejeup.amusementData.titleKorean
@@ -852,75 +853,33 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                               <span lang="th">{jejeup.amusementData.title}</span>
                             )}
                             {jejeup.amusementData.titleOther !== null && (
-                              <span className="lang">{jejeup.amusementData.titleOther}</span>
+                              <span className="lang" aria-label="작품의 다른 언어 제목">
+                                {jejeup.amusementData.titleOther}
+                              </span>
                             )}
-                            {jejeup.amusementData.originalAuthor &&
-                              jejeup.amusementData.original &&
-                              jejeup.amusementData.originTitle && (
-                                <span>
-                                  &apos;{jejeup.amusementData.originalAuthor}&apos;의{' '}
-                                  {OriginalName(jejeup.amusementData.original)} &apos;
-                                  {jejeup.amusementData.originTitle}&apos; 원작
-                                </span>
-                              )}
-                            {jejeup.amusementData.original !== null &&
-                              jejeup.amusementData.originTitle === null &&
-                              jejeup.amusementData.originalAuthor !== null && (
-                                <span className={styles.origin}>
-                                  동명의 {OriginalName(jejeup.amusementData.original)} 원작
-                                </span>
-                              )}
-                            {jejeup.amusementData.release !== '?' && <time>{jejeup.amusementData.release}</time>}
+                            {jejeup.amusementData.release !== '?' && (
+                              <>
+                                {(jejeup.amusementData.category === 'drama' ||
+                                  jejeup.amusementData.category === 'ott_drama' ||
+                                  jejeup.amusementData.category === 'ott_anime' ||
+                                  jejeup.amusementData.anime === 'tva' ||
+                                  jejeup.amusementData.anime === 'ova') && (
+                                  <time aria-label="방영년도">{jejeup.amusementData.release}</time>
+                                )}
+                                {(jejeup.amusementData.category === 'film' ||
+                                  jejeup.amusementData.category === 'anime_film' ||
+                                  jejeup.amusementData.category === 'ott_anime_film' ||
+                                  jejeup.amusementData.category === 'ott_film' ||
+                                  jejeup.amusementData.anime === 'film') && (
+                                  <time aria-label="상영년도">{jejeup.amusementData.release}</time>
+                                )}
+                                {jejeup.amusementData.category === 'game' && (
+                                  <time aria-label="출시년도">{jejeup.amusementData.release}</time>
+                                )}
+                              </>
+                            )}
                           </strong>
-                          {jejeup.amusementData.etc !== null && <em className="lang">{jejeup.amusementData.etc}</em>}
                         </dd>
-                      </dl>
-                      <dl className={styles.info}>
-                        {jejeup.amusementData.original !== null &&
-                          jejeup.amusementData.originTitle === null &&
-                          jejeup.amusementData.originalAuthor !== null && (
-                            <div>
-                              <dt>원작자</dt>
-                              <dd>{jejeup.amusementData.originalAuthor}</dd>
-                            </div>
-                          )}
-                        {jejeup.amusementData.country !== '?' && (
-                          <div>
-                            <dt>제작국가</dt>
-                            <dd>{jejeup.amusementData.country}</dd>
-                          </div>
-                        )}
-                        {jejeup.amusementData.genre !== '?' && (
-                          <div>
-                            <dt>장르</dt>
-                            <dd>{jejeup.amusementData.genre}</dd>
-                          </div>
-                        )}
-                        {jejeup.amusementData.publisher !== '?' && (
-                          <div>
-                            <dt>{jejeup.amusementData.category === 'game' ? '유통/배급' : '퍼블리셔'}</dt>
-                            <dd>{jejeup.amusementData.publisher}</dd>
-                          </div>
-                        )}
-                        {jejeup.amusementData.creator !== '?' && (
-                          <div>
-                            <dt>{jejeup.amusementData.category === 'game' ? '개발' : '주요 제작자'}</dt>
-                            <dd>{jejeup.amusementData.creator}</dd>
-                          </div>
-                        )}
-                        {jejeup.amusementData.cast !== null && (
-                          <div>
-                            {jejeup.amusementData.category !== 'anime' &&
-                            jejeup.amusementData.category !== 'ott_anime' &&
-                            jejeup.amusementData.category !== 'ott_anime_film' &&
-                            jejeup.amusementData.category !== 'game' ? (
-                              <dt>주요 출연자</dt>
-                            ) : (
-                              <dt>주요 성우</dt>
-                            )}
-                            <dd>{jejeup.amusementData.cast}</dd>
-                          </div>
-                        )}
                       </dl>
                     </figcaption>
                   </figure>
