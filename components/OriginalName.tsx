@@ -7,6 +7,9 @@ export const OriginalName = (org: string) => {
     novel: '소설',
     lightNovel: '라이트노벨',
     webtoon: '웹툰',
+    game: '게임',
+    fairytale: '동화',
+    memoirs: '회고록',
   };
   return names[org] || '';
 };
