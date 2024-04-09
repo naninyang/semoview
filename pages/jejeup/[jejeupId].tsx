@@ -216,6 +216,57 @@ const ClipboardIcon = styled.i({
   background: `url(${vectors.share}) no-repeat 50% 50%/contain`,
 });
 
+const ReviewContent = ({ data }: { data: any }) => {
+  const renderChildren = (children: any) => {
+    return children.map((child: any, index: number) => {
+      if (child.type === 'text') {
+        if (child.bold) {
+          return <strong key={index}>{child.text}</strong>;
+        }
+        if (child.strikethrough) {
+          return <s key={index}>{child.text}</s>;
+        }
+        if (child.bold === undefined && child.strikethrough === undefined) {
+          return (
+            <span
+              key={index}
+              dangerouslySetInnerHTML={{
+                __html: child.text.replace(/\n/g, '<br />'),
+              }}
+            />
+          );
+        }
+      } else if (child.type === 'link') {
+        return (
+          <Anchor key={index} href={child.url}>
+            {renderChildren(child.children)}
+          </Anchor>
+        );
+      }
+    });
+  };
+
+  const renderContent = (content: any) => {
+    console.log('content: ', content);
+    return content.map((item: any, index: number) => {
+      if (item.type === 'paragraph') {
+        return <p key={index}>{renderChildren(item.children)}</p>;
+      } else if (item.type === 'list') {
+        const ListComponent = item.format === 'ordered' ? 'ol' : 'ul';
+        return (
+          <ListComponent key={index}>
+            {item.children.map((listItem: any, listItemIndex: number) => (
+              <li key={listItemIndex}>{renderChildren(listItem.children)}</li>
+            ))}
+          </ListComponent>
+        );
+      }
+    });
+  };
+
+  return <div className={styles['review-comment']}>{renderContent(data)}</div>;
+};
+
 export default function JejeupDetail({
   jejeupData,
   jejeupId,
@@ -525,14 +576,10 @@ export default function JejeupDetail({
                       <dd>이 영상은 영상과 더보기에 그 어떤 정보도 존재하지 않는 최악의 영상입니다.</dd>
                     </dl>
                   )}
-                  {jejeupData.attributes.comment && (
+                  {jejeupData.attributes.review && (
                     <div className={styles.comment}>
                       <h2>큐레이터의 한줄평</h2>
-                      <p
-                        dangerouslySetInnerHTML={{
-                          __html: jejeupData.attributes.comment.replace(/\n/g, '<br />'),
-                        }}
-                      />
+                      <ReviewContent data={jejeupData.attributes.review} />
                     </div>
                   )}
                   <div className={styles.title}>

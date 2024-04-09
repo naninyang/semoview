@@ -537,7 +537,43 @@
           width: rem(5)
           height: rem(20)
 
-    .comment, .posters
+    .review-comment
+      background-color: rgba($hex-accent, .05)
+      border-radius: rem(3)
+      padding: rem(12)
+
+      strong
+        font-weight: 800
+
+      p, ul, ol
+        margin: rem(7)
+
+      p, li
+        font-size: rem(14)
+        font-weight: 700
+        line-height: 1.375
+
+        +mq(minSmall)
+          font-size: rem(16)
+
+      ol, ul
+        margin-left: rem(16)
+        padding-left: rem(16)
+
+        li
+          margin: rem(3) 0
+
+      ol
+        list-style-type: decimal
+
+      ul
+        list-style-type: disc
+
+      a
+        color: $hex-accent
+        text-decoration: underline
+
+    .posters
       p
         background-color: rgba($hex-accent, .05)
         border-radius: rem(3)

@@ -96,6 +96,7 @@ export interface JejeupPermalinkData {
     video: string;
     ownerAvatar: string;
     comment: string;
+    review: any;
     title: string;
     worst: boolean;
     amusements: string;
