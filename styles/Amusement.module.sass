@@ -227,40 +227,6 @@
               display: inline-block
               height: rem(18)
 
-        .relation
-          width: calc(100vw - rem(160))
-
-          +mq(minMedium)
-            width: calc(100vw - rem(550))
-
-          +mq(minLarge)
-            width: calc(100vw - rem(610))
-
-          +mq(minExtraLarge)
-            width: calc(100vw - rem(750))
-
-          &:not(.relation-open)
-            dd
-              min-height: auto
-              height: auto
-
-              ul
-                position: relative
-
-          dd
-            position: relative
-            display: flex
-            justify-content: flex-end
-            gap: rem(7)
-            width: 100%
-            height: rem(38)
-
-            ul
-              position: absolute
-              top: 0
-              left: 0
-              width: 100%
-
         .link, .relation
           padding: rem(7) 0
 
@@ -412,6 +378,41 @@
               text-align: left
               line-height: 1.25
               font-weight: 800
+
+        .relation
+          padding-left: 0
+          width: calc(100vw - rem(160))
+
+          +mq(minMedium)
+            width: calc(100vw - rem(550))
+
+          +mq(minLarge)
+            width: calc(100vw - rem(610))
+
+          +mq(minExtraLarge)
+            width: calc(100vw - rem(750))
+
+          &:not(.relation-open)
+            dd
+              min-height: auto
+              height: auto
+
+              ul
+                position: relative
+
+          dd
+            position: relative
+            display: flex
+            justify-content: flex-end
+            gap: rem(7)
+            width: 100%
+            height: rem(38)
+
+            ul
+              position: absolute
+              top: 0
+              left: 0
+              width: 100%
 
         .item
           display: flex
