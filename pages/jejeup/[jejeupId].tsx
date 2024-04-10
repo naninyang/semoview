@@ -279,10 +279,6 @@ export default function JejeupDetail({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  });
-
   const loadRelations = async () => {
     if (jejeupData) {
       if (jejeupData.attributes && jejeupData.attributes.relations) {
@@ -324,6 +320,7 @@ export default function JejeupDetail({
     const timer = setTimeout(() => {
       setTimeoutReached(true);
     }, 5000);
+    window.scrollTo(0, 0);
     return () => clearTimeout(timer);
   }, []);
 
