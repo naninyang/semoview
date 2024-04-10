@@ -974,7 +974,7 @@ export default function JejeupDetail({
                                               ? `'${data.title}'의 팬 게임 콜렉션`
                                               : data.titleKorean
                                                 ? data.titleKorean
-                                                : data.v.title}
+                                                : data.title}
                                           </span>
                                           {data.lang === 'chineseBeonche' && <span lang="zh-Hant">{data.title} </span>}
                                           {data.lang === 'chineseGanche' && <span lang="zh-Hans">{data.title} </span>}
