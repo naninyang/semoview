@@ -814,6 +814,11 @@ export default function JejeupDetail({
                                             <NetflixOriginal /> NETFLIX Original Animation Film
                                           </cite>
                                         )}
+                                        {data.ott === 'netflixDocumentary' && (
+                                          <cite>
+                                            <NetflixOriginal /> NETFLIX Original Documentary
+                                          </cite>
+                                        )}
                                         {data.ott === 'tvingOriginal' && (
                                           <cite>
                                             <TvingOriginal /> 티빙 오리지널
@@ -951,7 +956,8 @@ export default function JejeupDetail({
                                             {(data.ott === 'netflixOriginal' ||
                                               data.ott === 'netflixFilm' ||
                                               data.ott === 'netflixAnime' ||
-                                              data.ott === 'netflixAnimeFilm') &&
+                                              data.ott === 'netflixAnimeFilm' ||
+                                              data.ott === 'netflixDocumentary') &&
                                               'NETFLIX'}
                                             {(data.ott === 'tvingOriginal' || data.ott === 'tvingOnly') && 'TVING'}
                                             {(data.ott === 'watchaOriginal' || data.ott === 'watchaExclusive') &&
@@ -1312,6 +1318,11 @@ export default function JejeupDetail({
                                       <NetflixOriginal /> NETFLIX Original Animation Film
                                     </cite>
                                   )}
+                                  {data.ott === 'netflixDocumentary' && (
+                                    <cite>
+                                      <NetflixOriginal /> NETFLIX Original Documentary
+                                    </cite>
+                                  )}
                                   {data.ott === 'tvingOriginal' && (
                                     <cite>
                                       <TvingOriginal /> 티빙 오리지널
@@ -1447,7 +1458,8 @@ export default function JejeupDetail({
                                       {(data.ott === 'netflixOriginal' ||
                                         data.ott === 'netflixFilm' ||
                                         data.ott === 'netflixAnime' ||
-                                        data.ott === 'netflixAnimeFilm') &&
+                                        data.ott === 'netflixAnimeFilm' ||
+                                        data.ott === 'netflixDocumentary') &&
                                         'NETFLIX'}
                                       {(data.ott === 'tvingOriginal' || data.ott === 'tvingOnly') && 'TVING'}
                                       {(data.ott === 'watchaOriginal' || data.ott === 'watchaExclusive') && 'WATCHA'}

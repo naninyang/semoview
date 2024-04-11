@@ -422,7 +422,8 @@ function Categories({
                                 {(amusement.ott === 'netflixOriginal' ||
                                   amusement.ott === 'netflixFilm' ||
                                   amusement.ott === 'netflixAnime' ||
-                                  amusement.ott === 'netflixAnimeFilm') && (
+                                  amusement.ott === 'netflixAnimeFilm' ||
+                                  amusement.ott === 'netflixDocumentary') && (
                                   <>
                                     <NetflixIcon /> <span>NETFLIX Original</span>
                                   </>
@@ -456,6 +457,7 @@ function Categories({
                               {(amusement.category === 'film' ||
                                 amusement.category === 'anime_film' ||
                                 amusement.category === 'ott_anime_film' ||
+                                amusement.category === 'ott_documentary_film' ||
                                 amusement.category === 'ott_film' ||
                                 amusement.anime === 'film') && (
                                 <>

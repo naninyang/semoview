@@ -84,7 +84,9 @@ export async function getCategoryData(page?: number, pageSize?: number, category
     categoryName === 'ott_drama' ||
     categoryName === 'ott_film' ||
     categoryName === 'ott_anime' ||
-    categoryName === 'ott_anime_film'
+    categoryName === 'ott_anime_film' ||
+    categoryName === 'ott_documentary' ||
+    categoryName === 'ott_documentary_film'
   ) {
     const response = await fetch(
       `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[ott][$null]=false`,

@@ -680,22 +680,27 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                           )}
                           {jejeup.amusementData.ott === 'netflixOriginal' && (
                             <cite>
-                              <NetflixOriginal /> NETFLIX Original
+                              <NetflixOriginal /> A NETFLIX Original
                             </cite>
                           )}
                           {jejeup.amusementData.ott === 'netflixFilm' && (
                             <cite>
-                              <NetflixOriginal /> NETFLIX Original Film
+                              <NetflixOriginal /> A NETFLIX Original Film
                             </cite>
                           )}
                           {jejeup.amusementData.ott === 'netflixAnime' && (
                             <cite>
-                              <NetflixOriginal /> NETFLIX Original Animation
+                              <NetflixOriginal /> A NETFLIX Original Animation
                             </cite>
                           )}
                           {jejeup.amusementData.ott === 'netflixAnimeFilm' && (
                             <cite>
-                              <NetflixOriginal /> NETFLIX Original Animation Film
+                              <NetflixOriginal /> A NETFLIX Original Animation Film
+                            </cite>
+                          )}
+                          {jejeup.amusementData.ott === 'netflixDocumentary' && (
+                            <cite>
+                              <NetflixOriginal /> A NETFLIX Original Documentary
                             </cite>
                           )}
                           {jejeup.amusementData.ott === 'tvingOriginal' && (

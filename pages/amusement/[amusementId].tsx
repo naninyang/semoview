@@ -935,22 +935,27 @@ export default function Amusement({
                     )}
                     {amusementData.attributes.ott === 'netflixOriginal' && (
                       <>
-                        <NetflixOriginal /> NETFLIX Original
+                        <NetflixOriginal /> A NETFLIX Original
                       </>
                     )}
                     {amusementData.attributes.ott === 'netflixFilm' && (
                       <>
-                        <NetflixOriginal /> NETFLIX Original Film
+                        <NetflixOriginal /> A NETFLIX Original Film
                       </>
                     )}
                     {amusementData.attributes.ott === 'netflixAnime' && (
                       <>
-                        <NetflixOriginal /> NETFLIX Original Animation
+                        <NetflixOriginal /> A NETFLIX Original Animation
                       </>
                     )}
                     {amusementData.attributes.ott === 'netflixAnimeFilm' && (
                       <>
-                        <NetflixOriginal /> NETFLIX Original Animation Film
+                        <NetflixOriginal /> A NETFLIX Original Animation Film
+                      </>
+                    )}
+                    {amusementData.attributes.ott === 'netflixDocumentary' && (
+                      <>
+                        <NetflixOriginal /> A NETFLIX Original Documentary
                       </>
                     )}
                     {amusementData.attributes.ott === 'tvingOriginal' && (
@@ -1004,7 +1009,8 @@ export default function Amusement({
                       {(amusementData.attributes.ott === 'netflixOriginal' ||
                         amusementData.attributes.ott === 'netflixFilm' ||
                         amusementData.attributes.ott === 'netflixAnime' ||
-                        amusementData.attributes.ott === 'netflixAnimeFilm') &&
+                        amusementData.attributes.ott === 'netflixAnimeFilm' ||
+                        amusementData.attributes.ott === 'netflixDocumentary') &&
                         'NETFLIX'}
                       {(amusementData.attributes.ott === 'tvingOriginal' ||
                         amusementData.attributes.ott === 'tvingOnly') &&

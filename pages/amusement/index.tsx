@@ -544,15 +544,16 @@ function Amusement({
                               )}
                               {amusement.ott === 'disneyOriginal' && (
                                 <>
-                                  <DisneyIcon /> <span>Disney Plus Original</span>
+                                  <DisneyIcon /> <span>Disney+ Original</span>
                                 </>
                               )}
                               {(amusement.ott === 'netflixOriginal' ||
                                 amusement.ott === 'netflixFilm' ||
                                 amusement.ott === 'netflixAnime' ||
-                                amusement.ott === 'netflixAnimeFilm') && (
+                                amusement.ott === 'netflixAnimeFilm' ||
+                                amusement.ott === 'netflixDocumentary') && (
                                 <>
-                                  <NetflixIcon /> <span>NETFLIX Original</span>
+                                  <NetflixIcon /> <span>A NETFLIX Original</span>
                                 </>
                               )}
                               {(amusement.ott === 'tvingOriginal' || amusement.ott === 'tvingOnly') && (
@@ -667,6 +668,7 @@ function Amusement({
                             {(amusement.category === 'drama' ||
                               amusement.category === 'ott_drama' ||
                               amusement.category === 'ott_anime' ||
+                              amusement.category === 'ott_documentary' ||
                               amusement.anime === 'tva' ||
                               amusement.anime === 'ova') && (
                               <>
@@ -699,6 +701,7 @@ function Amusement({
                             {(amusement.category === 'film' ||
                               amusement.category === 'anime_film' ||
                               amusement.category === 'ott_anime_film' ||
+                              amusement.category === 'ott_documentary_film' ||
                               amusement.category === 'ott_film' ||
                               amusement.anime === 'film') && (
                               <>
