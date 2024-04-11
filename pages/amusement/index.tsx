@@ -486,6 +486,89 @@ function Amusement({
                     />
                     {amusement.category !== 'game_fan' && (
                       <dl>
+                        {amusement.animeBroadcast2 !== null && (
+                          <div
+                            className={`${styles.anime2} ${amusement.animeBroadcast1 === null ? styles.anime2only : ''}`}
+                          >
+                            <dt>방송사</dt>
+                            <dd>
+                              {amusement.animeBroadcast2 === 'aniplus' && (
+                                <>
+                                  <AniplusIcon /> <span>애니플러스</span>
+                                </>
+                              )}
+                              {amusement.animeBroadcast2 === 'daewon' && (
+                                <>
+                                  <DaewonIcon /> <span>애니원</span>
+                                </>
+                              )}
+                              {amusement.animeBroadcast2 === 'anibox' && (
+                                <>
+                                  <AniboxIcon /> <span>애니박스</span>
+                                </>
+                              )}
+                              {amusement.animeBroadcast2 === 'tooniverse' && (
+                                <>
+                                  <TooniverseIcon /> <span>투니버스</span>
+                                </>
+                              )}
+                              {amusement.animeBroadcast2 === 'animax' && (
+                                <>
+                                  <AnimaxIcon /> <span>애니박스</span>
+                                </>
+                              )}
+                            </dd>
+                          </div>
+                        )}
+                        {amusement.animeBroadcast1 !== null && (
+                          <div
+                            className={`${styles.anime1} ${amusement.animeBroadcast1 !== null ? styles.anime1 : ''} ${amusement.ott !== null ? styles.broadcasts : ''}`}
+                          >
+                            <dt>방송사</dt>
+                            <dd>
+                              {amusement.animeBroadcast1 === 'tokyomx' && (
+                                <>
+                                  <TokyomxIcon /> <span>도쿄 MX</span>
+                                </>
+                              )}
+                              {amusement.animeBroadcast1 === 'tvtokyo' && (
+                                <>
+                                  <TvtokyoIcon /> <span>테레비 도쿄</span>
+                                </>
+                              )}
+                              {amusement.animeBroadcast1 === 'fujitv' && (
+                                <>
+                                  <FujitvIcon /> <span>후지 테레비</span>
+                                </>
+                              )}
+                              {amusement.animeBroadcast1 === 'mbs' && (
+                                <>
+                                  <MbsIcon /> <span>MBS</span>
+                                </>
+                              )}
+                              {amusement.animeBroadcast1 === 'tbs' && (
+                                <>
+                                  <TbsIcon /> <span>TBS</span>
+                                </>
+                              )}
+                              {amusement.animeBroadcast1 === 'atx' && (
+                                <>
+                                  <AtxIcon /> <span>AT-X</span>
+                                </>
+                              )}
+                              {amusement.animeBroadcast1 === 'nippontv' && (
+                                <>
+                                  <NippontvIcon /> <span>닛폰 테레비</span>
+                                </>
+                              )}
+                              {amusement.animeBroadcast1 === 'wowow' && (
+                                <>
+                                  <WowowIcon /> <span>WOWOW</span>
+                                </>
+                              )}
+                            </dd>
+                          </div>
+                        )}
                         {amusement.broadcast !== null && (
                           <div className={`${styles.broadcast} ${amusement.ott !== null ? styles.broadcasts : ''}`}>
                             <dt>방송국</dt>
@@ -574,89 +657,6 @@ function Amusement({
                               {amusement.ott === 'paramount' && (
                                 <>
                                   <ParamountIcon /> <span>Paramount+에서 스트리밍 중</span>
-                                </>
-                              )}
-                            </dd>
-                          </div>
-                        )}
-                        {amusement.animeBroadcast2 !== null && (
-                          <div
-                            className={`${styles.anime2} ${amusement.animeBroadcast1 === null ? styles.anime2only : ''}`}
-                          >
-                            <dt>방송사</dt>
-                            <dd>
-                              {amusement.animeBroadcast2 === 'aniplus' && (
-                                <>
-                                  <AniplusIcon /> <span>애니플러스</span>
-                                </>
-                              )}
-                              {amusement.animeBroadcast2 === 'daewon' && (
-                                <>
-                                  <DaewonIcon /> <span>애니원</span>
-                                </>
-                              )}
-                              {amusement.animeBroadcast2 === 'anibox' && (
-                                <>
-                                  <AniboxIcon /> <span>애니박스</span>
-                                </>
-                              )}
-                              {amusement.animeBroadcast2 === 'tooniverse' && (
-                                <>
-                                  <TooniverseIcon /> <span>투니버스</span>
-                                </>
-                              )}
-                              {amusement.animeBroadcast2 === 'animax' && (
-                                <>
-                                  <AnimaxIcon /> <span>애니박스</span>
-                                </>
-                              )}
-                            </dd>
-                          </div>
-                        )}
-                        {amusement.animeBroadcast1 !== null && (
-                          <div
-                            className={`${styles.anime1} ${amusement.animeBroadcast1 !== null ? styles.anime1 : ''}`}
-                          >
-                            <dt>방송사</dt>
-                            <dd>
-                              {amusement.animeBroadcast1 === 'tokyomx' && (
-                                <>
-                                  <TokyomxIcon /> <span>도쿄 MX</span>
-                                </>
-                              )}
-                              {amusement.animeBroadcast1 === 'tvtokyo' && (
-                                <>
-                                  <TvtokyoIcon /> <span>테레비 도쿄</span>
-                                </>
-                              )}
-                              {amusement.animeBroadcast1 === 'fujitv' && (
-                                <>
-                                  <FujitvIcon /> <span>후지 테레비</span>
-                                </>
-                              )}
-                              {amusement.animeBroadcast1 === 'mbs' && (
-                                <>
-                                  <MbsIcon /> <span>MBS</span>
-                                </>
-                              )}
-                              {amusement.animeBroadcast1 === 'tbs' && (
-                                <>
-                                  <TbsIcon /> <span>TBS</span>
-                                </>
-                              )}
-                              {amusement.animeBroadcast1 === 'atx' && (
-                                <>
-                                  <AtxIcon /> <span>AT-X</span>
-                                </>
-                              )}
-                              {amusement.animeBroadcast1 === 'nippontv' && (
-                                <>
-                                  <NippontvIcon /> <span>닛폰 테레비</span>
-                                </>
-                              )}
-                              {amusement.animeBroadcast1 === 'wowow' && (
-                                <>
-                                  <WowowIcon /> <span>WOWOW</span>
                                 </>
                               )}
                             </dd>

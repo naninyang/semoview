@@ -608,10 +608,7 @@ export default function JejeupDetail({
                                   <div className={styles['info-container']}>
                                     <dl className={styles.summary}>
                                       <dt>
-                                        {data.category !== 'ott_drama' &&
-                                        data.category !== 'ott_film' &&
-                                        data.category !== 'ott_anime' &&
-                                        data.category !== 'ott_anime_film' ? (
+                                        {data.category !== 'anime_film' ? (
                                           <em className={styles[data.broadcast]}>
                                             {data.broadcast === 'ENA' && (
                                               <>
@@ -892,6 +889,7 @@ export default function JejeupDetail({
                                           data.category === 'anime_film' ||
                                           data.category === 'ott_anime_film' ||
                                           data.category === 'ott_film' ||
+                                          data.category === 'ott_documentary_film' ||
                                           data.anime === 'film') && (
                                           <>
                                             {data.rating === 'all' && (
@@ -1109,10 +1107,7 @@ export default function JejeupDetail({
                             <div className={styles['title-info']} key={index}>
                               <dl className={styles.summary}>
                                 <dt>
-                                  {data.category !== 'ott_drama' &&
-                                  data.category !== 'ott_film' &&
-                                  data.category !== 'ott_anime' &&
-                                  data.category !== 'ott_anime_film' ? (
+                                  {data.category !== 'anime_film' ? (
                                     <em className={styles[data.broadcast]}>
                                       {data.broadcast === 'ENA' && (
                                         <>
@@ -1224,9 +1219,7 @@ export default function JejeupDetail({
                                           )}
                                         </>
                                       )}
-                                      {(data.category === 'game' ||
-                                        data.category === 'game_fan' ||
-                                        data.category === 'game_fan') &&
+                                      {(data.category === 'game' || data.category === 'game_fan') &&
                                         data.isMobile &&
                                         '모바일 '}
                                       {CategoryName(data.category)}
@@ -1394,6 +1387,7 @@ export default function JejeupDetail({
                                     data.category === 'anime_film' ||
                                     data.category === 'ott_anime_film' ||
                                     data.category === 'ott_film' ||
+                                    data.category === 'ott_documentary_film' ||
                                     data.anime === 'film') && (
                                     <>
                                       {data.rating === 'all' && (
