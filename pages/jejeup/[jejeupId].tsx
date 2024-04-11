@@ -379,6 +379,14 @@ export default function JejeupDetail({
       });
   };
 
+  const amazonRatingHandler = () => {
+    alert('아마존 자체 심의등급으로 설정된 작품입니다.\n아마존 프라임 비디오에 가입이 되어 있다면 시청 가능합니다.');
+  };
+
+  const regionRatingHandler = () => {
+    alert('대한민국에서 시청이 불가능한 아마존 오리지널 작품입니다.\n시청 등급은 아마존 자체 심의등급입니다.');
+  };
+
   const customRatingHandler = () => {
     alert(
       '대한민국에서 시청/심의등급이 없거나 대한민국에 정식 발매된 작품이 아닙니다.\n해당 시청/심의등급은 제제없 자체설정 시청/심의등급입니다.\n따라서 제제없 심의등급은 법적구속력이 없습니다.\n\n자세한 내용은 공지사항을 참고하세요.',
@@ -1436,12 +1444,26 @@ export default function JejeupDetail({
                                       )}
                                     </>
                                   )}
-                                  {data.ratingCustom && (
+                                  {(data.ott === 'amazonOriginal' || data.ratingCustom) && (
                                     <div className={styles.custom}>
-                                      <button type="button" onClick={customRatingHandler}>
-                                        <i />
-                                        <span>제제없 자체설정 심의등급 안내</span>
-                                      </button>
+                                      {data.ott === 'amazonOriginal' && !data.ratingCustom && (
+                                        <button type="button" onClick={amazonRatingHandler}>
+                                          <i />
+                                          <span>아마존 자체 심의등급 작품</span>
+                                        </button>
+                                      )}
+                                      {data.ott === 'amazonOriginal' && data.ratingCustom && (
+                                        <button type="button" onClick={regionRatingHandler}>
+                                          <i />
+                                          <span>한국 리전 아마존 시청 불가 작품</span>
+                                        </button>
+                                      )}
+                                      {data.ott !== 'amazonOriginal' && data.ratingCustom && (
+                                        <button type="button" onClick={customRatingHandler}>
+                                          <i />
+                                          <span>제제없 자체설정 심의등급 안내</span>
+                                        </button>
+                                      )}
                                     </div>
                                   )}
                                   {data.ott !== null && data.ottAddr !== null && (
