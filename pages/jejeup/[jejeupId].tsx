@@ -1035,6 +1035,7 @@ export default function JejeupDetail({
                                                   동명의 {OriginalName(data.original)} 원작
                                                 </span>
                                               )}
+                                            {data.original !== null && data.etc !== null && ' | '}
                                             {data.etc !== null && (
                                               <em className="lang" aria-label="작품 추가설명">
                                                 {data.etc}
