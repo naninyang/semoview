@@ -120,6 +120,7 @@ export interface JejeupPermalinkData {
     pressPublished?: string;
     pressAvatar?: string;
     duration: string;
+    ownerUrl: string;
   };
   amusementData: {
     title: string;
