@@ -280,9 +280,11 @@
     margin-top: calc(env(safe-area-inset-top) + rem(114))
 
     .headline
+      justify-content: space-between
       gap: rem(7)
 
       +mq(minMedium)
+        justify-content: flex-start
         gap: rem(27)
 
       > a

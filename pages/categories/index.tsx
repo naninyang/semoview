@@ -201,7 +201,7 @@ function Categories({
       <Seo
         pageTitles={`리뷰 카테고리 선택하기 - ${originTitle}`}
         pageTitle={`리뷰 카테고리 선택하기`}
-        pageDescription="OTT / 영화 / 애니메이션 / 애니메이션 영화 / 드라마 / 게임"
+        pageDescription="OTT / 영화 / 애니메이션 / 드라마 / 게임"
         pageImg={`https://jejeup.dev1stud.io/og-categories.webp?ts=${timestamp}`}
       />
       <h1>
@@ -226,6 +226,7 @@ function Categories({
               <div className={styles.headline}>
                 <h2>
                   <Anchor href="/amusement?category=drama&page=1">드라마 리뷰</Anchor>
+                  {process.env.NODE_ENV && ` ${dramaData.total}개`}
                 </h2>
                 <Anchor href="/amusement?category=drama&page=1">
                   <span>더보기</span>
@@ -382,6 +383,7 @@ function Categories({
               <div className={styles.headline}>
                 <h2>
                   <Anchor href="/amusement?category=film&page=1">영화 리뷰</Anchor>
+                  {process.env.NODE_ENV && ` ${filmData.total}개`}
                 </h2>
                 <Anchor href="/amusement?category=film&page=1">
                   <span>더보기</span>
@@ -511,6 +513,7 @@ function Categories({
               <div className={styles.headline}>
                 <h2>
                   <Anchor href="/amusement?category=anime&page=1">애니메이션 리뷰</Anchor>
+                  {process.env.NODE_ENV && ` ${animeData.total}개`}
                 </h2>
                 <Anchor href="/amusement?category=anime&page=1">
                   <span>더보기</span>
@@ -735,6 +738,7 @@ function Categories({
               <div className={styles.headline}>
                 <h2>
                   <Anchor href="/amusement?category=ott&page=1">OTT 오리지널 & 온리 콘텐츠 리뷰</Anchor>
+                  {process.env.NODE_ENV && ` ${ottData.total}개`}
                 </h2>
                 <Anchor href="/amusement?category=ott&page=1">
                   <span>더보기</span>
@@ -965,6 +969,7 @@ function Categories({
               <div className={styles.headline}>
                 <h2>
                   <Anchor href="/amusement?category=game&page=1">게임 리뷰 & 실황</Anchor>
+                  {process.env.NODE_ENV && ` ${gameData.total}개`}
                 </h2>
                 <Anchor href="/amusement?category=game&page=1">
                   <span>더보기</span>
