@@ -441,10 +441,6 @@ export default function Amusement({
   const [selectedRelation, setSelectedRelation] = useState<string>('');
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  });
-
-  useEffect(() => {
     sessionStorage.setItem('location', router.asPath);
   }, [router.asPath]);
 
@@ -592,6 +588,7 @@ export default function Amusement({
 
   const [timeoutReached, setTimeoutReached] = useState(false);
   useEffect(() => {
+    window.scrollTo(0, 0);
     const timer = setTimeout(() => {
       setTimeoutReached(true);
     }, 5000);
