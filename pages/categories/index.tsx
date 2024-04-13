@@ -226,7 +226,7 @@ function Categories({
               <div className={styles.headline}>
                 <h2>
                   <Anchor href="/amusement?category=drama&page=1">드라마 리뷰</Anchor>
-                  {process.env.NODE_ENV && ` ${dramaData.total}개`}
+                  {process.env.NODE_ENV === 'development' && ` ${dramaData.total}개`}
                 </h2>
                 <Anchor href="/amusement?category=drama&page=1">
                   <span>더보기</span>
@@ -383,7 +383,7 @@ function Categories({
               <div className={styles.headline}>
                 <h2>
                   <Anchor href="/amusement?category=film&page=1">영화 리뷰</Anchor>
-                  {process.env.NODE_ENV && ` ${filmData.total}개`}
+                  {process.env.NODE_ENV === 'development' && ` ${filmData.total}개`}
                 </h2>
                 <Anchor href="/amusement?category=film&page=1">
                   <span>더보기</span>
@@ -513,7 +513,7 @@ function Categories({
               <div className={styles.headline}>
                 <h2>
                   <Anchor href="/amusement?category=anime&page=1">애니메이션 리뷰</Anchor>
-                  {process.env.NODE_ENV && ` ${animeData.total}개`}
+                  {process.env.NODE_ENV === 'development' && ` ${animeData.total}개`}
                 </h2>
                 <Anchor href="/amusement?category=anime&page=1">
                   <span>더보기</span>
@@ -738,7 +738,7 @@ function Categories({
               <div className={styles.headline}>
                 <h2>
                   <Anchor href="/amusement?category=ott&page=1">OTT 오리지널 리뷰</Anchor>
-                  {process.env.NODE_ENV && ` ${ottData.total}개`}
+                  {process.env.NODE_ENV === 'development' && ` ${ottData.total}개`}
                 </h2>
                 <Anchor href="/amusement?category=ott&page=1">
                   <span>더보기</span>
@@ -969,7 +969,7 @@ function Categories({
               <div className={styles.headline}>
                 <h2>
                   <Anchor href="/amusement?category=game&page=1">게임 리뷰 & 실황</Anchor>
-                  {process.env.NODE_ENV && ` ${gameData.total}개`}
+                  {process.env.NODE_ENV === 'development' && ` ${gameData.total}개`}
                 </h2>
                 <Anchor href="/amusement?category=game&page=1">
                   <span>더보기</span>
