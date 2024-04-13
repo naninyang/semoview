@@ -737,7 +737,7 @@ function Categories({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?category=ott&page=1">OTT 오리지널 & 온리 콘텐츠 리뷰</Anchor>
+                  <Anchor href="/amusement?category=ott&page=1">OTT 오리지널 리뷰</Anchor>
                   {process.env.NODE_ENV && ` ${ottData.total}개`}
                 </h2>
                 <Anchor href="/amusement?category=ott&page=1">

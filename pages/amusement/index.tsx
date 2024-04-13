@@ -200,14 +200,14 @@ function Amusement({
               ${categoryQuery === 'game' ? '게임은 끝날 때까지 끝난 게 아니다!' : ''}
               ${categoryQuery === 'game_fan' ? '이세계 팬 게임 모음' : ''}
               ${categoryQuery === 'anime' ? '애니입니다만, 문제라도?' : ''}
-              ${categoryQuery === 'ott' ? '퇴근 후, 이세계 OTT에서만 볼 수 있는 콘텐츠를.' : ''}
+              ${categoryQuery === 'ott' ? '퇴근 후, 이세계 OTT에서만 볼 수 있는 작품을.' : ''}
               ${categoryQuery === '' ? '카테고리 선택' : ''} - ${originTitle}`}
         pageTitle={`${categoryQuery === 'drama' ? '개가 짖어도 드라마는 정주행 할 수밖에 없다!' : ''}
               ${categoryQuery === 'film' ? '영화 사회에서는 영원한 우방도, 영원한 적도 없다!' : ''}
               ${categoryQuery === 'game' ? '게임은 끝날 때까지 끝난 게 아니다!' : ''}
               ${categoryQuery === 'game_fan' ? '이세계 팬 게임 모음' : ''}
               ${categoryQuery === 'anime' ? '애니입니다만, 문제라도?' : ''}
-              ${categoryQuery === 'ott' ? '퇴근 후, 이세계 OTT에서만 볼 수 있는 콘텐츠를.' : ''}
+              ${categoryQuery === 'ott' ? '퇴근 후, 이세계 OTT에서만 볼 수 있는 작품을.' : ''}
               ${categoryQuery === '' ? '카테고리 선택' : ''}`}
         pageDescription="원하는 카테고리를 선택해 리뷰영상을 즐겨보세요. 드라마, 영화, 애니, OTT 오리지널, 게임의 모든 것"
         pageImg={`https://jejeup.dev1stud.io/og-${categoryQuery}.webp?ts=${timestamp}`}
@@ -454,7 +454,7 @@ function Amusement({
               {category === 'game' && '게임은 끝날 때까지 끝난 게 아니다!'}
               {category === 'game_fan' && '이세계 팬 게임 모음'}
               {category === 'anime' && '애니입니다만, 문제라도?'}
-              {category === 'ott' && '퇴근 후, 이세계 OTT에서만 볼 수 있는 콘텐츠를.'}{' '}
+              {category === 'ott' && '퇴근 후, 이세계 OTT에서만 볼 수 있는 작품을.'}{' '}
               {categoryData.total > 0 && <span>({categoryData.total}개 작품)</span>}
             </h1>
             <div className={styles.select}>
