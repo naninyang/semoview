@@ -43,7 +43,7 @@ const DisneyOriginal = styled.i({
   background: `url(${vectors.ott.disney2}) no-repeat 50% 50%/contain`,
 });
 
-const StarOriginal = styled.dialog({
+const StarOriginal = styled.i({
   width: rem(49),
   background: `url(${vectors.ott.star2}) no-repeat 50% 50%/contain`,
 });

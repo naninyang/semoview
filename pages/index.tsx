@@ -33,6 +33,11 @@ const DisneyOriginal = styled.i({
   background: `url(${vectors.ott.disney}) no-repeat 50% 50%/contain`,
 });
 
+const StarOriginal = styled.i({
+  width: rem(49),
+  background: `url(${vectors.ott.star}) no-repeat 50% 50%/contain`,
+});
+
 const NetflixOriginal = styled.i({
   width: rem(59),
   background: `url(${vectors.ott.netflix}) no-repeat 50% 50%/contain`,
@@ -688,7 +693,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                           )}
                           {jejeup.amusementData.ott === 'disneyStar' && (
                             <cite>
-                              <DisneyOriginal /> Star Original
+                              <StarOriginal /> Star Original
                             </cite>
                           )}
                           {(jejeup.amusementData.ott === 'netflixSeries' ||

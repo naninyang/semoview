@@ -41,7 +41,7 @@ const DisneyOriginal = styled.i({
 });
 
 const StarOriginal = styled.i({
-  width: rem(29),
+  width: rem(43),
   background: `url(${vectors.ott.star}) no-repeat 50% 50%/contain`,
 });
 
