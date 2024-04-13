@@ -482,7 +482,7 @@ export default function JejeupDetail({
                               priority
                             />
                             <div>
-                              <p>유튜버가 유튜브에서만 재생할 수 있도록 설정한 콘텐츠 입니다.</p>
+                              <p>유튜버 또는 원 저작권자가 유튜브에서만 재생할 수 있도록 설정한 콘텐츠 입니다.</p>
                               <p>
                                 <Anchor href={`https://youtu.be/${jejeupData.attributes.video}`}>여기</Anchor>를 누르면
                                 유튜브로 이동합니다.
