@@ -613,6 +613,17 @@ export default function JejeupDetail({
                             <div className={styles['title-list']}>
                               {jejeupData.amusementData.map((data, index) => (
                                 <div className={styles['title-info']} key={index}>
+                                  <div
+                                    className={`${styles.poster} ${data.category === 'game' || data.category === 'game_fan' ? styles['posters-game'] : styles['posters-other']}`}
+                                  >
+                                    <Image
+                                      src={data.posterDefault}
+                                      alt=""
+                                      width={data.category === 'game' || data.category === 'game_fan' ? 460 : 390}
+                                      height={data.category === 'game' || data.category === 'game_fan' ? 215 : 560}
+                                      unoptimized
+                                    />
+                                  </div>
                                   <div className={styles['info-container']}>
                                     <dl className={styles.summary}>
                                       <dt>
@@ -975,7 +986,8 @@ export default function JejeupDetail({
                                         )}
                                         {data.ott === null && data.ottAddr !== null && (
                                           <Anchor href={data.ottAddr}>
-                                            단편영화 &apos;{data.title}&apos; 보러가기
+                                            단편영화 &apos;{data.titleKorean ? data.titleKorean : data.title}&apos;{' '}
+                                            보러가기
                                           </Anchor>
                                         )}
                                       </dt>
@@ -1093,17 +1105,6 @@ export default function JejeupDetail({
                                         </div>
                                       )}
                                     </dl>
-                                  </div>
-                                  <div
-                                    className={`${styles.poster} ${data.category === 'game' || data.category === 'game_fan' ? styles['posters-game'] : styles['posters-other']}`}
-                                  >
-                                    <Image
-                                      src={data.posterDefault}
-                                      alt=""
-                                      width={data.category === 'game' || data.category === 'game_fan' ? 460 : 390}
-                                      height={data.category === 'game' || data.category === 'game_fan' ? 215 : 560}
-                                      unoptimized
-                                    />
                                   </div>
                                 </div>
                               ))}
