@@ -678,37 +678,36 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                           )}
                           {jejeup.amusementData.ott === 'appleFilm' && (
                             <cite>
-                              <AppleOriginal /> An Apple Original Film
+                              <AppleOriginal /> Apple Original Films
                             </cite>
                           )}
                           {jejeup.amusementData.ott === 'disneyOriginal' && (
                             <cite>
-                              <DisneyOriginal /> Disney+ Original
+                              <DisneyOriginal /> Disney Original
                             </cite>
                           )}
-                          {jejeup.amusementData.ott === 'netflixOriginal' && (
+                          {jejeup.amusementData.ott === 'disneyStar' && (
                             <cite>
-                              <NetflixOriginal /> A NETFLIX Original
+                              <DisneyOriginal /> Star Original
                             </cite>
                           )}
-                          {jejeup.amusementData.ott === 'netflixFilm' && (
+                          {(jejeup.amusementData.ott === 'netflixSeries' ||
+                            jejeup.amusementData.ott === 'netflixOriginal' ||
+                            jejeup.amusementData.ott === 'netflixAnime') && (
                             <cite>
-                              <NetflixOriginal /> A NETFLIX Original Film
+                              <NetflixOriginal /> A NETFLIX Series
                             </cite>
                           )}
-                          {jejeup.amusementData.ott === 'netflixAnime' && (
+                          {(jejeup.amusementData.ott === 'netflixPresents' ||
+                            jejeup.amusementData.ott === 'netflixFilm' ||
+                            jejeup.amusementData.ott === 'netflixAnimeFilm') && (
                             <cite>
-                              <NetflixOriginal /> A NETFLIX Original Animation
-                            </cite>
-                          )}
-                          {jejeup.amusementData.ott === 'netflixAnimeFilm' && (
-                            <cite>
-                              <NetflixOriginal /> A NETFLIX Original Animation Film
+                              <NetflixOriginal /> NETFLIX Presents
                             </cite>
                           )}
                           {jejeup.amusementData.ott === 'netflixDocumentary' && (
                             <cite>
-                              <NetflixOriginal /> A NETFLIX Original Documentary
+                              <NetflixOriginal /> A NETFLIX Documentary
                             </cite>
                           )}
                           {jejeup.amusementData.ott === 'tvingOriginal' && (
@@ -743,7 +742,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                           )}
                           {jejeup.amusementData.ott === 'paramount' && (
                             <cite>
-                              <Paramount /> Paramount+에서 스트리밍 중
+                              <Paramount /> Paramount+
                             </cite>
                           )}
                           {(jejeup.amusementData.category === 'drama' ||

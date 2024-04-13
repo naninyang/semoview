@@ -23,6 +23,10 @@ const DisneyIcon = styled.i({
   background: `url(${vectors.ott.disneyIcon}) no-repeat 50% 50%/contain`,
 });
 
+const StarIcon = styled.i({
+  background: `url(${vectors.ott.starIcon}) no-repeat 50% 50%/contain`,
+});
+
 const NetflixIcon = styled.i({
   background: `url(${vectors.ott.netflixIcon}) no-repeat 50% 50%/contain`,
 });
@@ -617,46 +621,53 @@ function Amusement({
                             <dd>
                               {amusement.ott === 'amazonOriginal' && (
                                 <>
-                                  <AmazonIcon /> <span>AMAZON ORIGINAL</span>
+                                  <AmazonIcon /> <span>AMAZON</span>
                                 </>
                               )}
                               {(amusement.ott === 'appleOriginal' || amusement.ott === 'appleFilm') && (
                                 <>
-                                  <AppleIcon /> <span>An Apple Original</span>
+                                  <AppleIcon /> <span>Apple TV+</span>
                                 </>
                               )}
                               {amusement.ott === 'disneyOriginal' && (
                                 <>
-                                  <DisneyIcon /> <span>Disney+ Original</span>
+                                  <DisneyIcon /> <span>Disney+</span>
                                 </>
                               )}
-                              {(amusement.ott === 'netflixOriginal' ||
+                              {amusement.ott === 'disneyStar' && (
+                                <>
+                                  <StarIcon /> <span>Star+</span>
+                                </>
+                              )}
+                              {(amusement.ott === 'netflixSeries' ||
+                                amusement.ott === 'netflixPresents' ||
+                                amusement.ott === 'netflixOriginal' ||
                                 amusement.ott === 'netflixFilm' ||
                                 amusement.ott === 'netflixAnime' ||
                                 amusement.ott === 'netflixAnimeFilm' ||
                                 amusement.ott === 'netflixDocumentary') && (
                                 <>
-                                  <NetflixIcon /> <span>A NETFLIX Original</span>
+                                  <NetflixIcon /> <span>NETFLIX</span>
                                 </>
                               )}
                               {(amusement.ott === 'tvingOriginal' || amusement.ott === 'tvingOnly') && (
                                 <>
-                                  <TvingIcon /> <span>티빙 오리지널</span>
+                                  <TvingIcon /> <span>티빙</span>
                                 </>
                               )}
                               {(amusement.ott === 'watchaOriginal' || amusement.ott === 'watchaExclusive') && (
                                 <>
-                                  <WatchaIcon /> <span>왓챠 오리지널</span>
+                                  <WatchaIcon /> <span>왓챠</span>
                                 </>
                               )}
                               {(amusement.ott === 'wavveOriginal' || amusement.ott === 'wavveOnly') && (
                                 <>
-                                  <WavveIcon /> <span>웨이브 오리지널</span>
+                                  <WavveIcon /> <span>웨이브</span>
                                 </>
                               )}
                               {amusement.ott === 'paramount' && (
                                 <>
-                                  <ParamountIcon /> <span>Paramount+에서 스트리밍 중</span>
+                                  <ParamountIcon /> <span>Paramount+</span>
                                 </>
                               )}
                             </dd>

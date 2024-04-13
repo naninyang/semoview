@@ -43,6 +43,11 @@ const DisneyOriginal = styled.i({
   background: `url(${vectors.ott.disney2}) no-repeat 50% 50%/contain`,
 });
 
+const StarOriginal = styled.dialog({
+  width: rem(49),
+  background: `url(${vectors.ott.star2}) no-repeat 50% 50%/contain`,
+});
+
 const NetflixOriginal = styled.i({
   width: rem(59),
   background: `url(${vectors.ott.netflix}) no-repeat 50% 50%/contain`,
@@ -929,38 +934,37 @@ export default function Amusement({
                       </>
                     )}
                     {amusementData.attributes.ott === 'appleFilm' && (
-                      <>
-                        <AppleOriginal /> An Apple Original Film
-                      </>
+                      <cite>
+                        <AppleOriginal /> Apple Original Films
+                      </cite>
                     )}
                     {amusementData.attributes.ott === 'disneyOriginal' && (
-                      <>
-                        <DisneyOriginal /> Disney+ Original
-                      </>
+                      <cite>
+                        <DisneyOriginal /> Disney Original
+                      </cite>
                     )}
-                    {amusementData.attributes.ott === 'netflixOriginal' && (
-                      <>
-                        <NetflixOriginal /> A NETFLIX Original
-                      </>
+                    {amusementData.attributes.ott === 'disneyStar' && (
+                      <cite>
+                        <StarOriginal /> Star Original
+                      </cite>
                     )}
-                    {amusementData.attributes.ott === 'netflixFilm' && (
-                      <>
-                        <NetflixOriginal /> A NETFLIX Original Film
-                      </>
+                    {(amusementData.attributes.ott === 'netflixSeries' ||
+                      amusementData.attributes.ott === 'netflixOriginal' ||
+                      amusementData.attributes.ott === 'netflixAnime') && (
+                      <cite>
+                        <NetflixOriginal /> A NETFLIX Series
+                      </cite>
                     )}
-                    {amusementData.attributes.ott === 'netflixAnime' && (
+                    {(amusementData.attributes.ott === 'netflixPresents' ||
+                      amusementData.attributes.ott === 'netflixFilm' ||
+                      amusementData.attributes.ott === 'netflixAnimeFilm') && (
                       <>
-                        <NetflixOriginal /> A NETFLIX Original Animation
-                      </>
-                    )}
-                    {amusementData.attributes.ott === 'netflixAnimeFilm' && (
-                      <>
-                        <NetflixOriginal /> A NETFLIX Original Animation Film
+                        <NetflixOriginal /> NETFLIX Presents
                       </>
                     )}
                     {amusementData.attributes.ott === 'netflixDocumentary' && (
                       <>
-                        <NetflixOriginal /> A NETFLIX Original Documentary
+                        <NetflixOriginal /> A NETFLIX Documentary
                       </>
                     )}
                     {amusementData.attributes.ott === 'tvingOriginal' && (
@@ -995,7 +999,7 @@ export default function Amusement({
                     )}
                     {amusementData.attributes.ott === 'paramount' && (
                       <>
-                        <Paramount /> Paramount+에서 스트리밍 중
+                        <Paramount /> Paramount+
                       </>
                     )}
                   </dd>
@@ -1010,15 +1014,20 @@ export default function Amusement({
                       {(amusementData.attributes.ott === 'appleOriginal' ||
                         amusementData.attributes.ott === 'appleFilm') &&
                         'Apple TV+'}
-                      {amusementData.attributes.ott === 'disneyOriginal' && 'Disney+'}
-                      {(amusementData.attributes.ott === 'netflixOriginal' ||
+                      {(amusementData.attributes.ott === 'disneyOriginal' ||
+                        amusementData.attributes.ott === 'disneyStar') &&
+                        'Disney+'}
+                      {(amusementData.attributes.ott === 'netflixSeries' ||
+                        amusementData.attributes.ott === 'netflixPresents' ||
+                        amusementData.attributes.ott === 'netflixOriginal' ||
                         amusementData.attributes.ott === 'netflixFilm' ||
                         amusementData.attributes.ott === 'netflixAnime' ||
                         amusementData.attributes.ott === 'netflixAnimeFilm' ||
                         amusementData.attributes.ott === 'netflixDocumentary') &&
                         'NETFLIX'}
                       {(amusementData.attributes.ott === 'tvingOriginal' ||
-                        amusementData.attributes.ott === 'tvingOnly') &&
+                        amusementData.attributes.ott === 'tvingOnly' ||
+                        amusementData.attributes.ott === 'paramount') &&
                         'TVING'}
                       {(amusementData.attributes.ott === 'watchaOriginal' ||
                         amusementData.attributes.ott === 'watchaExclusive') &&
@@ -1026,7 +1035,6 @@ export default function Amusement({
                       {(amusementData.attributes.ott === 'wavveOriginal' ||
                         amusementData.attributes.ott === 'wavveOnly') &&
                         'Wavve'}
-                      {amusementData.attributes.ott === 'paramount' && 'TVING'}
                       에서 시청하기
                     </Anchor>
                   </dd>

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import styled from '@emotion/styled';
-import { JejeupData, JejeupPermalinkData, JejeupResponse } from 'types';
+import { JejeupData, JejeupPermalinkData } from 'types';
 import { formatDateDetail } from '@/utils/strapi';
 import Seo, { originTitle } from '@/components/Seo';
 import YouTubeController from '@/components/YouTubeController';
@@ -38,6 +38,11 @@ const AppleOriginal = styled.i({
 const DisneyOriginal = styled.i({
   width: rem(29),
   background: `url(${vectors.ott.disney}) no-repeat 50% 50%/contain`,
+});
+
+const StarOriginal = styled.i({
+  width: rem(29),
+  background: `url(${vectors.ott.star}) no-repeat 50% 50%/contain`,
 });
 
 const NetflixOriginal = styled.i({
@@ -802,37 +807,36 @@ export default function JejeupDetail({
                                         )}
                                         {data.ott === 'appleFilm' && (
                                           <cite>
-                                            <AppleOriginal /> An Apple Original Film
+                                            <AppleOriginal /> Apple Original Films
                                           </cite>
                                         )}
                                         {data.ott === 'disneyOriginal' && (
                                           <cite>
-                                            <DisneyOriginal /> Disney+ Original
+                                            <DisneyOriginal /> Disney Original
                                           </cite>
                                         )}
-                                        {data.ott === 'netflixOriginal' && (
+                                        {data.ott === 'disneyStar' && (
                                           <cite>
-                                            <NetflixOriginal /> NETFLIX Original
+                                            <StarOriginal /> Star Original
                                           </cite>
                                         )}
-                                        {data.ott === 'netflixFilm' && (
+                                        {(data.ott === 'netflixSeries' ||
+                                          data.ott === 'netflixOriginal' ||
+                                          data.ott === 'netflixAnime') && (
                                           <cite>
-                                            <NetflixOriginal /> NETFLIX Original Film
+                                            <NetflixOriginal /> A NETFLIX Series
                                           </cite>
                                         )}
-                                        {data.ott === 'netflixAnime' && (
+                                        {(data.ott === 'netflixPresents' ||
+                                          data.ott === 'netflixFilm' ||
+                                          data.ott === 'netflixAnimeFilm') && (
                                           <cite>
-                                            <NetflixOriginal /> NETFLIX Original Animation
-                                          </cite>
-                                        )}
-                                        {data.ott === 'netflixAnimeFilm' && (
-                                          <cite>
-                                            <NetflixOriginal /> NETFLIX Original Animation Film
+                                            <NetflixOriginal /> NETFLIX Presents
                                           </cite>
                                         )}
                                         {data.ott === 'netflixDocumentary' && (
                                           <cite>
-                                            <NetflixOriginal /> NETFLIX Original Documentary
+                                            <NetflixOriginal /> A NETFLIX Documentary
                                           </cite>
                                         )}
                                         {data.ott === 'tvingOriginal' && (
@@ -867,7 +871,7 @@ export default function JejeupDetail({
                                         )}
                                         {data.ott === 'paramount' && (
                                           <cite>
-                                            <Paramount /> Paramaount+에서 스트리밍 중
+                                            <Paramount /> Paramaount+
                                           </cite>
                                         )}
                                         {(data.category === 'drama' ||
@@ -976,11 +980,13 @@ export default function JejeupDetail({
                                               data.ott === 'netflixAnimeFilm' ||
                                               data.ott === 'netflixDocumentary') &&
                                               'NETFLIX'}
-                                            {(data.ott === 'tvingOriginal' || data.ott === 'tvingOnly') && 'TVING'}
+                                            {(data.ott === 'tvingOriginal' ||
+                                              data.ott === 'tvingOnly' ||
+                                              data.ott === 'paramount') &&
+                                              'TVING'}
                                             {(data.ott === 'watchaOriginal' || data.ott === 'watchaExclusive') &&
                                               'WATCHA'}
                                             {(data.ott === 'wavveOriginal' || data.ott === 'wavveOnly') && 'Wavve'}
-                                            {data.ott === 'paramount' && 'TVING'}
                                             에서 시청하기
                                           </Anchor>
                                         )}
@@ -1293,37 +1299,36 @@ export default function JejeupDetail({
                                   )}
                                   {data.ott === 'appleFilm' && (
                                     <cite>
-                                      <AppleOriginal /> An Apple Original Film
+                                      <AppleOriginal /> Apple Original Films
                                     </cite>
                                   )}
                                   {data.ott === 'disneyOriginal' && (
                                     <cite>
-                                      <DisneyOriginal /> Disney+ Original
+                                      <DisneyOriginal /> Disney Original
                                     </cite>
                                   )}
-                                  {data.ott === 'netflixOriginal' && (
+                                  {data.ott === 'disneyStar' && (
                                     <cite>
-                                      <NetflixOriginal /> NETFLIX Original
+                                      <StarOriginal /> Star Original
                                     </cite>
                                   )}
-                                  {data.ott === 'netflixFilm' && (
+                                  {(data.ott === 'netflixSeries' ||
+                                    data.ott === 'netflixOriginal' ||
+                                    data.ott === 'netflixAnime') && (
                                     <cite>
-                                      <NetflixOriginal /> NETFLIX Original Film
+                                      <NetflixOriginal /> A NETFLIX Series
                                     </cite>
                                   )}
-                                  {data.ott === 'netflixAnime' && (
+                                  {(data.ott === 'netflixPresents' ||
+                                    data.ott === 'netflixFilm' ||
+                                    data.ott === 'netflixAnimeFilm') && (
                                     <cite>
-                                      <NetflixOriginal /> NETFLIX Original Animation
-                                    </cite>
-                                  )}
-                                  {data.ott === 'netflixAnimeFilm' && (
-                                    <cite>
-                                      <NetflixOriginal /> NETFLIX Original Animation Film
+                                      <NetflixOriginal /> NETFLIX Presents
                                     </cite>
                                   )}
                                   {data.ott === 'netflixDocumentary' && (
                                     <cite>
-                                      <NetflixOriginal /> NETFLIX Original Documentary
+                                      <NetflixOriginal /> A NETFLIX Documentary
                                     </cite>
                                   )}
                                   {data.ott === 'tvingOriginal' && (
@@ -1358,7 +1363,7 @@ export default function JejeupDetail({
                                   )}
                                   {data.ott === 'paramount' && (
                                     <cite>
-                                      <Paramount /> Paramaount+에서 스트리밍 중
+                                      <Paramount /> Paramaount+
                                     </cite>
                                   )}
                                   {(data.category === 'drama' ||
@@ -1479,10 +1484,12 @@ export default function JejeupDetail({
                                         data.ott === 'netflixAnimeFilm' ||
                                         data.ott === 'netflixDocumentary') &&
                                         'NETFLIX'}
-                                      {(data.ott === 'tvingOriginal' || data.ott === 'tvingOnly') && 'TVING'}
+                                      {(data.ott === 'tvingOriginal' ||
+                                        data.ott === 'tvingOnly' ||
+                                        data.ott === 'paramount') &&
+                                        'TVING'}
                                       {(data.ott === 'watchaOriginal' || data.ott === 'watchaExclusive') && 'WATCHA'}
                                       {(data.ott === 'wavveOriginal' || data.ott === 'wavveOnly') && 'Wavve'}
-                                      {data.ott === 'paramount' && 'TVING'}
                                       에서 시청하기
                                     </Anchor>
                                   )}
