@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import styled from '@emotion/styled';
-import { JejeupData, JejeupPermalinkData } from 'types';
+import { JejeupData, JejeupMetaData, JejeupPermalinkData } from 'types';
 import { formatDateDetail } from '@/utils/strapi';
 import Seo, { originTitle } from '@/components/Seo';
 import YouTubeController from '@/components/YouTubeController';
@@ -252,7 +252,6 @@ const ReviewContent = ({ data }: { data: any }) => {
   };
 
   const renderContent = (content: any) => {
-    console.log('content: ', content);
     return content.map((item: any, index: number) => {
       if (item.type === 'paragraph') {
         return <p key={index}>{renderChildren(item.children)}</p>;
@@ -305,10 +304,6 @@ export default function JejeupDetail({
   useEffect(() => {
     loadRelations();
   }, [jejeupData]);
-
-  useEffect(() => {
-    console.log('jejeupData: ', jejeupData); // 임시코드
-  }, []);
 
   const previousPageHandler = () => {
     const previousPage = sessionStorage.getItem('location');
