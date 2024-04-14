@@ -303,6 +303,7 @@ export default function JejeupDetail({
 
   useEffect(() => {
     loadRelations();
+    console.log('jejeupData: ', jejeupData);
   }, [jejeupData]);
 
   const previousPageHandler = () => {
@@ -684,7 +685,7 @@ export default function JejeupDetail({
                         </div>
                       </div>
                     ) : jejeupData.jejeupMetaData.ogTitle === undefined ? (
-                      <JejeupMeta jejeup={jejeupData} />
+                      <JejeupMeta jejeup={jejeupData.attributes} />
                     ) : (
                       <div className={`${styles.preview} preview`}>
                         <div className={styles.video}>
