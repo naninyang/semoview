@@ -278,6 +278,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
         if (
           Array.isArray(jejeupMetaDataResponse) === false &&
           Object.keys(jejeupMetaDataResponse).length === 0 &&
+          jejeupMetaDataResponse.duration === undefined &&
           currentRetryCount < maxRetries
         ) {
           setTimeout(() => fetchMetadata(currentRetryCount + 1), 5000);
