@@ -425,6 +425,226 @@ export default function JejeupDetail({
     }
   };
 
+  function JejeupMeta({ jejeup }: { jejeup: any }) {
+    const [jejeupMetaData, setJejeupMetaData] = useState<JejeupMetaData | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const maxRetries = 7;
+
+    const fetchMetadata = async (currentRetryCount = 0) => {
+      try {
+        const jejeupMeta = await fetch(`${process.env.PREVIEW_OLD_API_URL}?url=https://youtu.be/${jejeup.video}`);
+        const jejeupMetaDataResponse = await jejeupMeta.json();
+
+        if (
+          Array.isArray(jejeupMetaDataResponse) === false &&
+          Object.keys(jejeupMetaDataResponse).length === 0 &&
+          currentRetryCount < maxRetries
+        ) {
+          setTimeout(() => fetchMetadata(currentRetryCount + 1), 5000);
+        } else {
+          setJejeupMetaData(jejeupMetaDataResponse);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    const handleRetry = () => {
+      setJejeupMetaData(null);
+      setIsLoading(true);
+      fetchMetadata().finally(() => setIsLoading(false));
+    };
+
+    useEffect(() => {
+      setIsLoading(true);
+      fetchMetadata().finally(() => setIsLoading(false));
+    }, []);
+
+    const handleReport = async (event: React.MouseEvent<HTMLButtonElement>) => {
+      const jejeupVideo = event.currentTarget.getAttribute('data-video');
+
+      try {
+        const response = await fetch('/api/unpublish', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ jejeupVideo: jejeupVideo }),
+        });
+
+        if (response.ok) {
+          alert('신고 성공! 감사합니다 ☺️');
+        } else {
+          const errorData = await response.json();
+          console.log(errorData.error);
+          alert('서버 오류입니다. 잠시 뒤 다시 시도해 주세요 😭');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('서버 오류입니다. 잠시 뒤 다시 시도해 주세요 😭');
+      }
+    };
+
+    return (
+      <>
+        {!isLoading && jejeupMetaData && jejeupData ? (
+          <>
+            {Object.keys(jejeupMetaData).length >= 0 ? (
+              <div className={`${styles.preview} preview`}>
+                <div className={styles.video}>
+                  {jejeupData.attributes.embeddingOff ? (
+                    <div className={styles.embeddingOff}>
+                      <Image
+                        src={jejeupData.jejeupMetaData.ogImage}
+                        width={1920}
+                        height={1080}
+                        alt=""
+                        unoptimized
+                        priority
+                      />
+                      <div>
+                        <p>유튜버 또는 원 저작권자가 유튜브에서만 재생할 수 있도록 설정한 콘텐츠 입니다.</p>
+                        <p>
+                          <Anchor href={`https://youtu.be/${jejeupData.attributes.video}`}>여기</Anchor>를 누르면
+                          유튜브로 이동합니다.
+                        </p>
+                      </div>
+                    </div>
+                  ) : (
+                    <YouTubeController
+                      videoId={jejeupData.attributes.video}
+                      videoImage={jejeupData.jejeupMetaData.ogImage}
+                    />
+                  )}
+                </div>
+                <div className={`${styles.youtube} ${isMore ? styles.more : ''}`}>
+                  <h1>{jejeupData.jejeupMetaData.ogTitle}</h1>
+                  <div className={styles.detail}>
+                    <Image
+                      src={`${jejeupData.jejeupMetaData.ownerAvatar === undefined ? 'https://cdn.dev1stud.io/jejeup/-/' + jejeupData.jejeupMetaData.ownerUrl.split('@')[1] + '.webp' : jejeupData.jejeupMetaData.ownerAvatar}`}
+                      width="36"
+                      height="36"
+                      alt=""
+                      unoptimized
+                    />
+                    <div className={styles.user}>
+                      <cite>{jejeupData.jejeupMetaData.ownerName}</cite>
+                      <time dateTime={jejeupData.jejeupMetaData.datePublished}>
+                        {formatDate(`${jejeupData.jejeupMetaData.datePublished}`)}
+                      </time>
+                    </div>
+                    <button type="button" onClick={moreToggle}>
+                      {isMore ? '닫기' : '더 보기'}
+                    </button>
+                  </div>
+                  {jejeupData.jejeupMetaData.ogDescription ? (
+                    <div className={styles.learnmore}>
+                      <em>{formatDuration(jejeupData.jejeupMetaData.duration)}</em>
+                      {jejeupData.jejeupMetaData.ogDescription}
+                      {isLoading && (
+                        <dl>
+                          <dt>관련 영상</dt>
+                          <dd>관련 영상 로딩 중...</dd>
+                        </dl>
+                      )}
+                      {jejeupData.attributes.relations && relations && !isLoading && !error && (
+                        <dl>
+                          <dt>관련 영상</dt>
+                          {Array.isArray(relations) &&
+                            relations
+                              .filter((relation) => relation.idx !== jejeupId)
+                              .map((relation) => (
+                                <dd key={relation.idx}>
+                                  <Anchor href={`/jejeup/${relation.idx}`}>{relation.subject}</Anchor>
+                                </dd>
+                              ))}
+                        </dl>
+                      )}
+                    </div>
+                  ) : (
+                    <div className={styles.learnmore}>
+                      <strong>유튜버가 더보기 정보를 등록하지 않았습니다.</strong>
+                    </div>
+                  )}
+                  {jejeupData.attributes.worst && (
+                    <div className={styles.worst}>
+                      <strong className="number">Worst</strong>
+                    </div>
+                  )}
+                  {(jejeupData.attributes.embeddingOff === null || jejeupData.attributes.embeddingOff === false) && (
+                    <div className={styles.embed}>
+                      <p>
+                        🚫 이 영상이 유튜브에서만 볼 수 있게 설정된 영상이라면 관리자에게{' '}
+                        <button type="button" data-video={jejeupData.attributes.video} onClick={handleReport}>
+                          알려
+                        </button>
+                        주세요.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div className={`${styles.preview} ${styles['preview-dummy']}`}>
+                <div className={styles.notice}>
+                  <p>알 수 없는 사유로 불러오지 못했습니다.</p>
+                  <p>
+                    <button type="button" data-video={jejeup.video} onClick={handleRetry}>
+                      새로고침
+                    </button>
+                    해 주세요.
+                  </p>
+                </div>
+                <div className={styles['preview-container']}>
+                  <div className={styles.thumbnail}>
+                    <div className={`${styles.dummy} ${styles.skeleton}`} />
+                  </div>
+                  <div className={styles['preview-info']}>
+                    <div className={styles.detail}>
+                      <div className={`${styles['user-info']}`}>
+                        <strong className={styles.skeleton} />
+                        <div className={styles.user}>
+                          <cite>
+                            <i className={styles.skeleton} />
+                          </cite>
+                          <time className={styles.skeleton} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </>
+        ) : (
+          <div className={`${styles.preview} ${styles['preview-dummy']}`}>
+            <div className={styles.notice} hidden>
+              <p>불러오는 중</p>
+            </div>
+            <div className={styles['preview-container']}>
+              <div className={styles.thumbnail}>
+                <div className={`${styles.dummy} ${styles.skeleton}`} />
+              </div>
+              <div className={styles['preview-info']}>
+                <div className={styles.detail}>
+                  <div className={`${styles['user-info']}`}>
+                    <strong className={styles.skeleton} />
+                    <div className={styles.user}>
+                      <cite>
+                        <i className={styles.skeleton} />
+                      </cite>
+                      <time className={styles.skeleton} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </>
+    );
+  }
+
   return (
     <main className={styles.jejeup}>
       <Seo
@@ -455,145 +675,128 @@ export default function JejeupDetail({
           <>
             {jejeupData.attributes.publishedAt !== null ? (
               <>
-                {jejeupData.jejeupMetaData && jejeupData.jejeupMetaData.ogTitle !== ' - YouTube' ? (
-                  jejeupData.jejeupMetaData.ogTitle === ' - YouTube' ||
-                  jejeupData.jejeupMetaData.ogTitle === undefined ? (
-                    <div className={`${styles.preview}  ${styles['preview-dummy']}`}>
-                      <div className={`${styles.dummy} ${styles.skeleton}`} />
-                      <div className={styles.youtube}>
-                        <h1>
-                          유튜버가 영상을 삭제했거나 비공개 처리한 영상입니다. 관리자에게{' '}
-                          <button type="button" data-video={jejeupData.attributes.video} onClick={handleReport}>
-                            신고
-                          </button>
-                          해 주세요.
-                        </h1>
-                        <div className={styles.detail}>
-                          <div className={`${styles.avatar} ${styles.skeleton}`} />
-                          <div className={styles.user}>
-                            <cite className={styles.skeleton} />
-                            <time className={styles.skeleton} />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className={`${styles.preview} preview`}>
-                      <div className={styles.video}>
-                        {jejeupData.attributes.embeddingOff ? (
-                          <div className={styles.embeddingOff}>
-                            <Image
-                              src={jejeupData.jejeupMetaData.ogImage}
-                              width={1920}
-                              height={1080}
-                              alt=""
-                              unoptimized
-                              priority
-                            />
-                            <div>
-                              <p>유튜버 또는 원 저작권자가 유튜브에서만 재생할 수 있도록 설정한 콘텐츠 입니다.</p>
-                              <p>
-                                <Anchor href={`https://youtu.be/${jejeupData.attributes.video}`}>여기</Anchor>를 누르면
-                                유튜브로 이동합니다.
-                              </p>
+                {jejeupData.jejeupMetaData && (
+                  <>
+                    {jejeupData.jejeupMetaData.ogTitle === ' - YouTube' ? (
+                      <div className={`${styles.preview}  ${styles['preview-dummy']}`}>
+                        <div className={`${styles.dummy} ${styles.skeleton}`} />
+                        <div className={styles.youtube}>
+                          <h1>
+                            유튜버가 영상을 삭제했거나 비공개 처리한 영상입니다. 관리자에게{' '}
+                            <button type="button" data-video={jejeupData.attributes.video} onClick={handleReport}>
+                              신고
+                            </button>
+                            해 주세요.
+                          </h1>
+                          <div className={styles.detail}>
+                            <div className={`${styles.avatar} ${styles.skeleton}`} />
+                            <div className={styles.user}>
+                              <cite className={styles.skeleton} />
+                              <time className={styles.skeleton} />
                             </div>
                           </div>
-                        ) : (
-                          <YouTubeController
-                            videoId={jejeupData.attributes.video}
-                            videoImage={jejeupData.jejeupMetaData.ogImage}
-                          />
-                        )}
-                      </div>
-                      <div className={`${styles.youtube} ${isMore ? styles.more : ''}`}>
-                        <h1>{jejeupData.jejeupMetaData.ogTitle}</h1>
-                        <div className={styles.detail}>
-                          <Image
-                            src={`${jejeupData.jejeupMetaData.ownerAvatar === undefined ? 'https://cdn.dev1stud.io/jejeup/-/' + jejeupData.jejeupMetaData.ownerUrl.split('@')[1] + '.webp' : jejeupData.jejeupMetaData.ownerAvatar}`}
-                            width="36"
-                            height="36"
-                            alt=""
-                            unoptimized
-                          />
-                          <div className={styles.user}>
-                            <cite>{jejeupData.jejeupMetaData.ownerName}</cite>
-                            <time dateTime={jejeupData.jejeupMetaData.datePublished}>
-                              {formatDate(`${jejeupData.jejeupMetaData.datePublished}`)}
-                            </time>
-                          </div>
-                          <button type="button" onClick={moreToggle}>
-                            {isMore ? '닫기' : '더 보기'}
-                          </button>
-                        </div>
-                        {jejeupData.jejeupMetaData.ogDescription ? (
-                          <div className={styles.learnmore}>
-                            <em>{formatDuration(jejeupData.jejeupMetaData.duration)}</em>
-                            {jejeupData.jejeupMetaData.ogDescription}
-                            {isLoading && (
-                              <dl>
-                                <dt>관련 영상</dt>
-                                <dd>관련 영상 로딩 중...</dd>
-                              </dl>
-                            )}
-                            {jejeupData.attributes.relations && relations && !isLoading && !error && (
-                              <dl>
-                                <dt>관련 영상</dt>
-                                {Array.isArray(relations) &&
-                                  relations
-                                    .filter((relation) => relation.idx !== jejeupId)
-                                    .map((relation) => (
-                                      <dd key={relation.idx}>
-                                        <Anchor href={`/jejeup/${relation.idx}`}>{relation.subject}</Anchor>
-                                      </dd>
-                                    ))}
-                              </dl>
-                            )}
-                          </div>
-                        ) : (
-                          <div className={styles.learnmore}>
-                            <strong>유튜버가 더보기 정보를 등록하지 않았습니다.</strong>
-                          </div>
-                        )}
-                        {jejeupData.attributes.worst && (
-                          <div className={styles.worst}>
-                            <strong className="number">Worst</strong>
-                          </div>
-                        )}
-                        {(jejeupData.attributes.embeddingOff === null ||
-                          jejeupData.attributes.embeddingOff === false) && (
-                          <div className={styles.embed}>
-                            <p>
-                              🚫 이 영상이 유튜브에서만 볼 수 있게 설정된 영상이라면 관리자에게{' '}
-                              <button type="button" data-video={jejeupData.attributes.video} onClick={handleReport}>
-                                알려
-                              </button>
-                              주세요.
-                            </p>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )
-                ) : (
-                  <div className={`${styles.preview}  ${styles['preview-dummy']}`}>
-                    <div className={`${styles.dummy} ${styles.skeleton}`} />
-                    <div className={styles.youtube}>
-                      <h1>
-                        유튜버가 영상을 삭제했거나 비공개 처리한 영상입니다. 관리자에게{' '}
-                        <button type="button" data-video={jejeupData.attributes.video} onClick={handleReport}>
-                          신고
-                        </button>
-                        해 주세요.
-                      </h1>
-                      <div className={styles.detail}>
-                        <div className={`${styles.avatar} ${styles.skeleton}`} />
-                        <div className={styles.user}>
-                          <cite className={styles.skeleton} />
-                          <time className={styles.skeleton} />
                         </div>
                       </div>
-                    </div>
-                  </div>
+                    ) : jejeupData.jejeupMetaData.ogTitle === undefined ? (
+                      <JejeupMeta jejeup={jejeupData} />
+                    ) : (
+                      <div className={`${styles.preview} preview`}>
+                        <div className={styles.video}>
+                          {jejeupData.attributes.embeddingOff ? (
+                            <div className={styles.embeddingOff}>
+                              <Image
+                                src={jejeupData.jejeupMetaData.ogImage}
+                                width={1920}
+                                height={1080}
+                                alt=""
+                                unoptimized
+                                priority
+                              />
+                              <div>
+                                <p>유튜버 또는 원 저작권자가 유튜브에서만 재생할 수 있도록 설정한 콘텐츠 입니다.</p>
+                                <p>
+                                  <Anchor href={`https://youtu.be/${jejeupData.attributes.video}`}>여기</Anchor>를
+                                  누르면 유튜브로 이동합니다.
+                                </p>
+                              </div>
+                            </div>
+                          ) : (
+                            <YouTubeController
+                              videoId={jejeupData.attributes.video}
+                              videoImage={jejeupData.jejeupMetaData.ogImage}
+                            />
+                          )}
+                        </div>
+                        <div className={`${styles.youtube} ${isMore ? styles.more : ''}`}>
+                          <h1>{jejeupData.jejeupMetaData.ogTitle}</h1>
+                          <div className={styles.detail}>
+                            <Image
+                              src={`${jejeupData.jejeupMetaData.ownerAvatar === undefined ? 'https://cdn.dev1stud.io/jejeup/-/' + jejeupData.jejeupMetaData.ownerUrl.split('@')[1] + '.webp' : jejeupData.jejeupMetaData.ownerAvatar}`}
+                              width="36"
+                              height="36"
+                              alt=""
+                              unoptimized
+                            />
+                            <div className={styles.user}>
+                              <cite>{jejeupData.jejeupMetaData.ownerName}</cite>
+                              <time dateTime={jejeupData.jejeupMetaData.datePublished}>
+                                {formatDate(`${jejeupData.jejeupMetaData.datePublished}`)}
+                              </time>
+                            </div>
+                            <button type="button" onClick={moreToggle}>
+                              {isMore ? '닫기' : '더 보기'}
+                            </button>
+                          </div>
+                          {jejeupData.jejeupMetaData.ogDescription ? (
+                            <div className={styles.learnmore}>
+                              <em>{formatDuration(jejeupData.jejeupMetaData.duration)}</em>
+                              {jejeupData.jejeupMetaData.ogDescription}
+                              {isLoading && (
+                                <dl>
+                                  <dt>관련 영상</dt>
+                                  <dd>관련 영상 로딩 중...</dd>
+                                </dl>
+                              )}
+                              {jejeupData.attributes.relations && relations && !isLoading && !error && (
+                                <dl>
+                                  <dt>관련 영상</dt>
+                                  {Array.isArray(relations) &&
+                                    relations
+                                      .filter((relation) => relation.idx !== jejeupId)
+                                      .map((relation) => (
+                                        <dd key={relation.idx}>
+                                          <Anchor href={`/jejeup/${relation.idx}`}>{relation.subject}</Anchor>
+                                        </dd>
+                                      ))}
+                                </dl>
+                              )}
+                            </div>
+                          ) : (
+                            <div className={styles.learnmore}>
+                              <strong>유튜버가 더보기 정보를 등록하지 않았습니다.</strong>
+                            </div>
+                          )}
+                          {jejeupData.attributes.worst && (
+                            <div className={styles.worst}>
+                              <strong className="number">Worst</strong>
+                            </div>
+                          )}
+                          {(jejeupData.attributes.embeddingOff === null ||
+                            jejeupData.attributes.embeddingOff === false) && (
+                            <div className={styles.embed}>
+                              <p>
+                                🚫 이 영상이 유튜브에서만 볼 수 있게 설정된 영상이라면 관리자에게{' '}
+                                <button type="button" data-video={jejeupData.attributes.video} onClick={handleReport}>
+                                  알려
+                                </button>
+                                주세요.
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </>
                 )}
                 <div className={styles.figcaption}>
                   {jejeupData.attributes.worst && (
