@@ -226,6 +226,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
 
   useEffect(() => {
     localStorage.removeItem('currentPage');
+    console.log('data: ', data);
   }, []);
 
   useEffect(() => {

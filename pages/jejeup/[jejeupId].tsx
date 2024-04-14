@@ -429,6 +429,7 @@ export default function JejeupDetail({
       try {
         const jejeupMeta = await fetch(`${process.env.PREVIEW_OLD_API_URL}?url=https://youtu.be/${jejeup.video}`);
         const jejeupMetaDataResponse = await jejeupMeta.json();
+        console.log('jejeupMetaDataResponse: ', jejeupMetaDataResponse);
 
         if (
           Array.isArray(jejeupMetaDataResponse) === false &&
