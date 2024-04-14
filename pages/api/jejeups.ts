@@ -24,10 +24,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         throw new Error('Failed to fetch article data');
       }
       const jejeupResponse = await response.json();
-      const jejeupMetaResponse = await fetch(
-        `${process.env.PREVIEW_OLD_API_URL}?url=https://youtu.be/${encodeURIComponent(jejeupResponse.data.attributes.video)}`,
-      );
-      const jejeupMetaData = await jejeupMetaResponse.json();
       const amusementSource = jejeupResponse.data.attributes.isAmusements
         ? jejeupResponse.data.attributes.amusements
         : jejeupResponse.data.attributes.title;
@@ -39,7 +35,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       const jejeups = {
         ...jejeupResponse.data,
-        jejeupMetaData,
         amusementData,
       };
 
