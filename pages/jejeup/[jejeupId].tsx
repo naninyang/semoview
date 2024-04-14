@@ -973,7 +973,7 @@ export default function JejeupDetail({
                                           <Anchor href={data.ottAddr}>
                                             {data.ott === 'amazonOriginal' && 'Prime Video'}
                                             {(data.ott === 'appleOriginal' || data.ott === 'appleFilm') && 'Apple TV+'}
-                                            {data.ott === 'disneyOriginal' && 'Disney+'}
+                                            {(data.ott === 'disneyOriginal' || data.ott === 'disneyStar') && 'Disney+'}
                                             {(data.ott === 'netflixOriginal' ||
                                               data.ott === 'netflixFilm' ||
                                               data.ott === 'netflixAnime' ||
@@ -1477,7 +1477,7 @@ export default function JejeupDetail({
                                     <Anchor href={data.ottAddr}>
                                       {data.ott === 'amazonOriginal' && 'Prime Video'}
                                       {(data.ott === 'appleOriginal' || data.ott === 'appleFilm') && 'Apple TV+'}
-                                      {data.ott === 'disneyOriginal' && 'Disney+'}
+                                      {(data.ott === 'disneyOriginal' || data.ott === 'disneyStar') && 'Disney+'}
                                       {(data.ott === 'netflixOriginal' ||
                                         data.ott === 'netflixFilm' ||
                                         data.ott === 'netflixAnime' ||

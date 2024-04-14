@@ -336,7 +336,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                         <button type="button" data-video={jejeup.video} onClick={handleReport}>
                           신고
                         </button>
-                        해 주세요.
+                        해 주세요. {process.env.NODE_ENV === 'development' && jejeup.idx}
                       </p>
                     </div>
                     <div className={styles['preview-container']}>
