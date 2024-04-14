@@ -304,6 +304,7 @@ export default function JejeupDetail({
 
   useEffect(() => {
     loadRelations();
+    console.log('jejeupData: ', jejeupData); // 임시코드
   }, [jejeupData]);
 
   const previousPageHandler = () => {
