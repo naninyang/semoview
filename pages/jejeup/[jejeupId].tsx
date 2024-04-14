@@ -425,13 +425,12 @@ export default function JejeupDetail({
     const [jejeupMetaData, setJejeupMetaData] = useState<JejeupMetaData | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const maxRetries = 7;
-    console.log('jejeup: ', jejeup);
 
     const fetchMetadata = async (currentRetryCount = 0) => {
       try {
         const jejeupMeta = await fetch(`${process.env.PREVIEW_OLD_API_URL}?url=https://youtu.be/${jejeup.video}`);
         const jejeupMetaDataResponse = await jejeupMeta.json();
-        // console.log('jejeupMetaDataResponse: ', jejeupMetaDataResponse);
+        console.log('jejeupMetaDataResponse: ', jejeupMetaDataResponse);
 
         if (
           Array.isArray(jejeupMetaDataResponse) === false &&
