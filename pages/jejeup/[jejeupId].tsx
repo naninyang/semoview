@@ -489,14 +489,7 @@ export default function JejeupDetail({
                 <div className={styles.video}>
                   {jejeupData.attributes.embeddingOff ? (
                     <div className={styles.embeddingOff}>
-                      <Image
-                        src={jejeupData.jejeupMetaData.ogImage}
-                        width={1920}
-                        height={1080}
-                        alt=""
-                        unoptimized
-                        priority
-                      />
+                      <Image src={jejeupMetaData.ogImage} width={1920} height={1080} alt="" unoptimized priority />
                       <div>
                         <p>유튜버 또는 원 저작권자가 유튜브에서만 재생할 수 있도록 설정한 콘텐츠 입니다.</p>
                         <p>
@@ -506,36 +499,33 @@ export default function JejeupDetail({
                       </div>
                     </div>
                   ) : (
-                    <YouTubeController
-                      videoId={jejeupData.attributes.video}
-                      videoImage={jejeupData.jejeupMetaData.ogImage}
-                    />
+                    <YouTubeController videoId={jejeupData.attributes.video} videoImage={jejeupMetaData.ogImage} />
                   )}
                 </div>
                 <div className={`${styles.youtube} ${isMore ? styles.more : ''}`}>
-                  <h1>{jejeupData.jejeupMetaData.ogTitle}</h1>
+                  <h1>{jejeupMetaData.ogTitle}</h1>
                   <div className={styles.detail}>
                     <Image
-                      src={`${jejeupData.jejeupMetaData.ownerAvatar === undefined ? 'https://cdn.dev1stud.io/jejeup/-/' + jejeupData.jejeupMetaData.ownerUrl.split('@')[1] + '.webp' : jejeupData.jejeupMetaData.ownerAvatar}`}
+                      src={`${jejeupMetaData.ownerAvatar === undefined ? 'https://cdn.dev1stud.io/jejeup/-/' + jejeupMetaData.ownerUrl?.split('@')[1] + '.webp' : jejeupMetaData.ownerAvatar}`}
                       width="36"
                       height="36"
                       alt=""
                       unoptimized
                     />
                     <div className={styles.user}>
-                      <cite>{jejeupData.jejeupMetaData.ownerName}</cite>
-                      <time dateTime={jejeupData.jejeupMetaData.datePublished}>
-                        {formatDate(`${jejeupData.jejeupMetaData.datePublished}`)}
+                      <cite>{jejeupMetaData.ownerName}</cite>
+                      <time dateTime={jejeupMetaData.datePublished}>
+                        {formatDate(`${jejeupMetaData.datePublished}`)}
                       </time>
                     </div>
                     <button type="button" onClick={moreToggle}>
                       {isMore ? '닫기' : '더 보기'}
                     </button>
                   </div>
-                  {jejeupData.jejeupMetaData.ogDescription ? (
+                  {jejeupMetaData.ogDescription ? (
                     <div className={styles.learnmore}>
-                      <em>{formatDuration(jejeupData.jejeupMetaData.duration)}</em>
-                      {jejeupData.jejeupMetaData.ogDescription}
+                      <em>{formatDuration(jejeupMetaData.duration)}</em>
+                      {jejeupMetaData.ogDescription}
                       {isLoading && (
                         <dl>
                           <dt>관련 영상</dt>

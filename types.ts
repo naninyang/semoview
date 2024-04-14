@@ -82,6 +82,7 @@ export interface JejeupMetaData {
   twitterSite?: string;
   twitterCreator?: string;
   datePublished?: string;
+  ownerUrl?: string;
   ownerAvatar?: string;
   ownerName?: string;
   pressPublished?: string;
