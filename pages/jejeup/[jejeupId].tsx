@@ -749,123 +749,145 @@ export default function JejeupDetail({
                                     <dl className={styles.summary}>
                                       <dt>
                                         {data.category !== 'anime_film' ? (
-                                          <em className={styles[data.broadcast]}>
-                                            {data.broadcast === 'ENA' && (
+                                          <>
+                                            {(data.category === 'drama' ||
+                                              data.category === 'film' ||
+                                              data.category === 'game' ||
+                                              data.category === 'anime' ||
+                                              data.category === 'ott_drama' ||
+                                              data.category === 'ott_film' ||
+                                              data.category === 'ott_anime') && (
+                                              <em className={styles[data.broadcast]}>
+                                                {data.broadcast === 'ENA' && (
+                                                  <>
+                                                    <Ena /> <span>ENA</span>
+                                                  </>
+                                                )}
+                                                {data.broadcast === 'JTBC' && (
+                                                  <>
+                                                    <Jtbc /> <span>JTBC</span>
+                                                  </>
+                                                )}
+                                                {data.broadcast === 'KBS2' && (
+                                                  <>
+                                                    <Kbs2tv /> <span>KBS 2TV</span>
+                                                  </>
+                                                )}
+                                                {data.broadcast === 'MBC' && (
+                                                  <>
+                                                    <Mbc /> <span>MBC</span>
+                                                  </>
+                                                )}
+                                                {data.broadcast === 'OCN' && (
+                                                  <>
+                                                    <Ocn /> <span>OCN</span>
+                                                  </>
+                                                )}
+                                                {data.broadcast === 'SBS' && (
+                                                  <>
+                                                    <Sbs /> <span>SBS</span>
+                                                  </>
+                                                )}
+                                                {data.broadcast === 'tvN' && (
+                                                  <>
+                                                    <Tvn /> <span>tvN</span>
+                                                  </>
+                                                )}
+                                                {(data.animeBroadcast1 !== null || data.animeBroadcast2 !== null) && (
+                                                  <>
+                                                    {data.animeBroadcast1 === 'tokyomx' && (
+                                                      <>
+                                                        <Tokyomx /> <span>도쿄 MX</span>
+                                                      </>
+                                                    )}
+                                                    {data.animeBroadcast1 === 'tvtokyo' && (
+                                                      <>
+                                                        <Tvtokyo /> <span>테레비 도쿄</span>
+                                                      </>
+                                                    )}
+                                                    {data.animeBroadcast1 === 'fujitv' && (
+                                                      <>
+                                                        <Fujitv /> <span>후지 테레비</span>
+                                                      </>
+                                                    )}
+                                                    {data.animeBroadcast1 === 'mbs' && (
+                                                      <>
+                                                        <Mbs /> <span>MBS</span>
+                                                      </>
+                                                    )}
+                                                    {data.animeBroadcast1 === 'tbs' && (
+                                                      <>
+                                                        <Tbs /> <span>TBS</span>
+                                                      </>
+                                                    )}
+                                                    {data.animeBroadcast1 === 'atx' && (
+                                                      <>
+                                                        <Atx /> <span>AT-X</span>
+                                                      </>
+                                                    )}
+                                                    {data.animeBroadcast1 === 'nippontv' && (
+                                                      <>
+                                                        <Nippontv /> <span>닛폰 테레비</span>
+                                                      </>
+                                                    )}
+                                                    {data.animeBroadcast1 === 'wowow' && (
+                                                      <>
+                                                        <Wowow /> <span>WOWOW</span>
+                                                      </>
+                                                    )}
+                                                    {data.animeBroadcast2 === 'aniplus' && (
+                                                      <>
+                                                        {data.animeBroadcast1 !== null && '|'}
+                                                        <Aniplus />
+                                                        <span>애니플러스</span> 방영{' '}
+                                                      </>
+                                                    )}
+                                                    {data.animeBroadcast2 === 'daewon' && (
+                                                      <>
+                                                        {data.animeBroadcast1 !== null && '|'}
+                                                        <Daewon /> <span>애니원</span> 방영{' '}
+                                                      </>
+                                                    )}
+                                                    {data.animeBroadcast2 === 'anibox' && (
+                                                      <>
+                                                        {data.animeBroadcast1 !== null && '|'}
+                                                        <Anibox /> <span>애니박스</span> 방영{' '}
+                                                      </>
+                                                    )}
+                                                    {data.animeBroadcast2 === 'tooniverse' && (
+                                                      <>
+                                                        {data.animeBroadcast1 !== null && '|'}
+                                                        <Tooniverse /> <span>투니버스</span> 방영{' '}
+                                                      </>
+                                                    )}
+                                                    {data.animeBroadcast2 === 'animax' && (
+                                                      <>
+                                                        {data.animeBroadcast1 !== null && '|'}
+                                                        <Animax /> <span>애니맥스</span> 방영{' '}
+                                                      </>
+                                                    )}
+                                                  </>
+                                                )}
+                                                {(data.category === 'game' || data.category === 'game_fan') &&
+                                                  data.isMobile &&
+                                                  '모바일 '}
+                                                {CategoryName(data.category)}
+                                                {data.ott === null && data.ottAddr !== null && ' | 단편영화'}
+                                              </em>
+                                            )}
+                                            {data.category === 'ott_anime_film' && (
                                               <>
-                                                <Ena /> <span>ENA</span>
+                                                <em>애니메이션</em>
+                                                <em>영화</em>
                                               </>
                                             )}
-                                            {data.broadcast === 'JTBC' && (
+                                            {data.category === 'ott_documentary_film' && (
                                               <>
-                                                <Jtbc /> <span>JTBC</span>
+                                                <em>다큐멘터리</em>
+                                                <em>영화</em>
                                               </>
                                             )}
-                                            {data.broadcast === 'KBS2' && (
-                                              <>
-                                                <Kbs2tv /> <span>KBS 2TV</span>
-                                              </>
-                                            )}
-                                            {data.broadcast === 'MBC' && (
-                                              <>
-                                                <Mbc /> <span>MBC</span>
-                                              </>
-                                            )}
-                                            {data.broadcast === 'OCN' && (
-                                              <>
-                                                <Ocn /> <span>OCN</span>
-                                              </>
-                                            )}
-                                            {data.broadcast === 'SBS' && (
-                                              <>
-                                                <Sbs /> <span>SBS</span>
-                                              </>
-                                            )}
-                                            {data.broadcast === 'tvN' && (
-                                              <>
-                                                <Tvn /> <span>tvN</span>
-                                              </>
-                                            )}
-                                            {(data.animeBroadcast1 !== null || data.animeBroadcast2 !== null) && (
-                                              <>
-                                                {data.animeBroadcast1 === 'tokyomx' && (
-                                                  <>
-                                                    <Tokyomx /> <span>도쿄 MX</span>
-                                                  </>
-                                                )}
-                                                {data.animeBroadcast1 === 'tvtokyo' && (
-                                                  <>
-                                                    <Tvtokyo /> <span>테레비 도쿄</span>
-                                                  </>
-                                                )}
-                                                {data.animeBroadcast1 === 'fujitv' && (
-                                                  <>
-                                                    <Fujitv /> <span>후지 테레비</span>
-                                                  </>
-                                                )}
-                                                {data.animeBroadcast1 === 'mbs' && (
-                                                  <>
-                                                    <Mbs /> <span>MBS</span>
-                                                  </>
-                                                )}
-                                                {data.animeBroadcast1 === 'tbs' && (
-                                                  <>
-                                                    <Tbs /> <span>TBS</span>
-                                                  </>
-                                                )}
-                                                {data.animeBroadcast1 === 'atx' && (
-                                                  <>
-                                                    <Atx /> <span>AT-X</span>
-                                                  </>
-                                                )}
-                                                {data.animeBroadcast1 === 'nippontv' && (
-                                                  <>
-                                                    <Nippontv /> <span>닛폰 테레비</span>
-                                                  </>
-                                                )}
-                                                {data.animeBroadcast1 === 'wowow' && (
-                                                  <>
-                                                    <Wowow /> <span>WOWOW</span>
-                                                  </>
-                                                )}
-                                                {data.animeBroadcast2 === 'aniplus' && (
-                                                  <>
-                                                    {data.animeBroadcast1 !== null && '|'}
-                                                    <Aniplus />
-                                                    <span>애니플러스</span> 방영{' '}
-                                                  </>
-                                                )}
-                                                {data.animeBroadcast2 === 'daewon' && (
-                                                  <>
-                                                    {data.animeBroadcast1 !== null && '|'}
-                                                    <Daewon /> <span>애니원</span> 방영{' '}
-                                                  </>
-                                                )}
-                                                {data.animeBroadcast2 === 'anibox' && (
-                                                  <>
-                                                    {data.animeBroadcast1 !== null && '|'}
-                                                    <Anibox /> <span>애니박스</span> 방영{' '}
-                                                  </>
-                                                )}
-                                                {data.animeBroadcast2 === 'tooniverse' && (
-                                                  <>
-                                                    {data.animeBroadcast1 !== null && '|'}
-                                                    <Tooniverse /> <span>투니버스</span> 방영{' '}
-                                                  </>
-                                                )}
-                                                {data.animeBroadcast2 === 'animax' && (
-                                                  <>
-                                                    {data.animeBroadcast1 !== null && '|'}
-                                                    <Animax /> <span>애니맥스</span> 방영{' '}
-                                                  </>
-                                                )}
-                                              </>
-                                            )}
-                                            {(data.category === 'game' || data.category === 'game_fan') &&
-                                              data.isMobile &&
-                                              '모바일 '}
-                                            {CategoryName(data.category)}
-                                            {data.ott === null && data.ottAddr !== null && ' | 단편영화'}
-                                          </em>
+                                          </>
                                         ) : (
                                           <>
                                             {data.broadcast !== null && (
@@ -907,6 +929,12 @@ export default function JejeupDetail({
                                                 )}
                                                 드라마
                                               </em>
+                                            )}
+                                            {data.category === 'anime_film' && (
+                                              <>
+                                                <em>애니메이션</em>
+                                                <em>영화</em>
+                                              </>
                                             )}
                                           </>
                                         )}
@@ -1256,124 +1284,145 @@ export default function JejeupDetail({
                               <dl className={styles.summary}>
                                 <dt>
                                   {data.category !== 'anime_film' ? (
-                                    <em className={styles[data.broadcast]}>
-                                      {data.broadcast === 'ENA' && (
+                                    <>
+                                      {(data.category === 'drama' ||
+                                        data.category === 'film' ||
+                                        data.category === 'game' ||
+                                        data.category === 'anime' ||
+                                        data.category === 'ott_drama' ||
+                                        data.category === 'ott_film' ||
+                                        data.category === 'ott_anime') && (
+                                        <em className={styles[data.broadcast]}>
+                                          {data.broadcast === 'ENA' && (
+                                            <>
+                                              <Ena /> <span>ENA</span>
+                                            </>
+                                          )}
+                                          {data.broadcast === 'JTBC' && (
+                                            <>
+                                              <Jtbc /> <span>JTBC</span>
+                                            </>
+                                          )}
+                                          {data.broadcast === 'KBS2' && (
+                                            <>
+                                              <Kbs2tv /> <span>KBS 2TV</span>
+                                            </>
+                                          )}
+                                          {data.broadcast === 'MBC' && (
+                                            <>
+                                              <Mbc /> <span>MBC</span>
+                                            </>
+                                          )}
+                                          {data.broadcast === 'OCN' && (
+                                            <>
+                                              <Ocn /> <span>OCN</span>
+                                            </>
+                                          )}
+                                          {data.broadcast === 'SBS' && (
+                                            <>
+                                              <Sbs /> <span>SBS</span>
+                                            </>
+                                          )}
+                                          {data.broadcast === 'tvN' && (
+                                            <>
+                                              <Tvn /> <span>tvN</span>
+                                            </>
+                                          )}
+                                          {(data.animeBroadcast1 !== null || data.animeBroadcast2 !== null) && (
+                                            <>
+                                              {data.animeBroadcast1 === 'tokyomx' && (
+                                                <>
+                                                  <Tokyomx /> <span>도쿄 MX</span>
+                                                </>
+                                              )}
+                                              {data.animeBroadcast1 === 'tvtokyo' && (
+                                                <>
+                                                  <Tvtokyo /> <span>테레비 도쿄</span>
+                                                </>
+                                              )}
+                                              {data.animeBroadcast1 === 'fujitv' && (
+                                                <>
+                                                  <Fujitv /> <span>후지 테레비</span>
+                                                </>
+                                              )}
+                                              {data.animeBroadcast1 === 'mbs' && (
+                                                <>
+                                                  <Mbs /> <span>MBS</span>
+                                                </>
+                                              )}
+                                              {data.animeBroadcast1 === 'tbs' && (
+                                                <>
+                                                  <Tbs /> <span>TBS</span>
+                                                </>
+                                              )}
+                                              {data.animeBroadcast1 === 'atx' && (
+                                                <>
+                                                  <Atx /> <span>AT-X</span>
+                                                </>
+                                              )}
+                                              {data.animeBroadcast1 === 'nippontv' && (
+                                                <>
+                                                  <Nippontv /> <span>닛폰 테레비</span>
+                                                </>
+                                              )}
+                                              {data.animeBroadcast1 === 'wowow' && (
+                                                <>
+                                                  <Wowow /> <span>WOWOW</span>
+                                                </>
+                                              )}
+                                              {data.animeBroadcast2 === 'aniplus' && (
+                                                <>
+                                                  {data.animeBroadcast1 !== null && '|'}
+                                                  <Aniplus />
+                                                  <span>애니플러스</span> 방영{' '}
+                                                </>
+                                              )}
+                                              {data.animeBroadcast2 === 'daewon' && (
+                                                <>
+                                                  {data.animeBroadcast1 !== null && '|'}
+                                                  <Daewon /> <span>애니원</span> 방영{' '}
+                                                </>
+                                              )}
+                                              {data.animeBroadcast2 === 'anibox' && (
+                                                <>
+                                                  {data.animeBroadcast1 !== null && '|'}
+                                                  <Anibox /> <span>애니박스</span> 방영{' '}
+                                                </>
+                                              )}
+                                              {data.animeBroadcast2 === 'tooniverse' && (
+                                                <>
+                                                  {data.animeBroadcast1 !== null && '|'}
+                                                  <Tooniverse /> <span>투니버스</span> 방영{' '}
+                                                </>
+                                              )}
+                                              {data.animeBroadcast2 === 'animax' && (
+                                                <>
+                                                  {data.animeBroadcast1 !== null && '|'}
+                                                  <Animax /> <span>애니맥스</span> 방영{' '}
+                                                </>
+                                              )}
+                                            </>
+                                          )}
+                                          {(data.category === 'game' || data.category === 'game_fan') &&
+                                            data.isMobile &&
+                                            '모바일 '}
+                                          {CategoryName(data.category)}
+                                          {data.ott === null && data.ottAddr !== null && ' | 단편영화'}
+                                        </em>
+                                      )}
+                                      {data.category === 'ott_anime_film' && (
                                         <>
-                                          <Ena /> <span>ENA</span>
+                                          <em>애니메이션</em>
+                                          <em>영화</em>
                                         </>
                                       )}
-                                      {data.broadcast === 'JTBC' && (
+                                      {data.category === 'ott_documentary_film' && (
                                         <>
-                                          <Jtbc /> <span>JTBC</span>
+                                          <em>다큐멘터리</em>
+                                          <em>영화</em>
                                         </>
                                       )}
-                                      {data.broadcast === 'KBS2' && (
-                                        <>
-                                          <Kbs2tv /> <span>KBS 2TV</span>
-                                        </>
-                                      )}
-                                      {data.broadcast === 'MBC' && (
-                                        <>
-                                          <Mbc /> <span>MBC</span>
-                                        </>
-                                      )}
-                                      {data.broadcast === 'OCN' && (
-                                        <>
-                                          <Ocn /> <span>OCN</span>
-                                        </>
-                                      )}
-                                      {data.broadcast === 'SBS' && (
-                                        <>
-                                          <Sbs /> <span>SBS</span>
-                                        </>
-                                      )}
-                                      {data.broadcast === 'tvN' && (
-                                        <>
-                                          <Tvn /> <span>tvN</span>
-                                        </>
-                                      )}
-                                      {(data.animeBroadcast1 !== null || data.animeBroadcast2 !== null) && (
-                                        <>
-                                          {data.animeBroadcast1 === 'tokyomx' && (
-                                            <>
-                                              <Tokyomx /> <span>도쿄 MX</span>
-                                            </>
-                                          )}
-                                          {data.animeBroadcast1 === 'tvtokyo' && (
-                                            <>
-                                              <Tvtokyo /> <span>테레비 도쿄</span>
-                                            </>
-                                          )}
-                                          {data.animeBroadcast1 === 'fujitv' && (
-                                            <>
-                                              <Fujitv /> <span>후지 테레비</span>
-                                            </>
-                                          )}
-                                          {data.animeBroadcast1 === 'mbs' && (
-                                            <>
-                                              <Mbs /> <span>MBS</span>
-                                            </>
-                                          )}
-                                          {data.animeBroadcast1 === 'tbs' && (
-                                            <>
-                                              <Tbs /> <span>TBS</span>
-                                            </>
-                                          )}
-                                          {data.animeBroadcast1 === 'atx' && (
-                                            <>
-                                              <Atx /> <span>AT-X</span>
-                                            </>
-                                          )}
-                                          {data.animeBroadcast1 === 'nippontv' && (
-                                            <>
-                                              <Nippontv /> <span>닛폰 테레비</span>
-                                            </>
-                                          )}
-                                          {data.animeBroadcast1 === 'wowow' && (
-                                            <>
-                                              <Wowow /> <span>WOWOW</span>
-                                            </>
-                                          )}
-                                          {data.animeBroadcast2 === 'aniplus' && (
-                                            <>
-                                              {data.animeBroadcast1 !== null && '|'}
-                                              <Aniplus />
-                                              <span>애니플러스</span> 방영{' '}
-                                            </>
-                                          )}
-                                          {data.animeBroadcast2 === 'daewon' && (
-                                            <>
-                                              {data.animeBroadcast1 !== null && '|'}
-                                              <Daewon /> <span>애니원</span> 방영{' '}
-                                            </>
-                                          )}
-                                          {data.animeBroadcast2 === 'anibox' && (
-                                            <>
-                                              {data.animeBroadcast1 !== null && '|'}
-                                              <Anibox /> <span>애니박스</span> 방영{' '}
-                                            </>
-                                          )}
-                                          {data.animeBroadcast2 === 'tooniverse' && (
-                                            <>
-                                              {data.animeBroadcast1 !== null && '|'}
-                                              <Tooniverse /> <span>투니버스</span> 방영{' '}
-                                            </>
-                                          )}
-                                          {data.animeBroadcast2 === 'animax' && (
-                                            <>
-                                              {data.animeBroadcast1 !== null && '|'}
-                                              <Animax /> <span>애니맥스</span> 방영{' '}
-                                            </>
-                                          )}
-                                        </>
-                                      )}
-                                      {(data.category === 'game' || data.category === 'game_fan') &&
-                                        data.isMobile &&
-                                        '모바일 '}
-                                      {CategoryName(data.category)}
-                                      {data.category === 'game_fan' && '팬 게임'}
-                                      {data.ott === null && data.ottAddr !== null && ' | 단편영화'}
-                                    </em>
+                                    </>
                                   ) : (
                                     <>
                                       {data.broadcast !== null && (
@@ -1415,6 +1464,12 @@ export default function JejeupDetail({
                                           )}
                                           드라마
                                         </em>
+                                      )}
+                                      {data.category === 'anime_film' && (
+                                        <>
+                                          <em>애니메이션</em>
+                                          <em>영화</em>
+                                        </>
                                       )}
                                     </>
                                   )}
@@ -1597,26 +1652,12 @@ export default function JejeupDetail({
                                       )}
                                     </>
                                   )}
-                                  {(data.ott === 'amazonOriginal' || data.ratingCustom) && (
+                                  {data.ratingCustom && (
                                     <div className={styles.custom}>
-                                      {data.ott === 'amazonOriginal' && !data.ratingCustom && (
-                                        <button type="button" onClick={amazonRatingHandler}>
-                                          <i />
-                                          <span>아마존 자체 심의등급 작품</span>
-                                        </button>
-                                      )}
-                                      {data.ott === 'amazonOriginal' && data.ratingCustom && (
-                                        <button type="button" onClick={regionRatingHandler}>
-                                          <i />
-                                          <span>한국 리전 아마존 시청 불가 작품</span>
-                                        </button>
-                                      )}
-                                      {data.ott !== 'amazonOriginal' && data.ratingCustom && (
-                                        <button type="button" onClick={customRatingHandler}>
-                                          <i />
-                                          <span>제제없 자체설정 심의등급 안내</span>
-                                        </button>
-                                      )}
+                                      <button type="button" onClick={customRatingHandler}>
+                                        <i />
+                                        <span>제제없 자체설정 심의등급 안내</span>
+                                      </button>
                                     </div>
                                   )}
                                   {data.ott !== null && data.ottAddr !== null && (
@@ -1642,11 +1683,6 @@ export default function JejeupDetail({
                                   {data.ott === null && data.ottAddr !== null && (
                                     <Anchor href={data.ottAddr}>
                                       단편영화 &apos;{data.titleKorean ? data.titleKorean : data.title}&apos; 보러가기
-                                    </Anchor>
-                                  )}
-                                  {data.category === 'game_fan' && (
-                                    <Anchor href={`/amusement/${data.idx}`}>
-                                      &apos;{data.relations}&apos;의 다른 팬 게임 보러가기
                                     </Anchor>
                                   )}
                                 </dt>

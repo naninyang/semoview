@@ -286,6 +286,15 @@ export interface JejeupAmusementData {
   };
 }
 
+export type Category =
+  | 'ott_film'
+  | 'ott_anime'
+  | 'ott_drama'
+  | 'ott_anime_film'
+  | 'ott_documentary_film'
+  | 'game'
+  | 'game_fan';
+
 export interface NoticeData {
   id: string;
   idx: string;

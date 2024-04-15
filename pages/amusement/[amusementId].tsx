@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 import styled from '@emotion/styled';
-import { AmusementData, AmusementPermalinkData, JejeupData, JejeupMetaData } from 'types';
+import { AmusementData, AmusementPermalinkData, Category, JejeupData, JejeupMetaData } from 'types';
 import { formatDateDetail } from '@/utils/strapi';
 import Seo, { originTitle } from '@/components/Seo';
 import { CategoryName } from '@/components/CategoryName';
@@ -1074,124 +1074,146 @@ export default function Amusement({
                 <dt>카테고리</dt>
                 <dd>
                   {amusementData.attributes.category !== 'anime_film' ? (
-                    <em>
-                      {amusementData.attributes.broadcast === 'ENA' && (
+                    <>
+                      {(amusementData.attributes.category === 'drama' ||
+                        amusementData.attributes.category === 'film' ||
+                        amusementData.attributes.category === 'game' ||
+                        amusementData.attributes.category === 'anime' ||
+                        amusementData.attributes.category === 'ott_drama' ||
+                        amusementData.attributes.category === 'ott_film' ||
+                        amusementData.attributes.category === 'ott_anime') && (
+                        <em>
+                          {amusementData.attributes.broadcast === 'ENA' && (
+                            <>
+                              <Ena /> <span>ENA</span>
+                            </>
+                          )}
+                          {amusementData.attributes.broadcast === 'JTBC' && (
+                            <>
+                              <Jtbc /> <span>JTBC</span>
+                            </>
+                          )}
+                          {amusementData.attributes.broadcast === 'KBS2' && (
+                            <>
+                              <Kbs2tv /> <span>KBS 2TV</span>
+                            </>
+                          )}
+                          {amusementData.attributes.broadcast === 'MBC' && (
+                            <>
+                              <Mbc /> <span>MBC</span>
+                            </>
+                          )}
+                          {amusementData.attributes.broadcast === 'OCN' && (
+                            <>
+                              <Ocn /> <span>OCN</span>
+                            </>
+                          )}
+                          {amusementData.attributes.broadcast === 'SBS' && (
+                            <>
+                              <Sbs /> <span>SBS</span>
+                            </>
+                          )}
+                          {amusementData.attributes.broadcast === 'tvN' && (
+                            <>
+                              <Tvn /> <span>tvN</span>
+                            </>
+                          )}
+                          {(amusementData.attributes.animeBroadcast1 !== null ||
+                            amusementData.attributes.animeBroadcast2 !== null) && (
+                            <>
+                              {amusementData.attributes.animeBroadcast1 === 'tokyomx' && (
+                                <>
+                                  <Tokyomx /> <span>도쿄 MX</span>
+                                </>
+                              )}
+                              {amusementData.attributes.animeBroadcast1 === 'tvtokyo' && (
+                                <>
+                                  <Tvtokyo /> <span>테레비 도쿄</span>
+                                </>
+                              )}
+                              {amusementData.attributes.animeBroadcast1 === 'fujitv' && (
+                                <>
+                                  <Fujitv /> <span>후지 테레비</span>
+                                </>
+                              )}
+                              {amusementData.attributes.animeBroadcast1 === 'mbs' && (
+                                <>
+                                  <Mbs /> <span>MBS</span>
+                                </>
+                              )}
+                              {amusementData.attributes.animeBroadcast1 === 'tbs' && (
+                                <>
+                                  <Tbs /> <span>TBS</span>
+                                </>
+                              )}
+                              {amusementData.attributes.animeBroadcast1 === 'atx' && (
+                                <>
+                                  <Atx /> <span>AT-X</span>
+                                </>
+                              )}
+                              {amusementData.attributes.animeBroadcast1 === 'nippontv' && (
+                                <>
+                                  <Nippontv /> <span>닛폰 테레비</span>
+                                </>
+                              )}
+                              {amusementData.attributes.animeBroadcast1 === 'wowow' && (
+                                <>
+                                  <Wowow /> <span>WOWOW</span>
+                                </>
+                              )}
+                              {amusementData.attributes.animeBroadcast2 === 'aniplus' && (
+                                <>
+                                  {amusementData.attributes.animeBroadcast1 !== null && '|'}
+                                  <Aniplus /> <span>애니플러스</span> 방영{' '}
+                                </>
+                              )}
+                              {amusementData.attributes.animeBroadcast2 === 'daewon' && (
+                                <>
+                                  {amusementData.attributes.animeBroadcast1 !== null && '|'}
+                                  <Daewon /> <span>애니원</span> 방영{' '}
+                                </>
+                              )}
+                              {amusementData.attributes.animeBroadcast2 === 'anibox' && (
+                                <>
+                                  {amusementData.attributes.animeBroadcast1 !== null && '|'}
+                                  <Anibox /> <span>애니박스</span> 방영{' '}
+                                </>
+                              )}
+                              {amusementData.attributes.animeBroadcast2 === 'tooniverse' && (
+                                <>
+                                  {amusementData.attributes.animeBroadcast1 !== null && '|'}
+                                  <Tooniverse /> <span>투니버스</span> 방영{' '}
+                                </>
+                              )}
+                              {amusementData.attributes.animeBroadcast2 === 'animax' && (
+                                <>
+                                  {amusementData.attributes.animeBroadcast1 !== null && '|'}
+                                  <Animax /> <span>애니맥스</span> 방영{' '}
+                                </>
+                              )}
+                            </>
+                          )}
+                          {((amusementData.attributes.category as Category) === 'game' ||
+                            (amusementData.attributes.category as Category) === 'game_fan') &&
+                            amusementData.attributes.isMobile &&
+                            '모바일 '}
+                          {CategoryName(amusementData.attributes.category)}
+                          {(amusementData.attributes.category as Category) === 'game_fan' && '팬 게임'}
+                        </em>
+                      )}
+                      {amusementData.attributes.category === 'ott_anime_film' && (
                         <>
-                          <Ena /> <span>ENA</span>
+                          <em>애니메이션</em>
+                          <em>영화</em>
                         </>
                       )}
-                      {amusementData.attributes.broadcast === 'JTBC' && (
+                      {amusementData.attributes.category === 'ott_documentary_film' && (
                         <>
-                          <Jtbc /> <span>JTBC</span>
+                          <em>다큐멘터리</em>
+                          <em>영화</em>
                         </>
                       )}
-                      {amusementData.attributes.broadcast === 'KBS2' && (
-                        <>
-                          <Kbs2tv /> <span>KBS 2TV</span>
-                        </>
-                      )}
-                      {amusementData.attributes.broadcast === 'MBC' && (
-                        <>
-                          <Mbc /> <span>MBC</span>
-                        </>
-                      )}
-                      {amusementData.attributes.broadcast === 'OCN' && (
-                        <>
-                          <Ocn /> <span>OCN</span>
-                        </>
-                      )}
-                      {amusementData.attributes.broadcast === 'SBS' && (
-                        <>
-                          <Sbs /> <span>SBS</span>
-                        </>
-                      )}
-                      {amusementData.attributes.broadcast === 'tvN' && (
-                        <>
-                          <Tvn /> <span>tvN</span>
-                        </>
-                      )}
-                      {(amusementData.attributes.animeBroadcast1 !== null ||
-                        amusementData.attributes.animeBroadcast2 !== null) && (
-                        <>
-                          {amusementData.attributes.animeBroadcast1 === 'tokyomx' && (
-                            <>
-                              <Tokyomx /> <span>도쿄 MX</span>
-                            </>
-                          )}
-                          {amusementData.attributes.animeBroadcast1 === 'tvtokyo' && (
-                            <>
-                              <Tvtokyo /> <span>테레비 도쿄</span>
-                            </>
-                          )}
-                          {amusementData.attributes.animeBroadcast1 === 'fujitv' && (
-                            <>
-                              <Fujitv /> <span>후지 테레비</span>
-                            </>
-                          )}
-                          {amusementData.attributes.animeBroadcast1 === 'mbs' && (
-                            <>
-                              <Mbs /> <span>MBS</span>
-                            </>
-                          )}
-                          {amusementData.attributes.animeBroadcast1 === 'tbs' && (
-                            <>
-                              <Tbs /> <span>TBS</span>
-                            </>
-                          )}
-                          {amusementData.attributes.animeBroadcast1 === 'atx' && (
-                            <>
-                              <Atx /> <span>AT-X</span>
-                            </>
-                          )}
-                          {amusementData.attributes.animeBroadcast1 === 'nippontv' && (
-                            <>
-                              <Nippontv /> <span>닛폰 테레비</span>
-                            </>
-                          )}
-                          {amusementData.attributes.animeBroadcast1 === 'wowow' && (
-                            <>
-                              <Wowow /> <span>WOWOW</span>
-                            </>
-                          )}
-                          {amusementData.attributes.animeBroadcast2 === 'aniplus' && (
-                            <>
-                              {amusementData.attributes.animeBroadcast1 !== null && '|'}
-                              <Aniplus /> <span>애니플러스</span> 방영{' '}
-                            </>
-                          )}
-                          {amusementData.attributes.animeBroadcast2 === 'daewon' && (
-                            <>
-                              {amusementData.attributes.animeBroadcast1 !== null && '|'}
-                              <Daewon /> <span>애니원</span> 방영{' '}
-                            </>
-                          )}
-                          {amusementData.attributes.animeBroadcast2 === 'anibox' && (
-                            <>
-                              {amusementData.attributes.animeBroadcast1 !== null && '|'}
-                              <Anibox /> <span>애니박스</span> 방영{' '}
-                            </>
-                          )}
-                          {amusementData.attributes.animeBroadcast2 === 'tooniverse' && (
-                            <>
-                              {amusementData.attributes.animeBroadcast1 !== null && '|'}
-                              <Tooniverse /> <span>투니버스</span> 방영{' '}
-                            </>
-                          )}
-                          {amusementData.attributes.animeBroadcast2 === 'animax' && (
-                            <>
-                              {amusementData.attributes.animeBroadcast1 !== null && '|'}
-                              <Animax /> <span>애니맥스</span> 방영{' '}
-                            </>
-                          )}
-                        </>
-                      )}
-                      {(amusementData.attributes.category === 'game' ||
-                        amusementData.attributes.category === 'game_fan') &&
-                        amusementData.attributes.isMobile &&
-                        '모바일 '}
-                      {CategoryName(amusementData.attributes.category)}
-                      {amusementData.attributes.category === 'game_fan' && '팬 게임'}
-                    </em>
+                    </>
                   ) : (
                     <em>{CategoryName(amusementData.attributes.category)}</em>
                   )}
