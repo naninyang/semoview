@@ -676,64 +676,76 @@ function Amusement({
                         <div className={category === 'game' || category === 'game_fan' ? styles.game : ''}>
                           <dt>{category === 'game' ? '심의등급' : '시청등급'}</dt>
                           <dd>
-                            {(amusement.category === 'drama' ||
-                              amusement.category === 'ott_drama' ||
-                              amusement.category === 'ott_anime' ||
-                              amusement.category === 'ott_documentary' ||
-                              amusement.anime === 'tva' ||
-                              amusement.anime === 'ova') && (
+                            {amusement.ott === 'amazonOriginal' ? (
+                              <i className={`${styles['rating-amazon']} number`} aria-label="시청 가능 연령">
+                                {amusement.rating === 'all' && 'All'}
+                                {amusement.rating === 'a7' && '7+'}
+                                {amusement.rating === 'b12' && '13+'}
+                                {amusement.rating === 'c15' && '16+'}
+                                {amusement.rating === 'd19' && '18+'}
+                              </i>
+                            ) : (
                               <>
-                                {amusement.rating === 'all' ? (
+                                {(amusement.category === 'drama' ||
+                                  amusement.category === 'ott_drama' ||
+                                  amusement.category === 'ott_anime' ||
+                                  amusement.category === 'ott_documentary' ||
+                                  amusement.anime === 'tva' ||
+                                  amusement.anime === 'ova') && (
                                   <>
-                                    <i className={`${styles.drama} ${styles.all} number`}>
-                                      {RatingsDrama(amusement.rating)}
-                                    </i>
-                                    <span>전체 이용가</span>
-                                  </>
-                                ) : (
-                                  <>
-                                    {amusement.rating === 'd19' ? (
+                                    {amusement.rating === 'all' ? (
                                       <>
-                                        <i className={`${styles.drama} ${styles.d19} number`}>
+                                        <i className={`${styles.drama} ${styles.all} number`}>
                                           {RatingsDrama(amusement.rating)}
                                         </i>
-                                        <span>세 미만 이용불가</span>
+                                        <span>전체 이용가</span>
                                       </>
                                     ) : (
                                       <>
-                                        <i className={`${styles.drama} number`}>{RatingsDrama(amusement.rating)}</i>
-                                        <span>세 이상 이용가</span>
+                                        {amusement.rating === 'd19' ? (
+                                          <>
+                                            <i className={`${styles.drama} ${styles.d19} number`}>
+                                              {RatingsDrama(amusement.rating)}
+                                            </i>
+                                            <span>세 미만 이용불가</span>
+                                          </>
+                                        ) : (
+                                          <>
+                                            <i className={`${styles.drama} number`}>{RatingsDrama(amusement.rating)}</i>
+                                            <span>세 이상 이용가</span>
+                                          </>
+                                        )}
                                       </>
                                     )}
                                   </>
                                 )}
-                              </>
-                            )}
-                            {(amusement.category === 'film' ||
-                              amusement.category === 'anime_film' ||
-                              amusement.category === 'ott_anime_film' ||
-                              amusement.category === 'ott_documentary_film' ||
-                              amusement.category === 'ott_film' ||
-                              amusement.anime === 'film') && (
-                              <>
-                                {amusement.rating === 'all' && (
+                                {(amusement.category === 'film' ||
+                                  amusement.category === 'anime_film' ||
+                                  amusement.category === 'ott_anime_film' ||
+                                  amusement.category === 'ott_documentary_film' ||
+                                  amusement.category === 'ott_film' ||
+                                  amusement.anime === 'film') && (
                                   <>
-                                    <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
-                                  </>
-                                )}
-                                {amusement.rating === 'b12' && (
-                                  <>
-                                    <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
-                                  </>
-                                )}
-                                {amusement.rating === 'c15' && (
-                                  <>
-                                    <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
-                                  </>
-                                )}
-                                {amusement.rating === 'd19' && (
-                                  <>
-                                    <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
+                                    {amusement.rating === 'all' && (
+                                      <>
+                                        <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
+                                      </>
+                                    )}
+                                    {amusement.rating === 'b12' && (
+                                      <>
+                                        <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
+                                      </>
+                                    )}
+                                    {amusement.rating === 'c15' && (
+                                      <>
+                                        <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
+                                      </>
+                                    )}
+                                    {amusement.rating === 'd19' && (
+                                      <>
+                                        <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
+                                      </>
+                                    )}
                                   </>
                                 )}
                               </>

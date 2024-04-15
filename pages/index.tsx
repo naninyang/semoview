@@ -751,49 +751,50 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                               <Paramount /> Paramount+
                             </cite>
                           )}
-                          {(jejeup.amusementData.category === 'drama' ||
-                            jejeup.amusementData.category === 'ott_drama' ||
-                            jejeup.amusementData.category === 'ott_anime' ||
-                            jejeup.amusementData.anime === 'tva' ||
-                            jejeup.amusementData.anime === 'ova') && (
-                            <>
-                              {jejeup.amusementData.rating === 'all' ? (
-                                <>
-                                  <i className={`${styles.drama} ${styles.all} number`}>
-                                    {RatingsDrama(jejeup.amusementData.rating)}
-                                  </i>
-                                  <span>전체 이용가</span>
-                                </>
-                              ) : (
-                                <>
-                                  {jejeup.amusementData.rating === 'd19' ? (
-                                    <>
-                                      <i className={`${styles.drama} ${styles.d19} number`}>
-                                        {RatingsDrama(jejeup.amusementData.rating)}
-                                      </i>
-                                      <span>세 미만 이용불가</span>
-                                    </>
-                                  ) : (
-                                    <>
-                                      <i className={`${styles.drama} number`}>
-                                        {RatingsDrama(jejeup.amusementData.rating)}
-                                      </i>
-                                      <span>세 이상 이용가</span>
-                                    </>
-                                  )}
-                                </>
-                              )}
-                            </>
-                          )}
                           {jejeup.amusementData.ott === 'amazonOriginal' ? (
                             <i className={`${styles['rating-amazon']} number`} aria-label="시청 가능 연령">
                               {jejeup.amusementData.rating === 'all' && 'All'}
+                              {jejeup.amusementData.rating === 'a7' && '7+'}
                               {jejeup.amusementData.rating === 'b12' && '13+'}
                               {jejeup.amusementData.rating === 'c15' && '16+'}
                               {jejeup.amusementData.rating === 'd19' && '18+'}
                             </i>
                           ) : (
                             <>
+                              {(jejeup.amusementData.category === 'drama' ||
+                                jejeup.amusementData.category === 'ott_drama' ||
+                                jejeup.amusementData.category === 'ott_anime' ||
+                                jejeup.amusementData.anime === 'tva' ||
+                                jejeup.amusementData.anime === 'ova') && (
+                                <>
+                                  {jejeup.amusementData.rating === 'all' ? (
+                                    <>
+                                      <i className={`${styles.drama} ${styles.all} number`}>
+                                        {RatingsDrama(jejeup.amusementData.rating)}
+                                      </i>
+                                      <span>전체 이용가</span>
+                                    </>
+                                  ) : (
+                                    <>
+                                      {jejeup.amusementData.rating === 'd19' ? (
+                                        <>
+                                          <i className={`${styles.drama} ${styles.d19} number`}>
+                                            {RatingsDrama(jejeup.amusementData.rating)}
+                                          </i>
+                                          <span>세 미만 이용불가</span>
+                                        </>
+                                      ) : (
+                                        <>
+                                          <i className={`${styles.drama} number`}>
+                                            {RatingsDrama(jejeup.amusementData.rating)}
+                                          </i>
+                                          <span>세 이상 이용가</span>
+                                        </>
+                                      )}
+                                    </>
+                                  )}
+                                </>
+                              )}
                               {(jejeup.amusementData.category === 'film' ||
                                 jejeup.amusementData.category === 'anime_film' ||
                                 jejeup.amusementData.category === 'ott_anime_film' ||

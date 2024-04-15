@@ -1232,49 +1232,50 @@ export default function Amusement({
                 <div className={styles.rating}>
                   <dt>{amusementData.attributes.category === 'game' ? '심의등급' : '시청등급'}</dt>
                   <dd>
-                    {(amusementData.attributes.category === 'drama' ||
-                      amusementData.attributes.category === 'ott_drama' ||
-                      amusementData.attributes.category === 'ott_anime' ||
-                      amusementData.attributes.anime === 'tva' ||
-                      amusementData.attributes.anime === 'ova') && (
-                      <>
-                        {amusementData.attributes.rating === 'all' ? (
-                          <>
-                            <i className={`${styles.drama} ${styles.all} number`}>
-                              {RatingsDrama(amusementData.attributes.rating)}
-                            </i>
-                            <span>전체 이용가</span>
-                          </>
-                        ) : (
-                          <>
-                            {amusementData.attributes.rating === 'd19' ? (
-                              <>
-                                <i className={`${styles.drama} ${styles.d19} number`}>
-                                  {RatingsDrama(amusementData.attributes.rating)}
-                                </i>
-                                <span>세 미만 이용불가</span>
-                              </>
-                            ) : (
-                              <>
-                                <i className={`${styles.drama} number`}>
-                                  {RatingsDrama(amusementData.attributes.rating)}
-                                </i>
-                                <span>세 이상 이용가</span>
-                              </>
-                            )}
-                          </>
-                        )}
-                      </>
-                    )}
                     {amusementData.attributes.ott === 'amazonOriginal' ? (
                       <i className={`${styles['rating-amazon']} number`} aria-label="시청 가능 연령">
                         {amusementData.attributes.rating === 'all' && 'All'}
+                        {amusementData.attributes.rating === 'a7' && '7+'}
                         {amusementData.attributes.rating === 'b12' && '13+'}
                         {amusementData.attributes.rating === 'c15' && '16+'}
                         {amusementData.attributes.rating === 'd19' && '18+'}
                       </i>
                     ) : (
                       <>
+                        {(amusementData.attributes.category === 'drama' ||
+                          amusementData.attributes.category === 'ott_drama' ||
+                          amusementData.attributes.category === 'ott_anime' ||
+                          amusementData.attributes.anime === 'tva' ||
+                          amusementData.attributes.anime === 'ova') && (
+                          <>
+                            {amusementData.attributes.rating === 'all' ? (
+                              <>
+                                <i className={`${styles.drama} ${styles.all} number`}>
+                                  {RatingsDrama(amusementData.attributes.rating)}
+                                </i>
+                                <span>전체 이용가</span>
+                              </>
+                            ) : (
+                              <>
+                                {amusementData.attributes.rating === 'd19' ? (
+                                  <>
+                                    <i className={`${styles.drama} ${styles.d19} number`}>
+                                      {RatingsDrama(amusementData.attributes.rating)}
+                                    </i>
+                                    <span>세 미만 이용불가</span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <i className={`${styles.drama} number`}>
+                                      {RatingsDrama(amusementData.attributes.rating)}
+                                    </i>
+                                    <span>세 이상 이용가</span>
+                                  </>
+                                )}
+                              </>
+                            )}
+                          </>
+                        )}
                         {(amusementData.attributes.category === 'film' ||
                           amusementData.attributes.category === 'anime_film' ||
                           amusementData.attributes.category === 'ott_anime_film' ||

@@ -990,52 +990,53 @@ export default function JejeupDetail({
                                             <Paramount /> Paramaount+
                                           </cite>
                                         )}
-                                        {(data.category === 'drama' ||
-                                          data.category === 'ott_drama' ||
-                                          data.category === 'ott_anime' ||
-                                          data.anime === 'tva' ||
-                                          data.anime === 'ova') && (
-                                          <>
-                                            {data.rating === 'all' ? (
-                                              <>
-                                                <i className={`${styles.drama} ${styles.all} number`}>
-                                                  {RatingsDrama(data.rating)}
-                                                </i>
-                                                <span>전체 이용가</span>
-                                              </>
-                                            ) : (
-                                              <>
-                                                {data.rating === 'd19' ? (
-                                                  <>
-                                                    <i className={`${styles.drama} ${styles.d19} number`}>
-                                                      {RatingsDrama(data.rating)}
-                                                    </i>
-                                                    <span>세 미만 이용불가</span>
-                                                  </>
-                                                ) : (
-                                                  <>
-                                                    <i className={`${styles.drama} number`}>
-                                                      {RatingsDrama(data.rating)}
-                                                    </i>
-                                                    <span>세 이상 이용가</span>
-                                                  </>
-                                                )}
-                                              </>
-                                            )}
-                                          </>
-                                        )}
                                         {data.ott === 'amazonOriginal' ? (
                                           <i
                                             className={`${styles['rating-amazon']} number`}
                                             aria-label="시청 가능 연령"
                                           >
                                             {data.rating === 'all' && 'All'}
+                                            {data.rating === 'a7' && '7+'}
                                             {data.rating === 'b12' && '13+'}
                                             {data.rating === 'c15' && '16+'}
                                             {data.rating === 'd19' && '18+'}
                                           </i>
                                         ) : (
                                           <>
+                                            {(data.category === 'drama' ||
+                                              data.category === 'ott_drama' ||
+                                              data.category === 'ott_anime' ||
+                                              data.anime === 'tva' ||
+                                              data.anime === 'ova') && (
+                                              <>
+                                                {data.rating === 'all' ? (
+                                                  <>
+                                                    <i className={`${styles.drama} ${styles.all} number`}>
+                                                      {RatingsDrama(data.rating)}
+                                                    </i>
+                                                    <span>전체 이용가</span>
+                                                  </>
+                                                ) : (
+                                                  <>
+                                                    {data.rating === 'd19' ? (
+                                                      <>
+                                                        <i className={`${styles.drama} ${styles.d19} number`}>
+                                                          {RatingsDrama(data.rating)}
+                                                        </i>
+                                                        <span>세 미만 이용불가</span>
+                                                      </>
+                                                    ) : (
+                                                      <>
+                                                        <i className={`${styles.drama} number`}>
+                                                          {RatingsDrama(data.rating)}
+                                                        </i>
+                                                        <span>세 이상 이용가</span>
+                                                      </>
+                                                    )}
+                                                  </>
+                                                )}
+                                              </>
+                                            )}
                                             {(data.category === 'film' ||
                                               data.category === 'anime_film' ||
                                               data.category === 'ott_anime_film' ||
@@ -1497,47 +1498,50 @@ export default function JejeupDetail({
                                       <Paramount /> Paramaount+
                                     </cite>
                                   )}
-                                  {(data.category === 'drama' ||
-                                    data.category === 'ott_drama' ||
-                                    data.category === 'ott_anime' ||
-                                    data.anime === 'tva' ||
-                                    data.anime === 'ova') && (
-                                    <>
-                                      {data.rating === 'all' ? (
-                                        <>
-                                          <i className={`${styles.drama} ${styles.all} number`}>
-                                            {RatingsDrama(data.rating)}
-                                          </i>
-                                          <span>전체 이용가</span>
-                                        </>
-                                      ) : (
-                                        <>
-                                          {data.rating === 'd19' ? (
-                                            <>
-                                              <i className={`${styles.drama} ${styles.d19} number`}>
-                                                {RatingsDrama(data.rating)}
-                                              </i>
-                                              <span>세 미만 이용불가</span>
-                                            </>
-                                          ) : (
-                                            <>
-                                              <i className={`${styles.drama} number`}>{RatingsDrama(data.rating)}</i>
-                                              <span>세 이상 이용가</span>
-                                            </>
-                                          )}
-                                        </>
-                                      )}
-                                    </>
-                                  )}
                                   {data.ott === 'amazonOriginal' ? (
                                     <i className={`${styles['rating-amazon']} number`} aria-label="시청 가능 연령">
                                       {data.rating === 'all' && 'All'}
+                                      {data.rating === 'a7' && '7+'}
                                       {data.rating === 'b12' && '13+'}
                                       {data.rating === 'c15' && '16+'}
                                       {data.rating === 'd19' && '18+'}
                                     </i>
                                   ) : (
                                     <>
+                                      {(data.category === 'drama' ||
+                                        data.category === 'ott_drama' ||
+                                        data.category === 'ott_anime' ||
+                                        data.anime === 'tva' ||
+                                        data.anime === 'ova') && (
+                                        <>
+                                          {data.rating === 'all' ? (
+                                            <>
+                                              <i className={`${styles.drama} ${styles.all} number`}>
+                                                {RatingsDrama(data.rating)}
+                                              </i>
+                                              <span>전체 이용가</span>
+                                            </>
+                                          ) : (
+                                            <>
+                                              {data.rating === 'd19' ? (
+                                                <>
+                                                  <i className={`${styles.drama} ${styles.d19} number`}>
+                                                    {RatingsDrama(data.rating)}
+                                                  </i>
+                                                  <span>세 미만 이용불가</span>
+                                                </>
+                                              ) : (
+                                                <>
+                                                  <i className={`${styles.drama} number`}>
+                                                    {RatingsDrama(data.rating)}
+                                                  </i>
+                                                  <span>세 이상 이용가</span>
+                                                </>
+                                              )}
+                                            </>
+                                          )}
+                                        </>
+                                      )}
                                       {(data.category === 'film' ||
                                         data.category === 'anime_film' ||
                                         data.category === 'ott_anime_film' ||
