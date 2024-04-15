@@ -431,6 +431,7 @@
         .item
           display: flex
           flex-wrap: wrap
+          align-items: center
           gap: rem(7)
 
           dd
@@ -446,6 +447,7 @@
           .rating
             dd
               display: flex
+              align-items: center
               gap: rem(7)
               border: 0
               padding: 0
@@ -482,6 +484,17 @@
                   &.d19
                     background-color: #D61D28
                     color: $hex-white
+
+                &.rating-amazon
+                  background-color: #33373d
+                  border-radius: rem(3)
+                  padding: rem(3) rem(7)
+                  width: auto
+                  height: auto
+                  font-size: rem(16)
+                  font-weight: 800
+                  line-height: 1
+                  color: $hex-white
 
               span
                 +screen-reader-only

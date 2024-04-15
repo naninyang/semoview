@@ -1266,36 +1266,47 @@ export default function Amusement({
                         )}
                       </>
                     )}
-                    {(amusementData.attributes.category === 'film' ||
-                      amusementData.attributes.category === 'anime_film' ||
-                      amusementData.attributes.category === 'ott_anime_film' ||
-                      amusementData.attributes.category === 'ott_film' ||
-                      amusementData.attributes.anime === 'film') && (
+                    {amusementData.attributes.ott === 'amazonOriginal' ? (
+                      <i className={`${styles['rating-amazon']} number`} aria-label="시청 가능 연령">
+                        {amusementData.attributes.rating === 'all' && 'All'}
+                        {amusementData.attributes.rating === 'b12' && '13+'}
+                        {amusementData.attributes.rating === 'c15' && '16+'}
+                        {amusementData.attributes.rating === 'd19' && '18+'}
+                      </i>
+                    ) : (
                       <>
-                        {amusementData.attributes.rating === 'all' && (
+                        {(amusementData.attributes.category === 'film' ||
+                          amusementData.attributes.category === 'anime_film' ||
+                          amusementData.attributes.category === 'ott_anime_film' ||
+                          amusementData.attributes.category === 'ott_film' ||
+                          amusementData.attributes.category === 'ott_documentary_film' ||
+                          amusementData.attributes.anime === 'film') && (
                           <>
-                            <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
-                          </>
-                        )}
-                        {amusementData.attributes.rating === 'b12' && (
-                          <>
-                            <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
-                          </>
-                        )}
-                        {amusementData.attributes.rating === 'c15' && (
-                          <>
-                            <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
-                          </>
-                        )}
-                        {amusementData.attributes.rating === 'd19' && (
-                          <>
-                            <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
+                            {amusementData.attributes.rating === 'all' && (
+                              <>
+                                <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
+                              </>
+                            )}
+                            {amusementData.attributes.rating === 'b12' && (
+                              <>
+                                <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
+                              </>
+                            )}
+                            {amusementData.attributes.rating === 'c15' && (
+                              <>
+                                <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
+                              </>
+                            )}
+                            {amusementData.attributes.rating === 'd19' && (
+                              <>
+                                <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
+                              </>
+                            )}
                           </>
                         )}
                       </>
                     )}
-                    {(amusementData.attributes.category === 'game' ||
-                      amusementData.attributes.category === 'game_fan') && (
+                    {amusementData.attributes.category === 'game' && (
                       <>
                         {amusementData.attributes.rating === 'all' && (
                           <>

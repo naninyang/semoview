@@ -1024,31 +1024,46 @@ export default function JejeupDetail({
                                             )}
                                           </>
                                         )}
-                                        {(data.category === 'film' ||
-                                          data.category === 'anime_film' ||
-                                          data.category === 'ott_anime_film' ||
-                                          data.category === 'ott_film' ||
-                                          data.category === 'ott_documentary_film' ||
-                                          data.anime === 'film') && (
+                                        {data.ott === 'amazonOriginal' ? (
+                                          <i
+                                            className={`${styles['rating-amazon']} number`}
+                                            aria-label="시청 가능 연령"
+                                          >
+                                            {data.rating === 'all' && 'All'}
+                                            {data.rating === 'b12' && '13+'}
+                                            {data.rating === 'c15' && '16+'}
+                                            {data.rating === 'd19' && '18+'}
+                                          </i>
+                                        ) : (
                                           <>
-                                            {data.rating === 'all' && (
+                                            {(data.category === 'film' ||
+                                              data.category === 'anime_film' ||
+                                              data.category === 'ott_anime_film' ||
+                                              data.category === 'ott_film' ||
+                                              data.category === 'ott_documentary_film' ||
+                                              data.anime === 'film') && (
                                               <>
-                                                <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
-                                              </>
-                                            )}
-                                            {data.rating === 'b12' && (
-                                              <>
-                                                <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
-                                              </>
-                                            )}
-                                            {data.rating === 'c15' && (
-                                              <>
-                                                <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
-                                              </>
-                                            )}
-                                            {data.rating === 'd19' && (
-                                              <>
-                                                <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
+                                                {data.rating === 'all' && (
+                                                  <>
+                                                    <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
+                                                  </>
+                                                )}
+                                                {data.rating === 'b12' && (
+                                                  <>
+                                                    <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
+                                                  </>
+                                                )}
+                                                {data.rating === 'c15' && (
+                                                  <>
+                                                    <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
+                                                  </>
+                                                )}
+                                                {data.rating === 'd19' && (
+                                                  <>
+                                                    <RatingFilmD18 className={styles.rating} />{' '}
+                                                    <span>청소년 이용불가</span>
+                                                  </>
+                                                )}
                                               </>
                                             )}
                                           </>
@@ -1514,31 +1529,42 @@ export default function JejeupDetail({
                                       )}
                                     </>
                                   )}
-                                  {(data.category === 'film' ||
-                                    data.category === 'anime_film' ||
-                                    data.category === 'ott_anime_film' ||
-                                    data.category === 'ott_film' ||
-                                    data.category === 'ott_documentary_film' ||
-                                    data.anime === 'film') && (
+                                  {data.ott === 'amazonOriginal' ? (
+                                    <i className={`${styles['rating-amazon']} number`} aria-label="시청 가능 연령">
+                                      {data.rating === 'all' && 'All'}
+                                      {data.rating === 'b12' && '13+'}
+                                      {data.rating === 'c15' && '16+'}
+                                      {data.rating === 'd19' && '18+'}
+                                    </i>
+                                  ) : (
                                     <>
-                                      {data.rating === 'all' && (
+                                      {(data.category === 'film' ||
+                                        data.category === 'anime_film' ||
+                                        data.category === 'ott_anime_film' ||
+                                        data.category === 'ott_film' ||
+                                        data.category === 'ott_documentary_film' ||
+                                        data.anime === 'film') && (
                                         <>
-                                          <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
-                                        </>
-                                      )}
-                                      {data.rating === 'b12' && (
-                                        <>
-                                          <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
-                                        </>
-                                      )}
-                                      {data.rating === 'c15' && (
-                                        <>
-                                          <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
-                                        </>
-                                      )}
-                                      {data.rating === 'd19' && (
-                                        <>
-                                          <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
+                                          {data.rating === 'all' && (
+                                            <>
+                                              <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
+                                            </>
+                                          )}
+                                          {data.rating === 'b12' && (
+                                            <>
+                                              <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
+                                            </>
+                                          )}
+                                          {data.rating === 'c15' && (
+                                            <>
+                                              <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
+                                            </>
+                                          )}
+                                          {data.rating === 'd19' && (
+                                            <>
+                                              <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
+                                            </>
+                                          )}
                                         </>
                                       )}
                                     </>
