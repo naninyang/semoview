@@ -466,7 +466,7 @@ export default function JejeupDetail({
             {Object.keys(jejeupMetaData).length > 0 ? (
               <>
                 {jejeupMetaData.error === 'Failed to fetch data' || jejeupMetaData.ogTitle === ' - YouTube' ? (
-                  <div className={`${styles.preview}  ${styles['preview-dummy']}`}>
+                  <div className={`${styles.preview} ${styles.more}  ${styles['preview-dummy']}`}>
                     <div className={`${styles.dummy} ${styles.skeleton}`} />
                     <div className={styles.youtube}>
                       <h1>
@@ -486,7 +486,7 @@ export default function JejeupDetail({
                     </div>
                   </div>
                 ) : jejeupMetaData.duration === undefined ? (
-                  <div className={`${styles.preview}  ${styles['preview-dummy']}`}>
+                  <div className={`${styles.preview} ${styles.more}  ${styles['preview-dummy']}`}>
                     <div className={`${styles.dummy} ${styles.skeleton}`} />
                     <div className={styles.youtube}>
                       <h1>
@@ -506,7 +506,7 @@ export default function JejeupDetail({
                     </div>
                   </div>
                 ) : (
-                  <div className={`${styles.preview} preview`}>
+                  <div className={`${styles.preview} ${styles.more} preview`}>
                     <div className={styles.video}>
                       {jejeupData.attributes.embeddingOff ? (
                         <div className={styles.embeddingOff}>
@@ -592,7 +592,7 @@ export default function JejeupDetail({
                 )}
               </>
             ) : (
-              <div className={`${styles.preview} ${styles['preview-dummy']}`}>
+              <div className={`${styles.preview} ${styles.more} ${styles['preview-dummy']}`}>
                 <div className={styles.notice}>
                   <p>알 수 없는 사유로 불러오지 못했습니다.</p>
                   <p>
