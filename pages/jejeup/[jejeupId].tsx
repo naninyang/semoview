@@ -279,31 +279,6 @@ export default function JejeupDetail({
   jejeupId: number;
 }) {
   const router = useRouter();
-  const [relations, setRelations] = useState<JejeupData | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const loadRelations = async () => {
-    if (jejeupData) {
-      if (jejeupData.attributes && jejeupData.attributes.relations) {
-        setIsLoading(true);
-        setError(null);
-        try {
-          const response = await fetch(`/api/relations?relations=${jejeupData.attributes.relations}&type=jejeup`);
-          const relationsResponse = await response.json();
-          setRelations(relationsResponse);
-        } catch (err) {
-          console.error(err);
-        } finally {
-          setIsLoading(false);
-        }
-      }
-    }
-  };
-
-  useEffect(() => {
-    loadRelations();
-  }, [jejeupData]);
 
   const previousPageHandler = () => {
     const previousPage = sessionStorage.getItem('location');
@@ -312,11 +287,6 @@ export default function JejeupDetail({
     } else {
       router.push('/');
     }
-  };
-
-  const [isMore, setIsMore] = useState(false);
-  const moreToggle = () => {
-    setIsMore(!isMore);
   };
 
   const [timeoutReached, setTimeoutReached] = useState(false);
@@ -409,11 +379,13 @@ export default function JejeupDetail({
         body: JSON.stringify({ jejeupVideo: jejeupVideo }),
       });
 
-      if (!response.ok) {
-        throw new Error('Something went wrong!');
+      if (response.ok) {
+        alert('신고 성공! 감사합니다 ☺️');
+      } else {
+        const errorData = await response.json();
+        console.log(errorData.error);
+        alert('서버 오류입니다. 잠시 뒤 다시 시도해 주세요 😭');
       }
-
-      alert('신고 성공! 감사합니다 ☺️');
     } catch (error) {
       console.error('Error:', error);
       alert('서버 오류입니다. 잠시 뒤 다시 시도해 주세요 😭');
@@ -423,6 +395,8 @@ export default function JejeupDetail({
   function JejeupMeta({ jejeupData }: { jejeupData: any }) {
     const [jejeupMetaData, setJejeupMetaData] = useState<JejeupMetaData | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [relations, setRelations] = useState<JejeupData | null>(null);
+    const [error, setError] = useState(null);
     const maxRetries = 7;
 
     const fetchMetadata = async (currentRetryCount = 0) => {
@@ -456,34 +430,38 @@ export default function JejeupDetail({
       fetchMetadata().finally(() => setIsLoading(false));
     }, []);
 
-    const handleReport = async (event: React.MouseEvent<HTMLButtonElement>) => {
-      const jejeupVideo = event.currentTarget.getAttribute('data-video');
+    const [isRelationsLoading, setIsRelationsLoading] = useState(false);
 
-      try {
-        const response = await fetch('/api/unpublish', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ jejeupVideo: jejeupVideo }),
-        });
-
-        if (response.ok) {
-          alert('신고 성공! 감사합니다 ☺️');
-        } else {
-          const errorData = await response.json();
-          console.log(errorData.error);
-          alert('서버 오류입니다. 잠시 뒤 다시 시도해 주세요 😭');
+    const loadRelations = async () => {
+      if (jejeupData) {
+        if (jejeupData.attributes && jejeupData.attributes.relations) {
+          setIsRelationsLoading(true);
+          setError(null);
+          try {
+            const response = await fetch(`/api/relations?relations=${jejeupData.attributes.relations}&type=jejeup`);
+            const relationsResponse = await response.json();
+            setRelations(relationsResponse);
+          } catch (err) {
+            console.error(err);
+          } finally {
+            setIsRelationsLoading(false);
+          }
         }
-      } catch (error) {
-        console.error('Error:', error);
-        alert('서버 오류입니다. 잠시 뒤 다시 시도해 주세요 😭');
       }
+    };
+
+    useEffect(() => {
+      loadRelations();
+    }, [jejeupData]);
+
+    const [isMore, setIsMore] = useState(false);
+    const moreToggle = () => {
+      setIsMore(!isMore);
     };
 
     return (
       <>
-        {!isLoading && jejeupData && jejeupMetaData ? (
+        {!isLoading && !error && jejeupData && jejeupMetaData ? (
           <>
             {Object.keys(jejeupMetaData).length > 0 ? (
               <>
@@ -569,23 +547,21 @@ export default function JejeupDetail({
                         <div className={styles.learnmore}>
                           <em>{formatDuration(jejeupMetaData.duration)}</em>
                           {jejeupMetaData.ogDescription}
-                          {isLoading && (
+                          {jejeupData.attributes.relations && relations && !isRelationsLoading && (
                             <dl>
                               <dt>관련 영상</dt>
-                              <dd>관련 영상 로딩 중...</dd>
-                            </dl>
-                          )}
-                          {jejeupData.attributes.relations && relations && !isLoading && !error && (
-                            <dl>
-                              <dt>관련 영상</dt>
-                              {Array.isArray(relations) &&
+                              {isRelationsLoading ? (
+                                <dd>관련 영상 불러오는 중</dd>
+                              ) : (
+                                Array.isArray(relations) &&
                                 relations
                                   .filter((relation) => relation.idx !== jejeupId)
                                   .map((relation) => (
                                     <dd key={relation.idx}>
                                       <Anchor href={`/jejeup/${relation.idx}`}>{relation.subject}</Anchor>
                                     </dd>
-                                  ))}
+                                  ))
+                              )}
                             </dl>
                           )}
                         </div>
@@ -1123,10 +1099,24 @@ export default function JejeupDetail({
                                         )}
                                         {data.ratingCustom && (
                                           <div className={styles.custom}>
-                                            <button type="button" onClick={customRatingHandler}>
-                                              <i />
-                                              <span>제제없 자체설정 심의등급 안내</span>
-                                            </button>
+                                            {data.ott === 'amazonOriginal' && !data.ratingCustom && (
+                                              <button type="button" onClick={amazonRatingHandler}>
+                                                <i />
+                                                <span>아마존 자체 심의등급 작품</span>
+                                              </button>
+                                            )}
+                                            {data.ott === 'amazonOriginal' && data.ratingCustom && (
+                                              <button type="button" onClick={regionRatingHandler}>
+                                                <i />
+                                                <span>한국 리전 아마존 시청 불가 작품</span>
+                                              </button>
+                                            )}
+                                            {data.ott !== 'amazonOriginal' && data.ratingCustom && (
+                                              <button type="button" onClick={customRatingHandler}>
+                                                <i />
+                                                <span>제제없 자체설정 심의등급 안내</span>
+                                              </button>
+                                            )}
                                           </div>
                                         )}
                                         {data.ott !== null && data.ottAddr !== null && (
@@ -1654,10 +1644,24 @@ export default function JejeupDetail({
                                   )}
                                   {data.ratingCustom && (
                                     <div className={styles.custom}>
-                                      <button type="button" onClick={customRatingHandler}>
-                                        <i />
-                                        <span>제제없 자체설정 심의등급 안내</span>
-                                      </button>
+                                      {data.ott === 'amazonOriginal' && !data.ratingCustom && (
+                                        <button type="button" onClick={amazonRatingHandler}>
+                                          <i />
+                                          <span>아마존 자체 심의등급 작품</span>
+                                        </button>
+                                      )}
+                                      {data.ott === 'amazonOriginal' && data.ratingCustom && (
+                                        <button type="button" onClick={regionRatingHandler}>
+                                          <i />
+                                          <span>한국 리전 아마존 시청 불가 작품</span>
+                                        </button>
+                                      )}
+                                      {data.ott !== 'amazonOriginal' && data.ratingCustom && (
+                                        <button type="button" onClick={customRatingHandler}>
+                                          <i />
+                                          <span>제제없 자체설정 심의등급 안내</span>
+                                        </button>
+                                      )}
                                     </div>
                                   )}
                                   {data.ott !== null && data.ottAddr !== null && (

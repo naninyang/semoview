@@ -270,7 +270,6 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
       try {
         const jejeupMeta = await fetch(`/api/metadata?url=https://youtu.be/${jejeup.video}`);
         const jejeupMetaDataResponse = await jejeupMeta.json();
-
         if (
           Array.isArray(jejeupMetaDataResponse) === false &&
           Object.keys(jejeupMetaDataResponse).length === 0 &&
