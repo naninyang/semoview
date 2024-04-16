@@ -55,21 +55,35 @@ header.header
     nav
       ol
         display: flex
+        align-items: center
         gap: rem(2)
 
         li
+          display: inline-flex
+          align-items: center
+
+          &::before
+            content: ''
+            display: inline-block
+            width: 1px
+            height: rem(14)
+            background-color: rgba($hex-dark, .7)
+
+          &:first-of-type
+            &::before
+              display: none
+
           a
             position: relative
             display: inline-block
-            padding: rem(4) rem(2)
+            padding: rem(4) rem(7)
             font-size: rem(14)
             font-weight: 700
             color: $hex-dark
             transition: all .7s cubic-bezier(.4,0,.2,1)
 
             +mq(minSmall)
-              padding: rem(4) rem(7)
-              font-size: rem(20)
+              font-size: rem(16)
 
             &::before
               content: ''
@@ -98,13 +112,28 @@ header.header
 
     ol
       display: flex
-      gap: rem(27)
 
       li
         +col
+        position: relative
+        padding: 0 rem(23)
+
+        &::before
+          content: ''
+          position: absolute
+          top: 50%
+          left: 0
+          transform: translateY(-50%)
+          display: inline-block
+          width: 1px
+          height: rem(14)
+          background-color: rgba($hex-dark, .7)
 
         &:first-of-type
           text-align: right
+
+          &::before
+            display: none
 
         a
           position: relative
