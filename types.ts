@@ -292,6 +292,8 @@ export type Category =
   | 'ott_drama'
   | 'ott_anime_film'
   | 'ott_documentary_film'
+  | 'documentary_film'
+  | 'anime_film'
   | 'game'
   | 'game_fan';
 

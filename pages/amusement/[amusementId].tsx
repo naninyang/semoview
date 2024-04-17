@@ -1218,7 +1218,24 @@ export default function Amusement({
                       )}
                     </>
                   ) : (
-                    <em>{CategoryName(amusementData.attributes.category)}</em>
+                    <>
+                      {(amusementData.attributes.category as Category) === 'anime_film' && (
+                        <>
+                          <em>애니메이션</em>
+                          <em>영화</em>
+                        </>
+                      )}
+                      {(amusementData.attributes.category as Category) === 'documentary_film' && (
+                        <>
+                          <em>다큐멘터리</em>
+                          <em>영화</em>
+                        </>
+                      )}
+                      {(amusementData.attributes.category as Category) === 'anime_film' ||
+                        ((amusementData.attributes.category as Category) === 'documentary_film' && (
+                          <em>{CategoryName(amusementData.attributes.category)}</em>
+                        ))}
+                    </>
                   )}
                   {amusementData.attributes.ott === null && amusementData.attributes.ottAddr !== null && (
                     <em>단편영화</em>
