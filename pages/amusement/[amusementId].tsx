@@ -1231,10 +1231,10 @@ export default function Amusement({
                           <em>영화</em>
                         </>
                       )}
-                      {(amusementData.attributes.category as Category) === 'anime_film' ||
-                        ((amusementData.attributes.category as Category) === 'documentary_film' && (
-                          <em>{CategoryName(amusementData.attributes.category)}</em>
-                        ))}
+                      {((amusementData.attributes.category as Category) === 'anime_film' ||
+                        (amusementData.attributes.category as Category) === 'documentary_film') && (
+                        <em>{CategoryName(amusementData.attributes.category)}</em>
+                      )}
                     </>
                   )}
                   {amusementData.attributes.ott === null && amusementData.attributes.ottAddr !== null && (
