@@ -390,7 +390,8 @@ function Categories({
                           <>
                             {amusement.lang === 'chineseBeonche' && <span lang="zh-Hant">{amusement.title} </span>}
                             {amusement.lang === 'chineseGanche' && <span lang="zh-Hans">{amusement.title} </span>}
-                            {amusement.lang === 'english' && <span lang="en">{amusement.title}</span>}
+                            {amusement.lang === 'europe' && <span lang="en">{amusement.title}</span>}
+                            {amusement.lang === 'english' && <span lang="en-US">{amusement.title}</span>}
                             {amusement.lang === 'japanese' && <span lang="ja">{amusement.title}</span>}
                             {amusement.lang === 'thai' && <span lang="th">{amusement.title}</span>}
                             {amusement.lang === null && <span lang="ko">{amusement.title}</span>}
@@ -539,7 +540,8 @@ function Categories({
                           <>
                             {amusement.lang === 'chineseBeonche' && <span lang="zh-Hant">{amusement.title} </span>}
                             {amusement.lang === 'chineseGanche' && <span lang="zh-Hans">{amusement.title} </span>}
-                            {amusement.lang === 'english' && <span lang="en">{amusement.title}</span>}
+                            {amusement.lang === 'europe' && <span lang="en">{amusement.title}</span>}
+                            {amusement.lang === 'english' && <span lang="en-US">{amusement.title}</span>}
                             {amusement.lang === 'japanese' && <span lang="ja">{amusement.title}</span>}
                             {amusement.lang === 'thai' && <span lang="th">{amusement.title}</span>}
                             {amusement.lang === null && <span lang="ko">{amusement.title}</span>}
@@ -784,7 +786,8 @@ function Categories({
                           <>
                             {amusement.lang === 'chineseBeonche' && <span lang="zh-Hant">{amusement.title} </span>}
                             {amusement.lang === 'chineseGanche' && <span lang="zh-Hans">{amusement.title} </span>}
-                            {amusement.lang === 'english' && <span lang="en">{amusement.title}</span>}
+                            {amusement.lang === 'europe' && <span lang="en">{amusement.title}</span>}
+                            {amusement.lang === 'english' && <span lang="en-US">{amusement.title}</span>}
                             {amusement.lang === 'japanese' && <span lang="ja">{amusement.title}</span>}
                             {amusement.lang === 'thai' && <span lang="th">{amusement.title}</span>}
                             {amusement.lang === null && <span lang="ko">{amusement.title}</span>}
@@ -1035,7 +1038,8 @@ function Categories({
                           <>
                             {amusement.lang === 'chineseBeonche' && <span lang="zh-Hant">{amusement.title} </span>}
                             {amusement.lang === 'chineseGanche' && <span lang="zh-Hans">{amusement.title} </span>}
-                            {amusement.lang === 'english' && <span lang="en">{amusement.title}</span>}
+                            {amusement.lang === 'europe' && <span lang="en">{amusement.title}</span>}
+                            {amusement.lang === 'english' && <span lang="en-US">{amusement.title}</span>}
                             {amusement.lang === 'japanese' && <span lang="ja">{amusement.title}</span>}
                             {amusement.lang === 'thai' && <span lang="th">{amusement.title}</span>}
                             {amusement.lang === null && <span lang="ko">{amusement.title}</span>}
@@ -1110,7 +1114,8 @@ function Categories({
                             <>
                               {amusement.lang === 'chineseBeonche' && <span lang="zh-Hant">{amusement.title} </span>}
                               {amusement.lang === 'chineseGanche' && <span lang="zh-Hans">{amusement.title} </span>}
-                              {amusement.lang === 'english' && <span lang="en">{amusement.title}</span>}
+                              {amusement.lang === 'europe' && <span lang="en">{amusement.title}</span>}
+                              {amusement.lang === 'english' && <span lang="en-US">{amusement.title}</span>}
                               {amusement.lang === 'japanese' && <span lang="ja">{amusement.title}</span>}
                               {amusement.lang === 'thai' && <span lang="th">{amusement.title}</span>}
                               {amusement.lang === null && <span lang="ko">{amusement.title}</span>}

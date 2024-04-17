@@ -917,8 +917,11 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                             {jejeup.amusementData.lang === 'chineseGanche' && (
                               <span lang="zh-Hans">{jejeup.amusementData.title} </span>
                             )}
-                            {jejeup.amusementData.lang === 'english' && (
+                            {jejeup.amusementData.lang === 'europe' && (
                               <span lang="en">{jejeup.amusementData.title}</span>
+                            )}
+                            {jejeup.amusementData.lang === 'english' && (
+                              <span lang="en-US">{jejeup.amusementData.title}</span>
                             )}
                             {jejeup.amusementData.lang === 'japanese' && (
                               <span lang="ja">{jejeup.amusementData.title}</span>

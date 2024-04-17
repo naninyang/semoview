@@ -1,6 +1,14 @@
 import { useEffect } from 'react';
 import type { AppProps } from 'next/app';
-import { Lato, Noto_Sans_JP, Noto_Sans_KR, Noto_Sans_SC, Noto_Sans_TC, Noto_Sans_Thai } from 'next/font/google';
+import {
+  Lato,
+  Noto_Sans,
+  Noto_Sans_JP,
+  Noto_Sans_KR,
+  Noto_Sans_SC,
+  Noto_Sans_TC,
+  Noto_Sans_Thai,
+} from 'next/font/google';
 import localFont from 'next/font/local';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
@@ -12,6 +20,11 @@ import '@/styles/globals.sass';
 const fontEN = Lato({
   weight: ['100', '300', '400', '700', '900'],
   subsets: ['latin'],
+});
+
+const fontUN = Noto_Sans({
+  weight: ['400', '500', '600', '700', '800', '900'],
+  subsets: ['latin-ext'],
 });
 
 const fontKR = Noto_Sans_KR({
@@ -123,6 +136,12 @@ export default function App({ Component, pageProps }: AppProps) {
             white-space: break-spaces;
             word-wrap: break-word;
             word-break: normal;
+          }
+          [lang='en'] {
+            font-family: ${fontUN.style.fontFamily}, sans-serif;
+          }
+          [lang='en-US'] {
+            font-family: ${NanumSquare.style.fontFamily}, sans-serif;
           }
           [lang='ja'] {
             font-family: ${fontEN.style.fontFamily}, ${fontJP.style.fontFamily}, ${fontKR.style.fontFamily}, sans-serif;

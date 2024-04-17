@@ -1158,7 +1158,8 @@ export default function JejeupDetail({
                                           </span>
                                           {data.lang === 'chineseBeonche' && <span lang="zh-Hant">{data.title} </span>}
                                           {data.lang === 'chineseGanche' && <span lang="zh-Hans">{data.title} </span>}
-                                          {data.lang === 'english' && <span lang="en">{data.title}</span>}
+                                          {data.lang === 'europe' && <span lang="en">{data.title}</span>}
+                                          {data.lang === 'english' && <span lang="en-US">{data.title}</span>}
                                           {data.lang === 'japanese' && <span lang="ja">{data.title}</span>}
                                           {data.lang === 'thai' && <span lang="th">{data.title}</span>}
                                           {data.titleOther !== null && (
@@ -1701,7 +1702,8 @@ export default function JejeupDetail({
                                     </span>
                                     {data.lang === 'chineseBeonche' && <span lang="zh-Hant">{data.title} </span>}
                                     {data.lang === 'chineseGanche' && <span lang="zh-Hans">{data.title} </span>}
-                                    {data.lang === 'english' && <span lang="en">{data.title}</span>}
+                                    {data.lang === 'europe' && <span lang="en">{data.title}</span>}
+                                    {data.lang === 'english' && <span lang="en-US">{data.title}</span>}
                                     {data.lang === 'japanese' && <span lang="ja">{data.title}</span>}
                                     {data.lang === 'thai' && <span lang="th">{data.title}</span>}
                                     {data.titleOther !== null && (

@@ -876,8 +876,11 @@ export default function Amusement({
                   {amusementData.attributes.lang === 'chineseGanche' && (
                     <span lang="zh-Hans">{amusementData.attributes.title}</span>
                   )}
-                  {amusementData.attributes.lang === 'english' && (
+                  {amusementData.attributes.lang === 'europe' && (
                     <span lang="en">{amusementData.attributes.title}</span>
+                  )}
+                  {amusementData.attributes.lang === 'english' && (
+                    <span lang="en-US">{amusementData.attributes.title}</span>
                   )}
                   {amusementData.attributes.lang === 'japanese' && (
                     <span lang="ja">{amusementData.attributes.title}</span>
