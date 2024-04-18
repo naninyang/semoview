@@ -231,7 +231,6 @@ function Tags({
           <i className="preview" />
           태그 골라보기! 💁‍♀️
         </span>
-        {count && <em>({formatNumber(count.amusement)}개 작품)</em>}
       </h1>
       {error && (
         <div className={styles.error}>
