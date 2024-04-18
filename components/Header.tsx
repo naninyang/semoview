@@ -78,7 +78,10 @@ export default function Header() {
           </ol>
         </nav>
       </div>
-      {(router.pathname === '/' || router.pathname === '/categories' || router.pathname === '/tags') && (
+      {(router.pathname === '/' ||
+        router.pathname === '/categories' ||
+        router.pathname === '/tags' ||
+        router.pathname === '/platforms') && (
         <div className={styles.tab}>
           <nav>
             <ol>
@@ -87,7 +90,13 @@ export default function Header() {
                   <span>영상 기준 정렬</span>
                 </Anchor>
               </li>
-              <li className={router.pathname === '/categories' || router.pathname === '/tags' ? styles.current : ''}>
+              <li
+                className={
+                  router.pathname === '/categories' || router.pathname === '/tags' || router.pathname === '/platforms'
+                    ? styles.current
+                    : ''
+                }
+              >
                 <Anchor href="/categories">
                   <span>작품 기준 정렬</span>
                 </Anchor>
