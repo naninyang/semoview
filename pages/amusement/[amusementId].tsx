@@ -501,7 +501,10 @@ export default function Amusement({
   }, [amusementData]);
 
   const previousPageHandler = () => {
-    const previousPage = sessionStorage.getItem('amuementCategory') || sessionStorage.getItem('amuementTag');
+    const previousPage =
+      sessionStorage.getItem('amuementCategory') ||
+      sessionStorage.getItem('amuementTag') ||
+      sessionStorage.getItem('amuementPlatform');
     if (previousPage) {
       router.push(`${previousPage}`);
     } else {

@@ -45,7 +45,7 @@
 
 ### TO-DO
 
-- Not yet
+- 코드 정리
 
 ## Supported PWA App. Download
 

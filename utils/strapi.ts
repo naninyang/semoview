@@ -397,6 +397,113 @@ export async function getTagData(page?: number, pageSize?: number, tagName?: str
   }
 }
 
+export async function getPlatformData(page?: number, pageSize?: number, platformName?: string) {
+  if (
+    platformName === 'KBS2' ||
+    platformName === 'MBC' ||
+    platformName === 'SBS' ||
+    platformName === 'tvN' ||
+    platformName === 'OCN' ||
+    platformName === 'JTBC' ||
+    platformName === 'ENA'
+  ) {
+    const response = await fetch(
+      `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[broadcast][$eq]=${platformName}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
+        },
+      },
+    );
+    const platformResponse = await response.json();
+    const platformResponseData = platformResponse.data;
+    const data: AmusementData = platformResponseData.map((data: any) => ({
+      id: `${data.id}`,
+      idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+      title: data.attributes.title,
+      lang: data.attributes.lang,
+      titleKorean: data.attributes.titleKorean,
+      titleOther: data.attributes.titleOther,
+      etc: data.attributes.etc,
+      release: data.attributes.release,
+      original: data.attributes.original,
+      originalAuthor: data.attributes.originalAuthor,
+      originTitle: data.attributes.originTitle,
+      rating: data.attributes.rating,
+      country: data.attributes.country,
+      category: data.attributes.category,
+      isMobile: data.attributes.isMobile,
+      genre: data.attributes.genre,
+      anime: data.attributes.anime,
+      animeBroadcast1: data.attributes.animeBroadcast1,
+      animeBroadcast2: data.attributes.animeBroadcast2,
+      ott: data.attributes.ott,
+      broadcast: data.attributes.broadcast,
+      publisher: data.attributes.publisher,
+      creator: data.attributes.creator,
+      cast: data.attributes.cast,
+      posterDefault: data.attributes.posterDefault,
+      posterOther: data.attributes.posterOther,
+    }));
+    const pageCount = platformResponse.meta.pagination.pageCount;
+    const total = platformResponse.meta.pagination.total;
+    return { data, pageCount: pageCount, total: total };
+  } else if (
+    platformName === 'amazon' ||
+    platformName === 'apple' ||
+    platformName === 'disney' ||
+    platformName === 'netflix' ||
+    platformName === 'tving' ||
+    platformName === 'watcha' ||
+    platformName === 'wavve' ||
+    platformName === 'paramount'
+  ) {
+    const response = await fetch(
+      `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[ott][$contains]=${platformName}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
+        },
+      },
+    );
+    const platformResponse = await response.json();
+    const platformResponseData = platformResponse.data;
+    const data: AmusementData = platformResponseData.map((data: any) => ({
+      id: `${data.id}`,
+      idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+      title: data.attributes.title,
+      lang: data.attributes.lang,
+      titleKorean: data.attributes.titleKorean,
+      titleOther: data.attributes.titleOther,
+      etc: data.attributes.etc,
+      release: data.attributes.release,
+      original: data.attributes.original,
+      originalAuthor: data.attributes.originalAuthor,
+      originTitle: data.attributes.originTitle,
+      rating: data.attributes.rating,
+      country: data.attributes.country,
+      category: data.attributes.category,
+      isMobile: data.attributes.isMobile,
+      genre: data.attributes.genre,
+      anime: data.attributes.anime,
+      animeBroadcast1: data.attributes.animeBroadcast1,
+      animeBroadcast2: data.attributes.animeBroadcast2,
+      ott: data.attributes.ott,
+      broadcast: data.attributes.broadcast,
+      publisher: data.attributes.publisher,
+      creator: data.attributes.creator,
+      cast: data.attributes.cast,
+      posterDefault: data.attributes.posterDefault,
+      posterOther: data.attributes.posterOther,
+    }));
+    const pageCount = platformResponse.meta.pagination.pageCount;
+    const total = platformResponse.meta.pagination.total;
+    return { data, pageCount: pageCount, total: total };
+  }
+}
+
 export async function getRenewAmusement(page?: number, pageSize?: number, amusementId?: string) {
   const response = await fetch(
     `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[title][$eq]=${amusementId}`,

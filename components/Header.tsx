@@ -43,7 +43,10 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        {router.pathname === '/' || router.pathname === '/categories' || router.pathname === '/tags' ? undefined : (
+        {router.pathname === '/' ||
+        router.pathname === '/categories' ||
+        router.pathname === '/tags' ||
+        router.pathname === '/platforms' ? undefined : (
           <s />
         )}
         <h1>
