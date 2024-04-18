@@ -7,6 +7,7 @@ import styled from '@emotion/styled';
 import { AmusementData, Counts } from 'types';
 import Seo, { originTitle } from '@/components/Seo';
 import Anchor from '@/components/Anchor';
+import Choice from '@/components/Choice';
 import { vectors } from '@/components/vectors';
 import { RatingsDrama } from '@/components/RatingsDrama';
 import { formatNumber } from '@/components/FormatNumber';
@@ -208,6 +209,7 @@ function Categories({
         pageDescription="OTT / 영화 / 애니메이션 / 드라마 / 게임"
         pageImg={`https://jejeup.dev1stud.io/og-categories.webp?ts=${timestamp}`}
       />
+      <Choice />
       <h1>
         <span>
           <i className="preview" />

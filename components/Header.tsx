@@ -43,7 +43,9 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        {router.pathname === '/' || router.pathname === '/categories' ? undefined : <s />}
+        {router.pathname === '/' || router.pathname === '/categories' || router.pathname === '/tags' ? undefined : (
+          <s />
+        )}
         <h1>
           {router.pathname === '/' ? (
             <button
@@ -73,7 +75,7 @@ export default function Header() {
           </ol>
         </nav>
       </div>
-      {(router.pathname === '/' || router.pathname === '/categories') && (
+      {(router.pathname === '/' || router.pathname === '/categories' || router.pathname === '/tags') && (
         <div className={styles.tab}>
           <nav>
             <ol>
@@ -82,7 +84,7 @@ export default function Header() {
                   <span>영상 기준 정렬</span>
                 </Anchor>
               </li>
-              <li className={router.pathname === '/categories' ? styles.current : ''}>
+              <li className={router.pathname === '/categories' || router.pathname === '/tags' ? styles.current : ''}>
                 <Anchor href="/categories">
                   <span>작품 기준 정렬</span>
                 </Anchor>

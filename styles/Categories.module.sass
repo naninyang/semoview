@@ -22,6 +22,36 @@
       text-decoration: underline
       color: $hex-accent
 
+  .choice
+    margin-bottom: rem(12)
+
+    ul
+      display: flex
+      gap: rem(7)
+      padding-left: rem(15)
+
+      li
+        display: flex
+        gap: rem(7)
+
+        &::before
+          content: '/'
+          color: $hex-accent
+
+        &:first-of-type
+          &::before
+            display: none
+
+        &.current
+          a
+            color: $hex-accent
+            text-decoration: underline
+
+        a
+          color: $hex-black
+          font-weight: 800
+          letter-spacing: -.07em
+
   > h1
     display: flex
     gap: rem(2)
@@ -399,6 +429,7 @@
         +mq(minMedium)
           padding-top: rem(27)
           font-size: rem(24)
+          text-align: center
 
       .unselect
         display: flex
@@ -406,10 +437,22 @@
         flex-grow: 1
         justify-content: center
         align-items: center
-        gap: rem(7)
+        gap: rem(52)
         font-weight: 700
         color: $hex-accent
         text-align: center
+
+        .form
+          display: flex
+          flex-direction: column
+          justify-content: center
+          align-items: center
+          gap: rem(7)
+          max-width: rem(370)
+          width: 100%
+          font-weight: 700
+          color: $hex-accent
+          text-align: center
 
       button
         background-color: $hex-accent
@@ -423,7 +466,6 @@
 
       select, button
         width: 100%
-        max-width: rem(370)
         border-radius: rem(3)
         padding: rem(3) rem(7)
         font-size: rem(16)
@@ -434,8 +476,6 @@
           font-size: rem(20)
 
       .visual
-        margin-top: rem(27)
-
         svg
           max-width: rem(345)
           width: 100%
