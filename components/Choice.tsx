@@ -14,7 +14,7 @@ export default function Choice() {
           <Anchor href="/tags">태그 골라보기</Anchor>
         </li>
         <li className={router.pathname === '/platform' ? styles.current : ''}>
-          <Anchor href="/platform">플랫폼/방송사 골라보기</Anchor>
+          <Anchor href="/platform">OTT & 방송사 골라보기</Anchor>
         </li>
       </ul>
     </div>
