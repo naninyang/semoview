@@ -7,6 +7,7 @@ export const vectors = {
   more: require('./more.svg'),
   up: require('./up.svg'),
   down: require('./down.svg'),
+  warning: require('./warning.svg'),
   ott: {
     amazon: require('./ott/amazon.svg'),
     amazon2: require('./ott/amazon2.svg'),

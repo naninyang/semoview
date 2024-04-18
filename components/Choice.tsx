@@ -1,11 +1,20 @@
 import { useRouter } from 'next/router';
 import Anchor from './Anchor';
 import styles from '@/styles/Categories.module.sass';
+import styled from '@emotion/styled';
+import { vectors } from './vectors';
+
+const WarningIcon = styled.i({
+  background: `url(${vectors.warning}) no-repeat 50% 50%/contain`,
+});
 
 export default function Choice() {
   const router = useRouter();
   return (
     <div className={styles.choice}>
+      <p>
+        <WarningIcon /> 골라보기 링크를 누른 뒤 잠시만 기다려 주세요! 속도가 다소 느립니다.
+      </p>
       <ul>
         <li className={router.pathname === '/categories' ? styles.current : ''}>
           <Anchor href="/categories">카테고리 골라보기</Anchor>

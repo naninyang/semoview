@@ -23,12 +23,15 @@
       color: $hex-accent
 
   .choice
+    display: flex
+    flex-direction: column
+    gap: rem(7)
     margin-bottom: rem(12)
 
     ul
       display: flex
       gap: rem(7)
-      padding-left: rem(15)
+      padding-left: rem(20)
 
       li
         display: flex
@@ -42,7 +45,7 @@
           &::before
             display: none
 
-        &.current
+        &.current, &:hover, &:focus
           a
             color: $hex-accent
             text-decoration: underline
@@ -51,6 +54,19 @@
           color: $hex-black
           font-weight: 800
           letter-spacing: -.07em
+
+    p
+      display: flex
+      align-items: center
+      gap: rem(5)
+      font-size: rem(14)
+      font-weight: 800
+      color: $hex-accent
+
+      i
+        display: inline-block
+        width: rem(14)
+        height: rem(14)
 
   > h1
     display: flex
