@@ -1482,7 +1482,7 @@ function Tags({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?tag=queer&page=1">LGTQ+ 작품 리뷰</Anchor>
+                  <Anchor href="/amusement?tag=queer&page=1">LGBTQ+ 작품 리뷰</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${queerData.total}개`}
                 </h2>
                 <Anchor href="/amusement?tag=queer&page=1">
