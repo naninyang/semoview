@@ -255,9 +255,10 @@ function Amusement({
               ${tagQuery === 'healing' && categoryQuery === 'game' ? '오늘밤은 힐링게임이 좋아' : ''}
               ${tagQuery === 'mobile' && categoryQuery === 'game' ? '제로부터 시작하는 모바일 게임 생활' : ''}
               ${tagQuery === 'queer' ? 'Love Wins' : ''}
-              ${tagQuery === 'isekai' ? '이세계물 모음' : ''}
+              ${tagQuery === 'yuri' ? '그 백합잎에 입맞춤을' : ''}
+              ${tagQuery === 'isekai' ? '마지막으로 이세계를 부탁드려도 될까요' : ''}
               ${tagQuery === 'timeslip' ? '빙글뱅글 타임루프' : ''}
-              ${tagQuery === 'anomalies' ? '지구에서는 우리가 아노말리야.' : ''}
+              ${tagQuery === 'anomalies' && categoryQuery === 'game' ? '지구에서는 우리가 아노말리야.' : ''}
               ${tagQuery === 'apocalypse' ? '꿈도 희망도 없는' : ''}
               ${tagQuery === 'picaresca' && categoryQuery !== 'game' ? '피카레스크 전성시대' : ''}
               ${tagQuery === 'picaresca' && categoryQuery === 'game' ? '자닌한 게임이라 욕하지는 마' : ''}
@@ -292,9 +293,10 @@ function Amusement({
               ${tagQuery === 'healing' && categoryQuery === 'game' ? '오늘밤은 힐링게임이 좋아' : ''}
               ${tagQuery === 'mobile' && categoryQuery === 'game' ? '제로부터 시작하는 모바일 게임 생활' : ''}
               ${tagQuery === 'queer' ? 'Love Wins' : ''}
-              ${tagQuery === 'isekai' ? '이세계물 모음' : ''}
+              ${tagQuery === 'yuri' ? '그 백합잎에 입맞춤을' : ''}
+              ${tagQuery === 'isekai' ? '마지막으로 이세계를 부탁드려도 될까요' : ''}
               ${tagQuery === 'timeslip' ? '빙글뱅글 타임루프' : ''}
-              ${tagQuery === 'anomalies' ? '지구에서는 우리가 아노말리야.' : ''}
+              ${tagQuery === 'anomalies' && categoryQuery === 'game' ? '지구에서는 우리가 아노말리야.' : ''}
               ${tagQuery === 'apocalypse' ? '꿈도 희망도 없는' : ''}
               ${tagQuery === 'picaresca' && categoryQuery !== 'game' ? '피카레스크 전성시대' : ''}
               ${tagQuery === 'picaresca' && categoryQuery === 'game' ? '자닌한 게임이라 욕하지는 마' : ''}
@@ -376,13 +378,14 @@ function Amusement({
               <select value={selectedTag} onChange={handleTagChange}>
                 <option value="">태그 선택</option>
                 <option value="mobile,game">모바일 게임</option>
+                <option value="healing,game">힐링 게임</option>
                 <option value="healing">치유물</option>
                 <option value="yuri">백합</option>
                 <option value="queer">퀴어</option>
                 <option value="isekai">이세계물</option>
                 <option value="timeslip">타임슬립</option>
                 <option value="anomalies">이상현상</option>
-                <option value="apocalypse">아포칼립스/좀비</option>
+                <option value="apocalypse,game">아포칼립스/좀비</option>
                 <option value="picaresca">피카레스크</option>
                 <option value="picaresca,game">피카레스크 게임</option>
                 <option value="horror,drama">호러 드라마</option>
@@ -977,10 +980,12 @@ function Amusement({
             <div className={styles.content}>
               <div className={styles.headline}>
                 <h1>
-                  {tag === 'healing' ? '밤은 치유물과 함께' : ''}
+                  {tag === 'healing' && categoryQuery !== 'game' ? '밤은 치유물과 함께' : ''}
+                  {tag === 'healing' && categoryQuery === 'game' ? '오늘밤은 힐링게임이 좋아' : ''}
                   {tag === 'mobile' ? '제로부터 시작하는 모바일 게임 생활' : ''}
                   {tag === 'queer' ? 'Love Wins' : ''}
-                  {tag === 'isekai' ? '이세계물 모음' : ''}
+                  {tag === 'yuri' ? '그 백합잎에 입맞춤을' : ''}
+                  {tag === 'isekai' ? '마지막으로 이세계를 부탁드려도 될까요' : ''}
                   {tag === 'timeslip' ? '빙글뱅글 타임루프' : ''}
                   {tag === 'anomalies' && category === 'game' ? '지구에서는 우리가 아노말리야.' : ''}
                   {tag === 'apocalypse' ? '꿈도 희망도 없는' : ''}
@@ -996,6 +1001,7 @@ function Amusement({
                   <select onChange={handleTagChange} defaultValue={selectedTag}>
                     <option value="">태그 선택</option>
                     <option value="mobile,game">모바일 게임</option>
+                    <option value="healing,game">힐링 게임</option>
                     <option value="healing">치유물</option>
                     <option value="yuri">백합</option>
                     <option value="queer">퀴어</option>
