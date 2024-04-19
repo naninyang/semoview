@@ -4140,7 +4140,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
     jtbcData = await jtbc.json();
 
-    const ena = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/platform?page=1&pageSize=5&platformName=ENA`);
+    const ena = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/platform?page=1&pageSize=7&platformName=ENA`);
     if (!ena.ok) {
       throw new Error('Network response was not ok');
     }
