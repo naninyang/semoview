@@ -174,6 +174,7 @@ function Amusement({
   platformQuery,
   platformData,
   platform,
+  ogAddress,
   currentPage,
   error,
 }: {
@@ -186,6 +187,7 @@ function Amusement({
   platformQuery: string;
   platformData: any;
   platform: string;
+  ogAddress: string;
   currentPage: number;
   error: string;
 }) {
@@ -220,7 +222,11 @@ function Amusement({
     if (!selectedTag) {
       alert('태그를 선택해 주세요');
     } else {
-      router.push(`/amusement?tag=${selectedTag}&page=1`);
+      const parts = selectedTag.split(',');
+      const tag = parts[0];
+      const category = parts[1];
+      const url = category ? `/amusement?tag=${tag}&category=${category}&page=1` : `/amusement?tag=${tag}&page=1`;
+      router.push(url);
     }
   };
 
@@ -245,18 +251,20 @@ function Amusement({
               ${categoryQuery === 'anime' ? '애니입니다만, 문제라도?' : ''}
               ${categoryQuery === 'ott' ? '퇴근 후, 이세계 OTT에서만 볼 수 있는 작품을.' : ''}
               ${categoryQuery === '' ? '카테고리 선택' : ''}
-              ${tagQuery === 'isHealing' ? '밤은 치유물과 함께' : ''}
-              ${tagQuery === 'isMobile' ? '제로부터 시작하는 모바일 게임 생활' : ''}
-              ${tagQuery === 'isQueer' ? 'Love Wins' : ''}
+              ${tagQuery === 'healing' && categoryQuery !== 'game' ? '밤은 치유물과 함께' : ''}
+              ${tagQuery === 'healing' && categoryQuery === 'game' ? '오늘밤은 힐링게임이 좋아' : ''}
+              ${tagQuery === 'mobile' && categoryQuery === 'game' ? '제로부터 시작하는 모바일 게임 생활' : ''}
+              ${tagQuery === 'queer' ? 'Love Wins' : ''}
               ${tagQuery === 'isekai' ? '이세계물 모음' : ''}
               ${tagQuery === 'timeslip' ? '빙글뱅글 타임루프' : ''}
               ${tagQuery === 'anomalies' ? '지구에서는 우리가 아노말리야.' : ''}
               ${tagQuery === 'apocalypse' ? '꿈도 희망도 없는' : ''}
-              ${tagQuery === 'picaresca' ? '피카레스크 전성시대' : ''}
-              ${tagQuery === 'horrorDrama' ? '심신미약자, 임산부, 노약자 시청금지 공포 드라마!' : ''}
-              ${tagQuery === 'horrorAnime' ? '심신미약자, 임산부, 노약자 시청금지 공포 애니!' : ''}
-              ${tagQuery === 'horrorFilm' ? '심신미약자, 임산부, 노약자 시청금지 공포 영화!' : ''}
-              ${tagQuery === 'horrorGame' ? '심신미약자, 임산부, 노약자 시청금지 공포 게임!' : ''}
+              ${tagQuery === 'picaresca' && categoryQuery !== 'game' ? '피카레스크 전성시대' : ''}
+              ${tagQuery === 'picaresca' && categoryQuery === 'game' ? '자닌한 게임이라 욕하지는 마' : ''}
+              ${tagQuery === 'horror' && categoryQuery === 'drama' ? '심신미약자, 임산부, 노약자 시청금지 공포 드라마!' : ''}
+              ${tagQuery === 'horror' && categoryQuery === 'anime' ? '심신미약자, 임산부, 노약자 시청금지 공포 애니!' : ''}
+              ${tagQuery === 'horror' && categoryQuery === 'film' ? '심신미약자, 임산부, 노약자 시청금지 공포 영화!' : ''}
+              ${tagQuery === 'horror' && categoryQuery === 'game' ? '심신미약자, 임산부, 노약자 시청금지 공포 게임!' : ''}
               ${platformQuery === 'KBS2' ? 'KBS 2TV' : ''}
               ${platformQuery === 'MBC' ? 'KBS 2TV' : ''}
               ${platformQuery === 'SBS' ? 'KBS 2TV' : ''}
@@ -280,18 +288,20 @@ function Amusement({
               ${categoryQuery === 'anime' ? '애니입니다만, 문제라도?' : ''}
               ${categoryQuery === 'ott' ? '퇴근 후, 이세계 OTT에서만 볼 수 있는 작품을.' : ''}
               ${categoryQuery === '' ? '카테고리 선택' : ''}
-              ${tagQuery === 'isHealing' ? '밤은 치유물과 함께' : ''}
-              ${tagQuery === 'isMobile' ? '제로부터 시작하는 모바일 게임 생활' : ''}
-              ${tagQuery === 'isQueer' ? 'Love Wins' : ''}
+              ${tagQuery === 'healing' && categoryQuery !== 'game' ? '밤은 치유물과 함께' : ''}
+              ${tagQuery === 'healing' && categoryQuery === 'game' ? '오늘밤은 힐링게임이 좋아' : ''}
+              ${tagQuery === 'mobile' && categoryQuery === 'game' ? '제로부터 시작하는 모바일 게임 생활' : ''}
+              ${tagQuery === 'queer' ? 'Love Wins' : ''}
               ${tagQuery === 'isekai' ? '이세계물 모음' : ''}
               ${tagQuery === 'timeslip' ? '빙글뱅글 타임루프' : ''}
               ${tagQuery === 'anomalies' ? '지구에서는 우리가 아노말리야.' : ''}
               ${tagQuery === 'apocalypse' ? '꿈도 희망도 없는' : ''}
-              ${tagQuery === 'picaresca' ? '피카레스크 전성시대' : ''}
-              ${tagQuery === 'horrorDrama' ? '심신미약자, 임산부, 노약자 시청금지 공포 드라마!' : ''}
-              ${tagQuery === 'horrorAnime' ? '심신미약자, 임산부, 노약자 시청금지 공포 애니!' : ''}
-              ${tagQuery === 'horrorFilm' ? '심신미약자, 임산부, 노약자 시청금지 공포 영화!' : ''}
-              ${tagQuery === 'horrorGame' ? '심신미약자, 임산부, 노약자 시청금지 공포 게임!' : ''}
+              ${tagQuery === 'picaresca' && categoryQuery !== 'game' ? '피카레스크 전성시대' : ''}
+              ${tagQuery === 'picaresca' && categoryQuery === 'game' ? '자닌한 게임이라 욕하지는 마' : ''}
+              ${tagQuery === 'horror' && categoryQuery === 'drama' ? '심신미약자, 임산부, 노약자 시청금지 공포 드라마!' : ''}
+              ${tagQuery === 'horror' && categoryQuery === 'anime' ? '심신미약자, 임산부, 노약자 시청금지 공포 애니!' : ''}
+              ${tagQuery === 'horror' && categoryQuery === 'film' ? '심신미약자, 임산부, 노약자 시청금지 공포 영화!' : ''}
+              ${tagQuery === 'horror' && categoryQuery === 'game' ? '심신미약자, 임산부, 노약자 시청금지 공포 게임!' : ''}
               ${tagQuery === '' ? '태그 선택' : ''}
               ${platformQuery === 'KBS2' ? 'KBS 2TV' : ''}
               ${platformQuery === 'MBC' ? 'KBS 2TV' : ''}
@@ -310,10 +320,10 @@ function Amusement({
               ${platformQuery === 'paramount' ? '파라마운트+' : ''}
               ${platformQuery === '' ? 'OTT/방소국 선택' : ''}`}
         pageDescription="원하는 카테고리/태그/OTT & 방송국을 선택해 리뷰영상을 즐기세요!"
-        pageImg={`https://jejeup.dev1stud.io/og-${categoryQuery}${tagQuery}${platformQuery}.webp?ts=${timestamp}`}
+        pageImg={`https://jejeup.dev1stud.io/og-${ogAddress}.webp?ts=${timestamp}`}
       />
       <div className="top-link">
-        {router.query.category && (
+        {router.query.category && !router.query.tag && (
           <Anchor href="/categories">
             <BackButton />
             <span>뒤로가기</span>
@@ -365,19 +375,20 @@ function Amusement({
             <div className={styles.form}>
               <select value={selectedTag} onChange={handleTagChange}>
                 <option value="">태그 선택</option>
-                <option value="isMobile">모바일 게임</option>
-                <option value="isHealing">치유물</option>
-                <option value="isGL">백합</option>
-                <option value="isQueer">퀴어</option>
+                <option value="mobile,game">모바일 게임</option>
+                <option value="healing">치유물</option>
+                <option value="yuri">백합</option>
+                <option value="queer">퀴어</option>
                 <option value="isekai">이세계물</option>
                 <option value="timeslip">타임슬립</option>
                 <option value="anomalies">이상현상</option>
                 <option value="apocalypse">아포칼립스/좀비</option>
                 <option value="picaresca">피카레스크</option>
-                <option value="horrorDrama">호러 드라마</option>
-                <option value="horrorAnime">호러 애니메이션</option>
-                <option value="horrorFilm">호러 영화</option>
-                <option value="horrorGame">호러 게임</option>
+                <option value="picaresca,game">피카레스크 게임</option>
+                <option value="horror,drama">호러 드라마</option>
+                <option value="horror,anime">호러 애니메이션</option>
+                <option value="horror,film">호러 영화</option>
+                <option value="horror,game">호러 게임</option>
               </select>
               <button onClick={handleTagSubmit}>태그 선택</button>
             </div>
@@ -654,7 +665,7 @@ function Amusement({
                               <div
                                 className={`${styles.anime2} ${amusement.animeBroadcast1 === null ? styles.anime2only : ''}`}
                               >
-                                <dt>방송사</dt>
+                                <dt>한국 애니 방송사</dt>
                                 <dd>
                                   {amusement.animeBroadcast2 === 'aniplus' && (
                                     <>
@@ -688,7 +699,7 @@ function Amusement({
                               <div
                                 className={`${styles.anime1} ${amusement.animeBroadcast1 !== null ? styles.anime1 : ''} ${amusement.ott !== null ? styles.broadcasts : ''}`}
                               >
-                                <dt>방송사</dt>
+                                <dt>일본 애니 방송사</dt>
                                 <dd>
                                   {amusement.animeBroadcast1 === 'tokyomx' && (
                                     <>
@@ -966,53 +977,51 @@ function Amusement({
             <div className={styles.content}>
               <div className={styles.headline}>
                 <h1>
-                  {tag === 'isHealing' ? '밤은 치유물과 함께' : ''}
-                  {tag === 'isMobile' ? '제로부터 시작하는 모바일 게임 생활' : ''}
-                  {tag === 'isQueer' ? 'Love Wins' : ''}
+                  {tag === 'healing' ? '밤은 치유물과 함께' : ''}
+                  {tag === 'mobile' ? '제로부터 시작하는 모바일 게임 생활' : ''}
+                  {tag === 'queer' ? 'Love Wins' : ''}
                   {tag === 'isekai' ? '이세계물 모음' : ''}
                   {tag === 'timeslip' ? '빙글뱅글 타임루프' : ''}
-                  {tag === 'anomalies' ? '지구에서는 우리가 아노말리야.' : ''}
+                  {tag === 'anomalies' && category === 'game' ? '지구에서는 우리가 아노말리야.' : ''}
                   {tag === 'apocalypse' ? '꿈도 희망도 없는' : ''}
-                  {tag === 'picaresca' ? '피카레스크 전성시대' : ''}
-                  {tag === 'horrorDrama' ? '심신미약자, 임산부, 노약자 시청금지 공포 드라마!' : ''}
-                  {tag === 'horrorAnime' ? '심신미약자, 임산부, 노약자 시청금지 공포 애니!' : ''}
-                  {tag === 'horrorFilm' ? '심신미약자, 임산부, 노약자 시청금지 공포 영화!' : ''}
-                  {tag === 'horrorGame' ? '심신미약자, 임산부, 노약자 시청금지 공포 게임!' : ''}{' '}
+                  {tag === 'picaresca' && category !== 'game' ? '피카레스크 전성시대' : ''}
+                  {tag === 'picaresca' && category === 'game' ? '자닌한 게임이라 욕하지는 마' : ''}
+                  {tag === 'horror' && category === 'drama' ? '심신미약자, 임산부, 노약자 시청금지 공포 드라마!' : ''}
+                  {tag === 'horror' && category === 'anime' ? '심신미약자, 임산부, 노약자 시청금지 공포 애니!' : ''}
+                  {tag === 'horror' && category === 'film' ? '심신미약자, 임산부, 노약자 시청금지 공포 영화!' : ''}
+                  {tag === 'horror' && category === 'game' ? '심신미약자, 임산부, 노약자 시청금지 공포 게임!' : ''}{' '}
                   {tagData.total > 0 && <span>({tagData.total}개 작품)</span>}
                 </h1>
                 <div className={styles.select}>
                   <select onChange={handleTagChange} defaultValue={selectedTag}>
                     <option value="">태그 선택</option>
-                    <option value="isMobile">모바일 게임</option>
-                    <option value="isHealing">치유물</option>
-                    <option value="isGL">백합</option>
-                    <option value="isQueer">퀴어</option>
+                    <option value="mobile,game">모바일 게임</option>
+                    <option value="healing">치유물</option>
+                    <option value="yuri">백합</option>
+                    <option value="queer">퀴어</option>
                     <option value="isekai">이세계물</option>
                     <option value="timeslip">타임슬립</option>
-                    <option value="anomalies">이상현상</option>
+                    <option value="anomalies,game">이상현상</option>
                     <option value="apocalypse">아포칼립스/좀비</option>
                     <option value="picaresca">피카레스크</option>
-                    <option value="horrorDrama">호러 드라마</option>
-                    <option value="horrorAnime">호러 애니메이션</option>
-                    <option value="horrorFilm">호러 영화</option>
-                    <option value="horrorGame">호러 게임</option>
+                    <option value="picaresca,game">피카레스크 게임</option>
+                    <option value="horror,drama">호러 드라마</option>
+                    <option value="horror,anime">호러 애니메이션</option>
+                    <option value="horror,film">호러 영화</option>
+                    <option value="horror,game">호러 게임</option>
                   </select>
                   <button onClick={handleTagSubmit}>선택</button>
                 </div>
               </div>
               {Array.isArray(tagData.data) && (
-                <section
-                  className={tag === 'isMobile' || tag === 'anomalies' || tag === 'horrorGame' ? styles.game : ''}
-                >
+                <section className={category === 'game' ? styles.game : ''}>
                   {tagData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                      <div
-                        className={`${styles.thumbnail} ${tag === 'isMobile' || tag === 'anomalies' || tag === 'horrorGame' ? styles.game : ''}`}
-                      >
+                      <div className={`${styles.thumbnail} ${category === 'game' ? styles.game : ''}`}>
                         <Image
                           src={amusement.posterDefault}
-                          width={tag === 'isMobile' || tag === 'anomalies' || tag === 'horrorGame' ? 460 : 390}
-                          height={tag === 'isMobile' || tag === 'anomalies' || tag === 'horrorGame' ? 215 : 560}
+                          width={category === 'game' ? 460 : 390}
+                          height={category === 'game' ? 215 : 560}
                           alt=""
                           unoptimized
                         />
@@ -1201,7 +1210,7 @@ function Amusement({
                                 </dd>
                               </div>
                             )}
-                            <div className={category === 'game' || category === 'game_fan' ? styles.game : ''}>
+                            <div className={category === 'game' ? styles.game : ''}>
                               <dt>{category === 'game' ? '심의등급' : '시청등급'}</dt>
                               <dd>
                                 {amusement.ott === 'amazonOriginal' ? (
@@ -1310,34 +1319,18 @@ function Amusement({
                         )}
                       </div>
                       <strong>
-                        <span lang="ko">
-                          {amusement.category === 'game_fan'
-                            ? `'${amusement.title}' 팬 게임 콜렉션`
-                            : amusement.titleKorean != null
-                              ? amusement.titleKorean
-                              : amusement.title}
-                        </span>
+                        <span lang="ko">{amusement.titleKorean != null ? amusement.titleKorean : amusement.title}</span>
                       </strong>
                     </Link>
                   ))}
                 </section>
               )}
-              {category && (
-                <Pagination
-                  currentPage={currentPage}
-                  pageCount={categoryData.pageCount}
-                  category={category}
-                  sorting={'amusement'}
-                />
-              )}
-              {tag && (
-                <Pagination
-                  currentPage={currentPage}
-                  pageCount={tagData.pageCount}
-                  category={tag}
-                  sorting={'amusement'}
-                />
-              )}
+              <Pagination
+                currentPage={currentPage}
+                pageCount={tagData.pageCount}
+                category={tag}
+                sorting={'amusement'}
+              />
             </div>
           )}
           {router.query.platform && platformData && (
@@ -1364,14 +1357,14 @@ function Amusement({
                 <div className={styles.select}>
                   <select onChange={handlePlatformChange} defaultValue={selectedPlatform}>
                     <option value="">플랫폼(OTT 또는 방송국) 선택</option>
-                    <option value="amazon">아마존 프라임비디오</option>
                     <option value="apple">애플 TV+</option>
                     <option value="disney">디즈니+ & 스타+</option>
+                    <option value="paramount">파라마운트+</option>
+                    <option value="amazon">아마존 프라임비디오</option>
                     <option value="netflix">넷플릭스</option>
                     <option value="tving">티빙</option>
                     <option value="watcha">왓챠</option>
                     <option value="wavve">웨이브</option>
-                    <option value="paramount">파라마운트+</option>
                     <option value="KBS2">KBS 2TV</option>
                     <option value="MBC">MBC</option>
                     <option value="SBS">SBS</option>
@@ -1390,43 +1383,9 @@ function Amusement({
                       <div className={styles.thumbnail}>
                         <Image src={amusement.posterDefault} width={390} height={560} alt="" unoptimized />
                         <dl>
-                          {amusement.animeBroadcast2 !== null && (
-                            <div
-                              className={`${styles.anime2} ${amusement.animeBroadcast1 === null ? styles.anime2only : ''}`}
-                            >
-                              <dt>방송사</dt>
-                              <dd>
-                                {amusement.animeBroadcast2 === 'aniplus' && (
-                                  <>
-                                    <AniplusIcon /> <span>애니플러스</span>
-                                  </>
-                                )}
-                                {amusement.animeBroadcast2 === 'daewon' && (
-                                  <>
-                                    <DaewonIcon /> <span>애니원</span>
-                                  </>
-                                )}
-                                {amusement.animeBroadcast2 === 'anibox' && (
-                                  <>
-                                    <AniboxIcon /> <span>애니박스</span>
-                                  </>
-                                )}
-                                {amusement.animeBroadcast2 === 'tooniverse' && (
-                                  <>
-                                    <TooniverseIcon /> <span>투니버스</span>
-                                  </>
-                                )}
-                                {amusement.animeBroadcast2 === 'animax' && (
-                                  <>
-                                    <AnimaxIcon /> <span>애니박스</span>
-                                  </>
-                                )}
-                              </dd>
-                            </div>
-                          )}
                           {amusement.animeBroadcast1 !== null && (
                             <div
-                              className={`${styles.anime1} ${amusement.animeBroadcast1 !== null ? styles.anime1 : ''} ${amusement.ott !== null ? styles.broadcasts : ''}`}
+                              className={`${styles.anime1} ${amusement.ott === 'disneyOriginal' || amusement.ott === 'disneyStar' ? styles.broadcasts : ''}`}
                             >
                               <dt>방송사</dt>
                               <dd>
@@ -1468,6 +1427,50 @@ function Amusement({
                                 {amusement.animeBroadcast1 === 'wowow' && (
                                   <>
                                     <WowowIcon /> <span>WOWOW</span>
+                                  </>
+                                )}
+                              </dd>
+                            </div>
+                          )}
+                          {amusement.ott !== null && (
+                            <div
+                              className={`${styles.broadcast} ${amusement.ott === 'disneyOriginal' || amusement.ott === 'disneyStar' ? styles.broadcasts : ''}`}
+                            >
+                              <dt>방송국</dt>
+                              <dd>
+                                {amusement.broadcast === 'ENA' && (
+                                  <>
+                                    <EnaIcon /> <span>ENA</span>
+                                  </>
+                                )}
+                                {amusement.broadcast === 'JTBC' && (
+                                  <>
+                                    <JtbcIcon /> <span>JTBC</span>
+                                  </>
+                                )}
+                                {amusement.broadcast === 'KBS2' && (
+                                  <>
+                                    <Kbs2Icon /> <span>KBS 2TV</span>
+                                  </>
+                                )}
+                                {amusement.broadcast === 'MBC' && (
+                                  <>
+                                    <MbcIcon /> <span>MBC</span>
+                                  </>
+                                )}
+                                {amusement.broadcast === 'OCN' && (
+                                  <>
+                                    <OcnIcon /> <span>OCN</span>
+                                  </>
+                                )}
+                                {amusement.broadcast === 'SBS' && (
+                                  <>
+                                    <SbsIcon /> <span>SBS</span>
+                                  </>
+                                )}
+                                {amusement.broadcast === 'tvN' && (
+                                  <>
+                                    <TvnIcon /> <span>tvN</span>
                                   </>
                                 )}
                               </dd>
@@ -1690,30 +1693,12 @@ function Amusement({
                   ))}
                 </section>
               )}
-              {category && (
-                <Pagination
-                  currentPage={currentPage}
-                  pageCount={categoryData.pageCount}
-                  category={category}
-                  sorting={'amusement'}
-                />
-              )}
-              {tag && (
-                <Pagination
-                  currentPage={currentPage}
-                  pageCount={tagData.pageCount}
-                  category={tag}
-                  sorting={'amusement'}
-                />
-              )}
-              {platform && (
-                <Pagination
-                  currentPage={currentPage}
-                  pageCount={platformData.pageCount}
-                  category={platform}
-                  sorting={'amusement'}
-                />
-              )}
+              <Pagination
+                currentPage={currentPage}
+                pageCount={platformData.pageCount}
+                category={platform}
+                sorting={'amusement'}
+              />
             </div>
           )}
         </>
@@ -1733,9 +1718,10 @@ export async function getServerSideProps(context: any) {
   let categoryData = null;
   let tagData = null;
   let platformData = null;
+  let ogAddress = null;
   let error = null;
 
-  if (category) {
+  if (!platform && !tag) {
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/category?categoryName=${category}&page=${currentPage}&pageSize=48`,
@@ -1747,20 +1733,65 @@ export async function getServerSideProps(context: any) {
     } catch (err) {
       error = err instanceof Error ? err.message : 'An unknown error occurred';
     }
-    return { props: { categoryQuery: context.query.category || '', categoryData, category, currentPage, error } };
+    return {
+      props: {
+        categoryQuery: context.query.category || '',
+        ogAddress: context.query.category || '',
+        categoryData,
+        category,
+        currentPage,
+        error,
+      },
+    };
   } else if (tag) {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/tag?tagName=${tag}&page=${currentPage}&pageSize=48`,
-      );
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+    if (!category) {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/tag?tagName=${tag}&page=${currentPage}&pageSize=48`,
+        );
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        tagData = await response.json();
+      } catch (err) {
+        error = err instanceof Error ? err.message : 'An unknown error occurred';
       }
-      tagData = await response.json();
-    } catch (err) {
-      error = err instanceof Error ? err.message : 'An unknown error occurred';
+      return {
+        props: {
+          tagQuery: context.query.tag || '',
+          ogAddress: context.query.tag || '',
+          tagData,
+          tag,
+          currentPage,
+          error,
+        },
+      };
+    } else {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/tag?tagName=${tag}&categoryName=${category}&page=${currentPage}&pageSize=48`,
+        );
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        tagData = await response.json();
+      } catch (err) {
+        error = err instanceof Error ? err.message : 'An unknown error occurred';
+      }
+      return {
+        props: {
+          tagQuery: context.query.tag || '',
+          tagData,
+          tag,
+          categoryQuery: context.query.category || '',
+          categoryData,
+          category,
+          ogAddress: context.query.tag + '-' + context.query.category || '',
+          currentPage,
+          error,
+        },
+      };
     }
-    return { props: { tagQuery: context.query.tag || '', tagData, tag, currentPage, error } };
   } else if (platform) {
     try {
       const response = await fetch(
@@ -1773,10 +1804,28 @@ export async function getServerSideProps(context: any) {
     } catch (err) {
       error = err instanceof Error ? err.message : 'An unknown error occurred';
     }
-    return { props: { platformQuery: context.query.platform || '', platformData, platform, currentPage, error } };
+    return {
+      props: {
+        platformQuery: context.query.platform || '',
+        ogAddress: context.query.platform || '',
+        platformData,
+        platform,
+        currentPage,
+        error,
+      },
+    };
   } else {
     return {
-      props: { categoryQuery: '', tagQuery: '', platformQuery: '', categoryData, tagData, platformData, error },
+      props: {
+        categoryQuery: '',
+        tagQuery: '',
+        platformQuery: '',
+        categoryData,
+        tagData,
+        platformData,
+        ogAddress: 'default',
+        error,
+      },
     };
   }
 }

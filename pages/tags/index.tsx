@@ -163,6 +163,7 @@ const RatingGameD19 = styled.i({
 function Tags({
   mobileData,
   healingData,
+  healingGameData,
   glData,
   queerData,
   isekaiData,
@@ -170,15 +171,16 @@ function Tags({
   anomaliesData,
   apocalypseData,
   picarescaData,
+  picarescaGameData,
   horrorDramaData,
   horrorAnimeData,
-  horrorAnimeFilmData,
   horrorFilmData,
   horrorGameData,
   error,
 }: {
   mobileData: any;
   healingData: any;
+  healingGameData: any;
   glData: any;
   queerData: any;
   isekaiData: any;
@@ -186,9 +188,9 @@ function Tags({
   anomaliesData: any;
   apocalypseData: any;
   picarescaData: any;
+  picarescaGameData: any;
   horrorDramaData: any;
   horrorAnimeData: any;
-  horrorAnimeFilmData: any;
   horrorFilmData: any;
   horrorGameData: any;
   error: string;
@@ -845,6 +847,83 @@ function Tags({
               </section>
             </>
           )}
+          {picarescaGameData && (
+            <>
+              <div className={styles.headline}>
+                <h2>
+                  <Anchor href="/amusement?tag=picaresca&category=game&page=1">피카레스크 게임 리뷰 & 실황</Anchor>
+                  {process.env.NODE_ENV === 'development' && ` ${picarescaGameData.total}개`}
+                </h2>
+                <Anchor href="/amusement?tag=picaresca&category=game&page=1">
+                  <span>더보기</span>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                      fill="black"
+                    />
+                  </svg>
+                </Anchor>
+              </div>
+              <section className={styles.game}>
+                {Array.isArray(picarescaGameData.data) &&
+                  picarescaGameData.data.map((amusement: AmusementData, index: number) => (
+                    <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
+                      <div className={styles.thumbnail}>
+                        <Image src={amusement.posterDefault} width="460" height="215" alt="" unoptimized />
+                        {amusement.category !== 'game_fan' && (
+                          <dl>
+                            <div className={styles.game}>
+                              <dt>심의등급</dt>
+                              <dd>
+                                {amusement.rating === 'all' && (
+                                  <>
+                                    <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
+                                  </>
+                                )}
+                                {amusement.rating === 'b12' && (
+                                  <>
+                                    <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
+                                  </>
+                                )}
+                                {amusement.rating === 'c15' && (
+                                  <>
+                                    <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
+                                  </>
+                                )}
+                                {amusement.rating === 'd19' && (
+                                  <>
+                                    <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
+                                  </>
+                                )}
+                              </dd>
+                            </div>
+                          </dl>
+                        )}
+                      </div>
+                      <strong>
+                        <strong>
+                          {amusement.category === 'game_fan' ? (
+                            `'${amusement.title}' 팬 게임 콜렉션`
+                          ) : amusement.titleKorean != null ? (
+                            amusement.titleKorean
+                          ) : (
+                            <>
+                              {amusement.lang === 'chineseBeonche' && <span lang="zh-Hant">{amusement.title} </span>}
+                              {amusement.lang === 'chineseGanche' && <span lang="zh-Hans">{amusement.title} </span>}
+                              {amusement.lang === 'europe' && <span lang="en">{amusement.title}</span>}
+                              {amusement.lang === 'english' && <span lang="en-US">{amusement.title}</span>}
+                              {amusement.lang === 'japanese' && <span lang="ja">{amusement.title}</span>}
+                              {amusement.lang === 'thai' && <span lang="th">{amusement.title}</span>}
+                              {amusement.lang === null && <span lang="ko">{amusement.title}</span>}
+                            </>
+                          )}
+                        </strong>
+                      </strong>
+                    </Link>
+                  ))}
+              </section>
+            </>
+          )}
           {apocalypseData && (
             <>
               <div className={styles.headline}>
@@ -1159,10 +1238,10 @@ function Tags({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?tag=anomalies&page=1">이상현상 게임 리뷰 & 실황</Anchor>
+                  <Anchor href="/amusement?tag=anomalies&category=game&page=1">이상현상 게임 리뷰 & 실황</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${anomaliesData.total}개`}
                 </h2>
-                <Anchor href="/amusement?tag=anomalies&page=1">
+                <Anchor href="/amusement?tag=anomalies&category=game&page=1">
                   <span>더보기</span>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -1236,10 +1315,10 @@ function Tags({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?tag=isHealing&page=1">치유물 리뷰</Anchor>
+                  <Anchor href="/amusement?tag=healing&page=1">치유물 리뷰</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${healingData.total}개`}
                 </h2>
-                <Anchor href="/amusement?tag=isHealing&page=1">
+                <Anchor href="/amusement?tag=healing&page=1">
                   <span>더보기</span>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -1472,6 +1551,83 @@ function Tags({
                             {amusement.lang === null && <span lang="ko">{amusement.title}</span>}
                           </>
                         )}
+                      </strong>
+                    </Link>
+                  ))}
+              </section>
+            </>
+          )}
+          {healingGameData && (
+            <>
+              <div className={styles.headline}>
+                <h2>
+                  <Anchor href="/amusement?tag=healing&category=game&page=1">힐링 게임 리뷰 & 실황</Anchor>
+                  {process.env.NODE_ENV === 'development' && ` ${healingGameData.total}개`}
+                </h2>
+                <Anchor href="/amusement?tag=healing&category=game&page=1">
+                  <span>더보기</span>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                      fill="black"
+                    />
+                  </svg>
+                </Anchor>
+              </div>
+              <section className={styles.game}>
+                {Array.isArray(healingGameData.data) &&
+                  healingGameData.data.map((amusement: AmusementData, index: number) => (
+                    <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
+                      <div className={styles.thumbnail}>
+                        <Image src={amusement.posterDefault} width="460" height="215" alt="" unoptimized />
+                        {amusement.category !== 'game_fan' && (
+                          <dl>
+                            <div className={styles.game}>
+                              <dt>심의등급</dt>
+                              <dd>
+                                {amusement.rating === 'all' && (
+                                  <>
+                                    <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
+                                  </>
+                                )}
+                                {amusement.rating === 'b12' && (
+                                  <>
+                                    <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
+                                  </>
+                                )}
+                                {amusement.rating === 'c15' && (
+                                  <>
+                                    <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
+                                  </>
+                                )}
+                                {amusement.rating === 'd19' && (
+                                  <>
+                                    <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
+                                  </>
+                                )}
+                              </dd>
+                            </div>
+                          </dl>
+                        )}
+                      </div>
+                      <strong>
+                        <strong>
+                          {amusement.category === 'game_fan' ? (
+                            `'${amusement.title}' 팬 게임 콜렉션`
+                          ) : amusement.titleKorean != null ? (
+                            amusement.titleKorean
+                          ) : (
+                            <>
+                              {amusement.lang === 'chineseBeonche' && <span lang="zh-Hant">{amusement.title} </span>}
+                              {amusement.lang === 'chineseGanche' && <span lang="zh-Hans">{amusement.title} </span>}
+                              {amusement.lang === 'europe' && <span lang="en">{amusement.title}</span>}
+                              {amusement.lang === 'english' && <span lang="en-US">{amusement.title}</span>}
+                              {amusement.lang === 'japanese' && <span lang="ja">{amusement.title}</span>}
+                              {amusement.lang === 'thai' && <span lang="th">{amusement.title}</span>}
+                              {amusement.lang === null && <span lang="ko">{amusement.title}</span>}
+                            </>
+                          )}
+                        </strong>
                       </strong>
                     </Link>
                   ))}
@@ -1792,10 +1948,10 @@ function Tags({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?tag=isGL&page=1">백합 리뷰</Anchor>
+                  <Anchor href="/amusement?tag=yuri&page=1">백합 리뷰</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${glData.total}개`}
                 </h2>
-                <Anchor href="/amusement?tag=isGL&page=1">
+                <Anchor href="/amusement?tag=yuri&page=1">
                   <span>더보기</span>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -2284,10 +2440,10 @@ function Tags({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?tag=mobile&page=1">모바일 게임 리뷰 & 실황</Anchor>
+                  <Anchor href="/amusement?tag=mobile&category=game&page=1">모바일 게임 리뷰 & 실황</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${mobileData.total}개`}
                 </h2>
-                <Anchor href="/amusement?tag=mobile&page=1">
+                <Anchor href="/amusement?tag=mobile&category=game&page=1">
                   <span>더보기</span>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -2361,10 +2517,10 @@ function Tags({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?tag=horrorDrama&page=1">공포 드라마 리뷰</Anchor>
+                  <Anchor href="/amusement?tag=horror&category=drama&page=1">공포 드라마 리뷰</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${horrorDramaData.total}개`}
                 </h2>
-                <Anchor href="/amusement?tag=horrorDrama&page=1">
+                <Anchor href="/amusement?tag=horror&category=drama&page=1">
                   <span>더보기</span>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -2587,10 +2743,10 @@ function Tags({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?tag=horrorFilm&page=1">공포 영화 리뷰</Anchor>
+                  <Anchor href="/amusement?tag=horror&category=film&page=1">공포 영화 리뷰</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${horrorFilmData.total}개`}
                 </h2>
-                <Anchor href="/amusement?tag=horrorFilm&page=1">
+                <Anchor href="/amusement?tag=horror&category=film&page=1">
                   <span>더보기</span>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -2897,10 +3053,10 @@ function Tags({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?tag=horrorAnime&page=1">공포 애니메이션 리뷰</Anchor>
+                  <Anchor href="/amusement?tag=horror&category=anime&page=1">공포 애니메이션 리뷰</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${horrorAnimeData.total}개`}
                 </h2>
-                <Anchor href="/amusement?tag=horrorAnime&page=1">
+                <Anchor href="/amusement?tag=horror&category=anime&page=1">
                   <span>더보기</span>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -3143,7 +3299,7 @@ function Tags({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?tag=horrorGame&page=1">공포 게임 리뷰 & 실황</Anchor>
+                  <Anchor href="/amusement?tag=horror&category=game&page=1">공포 게임 리뷰 & 실황</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${horrorGameData.total}개`}
                 </h2>
                 <Anchor href="/amusement?tag=horrorGame&page=1">
@@ -3228,6 +3384,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const currentPage = Number(context.query.page) || 1;
   let mobileData = null;
   let healingData = null;
+  let healingGameData = null;
   let glData = null;
   let queerData = null;
   let isekaiData = null;
@@ -3235,6 +3392,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let anomaliesData = null;
   let apocalypseData = null;
   let picarescaData = null;
+  let picarescaGameData = null;
   let horrorDramaData = null;
   let horrorAnimeData = null;
   let horrorAnimeFilmData = null;
@@ -3243,25 +3401,35 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let error = null;
 
   try {
-    const mobile = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tag?page=1&pageSize=5&tagName=isMobile`);
+    const mobile = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/tag?page=1&pageSize=5&tagName=mobile&categoryName=game`,
+    );
     if (!mobile.ok) {
       throw new Error('Network response was not ok');
     }
     mobileData = await mobile.json();
 
-    const healing = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tag?page=1&pageSize=7&tagName=isHealing`);
+    const healing = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tag?page=1&pageSize=7&tagName=healing`);
     if (!healing.ok) {
       throw new Error('Network response was not ok');
     }
     healingData = await healing.json();
 
-    const gl = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tag?page=1&pageSize=7&tagName=isGL`);
+    const healingGame = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/tag?page=1&pageSize=7&tagName=healing&categoryName=game`,
+    );
+    if (!healingGame.ok) {
+      throw new Error('Network response was not ok');
+    }
+    healingGameData = await healingGame.json();
+
+    const gl = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tag?page=1&pageSize=7&tagName=yuri`);
     if (!gl.ok) {
       throw new Error('Network response was not ok');
     }
     glData = await gl.json();
 
-    const queer = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tag?page=1&pageSize=7&tagName=isQueer`);
+    const queer = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tag?page=1&pageSize=7&tagName=queer`);
     if (!queer.ok) {
       throw new Error('Network response was not ok');
     }
@@ -3279,7 +3447,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
     timeslipData = await timeslip.json();
 
-    const anomalies = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tag?page=1&pageSize=5&tagName=anomalies`);
+    const anomalies = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/tag?page=1&pageSize=5&tagName=anomalies&categoryName=game`,
+    );
     if (!anomalies.ok) {
       throw new Error('Network response was not ok');
     }
@@ -3297,33 +3467,41 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
     picarescaData = await picaresca.json();
 
-    const horrorDrama = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tag?page=1&pageSize=7&tagName=horrorDrama`);
+    const picarescaGame = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/tag?page=1&pageSize=7&tagName=picaresca&categoryName=game`,
+    );
+    if (!picarescaGame.ok) {
+      throw new Error('Network response was not ok');
+    }
+    picarescaGameData = await picarescaGame.json();
+
+    const horrorDrama = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/tag?page=1&pageSize=7&tagName=horror&categoryName=drama`,
+    );
     if (!horrorDrama.ok) {
       throw new Error('Network response was not ok');
     }
     horrorDramaData = await horrorDrama.json();
 
-    const horrorAnime = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tag?page=1&pageSize=7&tagName=horrorAnime`);
+    const horrorAnime = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/tag?page=1&pageSize=7&tagName=horror&categoryName=anime`,
+    );
     if (!horrorAnime.ok) {
       throw new Error('Network response was not ok');
     }
     horrorAnimeData = await horrorAnime.json();
 
-    const horrorAnimeFilm = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/tag?page=1&pageSize=7&tagName=horrorAnimeFilm`,
+    const horrorFilm = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/tag?page=1&pageSize=7&tagName=horror&categoryName=film`,
     );
-    if (!horrorAnimeFilm.ok) {
-      throw new Error('Network response was not ok');
-    }
-    horrorAnimeFilmData = await horrorAnimeFilm.json();
-
-    const horrorFilm = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tag?page=1&pageSize=7&tagName=horrorFilm`);
     if (!horrorFilm.ok) {
       throw new Error('Network response was not ok');
     }
     horrorFilmData = await horrorFilm.json();
 
-    const horrorGame = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tag?page=1&pageSize=5&tagName=horrorGame`);
+    const horrorGame = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/tag?page=1&pageSize=5&tagName=horror&categoryName=game`,
+    );
     if (!horrorGame.ok) {
       throw new Error('Network response was not ok');
     }
@@ -3336,6 +3514,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       mobileData,
       healingData,
+      healingGameData,
       glData,
       queerData,
       isekaiData,
@@ -3343,6 +3522,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       anomaliesData,
       apocalypseData,
       picarescaData,
+      picarescaGameData,
       horrorDramaData,
       horrorAnimeData,
       horrorAnimeFilmData,
