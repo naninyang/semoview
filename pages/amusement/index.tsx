@@ -1651,7 +1651,7 @@ function CategoryTitle(category: keyof typeof categoryTitles): string {
     anime: '애니입니다만, 문제라도?',
     ott: '퇴근 후, 이세계 OTT에서만 볼 수 있는 작품을.',
   };
-  return categoryTitles[category] || '카테고리 선택';
+  return categoryTitles[category] || '카테고리/태그/플랫폼 선택';
 }
 
 function TagTitle(tag: keyof typeof tagTitles, category?: string): string {
