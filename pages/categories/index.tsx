@@ -77,6 +77,10 @@ const TvnIcon = styled.i({
   background: `url(${vectors.broadcast.tvnIcon}) no-repeat 50% 50%/contain`,
 });
 
+const AbcIcon = styled.i({
+  background: `url(${vectors.broadcast.abcIcon}) no-repeat 50% 50%/contain`,
+});
+
 const AniboxIcon = styled.i({
   background: `url(${vectors.anime.aniboxIcon}) no-repeat 0 50%/contain`,
 });
@@ -288,6 +292,11 @@ function Categories({
                                 {amusement.broadcast === 'tvN' && (
                                   <>
                                     <TvnIcon /> <span>tvN</span>
+                                  </>
+                                )}
+                                {amusement.broadcast === 'ABC' && (
+                                  <>
+                                    <AbcIcon /> <span>ABC</span>
                                   </>
                                 )}
                               </dd>
@@ -535,21 +544,7 @@ function Categories({
                           </div>
                         </dl>
                       </div>
-                      <strong>
-                        {amusement.titleKorean != null ? (
-                          amusement.titleKorean
-                        ) : (
-                          <>
-                            {amusement.lang === 'chineseBeonche' && <span lang="zh-Hant">{amusement.title} </span>}
-                            {amusement.lang === 'chineseGanche' && <span lang="zh-Hans">{amusement.title} </span>}
-                            {amusement.lang === 'europe' && <span lang="en">{amusement.title}</span>}
-                            {amusement.lang === 'english' && <span lang="en-US">{amusement.title}</span>}
-                            {amusement.lang === 'japanese' && <span lang="ja">{amusement.title}</span>}
-                            {amusement.lang === 'thai' && <span lang="th">{amusement.title}</span>}
-                            {amusement.lang === null && <span lang="ko">{amusement.title}</span>}
-                          </>
-                        )}
-                      </strong>
+                      <strong>{amusement.titleKorean != null ? amusement.titleKorean : amusement.title}</strong>
                     </Link>
                   ))}
               </section>
@@ -781,21 +776,7 @@ function Categories({
                           </div>
                         </dl>
                       </div>
-                      <strong>
-                        {amusement.titleKorean != null ? (
-                          amusement.titleKorean
-                        ) : (
-                          <>
-                            {amusement.lang === 'chineseBeonche' && <span lang="zh-Hant">{amusement.title} </span>}
-                            {amusement.lang === 'chineseGanche' && <span lang="zh-Hans">{amusement.title} </span>}
-                            {amusement.lang === 'europe' && <span lang="en">{amusement.title}</span>}
-                            {amusement.lang === 'english' && <span lang="en-US">{amusement.title}</span>}
-                            {amusement.lang === 'japanese' && <span lang="ja">{amusement.title}</span>}
-                            {amusement.lang === 'thai' && <span lang="th">{amusement.title}</span>}
-                            {amusement.lang === null && <span lang="ko">{amusement.title}</span>}
-                          </>
-                        )}
-                      </strong>
+                      <strong>{amusement.titleKorean != null ? amusement.titleKorean : amusement.title}</strong>
                     </Link>
                   ))}
               </section>
@@ -911,6 +892,11 @@ function Categories({
                                 {amusement.broadcast === 'tvN' && (
                                   <>
                                     <TvnIcon /> <span>tvN</span>
+                                  </>
+                                )}
+                                {amusement.broadcast === 'ABC' && (
+                                  <>
+                                    <AbcIcon /> <span>ABC</span>
                                   </>
                                 )}
                               </dd>
@@ -1033,21 +1019,7 @@ function Categories({
                           </div>
                         </dl>
                       </div>
-                      <strong>
-                        {amusement.titleKorean != null ? (
-                          amusement.titleKorean
-                        ) : (
-                          <>
-                            {amusement.lang === 'chineseBeonche' && <span lang="zh-Hant">{amusement.title} </span>}
-                            {amusement.lang === 'chineseGanche' && <span lang="zh-Hans">{amusement.title} </span>}
-                            {amusement.lang === 'europe' && <span lang="en">{amusement.title}</span>}
-                            {amusement.lang === 'english' && <span lang="en-US">{amusement.title}</span>}
-                            {amusement.lang === 'japanese' && <span lang="ja">{amusement.title}</span>}
-                            {amusement.lang === 'thai' && <span lang="th">{amusement.title}</span>}
-                            {amusement.lang === null && <span lang="ko">{amusement.title}</span>}
-                          </>
-                        )}
-                      </strong>
+                      <strong>{amusement.titleKorean != null ? amusement.titleKorean : amusement.title}</strong>
                     </Link>
                   ))}
               </section>

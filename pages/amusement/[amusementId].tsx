@@ -123,6 +123,11 @@ const Tvn = styled.i({
   background: `url(${vectors.broadcast.tvn2}) no-repeat 0 50%/contain`,
 });
 
+const Abc = styled.i({
+  width: rem(34),
+  background: `url(${vectors.broadcast.abc2}) no-repeat 0 50%/contain`,
+});
+
 const Anibox = styled.i({
   width: rem(48),
   background: `url(${vectors.anime.anibox2}) no-repeat 0 50%/contain`,
@@ -1124,6 +1129,11 @@ export default function Amusement({
                               <Tvn /> <span>tvN</span>
                             </>
                           )}
+                          {amusementData.attributes.broadcast === 'ABC' && (
+                            <>
+                              <Abc /> <span>ABC</span>
+                            </>
+                          )}
                           {(amusementData.attributes.animeBroadcast1 !== null ||
                             amusementData.attributes.animeBroadcast2 !== null) && (
                             <>
@@ -1424,7 +1434,7 @@ export default function Amusement({
                 <dt>
                   {amusementData.attributes.category === 'game' || amusementData.attributes.category === 'game_fan'
                     ? '유통/배급'
-                    : '퍼블리싱'}
+                    : '제작/배급'}
                 </dt>
                 <dd>{amusementData.attributes.publisher}</dd>
               </div>
@@ -1444,6 +1454,7 @@ export default function Amusement({
                 {amusementData.attributes.cast !== null && (
                   <div>
                     {amusementData.attributes.category !== 'anime' &&
+                    amusementData.attributes.category !== 'anime_film' &&
                     amusementData.attributes.category !== 'ott_anime' &&
                     amusementData.attributes.category !== 'ott_anime_film' &&
                     amusementData.attributes.category !== 'game' ? (
@@ -1509,7 +1520,7 @@ export default function Amusement({
           </div>
           {amusementData.attributes.posterOther && (
             <button type="button" onClick={togglePoster}>
-              <span>다른 이미지 보기</span>
+              <span>다른 포스터/비주얼 보기</span>
               <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g opacity="1">
                   <path

@@ -112,6 +112,11 @@ const Tvn = styled.i({
   background: `url(${vectors.broadcast.tvn}) no-repeat 0 50%/contain`,
 });
 
+const Abc = styled.i({
+  width: rem(34),
+  background: `url(${vectors.broadcast.abc}) no-repeat 0 50%/contain`,
+});
+
 const Anibox = styled.i({
   width: rem(48),
   background: `url(${vectors.anime.anibox}) no-repeat 0 50%/contain`,
@@ -540,6 +545,11 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                                     {jejeup.amusementData.broadcast === 'tvN' && (
                                       <>
                                         <Tvn /> <span>tvN</span>
+                                      </>
+                                    )}
+                                    {jejeup.amusementData.broadcast === 'ABC' && (
+                                      <>
+                                        <Abc /> <span>ABC</span>
                                       </>
                                     )}
                                     {(jejeup.amusementData.animeBroadcast1 !== null ||

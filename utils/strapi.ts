@@ -275,7 +275,8 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
     platformName === 'tvN' ||
     platformName === 'OCN' ||
     platformName === 'JTBC' ||
-    platformName === 'ENA'
+    platformName === 'ENA' ||
+    platformName === 'ABC'
   ) {
     const response = await fetch(
       `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[broadcast][$eq]=${platformName}`,

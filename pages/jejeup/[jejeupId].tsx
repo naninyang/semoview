@@ -120,6 +120,11 @@ const Tvn = styled.i({
   background: `url(${vectors.broadcast.tvn}) no-repeat 0 50%/contain`,
 });
 
+const Abc = styled.i({
+  width: rem(34),
+  background: `url(${vectors.broadcast.abc}) no-repeat 0 50%/contain`,
+});
+
 const Anibox = styled.i({
   width: rem(48),
   background: `url(${vectors.anime.anibox}) no-repeat 0 50%/contain`,
@@ -769,6 +774,11 @@ export default function JejeupDetail({
                                                     <Tvn /> <span>tvN</span>
                                                   </>
                                                 )}
+                                                {data.broadcast === 'ABC' && (
+                                                  <>
+                                                    <Abc /> <span>ABC</span>
+                                                  </>
+                                                )}
                                                 {(data.animeBroadcast1 !== null || data.animeBroadcast2 !== null) && (
                                                   <>
                                                     {data.animeBroadcast1 === 'tokyomx' && (
@@ -1237,7 +1247,7 @@ export default function JejeupDetail({
                                       )}
                                       {data.publisher !== '?' && (
                                         <div>
-                                          <dt>{data.category === 'game' ? '유통/배급' : '퍼블리싱'}</dt>
+                                          <dt>{data.category === 'game' ? '유통/배급' : '제작/배급'}</dt>
                                           <dd>{data.publisher}</dd>
                                         </div>
                                       )}
@@ -1317,6 +1327,11 @@ export default function JejeupDetail({
                                           {data.broadcast === 'tvN' && (
                                             <>
                                               <Tvn /> <span>tvN</span>
+                                            </>
+                                          )}
+                                          {data.broadcast === 'ABC' && (
+                                            <>
+                                              <Abc /> <span>ABC</span>
                                             </>
                                           )}
                                           {(data.animeBroadcast1 !== null || data.animeBroadcast2 !== null) && (

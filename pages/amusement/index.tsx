@@ -75,6 +75,10 @@ const TvnIcon = styled.i({
   background: `url(${vectors.broadcast.tvnIcon}) no-repeat 50% 50%/contain`,
 });
 
+const AbcIcon = styled.i({
+  background: `url(${vectors.broadcast.abcIcon}) no-repeat 50% 50%/contain`,
+});
+
 const AniboxIcon = styled.i({
   background: `url(${vectors.anime.aniboxIcon}) no-repeat 0 50%/contain`,
 });
@@ -554,13 +558,7 @@ function Amusement({
             <div className={styles.content}>
               <div className={styles.headline}>
                 <h1>
-                  {category === 'drama' && '개가 짖어도 드라마는 정주행 할 수밖에 없다!'}
-                  {category === 'film' && '영화 사회에서는 영원한 우방도, 영원한 적도 없다!'}
-                  {category === 'game' && '게임은 끝날 때까지 끝난 게 아니다!'}
-                  {category === 'game_fan' && '이세계 팬 게임 모음'}
-                  {category === 'anime' && '애니입니다만, 문제라도?'}
-                  {category === 'ott' && '퇴근 후, 이세계 OTT에서만 볼 수 있는 작품을.'}{' '}
-                  {categoryData.total > 0 && <span>({categoryData.total}개 작품)</span>}
+                  {pageTitle} {categoryData.total > 0 && <span>({categoryData.total}개 작품)</span>}
                 </h1>
                 <div className={styles.select}>
                   <select onChange={handleCategoryChange} defaultValue={selectedCategory}>
@@ -907,22 +905,7 @@ function Amusement({
             <div className={styles.content}>
               <div className={styles.headline}>
                 <h1>
-                  {tag === 'healing' && category !== 'game' ? '밤은 치유물과 함께' : ''}
-                  {tag === 'healing' && category === 'game' ? '오늘밤은 힐링게임이 좋아' : ''}
-                  {tag === 'mobile' ? '제로부터 시작하는 모바일 게임 생활' : ''}
-                  {tag === 'queer' ? 'Love Wins' : ''}
-                  {tag === 'yuri' ? '그 백합잎에 입맞춤을' : ''}
-                  {tag === 'isekai' ? '마지막으로 이세계를 부탁드려도 될까요' : ''}
-                  {tag === 'timeslip' ? '빙글뱅글 타임루프' : ''}
-                  {tag === 'anomalies' && category === 'game' ? '지구에서는 우리가 아노말리야.' : ''}
-                  {tag === 'apocalypse' ? '꿈도 희망도 없는' : ''}
-                  {tag === 'picaresca' && category !== 'game' ? '피카레스크 전성시대' : ''}
-                  {tag === 'picaresca' && category === 'game' ? '자닌한 게임이라 욕하지는 마' : ''}
-                  {tag === 'horror' && category === 'drama' ? '심신미약자, 임산부, 노약자 시청금지 공포 드라마!' : ''}
-                  {tag === 'horror' && category === 'anime' ? '심신미약자, 임산부, 노약자 시청금지 공포 애니!' : ''}
-                  {tag === 'horror' && category === 'film' ? '심신미약자, 임산부, 노약자 시청금지 공포 영화!' : ''}
-                  {tag === 'horror' && category === 'game' ? '심신미약자, 임산부, 노약자 시청금지 공포 게임!' : ''}{' '}
-                  {tagData.total > 0 && <span>({tagData.total}개 작품)</span>}
+                  {pageTitle} {tagData.total > 0 && <span>({tagData.total}개 작품)</span>}
                 </h1>
                 <div className={styles.select}>
                   <select onChange={handleTagChange} defaultValue={selectedTag}>
@@ -1270,31 +1253,17 @@ function Amusement({
             <div className={styles.content}>
               <div className={styles.headline}>
                 <h1>
-                  {platform === 'KBS2' ? 'KBS 2TV' : ''}
-                  {platform === 'MBC' ? 'MBC' : ''}
-                  {platform === 'SBS' ? 'SBS' : ''}
-                  {platform === 'JTBC' ? 'JTBC' : ''}
-                  {platform === 'OCN' ? 'OCN' : ''}
-                  {platform === 'tvN' ? 'tvN' : ''}
-                  {platform === 'ENA' ? 'ENA' : ''}
-                  {platform === 'amazon' ? '아마존 프라임비디오' : ''}
-                  {platform === 'apple' ? '애플 TV+' : ''}
-                  {platform === 'disney' ? '디즈니+ & 스타+' : ''}
-                  {platform === 'netflix' ? '넷플릭스' : ''}
-                  {platform === 'tving' ? '티빙' : ''}
-                  {platform === 'watcha' ? '왓챠' : ''}
-                  {platform === 'wavve' ? '웨이브' : ''}
-                  {platform === 'paramount' ? '파라마운트+' : ''}{' '}
-                  {platformData.total > 0 && <span>({platformData.total}개 작품)</span>}
+                  {pageTitle} {platformData.total > 0 && <span>({platformData.total}개 작품)</span>}
                 </h1>
                 <div className={styles.select}>
                   <select onChange={handlePlatformChange} defaultValue={selectedPlatform}>
                     <option value="">플랫폼(OTT 또는 방송국) 선택</option>
                     <option value="apple">애플 TV+</option>
-                    <option value="disney">디즈니+ & 스타+</option>
                     <option value="paramount">파라마운트+</option>
                     <option value="amazon">아마존 프라임비디오</option>
                     <option value="netflix">넷플릭스</option>
+                    <option value="disney">디즈니+ & 스타+</option>
+                    <option value="ABC">ABC</option>
                     <option value="tving">티빙</option>
                     <option value="watcha">왓챠</option>
                     <option value="wavve">웨이브</option>

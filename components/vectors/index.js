@@ -42,6 +42,9 @@ export const vectors = {
     paramount: require('./ott/paramount.svg'),
   },
   broadcast: {
+    abcIcon: require('./broadcast/abc-icon.svg'),
+    abc: require('./broadcast/abc.svg'),
+    abc2: require('./broadcast/abc2.svg'),
     enaIcon: require('./broadcast/ena-icon.svg'),
     ena: require('./broadcast/ena.svg'),
     ena2: require('./broadcast/ena2.svg'),
