@@ -3302,7 +3302,7 @@ function Tags({
                   <Anchor href="/amusement?tag=horror&category=game&page=1">공포 게임 리뷰 & 실황</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${horrorGameData.total}개`}
                 </h2>
-                <Anchor href="/amusement?tag=horrorGame&page=1">
+                <Anchor href="/amusement?tag=horror&category=game&page=1">
                   <span>더보기</span>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
