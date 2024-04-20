@@ -174,6 +174,7 @@ function Amusement({
   platformQuery,
   platformData,
   platform,
+  pageTitle,
   ogAddress,
   currentPage,
   error,
@@ -187,6 +188,7 @@ function Amusement({
   platformQuery: string;
   platformData: any;
   platform: string;
+  pageTitle: string;
   ogAddress: string;
   currentPage: number;
   error: string;
@@ -244,83 +246,8 @@ function Amusement({
   return (
     <main className={`${styles.categories} ${styles.amusement}`}>
       <Seo
-        pageTitles={`${categoryQuery === 'drama' ? '개가 짖어도 드라마는 정주행 할 수밖에 없다!' : ''}
-              ${categoryQuery === 'film' ? '영화 사회에서는 영원한 우방도, 영원한 적도 없다!' : ''}
-              ${categoryQuery === 'game' ? '게임은 끝날 때까지 끝난 게 아니다!' : ''}
-              ${categoryQuery === 'game_fan' ? '이세계 팬 게임 모음' : ''}
-              ${categoryQuery === 'anime' ? '애니입니다만, 문제라도?' : ''}
-              ${categoryQuery === 'ott' ? '퇴근 후, 이세계 OTT에서만 볼 수 있는 작품을.' : ''}
-              ${categoryQuery === '' ? '카테고리 선택' : ''}
-              ${tagQuery === 'healing' && categoryQuery !== 'game' ? '밤은 치유물과 함께' : ''}
-              ${tagQuery === 'healing' && categoryQuery === 'game' ? '오늘밤은 힐링게임이 좋아' : ''}
-              ${tagQuery === 'mobile' && categoryQuery === 'game' ? '제로부터 시작하는 모바일 게임 생활' : ''}
-              ${tagQuery === 'queer' ? 'Love Wins' : ''}
-              ${tagQuery === 'yuri' ? '그 백합잎에 입맞춤을' : ''}
-              ${tagQuery === 'isekai' ? '마지막으로 이세계를 부탁드려도 될까요' : ''}
-              ${tagQuery === 'timeslip' ? '빙글뱅글 타임루프' : ''}
-              ${tagQuery === 'anomalies' && categoryQuery === 'game' ? '지구에서는 우리가 아노말리야.' : ''}
-              ${tagQuery === 'apocalypse' ? '꿈도 희망도 없는' : ''}
-              ${tagQuery === 'picaresca' && categoryQuery !== 'game' ? '피카레스크 전성시대' : ''}
-              ${tagQuery === 'picaresca' && categoryQuery === 'game' ? '자닌한 게임이라 욕하지는 마' : ''}
-              ${tagQuery === 'horror' && categoryQuery === 'drama' ? '심신미약자, 임산부, 노약자 시청금지 공포 드라마!' : ''}
-              ${tagQuery === 'horror' && categoryQuery === 'anime' ? '심신미약자, 임산부, 노약자 시청금지 공포 애니!' : ''}
-              ${tagQuery === 'horror' && categoryQuery === 'film' ? '심신미약자, 임산부, 노약자 시청금지 공포 영화!' : ''}
-              ${tagQuery === 'horror' && categoryQuery === 'game' ? '심신미약자, 임산부, 노약자 시청금지 공포 게임!' : ''}
-              ${platformQuery === 'KBS2' ? 'KBS 2TV' : ''}
-              ${platformQuery === 'MBC' ? 'KBS 2TV' : ''}
-              ${platformQuery === 'SBS' ? 'KBS 2TV' : ''}
-              ${platformQuery === 'JTBC' ? 'KBS 2TV' : ''}
-              ${platformQuery === 'OCN' ? 'KBS 2TV' : ''}
-              ${platformQuery === 'tvN' ? 'KBS 2TV' : ''}
-              ${platformQuery === 'ENA' ? 'KBS 2TV' : ''}
-              ${platformQuery === 'amazon' ? '아마존 프라임비디오' : ''}
-              ${platformQuery === 'apple' ? '애플 TV+' : ''}
-              ${platformQuery === 'disney' ? '디즈니+ & 스타+' : ''}
-              ${platformQuery === 'netflix' ? '넷플릭스' : ''}
-              ${platformQuery === 'tving' ? '티빙' : ''}
-              ${platformQuery === 'watcha' ? '왓챠' : ''}
-              ${platformQuery === 'wavve' ? '웨이브' : ''}
-              ${platformQuery === 'paramount' ? '파라마운트+' : ''}
-              ${platformQuery === '' ? 'OTT/방소국 선택' : ''} - ${originTitle}`}
-        pageTitle={`${categoryQuery === 'drama' ? '개가 짖어도 드라마는 정주행 할 수밖에 없다!' : ''}
-              ${categoryQuery === 'film' ? '영화 사회에서는 영원한 우방도, 영원한 적도 없다!' : ''}
-              ${categoryQuery === 'game' ? '게임은 끝날 때까지 끝난 게 아니다!' : ''}
-              ${categoryQuery === 'game_fan' ? '이세계 팬 게임 모음' : ''}
-              ${categoryQuery === 'anime' ? '애니입니다만, 문제라도?' : ''}
-              ${categoryQuery === 'ott' ? '퇴근 후, 이세계 OTT에서만 볼 수 있는 작품을.' : ''}
-              ${categoryQuery === '' ? '카테고리 선택' : ''}
-              ${tagQuery === 'healing' && categoryQuery !== 'game' ? '밤은 치유물과 함께' : ''}
-              ${tagQuery === 'healing' && categoryQuery === 'game' ? '오늘밤은 힐링게임이 좋아' : ''}
-              ${tagQuery === 'mobile' && categoryQuery === 'game' ? '제로부터 시작하는 모바일 게임 생활' : ''}
-              ${tagQuery === 'queer' ? 'Love Wins' : ''}
-              ${tagQuery === 'yuri' ? '그 백합잎에 입맞춤을' : ''}
-              ${tagQuery === 'isekai' ? '마지막으로 이세계를 부탁드려도 될까요' : ''}
-              ${tagQuery === 'timeslip' ? '빙글뱅글 타임루프' : ''}
-              ${tagQuery === 'anomalies' && categoryQuery === 'game' ? '지구에서는 우리가 아노말리야.' : ''}
-              ${tagQuery === 'apocalypse' ? '꿈도 희망도 없는' : ''}
-              ${tagQuery === 'picaresca' && categoryQuery !== 'game' ? '피카레스크 전성시대' : ''}
-              ${tagQuery === 'picaresca' && categoryQuery === 'game' ? '자닌한 게임이라 욕하지는 마' : ''}
-              ${tagQuery === 'horror' && categoryQuery === 'drama' ? '심신미약자, 임산부, 노약자 시청금지 공포 드라마!' : ''}
-              ${tagQuery === 'horror' && categoryQuery === 'anime' ? '심신미약자, 임산부, 노약자 시청금지 공포 애니!' : ''}
-              ${tagQuery === 'horror' && categoryQuery === 'film' ? '심신미약자, 임산부, 노약자 시청금지 공포 영화!' : ''}
-              ${tagQuery === 'horror' && categoryQuery === 'game' ? '심신미약자, 임산부, 노약자 시청금지 공포 게임!' : ''}
-              ${tagQuery === '' ? '태그 선택' : ''}
-              ${platformQuery === 'KBS2' ? 'KBS 2TV' : ''}
-              ${platformQuery === 'MBC' ? 'KBS 2TV' : ''}
-              ${platformQuery === 'SBS' ? 'KBS 2TV' : ''}
-              ${platformQuery === 'JTBC' ? 'KBS 2TV' : ''}
-              ${platformQuery === 'OCN' ? 'KBS 2TV' : ''}
-              ${platformQuery === 'tvN' ? 'KBS 2TV' : ''}
-              ${platformQuery === 'ENA' ? 'KBS 2TV' : ''}
-              ${platformQuery === 'amazon' ? '아마존 프라임비디오' : ''}
-              ${platformQuery === 'apple' ? '애플 TV+' : ''}
-              ${platformQuery === 'disney' ? '디즈니+ & 스타+' : ''}
-              ${platformQuery === 'netflix' ? '넷플릭스' : ''}
-              ${platformQuery === 'tving' ? '티빙' : ''}
-              ${platformQuery === 'watcha' ? '왓챠' : ''}
-              ${platformQuery === 'wavve' ? '웨이브' : ''}
-              ${platformQuery === 'paramount' ? '파라마운트+' : ''}
-              ${platformQuery === '' ? 'OTT/방소국 선택' : ''}`}
+        pageTitles={`${pageTitle} - ${originTitle}`}
+        pageTitle={`${pageTitle}`}
         pageDescription="원하는 카테고리/태그/OTT & 방송국을 선택해 리뷰영상을 즐기세요!"
         pageImg={`https://jejeup.dev1stud.io/og-${ogAddress}.webp?ts=${timestamp}`}
       />
@@ -980,8 +907,8 @@ function Amusement({
             <div className={styles.content}>
               <div className={styles.headline}>
                 <h1>
-                  {tag === 'healing' && categoryQuery !== 'game' ? '밤은 치유물과 함께' : ''}
-                  {tag === 'healing' && categoryQuery === 'game' ? '오늘밤은 힐링게임이 좋아' : ''}
+                  {tag === 'healing' && category !== 'game' ? '밤은 치유물과 함께' : ''}
+                  {tag === 'healing' && category === 'game' ? '오늘밤은 힐링게임이 좋아' : ''}
                   {tag === 'mobile' ? '제로부터 시작하는 모바일 게임 생활' : ''}
                   {tag === 'queer' ? 'Love Wins' : ''}
                   {tag === 'yuri' ? '그 백합잎에 입맞춤을' : ''}
@@ -1715,6 +1642,62 @@ function Amusement({
 
 export default Amusement;
 
+function CategoryTitle(category: keyof typeof categoryTitles): string {
+  const categoryTitles = {
+    drama: '개가 짖어도 드라마는 정주행 할 수밖에 없다!',
+    film: '영화 사회에서는 영원한 우방도, 영원한 적도 없다!',
+    game: '게임은 끝날 때까지 끝난 게 아니다!',
+    game_fan: '이세계 팬 게임 모음',
+    anime: '애니입니다만, 문제라도?',
+    ott: '퇴근 후, 이세계 OTT에서만 볼 수 있는 작품을.',
+  };
+  return categoryTitles[category] || '카테고리 선택';
+}
+
+function TagTitle(tag: keyof typeof tagTitles, category?: string): string {
+  const tagTitles = {
+    healing: category !== 'game' ? '밤은 치유물과 함께' : '오늘밤은 힐링게임이 좋아',
+    mobile: '제로부터 시작하는 모바일 게임 생활',
+    queer: 'Love Wins',
+    yuri: '그 백합잎에 입맞춤을',
+    isekai: '마지막으로 이세계를 부탁드려도 될까요',
+    timeslip: '빙글뱅글 타임루프',
+    anomalies: category === 'game' ? '지구에서는 우리가 아노말리야.' : '',
+    apocalypse: '꿈도 희망도 없는',
+    picaresca: category !== 'game' ? '피카레스크 전성시대' : '자닌한 게임이라 욕하지는 마',
+    horror:
+      category === 'drama'
+        ? '심신미약자, 임산부, 노약자 시청금지 공포 드라마!'
+        : category === 'anime'
+          ? '심신미약자, 임산부, 노약자 시청금지 공포 애니!'
+          : category === 'film'
+            ? '심신미약자, 임산부, 노약자 시청금지 공포 영화!'
+            : '심신미약자, 임산부, 노약자 시청금지 공포 게임!',
+  };
+  return tagTitles[tag] || '태그 선택';
+}
+
+function PlatformTitle(platform: keyof typeof platformTitles) {
+  const platformTitles = {
+    KBS2: 'KBS 2TV',
+    MBC: 'MBC',
+    SBS: 'SBS',
+    JTBC: 'JTBC',
+    OCN: 'OCN',
+    tvN: 'tvN',
+    ENA: 'ENA',
+    amazon: '아마존 프라임비디오',
+    apple: '애플 TV+',
+    disney: '디즈니+ & 스타+',
+    netflix: '넷플릭스',
+    tving: '티빙',
+    watcha: '왓챠',
+    wavve: '웨이브',
+    paramount: '파라마운트+',
+  };
+  return platformTitles[platform] || 'OTT/방소국 선택';
+}
+
 export async function getServerSideProps(context: any) {
   const { query } = context;
   const category = query.category || null;
@@ -1724,8 +1707,9 @@ export async function getServerSideProps(context: any) {
   let categoryData = null;
   let tagData = null;
   let platformData = null;
-  let ogAddress = null;
   let error = null;
+  let ogAddress = null;
+  let pageTitle = '카테고리/태그/플랫폼 선택';
 
   if (!platform && !tag) {
     try {
@@ -1736,6 +1720,7 @@ export async function getServerSideProps(context: any) {
         throw new Error('Network response was not ok');
       }
       categoryData = await response.json();
+      pageTitle = CategoryTitle(category);
     } catch (err) {
       error = err instanceof Error ? err.message : 'An unknown error occurred';
     }
@@ -1745,6 +1730,7 @@ export async function getServerSideProps(context: any) {
         ogAddress: context.query.category || '',
         categoryData,
         category,
+        pageTitle,
         currentPage,
         error,
       },
@@ -1759,6 +1745,7 @@ export async function getServerSideProps(context: any) {
           throw new Error('Network response was not ok');
         }
         tagData = await response.json();
+        pageTitle = TagTitle(tag);
       } catch (err) {
         error = err instanceof Error ? err.message : 'An unknown error occurred';
       }
@@ -1768,6 +1755,7 @@ export async function getServerSideProps(context: any) {
           ogAddress: context.query.tag || '',
           tagData,
           tag,
+          pageTitle,
           currentPage,
           error,
         },
@@ -1781,6 +1769,7 @@ export async function getServerSideProps(context: any) {
           throw new Error('Network response was not ok');
         }
         tagData = await response.json();
+        pageTitle = TagTitle(tag, category);
       } catch (err) {
         error = err instanceof Error ? err.message : 'An unknown error occurred';
       }
@@ -1792,6 +1781,7 @@ export async function getServerSideProps(context: any) {
           categoryQuery: context.query.category || '',
           categoryData,
           category,
+          pageTitle,
           ogAddress: context.query.tag + '-' + context.query.category || '',
           currentPage,
           error,
@@ -1807,6 +1797,7 @@ export async function getServerSideProps(context: any) {
         throw new Error('Network response was not ok');
       }
       platformData = await response.json();
+      pageTitle = PlatformTitle(platform);
     } catch (err) {
       error = err instanceof Error ? err.message : 'An unknown error occurred';
     }
@@ -1816,11 +1807,12 @@ export async function getServerSideProps(context: any) {
         ogAddress: context.query.platform || '',
         platformData,
         platform,
+        pageTitle,
         currentPage,
         error,
       },
     };
-  } else {
+  } else if (category === null && tag === null && platform === null) {
     return {
       props: {
         categoryQuery: '',
