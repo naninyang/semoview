@@ -1648,23 +1648,24 @@ function TagTitle(tag: keyof typeof tagTitles, category?: string): string {
 
 function PlatformTitle(platform: keyof typeof platformTitles) {
   const platformTitles = {
-    KBS2: 'KBS 2TV',
-    MBC: 'MBC',
-    SBS: 'SBS',
-    JTBC: 'JTBC',
-    OCN: 'OCN',
-    tvN: 'tvN',
-    ENA: 'ENA',
-    amazon: '아마존 프라임비디오',
-    apple: '애플 TV+',
-    disney: '디즈니+ & 스타+',
-    netflix: '넷플릭스',
-    tving: '티빙',
-    watcha: '왓챠',
-    wavve: '웨이브',
-    paramount: '파라마운트+',
+    KBS2: 'KBS 2TV 드라마 리뷰',
+    MBC: 'MBC 드라마 리뷰',
+    SBS: 'SBS 드라마 리뷰',
+    JTBC: 'JTBC 드라마 리뷰',
+    OCN: 'OCN 드라마 리뷰',
+    tvN: 'tvN 드라마 리뷰',
+    ENA: 'ENA 드라마 리뷰',
+    ABC: 'ABC 드라마 리뷰',
+    amazon: '아마존 프라임비디오 오리지널 리뷰',
+    apple: '애플 TV+ 오리지널 리뷰',
+    disney: '디즈니+ & 스타+ 오리지널 리뷰',
+    netflix: '넷플릭스 오리지널 리뷰',
+    tving: '티빙 오리지널 리뷰',
+    watcha: '왓챠 오리지널 리뷰',
+    wavve: '웨이브 오리지널 리뷰',
+    paramount: '파라마운트+ 오리지널 리뷰',
   };
-  return platformTitles[platform] || 'OTT/방소국 선택';
+  return platformTitles[platform] || 'OTT/방송국 선택';
 }
 
 export async function getServerSideProps(context: any) {

@@ -221,7 +221,7 @@ function Platforms({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?platform=paramount&page=1">파라마운트+ 작품 리뷰</Anchor>
+                  <Anchor href="/amusement?platform=paramount&page=1">파라마운트+ 오리지널 리뷰</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${paramountData.total}개`}
                 </h2>
                 <Anchor href="/amusement?platform=paramount&page=1">
@@ -450,7 +450,7 @@ function Platforms({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?platform=wavve&page=1">웨이브 작품 리뷰</Anchor>
+                  <Anchor href="/amusement?platform=wavve&page=1">웨이브 오리지널 리뷰</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${wavveData.total}개`}
                 </h2>
                 <Anchor href="/amusement?platform=wavve&page=1">
@@ -679,7 +679,7 @@ function Platforms({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?platform=watcha&page=1">왓챠 작품 리뷰</Anchor>
+                  <Anchor href="/amusement?platform=watcha&page=1">왓챠 오리지널 리뷰</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${watchaData.total}개`}
                 </h2>
                 <Anchor href="/amusement?platform=watcha&page=1">
@@ -908,7 +908,7 @@ function Platforms({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?platform=tving&page=1">티빙 작품 리뷰</Anchor>
+                  <Anchor href="/amusement?platform=tving&page=1">티빙 오리지널 리뷰</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${tvingData.total}개`}
                 </h2>
                 <Anchor href="/amusement?platform=tving&page=1">
@@ -1137,7 +1137,7 @@ function Platforms({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?platform=netflix&page=1">넷플릭스 작품 리뷰</Anchor>
+                  <Anchor href="/amusement?platform=netflix&page=1">넷플릭스 오리지널 리뷰</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${netflixData.total}개`}
                 </h2>
                 <Anchor href="/amusement?platform=netflix&page=1">
@@ -1366,7 +1366,7 @@ function Platforms({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?platform=disney&page=1">디즈니+ & 스타+ 작품 리뷰</Anchor>
+                  <Anchor href="/amusement?platform=disney&page=1">디즈니+ & 스타+ 오리지널 리뷰</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${disneyData.total}개`}
                 </h2>
                 <Anchor href="/amusement?platform=disney&page=1">
@@ -1626,7 +1626,7 @@ function Platforms({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?platform=apple&page=1">애플 TV+ 작품 리뷰</Anchor>
+                  <Anchor href="/amusement?platform=apple&page=1">애플 TV+ 오리지널 리뷰</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${appleData.total}개`}
                 </h2>
                 <Anchor href="/amusement?platform=apple&page=1">
@@ -1855,7 +1855,7 @@ function Platforms({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?platform=amazon&page=1">아마존 프라임비디오 작품 리뷰</Anchor>
+                  <Anchor href="/amusement?platform=amazon&page=1">아마존 프라임비디오 오리지널 리뷰</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${amazonData.total}개`}
                 </h2>
                 <Anchor href="/amusement?platform=amazon&page=1">
