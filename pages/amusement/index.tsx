@@ -1727,7 +1727,7 @@ export async function getServerSideProps(context: any) {
     return {
       props: {
         categoryQuery: context.query.category || '',
-        ogAddress: context.query.category || '',
+        ogAddress: context.query.category || 'default',
         categoryData,
         category,
         pageTitle,
