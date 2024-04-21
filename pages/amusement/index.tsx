@@ -711,6 +711,11 @@ function Amusement({
                                       <TvnIcon /> <span>tvN</span>
                                     </>
                                   )}
+                                  {amusement.broadcast === 'ABC' && (
+                                    <>
+                                      <AbcIcon /> <span>ABC</span>
+                                    </>
+                                  )}
                                 </dd>
                               </div>
                             )}
