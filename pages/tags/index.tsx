@@ -2244,7 +2244,10 @@ function Tags({
                                 </i>
                               ) : (
                                 <>
-                                  {amusement.category === 'anime' || amusement.category === 'ott_anime' ? (
+                                  {amusement.category === 'drama' ||
+                                  amusement.category === 'anime' ||
+                                  amusement.category === 'ott_drama' ||
+                                  amusement.category === 'ott_anime' ? (
                                     <>
                                       {amusement.rating !== 'd19' ? (
                                         <>
