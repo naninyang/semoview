@@ -1546,7 +1546,7 @@ export default function Amusement({
                         <div className={styles.thumbnail}>
                           <YouTubeController
                             videoId={`${value}`}
-                            videoImage={`https://i.ytimg.com/vi/${value}/hq720.jpg`}
+                            videoImage={`https://i.ytimg.com/vi/${value}/hqdefault.jpg`}
                           />
                         </div>
                         <div className={styles['preview-info']}>
