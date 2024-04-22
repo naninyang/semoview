@@ -1533,6 +1533,38 @@ export default function Amusement({
           )}
         </div>
       </div>
+      {amusementData.attributes.related !== null && Array.isArray(amusementData.attributes.related) && (
+        <section>
+          <h2>관련 영상</h2>
+          <div className={styles.list}>
+            {amusementData.attributes.related.flatMap((item) =>
+              Object.entries(item).map(([key, value]) => (
+                <div className={styles.item} key={key}>
+                  <div className={styles.a}>
+                    <div className={`${styles.preview} preview`}>
+                      <div className={styles['preview-container']}>
+                        <div className={styles.thumbnail}>
+                          <YouTubeController
+                            videoId={`${value}`}
+                            videoImage={`https://i.ytimg.com/vi/${value}/hq720.jpg`}
+                          />
+                        </div>
+                        <div className={styles['preview-info']}>
+                          <div className={styles.detail}>
+                            <div className={`${styles['user-info']}`}>
+                              <strong>{key}</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )),
+            )}
+          </div>
+        </section>
+      )}
       {isJejeupsError && (
         <p className={styles['amusement-error']}>
           영상을 불러오지 못했습니다. 삭제된 영상이거나 인터넷 속도가 느립니다.{' '}
@@ -1541,26 +1573,33 @@ export default function Amusement({
       )}
       {isJejeupsLoading && <p className={styles['amusement-loading']}>목록 불러오는 중...</p>}
       {data && !isJejeupsLoading && !isJejeupsError && (
-        <div className={styles.list}>
-          {Object.keys(data.jejeups).length > 0 && Array.isArray(data.jejeups) ? (
-            data.jejeups.map((jejeup: JejeupData) => (
-              <div className={styles.item} key={jejeup.id}>
-                <JejeupMeta key={jejeup.idx} jejeup={jejeup} />
-              </div>
-            ))
+        <section>
+          {amusementData.attributes.category === 'game' || amusementData.attributes.category === 'game_fan' ? (
+            <h2>유튜브 리뷰 & 실황모음</h2>
           ) : (
-            <div className={styles.warning}>
-              <p>이 작품을 리뷰한 영상이 삭제되어 남아있는 영상이 없습니다.</p>
-              <p>
-                운영자에게 영상 등록을{' '}
-                <button type="button" data-video={amusementData.id} onClick={handleRequest}>
-                  요청
-                </button>{' '}
-                해 주세요!
-              </p>
-            </div>
+            <h2>유튜브 리뷰모음</h2>
           )}
-        </div>
+          <div className={styles.list}>
+            {Object.keys(data.jejeups).length > 0 && Array.isArray(data.jejeups) ? (
+              data.jejeups.map((jejeup: JejeupData) => (
+                <div className={styles.item} key={jejeup.id}>
+                  <JejeupMeta key={jejeup.idx} jejeup={jejeup} />
+                </div>
+              ))
+            ) : (
+              <div className={styles.warning}>
+                <p>이 작품을 리뷰한 영상이 삭제되어 남아있는 영상이 없습니다.</p>
+                <p>
+                  운영자에게 영상 등록을{' '}
+                  <button type="button" data-video={amusementData.id} onClick={handleRequest}>
+                    요청
+                  </button>{' '}
+                  해 주세요!
+                </p>
+              </div>
+            )}
+          </div>
+        </section>
       )}
     </main>
   );

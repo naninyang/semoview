@@ -252,6 +252,7 @@ export interface AmusementPermalinkData {
     posterDefault: string;
     posterOther: string;
     relations: string;
+    related: string;
     createdAt: string;
   };
 }
