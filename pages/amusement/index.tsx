@@ -334,6 +334,9 @@ function Amusement({
                   <option value="amazon">아마존 프라임비디오</option>
                   <option value="netflix">넷플릭스</option>
                   <option value="disney">디즈니+ / 스타+</option>
+                  <option value="tving">티빙</option>
+                  <option value="watcha">왓챠</option>
+                  <option value="wavve">웨이브</option>
                 </optgroup>
                 <optgroup label="방송국">
                   <option value="ABC">ABC / 20세기 / FOX / FX</option>
@@ -1276,6 +1279,9 @@ function Amusement({
                       <option value="amazon">아마존 프라임비디오</option>
                       <option value="netflix">넷플릭스</option>
                       <option value="disney">디즈니+ / 스타+</option>
+                      <option value="tving">티빙</option>
+                      <option value="watcha">왓챠</option>
+                      <option value="wavve">웨이브</option>
                     </optgroup>
                     <optgroup label="방송국">
                       <option value="ABC">ABC / 20세기 / FOX / FX</option>
