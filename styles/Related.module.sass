@@ -13,8 +13,15 @@
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)
   width: 100%
   height: 100%
-  background-color: rgba($hex-black, .5)
+  background-color: rgba($hex-white, .5)
   backdrop-filter: blur(rem(20))
+
+  &.dialog-amusement
+    background-color: rgba($hex-black, .5)
+
+    .container
+      h3
+        color: $hex-white
 
   +mq(minMedium)
     padding: rem(52)
@@ -28,24 +35,37 @@
       position: absolute
       top: 0
       right: 0
-      width: rem(36)
-      height: rem(36)
+      width: rem(20)
+      height: rem(20)
+
+      +mq(minLarge)
+        width: rem(36)
+        height: rem(36)
 
       i
         display: inline-block
-        width: rem(36)
-        height: rem(36)
+        width: rem(20)
+        height: rem(20)
+
+        +mq(minLarge)
+          width: rem(36)
+          height: rem(36)
 
       span
         +screen-reader-only
 
     h3
-      padding-right: rem(100)
-      padding-bottom: rem(27)
-      font-size: rem(36)
+      padding-right: rem(40)
+      padding-bottom: rem(12)
+      font-size: rem(20)
       font-weight: 800
       line-height: 1.16666667
-      color: $hex-white
+      color: $hex-black
+
+      +mq(minLarge)
+        padding-right: rem(100)
+        padding-bottom: rem(27)
+        font-size: rem(36)
 
     > div
       max-height: 100%
@@ -53,9 +73,6 @@
 
 .item
   display: flex
-  position: relative
-  z-index: 7
-  padding: rem(23) rem(7)
 
   +mq(minSmall)
     width: 50%
@@ -66,10 +83,33 @@
   +mq(minExtraLarge)
     width: 25%
 
+  &.item-amusement
+    position: relative
+    z-index: 7
+    padding: rem(23) rem(7)
+
+    button
+      span
+        color: $hex-white
+
+  &:not(.item-amusement)
+    padding: 0 rem(12) rem(27) 0
+
+    +mq(minSmall)
+      width: 50%
+
+    +mq(minLarge)
+      width: 100%
+
+    button
+      span
+        font-weight: 700
+        line-height: 1.27
+
   button
     display: flex
     flex-direction: column
-    gap: rem(12)
+    gap: rem(8)
     width: 100%
     background-color: transparent
     padding: 0
@@ -83,7 +123,7 @@
       height: auto
 
     span
-      color: $hex-white
+      color: $hex-black
       font-size: rem(14)
       line-height: 1.42857143
 

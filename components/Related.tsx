@@ -9,14 +9,20 @@ import amuses from '@/styles/Amusement.module.sass';
 interface Props {
   videoId: string;
   videoDescription: string;
+  sorting?: string;
+  title: string;
   key: string;
 }
 
-const CloseIcon = styled.i({
+const CloseLightIcon = styled.i({
   background: `url(${vectors.crossLight}) no-repeat 50% 50%/contain`,
 });
 
-const Related = ({ videoId, videoDescription, key }: Props) => {
+const CloseDarkIcon = styled.i({
+  background: `url(${vectors.crossDark}) no-repeat 50% 50%/contain`,
+});
+
+const Related = ({ videoId, videoDescription, title, sorting, key }: Props) => {
   const [selectedRelated, setSelectedRelated] = useState<boolean>(false);
 
   const handleButtonClick = () => {
@@ -28,8 +34,8 @@ const Related = ({ videoId, videoDescription, key }: Props) => {
   };
 
   useEffect(() => {
+    const isAmusement = sorting === 'amusement' ? true : false;
     const body = document.body;
-    const isAmusement = sessionStorage.getItem('amusementDetail');
     if (isAmusement) {
       if (selectedRelated) {
         body.classList.add(styles.open);
@@ -54,8 +60,12 @@ const Related = ({ videoId, videoDescription, key }: Props) => {
       window.removeEventListener('touchmove', preventScroll);
     };
   }, [selectedRelated]);
+
   return (
-    <div className={`${styles.item} ${selectedRelated ? styles.current : ''}`} key={key}>
+    <div
+      className={`${styles.item} ${selectedRelated ? styles.current : ''} ${sorting === 'amusement' ? styles['item-amusement'] : ''}`}
+      key={key}
+    >
       <button type="button" onClick={() => handleButtonClick()}>
         <Image
           src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
@@ -65,16 +75,20 @@ const Related = ({ videoId, videoDescription, key }: Props) => {
           priority
           alt=""
         />
-        <span>{videoDescription}</span>
+        <span>
+          <strong>[{title}]</strong> {videoDescription}
+        </span>
       </button>
       {selectedRelated && (
-        <dialog className={styles.dialog}>
+        <dialog className={`${styles.dialog} ${sorting === 'amusement' ? styles['dialog-amusement'] : ''}`}>
           <div className={styles.container}>
             <button type="button" onClick={() => handleCloseRelatedDetail()}>
-              <CloseIcon />
+              {sorting === 'amusement' ? <CloseLightIcon /> : <CloseDarkIcon />}
               <span>닫기</span>
             </button>
-            <h3>{videoDescription}</h3>
+            <h3>
+              [{title}] {videoDescription}
+            </h3>
             <YouTubeController videoId={videoId} videoImage={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`} />
           </div>
         </dialog>

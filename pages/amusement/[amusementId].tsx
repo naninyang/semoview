@@ -1562,10 +1562,20 @@ export default function Amusement({
       {amusementData.attributes.related !== null && Array.isArray(amusementData.attributes.related) && (
         <section>
           <h2>관련 영상</h2>
-          <div className={styles.list}>
+          <div className={`${styles.list} ${styles['related-list']}`}>
             {amusementData.attributes.related.flatMap((item) =>
               Object.entries(item).map(([key, value]) => (
-                <Related videoId={String(value)} videoDescription={key} key={key} />
+                <Related
+                  videoId={String(value)}
+                  videoDescription={key}
+                  title={
+                    amusementData.attributes.titleKorean !== null
+                      ? amusementData.attributes.titleKorean
+                      : amusementData.attributes.title
+                  }
+                  sorting={'amusement'}
+                  key={key}
+                />
               )),
             )}
           </div>

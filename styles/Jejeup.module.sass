@@ -22,557 +22,671 @@
 
   article
     display: flex
-    flex-direction: column
-    max-width: rem(1280)
-    width: 100%
 
-    .preview
-      &.preview-dummy
-        .skeleton
-          background: linear-gradient(90deg, #eeeeee 25%, #dddddd 50%, #eeeeee 75%)
-          background-size: 200% 100%
-          animation: loading 1.5s infinite
+    +mq(maxMedium)
+      flex-direction: column
 
-        .dummy
-          border-radius: rem(12)
-          aspect-ratio: 1920 / 1080
+    +mq(minLarge)
+      max-width: rem(1280)
+
+    .article
+      display: flex
+      flex-direction: column
+
+      +mq(minLarge)
+        +col
+
+      .preview
+        &.preview-dummy
+          .skeleton
+            background: linear-gradient(90deg, #eeeeee 25%, #dddddd 50%, #eeeeee 75%)
+            background-size: 200% 100%
+            animation: loading 1.5s infinite
+
+          .dummy
+            border-radius: rem(12)
+            aspect-ratio: 1920 / 1080
+
+          .youtube
+            h1
+              button
+                background-color: transparent
+                border: 0
+                padding: 0
+                color: $hex-accent
+                font-size: rem(20)
+                font-weight: 800
+                text-decoration: underline
+
+                +mq(maxExtraSmall)
+                  font-size: rem(16)
+
+            .detail
+              .avatar
+                border-radius: 100%
+                width: rem(40)
+                height: rem(40)
+
+              .user
+                cite
+                  margin-bottom: rem(4)
+                  width: rem(72)
+                  height: rem(20)
+
+                time
+                  width: rem(137)
+                  height: rem(16)
 
         .youtube
-          h1
-            button
-              background-color: transparent
-              border: 0
-              padding: 0
-              color: $hex-accent
-              font-size: rem(20)
-              font-weight: 800
-              text-decoration: underline
+          padding: rem(12) 0 rem(24)
 
-              +mq(maxExtraSmall)
-                font-size: rem(16)
+          &.more
+            h1
+              overflow: visible
+              text-overflow: clip
+              display: block
+              max-height: none
 
-          .detail
-            .avatar
-              border-radius: 100%
-              width: rem(40)
-              height: rem(40)
+            .learnmore
+              max-height: none
 
-            .user
-              cite
-                margin-bottom: rem(4)
-                width: rem(72)
-                height: rem(20)
+              &::after
+                display: none
 
-              time
-                width: rem(137)
-                height: rem(16)
+        h1
+          max-width: 100%
+          font-size: rem(20)
+          font-weight: 700
+          line-height: 1.4
+          +line-abbr(1, 22, 1.1)
 
-      .youtube
-        padding: rem(12) 0 rem(24)
+          +mq(maxExtraSmall)
+            font-size: rem(16)
+            +line-abbr(1, 28, 1.25)
 
-        &.more
-          h1
-            overflow: visible
-            text-overflow: clip
-            white-space: normal
+        .video
+          position: relative
 
-          .learnmore
-            max-height: none
+          .embeddingOff
+            position: relative
 
-            &::after
-              display: none
+            img
+              aspect-ratio: 1920 / 1080
+              width: 100%
+              height: auto
 
-      h1
-        font-size: rem(20)
-        font-weight: 700
-        line-height: 1.4
-        +ellipsis
+            div
+              position: absolute
+              top: 0
+              left: 0
+              width: 100%
+              height: 100%
+              background-color: rgba($hex-white, .7)
+              backdrop-filter: blur(rem(10))
+              display: flex
+              flex-direction: column
+              justify-content: center
+              align-items: center
+              text-align: center
 
-        +mq(maxExtraSmall)
-          font-size: rem(16)
+              p
+                font-weight: 800
 
-      .video
-        position: relative
+                +mq(minMedium)
+                  font-size: rem(24)
 
-        .embeddingOff
+                a
+                  color: $hex-accent
+
+        .detail
+          display: flex
+          gap: rem(12)
+          margin: rem(12) 0
           position: relative
 
           img
-            aspect-ratio: 1920 / 1080
-            width: 100%
-            height: auto
+            border-radius: 100%
+            width: rem(40)
+            height: rem(40)
 
-          div
-            position: absolute
-            top: 0
-            left: 0
-            width: 100%
-            height: 100%
-            background-color: rgba($hex-white, .7)
-            backdrop-filter: blur(rem(10))
+          .user
             display: flex
             flex-direction: column
             justify-content: center
-            align-items: center
-            text-align: center
-
-            p
-              font-weight: 800
-
-              +mq(minMedium)
-                font-size: rem(24)
-
-              a
-                color: $hex-accent
-
-      .detail
-        display: flex
-        gap: rem(12)
-        margin: rem(12) 0
-        position: relative
-
-        img
-          border-radius: 100%
-          width: rem(40)
-          height: rem(40)
-
-        .user
-          display: flex
-          flex-direction: column
-          justify-content: center
-
-          cite
-            font-size: rem(16)
-            font-weight: 700
-            line-height: 1.375
-
-          time
-            font-size: rem(12)
-            line-height: 1.5
-
-        button
-          position: absolute
-          top: 0
-          right: 0
-          background-color: transparent
-          padding: rem(12) rem(5)
-          font-size: rem(14)
-          font-weight: 800
-          color: $hex-accent
-
-      .worst
-        padding-bottom: rem(3)
-
-        strong
-          display: inline-flex
-          background-color: $hex-accent
-          border-radius: rem(3)
-          padding: rem(3) rem(5)
-          font-size: rem(12)
-          font-weight: 800
-          text-transform: uppercase
-          color: $hex-white
-
-      .embed
-        padding-top: rem(12)
-
-        p
-          font-weight: 500
-          line-height: 1.25
-
-          button
-            background: 0
-            border: 0
-            padding: 0
-            font-weight: 800
-            color: $hex-accent
-            line-height: 1.25
-            vertical-align: text-bottom
-
-      .learnmore
-        background-color: #F2F2F2
-        border-radius: rem(12)
-        padding: rem(12)
-        font-size: rem(14)
-        font-weight: 500
-        word-break: break-word
-        line-height: 1.42857143
-        max-height: rem(94)
-        overflow: hidden
-        position: relative
-
-        &::after
-          content: ''
-          display: block
-          position: absolute
-          border-radius: 0 0 rem(12)
-          bottom: 0
-          left: 0
-          width: 100%
-          height: rem(40)
-          background: linear-gradient(180deg, rgba(#F2F2F2, 0) 0%,#F2F2F2 50%, #F2F2F2 100%)
-
-        em
-          display: block
-          border: $hex-black
-          padding-bottom: rem(12)
-          font-size: rem(14)
-          font-weight: 700
-          font-style: normal
-          line-height: 1
-          color: $hex-accent
-
-        strong
-          color: $hex-accent
-
-        dl
-          display: flex
-          flex-direction: column
-
-          &:first-of-type
-            margin-top: rem(12)
-
-          dt
-            white-space: nowrap
-            font-weight: 800
-
-          dd
-            +col
-
-            a
-              font-weight: 800
-              color: $hex-accent
-              text-decoration: underline
-
-    .figcaption
-      display: flex
-      flex-direction: column
-      gap: rem(12)
-      overflow: hidden
-
-      .worst
-        padding-bottom: rem(7)
-
-        dt
-          +screen-reader-only
-
-        dd
-          font-size: rem(12)
-          font-weight: 900
-          color: $hex-accent
-
-    .title
-      .function
-        display: flex
-        gap: rem(17)
-        align-items: center
-        padding: rem(7) 0
-
-        button, a
-          display: flex
-          align-items: center
-          gap: rem(6)
-          height: rem(36)
-          background-color: rgba($hex-black, .1)
-          border-radius: rem(36)
-          padding: 0 rem(16)
-          font-size: rem(14)
-          font-weight: 800
-          color: $hex-black
-          line-height: 1
-
-          i
-            display: inline-block
-            width: rem(24)
-            height: rem(24)
-
-      .title-container
-        overflow: hidden
-
-      .title-list
-        display: grid
-        grid-auto-flow: column
-        grid-auto-columns: 75%
-        gap: rem(12)
-
-        +mq(minMedium)
-          grid-auto-columns: 65%
-
-        +mq(minLarge)
-          grid-auto-columns: 45%
-
-        .title-info
-          .info-container
-            display: flex
-            flex-direction: column
-            flex-grow: 1
-            gap: rem(17)
-
-      .title-item
-        padding-bottom: rem(23)
-
-        .poster
-          width: calc(50% - rem(6))
-
-      .title-list, .title-item
-        .title-info
-          display: flex
-          flex-direction: column
-          gap: rem(17)
-          width: 100%
-
-        .summary
-          display: flex
-          flex-direction: column
-          gap: rem(7)
-
-          dt
-            display: flex
-            flex-wrap: wrap
-            align-items: center
-            gap: rem(7)
-            line-height: rem(24)
 
             cite
-              display: inline-flex
-              align-items: center
-              height: rem(24)
-              font-size: rem(14)
-              font-weight: 800
-              font-style: normal
-              color: $hex-accent
-
-              i
-                display: inline-block
-                margin-right: rem(7)
-                height: rem(16)
-
-            em
-              display: inline-flex
-              align-items: center
-              height: rem(24)
-              border: 2px solid $hex-accent
-              border-radius: rem(3)
-              padding: rem(3) rem(5)
-              font-size: rem(14)
+              font-size: rem(16)
               font-weight: 700
-              line-height: 1
-              font-style: normal
+              line-height: 1.375
+
+            time
+              font-size: rem(12)
+              line-height: 1.5
+
+          button
+            position: absolute
+            top: 0
+            right: 0
+            background-color: transparent
+            padding: rem(12) rem(5)
+            font-size: rem(14)
+            font-weight: 800
+            color: $hex-accent
+
+        .worst
+          padding-bottom: rem(3)
+
+          strong
+            display: inline-flex
+            background-color: $hex-accent
+            border-radius: rem(3)
+            padding: rem(3) rem(5)
+            font-size: rem(12)
+            font-weight: 800
+            text-transform: uppercase
+            color: $hex-white
+
+        .embed
+          padding-top: rem(12)
+
+          p
+            font-weight: 500
+            line-height: 1.25
+
+            button
+              background: 0
+              border: 0
+              padding: 0
+              font-weight: 800
               color: $hex-accent
-              vertical-align: top
+              line-height: 1.25
+              vertical-align: text-bottom
 
-              &.ENA
-                border-color: #3B31E0
-                color: #3B31E0
+        .learnmore
+          background-color: #F2F2F2
+          border-radius: rem(12)
+          padding: rem(12)
+          font-size: rem(14)
+          font-weight: 500
+          word-break: break-word
+          line-height: 1.42857143
+          max-height: rem(94)
+          overflow: hidden
+          position: relative
 
-              &.JTBC
-                border-color: #F0047F
-                color: #F0047F
+          &::after
+            content: ''
+            display: block
+            position: absolute
+            border-radius: 0 0 rem(12)
+            bottom: 0
+            left: 0
+            width: 100%
+            height: rem(40)
+            background: linear-gradient(180deg, rgba(#F2F2F2, 0) 0%,#F2F2F2 50%, #F2F2F2 100%)
 
-              &.KBS2
-                border-color: #FAB700
-                color: #FAB700
+          em
+            display: block
+            border: $hex-black
+            padding-bottom: rem(12)
+            font-size: rem(14)
+            font-weight: 700
+            font-style: normal
+            line-height: 1
+            color: $hex-accent
 
-              &.MBC
-                border-color: #42515E
-                color: #42515E
+          strong
+            color: $hex-accent
 
-              &.OCN
-                border-color: #FFB514
-                color: #FFB514
+          dl
+            display: flex
+            flex-direction: column
 
-              &.SBS
-                border-color: #005A91
-                color: #005A91
+            &:first-of-type
+              margin-top: rem(12)
 
-              &.tvN
-                border-color: #FA0029
-                color: #FA0029
+            dt
+              white-space: nowrap
+              font-weight: 800
 
-              i
-                display: inline-block
-                margin-right: rem(5)
-                height: rem(14)
+            dd
+              +col
 
-                & ~ i
-                  margin-left: rem(5)
+              a
+                font-weight: 800
+                color: $hex-accent
+                text-decoration: underline
 
-              span
-                +screen-reader-only
+      .figcaption
+        display: flex
+        flex-direction: column
+        gap: rem(12)
+        overflow: hidden
 
-              & + i.rating
-                vertical-align: top
+        .worst
+          padding-bottom: rem(7)
 
-            > i
-              display: inline-flex
+          dt
+            +screen-reader-only
+
+          dd
+            font-size: rem(12)
+            font-weight: 900
+            color: $hex-accent
+
+      .title
+        .function
+          display: flex
+          gap: rem(17)
+          align-items: center
+          padding: rem(7) 0
+
+          button, a
+            display: flex
+            align-items: center
+            gap: rem(6)
+            height: rem(36)
+            background-color: rgba($hex-black, .1)
+            border-radius: rem(36)
+            padding: 0 rem(16)
+            font-size: rem(14)
+            font-weight: 800
+            color: $hex-black
+            line-height: 1
+
+            i
+              display: inline-block
               width: rem(24)
               height: rem(24)
-              padding: rem(6) 0 rem(10)
-              font-size: rem(12)
-              font-weight: 800
-              font-style: normal
-              line-height: 1
-              color: $hex-white
 
-              &.drama
-                background-color: #FFCB00
-                border-radius: rem(24)
-                color: $hex-black
-                justify-content: center
+        .title-container
+          overflow: hidden
 
-                &.all
-                  font-size: rem(10)
+        .title-list
+          display: grid
+          grid-auto-flow: column
+          grid-auto-columns: 75%
+          gap: rem(12)
 
-                &.d19
-                  background-color: #D61D28
-                  color: $hex-white
+          +mq(minMedium)
+            grid-auto-columns: 65%
 
-              &.rating-amazon
-                background-color: #33373d
-                border-radius: rem(3)
-                padding: rem(3) rem(7)
-                width: auto
-                height: rem(18)
-                font-size: rem(12)
-                font-weight: 800
-                line-height: 1
-                color: $hex-white
+          +mq(minLarge)
+            grid-auto-columns: 45%
 
-              &.rating
-                padding: 0
-                vertical-align: bottom
+          .title-info
+            .info-container
+              display: flex
+              flex-direction: column
+              flex-grow: 1
+              gap: rem(17)
 
-              &.drama + span,
-              &.rating + span
-                +screen-reader-only
+        .title-item
+          padding-bottom: rem(23)
 
-            .custom
-              display: inline-flex
+          .poster
+            width: calc(50% - rem(6))
+
+        .title-list, .title-item
+          .title-info
+            display: flex
+            flex-direction: column
+            gap: rem(17)
+            width: 100%
+
+          .summary
+            display: flex
+            flex-direction: column
+            gap: rem(7)
+
+            dt
+              display: flex
+              flex-wrap: wrap
               align-items: center
+              gap: rem(7)
+              line-height: rem(24)
 
-              button
-                background-color: transparent
-                border: rem(2) solid $hex-accent
-                border-radius: 100%
-                width: rem(20)
-                height: rem(20)
+              cite
+                display: inline-flex
+                align-items: center
+                height: rem(24)
+                font-size: rem(14)
+                font-weight: 800
+                font-style: normal
+                color: $hex-accent
 
-                i::before
-                  content: '?'
-                  font-size: rem(14)
-                  font-weight: 800
-                  font-style: normal
-                  color: $hex-accent
+                i
+                  display: inline-block
+                  margin-right: rem(7)
+                  height: rem(16)
+
+              em
+                display: inline-flex
+                align-items: center
+                height: rem(24)
+                border: 2px solid $hex-accent
+                border-radius: rem(3)
+                padding: rem(3) rem(5)
+                font-size: rem(14)
+                font-weight: 700
+                line-height: 1
+                font-style: normal
+                color: $hex-accent
+                vertical-align: top
+
+                &.ENA
+                  border-color: #3B31E0
+                  color: #3B31E0
+
+                &.JTBC
+                  border-color: #F0047F
+                  color: #F0047F
+
+                &.KBS2
+                  border-color: #FAB700
+                  color: #FAB700
+
+                &.MBC
+                  border-color: #42515E
+                  color: #42515E
+
+                &.OCN
+                  border-color: #FFB514
+                  color: #FFB514
+
+                &.SBS
+                  border-color: #005A91
+                  color: #005A91
+
+                &.tvN
+                  border-color: #FA0029
+                  color: #FA0029
+
+                i
+                  display: inline-block
+                  margin-right: rem(5)
+                  height: rem(14)
+
+                  & ~ i
+                    margin-left: rem(5)
 
                 span
                   +screen-reader-only
 
-            a
-              display: inline-flex
-              height: rem(24)
-              border: 2px solid $hex-black
-              border-radius: rem(3)
-              padding: rem(3) rem(5)
-              font-size: rem(14)
-              font-weight: 700
-              line-height: 1
-              font-style: normal
-              color: $hex-black
-              vertical-align: top
+                & + i.rating
+                  vertical-align: top
 
-          dd
-            padding-top: rem(3)
-
-            strong
-              display: flex
-              flex-direction: column
-              line-height: 1.125
-              color: $hex-dark
-
-              +mq(maxExtraSmall)
-                gap: rem(2)
-
-              +mq(minSmall)
-                line-height: rem(20)
-
-              span
-                font-size: rem(14)
-                font-weight: 600
-                color: rgba($hex-dark, .5)
-
-                &.title
-                  margin-bottom: rem(5)
-                  font-size: rem(20)
-                  font-weight: 800
-                  color: $hex-dark
-
-                &[lang="en"], &[lang="ko"]
-                  font-weight: 800
-
-                &.origin
-                  font-weight: 400
-                  font-size: rem(14)
-                  color: rgba($hex-dark, .7)
-
-              time
-                display: flex
-                align-items: center
-                gap: rem(7)
-                margin-top: rem(3)
-                font-size: rem(14)
-                font-weight: 400
+              > i
+                display: inline-flex
+                width: rem(24)
+                height: rem(24)
+                padding: rem(6) 0 rem(10)
+                font-size: rem(12)
+                font-weight: 800
+                font-style: normal
                 line-height: 1
+                color: $hex-white
+
+                &.drama
+                  background-color: #FFCB00
+                  border-radius: rem(24)
+                  color: $hex-black
+                  justify-content: center
+
+                  &.all
+                    font-size: rem(10)
+
+                  &.d19
+                    background-color: #D61D28
+                    color: $hex-white
+
+                &.rating-amazon
+                  background-color: #33373d
+                  border-radius: rem(3)
+                  padding: rem(3) rem(7)
+                  width: auto
+                  height: rem(18)
+                  font-size: rem(12)
+                  font-weight: 800
+                  line-height: 1
+                  color: $hex-white
+
+                &.rating
+                  padding: 0
+                  vertical-align: bottom
+
+                &.drama + span,
+                &.rating + span
+                  +screen-reader-only
+
+              .custom
+                display: inline-flex
+                align-items: center
+
+                button
+                  background-color: transparent
+                  border: rem(2) solid $hex-accent
+                  border-radius: 100%
+                  width: rem(20)
+                  height: rem(20)
+
+                  i::before
+                    content: '?'
+                    font-size: rem(14)
+                    font-weight: 800
+                    font-style: normal
+                    color: $hex-accent
+
+                  span
+                    +screen-reader-only
+
+              a
+                display: inline-flex
+                height: rem(24)
+                border: 2px solid $hex-black
+                border-radius: rem(3)
+                padding: rem(3) rem(5)
+                font-size: rem(14)
+                font-weight: 700
+                line-height: 1
+                font-style: normal
+                color: $hex-black
+                vertical-align: top
+
+            dd
+              padding-top: rem(3)
+
+              strong
+                display: flex
+                flex-direction: column
+                line-height: 1.125
                 color: $hex-dark
 
-            p
-              padding-top: rem(7)
+                +mq(maxExtraSmall)
+                  gap: rem(2)
+
+                +mq(minSmall)
+                  line-height: rem(20)
+
+                span
+                  font-size: rem(14)
+                  font-weight: 600
+                  color: rgba($hex-dark, .5)
+
+                  &.title
+                    margin-bottom: rem(5)
+                    font-size: rem(20)
+                    font-weight: 800
+                    color: $hex-dark
+
+                  &[lang="en"], &[lang="ko"]
+                    font-weight: 800
+
+                  &.origin
+                    font-weight: 400
+                    font-size: rem(14)
+                    color: rgba($hex-dark, .7)
+
+                time
+                  display: flex
+                  align-items: center
+                  gap: rem(7)
+                  margin-top: rem(3)
+                  font-size: rem(14)
+                  font-weight: 400
+                  line-height: 1
+                  color: $hex-dark
+
+              p
+                padding-top: rem(7)
+                font-size: rem(14)
+                color: $hex-azalea
+
+              em
+                font-style: normal
+
+          .info
+            display: flex
+            flex-direction: column
+            gap: rem(3)
+
+            > div
+              display: inline-flex
+              gap: rem(7)
+
+            dt, dd
               font-size: rem(14)
-              color: $hex-azalea
 
-            em
-              font-style: normal
+            dt
+              width: rem(70)
+              color: $hex-accent
+              white-space: nowrap
 
-        .info
+            dd
+              +col
+              font-weight: 800
+              color: $hex-dark
+
+          .poster
+            &.posters-game img
+              aspect-ratio: 460 / 215
+
+            &.posters-other img
+              aspect-ratio: 390 / 560
+
+            img
+              width: 100%
+              height: auto
+              object-fit: cover
+
+      .comment, .posters
+        margin-top: rem(17)
+
+      .title, .comment, .posters
+        display: flex
+        flex-direction: column
+        gap: rem(7)
+
+        h2
           display: flex
-          flex-direction: column
-          gap: rem(3)
+          align-items: center
+          gap: rem(7)
+          font-size: rem(20)
+          font-weight: 800
 
-          > div
+          &::before
+            content: ''
             display: inline-flex
-            gap: rem(7)
+            background-color: $hex-accent
+            border-radius: rem(3)
+            width: rem(5)
+            height: rem(20)
 
-          dt, dd
-            font-size: rem(14)
+      .review-comment
+        background-color: rgba($hex-accent, .05)
+        border-radius: rem(3)
+        padding: rem(12)
 
-          dt
-            width: rem(70)
-            color: $hex-accent
-            white-space: nowrap
+        strong
+          font-weight: 800
 
-          dd
-            +col
-            font-weight: 800
-            color: $hex-dark
+        p, ul, ol
+          margin: rem(7)
 
-        .poster
+        p, li
+          font-size: rem(14)
+          font-weight: 700
+          line-height: 1.375
+
+          +mq(minSmall)
+            font-size: rem(16)
+
+        ol, ul
+          margin-left: rem(16)
+          padding-left: rem(16)
+
+          li
+            margin: rem(3) 0
+
+        ol
+          list-style-type: decimal
+
+        ul
+          list-style-type: disc
+
+        a
+          color: $hex-accent
+          text-decoration: underline
+
+      .posters
+        p
+          background-color: rgba($hex-accent, .05)
+          border-radius: rem(3)
+          padding: rem(12)
+          font-size: rem(14)
+          font-weight: 700
+          line-height: 1.375
+
+          +mq(minSmall)
+            font-size: rem(16)
+
+      .posters
+        .poster-list
+          display: flex
+          gap: rem(12)
+
           &.posters-game img
             aspect-ratio: 460 / 215
 
           &.posters-other img
             aspect-ratio: 390 / 560
 
-          img
-            width: 100%
-            height: auto
-            object-fit: cover
+          .poster
+            width: calc(50% - rem(6))
 
-    .comment, .posters
-      margin-top: rem(17)
+            img
+              width: 100%
+              height: auto
+              object-fit: cover
 
-    .title, .comment, .posters
+    aside
       display: flex
       flex-direction: column
-      gap: rem(7)
+      gap: rem(12)
+
+      +mq(maxMedium)
+        margin-top: rem(27)
+
+      +mq(minLarge)
+        flex-direction: column
+        +coln
+        width: rem(192)
+        padding-left: rem(24)
+
+      &:not(.items-aside)
+        span
+          strong
+            +screen-reader-only
 
       h2
         display: flex
@@ -589,72 +703,18 @@
           width: rem(5)
           height: rem(20)
 
-    .review-comment
-      background-color: rgba($hex-accent, .05)
-      border-radius: rem(3)
-      padding: rem(12)
+        +mq(minLarge)
+          +screen-reader-only
 
-      strong
-        font-weight: 800
-
-      p, ul, ol
-        margin: rem(7)
-
-      p, li
-        font-size: rem(14)
-        font-weight: 700
-        line-height: 1.375
-
-        +mq(minSmall)
-          font-size: rem(16)
-
-      ol, ul
-        margin-left: rem(16)
-        padding-left: rem(16)
-
-        li
-          margin: rem(3) 0
-
-      ol
-        list-style-type: decimal
-
-      ul
-        list-style-type: disc
-
-      a
-        color: $hex-accent
-        text-decoration: underline
-
-    .posters
-      p
-        background-color: rgba($hex-accent, .05)
-        border-radius: rem(3)
-        padding: rem(12)
-        font-size: rem(14)
-        font-weight: 700
-        line-height: 1.375
-
-        +mq(minSmall)
-          font-size: rem(16)
-
-    .posters
-      .poster-list
+      .list
         display: flex
-        gap: rem(12)
 
-        &.posters-game img
-          aspect-ratio: 460 / 215
+        +mq(maxMedium)
+          flex-wrap: wrap
+          width: 100%
 
-        &.posters-other img
-          aspect-ratio: 390 / 560
-
-        .poster
-          width: calc(50% - rem(6))
-
-          img
-            width: 100%
-            height: auto
-            object-fit: cover
+        +mq(minLarge)
+          flex-direction: column
 
 @keyframes loading
   0%

@@ -515,6 +515,7 @@ export async function getAmusementData(amusement: string) {
     posterOther: amusementData.attributes.posterOther,
     relations: amusementData.attributes.relations,
     order: amusementData.attributes.order,
+    related: amusementData.attributes.related,
   };
 
   return rowsData;
