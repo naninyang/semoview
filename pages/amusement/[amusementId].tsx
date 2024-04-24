@@ -11,6 +11,7 @@ import { CategoryName } from '@/components/CategoryName';
 import { AnimeName } from '@/components/AnimeName';
 import { RatingsDrama } from '@/components/RatingsDrama';
 import { OriginalName } from '@/components/OriginalName';
+import { TagName } from '@/components/TagName';
 import { formatDate } from '@/components/FormatDate';
 import { formatDuration } from '@/components/FormatDuration';
 import { vectors } from '@/components/vectors';
@@ -427,6 +428,26 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
         </div>
       )}
     </>
+  );
+}
+
+export function TagsItem({ items }: { items: any }) {
+  const excludeTags = ['game', 'anime', 'film', 'drama'];
+  const filteredTags = items.filter((items: any) => !excludeTags.includes(items));
+
+  if (filteredTags.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className={styles.tags}>
+      <dt>태그</dt>
+      <dd>
+        {filteredTags.map((tag: string, index: number) => (
+          <span key={index}>{`#${TagName(tag)}`}</span>
+        ))}
+      </dd>
+    </div>
   );
 }
 
@@ -1413,6 +1434,7 @@ export default function Amusement({
                 </div>
               )}
             </div>
+            <TagsItem items={amusementData.attributes.tags} />
           </dl>
           <dl className={styles.staff}>
             {amusementData.attributes.original !== null &&

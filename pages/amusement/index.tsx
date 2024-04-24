@@ -199,7 +199,7 @@ function Amusement({
 
   useEffect(() => {
     sessionStorage.setItem(
-      `${category ? 'amuementCategory' : ''}${tag ? 'amuementTag' : ''}${platform ? 'amuementPlatform' : ''}`,
+      `${category && !tag ? 'amuementCategory' : ''}${category && tag ? 'amuementTag' : ''}${!category && tag ? 'amuementTag' : ''}${platform ? 'amuementPlatform' : ''}`,
       router.asPath,
     );
   }, [router.asPath]);

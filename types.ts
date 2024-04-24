@@ -253,6 +253,7 @@ export interface AmusementPermalinkData {
     posterOther: string;
     relations: string;
     related: string;
+    tags: any;
     createdAt: string;
   };
 }
