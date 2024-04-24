@@ -1264,7 +1264,8 @@ function Amusement({
               <Pagination
                 currentPage={currentPage}
                 pageCount={tagData.pageCount}
-                category={tag}
+                category={category}
+                tag={tag}
                 sorting={'amusement'}
               />
             </div>
@@ -1622,7 +1623,7 @@ function Amusement({
               <Pagination
                 currentPage={currentPage}
                 pageCount={platformData.pageCount}
-                category={platform}
+                platform={platform}
                 sorting={'amusement'}
               />
             </div>
