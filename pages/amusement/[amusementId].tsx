@@ -433,9 +433,9 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
 
 export function TagsItem({ items }: { items: any }) {
   const excludeTags = ['game', 'anime', 'film', 'drama'];
-  const filteredTags = items.filter((items: any) => !excludeTags.includes(items));
+  const filteredTags = items && items.filter((items: any) => !excludeTags.includes(items));
 
-  if (filteredTags.length === 0) {
+  if (!filteredTags) {
     return null;
   }
 
