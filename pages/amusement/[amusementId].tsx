@@ -19,6 +19,7 @@ import Anchor from '@/components/Anchor';
 import YouTubeController from '@/components/YouTubeController';
 import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Amusement.module.sass';
+import Related from '@/components/Related';
 
 const BackButton = styled.i({
   display: 'block',
@@ -470,9 +471,12 @@ export default function Amusement({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedRelation, setSelectedRelation] = useState<string>('');
-
   useEffect(() => {
     sessionStorage.setItem('location', router.asPath);
+  }, [router.asPath]);
+
+  useEffect(() => {
+    sessionStorage.setItem('amusementDetail', router.asPath);
   }, [router.asPath]);
 
   const loadRelations = async () => {
@@ -1561,27 +1565,7 @@ export default function Amusement({
           <div className={styles.list}>
             {amusementData.attributes.related.flatMap((item) =>
               Object.entries(item).map(([key, value]) => (
-                <div className={styles.item} key={key}>
-                  <div className={styles.a}>
-                    <div className={`${styles.preview} preview`}>
-                      <div className={styles['preview-container']}>
-                        <div className={styles.thumbnail}>
-                          <YouTubeController
-                            videoId={`${value}`}
-                            videoImage={`https://i.ytimg.com/vi/${value}/hqdefault.jpg`}
-                          />
-                        </div>
-                        <div className={styles['preview-info']}>
-                          <div className={styles.detail}>
-                            <div className={`${styles['user-info']}`}>
-                              <strong>{key}</strong>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <Related videoId={String(value)} videoDescription={key} key={key} />
               )),
             )}
           </div>

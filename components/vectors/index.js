@@ -8,6 +8,8 @@ export const vectors = {
   up: require('./up.svg'),
   down: require('./down.svg'),
   warning: require('./warning.svg'),
+  crossDark: require('./crossDark.svg'),
+  crossLight: require('./crossLight.svg'),
   ott: {
     amazon: require('./ott/amazon.svg'),
     amazon2: require('./ott/amazon2.svg'),

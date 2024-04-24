@@ -15,6 +15,7 @@ const Container = styled.div<{ isDesktop?: boolean }>(({ isDesktop }) => ({
   position: 'relative',
   overflow: 'hidden',
   borderRadius: rem(12),
+  aspectRatio: '1920 / 1080',
   '&:hover img': {
     transform: isDesktop ? 'scale(1.02)' : undefined,
   },
