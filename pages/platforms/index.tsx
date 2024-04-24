@@ -197,7 +197,7 @@ function Platforms({
       <Seo
         pageTitles={`리뷰 OTT & 방송국 선택하기 - ${originTitle}`}
         pageTitle={`리뷰 OTT & 방송국 선택하기`}
-        pageDescription="아마존 프라임비디오 / 애플 TV+ / 디즈니+ / 스타+ / 넷플릭스 / 티빙 / 왓챠 / 웨이브 / 파라마운트+ / KBS 2TV / MBC / SBS / JTBC / OCN / tvN / ENA / ABC"
+        pageDescription="아마존 프라임비디오 / 애플 TV+ / 디즈니+ & 스타+ / 넷플릭스 / 티빙 & 파라마운트+ / 왓챠 / 웨이브 / KBS 2TV / MBC / SBS / JTBC / OCN / tvN / ENA / ABC & 20th & FOX & FX "
         pageImg={`https://jejeup.dev1stud.io/og-platforms.webp?ts=${timestamp}`}
       />
       <Choice />

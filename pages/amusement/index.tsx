@@ -308,42 +308,52 @@ function Amusement({
             <div className={styles.form}>
               <select value={selectedTag} onChange={handleTagChange}>
                 <option value="">태그 선택</option>
-                <option value="mobile,game">모바일 게임</option>
-                <option value="healing,game">힐링 게임</option>
-                <option value="healing">치유물</option>
-                <option value="yuri">백합</option>
-                <option value="queer">퀴어</option>
-                <option value="isekai">이세계물</option>
-                <option value="timeslip">타임슬립</option>
-                <option value="anomalies">이상현상</option>
-                <option value="apocalypse,game">아포칼립스/좀비</option>
-                <option value="picaresca">피카레스크</option>
-                <option value="picaresca,game">피카레스크 게임</option>
-                <option value="horror,drama">호러 드라마</option>
-                <option value="horror,anime">호러 애니메이션</option>
-                <option value="horror,film">호러 영화</option>
-                <option value="horror,game">호러 게임</option>
+                <optgroup label="드라마/영화/애니메이션">
+                  <option value="horror,drama">호러 드라마</option>
+                  <option value="horror,anime">호러 애니메이션</option>
+                  <option value="horror,film">호러 영화</option>
+                  <option value="apocalypse">아포칼립스/좀비</option>
+                  <option value="healing">치유물</option>
+                  <option value="isekai">이세계물</option>
+                  <option value="queer">퀴어</option>
+                  <option value="timeslip">타임슬립</option>
+                  <option value="picaresca">피카레스크</option>
+                  <option value="yuri">백합</option>
+                </optgroup>
+                <optgroup label="게임">
+                  <option value="anomalies">이상현상</option>
+                  <option value="mobile,game">모바일</option>
+                  <option value="horror,game">호러</option>
+                  <option value="healing,game">힐링</option>
+                  <option value="apocalypse,game">아포칼립스/좀비</option>
+                  <option value="picaresca,game">피카레스크</option>
+                </optgroup>
               </select>
               <button onClick={handleTagSubmit}>태그 선택</button>
             </div>
             <div className={styles.form}>
               <select value={selectedPlatform} onChange={handlePlatformChange}>
                 <option value="">플랫폼(OTT 또는 방송국) 선택</option>
-                <option value="amazon">아마존 프라임비디오</option>
-                <option value="apple">애플 TV+</option>
-                <option value="disney">디즈니+ & 스타+</option>
-                <option value="netflix">넷플릭스</option>
-                <option value="tving">티빙</option>
-                <option value="watcha">왓챠</option>
-                <option value="wavve">웨이브</option>
-                <option value="paramount">파라마운트+</option>
-                <option value="KBS2">KBS 2TV</option>
-                <option value="MBC">MBC</option>
-                <option value="SBS">SBS</option>
-                <option value="tvN">tvN</option>
-                <option value="OCN">OCN</option>
-                <option value="JTBC">JTBC</option>
-                <option value="ENA">ENA</option>
+                <optgroup label="OTT">
+                  <option value="apple">애플 TV+</option>
+                  <option value="paramount">파라마운트+</option>
+                  <option value="amazon">아마존 프라임비디오</option>
+                  <option value="netflix">넷플릭스</option>
+                  <option value="disney">디즈니+ & 스타+</option>
+                </optgroup>
+                <optgroup label="방송국">
+                  <option value="ABC">ABC</option>
+                  <option value="tving">티빙</option>
+                  <option value="watcha">왓챠</option>
+                  <option value="wavve">웨이브</option>
+                  <option value="KBS2">KBS 2TV</option>
+                  <option value="MBC">MBC</option>
+                  <option value="SBS">SBS</option>
+                  <option value="tvN">tvN</option>
+                  <option value="OCN">OCN</option>
+                  <option value="JTBC">JTBC</option>
+                  <option value="ENA">ENA</option>
+                </optgroup>
               </select>
               <button onClick={handlePlatformSubmit}>플랫폼 선택</button>
             </div>
@@ -915,21 +925,26 @@ function Amusement({
                 <div className={styles.select}>
                   <select onChange={handleTagChange} defaultValue={selectedTag}>
                     <option value="">태그 선택</option>
-                    <option value="mobile,game">모바일 게임</option>
-                    <option value="healing,game">힐링 게임</option>
-                    <option value="healing">치유물</option>
-                    <option value="yuri">백합</option>
-                    <option value="queer">퀴어</option>
-                    <option value="isekai">이세계물</option>
-                    <option value="timeslip">타임슬립</option>
-                    <option value="anomalies,game">이상현상</option>
-                    <option value="apocalypse">아포칼립스/좀비</option>
-                    <option value="picaresca">피카레스크</option>
-                    <option value="picaresca,game">피카레스크 게임</option>
-                    <option value="horror,drama">호러 드라마</option>
-                    <option value="horror,anime">호러 애니메이션</option>
-                    <option value="horror,film">호러 영화</option>
-                    <option value="horror,game">호러 게임</option>
+                    <optgroup label="드라마/영화/애니메이션">
+                      <option value="horror,drama">호러 드라마</option>
+                      <option value="horror,film">호러 영화</option>
+                      <option value="horror,anime">호러 애니메이션</option>
+                      <option value="apocalypse">아포칼립스/좀비</option>
+                      <option value="healing">치유물</option>
+                      <option value="isekai">이세계물</option>
+                      <option value="queer">퀴어</option>
+                      <option value="timeslip">타임슬립</option>
+                      <option value="picaresca">피카레스크</option>
+                      <option value="yuri">백합</option>
+                    </optgroup>
+                    <optgroup label="게임">
+                      <option value="anomalies">이상현상</option>
+                      <option value="mobile,game">모바일</option>
+                      <option value="horror,game">호러</option>
+                      <option value="healing,game">힐링</option>
+                      <option value="apocalypse,game">아포칼립스/좀비</option>
+                      <option value="picaresca,game">피카레스크</option>
+                    </optgroup>
                   </select>
                   <button onClick={handleTagSubmit}>선택</button>
                 </div>
@@ -1263,22 +1278,26 @@ function Amusement({
                 <div className={styles.select}>
                   <select onChange={handlePlatformChange} defaultValue={selectedPlatform}>
                     <option value="">플랫폼(OTT 또는 방송국) 선택</option>
-                    <option value="apple">애플 TV+</option>
-                    <option value="paramount">파라마운트+</option>
-                    <option value="amazon">아마존 프라임비디오</option>
-                    <option value="netflix">넷플릭스</option>
-                    <option value="disney">디즈니+ & 스타+</option>
-                    <option value="ABC">ABC</option>
-                    <option value="tving">티빙</option>
-                    <option value="watcha">왓챠</option>
-                    <option value="wavve">웨이브</option>
-                    <option value="KBS2">KBS 2TV</option>
-                    <option value="MBC">MBC</option>
-                    <option value="SBS">SBS</option>
-                    <option value="tvN">tvN</option>
-                    <option value="OCN">OCN</option>
-                    <option value="JTBC">JTBC</option>
-                    <option value="ENA">ENA</option>
+                    <optgroup label="OTT">
+                      <option value="apple">애플 TV+</option>
+                      <option value="paramount">파라마운트+</option>
+                      <option value="amazon">아마존 프라임비디오</option>
+                      <option value="netflix">넷플릭스</option>
+                      <option value="disney">디즈니+ & 스타+</option>
+                    </optgroup>
+                    <optgroup label="방송국">
+                      <option value="ABC">ABC</option>
+                      <option value="tving">티빙</option>
+                      <option value="watcha">왓챠</option>
+                      <option value="wavve">웨이브</option>
+                      <option value="KBS2">KBS 2TV</option>
+                      <option value="MBC">MBC</option>
+                      <option value="SBS">SBS</option>
+                      <option value="tvN">tvN</option>
+                      <option value="OCN">OCN</option>
+                      <option value="JTBC">JTBC</option>
+                      <option value="ENA">ENA</option>
+                    </optgroup>
                   </select>
                   <button onClick={handlePlatformSubmit}>선택</button>
                 </div>
@@ -1660,7 +1679,7 @@ function PlatformTitle(platform: keyof typeof platformTitles) {
     OCN: 'OCN 드라마 리뷰',
     tvN: 'tvN 드라마 리뷰',
     ENA: 'ENA 드라마 리뷰',
-    ABC: 'ABC 드라마 리뷰',
+    ABC: 'ABC/20th/FOX/FX 드라마 리뷰',
     amazon: '아마존 프라임비디오 오리지널 리뷰',
     apple: '애플 TV+ 오리지널 리뷰',
     disney: '디즈니+ & 스타+ 오리지널 리뷰',

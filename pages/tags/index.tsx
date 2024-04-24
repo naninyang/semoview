@@ -174,6 +174,7 @@ function Tags({
   timeslipData,
   anomaliesData,
   apocalypseData,
+  apocalypseGameData,
   picarescaData,
   picarescaGameData,
   horrorDramaData,
@@ -191,6 +192,7 @@ function Tags({
   timeslipData: any;
   anomaliesData: any;
   apocalypseData: any;
+  apocalypseGameData: any;
   picarescaData: any;
   picarescaGameData: any;
   horrorDramaData: any;
@@ -1188,6 +1190,67 @@ function Tags({
                         </dl>
                       </div>
                       <strong>{amusement.titleKorean != null ? amusement.titleKorean : amusement.title}</strong>
+                    </Link>
+                  ))}
+              </section>
+            </>
+          )}
+          {apocalypseGameData && (
+            <>
+              <div className={styles.headline}>
+                <h2>
+                  <Anchor href="/amusement?tag=apocalypse&category=game&page=1">
+                    아포칼립스/좀비 게임 리뷰 & 실황
+                  </Anchor>
+                  {process.env.NODE_ENV === 'development' && ` ${apocalypseGameData.total}개`}
+                </h2>
+                <Anchor href="/amusement?tag=apocalypse&category=game&page=1">
+                  <span>더보기</span>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                      fill="black"
+                    />
+                  </svg>
+                </Anchor>
+              </div>
+              <section className={styles.game}>
+                {Array.isArray(apocalypseGameData.data) &&
+                  apocalypseGameData.data.map((amusement: AmusementData, index: number) => (
+                    <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
+                      <div className={styles.thumbnail}>
+                        <Image src={amusement.posterDefault} width="460" height="215" alt="" unoptimized />
+                        <dl>
+                          <div className={styles.game}>
+                            <dt>심의등급</dt>
+                            <dd>
+                              {amusement.rating === 'all' && (
+                                <>
+                                  <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
+                                </>
+                              )}
+                              {amusement.rating === 'b12' && (
+                                <>
+                                  <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
+                                </>
+                              )}
+                              {amusement.rating === 'c15' && (
+                                <>
+                                  <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
+                                </>
+                              )}
+                              {amusement.rating === 'd19' && (
+                                <>
+                                  <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
+                                </>
+                              )}
+                            </dd>
+                          </div>
+                        </dl>
+                      </div>
+                      <strong>
+                        <strong>{amusement.titleKorean != null ? amusement.titleKorean : amusement.title}</strong>
+                      </strong>
                     </Link>
                   ))}
               </section>
@@ -3192,6 +3255,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let timeslipData = null;
   let anomaliesData = null;
   let apocalypseData = null;
+  let apocalypseGameData = null;
   let picarescaData = null;
   let picarescaGameData = null;
   let horrorDramaData = null;
@@ -3262,6 +3326,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
     apocalypseData = await apocalypse.json();
 
+    const apocalypseGame = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/tag?page=1&pageSize=7&tagName=apocalypse&categoryName=game`,
+    );
+    if (!apocalypseGame.ok) {
+      throw new Error('Network response was not ok');
+    }
+    apocalypseGameData = await apocalypseGame.json();
+
     const picaresca = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tag?page=1&pageSize=7&tagName=picaresca`);
     if (!picaresca.ok) {
       throw new Error('Network response was not ok');
@@ -3322,6 +3394,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       timeslipData,
       anomaliesData,
       apocalypseData,
+      apocalypseGameData,
       picarescaData,
       picarescaGameData,
       horrorDramaData,
