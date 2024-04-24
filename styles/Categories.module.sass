@@ -564,3 +564,49 @@
               right: rem(7)
               bottom: rem(7)
               left: auto
+
+  aside
+    display: flex
+    position: relative
+    flex-direction: column
+    gap: rem(12)
+    margin-top: rem(52)
+    margin-right: rem(12)
+    padding: rem(102) 0
+    text-align: center
+    font-size: rem(20)
+    font-weight: 800
+    transition: all .4s cubic-bezier(.4,0,.2,1)
+
+    > div
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      border-radius: rem(7)
+
+      &.sideA
+        background: linear-gradient(to right top, #6d327c, #485DA6, #00a1ba, #00BF98, #36C486)
+
+      &.sideB
+        opacity: 0
+        background: linear-gradient(to right top, #38438b, #944b94, #d75a88, #ff7e71, #ffb25f, #ffeb68)
+        animation: aside 2.7s infinite
+
+    p
+      position: relative
+      z-index: 7
+      color: $hex-white
+
+    a
+      color: $hex-white
+      text-decoration: underline
+
+@keyframes  aside
+  0%
+    opacity: 0
+  50%
+    opacity: 1
+  100%
+    opacity: 0
