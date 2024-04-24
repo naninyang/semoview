@@ -169,13 +169,10 @@ const RatingGameD19 = styled.i({
 });
 
 function Amusement({
-  categoryQuery,
   categoryData,
   category,
-  tagQuery,
   tagData,
   tag,
-  platformQuery,
   platformData,
   platform,
   pageTitle,
@@ -183,13 +180,10 @@ function Amusement({
   currentPage,
   error,
 }: {
-  categoryQuery: string;
   categoryData: any;
   category: string;
-  tagQuery: string;
   tagData: any;
   tag: string;
-  platformQuery: string;
   platformData: any;
   platform: string;
   pageTitle: string;
@@ -343,9 +337,6 @@ function Amusement({
                 </optgroup>
                 <optgroup label="방송국">
                   <option value="ABC">ABC / 20세기 / FOX / FX</option>
-                  <option value="tving">티빙</option>
-                  <option value="watcha">왓챠</option>
-                  <option value="wavve">웨이브</option>
                   <option value="KBS2">KBS 2TV</option>
                   <option value="MBC">MBC</option>
                   <option value="SBS">SBS</option>
@@ -1288,9 +1279,6 @@ function Amusement({
                     </optgroup>
                     <optgroup label="방송국">
                       <option value="ABC">ABC / 20세기 / FOX / FX</option>
-                      <option value="tving">티빙</option>
-                      <option value="watcha">왓챠</option>
-                      <option value="wavve">웨이브</option>
                       <option value="KBS2">KBS 2TV</option>
                       <option value="MBC">MBC</option>
                       <option value="SBS">SBS</option>
