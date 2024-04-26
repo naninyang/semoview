@@ -1660,19 +1660,20 @@ function CategoryTitle(category: keyof typeof categoryTitles): string {
 
 function TagTitle(tag: keyof typeof tagTitles, category?: string): string {
   const tagTitles = {
-    healing: category !== 'game' ? '밤은 치유물과 함께' : '오늘밤은 힐링게임이 좋아',
-    mobile: '제로부터 시작하는 모바일 게임 생활',
     queer: 'Love Wins',
     yuri: '그 백합잎에 입맞춤을',
     isekai: '마지막으로 이세계를 부탁드려도 될까요',
     timeslip: '빙글뱅글 타임루프',
+    relife: '이세계에서 N회차',
+    healing: category === 'game' ? '오늘밤은 힐링게임이 좋아' : '밤은 치유물과 함께',
+    picaresca: category === 'game' ? '자닌한 게임이라 욕하지는 마' : '피카레스크 전성시대',
+    mobile: category === 'game' ? '제로부터 시작하는 모바일 게임 생활' : '',
     anomalies: category === 'game' ? '지구에서는 우리가 아노말리야.' : '',
-    apocalypse: '꿈도 희망도 없는',
-    picaresca: category !== 'game' ? '피카레스크 전성시대' : '자닌한 게임이라 욕하지는 마',
+    apocalypse: category === 'game' ? '멸망한 세상에도 희망은 있을까?' : '꿈도 희망도 없는 세상에서.',
     strategy: category === 'game' ? '전략적으로 경영하라' : '',
     backroon: category === 'game' ? '미궁에 갖혀벌렷' : '',
     simulation: category === 'game' ? '니몸 내몸 신컨으로 시뮬레이션' : '',
-    relife: '이세계에서 N회차',
+    backroom: category === 'game' ? '미궁의 백룸에서' : '',
     horror:
       category === 'drama'
         ? '심신미약자, 임산부, 노약자 시청금지 공포 드라마!'
