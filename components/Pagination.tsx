@@ -96,7 +96,9 @@ export function Pagination({
             const pageNumber = startPage + i;
             return (
               <React.Fragment key={pageNumber}>
-                <div className={`${styles.pages} ${pageNumber === currentPage ? styles.current : ''}`}>
+                <div
+                  className={`${styles.pages} ${pageNumber === currentPage ? styles.current : ''} ${endPage > 99 ? styles.many : ''}`}
+                >
                   {sorting === 'amusement' ? (
                     <>
                       {category && !tag && (
