@@ -501,7 +501,7 @@ export default function JejeupDetail({
             {Object.keys(jejeupMetaData).length > 0 ? (
               <>
                 {jejeupMetaData.error === 'Failed to fetch data' || jejeupMetaData.ogTitle === ' - YouTube' ? (
-                  <div className={`${styles.preview} ${styles.more}  ${styles['preview-dummy']}`}>
+                  <div className={`${styles.preview} ${styles.more} ${styles['preview-dummy']}`}>
                     <div className={`${styles.dummy} ${styles.skeleton}`} />
                     <div className={styles.youtube}>
                       <h1>
@@ -518,10 +518,11 @@ export default function JejeupDetail({
                           <time className={styles.skeleton} />
                         </div>
                       </div>
+                      <div className={`${styles.learnmore} ${styles.skeleton}`} />
                     </div>
                   </div>
                 ) : jejeupMetaData.duration === undefined ? (
-                  <div className={`${styles.preview} ${styles.more}  ${styles['preview-dummy']}`}>
+                  <div className={`${styles.preview} ${styles.more} ${styles['preview-dummy']}`}>
                     <div className={`${styles.dummy} ${styles.skeleton}`} />
                     <div className={styles.youtube}>
                       <h1>
@@ -538,6 +539,7 @@ export default function JejeupDetail({
                           <time className={styles.skeleton} />
                         </div>
                       </div>
+                      <div className={`${styles.learnmore} ${styles.skeleton}`} />
                     </div>
                   </div>
                 ) : (
@@ -653,33 +655,30 @@ export default function JejeupDetail({
                         </div>
                       </div>
                     </div>
+                    <div className={`${styles.learnmore} ${styles.skeleton}`} />
                   </div>
                 </div>
               </div>
             )}
           </>
         ) : (
-          <div className={`${styles.preview} ${styles['preview-dummy']}`}>
+          <div className={`${styles.preview} ${styles.more} ${styles['preview-dummy']}`}>
             <div className={styles.notice} hidden>
               <p>불러오는 중</p>
             </div>
-            <div className={styles['preview-container']}>
-              <div className={styles.thumbnail}>
-                <div className={`${styles.dummy} ${styles.skeleton}`} />
-              </div>
-              <div className={styles['preview-info']}>
-                <div className={styles.detail}>
-                  <div className={`${styles['user-info']}`}>
-                    <strong className={styles.skeleton} />
-                    <div className={styles.user}>
-                      <cite>
-                        <i className={styles.skeleton} />
-                      </cite>
-                      <time className={styles.skeleton} />
-                    </div>
-                  </div>
+            <div className={styles.video}>
+              <div className={`${styles.dummy} ${styles.skeleton}`} />
+            </div>
+            <div className={`${styles.youtube} ${styles.more}`}>
+              <h1 className={styles.skeleton} />
+              <div className={styles.detail}>
+                <div className={`${styles.avatar} ${styles.skeleton}`} />
+                <div className={styles.user}>
+                  <cite className={styles.skeleton} />
+                  <time className={styles.skeleton} />
                 </div>
               </div>
+              <div className={`${styles.learnmore} ${styles.skeleton}`} />
             </div>
           </div>
         )}
@@ -698,8 +697,8 @@ export default function JejeupDetail({
             : '서버 에러 또는 삭제/비공개된 영상'
         }
         pageImg={
-          jejeupData.jejeupMetaData && jejeupData.jejeupMetaData.ogImage
-            ? jejeupData.jejeupMetaData.ogImage
+          jejeupData.attributes
+            ? `https://i.ytimg.com/vi/${jejeupData.attributes.video}/hqdefault.jpg`
             : 'https://jejeup.dev1stud.io/missing.webp'
         }
         pageOgType={'video.other'}
