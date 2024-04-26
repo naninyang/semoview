@@ -309,6 +309,7 @@ function Amusement({
                   <option value="apocalypse">아포칼립스/좀비</option>
                   <option value="healing">치유물</option>
                   <option value="isekai">이세계물</option>
+                  <option value="relife">이세계 전생/전이</option>
                   <option value="queer">퀴어</option>
                   <option value="timeslip">타임슬립</option>
                   <option value="picaresca">피카레스크</option>
@@ -929,6 +930,7 @@ function Amusement({
                       <option value="apocalypse">아포칼립스/좀비</option>
                       <option value="healing">치유물</option>
                       <option value="isekai">이세계물</option>
+                      <option value="relife">이세계 전생/전이</option>
                       <option value="queer">퀴어</option>
                       <option value="timeslip">타임슬립</option>
                       <option value="picaresca">피카레스크</option>
