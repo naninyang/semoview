@@ -12,7 +12,7 @@ export const TagName = (name: string) => {
     strategy: '경영 #전략',
     simulation: '시뮬레이션',
     backroom: '백룸',
-    relife: '이세계 #전생 #전이',
+    relife: '#전생 #전이',
   };
   return names[name] || '';
 };
