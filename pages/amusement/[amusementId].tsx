@@ -475,10 +475,6 @@ export default function Amusement({
     sessionStorage.setItem('location', router.asPath);
   }, [router.asPath]);
 
-  useEffect(() => {
-    sessionStorage.setItem('amusementDetail', router.asPath);
-  }, [router.asPath]);
-
   const loadRelations = async () => {
     if (amusementData) {
       if (amusementData.attributes.relations) {
@@ -532,9 +528,9 @@ export default function Amusement({
 
   const previousPageHandler = () => {
     const previousPage =
-      sessionStorage.getItem('amuementCategory') ||
-      sessionStorage.getItem('amuementTag') ||
-      sessionStorage.getItem('amuementPlatform');
+      sessionStorage.getItem('amusementCategory') ||
+      sessionStorage.getItem('amusementTag') ||
+      sessionStorage.getItem('amusementPlatform');
     if (previousPage) {
       router.push(`${previousPage}`);
     } else {
@@ -626,6 +622,16 @@ export default function Amusement({
 
   const [timeoutReached, setTimeoutReached] = useState(false);
   useEffect(() => {
+    if (sessionStorage.getItem('amusementCategory')) {
+      sessionStorage.removeItem('amusementTag');
+      sessionStorage.removeItem('amusementPlatform');
+    } else if (sessionStorage.getItem('amusementTag')) {
+      sessionStorage.removeItem('amusementCategory');
+      sessionStorage.removeItem('amusementPlatform');
+    } else if (sessionStorage.getItem('amusementPlatform')) {
+      sessionStorage.removeItem('amusementCategory');
+      sessionStorage.removeItem('amusementTag');
+    }
     window.scrollTo(0, 0);
     const timer = setTimeout(() => {
       setTimeoutReached(true);
