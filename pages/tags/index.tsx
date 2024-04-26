@@ -185,6 +185,13 @@ function Tags({
   const timestamp = Date.now();
 
   useEffect(() => {
+    sessionStorage.removeItem('amusementCategory');
+    sessionStorage.removeItem('amusementTag');
+    sessionStorage.removeItem('amusementPlatform');
+
+    sessionStorage.removeItem('category');
+    sessionStorage.removeItem('platform');
+
     sessionStorage.setItem('tag', router.asPath);
   }, [router.asPath]);
 

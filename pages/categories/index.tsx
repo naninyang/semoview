@@ -186,6 +186,13 @@ function Categories({
   const timestamp = Date.now();
 
   useEffect(() => {
+    sessionStorage.removeItem('amusementCategory');
+    sessionStorage.removeItem('amusementTag');
+    sessionStorage.removeItem('amusementPlatform');
+
+    sessionStorage.removeItem('tag');
+    sessionStorage.removeItem('platform');
+
     sessionStorage.setItem('category', router.asPath);
   }, [router.asPath]);
 

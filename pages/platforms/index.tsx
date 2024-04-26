@@ -169,6 +169,13 @@ function Platforms({
   const timestamp = Date.now();
 
   useEffect(() => {
+    sessionStorage.removeItem('amusementCategory');
+    sessionStorage.removeItem('amusementTag');
+    sessionStorage.removeItem('amusementPlatform');
+
+    sessionStorage.removeItem('category');
+    sessionStorage.removeItem('tag');
+
     sessionStorage.setItem('platform', router.asPath);
   }, [router.asPath]);
 

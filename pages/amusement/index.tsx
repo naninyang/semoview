@@ -198,6 +198,14 @@ function Amusement({
   const [selectedPlatform, setSelectedPlatform] = useState<string>('');
 
   useEffect(() => {
+    sessionStorage.removeItem('amusementCategory');
+    sessionStorage.removeItem('amusementTag');
+    sessionStorage.removeItem('amusementPlatform');
+
+    sessionStorage.removeItem('category');
+    sessionStorage.removeItem('tag');
+    sessionStorage.removeItem('platform');
+
     sessionStorage.setItem(
       `${category && !tag ? 'amusementCategory' : ''}${category && tag ? 'amusementTag' : ''}${!category && tag ? 'amusementTag' : ''}${platform ? 'amusementPlatform' : ''}`,
       router.asPath,

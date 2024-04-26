@@ -530,7 +530,10 @@ export default function Amusement({
     const previousPage =
       sessionStorage.getItem('amusementCategory') ||
       sessionStorage.getItem('amusementTag') ||
-      sessionStorage.getItem('amusementPlatform');
+      sessionStorage.getItem('amusementPlatform') ||
+      sessionStorage.getItem('category') ||
+      sessionStorage.getItem('tag') ||
+      sessionStorage.getItem('platform');
     if (previousPage) {
       router.push(`${previousPage}`);
     } else {
@@ -622,16 +625,6 @@ export default function Amusement({
 
   const [timeoutReached, setTimeoutReached] = useState(false);
   useEffect(() => {
-    if (sessionStorage.getItem('amusementCategory')) {
-      sessionStorage.removeItem('amusementTag');
-      sessionStorage.removeItem('amusementPlatform');
-    } else if (sessionStorage.getItem('amusementTag')) {
-      sessionStorage.removeItem('amusementCategory');
-      sessionStorage.removeItem('amusementPlatform');
-    } else if (sessionStorage.getItem('amusementPlatform')) {
-      sessionStorage.removeItem('amusementCategory');
-      sessionStorage.removeItem('amusementTag');
-    }
     window.scrollTo(0, 0);
     const timer = setTimeout(() => {
       setTimeoutReached(true);
