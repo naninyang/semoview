@@ -445,7 +445,7 @@ export function TagsItem({ items }: { items: any }) {
       <dt>태그</dt>
       <dd>
         {filteredTags.map((tag: string, index: number) => (
-          <span key={index}>{`#${TagName(tag)}`}</span>
+          <span key={index}>{`#${TagName(tag)}`} </span>
         ))}
       </dd>
     </div>
@@ -1438,7 +1438,7 @@ export default function Amusement({
                 </div>
               )}
             </div>
-            <TagsItem items={amusementData.attributes.tags} />
+            {amusementData.attributes.tags !== null && <TagsItem items={amusementData.attributes.tags} />}
           </dl>
           <dl className={styles.staff}>
             {amusementData.attributes.original !== null &&

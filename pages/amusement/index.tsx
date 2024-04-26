@@ -321,6 +321,9 @@ function Amusement({
                   <option value="healing,game">힐링</option>
                   <option value="apocalypse,game">아포칼립스/좀비</option>
                   <option value="picaresca,game">피카레스크</option>
+                  <option value="strategy,game">전략/경영</option>
+                  <option value="simulation,game">시뮬레이션</option>
+                  <option value="backroom,game">백룸/미궁</option>
                 </optgroup>
               </select>
               <button onClick={handleTagSubmit}>태그 선택</button>
@@ -932,12 +935,15 @@ function Amusement({
                       <option value="yuri">백합</option>
                     </optgroup>
                     <optgroup label="게임">
-                      <option value="anomalies">이상현상</option>
+                      <option value="anomalies,game">이상현상</option>
                       <option value="mobile,game">모바일</option>
                       <option value="horror,game">호러</option>
                       <option value="healing,game">힐링</option>
                       <option value="apocalypse,game">아포칼립스/좀비</option>
                       <option value="picaresca,game">피카레스크</option>
+                      <option value="strategy,game">전략/경영</option>
+                      <option value="simulation,game">시뮬레이션</option>
+                      <option value="backroom,game">백룸/미궁</option>
                     </optgroup>
                   </select>
                   <button onClick={handleTagSubmit}>선택</button>
@@ -1653,6 +1659,10 @@ function TagTitle(tag: keyof typeof tagTitles, category?: string): string {
     anomalies: category === 'game' ? '지구에서는 우리가 아노말리야.' : '',
     apocalypse: '꿈도 희망도 없는',
     picaresca: category !== 'game' ? '피카레스크 전성시대' : '자닌한 게임이라 욕하지는 마',
+    strategy: category === 'game' ? '전략적으로 경영하라' : '',
+    backroon: category === 'game' ? '미궁에 갖혀벌렷' : '',
+    simulation: category === 'game' ? '니몸 내몸 신컨으로 시뮬레이션' : '',
+    relife: '이세계에서 N회차',
     horror:
       category === 'drama'
         ? '심신미약자, 임산부, 노약자 시청금지 공포 드라마!'
