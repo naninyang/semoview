@@ -577,7 +577,7 @@ function Amusement({
                   {pageTitle} {categoryData.total > 0 && <span>({categoryData.total}개 작품)</span>}
                 </h1>
                 <div className={styles.select}>
-                  <select onChange={handleCategoryChange} defaultValue={selectedCategory}>
+                  <select onChange={handleCategoryChange} defaultValue={category}>
                     <option value="">카테고리 선택</option>
                     <option value="ott">오직 OTT에서</option>
                     <option value="film">영화</option>
@@ -929,7 +929,7 @@ function Amusement({
                   {pageTitle} {tagData.total > 0 && <span>({tagData.total}개 작품)</span>}
                 </h1>
                 <div className={styles.select}>
-                  <select onChange={handleTagChange} defaultValue={selectedTag}>
+                  <select onChange={handleTagChange} defaultValue={tag && category ? `${tag},${category}` : tag}>
                     <option value="">태그 선택</option>
                     <optgroup label="드라마/영화/애니메이션">
                       <option value="horror,drama">호러 드라마</option>
@@ -1287,7 +1287,7 @@ function Amusement({
                   {pageTitle} {platformData.total > 0 && <span>({platformData.total}개 작품)</span>}
                 </h1>
                 <div className={styles.select}>
-                  <select onChange={handlePlatformChange} defaultValue={selectedPlatform}>
+                  <select onChange={handlePlatformChange} defaultValue={platform}>
                     <option value="">플랫폼(OTT 또는 방송국) 선택</option>
                     <optgroup label="OTT">
                       <option value="apple">애플 TV+</option>
@@ -1718,7 +1718,6 @@ export async function getServerSideProps(context: any) {
   let tagData = null;
   let platformData = null;
   let error = null;
-  let ogAddress = null;
   let pageTitle = '카테고리/태그/플랫폼 선택';
 
   if (!platform && !tag) {
