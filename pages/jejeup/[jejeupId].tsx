@@ -688,6 +688,10 @@ export default function JejeupDetail({
     );
   }
 
+  const validData = Array.isArray(jejeupData.amusementData)
+    ? jejeupData.amusementData.filter((data: any) => data.related !== null && Array.isArray(data.related))
+    : [];
+
   return (
     <main className={styles.jejeup}>
       <Seo
@@ -713,14 +717,7 @@ export default function JejeupDetail({
           <span>뒤로가기</span>
         </button>
       </div>
-      <article
-        className={
-          jejeupData.amusementData.filter((data: any) => data.related !== null && Array.isArray(data.related)).length >
-          0
-            ? styles['article-jejeup']
-            : ''
-        }
-      >
+      <article className={validData.length > 0 ? styles['article-jejeup'] : ''}>
         <div className={styles.article}>
           {jejeupData.attributes ? (
             <>
