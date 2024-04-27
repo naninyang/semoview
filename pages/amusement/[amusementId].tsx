@@ -20,11 +20,12 @@ import Related from '@/components/Related';
 import YouTubeController from '@/components/YouTubeController';
 import { rem } from '@/styles/designSystem';
 import footer from '@/styles/Footer.module.sass';
+import header from '@/styles/Header.module.sass';
 import styles from '@/styles/Amusement.module.sass';
 
 const BackButton = styled.i({
   display: 'block',
-  background: `url(${vectors.backward}) no-repeat 50% 50%/contain`,
+  background: `url(${vectors.backwardAmuse}) no-repeat 50% 50%/contain`,
 });
 
 const ClipboardIcon = styled.i({
@@ -667,7 +668,7 @@ export default function Amusement({
   if (!amusementData) {
     if (timeoutReached) {
       return (
-        <main className={`${footer.amusement} ${styles.amusement} ${styles.error}`}>
+        <main className={`${header.amusement} ${footer.amusement} ${styles.amusement} ${styles.error}`}>
           <div className="top-link">
             <Anchor href="/amusement">
               <BackButton />
@@ -836,7 +837,7 @@ export default function Amusement({
         pageImg={`https://cdn.dev1stud.io/jejeup/_/${amusementData.id}-og.webp?ts=${timestamp}`}
         pageTwt={`https://cdn.dev1stud.io/jejeup/_/${amusementData.id}-twt.webp?ts=${timestamp}`}
       />
-      <div className="top-link">
+      <div className={`top-link ${styles['top-link']}`}>
         <button onClick={previousPageHandler} type="button">
           <BackButton />
           <span>뒤로가기</span>

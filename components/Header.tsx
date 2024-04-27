@@ -9,6 +9,10 @@ const JejeupLogo = styled.i({
   background: `url(${vectors.jejeup}) no-repeat 50% 50%/contain`,
 });
 
+const JejeupAmuse = styled.i({
+  background: `url(${vectors.jejeupAmuse}) no-repeat 50% 50%/contain`,
+});
+
 export default function Header() {
   const router = useRouter();
   const [deferredPrompt, setDeferredPrompt] = useState<Event | null>(null);
@@ -41,7 +45,7 @@ export default function Header() {
     }
   };
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${router.pathname === '/amusement/[amusementId]' ? styles.amusement : ''}`}>
       <div className={styles.container}>
         {router.pathname === '/' ||
         router.pathname === '/categories' ||
@@ -50,22 +54,10 @@ export default function Header() {
           <s />
         )}
         <h1>
-          {router.pathname === '/' ? (
-            <button
-              type="button"
-              onClick={() => {
-                (window.location.reload as (cache: boolean) => void)(true);
-              }}
-            >
-              <JejeupLogo />
-              <span>제목에 제목이 없어서 짜증나서 만든 사이트</span>
-            </button>
-          ) : (
-            <Anchor href="/">
-              <JejeupLogo />
-              <span>제목에 제목이 없어서 짜증나서 만든 사이트</span>
-            </Anchor>
-          )}
+          <Anchor href="/">
+            {router.pathname === '/amusement/[amusementId]' ? <JejeupAmuse /> : <JejeupLogo />}
+            <span>제목에 제목이 없어서 짜증나서 만든 사이트</span>
+          </Anchor>
         </h1>
         <nav>
           <ol>

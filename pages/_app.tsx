@@ -120,6 +120,12 @@ export default function App({ Component, pageProps }: AppProps) {
       </Script>
       <style jsx global>
         {`
+          body {
+            ${router.pathname === '/amusement/[amusementId]' ? 'background-color:black' : ''}
+          }
+          main {
+            ${router.pathname === '/amusement/[amusementId]' ? 'margin-top:0' : ''}
+          }
           body,
           pre,
           input,

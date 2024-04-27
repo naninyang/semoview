@@ -10,6 +10,41 @@ header.header
   width: 100%
   padding: calc(env(safe-area-inset-top) + rem(23)) calc(env(safe-area-inset-right) + rem(19)) rem(23) calc(env(safe-area-inset-left) + rem(19))
 
+  &.amusement
+    backdrop-filter: blur(rem(20))
+    background-color: transparent
+
+    .container
+      nav
+        ol
+          li
+            &::before
+              background-color: rgba($hex-light, .7)
+
+            a
+              color: $hex-light
+
+              &::before
+                background-color: $hex-azalea
+
+              &:hover, &:focus
+                color: $hex-azalea
+
+    .tab
+      ol
+        li
+          &::before
+            background-color: rgba($hex-light, .7)
+
+          a
+            color: $hex-light
+
+          &.current a
+            color: $hex-azalea
+
+            &::after
+              background-color: $hex-azalea
+
   .container
     display: flex
     justify-content: space-between
