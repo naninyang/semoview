@@ -1,7 +1,9 @@
 @import './designSystem'
 
 .amusement
-  padding: 0 env(safe-area-inset-right) rem(27) env(safe-area-inset-left)
+  display: flex
+  flex-direction: column
+  padding: 0
   min-height: calc(100dvh - rem(78))
   font-size: rem(16)
 
@@ -17,29 +19,12 @@
   &.error
     min-height: 0
 
-  .amusement-loading, .amusement-error
-    display: flex
-    justify-content: center
-    align-items: center
-    padding-top: rem(27)
-    font-weight: 700
-    color: $hex-accent
-    text-align: center
-
-  .amusement-error
-    gap: rem(15)
-
-    button
-      background: none
-      text-decoration: underline
-      color: $hex-accent
-
   .cover
     display: flex
     align-items: center
     gap: rem(27)
     position: relative
-    padding: rem(27) rem(19) rem(72)
+    padding: rem(27) calc(env(safe-area-inset-right) + rem(19)) rem(72) calc(env(safe-area-inset-left) + rem(19))
 
     +mq(maxSmall)
       flex-direction: column-reverse
@@ -48,11 +33,11 @@
       justify-content: space-between
 
     +mq(minLarge)
-      padding: rem(52) rem(52) rem(162)
+      padding: rem(52) calc(env(safe-area-inset-right) + rem(52)) rem(162) calc(env(safe-area-inset-left) + rem(52))
 
     +mq(minExtraLarge)
       gap: rem(57)
-      padding: rem(102) rem(102) rem(327)
+      padding: rem(102) calc(env(safe-area-inset-right) + rem(102)) rem(327) calc(env(safe-area-inset-left) + rem(102))
 
     .background
       position: absolute
@@ -630,13 +615,44 @@
     background-color: $hex-black
     position: relative
     margin-top: rem(-57)
-    padding: 0 rem(12) rem(27)
+    padding: 0 calc(env(safe-area-inset-right) + rem(12)) rem(57) calc(env(safe-area-inset-left) + rem(12))
 
     +mq(minLarge)
       margin-top: rem(-117)
 
     +mq(minExtraLarge)
       margin-top: rem(-237)
+
+    &.not
+      display: flex
+      justify-content: center
+      flex-direction: column
+      flex-grow: 1
+      width: 100%
+
+    .amusement-loading, .amusement-error
+      display: flex
+      justify-content: center
+      align-items: center
+      position: relative
+      z-index: 7
+      width: 100%
+      padding-top: rem(27)
+      font-weight: 700
+      color: $hex-azalea
+      text-align: center
+
+      p
+        position: relative
+        z-index: 7
+
+    .amusement-error
+      gap: rem(15)
+
+      a
+        text-decoration: underline
+        color: $hex-azalea
+        font-weight: 800
 
     .related-list
       span

@@ -16,10 +16,11 @@ import { formatDate } from '@/components/FormatDate';
 import { formatDuration } from '@/components/FormatDuration';
 import { vectors } from '@/components/vectors';
 import Anchor from '@/components/Anchor';
+import Related from '@/components/Related';
 import YouTubeController from '@/components/YouTubeController';
 import { rem } from '@/styles/designSystem';
+import footer from '@/styles/Footer.module.sass';
 import styles from '@/styles/Amusement.module.sass';
-import Related from '@/components/Related';
 
 const BackButton = styled.i({
   display: 'block',
@@ -666,7 +667,7 @@ export default function Amusement({
   if (!amusementData) {
     if (timeoutReached) {
       return (
-        <main className={`${styles.amusement} ${styles.error}`}>
+        <main className={`${footer.amusement} ${styles.amusement} ${styles.error}`}>
           <div className="top-link">
             <Anchor href="/amusement">
               <BackButton />
@@ -746,7 +747,7 @@ export default function Amusement({
       );
     } else {
       return (
-        <main className={styles.amusement}>
+        <main className={`${footer.amusement} ${styles.amusement}`}>
           <Seo
             pageTitles={`404 NOT FOUND - ${originTitle}`}
             pageTitle={`404 NOT FOUND`}
@@ -827,7 +828,7 @@ export default function Amusement({
   };
 
   return (
-    <main className={styles.amusement}>
+    <main className={`${footer.amusement} ${styles.amusement}`}>
       <Seo
         pageTitles={`${amusementData.attributes.titleKorean !== null ? amusementData.attributes.titleKorean : amusementData.attributes.title} - ${originTitle}`}
         pageTitle={`${amusementData.attributes.titleKorean !== null ? amusementData.attributes.titleKorean : amusementData.attributes.title}`}
@@ -1580,13 +1581,17 @@ export default function Amusement({
           </div>
         </section>
       )}
-      {isJejeupsError && (
-        <p className={styles['amusement-error']}>
-          영상을 불러오지 못했습니다. 삭제된 영상이거나 인터넷 속도가 느립니다.{' '}
-          <Anchor href="/jejeups">뒤로가기</Anchor>
-        </p>
+      {(isJejeupsError || isJejeupsLoading) && (
+        <section className={styles.not}>
+          {isJejeupsError && (
+            <p className={styles['amusement-error']}>
+              영상을 불러오지 못했습니다. 삭제된 영상이거나 인터넷 속도가 느립니다.{' '}
+              <Anchor href="/amusement">뒤로가기</Anchor>
+            </p>
+          )}
+          {isJejeupsLoading && <p className={styles['amusement-loading']}>리뷰 불러오는 중...</p>}
+        </section>
       )}
-      {isJejeupsLoading && <p className={styles['amusement-loading']}>목록 불러오는 중...</p>}
       {data && !isJejeupsLoading && !isJejeupsError && (
         <section>
           {amusementData.attributes.category === 'game' || amusementData.attributes.category === 'game_fan' ? (
