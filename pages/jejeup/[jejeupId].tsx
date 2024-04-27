@@ -532,7 +532,7 @@ export default function JejeupDetail({
                         </button>
                         해 주세요.
                       </h1>
-                      <div className={styles.detail}>
+                      <div className={styles.detail} aria-hidden="true">
                         <div className={`${styles.avatar} ${styles.skeleton}`} />
                         <div className={styles.user}>
                           <cite className={styles.skeleton} />
@@ -608,7 +608,7 @@ export default function JejeupDetail({
                         </div>
                       )}
                       {jejeupData.attributes.worst && (
-                        <div className={styles.worst}>
+                        <div className={styles.worst} aria-label="Worst 영상">
                           <strong className="number">Worst</strong>
                         </div>
                       )}
@@ -639,7 +639,7 @@ export default function JejeupDetail({
                     해 주세요.
                   </p>
                 </div>
-                <div className={styles['preview-container']}>
+                <div className={styles['preview-container']} aria-hidden="true">
                   <div className={styles.thumbnail}>
                     <div className={`${styles.dummy} ${styles.skeleton}`} />
                   </div>
@@ -669,7 +669,7 @@ export default function JejeupDetail({
             <div className={styles.video}>
               <div className={`${styles.dummy} ${styles.skeleton}`} />
             </div>
-            <div className={`${styles.youtube} ${styles.more}`}>
+            <div className={`${styles.youtube} ${styles.more}`} aria-hidden="true">
               <h1 className={styles.skeleton} />
               <div className={styles.detail}>
                 <div className={`${styles.avatar} ${styles.skeleton}`} />

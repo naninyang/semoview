@@ -957,7 +957,7 @@ export default function Amusement({
             <dl className={styles.summary}>
               {amusementData.attributes.ott !== null && (
                 <div className={styles.platform}>
-                  <dt>플랫폼</dt>
+                  <dt>OTT 플랫폼</dt>
                   <dd>
                     {amusementData.attributes.ott === 'amazonOriginal' && (
                       <>
@@ -1293,8 +1293,7 @@ export default function Amusement({
                     {(amusementData.attributes.category === 'drama' ||
                       amusementData.attributes.category === 'ott_drama' ||
                       amusementData.attributes.category === 'ott_anime' ||
-                      amusementData.attributes.anime === 'tva' ||
-                      amusementData.attributes.anime === 'ova') &&
+                      amusementData.attributes.anime === 'tva') &&
                       '방영'}
                     {(amusementData.attributes.category === 'film' ||
                       amusementData.attributes.category === 'anime_film' ||
@@ -1302,7 +1301,8 @@ export default function Amusement({
                       amusementData.attributes.category === 'ott_film' ||
                       amusementData.attributes.anime === 'film') &&
                       '상영'}
-                    {amusementData.attributes.category === 'game' && '출시'}
+                    {(amusementData.attributes.category === 'game' || amusementData.attributes.anime === 'ova') &&
+                      '출시'}
                     년도
                   </dt>
                   <dd>{amusementData.attributes.release}년</dd>

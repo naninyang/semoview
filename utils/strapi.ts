@@ -321,6 +321,107 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
     const total = platformResponse.meta.pagination.total;
     return { data, pageCount: pageCount, total: total };
   } else if (
+    platformName === 'tokyomx' ||
+    platformName === 'tvtokyo' ||
+    platformName === 'fujitv' ||
+    platformName === 'mbs' ||
+    platformName === 'tbs' ||
+    platformName === 'atx' ||
+    platformName === 'nippontv' ||
+    platformName === 'wowow'
+  ) {
+    const response = await fetch(
+      `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[animeBroadcast1][$eq]=${platformName}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
+        },
+      },
+    );
+    const platformResponse = await response.json();
+    const platformResponseData = platformResponse.data;
+    const data: AmusementData = platformResponseData.map((data: any) => ({
+      id: `${data.id}`,
+      idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+      title: data.attributes.title,
+      lang: data.attributes.lang,
+      titleKorean: data.attributes.titleKorean,
+      titleOther: data.attributes.titleOther,
+      etc: data.attributes.etc,
+      release: data.attributes.release,
+      original: data.attributes.original,
+      originalAuthor: data.attributes.originalAuthor,
+      originTitle: data.attributes.originTitle,
+      rating: data.attributes.rating,
+      country: data.attributes.country,
+      category: data.attributes.category,
+      isMobile: data.attributes.isMobile,
+      genre: data.attributes.genre,
+      anime: data.attributes.anime,
+      animeBroadcast1: data.attributes.animeBroadcast1,
+      animeBroadcast2: data.attributes.animeBroadcast2,
+      ott: data.attributes.ott,
+      broadcast: data.attributes.broadcast,
+      publisher: data.attributes.publisher,
+      creator: data.attributes.creator,
+      cast: data.attributes.cast,
+      posterDefault: data.attributes.posterDefault,
+      posterOther: data.attributes.posterOther,
+    }));
+    const pageCount = platformResponse.meta.pagination.pageCount;
+    const total = platformResponse.meta.pagination.total;
+    return { data, pageCount: pageCount, total: total };
+  } else if (
+    platformName === 'aniplus' ||
+    platformName === 'daewon' ||
+    platformName === 'anibox' ||
+    platformName === 'tooniverse' ||
+    platformName === 'animax'
+  ) {
+    const response = await fetch(
+      `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[animeBroadcast2][$eq]=${platformName}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
+        },
+      },
+    );
+    const platformResponse = await response.json();
+    const platformResponseData = platformResponse.data;
+    const data: AmusementData = platformResponseData.map((data: any) => ({
+      id: `${data.id}`,
+      idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+      title: data.attributes.title,
+      lang: data.attributes.lang,
+      titleKorean: data.attributes.titleKorean,
+      titleOther: data.attributes.titleOther,
+      etc: data.attributes.etc,
+      release: data.attributes.release,
+      original: data.attributes.original,
+      originalAuthor: data.attributes.originalAuthor,
+      originTitle: data.attributes.originTitle,
+      rating: data.attributes.rating,
+      country: data.attributes.country,
+      category: data.attributes.category,
+      isMobile: data.attributes.isMobile,
+      genre: data.attributes.genre,
+      anime: data.attributes.anime,
+      animeBroadcast1: data.attributes.animeBroadcast1,
+      animeBroadcast2: data.attributes.animeBroadcast2,
+      ott: data.attributes.ott,
+      broadcast: data.attributes.broadcast,
+      publisher: data.attributes.publisher,
+      creator: data.attributes.creator,
+      cast: data.attributes.cast,
+      posterDefault: data.attributes.posterDefault,
+      posterOther: data.attributes.posterOther,
+    }));
+    const pageCount = platformResponse.meta.pagination.pageCount;
+    const total = platformResponse.meta.pagination.total;
+    return { data, pageCount: pageCount, total: total };
+  } else if (
     platformName === 'amazon' ||
     platformName === 'apple' ||
     platformName === 'disney' ||

@@ -368,14 +368,14 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                       <div className={styles['preview-container']}>
                         <div className={styles.thumbnail}>
                           <Image src={jejeupMetaData.ogImage} width="1920" height="1080" alt="" unoptimized />
-                          <em>{formatDuration(jejeupMetaData.duration)}</em>
+                          <em aria-label="재생시간">{formatDuration(jejeupMetaData.duration)}</em>
                         </div>
                         <div className={styles['preview-info']}>
                           <div className={styles.detail}>
                             <div className={`${styles['user-info']}`}>
-                              <strong>{jejeupMetaData.ogTitle}</strong>
+                              <strong aria-label="영상제목">{jejeupMetaData.ogTitle}</strong>
                               <div className={styles.user}>
-                                <cite>{jejeupMetaData.ownerName}</cite>
+                                <cite aria-label="유튜브 채널이름">{jejeupMetaData.ownerName}</cite>
                                 <time dateTime={jejeupMetaData.datePublished}>
                                   {formatDate(`${jejeupMetaData.datePublished}`)}
                                 </time>
@@ -383,12 +383,12 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                               {(jejeup.worst || jejeup.embeddingOff) && (
                                 <div className={styles.option}>
                                   {jejeup.worst && (
-                                    <div className={styles.worst}>
+                                    <div className={styles.worst} aria-label="Worst 영상">
                                       <strong className="number">Worst</strong>
                                     </div>
                                   )}
                                   {jejeup.embeddingOff && (
-                                    <div className={styles.embed}>
+                                    <div className={styles.embed} aria-label="퍼가기 금지 영상">
                                       <strong className="preview">퍼가기 금지 콘텐츠</strong>
                                     </div>
                                   )}
@@ -413,7 +413,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                     해 주세요.
                   </p>
                 </div>
-                <div className={styles['preview-container']}>
+                <div className={styles['preview-container']} aria-hidden="true">
                   <div className={styles.thumbnail}>
                     <div className={`${styles.dummy} ${styles.skeleton}`} />
                   </div>
@@ -439,7 +439,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
             <div className={styles.notice} hidden>
               <p>불러오는 중</p>
             </div>
-            <div className={styles['preview-container']}>
+            <div className={styles['preview-container']} aria-hidden="true">
               <div className={styles.thumbnail}>
                 <div className={`${styles.dummy} ${styles.skeleton}`} />
               </div>
@@ -913,8 +913,8 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                           )}
                         </dt>
                         <dd>
-                          <strong>
-                            <span className={styles.title} aria-label="작품명">
+                          <strong aria-label="작품명">
+                            <span className={styles.title}>
                               {jejeup.amusementData.category === 'game_fan'
                                 ? `'${jejeup.amusementData.title}'의 팬 게임 콜렉션`
                                 : jejeup.amusementData.titleKorean
