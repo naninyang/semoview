@@ -1,5 +1,11 @@
 @import './designSystem'
 
+.open
+  +mq(minLarge)
+    aside
+      max-height: calc(100vh - 78px)
+      overflow: hidden
+
 .jejeup
   display: flex
   justify-content: center
@@ -21,14 +27,31 @@
     color: $hex-accent
 
   article
-    display: flex
-
-    +mq(maxMedium)
-      flex-direction: column
-
     +mq(minLarge)
       width: 100%
       max-width: rem(1280)
+
+    &.article-jejeup
+      +mq(maxMedium)
+        display: flex
+        flex-direction: column
+
+      +mq(minLarge)
+        position: relative
+
+      .article
+        +mq(minLarge)
+          margin-right: rem(192)
+
+        .title
+          .title-container
+            width: calc(100vw - rem(30))
+
+            +mq(minLarge)
+              width: calc(100vw - rem(242))
+
+            +mq(minExtraLarge)
+              width: 100%
 
     .article
       display: flex
@@ -676,6 +699,14 @@
               height: auto
               object-fit: cover
 
+    > .scrollbar-container
+      +mq(minLarge)
+        position: absolute
+        top: 0
+        right: 0
+        width: rem(192)
+        height: 100%
+
     aside
       display: flex
       flex-direction: column
@@ -686,8 +717,6 @@
 
       +mq(minLarge)
         flex-direction: column
-        +coln
-        width: rem(192)
         padding-left: rem(24)
 
       &:not(.items-aside)
@@ -715,10 +744,11 @@
 
       .list
         display: flex
+        width: 100%
+        flex-wrap: wrap
 
-        +mq(maxMedium)
-          flex-wrap: wrap
-          width: 100%
+        +mq(maxExtraSmall)
+          flex-direction: column
 
         +mq(minLarge)
           flex-direction: column

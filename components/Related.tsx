@@ -5,6 +5,7 @@ import { vectors } from './vectors';
 import YouTubeController from './YouTubeController';
 import styles from '@/styles/Related.module.sass';
 import amuses from '@/styles/Amusement.module.sass';
+import jejeus from '@/styles/Jejeup.module.sass';
 
 interface Props {
   videoId: string;
@@ -43,6 +44,14 @@ const Related = ({ videoId, videoDescription, title, sorting, key }: Props) => {
       } else {
         body.classList.remove(styles.open);
         body.classList.remove(amuses.open);
+      }
+    } else {
+      if (selectedRelated) {
+        body.classList.add(styles.open);
+        body.classList.add(jejeus.open);
+      } else {
+        body.classList.remove(styles.open);
+        body.classList.remove(jejeus.open);
       }
     }
     const preventScroll = (e: Event) => {

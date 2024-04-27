@@ -231,25 +231,27 @@ const RelatedList = ({ related }: { related: any }) => {
   const validData = related.filter((data: any) => data.related !== null && Array.isArray(data.related));
   if (validData.length > 0) {
     return (
-      <aside className={validData.length > 1 ? styles['items-aside'] : ''}>
-        <h2>관련 영상</h2>
-        <div className={styles.list}>
-          {validData.map((data: any, index: number) => (
-            <React.Fragment key={index}>
-              {data.related.flatMap((item: any) =>
-                Object.entries(item).map(([key, value]) => (
-                  <Related
-                    videoId={String(value)}
-                    videoDescription={key}
-                    key={key}
-                    title={data.titleKorean ? data.titleKorean : data.title}
-                  />
-                )),
-              )}
-            </React.Fragment>
-          ))}
-        </div>
-      </aside>
+      <PerfectScrollbar className={styles['scrollbar-container']}>
+        <aside className={validData.length > 1 ? styles['items-aside'] : ''}>
+          <h2>관련 영상</h2>
+          <div className={styles.list}>
+            {validData.map((data: any, index: number) => (
+              <React.Fragment key={index}>
+                {data.related.flatMap((item: any) =>
+                  Object.entries(item).map(([key, value]) => (
+                    <Related
+                      videoId={String(value)}
+                      videoDescription={key}
+                      key={key}
+                      title={data.titleKorean ? data.titleKorean : data.title}
+                    />
+                  )),
+                )}
+              </React.Fragment>
+            ))}
+          </div>
+        </aside>
+      </PerfectScrollbar>
     );
   } else {
     return null;
@@ -711,7 +713,14 @@ export default function JejeupDetail({
           <span>뒤로가기</span>
         </button>
       </div>
-      <article className={styles['article-jejeup']}>
+      <article
+        className={
+          jejeupData.amusementData.filter((data: any) => data.related !== null && Array.isArray(data.related)).length >
+          0
+            ? styles['article-jejeup']
+            : ''
+        }
+      >
         <div className={styles.article}>
           {jejeupData.attributes ? (
             <>
