@@ -224,6 +224,7 @@ export interface AmusementData {
   relations: string;
   order: string;
   related: string;
+  tags: any;
 }
 
 export interface AmusementPermalinkData {

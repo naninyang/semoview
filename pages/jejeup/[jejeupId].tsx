@@ -16,6 +16,7 @@ import { RatingsDrama } from '@/components/RatingsDrama';
 import { formatDuration } from '@/components/FormatDuration';
 import { formatDate } from '@/components/FormatDate';
 import { OriginalName } from '@/components/OriginalName';
+import { TagName } from '@/components/TagName';
 import Related from '@/components/Related';
 import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Jejeup.module.sass';
@@ -307,6 +308,26 @@ const ReviewContent = ({ data }: { data: any }) => {
 
   return <div className={styles['review-comment']}>{renderContent(data)}</div>;
 };
+
+function TagsItem({ items }: { items: any }) {
+  const excludeTags = ['game', 'anime', 'film', 'drama'];
+  const filteredTags = items && items.filter((items: any) => !excludeTags.includes(items));
+
+  if (!filteredTags) {
+    return null;
+  }
+
+  return (
+    <div>
+      <dt>관련 태그</dt>
+      <dd>
+        {filteredTags.map((tag: string, index: number) => (
+          <span key={index}>{`#${TagName(tag)}`} </span>
+        ))}
+      </dd>
+    </div>
+  );
+}
 
 export default function JejeupDetail({
   jejeupData,
@@ -1290,6 +1311,7 @@ export default function JejeupDetail({
                                             <dd>{data.genre}</dd>
                                           </div>
                                         )}
+                                        {data.tags !== null && <TagsItem items={data.tags} />}
                                         {data.publisher !== '?' && (
                                           <div>
                                             <dt>{data.category === 'game' ? '유통/배급' : '제작/배급'}</dt>
@@ -1835,6 +1857,7 @@ export default function JejeupDetail({
                                       <dd>{data.genre}</dd>
                                     </div>
                                   )}
+                                  {data.tags !== null && <TagsItem items={data.tags} />}
                                   {data.publisher !== '?' && (
                                     <div>
                                       <dt>{data.category === 'game' ? '유통/배급' : '퍼블리싱'}</dt>
