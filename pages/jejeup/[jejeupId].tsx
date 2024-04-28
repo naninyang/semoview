@@ -417,7 +417,7 @@ export default function JejeupDetail({
       });
 
       if (response.ok) {
-        alert('신고 성공! 감사합니다 ☺️');
+        alert('제보 성공! 감사합니다 ☺️');
       } else {
         const errorData = await response.json();
         console.log(errorData.error);
@@ -509,7 +509,7 @@ export default function JejeupDetail({
                       <h1>
                         유튜버가 영상을 삭제했거나 비공개 처리한 영상입니다. 관리자에게{' '}
                         <button type="button" data-video={jejeupData.attributes.video} onClick={handleReport}>
-                          신고
+                          제제없 운영자에게 제보
                         </button>
                         해 주세요.
                       </h1>
@@ -553,8 +553,8 @@ export default function JejeupDetail({
                           <div>
                             <p>유튜버 또는 원 저작권자가 유튜브에서만 재생할 수 있도록 설정한 콘텐츠 입니다.</p>
                             <p>
-                              <Anchor href={`https://youtu.be/${jejeupData.attributes.video}`}>여기</Anchor>를 누르면
-                              유튜브로 이동합니다.
+                              <Anchor href={`https://youtu.be/${jejeupData.attributes.video}`}>여기</Anchor>를 누르시면
+                              유튜브 해당 영상으로 이동합니다.
                             </p>
                           </div>
                         </div>
@@ -620,7 +620,7 @@ export default function JejeupDetail({
                           <p>
                             🚫 이 영상이 유튜브에서만 볼 수 있게 설정된 영상이라면 관리자에게{' '}
                             <button type="button" data-video={jejeupData.attributes.video} onClick={handleReport}>
-                              알려
+                              제제없 운영자에게 제보해
                             </button>
                             주세요.
                           </p>
@@ -1932,7 +1932,7 @@ export default function JejeupDetail({
                     />
                   </div>
                   <div className={styles.youtube}>
-                    <h1>영상에 문제가 있다는 신고가 들어와 삭제 처리된 페이지입니다. 뒤로 돌아가세요.</h1>
+                    <h1>영상 재생에 문제가 있다는 제보가 들어와 삭제 처리된 페이지입니다. 뒤로 돌아가세요.</h1>
                   </div>
                 </div>
               )}

@@ -285,7 +285,7 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
       });
 
       if (response.ok) {
-        alert('신고 성공! 감사합니다 ☺️');
+        alert('제보 성공! 감사합니다 ☺️');
       } else {
         const errorData = await response.json();
         console.log(errorData.error);
@@ -309,7 +309,7 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
                     <p>유튜버가 삭제했거나 비공개 처리한 영상입니다.</p>
                     <p>
                       <button type="button" data-video={jejeup.video} onClick={handleReport}>
-                        신고
+                        제제없 운영자에게 제보
                       </button>
                       해 주세요.
                     </p>
