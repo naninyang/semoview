@@ -29,7 +29,7 @@
     align-items: center
     gap: rem(27)
     position: relative
-    padding: calc(env(safe-area-inset-top) + rem(105)) calc(env(safe-area-inset-right) + rem(19)) rem(72) calc(env(safe-area-inset-left) + rem(19))
+    padding: calc(env(safe-area-inset-top) + rem(105)) calc(env(safe-area-inset-right) + rem(19)) rem(327) calc(env(safe-area-inset-left) + rem(19))
 
     +mq(maxSmall)
       flex-direction: column-reverse
@@ -38,7 +38,7 @@
       justify-content: space-between
 
     +mq(minLarge)
-      padding: calc(env(safe-area-inset-top) + rem(130)) calc(env(safe-area-inset-right) + rem(52)) rem(162) calc(env(safe-area-inset-left) + rem(52))
+      padding: calc(env(safe-area-inset-top) + rem(130)) calc(env(safe-area-inset-right) + rem(52)) rem(327) calc(env(safe-area-inset-left) + rem(52))
 
     +mq(minExtraLarge)
       gap: rem(57)
@@ -623,14 +623,8 @@
     transition: all .4s cubic-bezier(.4,0,.2,1)
     background-color: $hex-black
     position: relative
-    margin-top: rem(-57)
-    padding: 0 calc(env(safe-area-inset-right) + rem(12)) rem(57) calc(env(safe-area-inset-left) + rem(12))
-
-    +mq(minLarge)
-      margin-top: rem(-117)
-
-    +mq(minExtraLarge)
-      margin-top: rem(-237)
+    margin-top: rem(-257)
+    padding: 0 calc(env(safe-area-inset-right) + rem(12)) calc(env(safe-area-inset-left) + rem(12))
 
     &.not
       display: flex
@@ -680,14 +674,8 @@
       left: 0
       z-index: 2
       width: 100%
-      height: rem(57)
+      height: rem(257)
       background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, #000 100%)
-
-      +mq(minLarge)
-        height: rem(117)
-
-      +mq(minExtraLarge)
-        height: rem(237)
 
     .warning, .item
       display: flex
@@ -720,16 +708,16 @@
     h2
       position: relative
       z-index: 7
-      padding: 0 rem(7)
+      padding: 0 rem(7) rem(17)
       font-size: rem(24)
       font-weight: 800
       color: $hex-azalea
 
       +mq(minLarge)
-        padding: 0 rem(40)
+        padding: 0 rem(40) rem(17)
 
       +mq(minExtraLarge)
-        padding: 0 rem(90)
+        padding: 0 rem(90) rem(17)
 
     .list
       display: flex
@@ -741,7 +729,7 @@
         flex-wrap: wrap
 
       .item
-        padding: rem(23) rem(7)
+        padding: 0 rem(7) rem(23)
 
         +mq(minSmall)
           width: 50%
