@@ -29,7 +29,7 @@
     align-items: center
     gap: rem(27)
     position: relative
-    padding: rem(105) calc(env(safe-area-inset-right) + rem(19)) rem(72) calc(env(safe-area-inset-left) + rem(19))
+    padding: calc(env(safe-area-inset-top) + rem(105)) calc(env(safe-area-inset-right) + rem(19)) rem(72) calc(env(safe-area-inset-left) + rem(19))
 
     +mq(maxSmall)
       flex-direction: column-reverse
@@ -38,11 +38,11 @@
       justify-content: space-between
 
     +mq(minLarge)
-      padding: rem(130) calc(env(safe-area-inset-right) + rem(52)) rem(162) calc(env(safe-area-inset-left) + rem(52))
+      padding: calc(env(safe-area-inset-top) + rem(130)) calc(env(safe-area-inset-right) + rem(52)) rem(162) calc(env(safe-area-inset-left) + rem(52))
 
     +mq(minExtraLarge)
       gap: rem(57)
-      padding: rem(180) calc(env(safe-area-inset-right) + rem(102)) rem(327) calc(env(safe-area-inset-left) + rem(102))
+      padding: calc(env(safe-area-inset-top) + rem(180)) calc(env(safe-area-inset-right) + rem(102)) rem(327) calc(env(safe-area-inset-left) + rem(102))
 
     .background
       position: absolute
