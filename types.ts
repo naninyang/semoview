@@ -322,6 +322,7 @@ export interface NoticePermalinkData {
     platform: string;
     subject: string;
     description: string;
+    content: string;
     created: string;
     createdAt: string;
   };
