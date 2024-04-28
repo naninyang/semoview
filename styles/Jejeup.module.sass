@@ -584,6 +584,14 @@
               display: inline-flex
               gap: rem(7)
 
+              &.ad-cc
+                span
+                  &::after
+                    content: ', '
+
+                  &:last-of-type::after
+                    content: ''
+
             dt, dd
               font-size: rem(14)
 

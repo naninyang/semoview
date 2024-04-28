@@ -17,6 +17,7 @@ import { formatDuration } from '@/components/FormatDuration';
 import { formatDate } from '@/components/FormatDate';
 import { OriginalName } from '@/components/OriginalName';
 import { TagName } from '@/components/TagName';
+import { SupportLang } from '@/components/SupportLang';
 import Related from '@/components/Related';
 import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Jejeup.module.sass';
@@ -323,6 +324,25 @@ function TagsItem({ items }: { items: any }) {
       <dd>
         {filteredTags.map((tag: string, index: number) => (
           <span key={index}>{`#${TagName(tag)}`} </span>
+        ))}
+      </dd>
+    </div>
+  );
+}
+
+function ADCC({ items }: { items: any }) {
+  const adcc = items && items.filter((items: any) => items);
+
+  if (!adcc) {
+    return null;
+  }
+
+  return (
+    <div className={styles['ad-cc']}>
+      <dt>자막/더빙</dt>
+      <dd>
+        {adcc.map((item: string, index: number) => (
+          <span key={index}>{SupportLang(item)}</span>
         ))}
       </dd>
     </div>
@@ -1305,6 +1325,7 @@ export default function JejeupDetail({
                                             <dd>{data.country}</dd>
                                           </div>
                                         )}
+                                        {data.supportLang !== null && <ADCC items={data.supportLang} />}
                                         {data.genre !== '?' && (
                                           <div>
                                             <dt>장르</dt>
@@ -1851,6 +1872,7 @@ export default function JejeupDetail({
                                       <dd>{data.country}</dd>
                                     </div>
                                   )}
+                                  {data.supportLang !== null && <ADCC items={data.supportLang} />}
                                   {data.genre !== '?' && (
                                     <div>
                                       <dt>장르</dt>

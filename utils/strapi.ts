@@ -618,6 +618,7 @@ export async function getAmusementData(amusement: string) {
     order: amusementData.attributes.order,
     related: amusementData.attributes.related,
     tags: amusementData.attributes.tags,
+    supportLang: amusementData.attributes.supportLang,
   };
 
   return rowsData;

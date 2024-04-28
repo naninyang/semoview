@@ -12,6 +12,7 @@ import { AnimeName } from '@/components/AnimeName';
 import { RatingsDrama } from '@/components/RatingsDrama';
 import { OriginalName } from '@/components/OriginalName';
 import { TagName } from '@/components/TagName';
+import { SupportLang } from '@/components/SupportLang';
 import { formatDate } from '@/components/FormatDate';
 import { formatDuration } from '@/components/FormatDuration';
 import { vectors } from '@/components/vectors';
@@ -450,6 +451,23 @@ export function TagsItem({ items }: { items: any }) {
           <span key={index}>{`#${TagName(tag)}`} </span>
         ))}
       </dd>
+    </div>
+  );
+}
+
+export function ADCC({ items }: { items: any }) {
+  const adcc = items && items.filter((items: any) => items);
+
+  if (!adcc) {
+    return null;
+  }
+
+  return (
+    <div className={styles['ad-cc']}>
+      <dt>자막/더빙</dt>
+      {adcc.map((item: string, index: number) => (
+        <dd key={index}>{SupportLang(item)}</dd>
+      ))}
     </div>
   );
 }
@@ -1288,6 +1306,7 @@ export default function Amusement({
                   <dd>{amusementData.attributes.country}</dd>
                 </div>
               )}
+              {amusementData.attributes.supportLang !== null && <ADCC items={amusementData.attributes.supportLang} />}
               {amusementData.attributes.release !== '?' && (
                 <div className={styles.release}>
                   <dt>
