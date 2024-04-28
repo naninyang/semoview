@@ -502,7 +502,7 @@ export default function JejeupDetail({
           <>
             {Object.keys(jejeupMetaData).length > 0 ? (
               <>
-                {jejeupMetaData.error === 'Failed to fetch data' || jejeupMetaData.ogTitle === ' - YouTube' ? (
+                {jejeupMetaData.error === 'Failed to fetch data' || jejeupMetaData.originalTitle === ' - YouTube' ? (
                   <div className={`${styles.preview} ${styles.more} ${styles['preview-dummy']}`}>
                     <div className={`${styles.dummy} ${styles.skeleton}`} />
                     <div className={styles.youtube}>

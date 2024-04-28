@@ -332,7 +332,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
           <>
             {Object.keys(jejeupMetaData).length > 0 ? (
               <>
-                {jejeupMetaData.error === 'Failed to fetch data' || jejeupMetaData.ogTitle === ' - YouTube' ? (
+                {jejeupMetaData.error === 'Failed to fetch data' || jejeupMetaData.originalTitle === ' - YouTube' ? (
                   <div className={`${styles.preview} ${styles['preview-dummy']}`}>
                     <div className={styles.notice}>
                       <p>유튜버가 삭제했거나 비공개 처리한 영상입니다.</p>

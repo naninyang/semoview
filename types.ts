@@ -13,6 +13,7 @@ export interface JejeupData {
   createdAt: string;
   error: string;
   ogTitle: string;
+  originalTitle: string;
   jejeups: {
     id: string;
     idx: string;
@@ -27,6 +28,7 @@ export interface JejeupData {
   jejeupMetaData: {
     error: string;
     ogTitle: string;
+    originalTitle: string;
     ogUrl: string;
     ogImage: string;
     ogDescription: string;
@@ -75,6 +77,7 @@ export interface JejeupData {
 export interface JejeupMetaData {
   error: string;
   ogTitle: string;
+  originalTitle: string;
   ogUrl: string;
   ogImage: string;
   ogDescription: string;
@@ -109,6 +112,7 @@ export interface JejeupPermalinkData {
   jejeupMetaData: {
     error: string;
     ogTitle: string;
+    originalTitle: string;
     ogUrl: string;
     ogImage: string;
     ogDescription: string;
