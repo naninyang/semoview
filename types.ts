@@ -307,6 +307,27 @@ export type Category =
   | 'game'
   | 'game_fan';
 
+export type Platform =
+  | 'amazonOriginal'
+  | 'appleOriginal'
+  | 'appleFilm'
+  | 'disneyOriginal'
+  | 'disneyStar'
+  | 'netflixSeries'
+  | 'netflixPresents'
+  | 'netflixOriginal'
+  | 'netflixFilm'
+  | 'netflixAnime'
+  | 'netflixAnimeFilm'
+  | 'netflixDocumentary'
+  | 'tvingOriginal'
+  | 'tvingOnly'
+  | 'watchaOriginal'
+  | 'watchaExclusive'
+  | 'wavveOriginal'
+  | 'wavveOnly'
+  | 'paramount';
+
 export interface NoticeData {
   id: string;
   idx: string;

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 import styled from '@emotion/styled';
-import { AmusementData } from 'types';
+import { AmusementData, Platform } from 'types';
 import Seo, { originTitle } from '@/components/Seo';
 import { RatingsDrama } from '@/components/RatingsDrama';
 import { vectors } from '@/components/vectors';
@@ -1437,116 +1437,88 @@ function Amusement({
                               </dd>
                             </div>
                           )}
-                          {amusement.ott !== null && (
-                            <div
-                              className={`${styles.broadcast} ${amusement.ott === 'disneyOriginal' || amusement.ott === 'disneyStar' ? styles.broadcasts : ''}`}
-                            >
-                              <dt>드라마 송출 방송국</dt>
-                              <dd>
-                                {amusement.broadcast === 'ENA' && (
-                                  <>
-                                    <EnaIcon /> <span>ENA</span>
-                                  </>
-                                )}
-                                {amusement.broadcast === 'JTBC' && (
-                                  <>
-                                    <JtbcIcon /> <span>JTBC</span>
-                                  </>
-                                )}
-                                {amusement.broadcast === 'KBS2' && (
-                                  <>
-                                    <Kbs2Icon /> <span>KBS 2TV</span>
-                                  </>
-                                )}
-                                {amusement.broadcast === 'MBC' && (
-                                  <>
-                                    <MbcIcon /> <span>MBC</span>
-                                  </>
-                                )}
-                                {amusement.broadcast === 'OCN' && (
-                                  <>
-                                    <OcnIcon /> <span>OCN</span>
-                                  </>
-                                )}
-                                {amusement.broadcast === 'SBS' && (
-                                  <>
-                                    <SbsIcon /> <span>SBS</span>
-                                  </>
-                                )}
-                                {amusement.broadcast === 'tvN' && (
-                                  <>
-                                    <TvnIcon /> <span>tvN</span>
-                                  </>
-                                )}
-                              </dd>
-                            </div>
-                          )}
-                          {platform === 'disney' && (
+                          {amusement.broadcast !== null && platform !== amusement.broadcast && (
                             <>
-                              <div className={styles.broadcast}>
-                                <dt>드라마 송출 방송국</dt>
-                                <dd>
-                                  {amusement.broadcast === 'ENA' && (
-                                    <>
-                                      <EnaIcon /> <span>ENA</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'JTBC' && (
-                                    <>
-                                      <JtbcIcon /> <span>JTBC</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'KBS2' && (
-                                    <>
-                                      <Kbs2Icon /> <span>KBS 2TV</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'MBC' && (
-                                    <>
-                                      <MbcIcon /> <span>MBC</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'OCN' && (
-                                    <>
-                                      <OcnIcon /> <span>OCN</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'SBS' && (
-                                    <>
-                                      <SbsIcon /> <span>SBS</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'tvN' && (
-                                    <>
-                                      <TvnIcon /> <span>tvN</span>
-                                    </>
-                                  )}
-                                </dd>
-                              </div>
-                              <div className={styles.platform}>
-                                <dt>OTT 플랫폼</dt>
-                                <dd>
-                                  {amusement.ott === 'disneyOriginal' && (
-                                    <>
-                                      <DisneyIcon /> <span>Disney+</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'disneyStar' && (
-                                    <>
-                                      <StarIcon /> <span>Star+</span>
-                                    </>
-                                  )}
-                                </dd>
-                              </div>
+                              {platform === 'disney' && (
+                                <>
+                                  <div className={styles.broadcast}>
+                                    <dt>드라마 송출 방송국</dt>
+                                    <dd>
+                                      {amusement.broadcast === 'ENA' && (
+                                        <>
+                                          <EnaIcon /> <span>ENA</span>
+                                        </>
+                                      )}
+                                      {amusement.broadcast === 'JTBC' && (
+                                        <>
+                                          <JtbcIcon /> <span>JTBC</span>
+                                        </>
+                                      )}
+                                      {amusement.broadcast === 'KBS2' && (
+                                        <>
+                                          <Kbs2Icon /> <span>KBS 2TV</span>
+                                        </>
+                                      )}
+                                      {amusement.broadcast === 'MBC' && (
+                                        <>
+                                          <MbcIcon /> <span>MBC</span>
+                                        </>
+                                      )}
+                                      {amusement.broadcast === 'OCN' && (
+                                        <>
+                                          <OcnIcon /> <span>OCN</span>
+                                        </>
+                                      )}
+                                      {amusement.broadcast === 'SBS' && (
+                                        <>
+                                          <SbsIcon /> <span>SBS</span>
+                                        </>
+                                      )}
+                                      {amusement.broadcast === 'tvN' && (
+                                        <>
+                                          <TvnIcon /> <span>tvN</span>
+                                        </>
+                                      )}
+                                    </dd>
+                                  </div>
+                                  <div className={styles.platform}>
+                                    <dt>OTT 플랫폼</dt>
+                                    <dd>
+                                      {amusement.ott === 'disneyOriginal' && (
+                                        <>
+                                          <DisneyIcon /> <span>Disney+</span>
+                                        </>
+                                      )}
+                                      {amusement.ott === 'disneyStar' && (
+                                        <>
+                                          <StarIcon /> <span>Star+</span>
+                                        </>
+                                      )}
+                                    </dd>
+                                  </div>
+                                </>
+                              )}
                             </>
                           )}
-                          {(platform === 'KBS2' ||
-                            platform === 'MBC' ||
-                            platform === 'SBS' ||
-                            platform === 'JTBC' ||
-                            platform === 'OCN' ||
-                            platform === 'tvN' ||
-                            platform === 'ENA') && (
+                          {((platform as Platform) !== 'amazonOriginal' ||
+                            (platform as Platform) !== 'appleOriginal' ||
+                            (platform as Platform) !== 'appleFilm' ||
+                            (platform as Platform) !== 'disneyOriginal' ||
+                            (platform as Platform) !== 'disneyStar' ||
+                            (platform as Platform) !== 'netflixSeries' ||
+                            (platform as Platform) !== 'netflixPresents' ||
+                            (platform as Platform) !== 'netflixOriginal' ||
+                            (platform as Platform) !== 'netflixFilm' ||
+                            (platform as Platform) !== 'netflixAnime' ||
+                            (platform as Platform) !== 'netflixAnimeFilm' ||
+                            (platform as Platform) !== 'netflixDocumentary' ||
+                            (platform as Platform) !== 'tvingOriginal' ||
+                            (platform as Platform) !== 'tvingOnly' ||
+                            (platform as Platform) !== 'watchaOriginal' ||
+                            (platform as Platform) !== 'watchaExclusive' ||
+                            (platform as Platform) !== 'wavveOriginal' ||
+                            (platform as Platform) !== 'wavveOnly' ||
+                            (platform as Platform) !== 'paramount') && (
                             <>
                               {amusement.ott !== null && (
                                 <div className={styles.platform}>
