@@ -124,7 +124,7 @@ export function Pagination({
             );
           })}
           {currentGroup < Math.ceil(pageCount / pageLimit) - 1 && (
-            <div className={styles.pager}>
+            <div className={`${styles.pager} ${currentGroup === 0 ? styles.pagerNext : ''}`}>
               {sorting === 'amusement' ? (
                 <>
                   {category && !tag && (
