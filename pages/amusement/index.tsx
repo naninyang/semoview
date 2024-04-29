@@ -345,13 +345,13 @@ function Amusement({
                   <option value="paramount">파라마운트+</option>
                   <option value="amazon">아마존 프라임비디오</option>
                   <option value="netflix">넷플릭스</option>
-                  <option value="disney">디즈니+ / 스타+</option>
+                  <option value="disney">디즈니++</option>
                   <option value="tving">티빙</option>
                   <option value="watcha">왓챠</option>
                   <option value="wavve">웨이브</option>
                 </optgroup>
                 <optgroup label="드라마 송출 방송국">
-                  <option value="ABC">ABC / 20세기 / FOX / FX</option>
+                  <option value="ABC">ABC</option>
                   <option value="KBS2">KBS 2TV</option>
                   <option value="MBC">MBC</option>
                   <option value="SBS">SBS</option>
@@ -362,12 +362,12 @@ function Amusement({
                 </optgroup>
                 <optgroup label="애니메이션 방영 일본 방송국">
                   <option value="tokyomx">도쿄MX</option>
-                  <option value="tvtokyo">테레비 도쿄</option>
-                  <option value="fujitv">후지 테레비</option>
+                  <option value="tvtokyo">테레토</option>
+                  <option value="fujitv">후지테레비</option>
                   <option value="mbs">MBS</option>
                   <option value="tbs">TBS</option>
                   <option value="atx">AT-X</option>
-                  <option value="nippontv">닛폰 테레비</option>
+                  <option value="nippontv">닛테레</option>
                   <option value="wowow">wowow</option>
                 </optgroup>
                 <optgroup label="애니메이션 방영 한국 방송국">
@@ -664,17 +664,17 @@ function Amusement({
                                 <dd>
                                   {amusement.animeBroadcast1 === 'tokyomx' && (
                                     <>
-                                      <TokyomxIcon /> <span>도쿄 MX</span>
+                                      <TokyomxIcon /> <span>도쿄MX</span>
                                     </>
                                   )}
                                   {amusement.animeBroadcast1 === 'tvtokyo' && (
                                     <>
-                                      <TvtokyoIcon /> <span>테레비 도쿄</span>
+                                      <TvtokyoIcon /> <span>테레토</span>
                                     </>
                                   )}
                                   {amusement.animeBroadcast1 === 'fujitv' && (
                                     <>
-                                      <FujitvIcon /> <span>후지 테레비</span>
+                                      <FujitvIcon /> <span>후지테레비</span>
                                     </>
                                   )}
                                   {amusement.animeBroadcast1 === 'mbs' && (
@@ -694,7 +694,7 @@ function Amusement({
                                   )}
                                   {amusement.animeBroadcast1 === 'nippontv' && (
                                     <>
-                                      <NippontvIcon /> <span>닛폰 테레비</span>
+                                      <NippontvIcon /> <span>닛테레</span>
                                     </>
                                   )}
                                   {amusement.animeBroadcast1 === 'wowow' && (
@@ -1032,17 +1032,17 @@ function Amusement({
                                 <dd>
                                   {amusement.animeBroadcast1 === 'tokyomx' && (
                                     <>
-                                      <TokyomxIcon /> <span>도쿄 MX</span>
+                                      <TokyomxIcon /> <span>도쿄MX</span>
                                     </>
                                   )}
                                   {amusement.animeBroadcast1 === 'tvtokyo' && (
                                     <>
-                                      <TvtokyoIcon /> <span>테레비 도쿄</span>
+                                      <TvtokyoIcon /> <span>테레토</span>
                                     </>
                                   )}
                                   {amusement.animeBroadcast1 === 'fujitv' && (
                                     <>
-                                      <FujitvIcon /> <span>후지 테레비</span>
+                                      <FujitvIcon /> <span>후지테레비</span>
                                     </>
                                   )}
                                   {amusement.animeBroadcast1 === 'mbs' && (
@@ -1062,7 +1062,7 @@ function Amusement({
                                   )}
                                   {amusement.animeBroadcast1 === 'nippontv' && (
                                     <>
-                                      <NippontvIcon /> <span>닛폰 테레비</span>
+                                      <NippontvIcon /> <span>닛테레</span>
                                     </>
                                   )}
                                   {amusement.animeBroadcast1 === 'wowow' && (
@@ -1311,13 +1311,13 @@ function Amusement({
                       <option value="paramount">파라마운트+</option>
                       <option value="amazon">아마존 프라임비디오</option>
                       <option value="netflix">넷플릭스</option>
-                      <option value="disney">디즈니+ / 스타+</option>
+                      <option value="disney">디즈니+</option>
                       <option value="tving">티빙</option>
                       <option value="watcha">왓챠</option>
                       <option value="wavve">웨이브</option>
                     </optgroup>
                     <optgroup label="드라마 송출 방송국">
-                      <option value="ABC">ABC / 20세기 / FOX / FX</option>
+                      <option value="ABC">ABC</option>
                       <option value="KBS2">KBS 2TV</option>
                       <option value="MBC">MBC</option>
                       <option value="SBS">SBS</option>
@@ -1328,12 +1328,12 @@ function Amusement({
                     </optgroup>
                     <optgroup label="애니메이션 방영 일본 방송국">
                       <option value="tokyomx">도쿄MX</option>
-                      <option value="tvtokyo">테레비 도쿄</option>
-                      <option value="fujitv">후지 테레비</option>
+                      <option value="tvtokyo">테레토</option>
+                      <option value="fujitv">후지테레비</option>
                       <option value="mbs">MBS</option>
                       <option value="tbs">TBS</option>
                       <option value="atx">AT-X</option>
-                      <option value="nippontv">닛폰 테레비</option>
+                      <option value="nippontv">닛테레</option>
                       <option value="wowow">wowow</option>
                     </optgroup>
                     <optgroup label="애니메이션 방영 한국 방송국">
@@ -1396,17 +1396,17 @@ function Amusement({
                               <dd>
                                 {amusement.animeBroadcast1 === 'tokyomx' && (
                                   <>
-                                    <TokyomxIcon /> <span>도쿄 MX</span>
+                                    <TokyomxIcon /> <span>도쿄MX</span>
                                   </>
                                 )}
                                 {amusement.animeBroadcast1 === 'tvtokyo' && (
                                   <>
-                                    <TvtokyoIcon /> <span>테레비 도쿄</span>
+                                    <TvtokyoIcon /> <span>테레토</span>
                                   </>
                                 )}
                                 {amusement.animeBroadcast1 === 'fujitv' && (
                                   <>
-                                    <FujitvIcon /> <span>후지 테레비</span>
+                                    <FujitvIcon /> <span>후지테레비</span>
                                   </>
                                 )}
                                 {amusement.animeBroadcast1 === 'mbs' && (
@@ -1426,7 +1426,7 @@ function Amusement({
                                 )}
                                 {amusement.animeBroadcast1 === 'nippontv' && (
                                   <>
-                                    <NippontvIcon /> <span>닛폰 테레비</span>
+                                    <NippontvIcon /> <span>닛테레</span>
                                   </>
                                 )}
                                 {amusement.animeBroadcast1 === 'wowow' && (
@@ -1743,15 +1743,15 @@ function PlatformTitle(platform: keyof typeof platformTitles): string {
     tving: '티빙 오리지널 리뷰',
     watcha: '왓챠 오리지널 리뷰',
     wavve: '웨이브 오리지널 리뷰',
-    paramount: '파라마운트+ 오리지널 리뷰',
+    paramount: '티빙에서 볼 수 있는 파라마운트+ 오리지널 리뷰',
     tokyomx: '도쿄MX 東京MX 방영 애니메이션',
-    tvtokyo: '테레비 도쿄 テレ東 방영 애니메이션',
-    fujitv: '후지 테레비 フジテレビ 방영 애니메이션',
+    tvtokyo: '테레토 テレ東 방영 애니메이션',
+    fujitv: '후지테레비 フジテレビ 방영 애니메이션',
     mbs: 'MBS 방영 애니메이션',
     tbs: 'TBS 방영 애니메이션',
     atx: 'AT-X 방영 애니메이션',
-    nippontv: '닛폰 테레비 日テレ 방영 애니메이션',
-    wowow: 'wowow 방영 애니메이션',
+    nippontv: '닛테레 日テレ 방영 애니메이션',
+    wowow: 'WOWOW 방영 애니메이션',
     aniplus: '애니플러스 방영 애니메이션',
     daewon: '애니원 방영 애니메이션',
     anibox: '애니박스 방영 애니메이션',

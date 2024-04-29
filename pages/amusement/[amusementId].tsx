@@ -1183,17 +1183,17 @@ export default function Amusement({
                             <>
                               {amusementData.attributes.animeBroadcast1 === 'tokyomx' && (
                                 <>
-                                  <Tokyomx /> <span>도쿄 MX</span>
+                                  <Tokyomx /> <span>도쿄MX</span>
                                 </>
                               )}
                               {amusementData.attributes.animeBroadcast1 === 'tvtokyo' && (
                                 <>
-                                  <Tvtokyo /> <span>테레비 도쿄</span>
+                                  <Tvtokyo /> <span>테레토</span>
                                 </>
                               )}
                               {amusementData.attributes.animeBroadcast1 === 'fujitv' && (
                                 <>
-                                  <Fujitv /> <span>후지 테레비</span>
+                                  <Fujitv /> <span>후지테레비</span>
                                 </>
                               )}
                               {amusementData.attributes.animeBroadcast1 === 'mbs' && (
@@ -1213,7 +1213,7 @@ export default function Amusement({
                               )}
                               {amusementData.attributes.animeBroadcast1 === 'nippontv' && (
                                 <>
-                                  <Nippontv /> <span>닛폰 테레비</span>
+                                  <Nippontv /> <span>닛테레</span>
                                 </>
                               )}
                               {amusementData.attributes.animeBroadcast1 === 'wowow' && (

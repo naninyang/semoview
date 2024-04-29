@@ -503,17 +503,17 @@ function Tags({
                               <dd>
                                 {amusement.animeBroadcast1 === 'tokyomx' && (
                                   <>
-                                    <TokyomxIcon /> <span>도쿄 MX</span>
+                                    <TokyomxIcon /> <span>도쿄MX</span>
                                   </>
                                 )}
                                 {amusement.animeBroadcast1 === 'tvtokyo' && (
                                   <>
-                                    <TvtokyoIcon /> <span>테레비 도쿄</span>
+                                    <TvtokyoIcon /> <span>테레토</span>
                                   </>
                                 )}
                                 {amusement.animeBroadcast1 === 'fujitv' && (
                                   <>
-                                    <FujitvIcon /> <span>후지 테레비</span>
+                                    <FujitvIcon /> <span>후지테레비</span>
                                   </>
                                 )}
                                 {amusement.animeBroadcast1 === 'mbs' && (
@@ -533,7 +533,7 @@ function Tags({
                                 )}
                                 {amusement.animeBroadcast1 === 'nippontv' && (
                                   <>
-                                    <NippontvIcon /> <span>닛폰 테레비</span>
+                                    <NippontvIcon /> <span>닛테레</span>
                                   </>
                                 )}
                                 {amusement.animeBroadcast1 === 'wowow' && (
@@ -804,17 +804,17 @@ function Tags({
                               <dd>
                                 {amusement.animeBroadcast1 === 'tokyomx' && (
                                   <>
-                                    <TokyomxIcon /> <span>도쿄 MX</span>
+                                    <TokyomxIcon /> <span>도쿄MX</span>
                                   </>
                                 )}
                                 {amusement.animeBroadcast1 === 'tvtokyo' && (
                                   <>
-                                    <TvtokyoIcon /> <span>테레비 도쿄</span>
+                                    <TvtokyoIcon /> <span>테레토</span>
                                   </>
                                 )}
                                 {amusement.animeBroadcast1 === 'fujitv' && (
                                   <>
-                                    <FujitvIcon /> <span>후지 테레비</span>
+                                    <FujitvIcon /> <span>후지테레비</span>
                                   </>
                                 )}
                                 {amusement.animeBroadcast1 === 'mbs' && (
@@ -834,7 +834,7 @@ function Tags({
                                 )}
                                 {amusement.animeBroadcast1 === 'nippontv' && (
                                   <>
-                                    <NippontvIcon /> <span>닛폰 테레비</span>
+                                    <NippontvIcon /> <span>닛테레</span>
                                   </>
                                 )}
                                 {amusement.animeBroadcast1 === 'wowow' && (
@@ -1097,17 +1097,17 @@ function Tags({
                               <dd>
                                 {amusement.animeBroadcast1 === 'tokyomx' && (
                                   <>
-                                    <TokyomxIcon /> <span>도쿄 MX</span>
+                                    <TokyomxIcon /> <span>도쿄MX</span>
                                   </>
                                 )}
                                 {amusement.animeBroadcast1 === 'tvtokyo' && (
                                   <>
-                                    <TvtokyoIcon /> <span>테레비 도쿄</span>
+                                    <TvtokyoIcon /> <span>테레토</span>
                                   </>
                                 )}
                                 {amusement.animeBroadcast1 === 'fujitv' && (
                                   <>
-                                    <FujitvIcon /> <span>후지 테레비</span>
+                                    <FujitvIcon /> <span>후지테레비</span>
                                   </>
                                 )}
                                 {amusement.animeBroadcast1 === 'mbs' && (
@@ -1127,7 +1127,7 @@ function Tags({
                                 )}
                                 {amusement.animeBroadcast1 === 'nippontv' && (
                                   <>
-                                    <NippontvIcon /> <span>닛폰 테레비</span>
+                                    <NippontvIcon /> <span>닛테레</span>
                                   </>
                                 )}
                                 {amusement.animeBroadcast1 === 'wowow' && (

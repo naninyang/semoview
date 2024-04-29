@@ -557,17 +557,17 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                                       <>
                                         {jejeup.amusementData.animeBroadcast1 === 'tokyomx' && (
                                           <>
-                                            <Tokyomx /> <span>도쿄 MX</span>
+                                            <Tokyomx /> <span>도쿄MX</span>
                                           </>
                                         )}
                                         {jejeup.amusementData.animeBroadcast1 === 'tvtokyo' && (
                                           <>
-                                            <Tvtokyo /> <span>테레비 도쿄</span>
+                                            <Tvtokyo /> <span>테레토</span>
                                           </>
                                         )}
                                         {jejeup.amusementData.animeBroadcast1 === 'fujitv' && (
                                           <>
-                                            <Fujitv /> <span>후지 테레비</span>
+                                            <Fujitv /> <span>후지테레비</span>
                                           </>
                                         )}
                                         {jejeup.amusementData.animeBroadcast1 === 'mbs' && (
@@ -587,7 +587,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                                         )}
                                         {jejeup.amusementData.animeBroadcast1 === 'nippontv' && (
                                           <>
-                                            <Nippontv /> <span>닛폰 테레비</span>
+                                            <Nippontv /> <span>닛테레</span>
                                           </>
                                         )}
                                         {jejeup.amusementData.animeBroadcast1 === 'wowow' && (
