@@ -106,6 +106,67 @@
         padding-left: rem(17)
 
   .content
+    > strong
+      display: block
+      padding-bottom: rem(7)
+      font-size: rem(16)
+      font-weight: 800
+
+      +mq(maxSmall)
+        font-size: rem(14)
+
+    .tag-list
+      display: flex
+      flex-wrap: wrap
+      gap: rem(7)
+      padding-bottom: rem(27)
+
+      +mq(maxSmall)
+        gap: rem(3)
+
+      li
+        padding: rem(3) 0
+
+      .current
+        a
+          span
+            background-color: $hex-accent
+            border-color: $hex-white
+            font-weight: 800
+            color: $hex-white
+
+      a
+        display: inline-flex
+        gap: rem(7)
+
+        +mq(maxSmall)
+          gap: rem(3)
+
+        &:hover, &:focus
+          span
+            background-color: $hex-accent
+            border-color: $hex-white
+            font-weight: 800
+            color: $hex-white
+
+        span
+          display: inline-flex
+          align-items: center
+          border: 1px solid rgba($hex-black, .2)
+          border-radius: rem(32)
+          padding: 0 rem(17)
+          height: rem(32)
+          font-size: rem(16)
+          white-space: nowrap
+          color: $hex-dark
+          transition: all .4s cubic-bezier(.4,0,.2,1)
+
+          +mq(maxSmall)
+            border-radius: rem(27)
+            padding: 0 rem(12)
+            height: rem(27)
+            font-size: rem(14)
+
     .headline
       display: flex
       align-items: center
@@ -118,19 +179,26 @@
         +mq(minMedium)
           font-size: rem(24)
 
-      h1 span
-        font-size: rem(14)
-        font-weight: 800
-        color: $hex-accent
+      h1
+        span
+          font-size: rem(14)
+          font-weight: 800
+          color: $hex-accent
 
-        +mq(minMedium)
+          +mq(minMedium)
+            font-size: rem(16)
+
+        strong
+          display: block
+          margin-top: rem(7)
           font-size: rem(16)
 
-      h2 a
-        color: $hex-dark
+      h2
+        a
+          color: $hex-dark
 
-        &:hover, &:focus
-          color: $hex-accent
+          &:hover, &:focus
+            color: $hex-accent
 
       .select
         display: flex
@@ -435,7 +503,6 @@
       display: flex
       flex-direction: column
       gap: rem(17)
-      height: calc(100dvh - rem(133))
 
       h1
         padding-top: rem(12)
@@ -458,6 +525,9 @@
         color: $hex-accent
         text-align: center
 
+        .form, .tags
+          width: 100%
+
         .form
           display: flex
           flex-direction: column
@@ -465,10 +535,73 @@
           align-items: center
           gap: rem(7)
           max-width: rem(370)
-          width: 100%
           font-weight: 700
           color: $hex-accent
           text-align: center
+
+        .tags
+          padding: 0 rem(27)
+
+          > strong
+            display: block
+            padding-bottom: rem(12)
+            font-size: rem(16)
+            font-weight: 800
+
+            +mq(maxSmall)
+              font-size: rem(14)
+
+          .tag-list
+            display: flex
+            flex-wrap: wrap
+            justify-content: center
+            gap: rem(7)
+
+            +mq(maxSmall)
+              gap: rem(3)
+
+            li
+              padding: rem(3) 0
+
+            .current
+              a
+                span
+                  background-color: $hex-accent
+                  border-color: $hex-white
+                  font-weight: 800
+                  color: $hex-white
+
+            a
+              display: inline-flex
+              gap: rem(7)
+
+              +mq(maxSmall)
+                gap: rem(3)
+
+              &:hover, &:focus
+                span
+                  background-color: $hex-accent
+                  border-color: $hex-white
+                  font-weight: 800
+                  color: $hex-white
+
+              span
+                display: inline-flex
+                align-items: center
+                border: 1px solid rgba($hex-black, .2)
+                border-radius: rem(32)
+                padding: 0 rem(17)
+                height: rem(32)
+                font-size: rem(16)
+                white-space: nowrap
+                color: $hex-dark
+                transition: all .4s cubic-bezier(.4,0,.2,1)
+
+                +mq(maxSmall)
+                  border-radius: rem(27)
+                  padding: 0 rem(12)
+                  height: rem(27)
+                  font-size: rem(14)
 
       button
         background-color: $hex-accent

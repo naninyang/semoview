@@ -10,6 +10,8 @@ import { vectors } from '@/components/vectors';
 import { Pagination } from '@/components/Pagination';
 import Anchor from '@/components/Anchor';
 import styles from '@/styles/Categories.module.sass';
+import { CategoryName } from '@/components/CategoryName';
+import { TagName } from '@/components/TagName';
 
 const AmazonIcon = styled.i({
   background: `url(${vectors.ott.amazonIcon}) no-repeat 50% 50%/contain`,
@@ -308,36 +310,6 @@ function Amusement({
               <button onClick={handleCategorySubmit}>카테고리 선택</button>
             </div>
             <div className={styles.form}>
-              <select value={selectedTag} onChange={handleTagChange}>
-                <option value="">태그 선택</option>
-                <optgroup label="드라마/영화/애니메이션">
-                  <option value="horror,drama">호러 드라마</option>
-                  <option value="horror,anime">호러 애니메이션</option>
-                  <option value="horror,film">호러 영화</option>
-                  <option value="apocalypse">아포칼립스/좀비</option>
-                  <option value="healing">치유물</option>
-                  <option value="isekai">이세계물</option>
-                  <option value="relife">이세계 전생/전이</option>
-                  <option value="queer">퀴어</option>
-                  <option value="timeslip">타임슬립</option>
-                  <option value="picaresca">피카레스크</option>
-                  <option value="yuri">백합</option>
-                </optgroup>
-                <optgroup label="게임">
-                  <option value="anomalies">이상현상</option>
-                  <option value="mobile,game">모바일</option>
-                  <option value="horror,game">호러</option>
-                  <option value="healing,game">힐링</option>
-                  <option value="apocalypse,game">아포칼립스/좀비</option>
-                  <option value="picaresca,game">피카레스크</option>
-                  <option value="strategy,game">전략/경영</option>
-                  <option value="simulation,game">시뮬레이션</option>
-                  <option value="backroom,game">백룸/미궁</option>
-                </optgroup>
-              </select>
-              <button onClick={handleTagSubmit}>태그 선택</button>
-            </div>
-            <div className={styles.form}>
               <select value={selectedPlatform} onChange={handlePlatformChange}>
                 <option value="">플랫폼(OTT 또는 방송국) 선택</option>
                 <optgroup label="OTT 플랫폼">
@@ -380,6 +352,112 @@ function Amusement({
               </select>
               <button onClick={handlePlatformSubmit}>플랫폼 선택</button>
             </div>
+            <div className={styles.tags}>
+              <strong>세상의 모든 해시태그</strong>
+              <ul className={styles['tag-list']}>
+                <li className={router.query.tag === 'horror' && category === 'drama' ? styles.current : ''}>
+                  <Anchor href="/amusement?tag=horror&category=drama&page=1">
+                    <span>#공포</span> <span>#호러</span> <span>#드라마</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'apocalypse' && !category ? styles.current : ''}>
+                  <Anchor href="/amusement?tag=apocalypse&page=1">
+                    <span>#아포칼립스</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'healing' && !category ? styles.current : ''}>
+                  <Anchor href="/amusement?tag=healing&page=1">
+                    <span>#힐링</span> <span>#치유</span> <span>#감동</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'isekai' ? styles.current : ''}>
+                  <Anchor href="/amusement?tag=isekai&page=1">
+                    <span>#이세계</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'relife' ? styles.current : ''}>
+                  <Anchor href="/amusement?tag=relife&page=1">
+                    <span>#전생</span> <span>#전이</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'horror' && category === 'film' ? styles.current : ''}>
+                  <Anchor href="/amusement?tag=horror&category=film&page=1">
+                    <span>#공포</span> <span>#호러</span> <span>#영화</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'queer' ? styles.current : ''}>
+                  <Anchor href="/amusement?tag=queer&page=1">
+                    <span>#퀴어</span> <span>#LGBTQ+</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'timeslip' ? styles.current : ''}>
+                  <Anchor href="/amusement?tag=timeslip&page=1">
+                    <span>#타임슬립</span> <span>#타임리프</span> <span>#회귀</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'picaresca' && !category ? styles.current : ''}>
+                  <Anchor href="/amusement?tag=picaresca&page=1">
+                    <span>#피카레스크</span> <span>#악인전</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'yuri' ? styles.current : ''}>
+                  <Anchor href="/amusement?tag=yuri&page=1">
+                    <span>#백합</span> <span>#레즈</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'horror' && category === 'anime' ? styles.current : ''}>
+                  <Anchor href="/amusement?tag=horror&category=anime&page=1">
+                    <span>#공포</span> <span>#호러</span> <span>#애니</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'anomalies' && category === 'game' ? styles.current : ''}>
+                  <Anchor href="amusement?tag=anomalies&category=game&page=1">
+                    <span>#이상현상</span> <span>#아노말리</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'mobile' && category === 'game' ? styles.current : ''}>
+                  <Anchor href="amusement?tag=mobile&category=game&page=1">
+                    <span>#모바일</span> <span>#게임</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'healing' && category === 'game' ? styles.current : ''}>
+                  <Anchor href="amusement?tag=healing&category=game&page=1">
+                    <span>#힐링</span> <span>#치유</span> <span>#감동</span> <span>#게임</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'apocalypse' && category === 'game' ? styles.current : ''}>
+                  <Anchor href="amusement?tag=apocalypse&category=game&page=1">
+                    <span>#아포칼립스</span> <span>#게임</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'picaresca' && category === 'game' ? styles.current : ''}>
+                  <Anchor href="amusement?tag=picaresca&category=game&page=1">
+                    <span>#피카레스크</span> <span>#악인전</span> <span>#게임</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'strategy' && category === 'game' ? styles.current : ''}>
+                  <Anchor href="amusement?tag=strategy&category=game&page=1">
+                    <span>#경영</span> <span>#전략</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'simulation' && category === 'game' ? styles.current : ''}>
+                  <Anchor href="amusement?tag=simulation&category=game&page=1">
+                    <span>#시뮬레이션</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'backroom' && category === 'game' ? styles.current : ''}>
+                  <Anchor href="amusement?tag=backroom&category=game&page=1">
+                    <span>#백룸</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'horror' && category === 'game' ? styles.current : ''}>
+                  <Anchor href="/amusement?tag=horror&category=game&page=1">
+                    <span>#공포</span> <span>#호러</span> <span>#게임</span>
+                  </Anchor>
+                </li>
+              </ul>
+            </div>
+
             <div className={styles.visual}>
               <svg width="345" height="294" viewBox="0 0 345 294" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -941,40 +1019,116 @@ function Amusement({
           )}
           {router.query.tag && tagData && (
             <div className={styles.content}>
+              <strong>세상의 모든 해시태그</strong>
+              <ul className={styles['tag-list']}>
+                <li className={router.query.tag === 'horror' && category === 'drama' ? styles.current : ''}>
+                  <Anchor href="/amusement?tag=horror&category=drama&page=1">
+                    <span>#공포</span> <span>#호러</span> <span>#드라마</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'apocalypse' && !category ? styles.current : ''}>
+                  <Anchor href="/amusement?tag=apocalypse&page=1">
+                    <span>#아포칼립스</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'healing' && !category ? styles.current : ''}>
+                  <Anchor href="/amusement?tag=healing&page=1">
+                    <span>#힐링</span> <span>#치유</span> <span>#감동</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'isekai' ? styles.current : ''}>
+                  <Anchor href="/amusement?tag=isekai&page=1">
+                    <span>#이세계</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'relife' ? styles.current : ''}>
+                  <Anchor href="/amusement?tag=relife&page=1">
+                    <span>#전생</span> <span>#전이</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'horror' && category === 'film' ? styles.current : ''}>
+                  <Anchor href="/amusement?tag=horror&category=film&page=1">
+                    <span>#공포</span> <span>#호러</span> <span>#영화</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'queer' ? styles.current : ''}>
+                  <Anchor href="/amusement?tag=queer&page=1">
+                    <span>#퀴어</span> <span>#LGBTQ+</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'timeslip' ? styles.current : ''}>
+                  <Anchor href="/amusement?tag=timeslip&page=1">
+                    <span>#타임슬립</span> <span>#타임리프</span> <span>#회귀</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'picaresca' && !category ? styles.current : ''}>
+                  <Anchor href="/amusement?tag=picaresca&page=1">
+                    <span>#피카레스크</span> <span>#악인전</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'yuri' ? styles.current : ''}>
+                  <Anchor href="/amusement?tag=yuri&page=1">
+                    <span>#백합</span> <span>#레즈</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'horror' && category === 'anime' ? styles.current : ''}>
+                  <Anchor href="/amusement?tag=horror&category=anime&page=1">
+                    <span>#공포</span> <span>#호러</span> <span>#애니</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'anomalies' && category === 'game' ? styles.current : ''}>
+                  <Anchor href="amusement?tag=anomalies&category=game&page=1">
+                    <span>#이상현상</span> <span>#아노말리</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'mobile' && category === 'game' ? styles.current : ''}>
+                  <Anchor href="amusement?tag=mobile&category=game&page=1">
+                    <span>#모바일</span> <span>#게임</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'healing' && category === 'game' ? styles.current : ''}>
+                  <Anchor href="amusement?tag=healing&category=game&page=1">
+                    <span>#힐링</span> <span>#치유</span> <span>#감동</span> <span>#게임</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'apocalypse' && category === 'game' ? styles.current : ''}>
+                  <Anchor href="amusement?tag=apocalypse&category=game&page=1">
+                    <span>#아포칼립스</span> <span>#게임</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'picaresca' && category === 'game' ? styles.current : ''}>
+                  <Anchor href="amusement?tag=picaresca&category=game&page=1">
+                    <span>#피카레스크</span> <span>#악인전</span> <span>#게임</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'strategy' && category === 'game' ? styles.current : ''}>
+                  <Anchor href="amusement?tag=strategy&category=game&page=1">
+                    <span>#경영</span> <span>#전략</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'simulation' && category === 'game' ? styles.current : ''}>
+                  <Anchor href="amusement?tag=simulation&category=game&page=1">
+                    <span>#시뮬레이션</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'backroom' && category === 'game' ? styles.current : ''}>
+                  <Anchor href="amusement?tag=backroom&category=game&page=1">
+                    <span>#백룸</span>
+                  </Anchor>
+                </li>
+                <li className={router.query.tag === 'horror' && category === 'game' ? styles.current : ''}>
+                  <Anchor href="/amusement?tag=horror&category=game&page=1">
+                    <span>#공포</span> <span>#호러</span> <span>#게임</span>
+                  </Anchor>
+                </li>
+              </ul>
               <div className={styles.headline}>
                 <h1>
                   {pageTitle} {tagData.total > 0 && <span>({tagData.total}개 작품)</span>}
+                  <strong>
+                    #{TagName(`${router.query.tag}`)} {category && `#${CategoryName(category)}`}
+                  </strong>
                 </h1>
-                <div className={styles.select}>
-                  <select onChange={handleTagChange} defaultValue={tag && category ? `${tag},${category}` : tag}>
-                    <option value="">태그 선택</option>
-                    <optgroup label="드라마/영화/애니메이션">
-                      <option value="horror,drama">호러 드라마</option>
-                      <option value="horror,film">호러 영화</option>
-                      <option value="horror,anime">호러 애니메이션</option>
-                      <option value="apocalypse">아포칼립스/좀비</option>
-                      <option value="healing">치유물</option>
-                      <option value="isekai">이세계물</option>
-                      <option value="relife">이세계 전생/전이</option>
-                      <option value="queer">퀴어</option>
-                      <option value="timeslip">타임슬립</option>
-                      <option value="picaresca">피카레스크</option>
-                      <option value="yuri">백합</option>
-                    </optgroup>
-                    <optgroup label="게임">
-                      <option value="anomalies,game">이상현상</option>
-                      <option value="mobile,game">모바일</option>
-                      <option value="horror,game">호러</option>
-                      <option value="healing,game">힐링</option>
-                      <option value="apocalypse,game">아포칼립스/좀비</option>
-                      <option value="picaresca,game">피카레스크</option>
-                      <option value="strategy,game">전략/경영</option>
-                      <option value="simulation,game">시뮬레이션</option>
-                      <option value="backroom,game">백룸/미궁</option>
-                    </optgroup>
-                  </select>
-                  <button onClick={handleTagSubmit}>선택</button>
-                </div>
               </div>
               {Array.isArray(tagData.data) && (
                 <section className={category === 'game' ? styles.game : ''}>

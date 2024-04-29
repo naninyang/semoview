@@ -9,6 +9,7 @@ export const TagName = (name: string) => {
     apocalypse: '아포칼립스',
     picaresca: '피카레스크 #악인전',
     horror: '공포 #호러',
+    mobile: '모바일',
     strategy: '경영 #전략',
     simulation: '시뮬레이션',
     backroom: '백룸',

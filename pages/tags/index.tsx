@@ -200,7 +200,7 @@ function Tags({
       <Seo
         pageTitles={`리뷰 태그 선택하기 - ${originTitle}`}
         pageTitle={`리뷰 태그 선택하기`}
-        pageDescription="모바일 / 치유물 / 백합 / 퀴어 / 이세계물 / 타임슬립 / 이상현상 / 아포칼립스&좀비 / 피카레스크 / 공포"
+        pageDescription="#힐링 #치유 #감동 #백합 #레즈 #퀴어 #LGBTQ+ #이세계 #타임슬립 #타임리프 #회귀 #이상현상 #아노말리 #아포칼립스 #피카레스크 #악인전 #공포 #호러 #경영 #전략 #시뮬레이션 #백룸 #전생 #전이"
         pageImg={`https://jejeup.dev1stud.io/og-tags.webp?ts=${timestamp}`}
       />
       <Choice />
@@ -224,7 +224,7 @@ function Tags({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?tag=horror&category=drama&page=1">공포 드라마 리뷰</Anchor>
+                  <Anchor href="/amusement?tag=horror&category=drama&page=1">#공포 #호러 #드라마</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${horrorDramaData.total}개`}
                 </h2>
                 <Anchor href="/amusement?tag=horror&category=drama&page=1">
@@ -441,7 +441,7 @@ function Tags({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?tag=horror&category=film&page=1">공포 영화 리뷰</Anchor>
+                  <Anchor href="/amusement?tag=horror&category=film&page=1">#공포 #호러 #영화</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${horrorFilmData.total}개`}
                 </h2>
                 <Anchor href="/amusement?tag=horror&category=film&page=1">
@@ -742,7 +742,7 @@ function Tags({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?tag=horror&category=anime&page=1">공포 애니메이션 리뷰</Anchor>
+                  <Anchor href="/amusement?tag=horror&category=anime&page=1">#공포 #호러 #애니</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${horrorAnimeData.total}개`}
                 </h2>
                 <Anchor href="/amusement?tag=horror&category=anime&page=1">
@@ -974,7 +974,7 @@ function Tags({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?tag=horror&category=game&page=1">공포 게임 리뷰 & 실황</Anchor>
+                  <Anchor href="/amusement?tag=horror&category=game&page=1">#공포 #호러 #게임</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${horrorGameData.total}개`}
                 </h2>
                 <Anchor href="/amusement?tag=horror&category=game&page=1">
@@ -1035,7 +1035,7 @@ function Tags({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?tag=healing&page=1">치유물 리뷰</Anchor>
+                  <Anchor href="/amusement?tag=healing&page=1">#힐링 #치유 #감동 #드라마 #영화 #애니</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${healingData.total}개`}
                 </h2>
                 <Anchor href="/amusement?tag=healing&page=1">
@@ -1336,7 +1336,7 @@ function Tags({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?tag=healing&category=game&page=1">힐링 게임 리뷰 & 실황</Anchor>
+                  <Anchor href="/amusement?tag=healing&category=game&page=1">#힐링 #치유 #감동 #게임</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${healingGameData.total}개`}
                 </h2>
                 <Anchor href="/amusement?tag=healing&category=game&page=1">
