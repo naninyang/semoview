@@ -1517,6 +1517,7 @@ export default function Amusement({
               <div className={styles.synopsys}>
                 <dt>시놉시스</dt>
                 <dd
+                  className="lang"
                   dangerouslySetInnerHTML={{
                     __html: amusementData.attributes.synopsys.replace(/\n/g, '<br />'),
                   }}
