@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import styled from '@emotion/styled';
+import { useMediaQuery } from 'react-responsive';
 import { vectors } from './vectors';
 import YouTubeController from './YouTubeController';
+import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Related.module.sass';
 import amuses from '@/styles/Amusement.module.sass';
 import jejeus from '@/styles/Jejeup.module.sass';
@@ -23,6 +25,15 @@ const CloseDarkIcon = styled.i({
   background: `url(${vectors.crossDark}) no-repeat 50% 50%/contain`,
 });
 
+export function useMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  const mobile = useMediaQuery({ query: `(max-width: ${rem(575)}` });
+  useEffect(() => {
+    setIsMobile(mobile);
+  }, [mobile]);
+  return isMobile;
+}
+
 const Related = ({ videoId, videoDescription, title, sorting, key }: Props) => {
   const [selectedRelated, setSelectedRelated] = useState<boolean>(false);
 
@@ -33,6 +44,8 @@ const Related = ({ videoId, videoDescription, title, sorting, key }: Props) => {
   const handleCloseRelatedDetail = () => {
     setSelectedRelated(false);
   };
+
+  const isMobile = useMobile();
 
   useEffect(() => {
     const isAmusement = sorting === 'amusement' ? true : false;
@@ -75,19 +88,28 @@ const Related = ({ videoId, videoDescription, title, sorting, key }: Props) => {
       className={`${styles.item} ${selectedRelated ? styles.current : ''} ${sorting === 'amusement' ? styles['item-amusement'] : ''}`}
       key={key}
     >
-      <button type="button" onClick={() => handleButtonClick()}>
-        <Image
-          src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
-          width={640}
-          height={480}
-          unoptimized
-          priority
-          alt=""
-        />
-        <span>
-          <strong>[{title}]</strong> {videoDescription}
-        </span>
-      </button>
+      {isMobile ? (
+        <div className={styles.item}>
+          <YouTubeController videoId={videoId} videoImage={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`} />
+          <span className="lang">
+            <strong>[{title}]</strong> {videoDescription}
+          </span>
+        </div>
+      ) : (
+        <button type="button" onClick={() => handleButtonClick()}>
+          <Image
+            src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+            width={640}
+            height={480}
+            unoptimized
+            priority
+            alt=""
+          />
+          <span className="lang">
+            <strong>[{title}]</strong> {videoDescription}
+          </span>
+        </button>
+      )}
       {selectedRelated && (
         <dialog className={`${styles.dialog} ${sorting === 'amusement' ? styles['dialog-amusement'] : ''}`}>
           <div className={styles.container}>
@@ -95,7 +117,7 @@ const Related = ({ videoId, videoDescription, title, sorting, key }: Props) => {
               {sorting === 'amusement' ? <CloseLightIcon /> : <CloseDarkIcon />}
               <span>닫기</span>
             </button>
-            <h3>
+            <h3 className="lang">
               [{title}] {videoDescription}
             </h3>
             <YouTubeController videoId={videoId} videoImage={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`} />
