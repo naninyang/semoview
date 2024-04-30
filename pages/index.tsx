@@ -914,7 +914,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                         </dt>
                         <dd>
                           <strong aria-label="작품명">
-                            <span className={styles.title}>
+                            <span className={`${styles.title} April16thPromise`}>
                               {jejeup.amusementData.category === 'game_fan'
                                 ? `'${jejeup.amusementData.title}'의 팬 게임 콜렉션`
                                 : jejeup.amusementData.titleKorean
