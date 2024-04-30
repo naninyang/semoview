@@ -412,7 +412,7 @@ function Amusement({
                 </li>
                 <li>
                   <Anchor href="amusement?tag=anomalies&category=game&page=1">
-                    <span>#이상현상</span> <span>#아노말리</span>
+                    <span>#이상현상</span> <span>#아노말리</span> <span>#게임</span>
                   </Anchor>
                 </li>
                 <li>
@@ -437,17 +437,17 @@ function Amusement({
                 </li>
                 <li>
                   <Anchor href="amusement?tag=strategy&category=game&page=1">
-                    <span>#경영</span> <span>#전략</span>
+                    <span>#경영</span> <span>#전략</span> <span>#게임</span>
                   </Anchor>
                 </li>
                 <li>
                   <Anchor href="amusement?tag=simulation&category=game&page=1">
-                    <span>#시뮬레이션</span>
+                    <span>#시뮬레이션</span> <span>#게임</span>
                   </Anchor>
                 </li>
                 <li>
                   <Anchor href="amusement?tag=backroom&category=game&page=1">
-                    <span>#백룸</span>
+                    <span>#백룸</span> <span>#게임</span>
                   </Anchor>
                 </li>
                 <li>
@@ -1078,7 +1078,7 @@ function Amusement({
                 </li>
                 <li className={router.query.tag === 'anomalies' && category === 'game' ? styles.current : ''}>
                   <Anchor href="amusement?tag=anomalies&category=game&page=1">
-                    <span>#이상현상</span> <span>#아노말리</span>
+                    <span>#이상현상</span> <span>#아노말리</span> <span>#게임</span>
                   </Anchor>
                 </li>
                 <li className={router.query.tag === 'mobile' && category === 'game' ? styles.current : ''}>
@@ -1103,17 +1103,17 @@ function Amusement({
                 </li>
                 <li className={router.query.tag === 'strategy' && category === 'game' ? styles.current : ''}>
                   <Anchor href="amusement?tag=strategy&category=game&page=1">
-                    <span>#경영</span> <span>#전략</span>
+                    <span>#경영</span> <span>#전략</span> <span>#게임</span>
                   </Anchor>
                 </li>
                 <li className={router.query.tag === 'simulation' && category === 'game' ? styles.current : ''}>
                   <Anchor href="amusement?tag=simulation&category=game&page=1">
-                    <span>#시뮬레이션</span>
+                    <span>#시뮬레이션</span> <span>#게임</span>
                   </Anchor>
                 </li>
                 <li className={router.query.tag === 'backroom' && category === 'game' ? styles.current : ''}>
                   <Anchor href="amusement?tag=backroom&category=game&page=1">
-                    <span>#백룸</span>
+                    <span>#백룸</span> <span>#게임</span>
                   </Anchor>
                 </li>
                 <li className={router.query.tag === 'horror' && category === 'game' ? styles.current : ''}>
@@ -1126,7 +1126,8 @@ function Amusement({
                 <h1>
                   {pageTitle} {tagData.total > 0 && <span>({tagData.total}개 작품)</span>}
                   <strong>
-                    #{TagName(`${router.query.tag}`)} {category && `#${CategoryName(category)}`}
+                    #{TagName(`${router.query.tag}`)} {category && `#${CategoryName(category)}`} #유튜브리뷰{' '}
+                    {category === 'game' && '#유튜브실황'}
                   </strong>
                 </h1>
               </div>

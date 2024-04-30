@@ -224,7 +224,9 @@ function Tags({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?tag=horror&category=drama&page=1">#공포 #호러 #드라마</Anchor>
+                  <Anchor href="/amusement?tag=horror&category=drama&page=1">
+                    <span>#공포</span> <span>#호러</span> <span>#드라마</span> <span>#유튜브리뷰</span>
+                  </Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${horrorDramaData.total}개`}
                 </h2>
                 <Anchor href="/amusement?tag=horror&category=drama&page=1">
@@ -441,7 +443,9 @@ function Tags({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?tag=horror&category=film&page=1">#공포 #호러 #영화</Anchor>
+                  <Anchor href="/amusement?tag=horror&category=film&page=1">
+                    <span>#공포</span> <span>#호러</span> <span>#영화</span> <span>#유튜브리뷰</span>
+                  </Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${horrorFilmData.total}개`}
                 </h2>
                 <Anchor href="/amusement?tag=horror&category=film&page=1">
@@ -742,7 +746,9 @@ function Tags({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?tag=horror&category=anime&page=1">#공포 #호러 #애니</Anchor>
+                  <Anchor href="/amusement?tag=horror&category=anime&page=1">
+                    <span>#공포</span> <span>#호러</span> <span>#애니</span> <span>#유튜브리뷰</span>
+                  </Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${horrorAnimeData.total}개`}
                 </h2>
                 <Anchor href="/amusement?tag=horror&category=anime&page=1">
@@ -974,7 +980,10 @@ function Tags({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?tag=horror&category=game&page=1">#공포 #호러 #게임</Anchor>
+                  <Anchor href="/amusement?tag=horror&category=game&page=1">
+                    <span>#공포</span> <span>#호러</span> <span>#게임</span> <span>#유튜브리뷰</span>{' '}
+                    <span>#유튜브실황</span>
+                  </Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${horrorGameData.total}개`}
                 </h2>
                 <Anchor href="/amusement?tag=horror&category=game&page=1">
@@ -1035,7 +1044,10 @@ function Tags({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?tag=healing&page=1">#힐링 #치유 #감동 #드라마 #영화 #애니</Anchor>
+                  <Anchor href="/amusement?tag=healing&page=1">
+                    <span>#힐링</span> <span>#치유</span> <span>#감동</span> <span>#드라마</span> <span>#영화</span>{' '}
+                    <span>#애니</span> <span>#유튜브리뷰</span>
+                  </Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${healingData.total}개`}
                 </h2>
                 <Anchor href="/amusement?tag=healing&page=1">
@@ -1336,7 +1348,10 @@ function Tags({
             <>
               <div className={styles.headline}>
                 <h2>
-                  <Anchor href="/amusement?tag=healing&category=game&page=1">#힐링 #치유 #감동 #게임</Anchor>
+                  <Anchor href="/amusement?tag=healing&category=game&page=1">
+                    <span>#힐링</span> <span>#치유</span> <span>#감동</span> <span>#게임</span> <span>#유튜브리뷰</span>{' '}
+                    <span>#유튜브실황</span>
+                  </Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${healingGameData.total}개`}
                 </h2>
                 <Anchor href="/amusement?tag=healing&category=game&page=1">

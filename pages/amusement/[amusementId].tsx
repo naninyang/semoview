@@ -437,7 +437,7 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
 
 export function TagsItem({ items }: { items: any }) {
   const excludeTags = ['game', 'anime', 'film', 'drama'];
-  const filteredTags = items && items.filter((items: any) => !excludeTags.includes(items));
+  const filteredTags = items.tags && items.tags.filter((items: any) => !excludeTags.includes(items));
 
   if (!filteredTags) {
     return null;
@@ -450,6 +450,7 @@ export function TagsItem({ items }: { items: any }) {
         {filteredTags.map((tag: string, index: number) => (
           <span key={index}>{`#${TagName(tag)}`} </span>
         ))}
+        {items.category !== null && `#${CategoryName(items.category)}`}
       </dd>
     </div>
   );
@@ -1458,7 +1459,7 @@ export default function Amusement({
                 </div>
               )}
             </div>
-            {amusementData.attributes.tags !== null && <TagsItem items={amusementData.attributes.tags} />}
+            {amusementData.attributes.tags !== null && <TagsItem items={amusementData.attributes} />}
           </dl>
           <dl className={styles.staff}>
             {amusementData.attributes.original !== null &&
