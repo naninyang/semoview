@@ -4,7 +4,7 @@ export const TagName = (name: string) => {
     yuri: '백합 #레즈',
     queer: '퀴어 #LGBTQ+',
     isekai: '이세계',
-    timeslip: '타임슬립 #타임리프 #회귀',
+    timeslip: '타임슬립 #타임리프 #타임루프 #회귀',
     anomalies: '이상현상 #아노말리',
     apocalypse: '아포칼립스',
     picaresca: '피카레스크 #악인전',

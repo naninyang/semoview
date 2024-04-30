@@ -392,7 +392,7 @@ function Amusement({
                 </li>
                 <li>
                   <Anchor href="/amusement?tag=timeslip&page=1">
-                    <span>#타임슬립</span> <span>#타임리프</span> <span>#회귀</span>
+                    <span>#타임슬립</span> <span>#타임리프</span> <span>#타임루프</span> <span>#회귀</span>
                   </Anchor>
                 </li>
                 <li>
@@ -1058,7 +1058,7 @@ function Amusement({
                 </li>
                 <li className={router.query.tag === 'timeslip' ? styles.current : ''}>
                   <Anchor href="/amusement?tag=timeslip&page=1">
-                    <span>#타임슬립</span> <span>#타임리프</span> <span>#회귀</span>
+                    <span>#타임슬립</span> <span>#타임리프</span> <span>#타임루프</span> <span>#회귀</span>
                   </Anchor>
                 </li>
                 <li className={router.query.tag === 'picaresca' && !category ? styles.current : ''}>
@@ -1858,7 +1858,7 @@ function TagTitle(tag: keyof typeof tagTitles, category?: string): string {
     queer: 'Love Wins',
     yuri: '그 백합잎에 입맞춤을',
     isekai: '마지막으로 이세계를 부탁드려도 될까요',
-    timeslip: '빙글뱅글 타임루프',
+    timeslip: '빙글뱅글 타임슬립',
     relife: '이세계에서 N회차',
     healing: category === 'game' ? '오늘밤은 힐링게임이 좋아' : '밤은 치유물과 함께',
     picaresca: category === 'game' ? '자닌한 게임이라 욕하지는 마' : '피카레스크 전성시대',

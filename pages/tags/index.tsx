@@ -200,7 +200,7 @@ function Tags({
       <Seo
         pageTitles={`리뷰 태그 선택하기 - ${originTitle}`}
         pageTitle={`리뷰 태그 선택하기`}
-        pageDescription="#힐링 #치유 #감동 #백합 #레즈 #퀴어 #LGBTQ+ #이세계 #타임슬립 #타임리프 #회귀 #이상현상 #아노말리 #아포칼립스 #피카레스크 #악인전 #공포 #호러 #경영 #전략 #시뮬레이션 #백룸 #전생 #전이"
+        pageDescription="#힐링 #치유 #감동 #백합 #레즈 #퀴어 #LGBTQ+ #이세계 #타임슬립 #타임리프 #타임루프 #회귀 #이상현상 #아노말리 #아포칼립스 #피카레스크 #악인전 #공포 #호러 #경영 #전략 #시뮬레이션 #백룸 #전생 #전이"
         pageImg={`https://jejeup.dev1stud.io/og-tags.webp?ts=${timestamp}`}
       />
       <Choice />
