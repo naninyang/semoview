@@ -59,7 +59,8 @@ function OpenSources({ licenses }: { licenses: string[] }) {
           </div>
         </dl>
         <p>
-          개발 코드를 보고싶은 분은 <Anchor href="https://github.com/naninyang/jejeup">깃헙 저장소</Anchor>를 확인하세요
+          개발 코드를 보고싶은 분은 <Anchor href="https://github.com/naninyang/semoview">깃헙 저장소</Anchor>를
+          확인하세요
         </p>
         <div className={styles.list}>
           <hr />
