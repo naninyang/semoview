@@ -118,7 +118,7 @@ const Related = ({ videoId, videoDescription, title, sorting, key }: Props) => {
               <span>닫기</span>
             </button>
             <h3 className="lang">
-              [{title}] {videoDescription}
+              <span className="April16thSafety">[{title}]</span> {videoDescription}
             </h3>
             <YouTubeController videoId={videoId} videoImage={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`} />
           </div>

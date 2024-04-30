@@ -257,12 +257,12 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
   };
 
   const regionRatingHandler = () => {
-    alert('대한민국에서 시청이 불가능한 아마존 오리지널 작품입니다.\n시청 등급은 아마존 자체 심의등급입니다.');
+    alert('한국에서 시청이 불가능한 아마존 오리지널 작품입니다.\n시청 등급은 아마존 자체 심의등급입니다.');
   };
 
   const customRatingHandler = () => {
     alert(
-      '대한민국에서 시청/심의등급이 없거나 대한민국에 정식 발매된 작품이 아닙니다.\n해당 시청/심의등급은 제제없 자체설정 시청/심의등급입니다.\n따라서 제제없 심의등급은 법적구속력이 없습니다.\n\n자세한 내용은 공지사항을 참고하세요.',
+      '한국에서 시청/심의등급이 없거나 한국에 정식 발매된 작품이 아닙니다.\n해당 시청/심의등급은 세모뷰 자체설정 시청/심의등급입니다.\n따라서 세모뷰 심의등급은 법적구속력이 없습니다.\n\n자세한 내용은 공지사항을 참고하세요.',
     );
   };
 
@@ -338,7 +338,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                       <p>유튜버가 삭제했거나 비공개 처리한 영상입니다.</p>
                       <p>
                         <button type="button" data-video={jejeup.video} onClick={handleReport}>
-                          제제없 운영자에게 제보
+                          세모뷰 운영자에게 제보
                         </button>
                         해 주세요. {process.env.NODE_ENV === 'development' && jejeup.idx}
                       </p>
@@ -466,14 +466,14 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
   return (
     <main className={styles.main}>
       <Seo
-        pageTitle="제목에 제목이 없어서 짜증나서 만든 사이트"
-        pageDescription="클릭하지 않아도 작품의 제목과 정보를 알 수 있게 도와드려요"
-        pageImg={`https://jejeup.dev1stud.io/og-image.webp?ts=${timestamp}`}
+        pageTitle="세상의 모든 리뷰"
+        pageDescription="세상의 모든 리뷰를 수집한다"
+        pageImg={`https://semo.dev1stud.io/og-image.webp?ts=${timestamp}`}
       />
       <h1>
-        <span>
+        <span className="April16thPromise">
           <i className="preview" />
-          클릭하지 않아도 제목과 정보를 알 수 있게 도와드려요 💃
+          리뷰영상을 클릭하지 않아도 작품 정보를 알 수 있게 도와드려요 💃
         </span>
         {count && <em>({formatNumber(count.jejeup)}개 리뷰/실황)</em>}
       </h1>
@@ -906,7 +906,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                               {jejeup.amusementData.ott !== 'amazonOriginal' && jejeup.amusementData.ratingCustom && (
                                 <button type="button" onClick={customRatingHandler}>
                                   <i />
-                                  <span>제제없 자체설정 심의등급 안내</span>
+                                  <span>세모뷰 자체설정 심의등급 안내</span>
                                 </button>
                               )}
                             </div>

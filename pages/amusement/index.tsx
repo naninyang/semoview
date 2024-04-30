@@ -257,7 +257,7 @@ function Amusement({
         pageTitles={`${pageTitle} - ${originTitle}`}
         pageTitle={`${pageTitle}`}
         pageDescription="원하는 카테고리/태그/OTT & 방송국을 선택해 리뷰영상을 즐기세요!"
-        pageImg={`https://jejeup.dev1stud.io/og-${ogAddress}.webp?ts=${timestamp}`}
+        pageImg={`https://semo.dev1stud.io/og-${ogAddress}.webp?ts=${timestamp}`}
       />
       <div className="top-link">
         {router.query.category && !router.query.tag && (

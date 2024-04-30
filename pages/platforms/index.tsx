@@ -185,11 +185,11 @@ function Platforms({
         pageTitles={`리뷰 OTT & 방송국 선택하기 - ${originTitle}`}
         pageTitle={`리뷰 OTT & 방송국 선택하기`}
         pageDescription="아마존 프라임비디오 / 애플 TV+ / 디즈니+ & 스타+ / 넷플릭스 / 티빙 & 파라마운트+ / 왓챠 / 웨이브 / KBS 2TV / MBC / SBS / JTBC / OCN / tvN / ENA / ABC & 20th & FOX & FX "
-        pageImg={`https://jejeup.dev1stud.io/og-platforms.webp?ts=${timestamp}`}
+        pageImg={`https://semo.dev1stud.io/og-platforms.webp?ts=${timestamp}`}
       />
       <Choice />
       <h1>
-        <span>
+        <span className="April16thPromise">
           <i className="preview" />
           OTT & 방송국 골라보기! 💁‍♀️
         </span>
@@ -207,7 +207,7 @@ function Platforms({
           {tvingData && (
             <>
               <div className={styles.headline}>
-                <h2>
+                <h2 className="April16thPromise">
                   <Anchor href="/amusement?platform=tving&page=1">티빙 오리지널 리뷰</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${tvingData.total}개`}
                 </h2>
@@ -427,7 +427,9 @@ function Platforms({
                           </div>
                         </dl>
                       </div>
-                      <strong>{amusement.titleKorean != null ? amusement.titleKorean : amusement.title}</strong>
+                      <strong className="April16thPromise">
+                        {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                      </strong>
                     </Link>
                   ))}
               </section>
@@ -436,7 +438,7 @@ function Platforms({
           {netflixData && (
             <>
               <div className={styles.headline}>
-                <h2>
+                <h2 className="April16thPromise">
                   <Anchor href="/amusement?platform=netflix&page=1">넷플릭스 오리지널 리뷰</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${netflixData.total}개`}
                 </h2>
@@ -656,7 +658,9 @@ function Platforms({
                           </div>
                         </dl>
                       </div>
-                      <strong>{amusement.titleKorean != null ? amusement.titleKorean : amusement.title}</strong>
+                      <strong className="April16thPromise">
+                        {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                      </strong>
                     </Link>
                   ))}
               </section>
@@ -665,7 +669,7 @@ function Platforms({
           {amazonData && (
             <>
               <div className={styles.headline}>
-                <h2>
+                <h2 className="April16thPromise">
                   <Anchor href="/amusement?platform=amazon&page=1">아마존 프라임비디오 오리지널 리뷰</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${amazonData.total}개`}
                 </h2>
@@ -830,7 +834,9 @@ function Platforms({
                           </div>
                         </dl>
                       </div>
-                      <strong>{amusement.titleKorean != null ? amusement.titleKorean : amusement.title}</strong>
+                      <strong className="April16thPromise">
+                        {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                      </strong>
                     </Link>
                   ))}
               </section>
@@ -839,7 +845,7 @@ function Platforms({
           {kbsData && (
             <>
               <div className={styles.headline}>
-                <h2>
+                <h2 className="April16thPromise">
                   <Anchor href="/amusement?platform=KBS2&page=1">KBS 2TV 드라마 리뷰</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${kbsData.total}개`}
                 </h2>
@@ -1084,7 +1090,9 @@ function Platforms({
                           </div>
                         </dl>
                       </div>
-                      <strong>{amusement.titleKorean != null ? amusement.titleKorean : amusement.title}</strong>
+                      <strong className="April16thPromise">
+                        {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                      </strong>
                     </Link>
                   ))}
               </section>
@@ -1093,7 +1101,7 @@ function Platforms({
           {tvnData && (
             <>
               <div className={styles.headline}>
-                <h2>
+                <h2 className="April16thPromise">
                   <Anchor href="/amusement?platform=tvN&page=1">tvN 드라마 리뷰</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${tvnData.total}개`}
                 </h2>
@@ -1338,7 +1346,9 @@ function Platforms({
                           </div>
                         </dl>
                       </div>
-                      <strong>{amusement.titleKorean != null ? amusement.titleKorean : amusement.title}</strong>
+                      <strong className="April16thPromise">
+                        {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                      </strong>
                     </Link>
                   ))}
               </section>
@@ -1347,7 +1357,7 @@ function Platforms({
           {jtbcData && (
             <>
               <div className={styles.headline}>
-                <h2>
+                <h2 className="April16thPromise">
                   <Anchor href="/amusement?platform=JTBC&page=1">JTBC 드라마 리뷰</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${jtbcData.total}개`}
                 </h2>
@@ -1592,7 +1602,9 @@ function Platforms({
                           </div>
                         </dl>
                       </div>
-                      <strong>{amusement.titleKorean != null ? amusement.titleKorean : amusement.title}</strong>
+                      <strong className="April16thPromise">
+                        {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                      </strong>
                     </Link>
                   ))}
               </section>
@@ -1602,7 +1614,7 @@ function Platforms({
             <div className={styles.sideA} />
             <div className={styles.sideB} />
             <p>좀 더 많은 OTT/방송국을 보고 싶으신가요?</p>
-            <p>
+            <p className="April16thPromise">
               <Anchor href="/amusement">플랫폼을 골라보세요!</Anchor>
             </p>
           </aside>

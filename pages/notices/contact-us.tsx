@@ -62,7 +62,7 @@ function ContactForm() {
         pageTitles={`문의사항 - ${originTitle}`}
         pageTitle="문의사항"
         pageDescription="무엇이든 물어보세요"
-        pageImg={`https://jejeup.dev1stud.io/og-image.webp?ts=${timestamp}`}
+        pageImg={`https://semo.dev1stud.io/og-image.webp?ts=${timestamp}`}
       />
       <div className="top-link">
         <button onClick={handleClose} type="button">
@@ -73,7 +73,7 @@ function ContactForm() {
       <div className={styles.content}>
         <h1>
           <span>문의하기</span>
-          <em>JEJEUP.CONTACT</em>
+          <em>SEMOVIEW.CONTACT</em>
         </h1>
         <div className={styles.summary}>
           <p>오타, 탈자, 버그 등 발견시 수정 요청해 주세요</p>

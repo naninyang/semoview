@@ -1,4 +1,4 @@
 User-Agent: *
 Allow: /
 
-Sitemap: https://jejeup.dev1stud.io/sitemap.xml
+Sitemap: https://semo.dev1stud.io/sitemap.xml

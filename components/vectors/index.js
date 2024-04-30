@@ -3,6 +3,7 @@ export const vectors = {
   backwardAmuse: require('./backwardAmuse.svg'),
   jejeup: require('./jejeup.svg'),
   jejeupAmuse: require('./jejeupAmuse.svg'),
+  jejeupDefault: require('./jejeupDefault.svg'),
   play: require('./play.svg'),
   share: require('./share.svg'),
   share2: require('./share2.svg'),

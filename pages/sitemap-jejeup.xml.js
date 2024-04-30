@@ -1,4 +1,4 @@
-const JejeupAPI = 'https://jejeup.dev1stud.io/api/sitemap';
+const JejeupAPI = 'https://semo.dev1stud.io/api/sitemap';
 // const JejeupAPI = 'http://localhost:3123/api/sitemap';
 
 function generateSiteMap(jejeups) {
@@ -8,7 +8,7 @@ function generateSiteMap(jejeups) {
         .map(({ idx, created }) => {
           return `
             <url>
-              <loc>https://jejeup.dev1stud.io/${idx}</loc>
+              <loc>https://semo.dev1stud.io/${idx}</loc>
               <lastmod>${created}</lastmod>
             </url>
           `;

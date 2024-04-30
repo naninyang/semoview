@@ -76,7 +76,7 @@ const Notice = ({ notice }: { notice: NoticePermalinkData | null }) => {
             pageTitles={`${notice.attributes.subject} - ${originTitle}`}
             pageTitle={`${notice.attributes.subject}`}
             pageDescription={`${notice.attributes.description}`}
-            pageImg={`https://jejeup.dev1stud.io/og-image.webp?ts=${timestamp}`}
+            pageImg={`https://semo.dev1stud.io/og-image.webp?ts=${timestamp}`}
           />
           <div className="top-link">
             <Anchor href="/notices">

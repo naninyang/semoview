@@ -310,7 +310,7 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
                     <p>유튜버가 삭제했거나 비공개 처리한 영상입니다.</p>
                     <p>
                       <button type="button" data-video={jejeup.video} onClick={handleReport}>
-                        제제없 운영자에게 제보
+                        세모뷰 운영자에게 제보
                       </button>
                       해 주세요.
                     </p>
@@ -590,12 +590,12 @@ export default function Amusement({
   };
 
   const regionRatingHandler = () => {
-    alert('대한민국에서 시청이 불가능한 아마존 오리지널 작품입니다.\n시청 등급은 아마존 자체 심의등급입니다.');
+    alert('한국에서 시청이 불가능한 아마존 오리지널 작품입니다.\n시청 등급은 아마존 자체 심의등급입니다.');
   };
 
   const customRatingHandler = () => {
     alert(
-      '대한민국에서 시청/심의등급이 없거나 대한민국에 정식 발매된 작품이 아닙니다.\n해당 시청/심의등급은 제제없 자체설정 시청/심의등급입니다.\n따라서 제제없 심의등급은 법적구속력이 없습니다.\n\n자세한 내용은 공지사항을 참고하세요.',
+      '한국에서 시청/심의등급이 없거나 한국에 정식 발매된 작품이 아닙니다.\n해당 시청/심의등급은 세모뷰 자체설정 시청/심의등급입니다.\n따라서 세모뷰 심의등급은 법적구속력이 없습니다.\n\n자세한 내용은 공지사항을 참고하세요.',
     );
   };
 
@@ -732,7 +732,7 @@ export default function Amusement({
                   </div>
                   <div className={styles.country}>
                     <dt>영상 제작국가</dt>
-                    <dd>대한민국에서 영상 제작</dd>
+                    <dd>한국에서 영상 제작</dd>
                   </div>
                   <div className={styles.release}>
                     <dt>영상 제작년도</dt>
@@ -772,7 +772,7 @@ export default function Amusement({
             pageTitles={`404 NOT FOUND - ${originTitle}`}
             pageTitle={`404 NOT FOUND`}
             pageDescription={`존재하지 않는 작품일걸요?`}
-            pageImg={`https://jejeup.dev1stud.io/missing.webp`}
+            pageImg={`https://semo.dev1stud.io/missing.webp`}
           />
           <p className={styles.loading}>작품 불러오는 중...</p>
         </main>
@@ -905,14 +905,14 @@ export default function Amusement({
         <div className={styles.info}>
           {amusementData.attributes.titleKorean !== null ? (
             amusementData.attributes.titleKorean.length >= 30 ? (
-              <h1 className={styles.long}>{amusementData.attributes.titleKorean}</h1>
+              <h1 className={`${styles.long} April16thLife`}>{amusementData.attributes.titleKorean}</h1>
             ) : (
-              <h1>{amusementData.attributes.titleKorean}</h1>
+              <h1 className="April16thLife">{amusementData.attributes.titleKorean}</h1>
             )
           ) : amusementData.attributes.title.length >= 30 ? (
-            <h1 className={styles.long}>{amusementData.attributes.title}</h1>
+            <h1 className={`${styles.long} April16thLife`}>{amusementData.attributes.title}</h1>
           ) : (
-            <h1>
+            <h1 className="April16thLife">
               {amusementData.attributes.category === 'game_fan'
                 ? `'${amusementData.attributes.title}' 팬 게임 콜렉션`
                 : amusementData.attributes.title}
@@ -1450,7 +1450,7 @@ export default function Amusement({
                         {amusementData.attributes.ott !== 'amazonOriginal' && amusementData.attributes.ratingCustom && (
                           <button type="button" onClick={customRatingHandler}>
                             <i />
-                            <span>제제없 자체설정 심의등급 안내</span>
+                            <span>세모뷰 자체설정 심의등급 안내</span>
                           </button>
                         )}
                       </div>
@@ -1467,13 +1467,13 @@ export default function Amusement({
               amusementData.attributes.originalAuthor !== null && (
                 <div>
                   <dt>원작자</dt>
-                  <dd>{amusementData.attributes.originalAuthor}</dd>
+                  <dd className="April16thPromise">{amusementData.attributes.originalAuthor}</dd>
                 </div>
               )}
             {amusementData.attributes.genre !== '?' && (
               <div>
                 <dt>장르</dt>
-                <dd>{amusementData.attributes.genre}</dd>
+                <dd className="April16thPromise">{amusementData.attributes.genre}</dd>
               </div>
             )}
             {amusementData.attributes.publisher !== '?' && (
@@ -1483,7 +1483,7 @@ export default function Amusement({
                     ? '유통/배급'
                     : '제작/배급'}
                 </dt>
-                <dd>{amusementData.attributes.publisher}</dd>
+                <dd className="April16thPromise">{amusementData.attributes.publisher}</dd>
               </div>
             )}
             {amusementData.attributes.creator !== '?' && (
@@ -1493,7 +1493,7 @@ export default function Amusement({
                     ? '개발'
                     : '주요 제작자'}
                 </dt>
-                <dd>{amusementData.attributes.creator}</dd>
+                <dd className="April16thPromise">{amusementData.attributes.creator}</dd>
               </div>
             )}
             {amusementData.attributes.cast !== '?' && (
@@ -1509,7 +1509,7 @@ export default function Amusement({
                     ) : (
                       <dt>주요 성우</dt>
                     )}
-                    <dd>{amusementData.attributes.cast}</dd>
+                    <dd className="April16thPromise">{amusementData.attributes.cast}</dd>
                   </div>
                 )}
               </>
@@ -1583,7 +1583,7 @@ export default function Amusement({
       </div>
       {amusementData.attributes.related !== null && Array.isArray(amusementData.attributes.related) && (
         <section>
-          <h2>관련 영상</h2>
+          <h2 className="April16thSafety">관련 영상</h2>
           <div className={`${styles.list} ${styles['related-list']}`}>
             {amusementData.attributes.related.flatMap((item) =>
               Object.entries(item).map(([key, value]) => (
@@ -1617,9 +1617,9 @@ export default function Amusement({
       {data && !isJejeupsLoading && !isJejeupsError && (
         <section>
           {amusementData.attributes.category === 'game' || amusementData.attributes.category === 'game_fan' ? (
-            <h2>유튜브 리뷰 & 실황모음</h2>
+            <h2 className="April16thSafety">유튜브 리뷰 & 실황모음</h2>
           ) : (
-            <h2>유튜브 리뷰모음</h2>
+            <h2 className="April16thSafety">유튜브 리뷰모음</h2>
           )}
           <div className={styles.list}>
             {Object.keys(data.jejeups).length > 0 && Array.isArray(data.jejeups) ? (

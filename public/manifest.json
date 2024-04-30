@@ -1,7 +1,7 @@
 {
-  "name": "제제없 JEJEUP",
-  "short_name": "제제없",
-  "description": "클릭하지 않아도 제목과 정보를 알 수 있게 도와드려요",
+  "name": "세모뷰 SEMOVIEW",
+  "short_name": "세모뷰",
+  "description": "세상의 모든 리뷰를 수집한다",
   "scope": "/",
   "id": "/",
   "start_url": "/",

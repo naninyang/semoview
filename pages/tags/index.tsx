@@ -201,11 +201,11 @@ function Tags({
         pageTitles={`리뷰 태그 선택하기 - ${originTitle}`}
         pageTitle={`리뷰 태그 선택하기`}
         pageDescription="#힐링 #치유 #감동 #백합 #레즈 #퀴어 #LGBTQ+ #이세계 #타임슬립 #타임리프 #타임루프 #회귀 #이상현상 #아노말리 #아포칼립스 #피카레스크 #악인전 #공포 #호러 #경영 #전략 #시뮬레이션 #백룸 #전생 #전이"
-        pageImg={`https://jejeup.dev1stud.io/og-tags.webp?ts=${timestamp}`}
+        pageImg={`https://semo.dev1stud.io/og-tags.webp?ts=${timestamp}`}
       />
       <Choice />
       <h1>
-        <span>
+        <span className="April16thPromise">
           <i className="preview" />
           태그 골라보기! 💁‍♀️
         </span>
@@ -223,7 +223,7 @@ function Tags({
           {horrorDramaData && (
             <>
               <div className={styles.headline}>
-                <h2>
+                <h2 className="April16thPromise">
                   <Anchor href="/amusement?tag=horror&category=drama&page=1">
                     <span>#공포</span> <span>#호러</span> <span>#드라마</span> <span>#유튜브리뷰</span>
                   </Anchor>
@@ -433,7 +433,9 @@ function Tags({
                           </div>
                         </dl>
                       </div>
-                      <strong>{amusement.titleKorean != null ? amusement.titleKorean : amusement.title}</strong>
+                      <strong className="April16thPromise">
+                        {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                      </strong>
                     </Link>
                   ))}
               </section>
@@ -442,7 +444,7 @@ function Tags({
           {horrorFilmData && (
             <>
               <div className={styles.headline}>
-                <h2>
+                <h2 className="April16thPromise">
                   <Anchor href="/amusement?tag=horror&category=film&page=1">
                     <span>#공포</span> <span>#호러</span> <span>#영화</span> <span>#유튜브리뷰</span>
                   </Anchor>
@@ -736,7 +738,9 @@ function Tags({
                           </div>
                         </dl>
                       </div>
-                      <strong>{amusement.titleKorean != null ? amusement.titleKorean : amusement.title}</strong>
+                      <strong className="April16thPromise">
+                        {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                      </strong>
                     </Link>
                   ))}
               </section>
@@ -745,7 +749,7 @@ function Tags({
           {horrorAnimeData && (
             <>
               <div className={styles.headline}>
-                <h2>
+                <h2 className="April16thPromise">
                   <Anchor href="/amusement?tag=horror&category=anime&page=1">
                     <span>#공포</span> <span>#호러</span> <span>#애니</span> <span>#유튜브리뷰</span>
                   </Anchor>
@@ -970,7 +974,9 @@ function Tags({
                           </div>
                         </dl>
                       </div>
-                      <strong>{amusement.titleKorean != null ? amusement.titleKorean : amusement.title}</strong>
+                      <strong className="April16thPromise">
+                        {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                      </strong>
                     </Link>
                   ))}
               </section>
@@ -979,7 +985,7 @@ function Tags({
           {horrorGameData && (
             <>
               <div className={styles.headline}>
-                <h2>
+                <h2 className="April16thPromise">
                   <Anchor href="/amusement?tag=horror&category=game&page=1">
                     <span>#공포</span> <span>#호러</span> <span>#게임</span> <span>#유튜브리뷰</span>{' '}
                     <span>#유튜브실황</span>
@@ -1033,7 +1039,9 @@ function Tags({
                         )}
                       </div>
                       <strong>
-                        <strong>{amusement.titleKorean != null ? amusement.titleKorean : amusement.title}</strong>
+                        <strong className="April16thPromise">
+                          {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                        </strong>
                       </strong>
                     </Link>
                   ))}
@@ -1043,7 +1051,7 @@ function Tags({
           {healingData && (
             <>
               <div className={styles.headline}>
-                <h2>
+                <h2 className="April16thPromise">
                   <Anchor href="/amusement?tag=healing&page=1">
                     <span>#힐링</span> <span>#치유</span> <span>#감동</span> <span>#드라마</span> <span>#영화</span>{' '}
                     <span>#애니</span> <span>#유튜브리뷰</span>
@@ -1338,7 +1346,9 @@ function Tags({
                           </div>
                         </dl>
                       </div>
-                      <strong>{amusement.titleKorean != null ? amusement.titleKorean : amusement.title}</strong>
+                      <strong className="April16thPromise">
+                        {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                      </strong>
                     </Link>
                   ))}
               </section>
@@ -1347,7 +1357,7 @@ function Tags({
           {healingGameData && (
             <>
               <div className={styles.headline}>
-                <h2>
+                <h2 className="April16thPromise">
                   <Anchor href="/amusement?tag=healing&category=game&page=1">
                     <span>#힐링</span> <span>#치유</span> <span>#감동</span> <span>#게임</span> <span>#유튜브리뷰</span>{' '}
                     <span>#유튜브실황</span>
@@ -1401,7 +1411,9 @@ function Tags({
                         )}
                       </div>
                       <strong>
-                        <strong>{amusement.titleKorean != null ? amusement.titleKorean : amusement.title}</strong>
+                        <strong className="April16thPromise">
+                          {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                        </strong>
                       </strong>
                     </Link>
                   ))}
@@ -1412,7 +1424,7 @@ function Tags({
             <div className={styles.sideA} />
             <div className={styles.sideB} />
             <p>좀 더 많은 태그를 보고 싶으신가요?</p>
-            <p>
+            <p className="April16thPromise">
               <Anchor href="/amusement">태그를 골라보세요!</Anchor>
             </p>
           </aside>

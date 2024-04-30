@@ -12,7 +12,7 @@ interface Props {
   pageOgType?: string;
 }
 
-export const originTitle = '제제없';
+export const originTitle = '세모뷰';
 
 const Seo = ({
   pageTitles,
@@ -26,9 +26,9 @@ const Seo = ({
 }: Props) => {
   const router = useRouter();
   const pagePath = router.asPath;
-  const domain = 'https://jejeup.dev1stud.io';
+  const domain = 'https://semo.dev1stud.io';
   const defaultTitle = `${originTitle}`;
-  const defaultDescription = '클릭하지 않아도 작품의 제목과 정보를 알 수 있게 도와드려요';
+  const defaultDescription = '세상의 모든 리뷰를 수집한다';
   const title = pageTitles || defaultTitle;
   const description = pageDescription || defaultDescription;
   const url = `${domain}${pagePath}`;

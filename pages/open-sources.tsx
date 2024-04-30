@@ -27,8 +27,8 @@ function OpenSources({ licenses }: { licenses: string[] }) {
       <Seo
         pageTitles={`오픈소스 - ${originTitle}`}
         pageTitle="오픈소스"
-        pageDescription="'제제없'에서 사용한 오픈소스"
-        pageImg={`https://jejeup.dev1stud.io/og-image.webp?ts=${timestamp}`}
+        pageDescription="'세모뷰'에서 사용한 오픈소스"
+        pageImg={`https://semo.dev1stud.io/og-image.webp?ts=${timestamp}`}
       />
       <div className="top-link">
         {currentPage ? (
@@ -45,17 +45,17 @@ function OpenSources({ licenses }: { licenses: string[] }) {
       </div>
       <div className={styles.content}>
         <h1>
-          <span>오픈소스</span>
-          <em>JEJEUP.OPENSOURCES</em>
+          <span className="April16thLife">오픈소스</span>
+          <em className="April16thSafety">SEMOVIEW.OPENSOURCES</em>
         </h1>
         <dl>
           <div>
             <dt>UX Designer & Developer</dt>
-            <dd>클로이 Chloe</dd>
+            <dd className="April16thPromise">클로이 Chloe</dd>
           </div>
           <div>
             <dt>Curator & Informator</dt>
-            <dd>클로이 Chloe</dd>
+            <dd className="April16thPromise">클로이 Chloe</dd>
           </div>
         </dl>
         <p>

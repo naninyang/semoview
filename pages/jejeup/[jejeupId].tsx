@@ -321,7 +321,7 @@ function TagsItem({ items }: { items: any }) {
   return (
     <div>
       <dt>관련 태그</dt>
-      <dd>
+      <dd className="April16thPromise">
         {filteredTags.map((tag: string, index: number) => (
           <span key={index}>{`#${TagName(tag)}`} </span>
         ))}
@@ -340,7 +340,7 @@ function ADCC({ items }: { items: any }) {
   return (
     <div className={styles['ad-cc']}>
       <dt>자막/더빙</dt>
-      <dd>
+      <dd className="April16thPromise">
         {adcc.map((item: string, index: number) => (
           <span key={index}>{SupportLang(item)}</span>
         ))}
@@ -408,7 +408,7 @@ export default function JejeupDetail({
             pageTitles={`404 NOT FOUND - ${originTitle}`}
             pageTitle={`404 NOT FOUND`}
             pageDescription={`서버 에러 또는 삭제/비공개된 영상`}
-            pageImg={`https://jejeup.dev1stud.io/missing.webp`}
+            pageImg={`https://semo.dev1stud.io/missing.webp`}
             pageOgType={'video.other'}
             pageImgWidth={1920}
             pageImgHeight={1080}
@@ -436,12 +436,12 @@ export default function JejeupDetail({
   };
 
   const regionRatingHandler = () => {
-    alert('대한민국에서 시청이 불가능한 아마존 오리지널 작품입니다.\n시청 등급은 아마존 자체 심의등급입니다.');
+    alert('한국에서 시청이 불가능한 아마존 오리지널 작품입니다.\n시청 등급은 아마존 자체 심의등급입니다.');
   };
 
   const customRatingHandler = () => {
     alert(
-      '대한민국에서 시청/심의등급이 없거나 대한민국에 정식 발매된 작품이 아닙니다.\n해당 시청/심의등급은 제제없 자체설정 시청/심의등급입니다.\n따라서 제제없 심의등급은 법적구속력이 없습니다.\n\n자세한 내용은 공지사항을 참고하세요.',
+      '한국에서 시청/심의등급이 없거나 한국에 정식 발매된 작품이 아닙니다.\n해당 시청/심의등급은 세모뷰 자체설정 시청/심의등급입니다.\n따라서 세모뷰 심의등급은 법적구속력이 없습니다.\n\n자세한 내용은 공지사항을 참고하세요.',
     );
   };
 
@@ -550,7 +550,7 @@ export default function JejeupDetail({
                       <h1>
                         유튜버가 영상을 삭제했거나 비공개 처리한 영상입니다. 관리자에게{' '}
                         <button type="button" data-video={jejeupData.attributes.video} onClick={handleReport}>
-                          제제없 운영자에게 제보
+                          세모뷰 운영자에게 제보
                         </button>
                         해 주세요.
                       </h1>
@@ -661,7 +661,7 @@ export default function JejeupDetail({
                           <p>
                             🚫 이 영상이 유튜브에서만 볼 수 있게 설정된 영상이라면 관리자에게{' '}
                             <button type="button" data-video={jejeupData.attributes.video} onClick={handleReport}>
-                              제제없 운영자에게 제보해
+                              세모뷰 운영자에게 제보해
                             </button>
                             주세요.
                           </p>
@@ -746,7 +746,7 @@ export default function JejeupDetail({
         pageImg={
           jejeupData.attributes
             ? `https://i.ytimg.com/vi/${jejeupData.attributes.video}/hqdefault.jpg`
-            : 'https://jejeup.dev1stud.io/missing.webp'
+            : 'https://semo.dev1stud.io/missing.webp'
         }
         pageOgType={'video.other'}
         pageImgWidth={1920}
@@ -774,12 +774,12 @@ export default function JejeupDetail({
                     )}
                     {jejeupData.attributes.review && (
                       <div className={styles.comment}>
-                        <h2>큐레이터의 영상/작품 리뷰</h2>
+                        <h2 className="April16thPromise">큐레이터의 영상/작품 리뷰</h2>
                         <ReviewContent data={jejeupData.attributes.review} />
                       </div>
                     )}
                     <div className={styles.title}>
-                      <h2>작품 정보</h2>
+                      <h2 className="April16thPromise">작품 정보</h2>
                       <div className={styles.function}>
                         <button onClick={copyToClipboard}>
                           <ClipboardIcon /> <span>URL 복사</span>
@@ -1205,7 +1205,7 @@ export default function JejeupDetail({
                                               {data.ott !== 'amazonOriginal' && data.ratingCustom && (
                                                 <button type="button" onClick={customRatingHandler}>
                                                   <i />
-                                                  <span>제제없 자체설정 심의등급 안내</span>
+                                                  <span>세모뷰 자체설정 심의등급 안내</span>
                                                 </button>
                                               )}
                                             </div>
@@ -1242,7 +1242,7 @@ export default function JejeupDetail({
                                         </dt>
                                         <dd>
                                           <strong>
-                                            <span className={styles.title} aria-label="작품명">
+                                            <span className={`${styles.title} April16thPromise`} aria-label="작품명">
                                               {data.category === 'game_fan'
                                                 ? `'${data.title}'의 팬 게임 콜렉션`
                                                 : data.titleKorean
@@ -1316,33 +1316,33 @@ export default function JejeupDetail({
                                           data.originalAuthor !== null && (
                                             <div>
                                               <dt>원작자</dt>
-                                              <dd>{data.originalAuthor}</dd>
+                                              <dd className="April16thPromise">{data.originalAuthor}</dd>
                                             </div>
                                           )}
                                         {data.country !== '?' && (
                                           <div>
                                             <dt>제작국가</dt>
-                                            <dd>{data.country}</dd>
+                                            <dd className="April16thPromise">{data.country}</dd>
                                           </div>
                                         )}
                                         {data.supportLang !== null && <ADCC items={data.supportLang} />}
                                         {data.genre !== '?' && (
                                           <div>
                                             <dt>장르</dt>
-                                            <dd>{data.genre}</dd>
+                                            <dd className="April16thPromise">{data.genre}</dd>
                                           </div>
                                         )}
                                         {data.tags !== null && <TagsItem items={data.tags} />}
                                         {data.publisher !== '?' && (
                                           <div>
                                             <dt>{data.category === 'game' ? '유통/배급' : '제작/배급'}</dt>
-                                            <dd>{data.publisher}</dd>
+                                            <dd className="April16thPromise">{data.publisher}</dd>
                                           </div>
                                         )}
                                         {data.creator !== '?' && (
                                           <div>
                                             <dt>{data.category === 'game' ? '개발' : '주요 제작자'}</dt>
-                                            <dd>{data.creator}</dd>
+                                            <dd className="April16thPromise">{data.creator}</dd>
                                           </div>
                                         )}
                                         {data.cast !== null && (
@@ -1356,7 +1356,7 @@ export default function JejeupDetail({
                                             ) : (
                                               <dt>주요 성우</dt>
                                             )}
-                                            <dd>{data.cast}</dd>
+                                            <dd className="April16thPromise">{data.cast}</dd>
                                           </div>
                                         )}
                                       </dl>
@@ -1763,7 +1763,7 @@ export default function JejeupDetail({
                                         {data.ott !== 'amazonOriginal' && data.ratingCustom && (
                                           <button type="button" onClick={customRatingHandler}>
                                             <i />
-                                            <span>제제없 자체설정 심의등급 안내</span>
+                                            <span>세모뷰 자체설정 심의등급 안내</span>
                                           </button>
                                         )}
                                       </div>
@@ -1796,7 +1796,7 @@ export default function JejeupDetail({
                                   </dt>
                                   <dd>
                                     <strong>
-                                      <span className={styles.title} aria-label="작품명">
+                                      <span className={`${styles.title} April16thPromise`} aria-label="작품명">
                                         {data.category === 'game_fan'
                                           ? `'${data.title} 팬 게임 콜렉션`
                                           : data.titleKorean
@@ -1863,33 +1863,33 @@ export default function JejeupDetail({
                                     data.originalAuthor !== null && (
                                       <div>
                                         <dt>원작자</dt>
-                                        <dd>{data.originalAuthor}</dd>
+                                        <dd className="April16thPromise">{data.originalAuthor}</dd>
                                       </div>
                                     )}
                                   {data.country !== '?' && (
                                     <div>
                                       <dt>제작국가</dt>
-                                      <dd>{data.country}</dd>
+                                      <dd className="April16thPromise">{data.country}</dd>
                                     </div>
                                   )}
                                   {data.supportLang !== null && <ADCC items={data.supportLang} />}
                                   {data.genre !== '?' && (
                                     <div>
                                       <dt>장르</dt>
-                                      <dd>{data.genre}</dd>
+                                      <dd className="April16thPromise">{data.genre}</dd>
                                     </div>
                                   )}
                                   {data.tags !== null && <TagsItem items={data.tags} />}
                                   {data.publisher !== '?' && (
                                     <div>
                                       <dt>{data.category === 'game' ? '유통/배급' : '퍼블리싱'}</dt>
-                                      <dd>{data.publisher}</dd>
+                                      <dd className="April16thPromise">{data.publisher}</dd>
                                     </div>
                                   )}
                                   {data.creator !== '?' && (
                                     <div>
                                       <dt>{data.category === 'game' ? '개발' : '주요 제작자'}</dt>
-                                      <dd>{data.creator}</dd>
+                                      <dd className="April16thPromise">{data.creator}</dd>
                                     </div>
                                   )}
                                   {data.cast !== null && (
@@ -1903,7 +1903,7 @@ export default function JejeupDetail({
                                       ) : (
                                         <dt>주요 성우</dt>
                                       )}
-                                      <dd>{data.cast}</dd>
+                                      <dd className="April16thPromise">{data.cast}</dd>
                                     </div>
                                   )}
                                 </dl>
@@ -1914,7 +1914,7 @@ export default function JejeupDetail({
                     </div>
                     {Array.isArray(jejeupData.amusementData) && jejeupData.amusementData.length == 1 && (
                       <div className={styles.posters}>
-                        <h2>
+                        <h2 className="April16thPromise">
                           {jejeupData.amusementData[0].category === 'game' ||
                           jejeupData.amusementData[0].category === 'game_fan'
                             ? '배너/썸네일'

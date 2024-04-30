@@ -52,26 +52,30 @@ const fontTH = Noto_Sans_Thai({
   subsets: ['thai'],
 });
 
-const NanumSquare = localFont({
+const April16thLife = localFont({
   src: [
     {
-      path: '../fonts/NanumSquareL.woff2',
-      weight: '300',
+      path: '../fonts/April16th-Life.woff2',
       style: 'normal',
     },
+  ],
+});
+
+const April16thPromise = localFont({
+  src: [
     {
-      path: '../fonts/NanumSquareR.woff2',
-      weight: '400',
+      path: '../fonts/April16th-Promise.woff2',
+      weight: '200',
       style: 'normal',
     },
+  ],
+});
+
+const April16thSafety = localFont({
+  src: [
     {
-      path: '../fonts/NanumSquareB.woff2',
-      weight: '700',
-      style: 'normal',
-    },
-    {
-      path: '../fonts/NanumSquareEB.woff2',
-      weight: '800',
+      path: '../fonts/April16th-Safety.woff2',
+      weight: '200',
       style: 'normal',
     },
   ],
@@ -131,7 +135,7 @@ export default function App({ Component, pageProps }: AppProps) {
           input,
           button,
           textarea {
-            font-family: ${NanumSquare.style.fontFamily}, sans-serif;
+            font-family: ${fontEN.style.fontFamily}, ${fontKR.style.fontFamily}, sans-serif;
             font-weight: 400;
           }
           select,
@@ -147,7 +151,7 @@ export default function App({ Component, pageProps }: AppProps) {
             font-family: ${fontUN.style.fontFamily}, sans-serif;
           }
           [lang='en-US'] {
-            font-family: ${NanumSquare.style.fontFamily}, sans-serif;
+            font-family: ${fontEN.style.fontFamily}, sans-serif;
           }
           [lang='ja'] {
             font-family: ${fontEN.style.fontFamily}, ${fontJP.style.fontFamily}, ${fontKR.style.fontFamily}, sans-serif;
@@ -170,6 +174,15 @@ export default function App({ Component, pageProps }: AppProps) {
           .number,
           time {
             font-family: ${fontEN.style.fontFamily}, sans-serif;
+          }
+          .April16thLife {
+            font-family: ${April16thLife.style.fontFamily}, sans-serif;
+          }
+          .April16thPromise {
+            font-family: ${April16thPromise.style.fontFamily}, sans-serif;
+          }
+          .April16thSafety {
+            font-family: ${April16thSafety.style.fontFamily}, sans-serif;
           }
         `}
       </style>

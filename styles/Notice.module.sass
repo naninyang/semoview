@@ -88,30 +88,6 @@
             background-color: $hex-accent
             color: $hex-light
 
-      .interation
-        display: block
-        position: relative
-        margin: rem(32) auto
-        width: rem(285)
-        height: rem(100)
-
-        svg
-          position: absolute
-
-          &.svg1
-            left: 0
-            top: 0
-
-          &.svg2
-            top: 0
-            left: rem(78)
-            anime: svg2 1s cubic-bezier(.4,0,.2,1)
-
-          &.svg3
-            left: 0
-            bottom: 0
-            anime: svg3 2s cubic-bezier(.4,0,.2,1)
-
     ul
       li
         border-top: 1px solid rgba($hex-dark, .2)
@@ -327,22 +303,3 @@
 
           span
             color: $hex-black
-
-@keyframes svg2
-  0%
-    opacity: 0
-    transform: translateX(rem(-14))
-
-  100%
-    opacity: 1
-    transform: translateX(0)
-
-@keyframes svg3
-  0%
-    opacity: 0
-
-  50%
-    opacity: 0
-
-  100%
-    opacity: 1

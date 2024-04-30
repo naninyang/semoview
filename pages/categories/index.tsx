@@ -218,11 +218,11 @@ function Categories({
         pageTitles={`리뷰 카테고리 선택하기 - ${originTitle}`}
         pageTitle={`리뷰 카테고리 선택하기`}
         pageDescription="OTT / 영화 / 애니메이션 / 드라마 / 게임"
-        pageImg={`https://jejeup.dev1stud.io/og-categories.webp?ts=${timestamp}`}
+        pageImg={`https://semo.dev1stud.io/og-categories.webp?ts=${timestamp}`}
       />
       <Choice />
       <h1>
-        <span>
+        <span className="April16thPromise">
           <i className="preview" />
           카테고리별 보고싶다? 골라보세요 💁‍♀️
         </span>
@@ -241,7 +241,7 @@ function Categories({
           {dramaData && (
             <>
               <div className={styles.headline}>
-                <h2>
+                <h2 className="April16thPromise">
                   <Anchor href="/amusement?category=drama&page=1">드라마 리뷰</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${dramaData.total}개`}
                 </h2>
@@ -401,20 +401,8 @@ function Categories({
                           </div>
                         </dl>
                       </div>
-                      <strong>
-                        {amusement.titleKorean != null ? (
-                          amusement.titleKorean
-                        ) : (
-                          <>
-                            {amusement.lang === 'chineseBeonche' && <span lang="zh-Hant">{amusement.title} </span>}
-                            {amusement.lang === 'chineseGanche' && <span lang="zh-Hans">{amusement.title} </span>}
-                            {amusement.lang === 'europe' && <span lang="en">{amusement.title}</span>}
-                            {amusement.lang === 'english' && <span lang="en-US">{amusement.title}</span>}
-                            {amusement.lang === 'japanese' && <span lang="ja">{amusement.title}</span>}
-                            {amusement.lang === 'thai' && <span lang="th">{amusement.title}</span>}
-                            {amusement.lang === null && <span lang="ko">{amusement.title}</span>}
-                          </>
-                        )}
+                      <strong className="April16thPromise">
+                        {amusement.titleKorean ? amusement.titleKorean : amusement.title}
                       </strong>
                     </Link>
                   ))}
@@ -424,7 +412,7 @@ function Categories({
           {filmData && (
             <>
               <div className={styles.headline}>
-                <h2>
+                <h2 className="April16thPromise">
                   <Anchor href="/amusement?category=film&page=1">영화 리뷰</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${filmData.total}개`}
                 </h2>
@@ -551,7 +539,9 @@ function Categories({
                           </div>
                         </dl>
                       </div>
-                      <strong>{amusement.titleKorean != null ? amusement.titleKorean : amusement.title}</strong>
+                      <strong className="April16thPromise">
+                        {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                      </strong>
                     </Link>
                   ))}
               </section>
@@ -560,7 +550,7 @@ function Categories({
           {animeData && (
             <>
               <div className={styles.headline}>
-                <h2>
+                <h2 className="April16thPromise">
                   <Anchor href="/amusement?category=anime&page=1">애니메이션 리뷰</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${animeData.total}개`}
                 </h2>
@@ -783,7 +773,9 @@ function Categories({
                           </div>
                         </dl>
                       </div>
-                      <strong>{amusement.titleKorean != null ? amusement.titleKorean : amusement.title}</strong>
+                      <strong className="April16thPromise">
+                        {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                      </strong>
                     </Link>
                   ))}
               </section>
@@ -792,7 +784,7 @@ function Categories({
           {ottData && (
             <>
               <div className={styles.headline}>
-                <h2>
+                <h2 className="April16thPromise">
                   <Anchor href="/amusement?category=ott&page=1">OTT 오리지널 리뷰</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${ottData.total}개`}
                 </h2>
@@ -1026,7 +1018,9 @@ function Categories({
                           </div>
                         </dl>
                       </div>
-                      <strong>{amusement.titleKorean != null ? amusement.titleKorean : amusement.title}</strong>
+                      <strong className="April16thPromise">
+                        {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                      </strong>
                     </Link>
                   ))}
               </section>
@@ -1035,7 +1029,7 @@ function Categories({
           {gameData && (
             <>
               <div className={styles.headline}>
-                <h2>
+                <h2 className="April16thPromise">
                   <Anchor href="/amusement?category=game&page=1">게임 리뷰 & 실황</Anchor>
                   {process.env.NODE_ENV === 'development' && ` ${gameData.total}개`}
                 </h2>
@@ -1086,22 +1080,12 @@ function Categories({
                         )}
                       </div>
                       <strong>
-                        <strong>
-                          {amusement.category === 'game_fan' ? (
-                            `'${amusement.title}' 팬 게임 콜렉션`
-                          ) : amusement.titleKorean != null ? (
-                            amusement.titleKorean
-                          ) : (
-                            <>
-                              {amusement.lang === 'chineseBeonche' && <span lang="zh-Hant">{amusement.title} </span>}
-                              {amusement.lang === 'chineseGanche' && <span lang="zh-Hans">{amusement.title} </span>}
-                              {amusement.lang === 'europe' && <span lang="en">{amusement.title}</span>}
-                              {amusement.lang === 'english' && <span lang="en-US">{amusement.title}</span>}
-                              {amusement.lang === 'japanese' && <span lang="ja">{amusement.title}</span>}
-                              {amusement.lang === 'thai' && <span lang="th">{amusement.title}</span>}
-                              {amusement.lang === null && <span lang="ko">{amusement.title}</span>}
-                            </>
-                          )}
+                        <strong className="April16thPromise">
+                          {amusement.category === 'game_fan'
+                            ? `'${amusement.title}' 팬 게임 콜렉션`
+                            : amusement.titleKorean
+                              ? amusement.titleKorean
+                              : amusement.title}
                         </strong>
                       </strong>
                     </Link>
@@ -1112,7 +1096,7 @@ function Categories({
           {fanData && (
             <>
               <div className={styles.headline}>
-                <h2>
+                <h2 className="April16thPromise">
                   <Anchor href="/amusement?category=game_fan&page=1">팬 게임 콜렉션</Anchor>
                 </h2>
                 <Anchor href="/amusement?category=game_fan&page=1">
@@ -1133,7 +1117,7 @@ function Categories({
                         <Image src={amusement.posterDefault} width="460" height="215" alt="" unoptimized />
                       </div>
                       <strong>
-                        <strong>&apos;{amusement.title}&apos; 팬 게임 콜렉션</strong>
+                        <strong className="April16thPromise">&apos;{amusement.title}&apos; 팬 게임 콜렉션</strong>
                       </strong>
                     </Link>
                   ))}

@@ -13,6 +13,10 @@ const JejeupAmuse = styled.i({
   background: `url(${vectors.jejeupAmuse}) no-repeat 50% 50%/contain`,
 });
 
+const JejeupDefault = styled.i({
+  background: `url(${vectors.jejeupDefault}) no-repeat 50% 50%/contain`,
+});
+
 export default function Header() {
   const router = useRouter();
   const [deferredPrompt, setDeferredPrompt] = useState<Event | null>(null);
@@ -55,8 +59,17 @@ export default function Header() {
         )}
         <h1>
           <Anchor href="/">
-            {router.pathname === '/amusement/[amusementId]' ? <JejeupAmuse /> : <JejeupLogo />}
-            <span>제목에 제목이 없어서 짜증나서 만든 사이트</span>
+            {router.pathname === '/amusement/[amusementId]' ? (
+              <JejeupAmuse />
+            ) : router.pathname === '/' ||
+              router.pathname === '/categories' ||
+              router.pathname === '/tags' ||
+              router.pathname === '/platforms' ? (
+              <JejeupDefault />
+            ) : (
+              <JejeupLogo />
+            )}
+            <span>세상의 모든 리뷰</span>
           </Anchor>
         </h1>
         <nav>
