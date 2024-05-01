@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import { isSafari } from 'react-device-detect';
 import styled from '@emotion/styled';
 import Seo, { originTitle } from '@/components/Seo';
 import { vectors } from '@/components/vectors';
+import Anchor from '@/components/Anchor';
 import styles from '@/styles/Notice.module.sass';
 
 const BackButton = styled.i({
@@ -65,15 +67,15 @@ function ContactForm() {
         pageImg={`https://semo.dev1stud.io/og-image.webp?ts=${timestamp}`}
       />
       <div className="top-link">
-        <button onClick={handleClose} type="button">
+        <Anchor href="/notices">
           <BackButton />
           <span>뒤로가기</span>
-        </button>
+        </Anchor>
       </div>
       <div className={styles.content}>
         <h1>
-          <span>문의하기</span>
-          <em>SEMOVIEW.CONTACT</em>
+          <span className={`${isSafari ? 'April16thPromise' : 'April16thLife'}`}>문의하기</span>
+          <em className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>SEMOVIEW.CONTACT</em>
         </h1>
         <div className={styles.summary}>
           <p>오타, 탈자, 버그 등 발견시 수정 요청해 주세요</p>
@@ -146,10 +148,10 @@ function ContactForm() {
             <div className={styles['button-group']}>
               <button type="submit">문의하기</button>
               <div className={styles.cancel}>
-                <button onClick={handleClose} type="button">
+                <Anchor href="/notices">
                   <BackButton />
                   <span>뒤로가기</span>
-                </button>
+                </Anchor>
               </div>
             </div>
           </fieldset>

@@ -358,8 +358,12 @@ export default function JejeupDetail({
 }) {
   const router = useRouter();
 
+  useEffect(() => {
+    sessionStorage.setItem('backhistory', router.asPath);
+  }, [router.asPath]);
+
   const previousPageHandler = () => {
-    const previousPage = sessionStorage.getItem('location');
+    const previousPage = sessionStorage.getItem('semoview');
     if (previousPage) {
       router.push(`${previousPage}`);
     } else {

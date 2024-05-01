@@ -192,6 +192,8 @@ function Tags({
     sessionStorage.removeItem('category');
     sessionStorage.removeItem('platform');
 
+    sessionStorage.setItem('backhistory', router.asPath);
+    sessionStorage.setItem('semoview', router.asPath);
     sessionStorage.setItem('tag', router.asPath);
   }, [router.asPath]);
 

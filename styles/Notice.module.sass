@@ -20,7 +20,7 @@
       gap: rem(7)
       font-size: rem(24)
       font-weight: 900
-      color: $hex-accent
+      color: $hex-azalea
 
       +mq(minSmall)
         font-size: rem(64)
@@ -70,19 +70,19 @@
           background-color: transparent
           width: rem(170)
           justify-content: center
-          border: rem(2) solid $hex-accent
+          border: rem(1) solid $hex-accent
           border-radius: rem(3)
-          padding: rem(7) rem(32)
-          font-size: rem(20)
-          font-weight: 900
+          padding: rem(12) rem(32)
+          font-size: rem(16)
+          font-weight: 700
           line-height: 1
           color: $hex-accent
           transition: all .3s cubic-bezier(.4,0,.2,1)
 
           +mq(minSmall)
             width: auto
-            padding: rem(12) rem(52)
-            font-size: rem(24)
+            padding: rem(17) rem(52)
+            font-size: rem(20)
 
           &:hover, &:focus
             background-color: $hex-accent
@@ -99,6 +99,7 @@
           display: flex
           justify-content: space-between
           align-items: center
+          gap: rem(23)
           padding: rem(7) 0
 
           strong
@@ -124,6 +125,9 @@
               color: $hex-dark
               transition: all .4s cubic-bezier(.4,0,.2,1)
 
+              +mq(maxExtraSmall)
+                font-size: rem(14)
+
           &:focus, &:hover
             strong
               &::before
@@ -138,6 +142,9 @@
             font-size: rem(14)
             white-space: nowrap
             color: $hex-dark
+
+            +mq(maxExtraSmall)
+              font-size: rem(12)
 
     fieldset
       display: flex
@@ -194,7 +201,7 @@
     .cancel
       text-align: right
 
-      button
+      a
         background-color: transparent
         transition: border .4s cubic-bezier(.4,0,.2,1)
         display: inline-flex
@@ -282,6 +289,7 @@
 
       a
         display: inline-flex
+        align-items: center
         gap: rem(5)
         transition: all .4s cubic-bezier(.4,0,.2,1)
         background: transparent

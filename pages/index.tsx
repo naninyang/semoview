@@ -229,11 +229,7 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
   const timestamp = Date.now();
 
   useEffect(() => {
-    localStorage.removeItem('currentPage');
-  }, []);
-
-  useEffect(() => {
-    sessionStorage.setItem('location', router.asPath);
+    sessionStorage.setItem('backhistory', router.asPath);
   }, [router.asPath]);
 
   const [count, setCount] = useState<Counts | null>(null);

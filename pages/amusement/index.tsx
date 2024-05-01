@@ -208,6 +208,7 @@ function Amusement({
     sessionStorage.removeItem('tag');
     sessionStorage.removeItem('platform');
 
+    sessionStorage.setItem('backhistory', router.asPath);
     sessionStorage.setItem(
       `${category && !tag ? 'amusementCategory' : ''}${category && tag ? 'amusementTag' : ''}${!category && tag ? 'amusementTag' : ''}${platform ? 'amusementPlatform' : ''}`,
       router.asPath,

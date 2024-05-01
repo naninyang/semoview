@@ -1,21 +1,23 @@
 @import './designSystem'
 
-main.amusement + footer.footer
-  background-color: $hex-black
+main.amusement,
+main.open
+  & + footer.footer
+    background-color: $hex-black
 
-  .container
-    p
-      color: $hex-white
+    .container
+      p
+        color: $hex-white
 
-      &.copyright
-        strong
+        &.copyright
+          strong
+            color: $hex-azalea
+
+        &.copyrights
           color: $hex-azalea
 
-      &.copyrights
-        color: $hex-azalea
-
-      &.scp
-        color: rgba($hex-light, .7)
+        &.scp
+          color: rgba($hex-light, .7)
 
 footer.footer
   background-color: rgba($hex-white, .7)

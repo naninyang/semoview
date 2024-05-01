@@ -176,6 +176,7 @@ function Platforms({
     sessionStorage.removeItem('category');
     sessionStorage.removeItem('tag');
 
+    sessionStorage.setItem('backhistory', router.asPath);
     sessionStorage.setItem('platform', router.asPath);
   }, [router.asPath]);
 

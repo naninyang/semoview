@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import styled from '@emotion/styled';
+import { isSafari } from 'react-device-detect';
 import { useMediaQuery } from 'react-responsive';
 import { vectors } from './vectors';
 import YouTubeController from './YouTubeController';
@@ -118,7 +119,8 @@ const Related = ({ videoId, videoDescription, title, sorting, key }: Props) => {
               <span>닫기</span>
             </button>
             <h3 className="lang">
-              <span className="April16thSafety">[{title}]</span> {videoDescription}
+              <span className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>[{title}]</span>{' '}
+              {videoDescription}
             </h3>
             <YouTubeController videoId={videoId} videoImage={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`} />
           </div>

@@ -3,6 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
+import { isSafari } from 'react-device-detect';
 import styled from '@emotion/styled';
 import { AmusementData, AmusementPermalinkData, Category, JejeupData, JejeupMetaData } from 'types';
 import { formatDateDetail } from '@/utils/strapi';
@@ -20,13 +21,13 @@ import Anchor from '@/components/Anchor';
 import Related from '@/components/Related';
 import YouTubeController from '@/components/YouTubeController';
 import { rem } from '@/styles/designSystem';
-import footer from '@/styles/Footer.module.sass';
 import header from '@/styles/Header.module.sass';
+import footer from '@/styles/Footer.module.sass';
 import styles from '@/styles/Amusement.module.sass';
 
 const BackButton = styled.i({
   display: 'block',
-  background: `url(${vectors.backwardAmuse}) no-repeat 50% 50%/contain`,
+  background: `url(${vectors.backwardDark}) no-repeat 50% 50%/contain`,
 });
 
 const ClipboardIcon = styled.i({
@@ -450,7 +451,7 @@ export function TagsItem({ items }: { items: any }) {
         {filteredTags.map((tag: string, index: number) => (
           <span key={index}>{`#${TagName(tag)}`} </span>
         ))}
-        {items.category !== null && `#${CategoryName(items.category)}`}
+        {items.category && `#${CategoryName(items.category)}`}
       </dd>
     </div>
   );
@@ -493,7 +494,8 @@ export default function Amusement({
   const [error, setError] = useState(null);
   const [selectedRelation, setSelectedRelation] = useState<string>('');
   useEffect(() => {
-    sessionStorage.setItem('location', router.asPath);
+    sessionStorage.setItem('backhistory', router.asPath);
+    sessionStorage.setItem('semoview', router.asPath);
   }, [router.asPath]);
 
   const loadRelations = async () => {
@@ -905,14 +907,20 @@ export default function Amusement({
         <div className={styles.info}>
           {amusementData.attributes.titleKorean !== null ? (
             amusementData.attributes.titleKorean.length >= 30 ? (
-              <h1 className={`${styles.long} April16thLife`}>{amusementData.attributes.titleKorean}</h1>
+              <h1 className={`${styles.long} ${isSafari ? 'April16thPromise' : 'April16thLife'}`}>
+                {amusementData.attributes.titleKorean}
+              </h1>
             ) : (
-              <h1 className="April16thLife">{amusementData.attributes.titleKorean}</h1>
+              <h1 className={`${isSafari ? 'April16thPromise' : 'April16thLife'}`}>
+                {amusementData.attributes.titleKorean}
+              </h1>
             )
           ) : amusementData.attributes.title.length >= 30 ? (
-            <h1 className={`${styles.long} April16thLife`}>{amusementData.attributes.title}</h1>
+            <h1 className={`${styles.long} ${isSafari ? 'April16thPromise' : 'April16thLife'}`}>
+              {amusementData.attributes.title}
+            </h1>
           ) : (
-            <h1 className="April16thLife">
+            <h1 className={`${isSafari ? 'April16thPromise' : 'April16thLife'}`}>
               {amusementData.attributes.category === 'game_fan'
                 ? `'${amusementData.attributes.title}' 팬 게임 콜렉션`
                 : amusementData.attributes.title}
@@ -1583,7 +1591,7 @@ export default function Amusement({
       </div>
       {amusementData.attributes.related !== null && Array.isArray(amusementData.attributes.related) && (
         <section>
-          <h2 className="April16thSafety">관련 영상</h2>
+          <h2 className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>관련 영상</h2>
           <div className={`${styles.list} ${styles['related-list']}`}>
             {amusementData.attributes.related.flatMap((item) =>
               Object.entries(item).map(([key, value]) => (
@@ -1617,9 +1625,9 @@ export default function Amusement({
       {data && !isJejeupsLoading && !isJejeupsError && (
         <section>
           {amusementData.attributes.category === 'game' || amusementData.attributes.category === 'game_fan' ? (
-            <h2 className="April16thSafety">유튜브 리뷰 & 실황모음</h2>
+            <h2 className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>유튜브 리뷰 & 실황모음</h2>
           ) : (
-            <h2 className="April16thSafety">유튜브 리뷰모음</h2>
+            <h2 className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>유튜브 리뷰모음</h2>
           )}
           <div className={styles.list}>
             {Object.keys(data.jejeups).length > 0 && Array.isArray(data.jejeups) ? (

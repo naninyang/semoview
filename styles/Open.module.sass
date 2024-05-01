@@ -4,10 +4,15 @@
   display: flex
   justify-content: center
   gap: rem(25)
-  padding: rem(27) calc(env(safe-area-inset-right) + rem(15)) rem(57) calc(env(safe-area-inset-left) + rem(15))
+  padding: calc(env(safe-area-inset-top) + rem(105)) calc(env(safe-area-inset-right) + rem(15)) rem(57) calc(env(safe-area-inset-left) + rem(15))
 
   +mq(minLarge)
-    padding: rem(57) calc(env(safe-area-inset-right) + rem(25)) rem(72) calc(env(safe-area-inset-left) + rem(25))
+    padding: calc(env(safe-area-inset-top) + rem(135)) calc(env(safe-area-inset-right) + rem(25)) rem(72) calc(env(safe-area-inset-left) + rem(25))
+
+  .top-link
+    button
+      span
+        color: $hex-white
 
   .content
     max-width: rem(720)
@@ -20,7 +25,7 @@
       gap: rem(7)
       font-size: rem(24)
       font-weight: 900
-      color: $hex-accent
+      color: $hex-azalea
 
       +mq(minSmall)
         font-size: rem(64)
@@ -65,7 +70,7 @@
           +coln
 
       dt
-        color: $hex-dark
+        color: $hex-light
 
         +mq(maxMedium)
           width: rem(185)
@@ -73,7 +78,7 @@
 
       dd
         font-weight: 900
-        color: $hex-accent
+        color: $hex-white
 
         +mq(maxMedium)
           width: rem(95)
@@ -81,18 +86,19 @@
     p
       margin: rem(57) 0
       text-align: center
+      color: $hex-white
 
       a
-        color: $hex-accent
+        color: $hex-azalea
         font-weight: 800
         text-decoration: underline
 
     hr
-      margin: rem(20) 0
-      border: 1px solid rgba($hex-dark, .2)
+      margin: rem(52) 0
+      border: 1px solid rgba($hex-light, .2)
 
       +mq(minLarge)
-        margin: rem(25) 0
+        margin: rem(72) 0
 
     .list
       margin: rem(50) auto 0
@@ -104,3 +110,8 @@
 
       pre, code
         white-space: pre-wrap
+        color: $hex-light
+        line-height: 1.5
+
+        +mq(maxExtraSmall)
+          font-size: rem(14)

@@ -125,10 +125,14 @@ export default function App({ Component, pageProps }: AppProps) {
       <style jsx global>
         {`
           body {
-            ${router.pathname === '/amusement/[amusementId]' ? 'background-color:black' : ''}
+            ${router.pathname === '/amusement/[amusementId]' || router.pathname === '/open-sources'
+              ? 'background-color:black'
+              : ''}
           }
           main {
-            ${router.pathname === '/amusement/[amusementId]' ? 'margin-top:0' : ''}
+            ${router.pathname === '/amusement/[amusementId]' || router.pathname === '/open-sources'
+              ? 'margin-top:0'
+              : ''}
           }
           body,
           pre,

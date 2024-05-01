@@ -1,52 +1,52 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import fs from 'fs';
 import path from 'path';
+import { useRouter } from 'next/router';
+import { isSafari } from 'react-device-detect';
 import styled from '@emotion/styled';
 import Seo, { originTitle } from '@/components/Seo';
 import Anchor from '@/components/Anchor';
 import { vectors } from '@/components/vectors';
+import footer from '@/styles/Footer.module.sass';
 import styles from '@/styles/Open.module.sass';
 
 const BackButton = styled.i({
   display: 'block',
-  background: `url(${vectors.backward}) no-repeat 50% 50%/contain`,
+  background: `url(${vectors.backwardDark}) no-repeat 50% 50%/contain`,
 });
 
 function OpenSources({ licenses }: { licenses: string[] }) {
   const [currentPage, setCurrentPage] = useState<string | null>(null);
 
-  useEffect(() => {
-    const storedPage = localStorage.getItem('currentPage');
-    setCurrentPage(storedPage);
-  }, []);
-
+  const router = useRouter();
+  const previousPageHandler = () => {
+    const previousPage = sessionStorage.getItem('backhistory');
+    if (previousPage) {
+      router.push(`${previousPage}`);
+    } else {
+      router.push('/');
+    }
+  };
   const timestamp = Date.now();
 
   return (
-    <main className={styles.open}>
+    <main className={`${footer.open} ${styles.open}`}>
       <Seo
         pageTitles={`오픈소스 - ${originTitle}`}
         pageTitle="오픈소스"
         pageDescription="'세모뷰'에서 사용한 오픈소스"
         pageImg={`https://semo.dev1stud.io/og-image.webp?ts=${timestamp}`}
       />
-      <div className="top-link">
-        {currentPage ? (
-          <Anchor href={`/${currentPage}`}>
-            <BackButton />
-            <span>뒤로가기</span>
-          </Anchor>
-        ) : (
-          <Anchor href="/">
-            <BackButton />
-            <span>뒤로가기</span>
-          </Anchor>
-        )}
+      <div className={`top-link ${styles['top-link']}`}>
+        <button onClick={previousPageHandler} type="button">
+          <BackButton />
+          <span>뒤로가기</span>
+        </button>
       </div>
       <div className={styles.content}>
         <h1>
-          <span className="April16thLife">오픈소스</span>
-          <em className="April16thSafety">SEMOVIEW.OPENSOURCES</em>
+          <span className={`${isSafari ? 'April16thPromise' : 'April16thLife'}`}>오픈소스</span>
+          <em className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>SEMOVIEW.OPENSOURCES</em>
         </h1>
         <dl>
           <div>

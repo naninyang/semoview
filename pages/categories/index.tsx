@@ -193,6 +193,7 @@ function Categories({
     sessionStorage.removeItem('tag');
     sessionStorage.removeItem('platform');
 
+    sessionStorage.setItem('backhistory', router.asPath);
     sessionStorage.setItem('category', router.asPath);
   }, [router.asPath]);
 

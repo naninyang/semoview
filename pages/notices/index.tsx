@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { GetServerSideProps, NextPage } from 'next';
+import { useRouter } from 'next/router';
 import { isSafari } from 'react-device-detect';
 import styled from '@emotion/styled';
 import { NoticeData } from 'types';
@@ -66,6 +67,16 @@ const Notices: NextPage<NoticeProps> = ({ notices }) => {
     }
   }, []);
 
+  const router = useRouter();
+  const previousPageHandler = () => {
+    const previousPage = sessionStorage.getItem('backhistory');
+    if (previousPage) {
+      router.push(`${previousPage}`);
+    } else {
+      router.push('/');
+    }
+  };
+
   const timestamp = Date.now();
 
   return (
@@ -77,22 +88,15 @@ const Notices: NextPage<NoticeProps> = ({ notices }) => {
         pageImg={`https://semo.dev1stud.io/og-image.webp?ts=${timestamp}`}
       />
       <div className="top-link">
-        {currentPage ? (
-          <Anchor href={`/${currentPage}`}>
-            <BackButton />
-            <span>뒤로가기</span>
-          </Anchor>
-        ) : (
-          <Anchor href="/">
-            <BackButton />
-            <span>뒤로가기</span>
-          </Anchor>
-        )}
+        <button onClick={previousPageHandler} type="button">
+          <BackButton />
+          <span>뒤로가기</span>
+        </button>
       </div>
       <div className={styles.content}>
         <h1>
-          <span className="April16thLife">문의 및 공지</span>
-          <em className="April16thSafety">SEMOVIEW.NOTICES</em>
+          <span className={`${isSafari ? 'April16thPromise' : 'April16thLife'}`}>문의 및 공지</span>
+          <em className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>SEMOVIEW.NOTICES</em>
         </h1>
         <div className={styles.summary}>
           <p>
@@ -103,9 +107,7 @@ const Notices: NextPage<NoticeProps> = ({ notices }) => {
             &apos;세모뷰&apos;에서는 그런 리뷰 영상들을 모아서 <span>눌러보기 전에 어떤 영상인지 알려드립니다!</span>
           </p>
           <div className={styles['button-group']}>
-            <Anchor href="/notices/contact-us" target="_blank">
-              문의하기
-            </Anchor>
+            <Anchor href="/notices/contact-us">문의하기</Anchor>
             {deviceSafari !== 'isSafari' && (
               <button type="button" onClick={onInstallPWA}>
                 앱 내려받기

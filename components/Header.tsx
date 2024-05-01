@@ -9,8 +9,8 @@ const JejeupLogo = styled.i({
   background: `url(${vectors.jejeup}) no-repeat 50% 50%/contain`,
 });
 
-const JejeupAmuse = styled.i({
-  background: `url(${vectors.jejeupAmuse}) no-repeat 50% 50%/contain`,
+const JejeupDark = styled.i({
+  background: `url(${vectors.jejeupDark}) no-repeat 50% 50%/contain`,
 });
 
 const JejeupDefault = styled.i({
@@ -49,7 +49,9 @@ export default function Header() {
     }
   };
   return (
-    <header className={`${styles.header} ${router.pathname === '/amusement/[amusementId]' ? styles.amusement : ''}`}>
+    <header
+      className={`${styles.header} ${router.pathname === '/amusement/[amusementId]' || router.pathname === '/open-sources' ? styles.dark : ''}`}
+    >
       <div className={styles.container}>
         {router.pathname === '/' ||
         router.pathname === '/categories' ||
@@ -59,8 +61,8 @@ export default function Header() {
         )}
         <h1>
           <Anchor href="/">
-            {router.pathname === '/amusement/[amusementId]' ? (
-              <JejeupAmuse />
+            {router.pathname === '/amusement/[amusementId]' || router.pathname === '/open-sources' ? (
+              <JejeupDark />
             ) : router.pathname === '/' ||
               router.pathname === '/categories' ||
               router.pathname === '/tags' ||
