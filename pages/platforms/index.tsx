@@ -183,8 +183,8 @@ function Platforms({
   return (
     <main className={styles.categories}>
       <Seo
-        pageTitles={`리뷰 OTT & 방송국 선택하기 - ${originTitle}`}
-        pageTitle={`리뷰 OTT & 방송국 선택하기`}
+        pageTitles={`OTT 플랫폼 또는 방송국 선택하기 - ${originTitle}`}
+        pageTitle={`OTT 플랫폼 또는 방송국 선택하기`}
         pageDescription="아마존 프라임비디오 / 애플 TV+ / 디즈니+ & 스타+ / 넷플릭스 / 티빙 & 파라마운트+ / 왓챠 / 웨이브 / KBS 2TV / MBC / SBS / JTBC / OCN / tvN / ENA / ABC & 20th & FOX & FX "
         pageImg={`https://semo.dev1stud.io/og-platforms.webp?ts=${timestamp}`}
       />
@@ -192,7 +192,7 @@ function Platforms({
       <h1>
         <span className="April16thPromise">
           <i className="preview" />
-          OTT & 방송국 골라보기! 💁‍♀️
+          OTT 플랫폼 또는 방송국을 골라보세요! 💁‍♀️
         </span>
       </h1>
       {error && (

@@ -4,7 +4,7 @@
   box-sizing: border-box
 
 \::selection
-  background-color: $hex-accent
+  background-color: $hex-azalea
   color: $hex-white
 
 html
@@ -37,6 +37,7 @@ h1, h2, h3, h4, h5, h6
 
 img
   +image-rendering
+  user-drag: none
 
 a
   text-decoration: none
@@ -86,6 +87,9 @@ address, cite
 
 iframe
   display: block
+
+a, button, select, input
+  user-select: none
 
 main
   margin-top: calc(env(safe-area-inset-top) + rem(78))
