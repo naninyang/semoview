@@ -176,13 +176,14 @@ export default function App({ Component, pageProps }: AppProps) {
             font-family: ${fontEN.style.fontFamily}, sans-serif;
           }
           .April16thLife {
-            font-family: ${April16thLife.style.fontFamily}, sans-serif;
+            font-family: ${April16thLife.style.fontFamily}, ${April16thSafety.style.fontFamily},
+              ${April16thPromise.style.fontFamily}, sans-serif;
           }
           .April16thPromise {
             font-family: ${April16thPromise.style.fontFamily}, sans-serif;
           }
           .April16thSafety {
-            font-family: ${April16thSafety.style.fontFamily}, sans-serif;
+            font-family: ${April16thSafety.style.fontFamily}, ${April16thPromise.style.fontFamily}, sans-serif;
           }
         `}
       </style>
