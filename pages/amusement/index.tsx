@@ -997,10 +997,10 @@ function Amusement({
                         )}
                       </div>
                       <strong>
-                        <span lang="ko">
+                        <span className="April16thPromise">
                           {amusement.category === 'game_fan'
                             ? `'${amusement.title}' 팬 게임 콜렉션`
-                            : amusement.titleKorean != null
+                            : amusement.titleKorean
                               ? amusement.titleKorean
                               : amusement.title}
                         </span>
@@ -1437,7 +1437,9 @@ function Amusement({
                         )}
                       </div>
                       <strong>
-                        <span lang="ko">{amusement.titleKorean != null ? amusement.titleKorean : amusement.title}</span>
+                        <span className="April16thPromise">
+                          {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                        </span>
                       </strong>
                     </Link>
                   ))}
@@ -1819,7 +1821,9 @@ function Amusement({
                         </dl>
                       </div>
                       <strong>
-                        <span lang="ko">{amusement.titleKorean != null ? amusement.titleKorean : amusement.title}</span>
+                        <span className="April16thPromise">
+                          {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                        </span>
                       </strong>
                     </Link>
                   ))}
