@@ -446,7 +446,7 @@ export function TagsItem({ items }: { items: any }) {
   return (
     <div className={styles.tags}>
       <dt>태그</dt>
-      <dd>
+      <dd className="April16thPromise">
         {filteredTags.map((tag: string, index: number) => (
           <span key={index}>{`#${TagName(tag)}`} </span>
         ))}
