@@ -4,6 +4,7 @@ import path from 'path';
 import { useRouter } from 'next/router';
 import { isSafari } from 'react-device-detect';
 import styled from '@emotion/styled';
+import { License } from 'types';
 import Seo, { originTitle } from '@/components/Seo';
 import Anchor from '@/components/Anchor';
 import { vectors } from '@/components/vectors';
@@ -15,9 +16,7 @@ const BackButton = styled.i({
   background: `url(${vectors.backwardDark}) no-repeat 50% 50%/contain`,
 });
 
-function OpenSources({ licenses }: { licenses: string[] }) {
-  const [currentPage, setCurrentPage] = useState<string | null>(null);
-
+function OpenSources({ licenses }: { licenses: License[] }) {
   const router = useRouter();
   const previousPageHandler = () => {
     const previousPage = sessionStorage.getItem('backhistory');
@@ -66,13 +65,13 @@ function OpenSources({ licenses }: { licenses: string[] }) {
           <hr />
           {licenses.map((license, index) => (
             <div key={index}>
+              <h2>{license.filename}</h2>
               <pre>
-                <code>{license}</code>
+                <code>{license.content}</code>
               </pre>
               <hr />
             </div>
           ))}
-          p
         </div>
       </div>
     </main>
@@ -84,7 +83,11 @@ export async function getStaticProps() {
   const filenames = fs.readdirSync(markdownDir);
   const licenses = filenames.map((filename) => {
     const filePath = path.join(markdownDir, filename);
-    return fs.readFileSync(filePath, 'utf8');
+    const content = fs.readFileSync(filePath, 'utf8');
+    return {
+      filename: filename.replace(/\.md$/, ''),
+      content,
+    };
   });
 
   return {

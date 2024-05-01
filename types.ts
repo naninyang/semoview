@@ -353,3 +353,8 @@ export interface Counts {
   jejeup: number;
   amusement: number;
 }
+
+export interface License {
+  filename: string;
+  content: string;
+}
