@@ -599,7 +599,7 @@ function Categories({
                                 )}
                                 {amusement.animeBroadcast2 === 'animax' && (
                                   <>
-                                    <AniboxIcon /> <span>애니박스</span>
+                                    <AnimaxIcon /> <span>애니맥스 코리아</span>
                                   </>
                                 )}
                               </dd>

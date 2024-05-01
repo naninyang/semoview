@@ -295,7 +295,7 @@ function Amusement({
       )}
       {!router.query.category && !router.query.tag && !router.query.platform && (
         <div className={styles.welcome}>
-          <h1>원하는 카테고리/태그/플랫폼을 선택하세요 👋</h1>
+          <h1 className="April16thPromise">원하는 카테고리/태그/플랫폼을 선택하세요 👋</h1>
           <div className={styles.unselect}>
             <div className={styles.form}>
               <select value={selectedCategory} onChange={handleCategoryChange}>
@@ -668,7 +668,7 @@ function Amusement({
           {router.query.category && categoryData && (
             <div className={styles.content}>
               <div className={styles.headline}>
-                <h1>
+                <h1 className="April16thPromise">
                   {pageTitle} {categoryData.total > 0 && <span>({categoryData.total}개 작품)</span>}
                 </h1>
                 <div className={styles.select}>
@@ -1123,7 +1123,7 @@ function Amusement({
                 </li>
               </ul>
               <div className={styles.headline}>
-                <h1>
+                <h1 className="April16thPromise">
                   {pageTitle} {tagData.total > 0 && <span>({tagData.total}개 작품)</span>}
                   <strong>
                     #{TagName(`${router.query.tag}`)} {category && `#${CategoryName(category)}`} #유튜브리뷰{' '}
@@ -1455,7 +1455,7 @@ function Amusement({
           {router.query.platform && platformData && (
             <div className={styles.content}>
               <div className={styles.headline}>
-                <h1 lang="ja">
+                <h1 className="April16thPromise">
                   {pageTitle} {platformData.total > 0 && <span>({platformData.total}개 작품)</span>}
                 </h1>
                 <div className={styles.select}>
