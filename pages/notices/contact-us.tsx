@@ -75,7 +75,7 @@ function ContactForm() {
       <div className={styles.content}>
         <h1>
           <span className={`${isSafari ? 'April16thPromise' : 'April16thLife'}`}>문의하기</span>
-          <em className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>SEMOVIEW.CONTACT</em>
+          <em className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>semoview.contact</em>
         </h1>
         <div className={styles.summary}>
           <p>오타, 탈자, 버그 등 발견시 수정 요청해 주세요</p>

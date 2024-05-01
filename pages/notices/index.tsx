@@ -96,7 +96,7 @@ const Notices: NextPage<NoticeProps> = ({ notices }) => {
       <div className={styles.content}>
         <h1>
           <span className={`${isSafari ? 'April16thPromise' : 'April16thLife'}`}>문의 및 공지</span>
-          <em className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>SEMOVIEW.NOTICES</em>
+          <em className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>semoview.notices</em>
         </h1>
         <div className={styles.summary}>
           <p>

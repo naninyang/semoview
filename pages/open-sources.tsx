@@ -45,7 +45,7 @@ function OpenSources({ licenses }: { licenses: License[] }) {
       <div className={styles.content}>
         <h1>
           <span className={`${isSafari ? 'April16thPromise' : 'April16thLife'}`}>오픈소스</span>
-          <em className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>SEMOVIEW.OPENSOURCES</em>
+          <em className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>semoview.opensources</em>
         </h1>
         <dl>
           <div>
