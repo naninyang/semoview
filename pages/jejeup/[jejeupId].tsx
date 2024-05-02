@@ -1334,7 +1334,7 @@ export default function JejeupDetail({
                                         )}
                                         {data.runningTime && (
                                           <div>
-                                            <dt>러닝타임</dt>
+                                            <dt>재생시간</dt>
                                             <dd>
                                               {data.runningTime}분{formatTime(data.runningTime)}
                                             </dd>
@@ -1890,7 +1890,7 @@ export default function JejeupDetail({
                                   {console.log(data)}
                                   {data.runningTime && (
                                     <div>
-                                      <dt>러닝타임</dt>
+                                      <dt>재생시간</dt>
                                       <dd>
                                         {data.runningTime}분{formatTime(data.runningTime)}
                                       </dd>

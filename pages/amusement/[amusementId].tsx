@@ -1313,7 +1313,7 @@ export default function Amusement({
               </div>
               {amusementData.attributes.runningTime && (
                 <div className={styles.country}>
-                  <dt>러닝타임</dt>
+                  <dt>재생시간</dt>
                   <dd>
                     {amusementData.attributes.runningTime}분{formatTime(amusementData.attributes.runningTime)}
                   </dd>
