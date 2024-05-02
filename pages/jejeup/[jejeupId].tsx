@@ -550,7 +550,7 @@ export default function JejeupDetail({
                 {jejeupMetaData.error === 'Failed to fetch data' || jejeupMetaData.originalTitle === ' - YouTube' ? (
                   <div className={`${styles.preview} ${styles.more} ${styles['preview-dummy']}`}>
                     <div className={`${styles.dummy} ${styles.skeleton}`} />
-                    <div className={styles.youtube}>
+                    <div className={`${styles.youtube} ${styles.more}`}>
                       <h1>
                         유튜버가 영상을 삭제했거나 비공개 처리한 영상입니다. 관리자에게{' '}
                         <button type="button" data-video={jejeupData.attributes.video} onClick={handleReport}>
@@ -569,9 +569,9 @@ export default function JejeupDetail({
                     </div>
                   </div>
                 ) : jejeupMetaData.duration === undefined ? (
-                  <div className={`${styles.preview} ${styles.more} ${styles['preview-dummy']}`}>
+                  <div className={`${styles.preview} ${styles['preview-dummy']}`}>
                     <div className={`${styles.dummy} ${styles.skeleton}`} />
-                    <div className={styles.youtube}>
+                    <div className={`${styles.youtube} ${styles.more}`}>
                       <h1>
                         알 수 없는 사유로 불러오지 못했습니다.{' '}
                         <button type="button" data-video={jejeupData.attributes.video} onClick={handleRetry}>
@@ -590,7 +590,7 @@ export default function JejeupDetail({
                     </div>
                   </div>
                 ) : (
-                  <div className={`${styles.preview} ${styles.more} preview`}>
+                  <div className={`${styles.preview} preview`}>
                     <div className={styles.video}>
                       {jejeupData.attributes.embeddingOff ? (
                         <div className={styles.embeddingOff}>
