@@ -3,8 +3,8 @@ export function formatTime(totalMinutes: number) {
   const minutes = totalMinutes % 60;
 
   if (hours === 0) {
-    return `${minutes}분`;
+    return false;
   } else {
-    return `${hours}시간 ${minutes}분`;
+    return ` (${hours}시간 ${minutes}분)`;
   }
 }
