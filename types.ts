@@ -263,6 +263,7 @@ export interface AmusementPermalinkData {
     tags: any;
     createdAt: string;
     supportLang: any;
+    comment: string;
   };
 }
 

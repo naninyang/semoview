@@ -555,13 +555,18 @@
             +col
             font-weight: 800
 
-          &.synopsys
+          &.synopsys, &.comment
             dt
               +screen-reader-only
 
             dd
               padding-top: rem(7)
-              font-weight: 440
+              font-weight: 400
+
+          &.comment
+            dd
+              font-weight: 800
+              color: $hex-azalea
 
     .poster
       width: rem(370)

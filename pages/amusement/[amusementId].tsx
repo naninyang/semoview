@@ -1533,6 +1533,16 @@ export default function Amusement({
                 />
               </div>
             )}
+            {amusementData.attributes.comment && (
+              <div className={styles.comment}>
+                <dt>작품 추가 정보</dt>
+                <dd
+                  dangerouslySetInnerHTML={{
+                    __html: amusementData.attributes.comment.replace(/\n/g, '<br />'),
+                  }}
+                />
+              </div>
+            )}
           </dl>
         </div>
         <div
