@@ -226,6 +226,7 @@ export interface AmusementData {
   related: string;
   tags: any;
   supportLang: any;
+  runningTime: number;
 }
 
 export interface AmusementPermalinkData {
@@ -264,6 +265,7 @@ export interface AmusementPermalinkData {
     createdAt: string;
     supportLang: any;
     comment: string;
+    runningTime: number;
   };
 }
 

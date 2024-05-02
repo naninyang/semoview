@@ -15,6 +15,7 @@ import { AnimeName } from '@/components/AnimeName';
 import { RatingsDrama } from '@/components/RatingsDrama';
 import { formatDuration } from '@/components/FormatDuration';
 import { formatDate } from '@/components/FormatDate';
+import { formatTime } from '@/components/FormatTime';
 import { OriginalName } from '@/components/OriginalName';
 import { TagName } from '@/components/TagName';
 import { SupportLang } from '@/components/SupportLang';
@@ -1329,6 +1330,14 @@ export default function JejeupDetail({
                                             <dd className="April16thPromise">{data.country}</dd>
                                           </div>
                                         )}
+                                        {data.runningTime && (
+                                          <div>
+                                            <dt>러닝타임</dt>
+                                            <dd>
+                                              {data.runningTime}분 ({formatTime(data.runningTime)})
+                                            </dd>
+                                          </div>
+                                        )}
                                         {data.supportLang !== null && <ADCC items={data.supportLang} />}
                                         {data.genre !== '?' && (
                                           <div>
@@ -1874,6 +1883,15 @@ export default function JejeupDetail({
                                     <div>
                                       <dt>제작국가</dt>
                                       <dd className="April16thPromise">{data.country}</dd>
+                                    </div>
+                                  )}
+                                  {console.log(data)}
+                                  {data.runningTime && (
+                                    <div>
+                                      <dt>러닝타임</dt>
+                                      <dd>
+                                        {data.runningTime}분 ({formatTime(data.runningTime)})
+                                      </dd>
                                     </div>
                                   )}
                                   {data.supportLang !== null && <ADCC items={data.supportLang} />}

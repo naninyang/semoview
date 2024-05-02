@@ -619,6 +619,7 @@ export async function getAmusementData(amusement: string) {
     related: amusementData.attributes.related,
     tags: amusementData.attributes.tags,
     supportLang: amusementData.attributes.supportLang,
+    runningTime: amusementData.attributes.runningTime,
   };
 
   return rowsData;

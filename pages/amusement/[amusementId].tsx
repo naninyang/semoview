@@ -20,6 +20,7 @@ import { vectors } from '@/components/vectors';
 import Anchor from '@/components/Anchor';
 import Related from '@/components/Related';
 import YouTubeController from '@/components/YouTubeController';
+import { formatTime } from '@/components/FormatTime';
 import { rem } from '@/styles/designSystem';
 import header from '@/styles/Header.module.sass';
 import footer from '@/styles/Footer.module.sass';
@@ -1309,6 +1310,14 @@ export default function Amusement({
                   {amusementData.attributes.anime !== null && <em>{AnimeName(amusementData.attributes.anime)}</em>}
                 </dd>
               </div>
+              {amusementData.attributes.runningTime && (
+                <div className={styles.country}>
+                  <dt>러닝타임</dt>
+                  <dd>
+                    {amusementData.attributes.runningTime}분 ({formatTime(amusementData.attributes.runningTime)})
+                  </dd>
+                </div>
+              )}
               {amusementData.attributes.country !== '?' && (
                 <div className={styles.country}>
                   <dt>제작국가</dt>
