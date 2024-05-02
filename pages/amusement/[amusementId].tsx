@@ -9,10 +9,11 @@ import { AmusementData, AmusementPermalinkData, Category, JejeupData, JejeupMeta
 import { formatDateDetail } from '@/utils/strapi';
 import Seo, { originTitle } from '@/components/Seo';
 import { CategoryName } from '@/components/CategoryName';
+import { TagCategoryName } from '@/components/TagCategory';
+import { TagName } from '@/components/TagName';
 import { AnimeName } from '@/components/AnimeName';
 import { RatingsDrama } from '@/components/RatingsDrama';
 import { OriginalName } from '@/components/OriginalName';
-import { TagName } from '@/components/TagName';
 import { SupportLang } from '@/components/SupportLang';
 import { formatDate } from '@/components/FormatDate';
 import { formatDuration } from '@/components/FormatDuration';
@@ -452,7 +453,7 @@ export function TagsItem({ items }: { items: any }) {
         {filteredTags.map((tag: string, index: number) => (
           <span key={index}>{`#${TagName(tag)}`} </span>
         ))}
-        {items.category && `#${CategoryName(items.category)}`}
+        {items.category && <span>#{TagCategoryName(items.category)}</span>}
       </dd>
     </div>
   );

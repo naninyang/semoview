@@ -11,13 +11,14 @@ import YouTubeController from '@/components/YouTubeController';
 import Anchor from '@/components/Anchor';
 import { vectors } from '@/components/vectors';
 import { CategoryName } from '@/components/CategoryName';
+import { TagCategoryName } from '@/components/TagCategory';
+import { TagName } from '@/components/TagName';
 import { AnimeName } from '@/components/AnimeName';
 import { RatingsDrama } from '@/components/RatingsDrama';
 import { formatDuration } from '@/components/FormatDuration';
 import { formatDate } from '@/components/FormatDate';
 import { formatTime } from '@/components/FormatTime';
 import { OriginalName } from '@/components/OriginalName';
-import { TagName } from '@/components/TagName';
 import { SupportLang } from '@/components/SupportLang';
 import Related from '@/components/Related';
 import { rem } from '@/styles/designSystem';
@@ -313,19 +314,20 @@ const ReviewContent = ({ data }: { data: any }) => {
 
 function TagsItem({ items }: { items: any }) {
   const excludeTags = ['game', 'anime', 'film', 'drama'];
-  const filteredTags = items && items.filter((items: any) => !excludeTags.includes(items));
+  const filteredTags = items.tags && items.tags.filter((items: any) => !excludeTags.includes(items));
 
   if (!filteredTags) {
     return null;
   }
 
   return (
-    <div>
+    <div className={styles.tags}>
       <dt>관련 태그</dt>
       <dd className="April16thPromise">
         {filteredTags.map((tag: string, index: number) => (
           <span key={index}>{`#${TagName(tag)}`} </span>
         ))}
+        {items.category && <span> #{TagCategoryName(items.category)}</span>}
       </dd>
     </div>
   );
@@ -1345,7 +1347,7 @@ export default function JejeupDetail({
                                             <dd className="April16thPromise">{data.genre}</dd>
                                           </div>
                                         )}
-                                        {data.tags !== null && <TagsItem items={data.tags} />}
+                                        {data.tags !== null && <TagsItem items={data} />}
                                         {data.publisher !== '?' && (
                                           <div>
                                             <dt>{data.category === 'game' ? '유통/배급' : '제작/배급'}</dt>
@@ -1901,7 +1903,7 @@ export default function JejeupDetail({
                                       <dd className="April16thPromise">{data.genre}</dd>
                                     </div>
                                   )}
-                                  {data.tags !== null && <TagsItem items={data.tags} />}
+                                  {data.tags !== null && <TagsItem items={data} />}
                                   {data.publisher !== '?' && (
                                     <div>
                                       <dt>{data.category === 'game' ? '유통/배급' : '퍼블리싱'}</dt>
