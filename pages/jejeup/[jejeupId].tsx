@@ -1368,10 +1368,18 @@ export default function JejeupDetail({
                                             data.category !== 'ott_anime_film' &&
                                             data.category !== 'game' ? (
                                               <dt>주요 출연자</dt>
+                                            ) : data.dubbing !== null ? (
+                                              <dt>원어 성우</dt>
                                             ) : (
                                               <dt>주요 성우</dt>
                                             )}
                                             <dd className="April16thPromise">{data.cast}</dd>
+                                          </div>
+                                        )}
+                                        {data.dubbing !== null && (
+                                          <div>
+                                            <dt>한국 성우</dt>
+                                            <dd className="April16thPromise">{data.dubbing}</dd>
                                           </div>
                                         )}
                                       </dl>
@@ -1887,7 +1895,6 @@ export default function JejeupDetail({
                                       <dd className="April16thPromise">{data.country}</dd>
                                     </div>
                                   )}
-                                  {console.log(data)}
                                   {data.runningTime && (
                                     <div>
                                       <dt>재생시간</dt>
@@ -1924,10 +1931,18 @@ export default function JejeupDetail({
                                       data.category !== 'ott_anime_film' &&
                                       data.category !== 'game' ? (
                                         <dt>주요 출연자</dt>
+                                      ) : data.dubbing !== null ? (
+                                        <dt>원어 성우</dt>
                                       ) : (
                                         <dt>주요 성우</dt>
                                       )}
                                       <dd className="April16thPromise">{data.cast}</dd>
+                                    </div>
+                                  )}
+                                  {data.dubbing !== null && (
+                                    <div>
+                                      <dt>한국 성우</dt>
+                                      <dd className="April16thPromise">{data.dubbing}</dd>
                                     </div>
                                   )}
                                 </dl>

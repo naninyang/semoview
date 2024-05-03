@@ -1524,6 +1524,8 @@ export default function Amusement({
                     amusementData.attributes.category !== 'ott_anime_film' &&
                     amusementData.attributes.category !== 'game' ? (
                       <dt>주요 출연자</dt>
+                    ) : amusementData.attributes.dubbing !== null ? (
+                      <dt>원어 성우</dt>
                     ) : (
                       <dt>주요 성우</dt>
                     )}
@@ -1531,6 +1533,12 @@ export default function Amusement({
                   </div>
                 )}
               </>
+            )}
+            {amusementData.attributes.dubbing && (
+              <div>
+                <dt>한국 성우</dt>
+                <dd>{amusementData.attributes.dubbing}</dd>
+              </div>
             )}
             {amusementData.attributes.synopsys && (
               <div className={styles.synopsys}>

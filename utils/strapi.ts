@@ -612,6 +612,7 @@ export async function getAmusementData(amusement: string) {
     publisher: amusementData.attributes.publisher,
     creator: amusementData.attributes.creator,
     cast: amusementData.attributes.cast,
+    dubbing: amusementData.attributes.dubbing,
     posterDefault: amusementData.attributes.posterDefault,
     posterOther: amusementData.attributes.posterOther,
     relations: amusementData.attributes.relations,
