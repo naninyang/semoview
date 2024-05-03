@@ -1382,6 +1382,12 @@ export default function JejeupDetail({
                                             <dd className="April16thPromise">{data.dubbing}</dd>
                                           </div>
                                         )}
+                                        {data.characters !== null && (
+                                          <div>
+                                            <dt>캐릭터</dt>
+                                            <dd className="April16thPromise">{data.characters}</dd>
+                                          </div>
+                                        )}
                                       </dl>
                                     </div>
                                   </div>
@@ -1943,6 +1949,12 @@ export default function JejeupDetail({
                                     <div>
                                       <dt>한국 성우</dt>
                                       <dd className="April16thPromise">{data.dubbing}</dd>
+                                    </div>
+                                  )}
+                                  {data.characters !== null && (
+                                    <div>
+                                      <dt>캐릭터</dt>
+                                      <dd className="April16thPromise">{data.characters}</dd>
                                     </div>
                                   )}
                                 </dl>

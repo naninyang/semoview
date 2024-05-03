@@ -220,6 +220,7 @@ export interface AmusementData {
   creator: string;
   cast: string;
   dubbing: string;
+  characters: string;
   posterDefault: string;
   posterOther: string;
   relations: string;
@@ -257,6 +258,7 @@ export interface AmusementPermalinkData {
     publisher: string;
     creator: string;
     cast: string;
+    characters: string;
     dubbing: string;
     synopsys: string;
     posterDefault: string;

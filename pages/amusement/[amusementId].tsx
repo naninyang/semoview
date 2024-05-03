@@ -1540,6 +1540,12 @@ export default function Amusement({
                 <dd className="April16thPromise">{amusementData.attributes.dubbing}</dd>
               </div>
             )}
+            {amusementData.attributes.characters && (
+              <div>
+                <dt>캐릭터</dt>
+                <dd className="April16thPromise">{amusementData.attributes.characters}</dd>
+              </div>
+            )}
             {amusementData.attributes.synopsys && (
               <div className={styles.synopsys}>
                 <dt>시놉시스</dt>
