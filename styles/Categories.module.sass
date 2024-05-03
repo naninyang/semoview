@@ -1,7 +1,7 @@
 @import './designSystem'
 
 .categories
-  padding: rem(10) calc(env(safe-area-inset-right) + rem(12)) rem(57) calc(env(safe-area-inset-left) + rem(12))
+  padding: 0 0 rem(57)
   min-height: calc(100dvh - rem(78))
   font-size: rem(16)
 
@@ -9,6 +9,7 @@
     display: flex
     justify-content: center
     align-items: center
+    padding: 0 calc(env(safe-area-inset-right) + rem(12)) 0 calc(env(safe-area-inset-left) + rem(12))
     height: calc(100dvh - rem(133))
     font-weight: 700
     color: $hex-accent
@@ -27,6 +28,7 @@
     flex-direction: column
     gap: rem(7)
     margin-bottom: rem(12)
+    padding: rem(12) calc(env(safe-area-inset-right) + rem(12)) 0 calc(env(safe-area-inset-left) + rem(12))
 
     ul
       display: flex
@@ -71,7 +73,7 @@
   > h1
     display: flex
     gap: rem(2)
-    padding: rem(15) rem(7) rem(3)
+    padding: rem(15) calc(env(safe-area-inset-right) + rem(7)) rem(3) calc(env(safe-area-inset-left) + rem(7))
     font-size: rem(20)
     font-weight: 800
     line-height: 1.2
@@ -108,67 +110,80 @@
   .content
     > strong
       display: block
-      padding-bottom: rem(7)
+      padding: 0 calc(env(safe-area-inset-right) + rem(12)) rem(7) calc(env(safe-area-inset-left) + rem(12))
       font-size: rem(16)
       font-weight: 800
 
       +mq(maxSmall)
         font-size: rem(14)
 
-    .tag-list
+    .tag-container
       display: flex
-      flex-wrap: wrap
+      flex-direction: column
       gap: rem(7)
-      padding-bottom: rem(27)
+      padding: rem(27) 0 rem(57)
+      background-color: $hex-azalea
 
-      +mq(maxSmall)
-        gap: rem(3)
+      strong, .tag-list
+        padding: 0 calc(env(safe-area-inset-right) + rem(12)) 0 calc(env(safe-area-inset-left) + rem(12))
 
-      li
-        padding: rem(3) 0
+      strong
+        color: $hex-black
 
-      .current
-        a
-          span
-            background-color: $hex-accent
-            border-color: $hex-white
-            color: $hex-white
-
-      a
-        display: inline-flex
+      .tag-list
+        display: flex
+        flex-wrap: wrap
         gap: rem(7)
 
         +mq(maxSmall)
           gap: rem(3)
 
-        &:hover, &:focus
-          span
-            background-color: $hex-accent
-            border-color: $hex-white
-            color: $hex-white
+        li
+          padding: rem(3) 0
 
-        span
+        .current
+          a
+            span
+              background-color: $hex-black
+              border-color: $hex-accent
+              color: $hex-light
+
+        a
           display: inline-flex
-          align-items: center
-          border: 1px solid rgba($hex-black, .2)
-          border-radius: rem(32)
-          padding: 0 rem(17)
-          height: rem(32)
-          font-size: rem(16)
-          white-space: nowrap
-          color: $hex-dark
-          transition: all .4s cubic-bezier(.4,0,.2,1)
+          gap: rem(7)
 
           +mq(maxSmall)
-            border-radius: rem(27)
-            padding: 0 rem(12)
-            height: rem(27)
-            font-size: rem(14)
+            gap: rem(3)
+
+          &:hover, &:focus
+            span
+              background-color: $hex-black
+              border-color: $hex-accent
+              color: $hex-light
+
+          span
+            display: inline-flex
+            align-items: center
+            background-color: $hex-white
+            border: 1px solid $hex-light
+            border-radius: rem(32)
+            padding: 0 rem(17)
+            height: rem(32)
+            font-size: rem(16)
+            white-space: nowrap
+            color: $hex-dark
+            transition: all .4s cubic-bezier(.4,0,.2,1)
+
+            +mq(maxSmall)
+              border-radius: rem(27)
+              padding: 0 rem(12)
+              height: rem(27)
+              font-size: rem(14)
 
     .headline
       display: flex
       align-items: center
-      padding: rem(52) 0 rem(17)
+      padding: rem(52) calc(env(safe-area-inset-right) + rem(12)) rem(17) calc(env(safe-area-inset-left) + rem(12))
 
       h1, h2
         font-size: rem(20)
@@ -178,10 +193,17 @@
           font-size: rem(24)
 
       h1
+        em
+          font-size: rem(32)
+          font-style: normal
+          line-height: 1.25
+          color: $hex-light
+
         span
           font-size: rem(14)
           font-weight: 800
           color: $hex-azalea
+          white-space: nowrap
 
           +mq(minMedium)
             font-size: rem(16)
@@ -191,7 +213,7 @@
           margin-top: rem(7)
           font-size: rem(16)
           font-weight: 800
-          color: $hex-accent
+          color: $hex-white
 
       h2
         a
@@ -237,6 +259,10 @@
       display: flex
       flex-wrap: wrap
       gap: rem(12)
+      padding: 0 env(safe-area-inset-right) 0 calc(env(safe-area-inset-left) + rem(12))
+
+      +mq(minMedium)
+        padding: 0 env(safe-area-inset-right) 0 calc(env(safe-area-inset-left) + rem(12))
 
       &.game
         a
@@ -634,18 +660,19 @@
 
     .headline
       display: flex
-      padding: rem(12) 0 rem(17)
       justify-content: flex-start
+      background-color: $hex-dark
+      padding: rem(37) calc(env(safe-area-inset-right) + rem(12)) rem(17) calc(env(safe-area-inset-left) + rem(12))
 
       +mq(maxSmall)
         flex-direction: column
         align-items: flex-start
-        gap: rem(7)
+        gap: rem(27)
 
       +mq(minMedium)
         justify-content: space-between
         align-items: center
-        padding: rem(27) 0 rem(17)
+        padding: rem(52) calc(env(safe-area-inset-right) + rem(12)) rem(27) calc(env(safe-area-inset-left) + rem(12))
 
       .select
         display: flex
@@ -659,6 +686,11 @@
 
     .content
       section
+        padding: rem(27) env(safe-area-inset-right) 0 calc(env(safe-area-inset-left) + rem(12))
+
+        +mq(minMedium)
+          padding: rem(52) env(safe-area-inset-right) 0 calc(env(safe-area-inset-left) + rem(12))
+
         &.game
           a
             width: calc(100% - rem(12))
