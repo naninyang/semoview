@@ -604,6 +604,7 @@ export async function getAmusementData(amusement: string) {
     isMobile: amusementData.attributes.isMobile,
     genre: amusementData.attributes.genre,
     anime: amusementData.attributes.anime,
+    dubbingLang: amusementData.attributes.dubbingLang,
     animeBroadcast1: amusementData.attributes.animeBroadcast1,
     animeBroadcast2: amusementData.attributes.animeBroadcast2,
     ott: amusementData.attributes.ott,

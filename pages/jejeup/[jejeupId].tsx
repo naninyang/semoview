@@ -1378,7 +1378,11 @@ export default function JejeupDetail({
                                         )}
                                         {data.dubbing !== null && (
                                           <div>
-                                            <dt>한국 성우</dt>
+                                            <dt>
+                                              {data.dubbingLang === 'japanese' && '일본'}
+                                              {data.dubbingLang === 'english' && '미국'}
+                                              {data.dubbingLang === null && '한국'} 성우
+                                            </dt>
                                             <dd className="April16thPromise">{data.dubbing}</dd>
                                           </div>
                                         )}
@@ -1947,7 +1951,11 @@ export default function JejeupDetail({
                                   )}
                                   {data.dubbing !== null && (
                                     <div>
-                                      <dt>한국 성우</dt>
+                                      <dt>
+                                        {data.dubbingLang === 'japanese' && '일본'}
+                                        {data.dubbingLang === 'english' && '미국'}
+                                        {data.dubbingLang === null && '한국'} 성우
+                                      </dt>
                                       <dd className="April16thPromise">{data.dubbing}</dd>
                                     </div>
                                   )}

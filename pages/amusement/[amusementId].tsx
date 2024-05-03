@@ -1536,7 +1536,11 @@ export default function Amusement({
             )}
             {amusementData.attributes.dubbing && (
               <div>
-                <dt>한국 성우</dt>
+                <dt>
+                  {amusementData.attributes.dubbingLang === 'japanese' && '일본'}
+                  {amusementData.attributes.dubbingLang === 'english' && '미국'}
+                  {amusementData.attributes.dubbingLang === null && '한국'} 성우
+                </dt>
                 <dd className="April16thPromise">{amusementData.attributes.dubbing}</dd>
               </div>
             )}
