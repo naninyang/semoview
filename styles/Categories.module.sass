@@ -534,6 +534,7 @@
       gap: rem(17)
 
       h1
+        text-align: center
         padding-top: rem(12)
         font-size: rem(20)
         font-weight: 800
@@ -541,7 +542,6 @@
         +mq(minMedium)
           padding-top: rem(27)
           font-size: rem(24)
-          text-align: center
 
       .unselect
         display: flex
@@ -736,8 +736,7 @@
     position: relative
     flex-direction: column
     gap: rem(12)
-    margin-top: rem(52)
-    margin-right: rem(12)
+    margin: rem(52) calc(env(safe-area-inset-right) + rem(12)) 0 calc(env(safe-area-inset-left) + rem(12))
     padding: rem(102) 0
     text-align: center
     font-size: rem(20)
