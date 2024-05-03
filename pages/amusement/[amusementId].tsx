@@ -1537,7 +1537,7 @@ export default function Amusement({
             {amusementData.attributes.dubbing && (
               <div>
                 <dt>한국 성우</dt>
-                <dd>{amusementData.attributes.dubbing}</dd>
+                <dd className="April16thPromise">{amusementData.attributes.dubbing}</dd>
               </div>
             )}
             {amusementData.attributes.synopsys && (
