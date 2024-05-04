@@ -2116,27 +2116,17 @@ export default function Amusement({
                           {(amusementData.attributes.ott === 'amazonOriginal' ||
                             amusementData.attributes.ratingCustom) && (
                             <div className={styles.custom}>
+                              (
                               {amusementData.attributes.ott === 'amazonOriginal' &&
-                                !amusementData.attributes.ratingCustom && (
-                                  <button type="button" onClick={amazonRatingHandler}>
-                                    <i />
-                                    <span>아마존 자체 심의등급 작품</span>
-                                  </button>
-                                )}
+                                !amusementData.attributes.ratingCustom &&
+                                '아마존 자체 심의등급'}
                               {amusementData.attributes.ott === 'amazonOriginal' &&
-                                amusementData.attributes.ratingCustom && (
-                                  <button type="button" onClick={regionRatingHandler}>
-                                    <i />
-                                    <span>한국 리전 아마존 시청 불가 작품</span>
-                                  </button>
-                                )}
+                                amusementData.attributes.ratingCustom &&
+                                '한국 리전 아마존 시청 불가'}
                               {amusementData.attributes.ott !== 'amazonOriginal' &&
-                                amusementData.attributes.ratingCustom && (
-                                  <button type="button" onClick={customRatingHandler}>
-                                    <i />
-                                    <span>세모뷰 자체설정 심의등급 안내</span>
-                                  </button>
-                                )}
+                                amusementData.attributes.ratingCustom &&
+                                '세모뷰 자체설정 심의등급'}
+                              )
                             </div>
                           )}
                         </dd>
