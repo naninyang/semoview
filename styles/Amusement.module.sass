@@ -1,5 +1,183 @@
 @import './designSystem'
 
+.modal
+  position: fixed
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  top: 0
+  left: 0
+  z-index: 9999
+  border: 0
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)
+  width: 100%
+  height: 100%
+  background-color: rgba($hex-black, .7)
+  backdrop-filter: blur(rem(20))
+
+  +mq(maxExtraSmall)
+    background-color: $hex-dark
+
+  +mq(minSmall)
+    padding: rem(25)
+
+  +mq(minMedium)
+    padding: rem(52)
+
+  .container
+    position: relative
+    display: flex
+    flex-direction: column
+
+    +mq(minSmall)
+      width: 100%
+
+    +mq(minMedium)
+      width: 92%
+      max-height: 92%
+
+    +mq(minLarge)
+      width: 77%
+      max-height: 77%
+
+    +mq(maxExtraSmall)
+      flex-grow: 1
+      padding: rem(25)
+      width: 100%
+
+    > button
+      background-color: transparent
+      position: absolute
+      top: 0
+      right: 0
+      width: rem(20)
+      height: rem(20)
+
+      +mq(maxExtraSmall)
+        top: rem(25)
+        right: rem(25)
+
+      +mq(minLarge)
+        width: rem(36)
+        height: rem(36)
+
+      i
+        display: inline-block
+        width: rem(20)
+        height: rem(20)
+
+        +mq(minLarge)
+          width: rem(36)
+          height: rem(36)
+
+      span
+        +screen-reader-only
+
+    h3
+      padding-right: rem(40)
+      padding-bottom: rem(23)
+      font-size: rem(20)
+      font-weight: 800
+      line-height: 1.16666667
+      color: $hex-azalea
+
+      +mq(minLarge)
+        padding-right: rem(100)
+        padding-bottom: rem(27)
+        font-size: rem(36)
+
+    .scrollbar-container
+      +mq(maxExtraSmall)
+        max-height: calc(100dvh - rem(97))
+
+    .content
+      display: flex
+      flex-direction: column
+      gap: rem(12)
+      background-color: $hex-dark
+      margin: 0 auto
+      border-radius: rem(12)
+      padding: rem(25)
+
+      +mq(maxExtraSmall)
+        padding: 0
+        border-radius: 0
+
+      .title, .accent, .synopsys, .summary
+        dt
+          +screen-reader-only
+
+      .title, .summary
+        gap: rem(3)
+
+      .item
+        flex-wrap: wrap
+        gap: rem(3)
+
+        > div
+          gap: rem(3)
+
+          &.category
+            gap: 0
+
+            dd
+              display: flex
+              align-items: flex-start
+              gap: rem(3)
+
+              em
+                display: flex
+                gap: rem(3)
+
+                &::after
+                  content: '|'
+                  color: $hex-light
+
+                &:last-of-type::after
+                  content: ''
+
+          &::after
+            content: '|'
+            color: $hex-light
+
+          &:last-of-type::after
+            content: ''
+
+          dd
+            white-space: nowrap
+
+      dl
+        display: flex
+        flex-direction: column
+        gap: rem(7)
+
+        div
+          display: flex
+          gap: rem(7)
+
+      dt, dd
+        font-size: rem(14)
+
+        +mq(minLarge)
+          font-size: rem(16)
+
+      dt
+        width: rem(70)
+        color: $hex-azalea
+        white-space: nowrap
+
+        +mq(minLarge)
+          width: rem(80)
+
+      dd
+        +col
+        color: $hex-white
+        line-height: 1.42857143
+
+        em, i
+          font-style: normal
+
 .amusement
   display: flex
   flex-direction: column
@@ -26,22 +204,23 @@
 
   .cover
     display: flex
-    align-items: center
     gap: rem(27)
     position: relative
     padding: calc(env(safe-area-inset-top) + rem(105)) calc(env(safe-area-inset-right) + rem(19)) rem(327) calc(env(safe-area-inset-left) + rem(19))
 
     +mq(maxSmall)
       flex-direction: column-reverse
+      gap: rem(52)
 
     +mq(minMedium)
       justify-content: space-between
 
     +mq(minLarge)
+      gap: rem(52)
       padding: calc(env(safe-area-inset-top) + rem(130)) calc(env(safe-area-inset-right) + rem(52)) rem(327) calc(env(safe-area-inset-left) + rem(52))
 
     +mq(minExtraLarge)
-      gap: rem(57)
+      gap: rem(102)
       padding: calc(env(safe-area-inset-top) + rem(180)) calc(env(safe-area-inset-right) + rem(102)) rem(327) calc(env(safe-area-inset-left) + rem(102))
 
     .background
@@ -554,6 +733,7 @@
           dd
             +col
             font-weight: 800
+            text-wrap: balance
 
           &.synopsys, &.comment
             dt
@@ -561,6 +741,10 @@
 
             dd
               padding-top: rem(7)
+
+          &.synopsys
+            dd
+              +line-abbr(2, 67, 1.5)
               font-weight: 400
 
           &.comment
@@ -568,25 +752,53 @@
               font-weight: 800
               color: $hex-azalea
 
+      .more
+        font-size: rem(16)
+
+        button
+          background-color: transparent
+          color: $hex-white
+          font-weight: 800
+
     .poster
-      width: rem(370)
       text-align: center
 
       &.poster-game
-        width: rem(407)
+        +mq(minMedium)
+          width: rem(270)
+
+        +mq(minLarge)
+          width: rem(407)
+
+        .images, img
+          aspect-ratio: 460 / 215
 
         .images
-          aspect-ratio: 460 / 215
+          +mq(maxSmall)
+            width: 52%
 
-        img
-          aspect-ratio: 460 / 215
+          +mq(maxExtraSmall)
+            width: 92%
 
-      +mq(maxExtraSmall)
-        width: 92% !important
+      +mq(minMedium)
+        width: rem(257)
+
+      +mq(minExtraLarge)
+        width: rem(370)
+
+      +mq(maxSmall)
+        width: 100%
 
       .images
         aspect-ratio: 390 / 560
         position: relative
+
+        +mq(maxSmall)
+          margin: 0 auto
+          width: 52%
+
+        +mq(maxExtraSmall)
+          width: 92%
 
       img
         position: absolute
