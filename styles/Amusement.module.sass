@@ -82,27 +82,40 @@
       line-height: 1.16666667
       color: $hex-azalea
 
+      span
+        display: block
+        +ellipsis
+
       +mq(minLarge)
         padding-right: rem(100)
         padding-bottom: rem(27)
         font-size: rem(36)
 
-    .scrollbar-container
+    .contents
+      background-color: $hex-dark
+      border-radius: rem(12)
+
+      +mq(minSmall)
+        max-height: calc(100dvh - rem(103))
+
+      +mq(minMedium)
+        max-height: calc(100dvh - rem(223))
+
+      +mq(minLarge)
+        max-height: calc(100dvh - rem(283))
+
       +mq(maxExtraSmall)
         max-height: calc(100dvh - rem(97))
+        border-radius: 0
 
     .content
       display: flex
       flex-direction: column
       gap: rem(12)
-      background-color: $hex-dark
-      margin: 0 auto
-      border-radius: rem(12)
       padding: rem(25)
 
       +mq(maxExtraSmall)
-        padding: 0
-        border-radius: 0
+        padding: 0 rem(25) 0 0
 
       .title, .accent, .synopsys, .summary
         dt
