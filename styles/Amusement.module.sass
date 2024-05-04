@@ -20,10 +20,10 @@
     background-color: $hex-dark
 
   +mq(minSmall)
-    padding: rem(25)
+    padding: calc(env(safe-area-inset-top) + rem(25)) calc(env(safe-area-inset-right) + rem(25)) calc(env(safe-area-inset-bottom) + rem(25)) calc(env(safe-area-inset-left) + rem(25))
 
   +mq(minMedium)
-    padding: rem(52)
+    padding: calc(env(safe-area-inset-top) + rem(52)) calc(env(safe-area-inset-right) + rem(52)) calc(env(safe-area-inset-bottom) + rem(52)) calc(env(safe-area-inset-left) + rem(52))
 
   .container
     position: relative
