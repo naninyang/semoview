@@ -994,12 +994,6 @@ export default function Amusement({
                 </dd>
               </div>
             )}
-            {amusementData.attributes.titleOther && (
-              <div>
-                <dt>작품의 다른 언어 제목</dt>
-                <dd className="lang">{amusementData.attributes.titleOther}</dd>
-              </div>
-            )}
             {amusementData.attributes.etc && (
               <div className={styles.accent}>
                 <dt>작품 추가설명</dt>
@@ -1529,12 +1523,6 @@ export default function Amusement({
                   <dd className="April16thPromise">{amusementData.attributes.originalAuthor}</dd>
                 </div>
               )}
-            {amusementData.attributes.genre !== '?' && (
-              <div>
-                <dt>장르</dt>
-                <dd className="April16thPromise">{amusementData.attributes.genre}</dd>
-              </div>
-            )}
             {amusementData.attributes.publisher !== '?' && (
               <div>
                 <dt>
@@ -1542,7 +1530,7 @@ export default function Amusement({
                     ? '유통/배급'
                     : '제작/배급'}
                 </dt>
-                <dd className="April16thPromise">{truncateString(amusementData.attributes.publisher, 78)}</dd>
+                <dd className="April16thPromise">{truncateString(amusementData.attributes.publisher, 72)}</dd>
               </div>
             )}
             {amusementData.attributes.creator !== '?' && (
@@ -1552,7 +1540,7 @@ export default function Amusement({
                     ? '개발'
                     : '주요 제작자'}
                 </dt>
-                <dd className="April16thPromise">{truncateString(amusementData.attributes.creator, 78)}</dd>
+                <dd className="April16thPromise">{truncateString(amusementData.attributes.creator, 72)}</dd>
               </div>
             )}
             {amusementData.attributes.cast !== '?' && (
@@ -1570,7 +1558,7 @@ export default function Amusement({
                     ) : (
                       <dt>주요 성우</dt>
                     )}
-                    <dd className="April16thPromise">{truncateString(amusementData.attributes.cast, 78)}</dd>
+                    <dd className="April16thPromise">{truncateString(amusementData.attributes.cast, 72)}</dd>
                   </div>
                 )}
               </>
@@ -1582,13 +1570,13 @@ export default function Amusement({
                   {amusementData.attributes.dubbingLang === 'english' && '미국'}
                   {amusementData.attributes.dubbingLang === null && '한국'} 성우
                 </dt>
-                <dd className="April16thPromise">{truncateString(amusementData.attributes.dubbing, 78)}</dd>
+                <dd className="April16thPromise">{truncateString(amusementData.attributes.dubbing, 72)}</dd>
               </div>
             )}
             {amusementData.attributes.characters && (
               <div>
                 <dt>캐릭터</dt>
-                <dd className="April16thPromise">{truncateString(amusementData.attributes.characters, 78)}</dd>
+                <dd className="April16thPromise">{truncateString(amusementData.attributes.characters, 72)}</dd>
               </div>
             )}
             {amusementData.attributes.comment && (

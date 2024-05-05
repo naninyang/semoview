@@ -135,6 +135,16 @@
         > div
           gap: rem(3)
 
+          &::after
+            content: '|'
+            color: $hex-light
+
+          &:last-of-type::after
+            content: ''
+
+          dd
+            white-space: nowrap
+
           &.category
             gap: 0
 
@@ -148,26 +158,21 @@
                 gap: rem(3)
 
                 &::after
-                  content: '|'
+                  content: '· '
                   color: $hex-light
 
                 &:last-of-type::after
                   content: ''
 
-          &::after
-            content: '|'
-            color: $hex-light
-
-          &:last-of-type::after
-            content: ''
-
-          dd
-            white-space: nowrap
-
           &.rating
             dd
               display: flex
               gap: rem(3)
+
+          &.ad-cc
+            dd
+              & + dd::before
+                content: '· '
 
       dl
         display: flex
