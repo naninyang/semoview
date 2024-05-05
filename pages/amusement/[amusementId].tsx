@@ -1141,20 +1141,22 @@ export default function Amusement({
                   </dd>
                 </div>
               )}
-              {amusementData.attributes.ott === null && amusementData.attributes.ottAddr !== null && (
-                <div className={styles.link}>
-                  <dt>단편영화 보기</dt>
-                  <dd>
-                    <Anchor href={amusementData.attributes.ottAddr}>
-                      단편영화 &apos;
-                      {amusementData.attributes.titleKorean
-                        ? amusementData.attributes.titleKorean
-                        : amusementData.attributes.title}
-                      &apos; 보러가기
-                    </Anchor>
-                  </dd>
-                </div>
-              )}
+              {amusementData.attributes.ott === null &&
+                amusementData.attributes.category !== 'game_fan' &&
+                amusementData.attributes.ottAddr !== null && (
+                  <div className={styles.link}>
+                    <dt>단편영화 보기</dt>
+                    <dd>
+                      <Anchor href={amusementData.attributes.ottAddr}>
+                        단편영화 &apos;
+                        {amusementData.attributes.titleKorean
+                          ? amusementData.attributes.titleKorean
+                          : amusementData.attributes.title}
+                        &apos; 보러가기
+                      </Anchor>
+                    </dd>
+                  </div>
+                )}
               {isLoading && (
                 <div className={styles.relation}>
                   <dt>다른 버전 보기</dt>
@@ -1340,9 +1342,9 @@ export default function Amusement({
                         )}
                     </>
                   )}
-                  {amusementData.attributes.ott === null && amusementData.attributes.ottAddr !== null && (
-                    <em>단편영화</em>
-                  )}
+                  {amusementData.attributes.ott === null &&
+                    amusementData.attributes.category !== 'game_fan' &&
+                    amusementData.attributes.ottAddr !== null && <em>단편영화</em>}
                   {amusementData.attributes.anime !== null && <em>{AnimeName(amusementData.attributes.anime)}</em>}
                 </dd>
               </div>
@@ -1601,12 +1603,18 @@ export default function Amusement({
               </div>
             )}
           </dl>
-          <div className={styles.more}>
-            ...{' '}
-            <button type="button" onClick={() => handleButtonClick()}>
-              <span>더보기</span>
-            </button>
-          </div>
+          {amusementData.attributes.category !== 'game_fan' ? (
+            <div className={styles.more}>
+              ...{' '}
+              <button type="button" onClick={() => handleButtonClick()}>
+                <span>더보기</span>
+              </button>
+            </div>
+          ) : (
+            <div className={styles.channel}>
+              <Anchor href={amusementData.attributes.ottAddr}>{amusementData.attributes.title} 채널 놀러가기</Anchor>
+            </div>
+          )}
         </div>
         <div
           className={`${styles.poster} ${amusementData.attributes.category === 'game' || amusementData.attributes.category === 'game_fan' ? styles['poster-game'] : ''}`}
@@ -1951,9 +1959,9 @@ export default function Amusement({
                                 )}
                             </>
                           )}
-                          {amusementData.attributes.ott === null && amusementData.attributes.ottAddr !== null && (
-                            <em>단편영화</em>
-                          )}
+                          {amusementData.attributes.ott === null &&
+                            amusementData.attributes.category !== 'game_fan' &&
+                            amusementData.attributes.ottAddr !== null && <em>단편영화</em>}
                           {amusementData.attributes.anime !== null && (
                             <em>{AnimeName(amusementData.attributes.anime)}</em>
                           )}
