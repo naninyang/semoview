@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import styled from '@emotion/styled';
-import { JejeupData, JejeupMetaData, JejeupPermalinkData } from 'types';
+import { AmusementData, JejeupData, JejeupMetaData, JejeupPermalinkData } from 'types';
 import { formatDateDetail } from '@/utils/strapi';
 import Seo, { originTitle } from '@/components/Seo';
 import YouTubeController from '@/components/YouTubeController';
@@ -256,6 +256,66 @@ const RelatedList = ({ related }: { related: any }) => {
           </div>
         </aside>
       </PerfectScrollbar>
+    );
+  } else {
+    return null;
+  }
+};
+
+const GameList = ({ game }: { game: any }) => {
+  const [amusementData, setAmusementData] = useState<AmusementData | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    async function fetchAmusementData() {
+      setLoading(true);
+      const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/jejeupAmusement?page=1&amusementId=${game}`;
+
+      try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setAmusementData(data.jejeups);
+      } catch (e) {
+        if (e instanceof Error) {
+          console.error('Error fetching data: ', e.message);
+        } else {
+          console.error('Error fetching data: ', e);
+        }
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchAmusementData();
+  }, []);
+
+  if (!loading && amusementData && Object.keys(amusementData).length > 1) {
+    return (
+      <aside className={styles['items-fan']}>
+        <h2>팬게임 영상</h2>
+        <div className={styles.list}>
+          {amusementData &&
+            Array.isArray(amusementData) &&
+            amusementData.map((data: JejeupData, index: number) => (
+              <div className={styles.item} key={index}>
+                <Anchor href={`/jejeup/${data.idx}`} key={index}>
+                  <Image
+                    src={`https://i.ytimg.com/vi/${data.video}/hqdefault.jpg`}
+                    width={640}
+                    height={480}
+                    unoptimized
+                    priority
+                    alt=""
+                  />
+                  <span>{data.subject}</span>
+                </Anchor>
+              </div>
+            ))}
+        </div>
+      </aside>
     );
   } else {
     return null;
@@ -785,1243 +845,1240 @@ export default function JejeupDetail({
                         <ReviewContent data={jejeupData.attributes.review} />
                       </div>
                     )}
-                    <div className={styles.title}>
-                      <h2 className="April16thPromise">작품 정보</h2>
-                      <div className={styles.function}>
-                        <button onClick={copyToClipboard}>
-                          <ClipboardIcon /> <span>URL 복사</span>
-                        </button>
-                      </div>
-                      {Array.isArray(jejeupData.amusementData) &&
-                        (jejeupData.amusementData.length > 1 ? (
-                          <div className={styles['title-container']}>
-                            <PerfectScrollbar className={styles['scrollbar-container']}>
-                              <div className={styles['title-list']}>
+                    {Array.isArray(jejeupData.amusementData) && jejeupData.amusementData[0].category !== 'game_fan' ? (
+                      <>
+                        <div className={styles.title}>
+                          <h2 className="April16thPromise">작품 정보</h2>
+                          <div className={styles.function}>
+                            <button onClick={copyToClipboard}>
+                              <ClipboardIcon /> <span>URL 복사</span>
+                            </button>
+                          </div>
+                          {Array.isArray(jejeupData.amusementData) &&
+                            (jejeupData.amusementData.length > 1 ? (
+                              <div className={styles['title-container']}>
+                                <PerfectScrollbar className={styles['scrollbar-container']}>
+                                  <div className={styles['title-list']}>
+                                    {jejeupData.amusementData.map((data, index) => (
+                                      <div className={styles['title-info']} key={index}>
+                                        <div
+                                          className={`${styles.poster} ${data.category === 'game' ? styles['posters-game'] : styles['posters-other']}`}
+                                        >
+                                          <Image
+                                            src={data.posterDefault}
+                                            alt=""
+                                            width={data.category === 'game' ? 460 : 390}
+                                            height={data.category === 'game' ? 215 : 560}
+                                            unoptimized
+                                          />
+                                        </div>
+                                        <div className={styles['info-container']}>
+                                          <dl className={styles.summary}>
+                                            <dt>
+                                              {data.category !== 'anime_film' ? (
+                                                <>
+                                                  {(data.category === 'drama' ||
+                                                    data.category === 'film' ||
+                                                    data.category === 'game' ||
+                                                    data.category === 'anime' ||
+                                                    data.category === 'ott_drama' ||
+                                                    data.category === 'ott_film' ||
+                                                    data.category === 'ott_anime') && (
+                                                    <em className={styles[data.broadcast]}>
+                                                      {data.broadcast === 'ENA' && (
+                                                        <>
+                                                          <Ena /> <span>ENA</span>
+                                                        </>
+                                                      )}
+                                                      {data.broadcast === 'JTBC' && (
+                                                        <>
+                                                          <Jtbc /> <span>JTBC</span>
+                                                        </>
+                                                      )}
+                                                      {data.broadcast === 'KBS2' && (
+                                                        <>
+                                                          <Kbs2tv /> <span>KBS 2TV</span>
+                                                        </>
+                                                      )}
+                                                      {data.broadcast === 'MBC' && (
+                                                        <>
+                                                          <Mbc /> <span>MBC</span>
+                                                        </>
+                                                      )}
+                                                      {data.broadcast === 'OCN' && (
+                                                        <>
+                                                          <Ocn /> <span>OCN</span>
+                                                        </>
+                                                      )}
+                                                      {data.broadcast === 'SBS' && (
+                                                        <>
+                                                          <Sbs /> <span>SBS</span>
+                                                        </>
+                                                      )}
+                                                      {data.broadcast === 'tvN' && (
+                                                        <>
+                                                          <Tvn /> <span>tvN</span>
+                                                        </>
+                                                      )}
+                                                      {data.broadcast === 'ABC' && (
+                                                        <>
+                                                          <Abc /> <span>ABC</span>
+                                                        </>
+                                                      )}
+                                                      {(data.animeBroadcast1 !== null ||
+                                                        data.animeBroadcast2 !== null) && (
+                                                        <>
+                                                          {data.animeBroadcast1 === 'tokyomx' && (
+                                                            <>
+                                                              <Tokyomx /> <span>도쿄MX</span>
+                                                            </>
+                                                          )}
+                                                          {data.animeBroadcast1 === 'tvtokyo' && (
+                                                            <>
+                                                              <Tvtokyo /> <span>테레토</span>
+                                                            </>
+                                                          )}
+                                                          {data.animeBroadcast1 === 'fujitv' && (
+                                                            <>
+                                                              <Fujitv /> <span>후지테레비</span>
+                                                            </>
+                                                          )}
+                                                          {data.animeBroadcast1 === 'mbs' && (
+                                                            <>
+                                                              <Mbs /> <span>MBS</span>
+                                                            </>
+                                                          )}
+                                                          {data.animeBroadcast1 === 'tbs' && (
+                                                            <>
+                                                              <Tbs /> <span>TBS</span>
+                                                            </>
+                                                          )}
+                                                          {data.animeBroadcast1 === 'atx' && (
+                                                            <>
+                                                              <Atx /> <span>AT-X</span>
+                                                            </>
+                                                          )}
+                                                          {data.animeBroadcast1 === 'nippontv' && (
+                                                            <>
+                                                              <Nippontv /> <span>닛테레</span>
+                                                            </>
+                                                          )}
+                                                          {data.animeBroadcast1 === 'wowow' && (
+                                                            <>
+                                                              <Wowow /> <span>WOWOW</span>
+                                                            </>
+                                                          )}
+                                                          {data.animeBroadcast2 === 'aniplus' && (
+                                                            <>
+                                                              {data.animeBroadcast1 !== null && '|'}
+                                                              <Aniplus />
+                                                              <span>애니플러스</span> 방영{' '}
+                                                            </>
+                                                          )}
+                                                          {data.animeBroadcast2 === 'daewon' && (
+                                                            <>
+                                                              {data.animeBroadcast1 !== null && '|'}
+                                                              <Daewon /> <span>애니원</span> 방영{' '}
+                                                            </>
+                                                          )}
+                                                          {data.animeBroadcast2 === 'anibox' && (
+                                                            <>
+                                                              {data.animeBroadcast1 !== null && '|'}
+                                                              <Anibox /> <span>애니박스</span> 방영{' '}
+                                                            </>
+                                                          )}
+                                                          {data.animeBroadcast2 === 'tooniverse' && (
+                                                            <>
+                                                              {data.animeBroadcast1 !== null && '|'}
+                                                              <Tooniverse /> <span>투니버스</span> 방영{' '}
+                                                            </>
+                                                          )}
+                                                          {data.animeBroadcast2 === 'animax' && (
+                                                            <>
+                                                              {data.animeBroadcast1 !== null && '|'}
+                                                              <Animax /> <span>애니맥스</span> 방영{' '}
+                                                            </>
+                                                          )}
+                                                        </>
+                                                      )}
+                                                      {data.category === 'game' && data.isMobile && '모바일 '}
+                                                      {CategoryName(data.category)}
+                                                      {data.ott === null && data.ottAddr !== null && ' | 단편영화'}
+                                                    </em>
+                                                  )}
+                                                  {data.category === 'ott_anime_film' && (
+                                                    <>
+                                                      <em>애니메이션</em>
+                                                      <em>영화</em>
+                                                    </>
+                                                  )}
+                                                  {data.category === 'ott_documentary_film' && (
+                                                    <>
+                                                      <em>다큐멘터리</em>
+                                                      <em>영화</em>
+                                                    </>
+                                                  )}
+                                                </>
+                                              ) : (
+                                                <>
+                                                  {data.broadcast !== null && (
+                                                    <em className={styles[data.broadcast]}>
+                                                      {data.broadcast === 'ENA' && (
+                                                        <>
+                                                          <Ena /> <span>ENA</span>
+                                                        </>
+                                                      )}
+                                                      {data.broadcast === 'JTBC' && (
+                                                        <>
+                                                          <Jtbc /> <span>JTBC</span>
+                                                        </>
+                                                      )}
+                                                      {data.broadcast === 'KBS2' && (
+                                                        <>
+                                                          <Kbs2tv /> <span>KBS 2TV</span>
+                                                        </>
+                                                      )}
+                                                      {data.broadcast === 'MBC' && (
+                                                        <>
+                                                          <Mbc /> <span>MBC</span>
+                                                        </>
+                                                      )}
+                                                      {data.broadcast === 'OCN' && (
+                                                        <>
+                                                          <Ocn /> <span>OCN</span>
+                                                        </>
+                                                      )}
+                                                      {data.broadcast === 'SBS' && (
+                                                        <>
+                                                          <Sbs /> <span>SBS</span>
+                                                        </>
+                                                      )}
+                                                      {data.broadcast === 'tvN' && (
+                                                        <>
+                                                          <Tvn /> <span>tvN</span>
+                                                        </>
+                                                      )}
+                                                      드라마
+                                                    </em>
+                                                  )}
+                                                  {data.category === 'anime_film' && (
+                                                    <>
+                                                      <em>애니메이션</em>
+                                                      <em>영화</em>
+                                                    </>
+                                                  )}
+                                                </>
+                                              )}
+                                              {data.category === 'anime' && <em>{AnimeName(data.anime)}</em>}
+                                              {data.ott === 'amazonOriginal' && (
+                                                <cite>
+                                                  <AmazonOriginal /> AMAZON ORIGINAL
+                                                </cite>
+                                              )}
+                                              {data.ott === 'appleOriginal' && (
+                                                <cite>
+                                                  <AppleOriginal /> An Apple Original
+                                                </cite>
+                                              )}
+                                              {data.ott === 'appleFilm' && (
+                                                <cite>
+                                                  <AppleOriginal /> Apple Original Films
+                                                </cite>
+                                              )}
+                                              {data.ott === 'disneyOriginal' && (
+                                                <cite>
+                                                  <DisneyOriginal /> Disney Original
+                                                </cite>
+                                              )}
+                                              {data.ott === 'disneyStar' && (
+                                                <cite>
+                                                  <StarOriginal /> Star Original
+                                                </cite>
+                                              )}
+                                              {(data.ott === 'netflixSeries' ||
+                                                data.ott === 'netflixOriginal' ||
+                                                data.ott === 'netflixAnime') && (
+                                                <cite>
+                                                  <NetflixOriginal /> A NETFLIX Series
+                                                </cite>
+                                              )}
+                                              {(data.ott === 'netflixPresents' ||
+                                                data.ott === 'netflixFilm' ||
+                                                data.ott === 'netflixAnimeFilm') && (
+                                                <cite>
+                                                  <NetflixOriginal /> NETFLIX Presents
+                                                </cite>
+                                              )}
+                                              {data.ott === 'netflixDocumentary' && (
+                                                <cite>
+                                                  <NetflixOriginal /> A NETFLIX Documentary
+                                                </cite>
+                                              )}
+                                              {data.ott === 'tvingOriginal' && (
+                                                <cite>
+                                                  <TvingOriginal /> 티빙 오리지널
+                                                </cite>
+                                              )}
+                                              {data.ott === 'tvingOnly' && (
+                                                <cite>
+                                                  <TvingOnly /> 오직 티빙에서
+                                                </cite>
+                                              )}
+                                              {data.ott === 'watchaOriginal' && (
+                                                <cite>
+                                                  <WatchaOriginal /> 왓챠 오리지널
+                                                </cite>
+                                              )}
+                                              {data.ott === 'watchaExclusive' && (
+                                                <cite>
+                                                  <WatchaOnly /> 오직 왓챠에서
+                                                </cite>
+                                              )}
+                                              {data.ott === 'wavveOriginal' && (
+                                                <cite>
+                                                  <WavveOriginal /> 웨이브 오리지널
+                                                </cite>
+                                              )}
+                                              {data.ott === 'wavveOnly' && (
+                                                <cite>
+                                                  <WavveOnly /> 오직 웨이브에서
+                                                </cite>
+                                              )}
+                                              {data.ott === 'paramount' && (
+                                                <cite>
+                                                  <Paramount /> Paramaount+
+                                                </cite>
+                                              )}
+                                              {data.ott === 'amazonOriginal' ? (
+                                                <i
+                                                  className={`${styles['rating-amazon']} number`}
+                                                  aria-label="시청 가능 연령"
+                                                >
+                                                  {data.rating === 'all' && 'All'}
+                                                  {data.rating === 'a7' && '7+'}
+                                                  {data.rating === 'b12' && '13+'}
+                                                  {data.rating === 'c15' && '16+'}
+                                                  {data.rating === 'd19' && '18+'}
+                                                </i>
+                                              ) : (
+                                                <>
+                                                  {(data.category === 'drama' ||
+                                                    data.category === 'ott_drama' ||
+                                                    data.category === 'ott_anime' ||
+                                                    data.anime === 'tva' ||
+                                                    data.anime === 'ova') && (
+                                                    <>
+                                                      {data.rating === 'all' ? (
+                                                        <>
+                                                          <i className={`${styles.drama} ${styles.all} number`}>
+                                                            {RatingsDrama(data.rating)}
+                                                          </i>
+                                                          <span>전체 이용가</span>
+                                                        </>
+                                                      ) : (
+                                                        <>
+                                                          {data.rating === 'd19' ? (
+                                                            <>
+                                                              <i className={`${styles.drama} ${styles.d19} number`}>
+                                                                {RatingsDrama(data.rating)}
+                                                              </i>
+                                                              <span>세 미만 이용불가</span>
+                                                            </>
+                                                          ) : (
+                                                            <>
+                                                              <i className={`${styles.drama} number`}>
+                                                                {RatingsDrama(data.rating)}
+                                                              </i>
+                                                              <span>세 이상 이용가</span>
+                                                            </>
+                                                          )}
+                                                        </>
+                                                      )}
+                                                    </>
+                                                  )}
+                                                  {(data.category === 'film' ||
+                                                    data.category === 'anime_film' ||
+                                                    data.category === 'ott_anime_film' ||
+                                                    data.category === 'ott_film' ||
+                                                    data.category === 'ott_documentary_film' ||
+                                                    data.anime === 'film') && (
+                                                    <>
+                                                      {data.rating === 'all' && (
+                                                        <>
+                                                          <RatingFilmAll className={styles.rating} />{' '}
+                                                          <span>전체 이용가</span>
+                                                        </>
+                                                      )}
+                                                      {data.rating === 'b12' && (
+                                                        <>
+                                                          <RatingFilmB12 className={styles.rating} />{' '}
+                                                          <span>12세 이용가</span>
+                                                        </>
+                                                      )}
+                                                      {data.rating === 'c15' && (
+                                                        <>
+                                                          <RatingFilmC15 className={styles.rating} />{' '}
+                                                          <span>15세 이용가</span>
+                                                        </>
+                                                      )}
+                                                      {data.rating === 'd19' && (
+                                                        <>
+                                                          <RatingFilmD18 className={styles.rating} />{' '}
+                                                          <span>청소년 이용불가</span>
+                                                        </>
+                                                      )}
+                                                    </>
+                                                  )}
+                                                </>
+                                              )}
+                                              {data.category === 'game' && (
+                                                <>
+                                                  {data.rating === 'all' && (
+                                                    <>
+                                                      <RatingGameAll className={styles.rating} />{' '}
+                                                      <span>전체 이용가</span>
+                                                    </>
+                                                  )}
+                                                  {data.rating === 'b12' && (
+                                                    <>
+                                                      <RatingGameB12 className={styles.rating} />{' '}
+                                                      <span>12세 이용가</span>
+                                                    </>
+                                                  )}
+                                                  {data.rating === 'c15' && (
+                                                    <>
+                                                      <RatingGameC15 className={styles.rating} />{' '}
+                                                      <span>15세 이용가</span>
+                                                    </>
+                                                  )}
+                                                  {data.rating === 'd19' && (
+                                                    <>
+                                                      <RatingGameD19 className={styles.rating} />{' '}
+                                                      <span>청소년 이용불가</span>
+                                                    </>
+                                                  )}
+                                                </>
+                                              )}
+                                              {data.ratingCustom && (
+                                                <div className={styles.custom}>
+                                                  {data.ott === 'amazonOriginal' && !data.ratingCustom && (
+                                                    <button type="button" onClick={amazonRatingHandler}>
+                                                      <i />
+                                                      <span>아마존 자체 심의등급 작품</span>
+                                                    </button>
+                                                  )}
+                                                  {data.ott === 'amazonOriginal' && data.ratingCustom && (
+                                                    <button type="button" onClick={regionRatingHandler}>
+                                                      <i />
+                                                      <span>한국 리전 아마존 시청 불가 작품</span>
+                                                    </button>
+                                                  )}
+                                                  {data.ott !== 'amazonOriginal' && data.ratingCustom && (
+                                                    <button type="button" onClick={customRatingHandler}>
+                                                      <i />
+                                                      <span>세모뷰 자체설정 심의등급 안내</span>
+                                                    </button>
+                                                  )}
+                                                </div>
+                                              )}
+                                              {data.ott !== null && data.ottAddr !== null && (
+                                                <Anchor href={data.ottAddr}>
+                                                  {data.ott === 'amazonOriginal' && 'Prime Video'}
+                                                  {(data.ott === 'appleOriginal' || data.ott === 'appleFilm') &&
+                                                    'Apple TV+'}
+                                                  {(data.ott === 'disneyOriginal' || data.ott === 'disneyStar') &&
+                                                    'Disney+'}
+                                                  {(data.ott === 'netflixOriginal' ||
+                                                    data.ott === 'netflixFilm' ||
+                                                    data.ott === 'netflixAnime' ||
+                                                    data.ott === 'netflixAnimeFilm' ||
+                                                    data.ott === 'netflixDocumentary') &&
+                                                    'NETFLIX'}
+                                                  {(data.ott === 'tvingOriginal' ||
+                                                    data.ott === 'tvingOnly' ||
+                                                    data.ott === 'paramount') &&
+                                                    'TVING'}
+                                                  {(data.ott === 'watchaOriginal' || data.ott === 'watchaExclusive') &&
+                                                    'WATCHA'}
+                                                  {(data.ott === 'wavveOriginal' || data.ott === 'wavveOnly') &&
+                                                    'Wavve'}
+                                                  에서 시청하기
+                                                </Anchor>
+                                              )}
+                                              {data.ott === null && data.ottAddr !== null && (
+                                                <Anchor href={data.ottAddr}>
+                                                  단편영화 &apos;{data.titleKorean ? data.titleKorean : data.title}
+                                                  &apos; 보러가기
+                                                </Anchor>
+                                              )}
+                                            </dt>
+                                            <dd>
+                                              <strong>
+                                                <span
+                                                  className={`${styles.title} April16thPromise`}
+                                                  aria-label="작품명"
+                                                >
+                                                  {data.titleKorean ? data.titleKorean : data.title}
+                                                </span>
+                                                {data.lang === 'chineseBeonche' && (
+                                                  <span lang="zh-Hant">{data.title} </span>
+                                                )}
+                                                {data.lang === 'chineseGanche' && (
+                                                  <span lang="zh-Hans">{data.title} </span>
+                                                )}
+                                                {data.lang === 'europe' && <span lang="en">{data.title}</span>}
+                                                {data.lang === 'english' && <span lang="en-US">{data.title}</span>}
+                                                {data.lang === 'japanese' && <span lang="ja">{data.title}</span>}
+                                                {data.lang === 'thai' && <span lang="th">{data.title}</span>}
+                                                {data.titleOther !== null && (
+                                                  <span className="lang" aria-label="작품의 다른 언어 제목">
+                                                    {data.titleOther}
+                                                  </span>
+                                                )}
+                                                {data.release !== '?' && (
+                                                  <>
+                                                    {(data.category === 'drama' ||
+                                                      data.category === 'ott_drama' ||
+                                                      data.category === 'ott_anime' ||
+                                                      data.anime === 'tva' ||
+                                                      data.anime === 'ova') && (
+                                                      <time aria-label="방영년도">{data.release}</time>
+                                                    )}
+                                                    {(data.category === 'film' ||
+                                                      data.category === 'anime_film' ||
+                                                      data.category === 'ott_anime_film' ||
+                                                      data.category === 'ott_film' ||
+                                                      data.anime === 'film') && (
+                                                      <time aria-label="상영년도">{data.release}</time>
+                                                    )}
+                                                    {data.category === 'game' && (
+                                                      <time aria-label="출시년도">{data.release}</time>
+                                                    )}
+                                                  </>
+                                                )}
+                                              </strong>
+                                              {(data.original !== null || data.etc !== null) && (
+                                                <p>
+                                                  {data.originalAuthor && data.original && data.originTitle && (
+                                                    <span>
+                                                      &apos;{data.originalAuthor}&apos;의 {OriginalName(data.original)}{' '}
+                                                      &apos;
+                                                      {data.originTitle}&apos; 원작
+                                                    </span>
+                                                  )}
+                                                  {data.original !== null &&
+                                                    data.originTitle === null &&
+                                                    data.originalAuthor !== null && (
+                                                      <span className={styles.origin}>
+                                                        동명의 {OriginalName(data.original)} 원작
+                                                      </span>
+                                                    )}
+                                                  {data.original !== null && data.etc !== null && ' | '}
+                                                  {data.etc !== null && (
+                                                    <em className="lang" aria-label="작품 추가설명">
+                                                      {data.etc}
+                                                    </em>
+                                                  )}
+                                                </p>
+                                              )}
+                                            </dd>
+                                          </dl>
+                                          <dl className={styles.info}>
+                                            {data.original !== null &&
+                                              data.originTitle === null &&
+                                              data.originalAuthor !== null && (
+                                                <div>
+                                                  <dt>원작자</dt>
+                                                  <dd className="April16thPromise">{data.originalAuthor}</dd>
+                                                </div>
+                                              )}
+                                            {data.country !== '?' && (
+                                              <div>
+                                                <dt>제작국가</dt>
+                                                <dd className="April16thPromise">{data.country}</dd>
+                                              </div>
+                                            )}
+                                            {data.runningTime && (
+                                              <div>
+                                                <dt>재생시간</dt>
+                                                <dd>
+                                                  {data.runningTime}분{formatTime(data.runningTime)}
+                                                </dd>
+                                              </div>
+                                            )}
+                                            {data.supportLang !== null && <ADCC items={data.supportLang} />}
+                                            {data.genre !== '?' && (
+                                              <div>
+                                                <dt>장르</dt>
+                                                <dd className="April16thPromise">{data.genre}</dd>
+                                              </div>
+                                            )}
+                                            {data.tags !== null && <TagsItem items={data} />}
+                                            {data.publisher !== '?' && (
+                                              <div>
+                                                <dt>{data.category === 'game' ? '유통/배급' : '제작/배급'}</dt>
+                                                <dd className="April16thPromise">{data.publisher}</dd>
+                                              </div>
+                                            )}
+                                            {data.creator !== '?' && (
+                                              <div>
+                                                <dt>{data.category === 'game' ? '개발' : '주요 제작자'}</dt>
+                                                <dd className="April16thPromise">{data.creator}</dd>
+                                              </div>
+                                            )}
+                                            {data.cast !== null && (
+                                              <div>
+                                                {data.category !== 'anime' &&
+                                                data.category !== 'anime_film' &&
+                                                data.category !== 'ott_anime' &&
+                                                data.category !== 'ott_anime_film' &&
+                                                data.category !== 'game' ? (
+                                                  <dt>주요 출연자</dt>
+                                                ) : data.dubbing !== null ? (
+                                                  <dt>원어 성우</dt>
+                                                ) : (
+                                                  <dt>주요 성우</dt>
+                                                )}
+                                                <dd className="April16thPromise">{data.cast}</dd>
+                                              </div>
+                                            )}
+                                            {data.dubbing !== null && (
+                                              <div>
+                                                <dt>
+                                                  {data.dubbingLang === 'japanese' && '일본'}
+                                                  {data.dubbingLang === 'english' && '미국'}
+                                                  {data.dubbingLang === null && '한국'} 성우
+                                                </dt>
+                                                <dd className="April16thPromise">{data.dubbing}</dd>
+                                              </div>
+                                            )}
+                                            {data.characters !== null && (
+                                              <div>
+                                                <dt>캐릭터</dt>
+                                                <dd className="April16thPromise">{data.characters}</dd>
+                                              </div>
+                                            )}
+                                          </dl>
+                                        </div>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </PerfectScrollbar>
+                              </div>
+                            ) : (
+                              <div className={styles['title-item']}>
                                 {jejeupData.amusementData.map((data, index) => (
                                   <div className={styles['title-info']} key={index}>
-                                    <div
-                                      className={`${styles.poster} ${data.category === 'game' || data.category === 'game_fan' ? styles['posters-game'] : styles['posters-other']}`}
-                                    >
-                                      <Image
-                                        src={data.posterDefault}
-                                        alt=""
-                                        width={data.category === 'game' || data.category === 'game_fan' ? 460 : 390}
-                                        height={data.category === 'game' || data.category === 'game_fan' ? 215 : 560}
-                                        unoptimized
-                                      />
-                                    </div>
-                                    <div className={styles['info-container']}>
-                                      <dl className={styles.summary}>
-                                        <dt>
-                                          {data.category !== 'anime_film' ? (
-                                            <>
-                                              {(data.category === 'drama' ||
-                                                data.category === 'film' ||
-                                                data.category === 'game' ||
-                                                data.category === 'anime' ||
-                                                data.category === 'ott_drama' ||
-                                                data.category === 'ott_film' ||
-                                                data.category === 'ott_anime') && (
-                                                <em className={styles[data.broadcast]}>
-                                                  {data.broadcast === 'ENA' && (
-                                                    <>
-                                                      <Ena /> <span>ENA</span>
-                                                    </>
-                                                  )}
-                                                  {data.broadcast === 'JTBC' && (
-                                                    <>
-                                                      <Jtbc /> <span>JTBC</span>
-                                                    </>
-                                                  )}
-                                                  {data.broadcast === 'KBS2' && (
-                                                    <>
-                                                      <Kbs2tv /> <span>KBS 2TV</span>
-                                                    </>
-                                                  )}
-                                                  {data.broadcast === 'MBC' && (
-                                                    <>
-                                                      <Mbc /> <span>MBC</span>
-                                                    </>
-                                                  )}
-                                                  {data.broadcast === 'OCN' && (
-                                                    <>
-                                                      <Ocn /> <span>OCN</span>
-                                                    </>
-                                                  )}
-                                                  {data.broadcast === 'SBS' && (
-                                                    <>
-                                                      <Sbs /> <span>SBS</span>
-                                                    </>
-                                                  )}
-                                                  {data.broadcast === 'tvN' && (
-                                                    <>
-                                                      <Tvn /> <span>tvN</span>
-                                                    </>
-                                                  )}
-                                                  {data.broadcast === 'ABC' && (
-                                                    <>
-                                                      <Abc /> <span>ABC</span>
-                                                    </>
-                                                  )}
-                                                  {(data.animeBroadcast1 !== null || data.animeBroadcast2 !== null) && (
-                                                    <>
-                                                      {data.animeBroadcast1 === 'tokyomx' && (
-                                                        <>
-                                                          <Tokyomx /> <span>도쿄MX</span>
-                                                        </>
-                                                      )}
-                                                      {data.animeBroadcast1 === 'tvtokyo' && (
-                                                        <>
-                                                          <Tvtokyo /> <span>테레토</span>
-                                                        </>
-                                                      )}
-                                                      {data.animeBroadcast1 === 'fujitv' && (
-                                                        <>
-                                                          <Fujitv /> <span>후지테레비</span>
-                                                        </>
-                                                      )}
-                                                      {data.animeBroadcast1 === 'mbs' && (
-                                                        <>
-                                                          <Mbs /> <span>MBS</span>
-                                                        </>
-                                                      )}
-                                                      {data.animeBroadcast1 === 'tbs' && (
-                                                        <>
-                                                          <Tbs /> <span>TBS</span>
-                                                        </>
-                                                      )}
-                                                      {data.animeBroadcast1 === 'atx' && (
-                                                        <>
-                                                          <Atx /> <span>AT-X</span>
-                                                        </>
-                                                      )}
-                                                      {data.animeBroadcast1 === 'nippontv' && (
-                                                        <>
-                                                          <Nippontv /> <span>닛테레</span>
-                                                        </>
-                                                      )}
-                                                      {data.animeBroadcast1 === 'wowow' && (
-                                                        <>
-                                                          <Wowow /> <span>WOWOW</span>
-                                                        </>
-                                                      )}
-                                                      {data.animeBroadcast2 === 'aniplus' && (
-                                                        <>
-                                                          {data.animeBroadcast1 !== null && '|'}
-                                                          <Aniplus />
-                                                          <span>애니플러스</span> 방영{' '}
-                                                        </>
-                                                      )}
-                                                      {data.animeBroadcast2 === 'daewon' && (
-                                                        <>
-                                                          {data.animeBroadcast1 !== null && '|'}
-                                                          <Daewon /> <span>애니원</span> 방영{' '}
-                                                        </>
-                                                      )}
-                                                      {data.animeBroadcast2 === 'anibox' && (
-                                                        <>
-                                                          {data.animeBroadcast1 !== null && '|'}
-                                                          <Anibox /> <span>애니박스</span> 방영{' '}
-                                                        </>
-                                                      )}
-                                                      {data.animeBroadcast2 === 'tooniverse' && (
-                                                        <>
-                                                          {data.animeBroadcast1 !== null && '|'}
-                                                          <Tooniverse /> <span>투니버스</span> 방영{' '}
-                                                        </>
-                                                      )}
-                                                      {data.animeBroadcast2 === 'animax' && (
-                                                        <>
-                                                          {data.animeBroadcast1 !== null && '|'}
-                                                          <Animax /> <span>애니맥스</span> 방영{' '}
-                                                        </>
-                                                      )}
-                                                    </>
-                                                  )}
-                                                  {(data.category === 'game' || data.category === 'game_fan') &&
-                                                    data.isMobile &&
-                                                    '모바일 '}
-                                                  {CategoryName(data.category)}
-                                                  {data.ott === null && data.ottAddr !== null && ' | 단편영화'}
-                                                </em>
-                                              )}
-                                              {data.category === 'ott_anime_film' && (
-                                                <>
-                                                  <em>애니메이션</em>
-                                                  <em>영화</em>
-                                                </>
-                                              )}
-                                              {data.category === 'ott_documentary_film' && (
-                                                <>
-                                                  <em>다큐멘터리</em>
-                                                  <em>영화</em>
-                                                </>
-                                              )}
-                                            </>
-                                          ) : (
-                                            <>
-                                              {data.broadcast !== null && (
-                                                <em className={styles[data.broadcast]}>
-                                                  {data.broadcast === 'ENA' && (
-                                                    <>
-                                                      <Ena /> <span>ENA</span>
-                                                    </>
-                                                  )}
-                                                  {data.broadcast === 'JTBC' && (
-                                                    <>
-                                                      <Jtbc /> <span>JTBC</span>
-                                                    </>
-                                                  )}
-                                                  {data.broadcast === 'KBS2' && (
-                                                    <>
-                                                      <Kbs2tv /> <span>KBS 2TV</span>
-                                                    </>
-                                                  )}
-                                                  {data.broadcast === 'MBC' && (
-                                                    <>
-                                                      <Mbc /> <span>MBC</span>
-                                                    </>
-                                                  )}
-                                                  {data.broadcast === 'OCN' && (
-                                                    <>
-                                                      <Ocn /> <span>OCN</span>
-                                                    </>
-                                                  )}
-                                                  {data.broadcast === 'SBS' && (
-                                                    <>
-                                                      <Sbs /> <span>SBS</span>
-                                                    </>
-                                                  )}
-                                                  {data.broadcast === 'tvN' && (
-                                                    <>
-                                                      <Tvn /> <span>tvN</span>
-                                                    </>
-                                                  )}
-                                                  드라마
-                                                </em>
-                                              )}
-                                              {data.category === 'anime_film' && (
-                                                <>
-                                                  <em>애니메이션</em>
-                                                  <em>영화</em>
-                                                </>
-                                              )}
-                                            </>
+                                    <dl className={styles.summary}>
+                                      <dt>
+                                        {data.category !== 'anime_film' ? (
+                                          <>
+                                            {(data.category === 'drama' ||
+                                              data.category === 'film' ||
+                                              data.category === 'game' ||
+                                              data.category === 'anime' ||
+                                              data.category === 'ott_drama' ||
+                                              data.category === 'ott_film' ||
+                                              data.category === 'ott_anime') && (
+                                              <em className={styles[data.broadcast]}>
+                                                {data.broadcast === 'ENA' && (
+                                                  <>
+                                                    <Ena /> <span>ENA</span>
+                                                  </>
+                                                )}
+                                                {data.broadcast === 'JTBC' && (
+                                                  <>
+                                                    <Jtbc /> <span>JTBC</span>
+                                                  </>
+                                                )}
+                                                {data.broadcast === 'KBS2' && (
+                                                  <>
+                                                    <Kbs2tv /> <span>KBS 2TV</span>
+                                                  </>
+                                                )}
+                                                {data.broadcast === 'MBC' && (
+                                                  <>
+                                                    <Mbc /> <span>MBC</span>
+                                                  </>
+                                                )}
+                                                {data.broadcast === 'OCN' && (
+                                                  <>
+                                                    <Ocn /> <span>OCN</span>
+                                                  </>
+                                                )}
+                                                {data.broadcast === 'SBS' && (
+                                                  <>
+                                                    <Sbs /> <span>SBS</span>
+                                                  </>
+                                                )}
+                                                {data.broadcast === 'tvN' && (
+                                                  <>
+                                                    <Tvn /> <span>tvN</span>
+                                                  </>
+                                                )}
+                                                {data.broadcast === 'ABC' && (
+                                                  <>
+                                                    <Abc /> <span>ABC</span>
+                                                  </>
+                                                )}
+                                                {(data.animeBroadcast1 !== null || data.animeBroadcast2 !== null) && (
+                                                  <>
+                                                    {data.animeBroadcast1 === 'tokyomx' && (
+                                                      <>
+                                                        <Tokyomx /> <span>도쿄MX</span>
+                                                      </>
+                                                    )}
+                                                    {data.animeBroadcast1 === 'tvtokyo' && (
+                                                      <>
+                                                        <Tvtokyo /> <span>테레토</span>
+                                                      </>
+                                                    )}
+                                                    {data.animeBroadcast1 === 'fujitv' && (
+                                                      <>
+                                                        <Fujitv /> <span>후지테레비</span>
+                                                      </>
+                                                    )}
+                                                    {data.animeBroadcast1 === 'mbs' && (
+                                                      <>
+                                                        <Mbs /> <span>MBS</span>
+                                                      </>
+                                                    )}
+                                                    {data.animeBroadcast1 === 'tbs' && (
+                                                      <>
+                                                        <Tbs /> <span>TBS</span>
+                                                      </>
+                                                    )}
+                                                    {data.animeBroadcast1 === 'atx' && (
+                                                      <>
+                                                        <Atx /> <span>AT-X</span>
+                                                      </>
+                                                    )}
+                                                    {data.animeBroadcast1 === 'nippontv' && (
+                                                      <>
+                                                        <Nippontv /> <span>닛테레</span>
+                                                      </>
+                                                    )}
+                                                    {data.animeBroadcast1 === 'wowow' && (
+                                                      <>
+                                                        <Wowow /> <span>WOWOW</span>
+                                                      </>
+                                                    )}
+                                                    {data.animeBroadcast2 === 'aniplus' && (
+                                                      <>
+                                                        {data.animeBroadcast1 !== null && '|'}
+                                                        <Aniplus />
+                                                        <span>애니플러스</span> 방영{' '}
+                                                      </>
+                                                    )}
+                                                    {data.animeBroadcast2 === 'daewon' && (
+                                                      <>
+                                                        {data.animeBroadcast1 !== null && '|'}
+                                                        <Daewon /> <span>애니원</span> 방영{' '}
+                                                      </>
+                                                    )}
+                                                    {data.animeBroadcast2 === 'anibox' && (
+                                                      <>
+                                                        {data.animeBroadcast1 !== null && '|'}
+                                                        <Anibox /> <span>애니박스</span> 방영{' '}
+                                                      </>
+                                                    )}
+                                                    {data.animeBroadcast2 === 'tooniverse' && (
+                                                      <>
+                                                        {data.animeBroadcast1 !== null && '|'}
+                                                        <Tooniverse /> <span>투니버스</span> 방영{' '}
+                                                      </>
+                                                    )}
+                                                    {data.animeBroadcast2 === 'animax' && (
+                                                      <>
+                                                        {data.animeBroadcast1 !== null && '|'}
+                                                        <Animax /> <span>애니맥스</span> 방영{' '}
+                                                      </>
+                                                    )}
+                                                  </>
+                                                )}
+                                                {data.category === 'game' && data.isMobile && '모바일 '}
+                                                {CategoryName(data.category)}
+                                                {data.ott === null && data.ottAddr !== null && ' | 단편영화'}
+                                              </em>
+                                            )}
+                                            {data.category === 'ott_anime_film' && (
+                                              <>
+                                                <em>애니메이션</em>
+                                                <em>영화</em>
+                                              </>
+                                            )}
+                                            {data.category === 'ott_documentary_film' && (
+                                              <>
+                                                <em>다큐멘터리</em>
+                                                <em>영화</em>
+                                              </>
+                                            )}
+                                          </>
+                                        ) : (
+                                          <>
+                                            {data.broadcast !== null && (
+                                              <em className={styles[data.broadcast]}>
+                                                {data.broadcast === 'ENA' && (
+                                                  <>
+                                                    <Ena /> <span>ENA</span>
+                                                  </>
+                                                )}
+                                                {data.broadcast === 'JTBC' && (
+                                                  <>
+                                                    <Jtbc /> <span>JTBC</span>
+                                                  </>
+                                                )}
+                                                {data.broadcast === 'KBS2' && (
+                                                  <>
+                                                    <Kbs2tv /> <span>KBS 2TV</span>
+                                                  </>
+                                                )}
+                                                {data.broadcast === 'MBC' && (
+                                                  <>
+                                                    <Mbc /> <span>MBC</span>
+                                                  </>
+                                                )}
+                                                {data.broadcast === 'OCN' && (
+                                                  <>
+                                                    <Ocn /> <span>OCN</span>
+                                                  </>
+                                                )}
+                                                {data.broadcast === 'SBS' && (
+                                                  <>
+                                                    <Sbs /> <span>SBS</span>
+                                                  </>
+                                                )}
+                                                {data.broadcast === 'tvN' && (
+                                                  <>
+                                                    <Tvn /> <span>tvN</span>
+                                                  </>
+                                                )}
+                                                드라마
+                                              </em>
+                                            )}
+                                            {data.category === 'anime_film' && (
+                                              <>
+                                                <em>애니메이션</em>
+                                                <em>영화</em>
+                                              </>
+                                            )}
+                                          </>
+                                        )}
+                                        {data.category === 'anime' && <em>{AnimeName(data.anime)}</em>}
+                                        {data.ott === 'amazonOriginal' && (
+                                          <cite>
+                                            <AmazonOriginal /> AMAZON ORIGINAL
+                                          </cite>
+                                        )}
+                                        {data.ott === 'appleOriginal' && (
+                                          <cite>
+                                            <AppleOriginal /> An Apple Original
+                                          </cite>
+                                        )}
+                                        {data.ott === 'appleFilm' && (
+                                          <cite>
+                                            <AppleOriginal /> Apple Original Films
+                                          </cite>
+                                        )}
+                                        {data.ott === 'disneyOriginal' && (
+                                          <cite>
+                                            <DisneyOriginal /> Disney Original
+                                          </cite>
+                                        )}
+                                        {data.ott === 'disneyStar' && (
+                                          <cite>
+                                            <StarOriginal /> Star Original
+                                          </cite>
+                                        )}
+                                        {(data.ott === 'netflixSeries' ||
+                                          data.ott === 'netflixOriginal' ||
+                                          data.ott === 'netflixAnime') && (
+                                          <cite>
+                                            <NetflixOriginal /> A NETFLIX Series
+                                          </cite>
+                                        )}
+                                        {(data.ott === 'netflixPresents' ||
+                                          data.ott === 'netflixFilm' ||
+                                          data.ott === 'netflixAnimeFilm') && (
+                                          <cite>
+                                            <NetflixOriginal /> NETFLIX Presents
+                                          </cite>
+                                        )}
+                                        {data.ott === 'netflixDocumentary' && (
+                                          <cite>
+                                            <NetflixOriginal /> A NETFLIX Documentary
+                                          </cite>
+                                        )}
+                                        {data.ott === 'tvingOriginal' && (
+                                          <cite>
+                                            <TvingOriginal /> 티빙 오리지널
+                                          </cite>
+                                        )}
+                                        {data.ott === 'tvingOnly' && (
+                                          <cite>
+                                            <TvingOnly /> 오직 티빙에서
+                                          </cite>
+                                        )}
+                                        {data.ott === 'watchaOriginal' && (
+                                          <cite>
+                                            <WatchaOriginal /> 왓챠 오리지널
+                                          </cite>
+                                        )}
+                                        {data.ott === 'watchaExclusive' && (
+                                          <cite>
+                                            <WatchaOnly /> 오직 왓챠에서
+                                          </cite>
+                                        )}
+                                        {data.ott === 'wavveOriginal' && (
+                                          <cite>
+                                            <WavveOriginal /> 웨이브 오리지널
+                                          </cite>
+                                        )}
+                                        {data.ott === 'wavveOnly' && (
+                                          <cite>
+                                            <WavveOnly /> 오직 웨이브에서
+                                          </cite>
+                                        )}
+                                        {data.ott === 'paramount' && (
+                                          <cite>
+                                            <Paramount /> Paramaount+
+                                          </cite>
+                                        )}
+                                        {data.ott === 'amazonOriginal' ? (
+                                          <i
+                                            className={`${styles['rating-amazon']} number`}
+                                            aria-label="시청 가능 연령"
+                                          >
+                                            {data.rating === 'all' && 'All'}
+                                            {data.rating === 'a7' && '7+'}
+                                            {data.rating === 'b12' && '13+'}
+                                            {data.rating === 'c15' && '16+'}
+                                            {data.rating === 'd19' && '18+'}
+                                          </i>
+                                        ) : (
+                                          <>
+                                            {(data.category === 'drama' ||
+                                              data.category === 'ott_drama' ||
+                                              data.category === 'ott_anime' ||
+                                              data.anime === 'tva' ||
+                                              data.anime === 'ova') && (
+                                              <>
+                                                {data.rating === 'all' ? (
+                                                  <>
+                                                    <i className={`${styles.drama} ${styles.all} number`}>
+                                                      {RatingsDrama(data.rating)}
+                                                    </i>
+                                                    <span>전체 이용가</span>
+                                                  </>
+                                                ) : (
+                                                  <>
+                                                    {data.rating === 'd19' ? (
+                                                      <>
+                                                        <i className={`${styles.drama} ${styles.d19} number`}>
+                                                          {RatingsDrama(data.rating)}
+                                                        </i>
+                                                        <span>세 미만 이용불가</span>
+                                                      </>
+                                                    ) : (
+                                                      <>
+                                                        <i className={`${styles.drama} number`}>
+                                                          {RatingsDrama(data.rating)}
+                                                        </i>
+                                                        <span>세 이상 이용가</span>
+                                                      </>
+                                                    )}
+                                                  </>
+                                                )}
+                                              </>
+                                            )}
+                                            {(data.category === 'film' ||
+                                              data.category === 'anime_film' ||
+                                              data.category === 'ott_anime_film' ||
+                                              data.category === 'ott_film' ||
+                                              data.category === 'ott_documentary_film' ||
+                                              data.anime === 'film') && (
+                                              <>
+                                                {data.rating === 'all' && (
+                                                  <>
+                                                    <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
+                                                  </>
+                                                )}
+                                                {data.rating === 'b12' && (
+                                                  <>
+                                                    <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
+                                                  </>
+                                                )}
+                                                {data.rating === 'c15' && (
+                                                  <>
+                                                    <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
+                                                  </>
+                                                )}
+                                                {data.rating === 'd19' && (
+                                                  <>
+                                                    <RatingFilmD18 className={styles.rating} />{' '}
+                                                    <span>청소년 이용불가</span>
+                                                  </>
+                                                )}
+                                              </>
+                                            )}
+                                          </>
+                                        )}
+                                        {data.category === 'game' && (
+                                          <>
+                                            {data.rating === 'all' && (
+                                              <>
+                                                <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
+                                              </>
+                                            )}
+                                            {data.rating === 'b12' && (
+                                              <>
+                                                <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
+                                              </>
+                                            )}
+                                            {data.rating === 'c15' && (
+                                              <>
+                                                <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
+                                              </>
+                                            )}
+                                            {data.rating === 'd19' && (
+                                              <>
+                                                <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
+                                              </>
+                                            )}
+                                          </>
+                                        )}
+                                        {data.ratingCustom && (
+                                          <div className={styles.custom}>
+                                            {data.ott === 'amazonOriginal' && !data.ratingCustom && (
+                                              <button type="button" onClick={amazonRatingHandler}>
+                                                <i />
+                                                <span>아마존 자체 심의등급 작품</span>
+                                              </button>
+                                            )}
+                                            {data.ott === 'amazonOriginal' && data.ratingCustom && (
+                                              <button type="button" onClick={regionRatingHandler}>
+                                                <i />
+                                                <span>한국 리전 아마존 시청 불가 작품</span>
+                                              </button>
+                                            )}
+                                            {data.ott !== 'amazonOriginal' && data.ratingCustom && (
+                                              <button type="button" onClick={customRatingHandler}>
+                                                <i />
+                                                <span>세모뷰 자체설정 심의등급 안내</span>
+                                              </button>
+                                            )}
+                                          </div>
+                                        )}
+                                        {data.ott !== null && data.ottAddr !== null && (
+                                          <Anchor href={data.ottAddr}>
+                                            {data.ott === 'amazonOriginal' && 'Prime Video'}
+                                            {(data.ott === 'appleOriginal' || data.ott === 'appleFilm') && 'Apple TV+'}
+                                            {(data.ott === 'disneyOriginal' || data.ott === 'disneyStar') && 'Disney+'}
+                                            {(data.ott === 'netflixOriginal' ||
+                                              data.ott === 'netflixFilm' ||
+                                              data.ott === 'netflixAnime' ||
+                                              data.ott === 'netflixAnimeFilm' ||
+                                              data.ott === 'netflixDocumentary') &&
+                                              'NETFLIX'}
+                                            {(data.ott === 'tvingOriginal' ||
+                                              data.ott === 'tvingOnly' ||
+                                              data.ott === 'paramount') &&
+                                              'TVING'}
+                                            {(data.ott === 'watchaOriginal' || data.ott === 'watchaExclusive') &&
+                                              'WATCHA'}
+                                            {(data.ott === 'wavveOriginal' || data.ott === 'wavveOnly') && 'Wavve'}
+                                            에서 시청하기
+                                          </Anchor>
+                                        )}
+                                        {data.ott === null && data.ottAddr !== null && (
+                                          <Anchor href={data.ottAddr}>
+                                            단편영화 &apos;{data.titleKorean ? data.titleKorean : data.title}&apos;
+                                            보러가기
+                                          </Anchor>
+                                        )}
+                                      </dt>
+                                      <dd>
+                                        <strong>
+                                          <span className={`${styles.title} April16thPromise`} aria-label="작품명">
+                                            {data.titleKorean ? data.titleKorean : data.title}
+                                          </span>
+                                          {data.lang === 'chineseBeonche' && <span lang="zh-Hant">{data.title} </span>}
+                                          {data.lang === 'chineseGanche' && <span lang="zh-Hans">{data.title} </span>}
+                                          {data.lang === 'europe' && <span lang="en">{data.title}</span>}
+                                          {data.lang === 'english' && <span lang="en-US">{data.title}</span>}
+                                          {data.lang === 'japanese' && <span lang="ja">{data.title}</span>}
+                                          {data.lang === 'thai' && <span lang="th">{data.title}</span>}
+                                          {data.titleOther !== null && (
+                                            <span className="lang" aria-label="작품의 다른 언어 제목">
+                                              {data.titleOther}
+                                            </span>
                                           )}
-                                          {data.category === 'anime' && <em>{AnimeName(data.anime)}</em>}
-                                          {data.ott === 'amazonOriginal' && (
-                                            <cite>
-                                              <AmazonOriginal /> AMAZON ORIGINAL
-                                            </cite>
-                                          )}
-                                          {data.ott === 'appleOriginal' && (
-                                            <cite>
-                                              <AppleOriginal /> An Apple Original
-                                            </cite>
-                                          )}
-                                          {data.ott === 'appleFilm' && (
-                                            <cite>
-                                              <AppleOriginal /> Apple Original Films
-                                            </cite>
-                                          )}
-                                          {data.ott === 'disneyOriginal' && (
-                                            <cite>
-                                              <DisneyOriginal /> Disney Original
-                                            </cite>
-                                          )}
-                                          {data.ott === 'disneyStar' && (
-                                            <cite>
-                                              <StarOriginal /> Star Original
-                                            </cite>
-                                          )}
-                                          {(data.ott === 'netflixSeries' ||
-                                            data.ott === 'netflixOriginal' ||
-                                            data.ott === 'netflixAnime') && (
-                                            <cite>
-                                              <NetflixOriginal /> A NETFLIX Series
-                                            </cite>
-                                          )}
-                                          {(data.ott === 'netflixPresents' ||
-                                            data.ott === 'netflixFilm' ||
-                                            data.ott === 'netflixAnimeFilm') && (
-                                            <cite>
-                                              <NetflixOriginal /> NETFLIX Presents
-                                            </cite>
-                                          )}
-                                          {data.ott === 'netflixDocumentary' && (
-                                            <cite>
-                                              <NetflixOriginal /> A NETFLIX Documentary
-                                            </cite>
-                                          )}
-                                          {data.ott === 'tvingOriginal' && (
-                                            <cite>
-                                              <TvingOriginal /> 티빙 오리지널
-                                            </cite>
-                                          )}
-                                          {data.ott === 'tvingOnly' && (
-                                            <cite>
-                                              <TvingOnly /> 오직 티빙에서
-                                            </cite>
-                                          )}
-                                          {data.ott === 'watchaOriginal' && (
-                                            <cite>
-                                              <WatchaOriginal /> 왓챠 오리지널
-                                            </cite>
-                                          )}
-                                          {data.ott === 'watchaExclusive' && (
-                                            <cite>
-                                              <WatchaOnly /> 오직 왓챠에서
-                                            </cite>
-                                          )}
-                                          {data.ott === 'wavveOriginal' && (
-                                            <cite>
-                                              <WavveOriginal /> 웨이브 오리지널
-                                            </cite>
-                                          )}
-                                          {data.ott === 'wavveOnly' && (
-                                            <cite>
-                                              <WavveOnly /> 오직 웨이브에서
-                                            </cite>
-                                          )}
-                                          {data.ott === 'paramount' && (
-                                            <cite>
-                                              <Paramount /> Paramaount+
-                                            </cite>
-                                          )}
-                                          {data.ott === 'amazonOriginal' ? (
-                                            <i
-                                              className={`${styles['rating-amazon']} number`}
-                                              aria-label="시청 가능 연령"
-                                            >
-                                              {data.rating === 'all' && 'All'}
-                                              {data.rating === 'a7' && '7+'}
-                                              {data.rating === 'b12' && '13+'}
-                                              {data.rating === 'c15' && '16+'}
-                                              {data.rating === 'd19' && '18+'}
-                                            </i>
-                                          ) : (
+                                          {data.release !== '?' && (
                                             <>
                                               {(data.category === 'drama' ||
                                                 data.category === 'ott_drama' ||
                                                 data.category === 'ott_anime' ||
                                                 data.anime === 'tva' ||
                                                 data.anime === 'ova') && (
-                                                <>
-                                                  {data.rating === 'all' ? (
-                                                    <>
-                                                      <i className={`${styles.drama} ${styles.all} number`}>
-                                                        {RatingsDrama(data.rating)}
-                                                      </i>
-                                                      <span>전체 이용가</span>
-                                                    </>
-                                                  ) : (
-                                                    <>
-                                                      {data.rating === 'd19' ? (
-                                                        <>
-                                                          <i className={`${styles.drama} ${styles.d19} number`}>
-                                                            {RatingsDrama(data.rating)}
-                                                          </i>
-                                                          <span>세 미만 이용불가</span>
-                                                        </>
-                                                      ) : (
-                                                        <>
-                                                          <i className={`${styles.drama} number`}>
-                                                            {RatingsDrama(data.rating)}
-                                                          </i>
-                                                          <span>세 이상 이용가</span>
-                                                        </>
-                                                      )}
-                                                    </>
-                                                  )}
-                                                </>
+                                                <time aria-label="방영년도">{data.release}</time>
                                               )}
                                               {(data.category === 'film' ||
                                                 data.category === 'anime_film' ||
                                                 data.category === 'ott_anime_film' ||
                                                 data.category === 'ott_film' ||
-                                                data.category === 'ott_documentary_film' ||
                                                 data.anime === 'film') && (
-                                                <>
-                                                  {data.rating === 'all' && (
-                                                    <>
-                                                      <RatingFilmAll className={styles.rating} />{' '}
-                                                      <span>전체 이용가</span>
-                                                    </>
-                                                  )}
-                                                  {data.rating === 'b12' && (
-                                                    <>
-                                                      <RatingFilmB12 className={styles.rating} />{' '}
-                                                      <span>12세 이용가</span>
-                                                    </>
-                                                  )}
-                                                  {data.rating === 'c15' && (
-                                                    <>
-                                                      <RatingFilmC15 className={styles.rating} />{' '}
-                                                      <span>15세 이용가</span>
-                                                    </>
-                                                  )}
-                                                  {data.rating === 'd19' && (
-                                                    <>
-                                                      <RatingFilmD18 className={styles.rating} />{' '}
-                                                      <span>청소년 이용불가</span>
-                                                    </>
-                                                  )}
-                                                </>
+                                                <time aria-label="상영년도">{data.release}</time>
+                                              )}
+                                              {data.category === 'game' && (
+                                                <time aria-label="출시년도">{data.release}</time>
                                               )}
                                             </>
                                           )}
-                                          {data.category === 'game' && (
-                                            <>
-                                              {data.rating === 'all' && (
-                                                <>
-                                                  <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
-                                                </>
-                                              )}
-                                              {data.rating === 'b12' && (
-                                                <>
-                                                  <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
-                                                </>
-                                              )}
-                                              {data.rating === 'c15' && (
-                                                <>
-                                                  <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
-                                                </>
-                                              )}
-                                              {data.rating === 'd19' && (
-                                                <>
-                                                  <RatingGameD19 className={styles.rating} />{' '}
-                                                  <span>청소년 이용불가</span>
-                                                </>
-                                              )}
-                                            </>
-                                          )}
-                                          {data.ratingCustom && (
-                                            <div className={styles.custom}>
-                                              {data.ott === 'amazonOriginal' && !data.ratingCustom && (
-                                                <button type="button" onClick={amazonRatingHandler}>
-                                                  <i />
-                                                  <span>아마존 자체 심의등급 작품</span>
-                                                </button>
-                                              )}
-                                              {data.ott === 'amazonOriginal' && data.ratingCustom && (
-                                                <button type="button" onClick={regionRatingHandler}>
-                                                  <i />
-                                                  <span>한국 리전 아마존 시청 불가 작품</span>
-                                                </button>
-                                              )}
-                                              {data.ott !== 'amazonOriginal' && data.ratingCustom && (
-                                                <button type="button" onClick={customRatingHandler}>
-                                                  <i />
-                                                  <span>세모뷰 자체설정 심의등급 안내</span>
-                                                </button>
-                                              )}
-                                            </div>
-                                          )}
-                                          {data.ott !== null && data.ottAddr !== null && (
-                                            <Anchor href={data.ottAddr}>
-                                              {data.ott === 'amazonOriginal' && 'Prime Video'}
-                                              {(data.ott === 'appleOriginal' || data.ott === 'appleFilm') &&
-                                                'Apple TV+'}
-                                              {(data.ott === 'disneyOriginal' || data.ott === 'disneyStar') &&
-                                                'Disney+'}
-                                              {(data.ott === 'netflixOriginal' ||
-                                                data.ott === 'netflixFilm' ||
-                                                data.ott === 'netflixAnime' ||
-                                                data.ott === 'netflixAnimeFilm' ||
-                                                data.ott === 'netflixDocumentary') &&
-                                                'NETFLIX'}
-                                              {(data.ott === 'tvingOriginal' ||
-                                                data.ott === 'tvingOnly' ||
-                                                data.ott === 'paramount') &&
-                                                'TVING'}
-                                              {(data.ott === 'watchaOriginal' || data.ott === 'watchaExclusive') &&
-                                                'WATCHA'}
-                                              {(data.ott === 'wavveOriginal' || data.ott === 'wavveOnly') && 'Wavve'}
-                                              에서 시청하기
-                                            </Anchor>
-                                          )}
-                                          {data.ott === null && data.ottAddr !== null && (
-                                            <Anchor href={data.ottAddr}>
-                                              단편영화 &apos;{data.titleKorean ? data.titleKorean : data.title}&apos;{' '}
-                                              보러가기
-                                            </Anchor>
-                                          )}
-                                        </dt>
-                                        <dd>
-                                          <strong>
-                                            <span className={`${styles.title} April16thPromise`} aria-label="작품명">
-                                              {data.category === 'game_fan'
-                                                ? `'${data.title}'의 팬 게임 콜렉션`
-                                                : data.titleKorean
-                                                  ? data.titleKorean
-                                                  : data.title}
-                                            </span>
-                                            {data.lang === 'chineseBeonche' && (
-                                              <span lang="zh-Hant">{data.title} </span>
-                                            )}
-                                            {data.lang === 'chineseGanche' && <span lang="zh-Hans">{data.title} </span>}
-                                            {data.lang === 'europe' && <span lang="en">{data.title}</span>}
-                                            {data.lang === 'english' && <span lang="en-US">{data.title}</span>}
-                                            {data.lang === 'japanese' && <span lang="ja">{data.title}</span>}
-                                            {data.lang === 'thai' && <span lang="th">{data.title}</span>}
-                                            {data.titleOther !== null && (
-                                              <span className="lang" aria-label="작품의 다른 언어 제목">
-                                                {data.titleOther}
+                                        </strong>
+                                        {(data.original !== null || data.etc !== null) && (
+                                          <p>
+                                            {data.originalAuthor && data.original && data.originTitle && (
+                                              <span>
+                                                &apos;{data.originalAuthor}&apos;의 {OriginalName(data.original)} &apos;
+                                                {data.originTitle}&apos; 원작
                                               </span>
                                             )}
-                                            {data.release !== '?' && (
-                                              <>
-                                                {(data.category === 'drama' ||
-                                                  data.category === 'ott_drama' ||
-                                                  data.category === 'ott_anime' ||
-                                                  data.anime === 'tva' ||
-                                                  data.anime === 'ova') && (
-                                                  <time aria-label="방영년도">{data.release}</time>
-                                                )}
-                                                {(data.category === 'film' ||
-                                                  data.category === 'anime_film' ||
-                                                  data.category === 'ott_anime_film' ||
-                                                  data.category === 'ott_film' ||
-                                                  data.anime === 'film') && (
-                                                  <time aria-label="상영년도">{data.release}</time>
-                                                )}
-                                                {data.category === 'game' && (
-                                                  <time aria-label="출시년도">{data.release}</time>
-                                                )}
-                                              </>
-                                            )}
-                                          </strong>
-                                          {(data.original !== null || data.etc !== null) && (
-                                            <p>
-                                              {data.originalAuthor && data.original && data.originTitle && (
-                                                <span>
-                                                  &apos;{data.originalAuthor}&apos;의 {OriginalName(data.original)}{' '}
-                                                  &apos;
-                                                  {data.originTitle}&apos; 원작
+                                            {data.original !== null &&
+                                              data.originTitle === null &&
+                                              data.originalAuthor !== null && (
+                                                <span className={styles.origin}>
+                                                  동명의 {OriginalName(data.original)} 원작
                                                 </span>
                                               )}
-                                              {data.original !== null &&
-                                                data.originTitle === null &&
-                                                data.originalAuthor !== null && (
-                                                  <span className={styles.origin}>
-                                                    동명의 {OriginalName(data.original)} 원작
-                                                  </span>
-                                                )}
-                                              {data.original !== null && data.etc !== null && ' | '}
-                                              {data.etc !== null && (
-                                                <em className="lang" aria-label="작품 추가설명">
-                                                  {data.etc}
-                                                </em>
-                                              )}
-                                            </p>
-                                          )}
-                                        </dd>
-                                      </dl>
-                                      <dl className={styles.info}>
-                                        {data.original !== null &&
-                                          data.originTitle === null &&
-                                          data.originalAuthor !== null && (
-                                            <div>
-                                              <dt>원작자</dt>
-                                              <dd className="April16thPromise">{data.originalAuthor}</dd>
-                                            </div>
-                                          )}
-                                        {data.country !== '?' && (
-                                          <div>
-                                            <dt>제작국가</dt>
-                                            <dd className="April16thPromise">{data.country}</dd>
-                                          </div>
-                                        )}
-                                        {data.runningTime && (
-                                          <div>
-                                            <dt>재생시간</dt>
-                                            <dd>
-                                              {data.runningTime}분{formatTime(data.runningTime)}
-                                            </dd>
-                                          </div>
-                                        )}
-                                        {data.supportLang !== null && <ADCC items={data.supportLang} />}
-                                        {data.genre !== '?' && (
-                                          <div>
-                                            <dt>장르</dt>
-                                            <dd className="April16thPromise">{data.genre}</dd>
-                                          </div>
-                                        )}
-                                        {data.tags !== null && <TagsItem items={data} />}
-                                        {data.publisher !== '?' && (
-                                          <div>
-                                            <dt>{data.category === 'game' ? '유통/배급' : '제작/배급'}</dt>
-                                            <dd className="April16thPromise">{data.publisher}</dd>
-                                          </div>
-                                        )}
-                                        {data.creator !== '?' && (
-                                          <div>
-                                            <dt>{data.category === 'game' ? '개발' : '주요 제작자'}</dt>
-                                            <dd className="April16thPromise">{data.creator}</dd>
-                                          </div>
-                                        )}
-                                        {data.cast !== null && (
-                                          <div>
-                                            {data.category !== 'anime' &&
-                                            data.category !== 'anime_film' &&
-                                            data.category !== 'ott_anime' &&
-                                            data.category !== 'ott_anime_film' &&
-                                            data.category !== 'game' ? (
-                                              <dt>주요 출연자</dt>
-                                            ) : data.dubbing !== null ? (
-                                              <dt>원어 성우</dt>
-                                            ) : (
-                                              <dt>주요 성우</dt>
+                                            {data.original !== null && data.etc !== null && ' | '}
+                                            {data.etc !== null && (
+                                              <em className="lang" aria-label="작품 추가설명">
+                                                {data.etc}
+                                              </em>
                                             )}
-                                            <dd className="April16thPromise">{data.cast}</dd>
-                                          </div>
+                                          </p>
                                         )}
-                                        {data.dubbing !== null && (
+                                      </dd>
+                                    </dl>
+                                    <dl className={styles.info}>
+                                      {data.original !== null &&
+                                        data.originTitle === null &&
+                                        data.originalAuthor !== null && (
                                           <div>
-                                            <dt>
-                                              {data.dubbingLang === 'japanese' && '일본'}
-                                              {data.dubbingLang === 'english' && '미국'}
-                                              {data.dubbingLang === null && '한국'} 성우
-                                            </dt>
-                                            <dd className="April16thPromise">{data.dubbing}</dd>
+                                            <dt>원작자</dt>
+                                            <dd className="April16thPromise">{data.originalAuthor}</dd>
                                           </div>
                                         )}
-                                        {data.characters !== null && (
-                                          <div>
-                                            <dt>캐릭터</dt>
-                                            <dd className="April16thPromise">{data.characters}</dd>
-                                          </div>
-                                        )}
-                                      </dl>
-                                    </div>
+                                      {data.country !== '?' && (
+                                        <div>
+                                          <dt>제작국가</dt>
+                                          <dd className="April16thPromise">{data.country}</dd>
+                                        </div>
+                                      )}
+                                      {data.runningTime && (
+                                        <div>
+                                          <dt>재생시간</dt>
+                                          <dd>
+                                            {data.runningTime}분{formatTime(data.runningTime)}
+                                          </dd>
+                                        </div>
+                                      )}
+                                      {data.supportLang !== null && <ADCC items={data.supportLang} />}
+                                      {data.genre !== '?' && (
+                                        <div>
+                                          <dt>장르</dt>
+                                          <dd className="April16thPromise">{data.genre}</dd>
+                                        </div>
+                                      )}
+                                      {data.tags !== null && <TagsItem items={data} />}
+                                      {data.publisher !== '?' && (
+                                        <div>
+                                          <dt>{data.category === 'game' ? '유통/배급' : '퍼블리싱'}</dt>
+                                          <dd className="April16thPromise">{data.publisher}</dd>
+                                        </div>
+                                      )}
+                                      {data.creator !== '?' && (
+                                        <div>
+                                          <dt>{data.category === 'game' ? '개발' : '주요 제작자'}</dt>
+                                          <dd className="April16thPromise">{data.creator}</dd>
+                                        </div>
+                                      )}
+                                      {data.cast !== null && (
+                                        <div>
+                                          {data.category !== 'anime' &&
+                                          data.category !== 'anime_film' &&
+                                          data.category !== 'ott_anime' &&
+                                          data.category !== 'ott_anime_film' &&
+                                          data.category !== 'game' ? (
+                                            <dt>주요 출연자</dt>
+                                          ) : data.dubbing !== null ? (
+                                            <dt>원어 성우</dt>
+                                          ) : (
+                                            <dt>주요 성우</dt>
+                                          )}
+                                          <dd className="April16thPromise">{data.cast}</dd>
+                                        </div>
+                                      )}
+                                      {data.dubbing !== null && (
+                                        <div>
+                                          <dt>
+                                            {data.dubbingLang === 'japanese' && '일본'}
+                                            {data.dubbingLang === 'english' && '미국'}
+                                            {data.dubbingLang === null && '한국'} 성우
+                                          </dt>
+                                          <dd className="April16thPromise">{data.dubbing}</dd>
+                                        </div>
+                                      )}
+                                      {data.characters !== null && (
+                                        <div>
+                                          <dt>캐릭터</dt>
+                                          <dd className="April16thPromise">{data.characters}</dd>
+                                        </div>
+                                      )}
+                                    </dl>
                                   </div>
                                 ))}
                               </div>
-                            </PerfectScrollbar>
-                          </div>
-                        ) : (
-                          <div className={styles['title-item']}>
-                            {jejeupData.amusementData.map((data, index) => (
-                              <div className={styles['title-info']} key={index}>
-                                <dl className={styles.summary}>
-                                  <dt>
-                                    {data.category !== 'anime_film' ? (
-                                      <>
-                                        {(data.category === 'drama' ||
-                                          data.category === 'film' ||
-                                          data.category === 'game' ||
-                                          data.category === 'anime' ||
-                                          data.category === 'ott_drama' ||
-                                          data.category === 'ott_film' ||
-                                          data.category === 'ott_anime') && (
-                                          <em className={styles[data.broadcast]}>
-                                            {data.broadcast === 'ENA' && (
-                                              <>
-                                                <Ena /> <span>ENA</span>
-                                              </>
-                                            )}
-                                            {data.broadcast === 'JTBC' && (
-                                              <>
-                                                <Jtbc /> <span>JTBC</span>
-                                              </>
-                                            )}
-                                            {data.broadcast === 'KBS2' && (
-                                              <>
-                                                <Kbs2tv /> <span>KBS 2TV</span>
-                                              </>
-                                            )}
-                                            {data.broadcast === 'MBC' && (
-                                              <>
-                                                <Mbc /> <span>MBC</span>
-                                              </>
-                                            )}
-                                            {data.broadcast === 'OCN' && (
-                                              <>
-                                                <Ocn /> <span>OCN</span>
-                                              </>
-                                            )}
-                                            {data.broadcast === 'SBS' && (
-                                              <>
-                                                <Sbs /> <span>SBS</span>
-                                              </>
-                                            )}
-                                            {data.broadcast === 'tvN' && (
-                                              <>
-                                                <Tvn /> <span>tvN</span>
-                                              </>
-                                            )}
-                                            {data.broadcast === 'ABC' && (
-                                              <>
-                                                <Abc /> <span>ABC</span>
-                                              </>
-                                            )}
-                                            {(data.animeBroadcast1 !== null || data.animeBroadcast2 !== null) && (
-                                              <>
-                                                {data.animeBroadcast1 === 'tokyomx' && (
-                                                  <>
-                                                    <Tokyomx /> <span>도쿄MX</span>
-                                                  </>
-                                                )}
-                                                {data.animeBroadcast1 === 'tvtokyo' && (
-                                                  <>
-                                                    <Tvtokyo /> <span>테레토</span>
-                                                  </>
-                                                )}
-                                                {data.animeBroadcast1 === 'fujitv' && (
-                                                  <>
-                                                    <Fujitv /> <span>후지테레비</span>
-                                                  </>
-                                                )}
-                                                {data.animeBroadcast1 === 'mbs' && (
-                                                  <>
-                                                    <Mbs /> <span>MBS</span>
-                                                  </>
-                                                )}
-                                                {data.animeBroadcast1 === 'tbs' && (
-                                                  <>
-                                                    <Tbs /> <span>TBS</span>
-                                                  </>
-                                                )}
-                                                {data.animeBroadcast1 === 'atx' && (
-                                                  <>
-                                                    <Atx /> <span>AT-X</span>
-                                                  </>
-                                                )}
-                                                {data.animeBroadcast1 === 'nippontv' && (
-                                                  <>
-                                                    <Nippontv /> <span>닛테레</span>
-                                                  </>
-                                                )}
-                                                {data.animeBroadcast1 === 'wowow' && (
-                                                  <>
-                                                    <Wowow /> <span>WOWOW</span>
-                                                  </>
-                                                )}
-                                                {data.animeBroadcast2 === 'aniplus' && (
-                                                  <>
-                                                    {data.animeBroadcast1 !== null && '|'}
-                                                    <Aniplus />
-                                                    <span>애니플러스</span> 방영{' '}
-                                                  </>
-                                                )}
-                                                {data.animeBroadcast2 === 'daewon' && (
-                                                  <>
-                                                    {data.animeBroadcast1 !== null && '|'}
-                                                    <Daewon /> <span>애니원</span> 방영{' '}
-                                                  </>
-                                                )}
-                                                {data.animeBroadcast2 === 'anibox' && (
-                                                  <>
-                                                    {data.animeBroadcast1 !== null && '|'}
-                                                    <Anibox /> <span>애니박스</span> 방영{' '}
-                                                  </>
-                                                )}
-                                                {data.animeBroadcast2 === 'tooniverse' && (
-                                                  <>
-                                                    {data.animeBroadcast1 !== null && '|'}
-                                                    <Tooniverse /> <span>투니버스</span> 방영{' '}
-                                                  </>
-                                                )}
-                                                {data.animeBroadcast2 === 'animax' && (
-                                                  <>
-                                                    {data.animeBroadcast1 !== null && '|'}
-                                                    <Animax /> <span>애니맥스</span> 방영{' '}
-                                                  </>
-                                                )}
-                                              </>
-                                            )}
-                                            {(data.category === 'game' || data.category === 'game_fan') &&
-                                              data.isMobile &&
-                                              '모바일 '}
-                                            {CategoryName(data.category)}
-                                            {data.ott === null && data.ottAddr !== null && ' | 단편영화'}
-                                          </em>
-                                        )}
-                                        {data.category === 'ott_anime_film' && (
-                                          <>
-                                            <em>애니메이션</em>
-                                            <em>영화</em>
-                                          </>
-                                        )}
-                                        {data.category === 'ott_documentary_film' && (
-                                          <>
-                                            <em>다큐멘터리</em>
-                                            <em>영화</em>
-                                          </>
-                                        )}
-                                      </>
-                                    ) : (
-                                      <>
-                                        {data.broadcast !== null && (
-                                          <em className={styles[data.broadcast]}>
-                                            {data.broadcast === 'ENA' && (
-                                              <>
-                                                <Ena /> <span>ENA</span>
-                                              </>
-                                            )}
-                                            {data.broadcast === 'JTBC' && (
-                                              <>
-                                                <Jtbc /> <span>JTBC</span>
-                                              </>
-                                            )}
-                                            {data.broadcast === 'KBS2' && (
-                                              <>
-                                                <Kbs2tv /> <span>KBS 2TV</span>
-                                              </>
-                                            )}
-                                            {data.broadcast === 'MBC' && (
-                                              <>
-                                                <Mbc /> <span>MBC</span>
-                                              </>
-                                            )}
-                                            {data.broadcast === 'OCN' && (
-                                              <>
-                                                <Ocn /> <span>OCN</span>
-                                              </>
-                                            )}
-                                            {data.broadcast === 'SBS' && (
-                                              <>
-                                                <Sbs /> <span>SBS</span>
-                                              </>
-                                            )}
-                                            {data.broadcast === 'tvN' && (
-                                              <>
-                                                <Tvn /> <span>tvN</span>
-                                              </>
-                                            )}
-                                            드라마
-                                          </em>
-                                        )}
-                                        {data.category === 'anime_film' && (
-                                          <>
-                                            <em>애니메이션</em>
-                                            <em>영화</em>
-                                          </>
-                                        )}
-                                      </>
-                                    )}
-                                    {data.category === 'anime' && <em>{AnimeName(data.anime)}</em>}
-                                    {data.ott === 'amazonOriginal' && (
-                                      <cite>
-                                        <AmazonOriginal /> AMAZON ORIGINAL
-                                      </cite>
-                                    )}
-                                    {data.ott === 'appleOriginal' && (
-                                      <cite>
-                                        <AppleOriginal /> An Apple Original
-                                      </cite>
-                                    )}
-                                    {data.ott === 'appleFilm' && (
-                                      <cite>
-                                        <AppleOriginal /> Apple Original Films
-                                      </cite>
-                                    )}
-                                    {data.ott === 'disneyOriginal' && (
-                                      <cite>
-                                        <DisneyOriginal /> Disney Original
-                                      </cite>
-                                    )}
-                                    {data.ott === 'disneyStar' && (
-                                      <cite>
-                                        <StarOriginal /> Star Original
-                                      </cite>
-                                    )}
-                                    {(data.ott === 'netflixSeries' ||
-                                      data.ott === 'netflixOriginal' ||
-                                      data.ott === 'netflixAnime') && (
-                                      <cite>
-                                        <NetflixOriginal /> A NETFLIX Series
-                                      </cite>
-                                    )}
-                                    {(data.ott === 'netflixPresents' ||
-                                      data.ott === 'netflixFilm' ||
-                                      data.ott === 'netflixAnimeFilm') && (
-                                      <cite>
-                                        <NetflixOriginal /> NETFLIX Presents
-                                      </cite>
-                                    )}
-                                    {data.ott === 'netflixDocumentary' && (
-                                      <cite>
-                                        <NetflixOriginal /> A NETFLIX Documentary
-                                      </cite>
-                                    )}
-                                    {data.ott === 'tvingOriginal' && (
-                                      <cite>
-                                        <TvingOriginal /> 티빙 오리지널
-                                      </cite>
-                                    )}
-                                    {data.ott === 'tvingOnly' && (
-                                      <cite>
-                                        <TvingOnly /> 오직 티빙에서
-                                      </cite>
-                                    )}
-                                    {data.ott === 'watchaOriginal' && (
-                                      <cite>
-                                        <WatchaOriginal /> 왓챠 오리지널
-                                      </cite>
-                                    )}
-                                    {data.ott === 'watchaExclusive' && (
-                                      <cite>
-                                        <WatchaOnly /> 오직 왓챠에서
-                                      </cite>
-                                    )}
-                                    {data.ott === 'wavveOriginal' && (
-                                      <cite>
-                                        <WavveOriginal /> 웨이브 오리지널
-                                      </cite>
-                                    )}
-                                    {data.ott === 'wavveOnly' && (
-                                      <cite>
-                                        <WavveOnly /> 오직 웨이브에서
-                                      </cite>
-                                    )}
-                                    {data.ott === 'paramount' && (
-                                      <cite>
-                                        <Paramount /> Paramaount+
-                                      </cite>
-                                    )}
-                                    {data.ott === 'amazonOriginal' ? (
-                                      <i className={`${styles['rating-amazon']} number`} aria-label="시청 가능 연령">
-                                        {data.rating === 'all' && 'All'}
-                                        {data.rating === 'a7' && '7+'}
-                                        {data.rating === 'b12' && '13+'}
-                                        {data.rating === 'c15' && '16+'}
-                                        {data.rating === 'd19' && '18+'}
-                                      </i>
-                                    ) : (
-                                      <>
-                                        {(data.category === 'drama' ||
-                                          data.category === 'ott_drama' ||
-                                          data.category === 'ott_anime' ||
-                                          data.anime === 'tva' ||
-                                          data.anime === 'ova') && (
-                                          <>
-                                            {data.rating === 'all' ? (
-                                              <>
-                                                <i className={`${styles.drama} ${styles.all} number`}>
-                                                  {RatingsDrama(data.rating)}
-                                                </i>
-                                                <span>전체 이용가</span>
-                                              </>
-                                            ) : (
-                                              <>
-                                                {data.rating === 'd19' ? (
-                                                  <>
-                                                    <i className={`${styles.drama} ${styles.d19} number`}>
-                                                      {RatingsDrama(data.rating)}
-                                                    </i>
-                                                    <span>세 미만 이용불가</span>
-                                                  </>
-                                                ) : (
-                                                  <>
-                                                    <i className={`${styles.drama} number`}>
-                                                      {RatingsDrama(data.rating)}
-                                                    </i>
-                                                    <span>세 이상 이용가</span>
-                                                  </>
-                                                )}
-                                              </>
-                                            )}
-                                          </>
-                                        )}
-                                        {(data.category === 'film' ||
-                                          data.category === 'anime_film' ||
-                                          data.category === 'ott_anime_film' ||
-                                          data.category === 'ott_film' ||
-                                          data.category === 'ott_documentary_film' ||
-                                          data.anime === 'film') && (
-                                          <>
-                                            {data.rating === 'all' && (
-                                              <>
-                                                <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
-                                              </>
-                                            )}
-                                            {data.rating === 'b12' && (
-                                              <>
-                                                <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
-                                              </>
-                                            )}
-                                            {data.rating === 'c15' && (
-                                              <>
-                                                <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
-                                              </>
-                                            )}
-                                            {data.rating === 'd19' && (
-                                              <>
-                                                <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
-                                              </>
-                                            )}
-                                          </>
-                                        )}
-                                      </>
-                                    )}
-                                    {data.category === 'game' && (
-                                      <>
-                                        {data.rating === 'all' && (
-                                          <>
-                                            <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
-                                          </>
-                                        )}
-                                        {data.rating === 'b12' && (
-                                          <>
-                                            <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
-                                          </>
-                                        )}
-                                        {data.rating === 'c15' && (
-                                          <>
-                                            <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
-                                          </>
-                                        )}
-                                        {data.rating === 'd19' && (
-                                          <>
-                                            <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
-                                          </>
-                                        )}
-                                      </>
-                                    )}
-                                    {data.ratingCustom && (
-                                      <div className={styles.custom}>
-                                        {data.ott === 'amazonOriginal' && !data.ratingCustom && (
-                                          <button type="button" onClick={amazonRatingHandler}>
-                                            <i />
-                                            <span>아마존 자체 심의등급 작품</span>
-                                          </button>
-                                        )}
-                                        {data.ott === 'amazonOriginal' && data.ratingCustom && (
-                                          <button type="button" onClick={regionRatingHandler}>
-                                            <i />
-                                            <span>한국 리전 아마존 시청 불가 작품</span>
-                                          </button>
-                                        )}
-                                        {data.ott !== 'amazonOriginal' && data.ratingCustom && (
-                                          <button type="button" onClick={customRatingHandler}>
-                                            <i />
-                                            <span>세모뷰 자체설정 심의등급 안내</span>
-                                          </button>
-                                        )}
-                                      </div>
-                                    )}
-                                    {data.ott !== null && data.ottAddr !== null && (
-                                      <Anchor href={data.ottAddr}>
-                                        {data.ott === 'amazonOriginal' && 'Prime Video'}
-                                        {(data.ott === 'appleOriginal' || data.ott === 'appleFilm') && 'Apple TV+'}
-                                        {(data.ott === 'disneyOriginal' || data.ott === 'disneyStar') && 'Disney+'}
-                                        {(data.ott === 'netflixOriginal' ||
-                                          data.ott === 'netflixFilm' ||
-                                          data.ott === 'netflixAnime' ||
-                                          data.ott === 'netflixAnimeFilm' ||
-                                          data.ott === 'netflixDocumentary') &&
-                                          'NETFLIX'}
-                                        {(data.ott === 'tvingOriginal' ||
-                                          data.ott === 'tvingOnly' ||
-                                          data.ott === 'paramount') &&
-                                          'TVING'}
-                                        {(data.ott === 'watchaOriginal' || data.ott === 'watchaExclusive') && 'WATCHA'}
-                                        {(data.ott === 'wavveOriginal' || data.ott === 'wavveOnly') && 'Wavve'}
-                                        에서 시청하기
-                                      </Anchor>
-                                    )}
-                                    {data.ott === null && data.ottAddr !== null && (
-                                      <Anchor href={data.ottAddr}>
-                                        단편영화 &apos;{data.titleKorean ? data.titleKorean : data.title}&apos; 보러가기
-                                      </Anchor>
-                                    )}
-                                  </dt>
-                                  <dd>
-                                    <strong>
-                                      <span className={`${styles.title} April16thPromise`} aria-label="작품명">
-                                        {data.category === 'game_fan'
-                                          ? `'${data.title} 팬 게임 콜렉션`
-                                          : data.titleKorean
-                                            ? data.titleKorean
-                                            : data.title}
-                                      </span>
-                                      {data.lang === 'chineseBeonche' && <span lang="zh-Hant">{data.title} </span>}
-                                      {data.lang === 'chineseGanche' && <span lang="zh-Hans">{data.title} </span>}
-                                      {data.lang === 'europe' && <span lang="en">{data.title}</span>}
-                                      {data.lang === 'english' && <span lang="en-US">{data.title}</span>}
-                                      {data.lang === 'japanese' && <span lang="ja">{data.title}</span>}
-                                      {data.lang === 'thai' && <span lang="th">{data.title}</span>}
-                                      {data.titleOther !== null && (
-                                        <span className="lang" aria-label="작품의 다른 언어 제목">
-                                          {data.titleOther}
-                                        </span>
-                                      )}
-                                      {data.release !== '?' && (
-                                        <>
-                                          {(data.category === 'drama' ||
-                                            data.category === 'ott_drama' ||
-                                            data.category === 'ott_anime' ||
-                                            data.anime === 'tva' ||
-                                            data.anime === 'ova') && <time aria-label="방영년도">{data.release}</time>}
-                                          {(data.category === 'film' ||
-                                            data.category === 'anime_film' ||
-                                            data.category === 'ott_anime_film' ||
-                                            data.category === 'ott_film' ||
-                                            data.anime === 'film') && <time aria-label="상영년도">{data.release}</time>}
-                                          {data.category === 'game' && (
-                                            <time aria-label="출시년도">{data.release}</time>
-                                          )}
-                                        </>
-                                      )}
-                                    </strong>
-                                    {(data.original !== null || data.etc !== null) && (
-                                      <p>
-                                        {data.originalAuthor && data.original && data.originTitle && (
-                                          <span>
-                                            &apos;{data.originalAuthor}&apos;의 {OriginalName(data.original)} &apos;
-                                            {data.originTitle}&apos; 원작
-                                          </span>
-                                        )}
-                                        {data.original !== null &&
-                                          data.originTitle === null &&
-                                          data.originalAuthor !== null && (
-                                            <span className={styles.origin}>
-                                              동명의 {OriginalName(data.original)} 원작
-                                            </span>
-                                          )}
-                                        {data.original !== null && data.etc !== null && ' | '}
-                                        {data.etc !== null && (
-                                          <em className="lang" aria-label="작품 추가설명">
-                                            {data.etc}
-                                          </em>
-                                        )}
-                                      </p>
-                                    )}
-                                  </dd>
-                                </dl>
-                                <dl className={styles.info}>
-                                  {data.original !== null &&
-                                    data.originTitle === null &&
-                                    data.originalAuthor !== null && (
-                                      <div>
-                                        <dt>원작자</dt>
-                                        <dd className="April16thPromise">{data.originalAuthor}</dd>
-                                      </div>
-                                    )}
-                                  {data.country !== '?' && (
-                                    <div>
-                                      <dt>제작국가</dt>
-                                      <dd className="April16thPromise">{data.country}</dd>
-                                    </div>
-                                  )}
-                                  {data.runningTime && (
-                                    <div>
-                                      <dt>재생시간</dt>
-                                      <dd>
-                                        {data.runningTime}분{formatTime(data.runningTime)}
-                                      </dd>
-                                    </div>
-                                  )}
-                                  {data.supportLang !== null && <ADCC items={data.supportLang} />}
-                                  {data.genre !== '?' && (
-                                    <div>
-                                      <dt>장르</dt>
-                                      <dd className="April16thPromise">{data.genre}</dd>
-                                    </div>
-                                  )}
-                                  {data.tags !== null && <TagsItem items={data} />}
-                                  {data.publisher !== '?' && (
-                                    <div>
-                                      <dt>{data.category === 'game' ? '유통/배급' : '퍼블리싱'}</dt>
-                                      <dd className="April16thPromise">{data.publisher}</dd>
-                                    </div>
-                                  )}
-                                  {data.creator !== '?' && (
-                                    <div>
-                                      <dt>{data.category === 'game' ? '개발' : '주요 제작자'}</dt>
-                                      <dd className="April16thPromise">{data.creator}</dd>
-                                    </div>
-                                  )}
-                                  {data.cast !== null && (
-                                    <div>
-                                      {data.category !== 'anime' &&
-                                      data.category !== 'anime_film' &&
-                                      data.category !== 'ott_anime' &&
-                                      data.category !== 'ott_anime_film' &&
-                                      data.category !== 'game' ? (
-                                        <dt>주요 출연자</dt>
-                                      ) : data.dubbing !== null ? (
-                                        <dt>원어 성우</dt>
-                                      ) : (
-                                        <dt>주요 성우</dt>
-                                      )}
-                                      <dd className="April16thPromise">{data.cast}</dd>
-                                    </div>
-                                  )}
-                                  {data.dubbing !== null && (
-                                    <div>
-                                      <dt>
-                                        {data.dubbingLang === 'japanese' && '일본'}
-                                        {data.dubbingLang === 'english' && '미국'}
-                                        {data.dubbingLang === null && '한국'} 성우
-                                      </dt>
-                                      <dd className="April16thPromise">{data.dubbing}</dd>
-                                    </div>
-                                  )}
-                                  {data.characters !== null && (
-                                    <div>
-                                      <dt>캐릭터</dt>
-                                      <dd className="April16thPromise">{data.characters}</dd>
-                                    </div>
-                                  )}
-                                </dl>
-                              </div>
                             ))}
-                          </div>
-                        ))}
-                    </div>
-                    {Array.isArray(jejeupData.amusementData) && jejeupData.amusementData.length == 1 && (
-                      <div className={styles.posters}>
-                        <h2 className="April16thPromise">
-                          {jejeupData.amusementData[0].category === 'game' ||
-                          jejeupData.amusementData[0].category === 'game_fan'
-                            ? '배너/썸네일'
-                            : '비주얼/포스터'}
-                        </h2>
-                        <div
-                          className={`${styles['poster-list']} ${jejeupData.amusementData[0].category === 'game' || jejeupData.amusementData[0].category === 'game_fan' ? styles['posters-game'] : styles['posters-other']}`}
-                        >
-                          <div className={styles.poster}>
-                            <Image
-                              src={jejeupData.amusementData[0].posterDefault}
-                              alt=""
-                              width={
-                                jejeupData.amusementData[0].category === 'game' ||
-                                jejeupData.amusementData[0].category === 'game_fan'
-                                  ? 460
-                                  : 390
-                              }
-                              height={
-                                jejeupData.amusementData[0].category === 'game' ||
-                                jejeupData.amusementData[0].category === 'game_fan'
-                                  ? 215
-                                  : 560
-                              }
-                              unoptimized
-                            />
-                          </div>
-                          {jejeupData.amusementData[0].posterOther && (
-                            <div className={styles.poster}>
-                              <Image
-                                src={jejeupData.amusementData[0].posterOther}
-                                alt=""
-                                width={
-                                  jejeupData.amusementData[0].category === 'game' ||
-                                  jejeupData.amusementData[0].category === 'game_fan'
-                                    ? 460
-                                    : 390
-                                }
-                                height={
-                                  jejeupData.amusementData[0].category === 'game' ||
-                                  jejeupData.amusementData[0].category === 'game_fan'
-                                    ? 215
-                                    : 560
-                                }
-                                unoptimized
-                              />
+                        </div>
+                        {Array.isArray(jejeupData.amusementData) && jejeupData.amusementData.length == 1 && (
+                          <div className={styles.posters}>
+                            <h2 className="April16thPromise">
+                              {jejeupData.amusementData[0].category === 'game' ? '배너/썸네일' : '비주얼/포스터'}
+                            </h2>
+                            <div
+                              className={`${styles['poster-list']} ${jejeupData.amusementData[0].category === 'game' ? styles['posters-game'] : styles['posters-other']}`}
+                            >
+                              <div className={styles.poster}>
+                                <Image
+                                  src={jejeupData.amusementData[0].posterDefault}
+                                  alt=""
+                                  width={jejeupData.amusementData[0].category === 'game' ? 460 : 390}
+                                  height={jejeupData.amusementData[0].category === 'game' ? 215 : 560}
+                                  unoptimized
+                                />
+                              </div>
+                              {jejeupData.amusementData[0].posterOther && (
+                                <div className={styles.poster}>
+                                  <Image
+                                    src={jejeupData.amusementData[0].posterOther}
+                                    alt=""
+                                    width={jejeupData.amusementData[0].category === 'game' ? 460 : 390}
+                                    height={jejeupData.amusementData[0].category === 'game' ? 215 : 560}
+                                    unoptimized
+                                  />
+                                </div>
+                              )}
                             </div>
-                          )}
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <div className={styles.title}>
+                        <div className={styles.function}>
+                          <button onClick={copyToClipboard}>
+                            <ClipboardIcon /> <span>URL 복사</span>
+                          </button>
                         </div>
                       </div>
                     )}
@@ -2055,9 +2112,14 @@ export default function JejeupDetail({
             </div>
           )}
         </div>
-        {jejeupData.attributes &&
-          jejeupData.attributes.publishedAt !== null &&
-          Array.isArray(jejeupData.amusementData) && <RelatedList related={jejeupData.amusementData} />}
+        {jejeupData.attributes && jejeupData.attributes.publishedAt !== null && (
+          <>
+            {Array.isArray(jejeupData.amusementData) && <RelatedList related={jejeupData.amusementData} />}
+            {Array.isArray(jejeupData.amusementData) &&
+              jejeupData.amusementData[0].category === 'game_fan' &&
+              jejeupData.attributes.title !== null && <GameList game={jejeupData.attributes.title} />}
+          </>
+        )}
       </article>
     </main>
   );
@@ -2066,6 +2128,7 @@ export default function JejeupDetail({
 export const getStaticProps: GetStaticProps = async (context) => {
   const jejeupId = context.params?.jejeupId;
   let jejeupData = null;
+  let amusementData = null;
 
   if (jejeupId && typeof jejeupId === 'string') {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/jejeups?id=${jejeupId.substring(14)}`);
