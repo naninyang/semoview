@@ -262,17 +262,17 @@ const RelatedList = ({ related }: { related: any }) => {
   }
 };
 
-const GameList = ({ game, current }: { game: number; current: number }) => {
+const GameList = ({ game, current, creator }: { game: number; current: number; creator: string }) => {
   const [amusementData, setAmusementData] = useState<AmusementData | null>(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchAmusementData() {
       setLoading(true);
-      const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/jejeupAmusement?page=1&amusementId=${game}`;
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/jejeupAmusement?page=1&amusementId=${game}`;
 
       try {
-        const response = await fetch(apiUrl);
+        const response = await fetch(url);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -295,7 +295,7 @@ const GameList = ({ game, current }: { game: number; current: number }) => {
   if (!loading && amusementData && Object.keys(amusementData).length > 1) {
     return (
       <aside className={styles['items-fan']}>
-        <h2>팬게임 영상</h2>
+        <h2>{creator}의 다른 팬게임 영상</h2>
         <div className={styles.list}>
           {amusementData &&
             Array.isArray(amusementData) &&
@@ -2122,7 +2122,11 @@ export default function JejeupDetail({
             {Array.isArray(jejeupData.amusementData) &&
               jejeupData.amusementData[0].category === 'game_fan' &&
               jejeupData.attributes.title !== null && (
-                <GameList game={Number(jejeupData.attributes.title)} current={jejeupId} />
+                <GameList
+                  game={Number(jejeupData.attributes.title)}
+                  current={jejeupId}
+                  creator={jejeupData.amusementData[0].title}
+                />
               )}
           </>
         )}
