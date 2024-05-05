@@ -892,6 +892,15 @@ export default function Amusement({
     }
   };
 
+  function checkKorean(word: string) {
+    const lastChar = word.charCodeAt(word.length - 1);
+    const isThereLastChar = (lastChar - 0xac00) % 28;
+    if (isThereLastChar) {
+      return `${word}이 해보는 ${word}의 팬게임`;
+    }
+    return `${word}가 해보는 ${word}의 팬게임`;
+  }
+
   return (
     <main className={`${footer.amusement} ${styles.amusement}`}>
       <Seo
@@ -1706,7 +1715,11 @@ export default function Amusement({
       {data && !isJejeupsLoading && !isJejeupsError && (
         <section>
           {amusementData.attributes.category === 'game' || amusementData.attributes.category === 'game_fan' ? (
-            <h2 className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>유튜브 리뷰 & 실황모음</h2>
+            <h2 className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>
+              {amusementData.attributes.category === 'game'
+                ? '유튜브 리뷰 & 실황모음'
+                : checkKorean(amusementData.attributes.title)}
+            </h2>
           ) : (
             <h2 className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>유튜브 리뷰모음</h2>
           )}
