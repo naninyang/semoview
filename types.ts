@@ -1,7 +1,7 @@
 export interface JejeupData {
   pageCount: number;
   id: string;
-  idx: string;
+  idx: number;
   subject: string;
   video: string;
   ownerAvatar: string;

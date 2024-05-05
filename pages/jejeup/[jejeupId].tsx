@@ -262,7 +262,7 @@ const RelatedList = ({ related }: { related: any }) => {
   }
 };
 
-const GameList = ({ game }: { game: any }) => {
+const GameList = ({ game, current }: { game: number; current: number }) => {
   const [amusementData, setAmusementData] = useState<AmusementData | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -300,19 +300,23 @@ const GameList = ({ game }: { game: any }) => {
           {amusementData &&
             Array.isArray(amusementData) &&
             amusementData.map((data: JejeupData, index: number) => (
-              <div className={styles.item} key={index}>
-                <Anchor href={`/jejeup/${data.idx}`} key={index}>
-                  <Image
-                    src={`https://i.ytimg.com/vi/${data.video}/hqdefault.jpg`}
-                    width={640}
-                    height={480}
-                    unoptimized
-                    priority
-                    alt=""
-                  />
-                  <span>{data.subject}</span>
-                </Anchor>
-              </div>
+              <>
+                {data.idx !== current && (
+                  <div className={styles.item} key={index}>
+                    <Anchor href={`/jejeup/${data.idx}`} key={index}>
+                      <Image
+                        src={`https://i.ytimg.com/vi/${data.video}/hqdefault.jpg`}
+                        width={640}
+                        height={480}
+                        unoptimized
+                        priority
+                        alt=""
+                      />
+                      <span>{data.subject}</span>
+                    </Anchor>
+                  </div>
+                )}
+              </>
             ))}
         </div>
       </aside>
@@ -2117,7 +2121,9 @@ export default function JejeupDetail({
             {Array.isArray(jejeupData.amusementData) && <RelatedList related={jejeupData.amusementData} />}
             {Array.isArray(jejeupData.amusementData) &&
               jejeupData.amusementData[0].category === 'game_fan' &&
-              jejeupData.attributes.title !== null && <GameList game={jejeupData.attributes.title} />}
+              jejeupData.attributes.title !== null && (
+                <GameList game={Number(jejeupData.attributes.title)} current={jejeupId} />
+              )}
           </>
         )}
       </article>
