@@ -1979,7 +1979,7 @@ export default function JejeupDetail({
                                       {data.runningTime && (
                                         <div>
                                           <dt>재생시간</dt>
-                                          <dd>
+                                          <dd className="seed">
                                             {data.runningTime}분{formatTime(data.runningTime)}
                                           </dd>
                                         </div>

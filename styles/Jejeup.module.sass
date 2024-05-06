@@ -589,7 +589,12 @@
 
               &.tags
                 dd
+                  display: block
                   gap: rem(2)
+
+                  span
+                    white-space: nowrap
+                    display: inline-block
 
               &.ad-cc
                 span
@@ -614,7 +619,7 @@
               +col
               font-weight: 800
               color: $hex-dark
-              font-variation-settings: 'opsz' 900, 'wght' 900
+              font-variation-settings: 'opsz' 800, 'wght' 800
 
           .poster
             &.posters-game img

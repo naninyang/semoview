@@ -1793,8 +1793,8 @@ export default function Amusement({
                 </span>
               )}
             </h3>
-            <div className={`${styles.contents} seed`}>
-              <PerfectScrollbar className={`${styles['scrollbar-container']}`}>
+            <div className={styles.contents}>
+              <PerfectScrollbar className={styles['scrollbar-container']}>
                 <div className={styles.content}>
                   <dl className={styles.title}>
                     {amusementData.attributes.titleKorean !== null && (
@@ -1869,7 +1869,7 @@ export default function Amusement({
                       {amusementData.attributes.ott !== null && (
                         <div className={styles.platform}>
                           <dt>OTT 플랫폼</dt>
-                          <dd>
+                          <dd className="seed">
                             {amusementData.attributes.ott === 'amazonOriginal' && 'AMAZON ORIGINAL'}
                             {amusementData.attributes.ott === 'appleOriginal' && 'An Apple Original'}
                             {amusementData.attributes.ott === 'appleFilm' && 'Apple Original Films'}
@@ -1896,7 +1896,7 @@ export default function Amusement({
                       )}
                       <div className={styles.category}>
                         <dt>카테고리</dt>
-                        <dd>
+                        <dd className="seed">
                           {amusementData.attributes.category !== 'anime_film' ? (
                             <>
                               {(amusementData.attributes.category === 'drama' ||
@@ -2007,7 +2007,7 @@ export default function Amusement({
                       {amusementData.attributes.runningTime && (
                         <div className={styles.country}>
                           <dt>재생시간</dt>
-                          <dd>
+                          <dd className="seed">
                             {amusementData.attributes.runningTime}분{formatTime(amusementData.attributes.runningTime)}
                           </dd>
                         </div>
@@ -2015,7 +2015,7 @@ export default function Amusement({
                       {amusementData.attributes.country !== '?' && (
                         <div className={styles.country}>
                           <dt>제작국가</dt>
-                          <dd>{amusementData.attributes.country}</dd>
+                          <dd className="seed">{amusementData.attributes.country}</dd>
                         </div>
                       )}
                     </div>
@@ -2042,13 +2042,13 @@ export default function Amusement({
                               '출시'}
                             년도
                           </dt>
-                          <dd>{amusementData.attributes.release}년</dd>
+                          <dd className="seed">{amusementData.attributes.release}년</dd>
                         </div>
                       )}
                       {amusementData.attributes.category !== 'game_fan' && (
                         <div className={styles.rating}>
                           <dt>{amusementData.attributes.category === 'game' ? '심의등급' : '시청등급'}</dt>
-                          <dd>
+                          <dd className="seed">
                             {amusementData.attributes.ott === 'amazonOriginal' ? (
                               <i className={`${styles['rating-amazon']} number`} aria-label="시청 가능 연령">
                                 {amusementData.attributes.rating === 'all' && 'All'}
@@ -2175,13 +2175,13 @@ export default function Amusement({
                       amusementData.attributes.originalAuthor !== null && (
                         <div>
                           <dt>원작자</dt>
-                          <dd>{amusementData.attributes.originalAuthor}</dd>
+                          <dd className="seed">{amusementData.attributes.originalAuthor}</dd>
                         </div>
                       )}
                     {amusementData.attributes.genre !== '?' && (
                       <div>
                         <dt>장르</dt>
-                        <dd>{amusementData.attributes.genre}</dd>
+                        <dd className="seed">{amusementData.attributes.genre}</dd>
                       </div>
                     )}
                     {amusementData.attributes.publisher !== '?' && (
@@ -2192,7 +2192,7 @@ export default function Amusement({
                             ? '유통/배급'
                             : '제작/배급'}
                         </dt>
-                        <dd>{amusementData.attributes.publisher}</dd>
+                        <dd className="seed">{amusementData.attributes.publisher}</dd>
                       </div>
                     )}
                     {amusementData.attributes.creator !== '?' && (
@@ -2203,7 +2203,7 @@ export default function Amusement({
                             ? '개발'
                             : '주요 제작자'}
                         </dt>
-                        <dd>{amusementData.attributes.creator}</dd>
+                        <dd className="seed">{amusementData.attributes.creator}</dd>
                       </div>
                     )}
                     {amusementData.attributes.cast !== '?' && (
@@ -2221,7 +2221,7 @@ export default function Amusement({
                             ) : (
                               <dt>주요 성우</dt>
                             )}
-                            <dd>{amusementData.attributes.cast}</dd>
+                            <dd className="seed">{amusementData.attributes.cast}</dd>
                           </div>
                         )}
                       </>
@@ -2233,13 +2233,13 @@ export default function Amusement({
                           {amusementData.attributes.dubbingLang === 'english' && '미국'}
                           {amusementData.attributes.dubbingLang === null && '한국'} 성우
                         </dt>
-                        <dd>{amusementData.attributes.dubbing}</dd>
+                        <dd className="seed">{amusementData.attributes.dubbing}</dd>
                       </div>
                     )}
                     {amusementData.attributes.characters && (
                       <div>
                         <dt>캐릭터</dt>
-                        <dd>{amusementData.attributes.characters}</dd>
+                        <dd className="seed">{amusementData.attributes.characters}</dd>
                       </div>
                     )}
                     {amusementData.attributes.comment && (
