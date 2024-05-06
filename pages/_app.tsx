@@ -81,6 +81,15 @@ const April16thSafety = localFont({
   ],
 });
 
+const Happiness = localFont({
+  src: [
+    {
+      path: '../fonts/HappinessSansVF.woff2',
+      style: 'normal',
+    },
+  ],
+});
+
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   useEffect(() => {
@@ -188,6 +197,9 @@ export default function App({ Component, pageProps }: AppProps) {
           }
           .April16thSafety {
             font-family: ${April16thSafety.style.fontFamily}, ${April16thPromise.style.fontFamily}, sans-serif;
+          }
+          .seed {
+            font-family: ${Happiness.style.fontFamily}, sans-serif;
           }
         `}
       </style>

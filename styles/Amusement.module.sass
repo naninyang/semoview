@@ -365,7 +365,7 @@
         display: flex
         flex-direction: column
         gap: rem(5)
-        +col
+        // +col
         font-size: rem(14)
         line-height: 1.5
 
@@ -759,8 +759,9 @@
 
           dd
             +col
-            font-weight: 800
+            font-weight: 700
             text-wrap: balance
+            font-variation-settings: 'opsz' 900, 'wght' 900
 
           &.synopsys, &.comment
             dt
@@ -773,6 +774,7 @@
             dd
               +line-abbr(2, 67, 1.5)
               font-weight: 400
+              font-variation-settings: 'opsz' 400, 'wght' 400
 
           &.comment
             dd

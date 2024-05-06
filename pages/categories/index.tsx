@@ -402,8 +402,8 @@ function Categories({
                           </div>
                         </dl>
                       </div>
-                      <strong className="April16thPromise">
-                        {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                      <strong>
+                        <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
                     </Link>
                   ))}
@@ -540,8 +540,8 @@ function Categories({
                           </div>
                         </dl>
                       </div>
-                      <strong className="April16thPromise">
-                        {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                      <strong>
+                        <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
                     </Link>
                   ))}
@@ -774,8 +774,8 @@ function Categories({
                           </div>
                         </dl>
                       </div>
-                      <strong className="April16thPromise">
-                        {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                      <strong>
+                        <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
                     </Link>
                   ))}
@@ -1019,8 +1019,8 @@ function Categories({
                           </div>
                         </dl>
                       </div>
-                      <strong className="April16thPromise">
-                        {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                      <strong>
+                        <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
                     </Link>
                   ))}
@@ -1081,12 +1081,14 @@ function Categories({
                         )}
                       </div>
                       <strong>
-                        <strong className="April16thPromise">
-                          {amusement.category === 'game_fan'
-                            ? `'${amusement.title}' 팬 게임 콜렉션`
-                            : amusement.titleKorean
-                              ? amusement.titleKorean
-                              : amusement.title}
+                        <strong>
+                          <span className="seed">
+                            {amusement.category === 'game_fan'
+                              ? `'${amusement.title}' 팬 게임 콜렉션`
+                              : amusement.titleKorean
+                                ? amusement.titleKorean
+                                : amusement.title}
+                          </span>
                         </strong>
                       </strong>
                     </Link>
@@ -1118,7 +1120,7 @@ function Categories({
                         <Image src={amusement.posterDefault} width="460" height="215" alt="" unoptimized />
                       </div>
                       <strong>
-                        <strong className="April16thPromise">&apos;{amusement.title}&apos; 팬 게임 콜렉션</strong>
+                        <span className="seed">&apos;{amusement.title}&apos; 팬 게임 콜렉션</span>
                       </strong>
                     </Link>
                   ))}

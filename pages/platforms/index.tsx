@@ -428,8 +428,8 @@ function Platforms({
                           </div>
                         </dl>
                       </div>
-                      <strong className="April16thPromise">
-                        {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                      <strong>
+                        <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
                     </Link>
                   ))}
@@ -659,8 +659,8 @@ function Platforms({
                           </div>
                         </dl>
                       </div>
-                      <strong className="April16thPromise">
-                        {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                      <strong>
+                        <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
                     </Link>
                   ))}
@@ -835,8 +835,8 @@ function Platforms({
                           </div>
                         </dl>
                       </div>
-                      <strong className="April16thPromise">
-                        {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                      <strong>
+                        <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
                     </Link>
                   ))}
@@ -1091,8 +1091,8 @@ function Platforms({
                           </div>
                         </dl>
                       </div>
-                      <strong className="April16thPromise">
-                        {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                      <strong>
+                        <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
                     </Link>
                   ))}
@@ -1347,8 +1347,8 @@ function Platforms({
                           </div>
                         </dl>
                       </div>
-                      <strong className="April16thPromise">
-                        {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                      <strong>
+                        <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
                     </Link>
                   ))}
@@ -1603,8 +1603,8 @@ function Platforms({
                           </div>
                         </dl>
                       </div>
-                      <strong className="April16thPromise">
-                        {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                      <strong>
+                        <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
                     </Link>
                   ))}

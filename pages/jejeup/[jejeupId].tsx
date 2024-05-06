@@ -387,7 +387,7 @@ function TagsItem({ items }: { items: any }) {
   return (
     <div className={styles.tags}>
       <dt>관련 태그</dt>
-      <dd className="April16thPromise">
+      <dd className="seed">
         {filteredTags.map((tag: string, index: number) => (
           <span key={index}>{`#${TagName(tag)}`} </span>
         ))}
@@ -407,7 +407,7 @@ function ADCC({ items }: { items: any }) {
   return (
     <div className={styles['ad-cc']}>
       <dt>자막/더빙</dt>
-      <dd className="April16thPromise">
+      <dd className="seed">
         {adcc.map((item: string, index: number) => (
           <span key={index}>{SupportLang(item)}</span>
         ))}
@@ -1318,10 +1318,7 @@ export default function JejeupDetail({
                                             </dt>
                                             <dd>
                                               <strong>
-                                                <span
-                                                  className={`${styles.title} April16thPromise`}
-                                                  aria-label="작품명"
-                                                >
+                                                <span className={`${styles.title} seed`} aria-label="작품명">
                                                   {data.titleKorean ? data.titleKorean : data.title}
                                                 </span>
                                                 {data.lang === 'chineseBeonche' && (
@@ -1393,13 +1390,13 @@ export default function JejeupDetail({
                                               data.originalAuthor !== null && (
                                                 <div>
                                                   <dt>원작자</dt>
-                                                  <dd className="April16thPromise">{data.originalAuthor}</dd>
+                                                  <dd className="seed">{data.originalAuthor}</dd>
                                                 </div>
                                               )}
                                             {data.country !== '?' && (
                                               <div>
                                                 <dt>제작국가</dt>
-                                                <dd className="April16thPromise">{data.country}</dd>
+                                                <dd className="seed">{data.country}</dd>
                                               </div>
                                             )}
                                             {data.runningTime && (
@@ -1414,20 +1411,20 @@ export default function JejeupDetail({
                                             {data.genre !== '?' && (
                                               <div>
                                                 <dt>장르</dt>
-                                                <dd className="April16thPromise">{data.genre}</dd>
+                                                <dd className="seed">{data.genre}</dd>
                                               </div>
                                             )}
                                             {data.tags !== null && <TagsItem items={data} />}
                                             {data.publisher !== '?' && (
                                               <div>
                                                 <dt>{data.category === 'game' ? '유통/배급' : '제작/배급'}</dt>
-                                                <dd className="April16thPromise">{data.publisher}</dd>
+                                                <dd className="seed">{data.publisher}</dd>
                                               </div>
                                             )}
                                             {data.creator !== '?' && (
                                               <div>
                                                 <dt>{data.category === 'game' ? '개발' : '주요 제작자'}</dt>
-                                                <dd className="April16thPromise">{data.creator}</dd>
+                                                <dd className="seed">{data.creator}</dd>
                                               </div>
                                             )}
                                             {data.cast !== null && (
@@ -1443,7 +1440,7 @@ export default function JejeupDetail({
                                                 ) : (
                                                   <dt>주요 성우</dt>
                                                 )}
-                                                <dd className="April16thPromise">{data.cast}</dd>
+                                                <dd className="seed">{data.cast}</dd>
                                               </div>
                                             )}
                                             {data.dubbing !== null && (
@@ -1453,13 +1450,13 @@ export default function JejeupDetail({
                                                   {data.dubbingLang === 'english' && '미국'}
                                                   {data.dubbingLang === null && '한국'} 성우
                                                 </dt>
-                                                <dd className="April16thPromise">{data.dubbing}</dd>
+                                                <dd className="seed">{data.dubbing}</dd>
                                               </div>
                                             )}
                                             {data.characters !== null && (
                                               <div>
                                                 <dt>캐릭터</dt>
-                                                <dd className="April16thPromise">{data.characters}</dd>
+                                                <dd className="seed">{data.characters}</dd>
                                               </div>
                                             )}
                                           </dl>
@@ -1970,13 +1967,13 @@ export default function JejeupDetail({
                                         data.originalAuthor !== null && (
                                           <div>
                                             <dt>원작자</dt>
-                                            <dd className="April16thPromise">{data.originalAuthor}</dd>
+                                            <dd className="seed">{data.originalAuthor}</dd>
                                           </div>
                                         )}
                                       {data.country !== '?' && (
                                         <div>
                                           <dt>제작국가</dt>
-                                          <dd className="April16thPromise">{data.country}</dd>
+                                          <dd className="seed">{data.country}</dd>
                                         </div>
                                       )}
                                       {data.runningTime && (
@@ -1991,20 +1988,20 @@ export default function JejeupDetail({
                                       {data.genre !== '?' && (
                                         <div>
                                           <dt>장르</dt>
-                                          <dd className="April16thPromise">{data.genre}</dd>
+                                          <dd className="seed">{data.genre}</dd>
                                         </div>
                                       )}
                                       {data.tags !== null && <TagsItem items={data} />}
                                       {data.publisher !== '?' && (
                                         <div>
                                           <dt>{data.category === 'game' ? '유통/배급' : '퍼블리싱'}</dt>
-                                          <dd className="April16thPromise">{data.publisher}</dd>
+                                          <dd className="seed">{data.publisher}</dd>
                                         </div>
                                       )}
                                       {data.creator !== '?' && (
                                         <div>
                                           <dt>{data.category === 'game' ? '개발' : '주요 제작자'}</dt>
-                                          <dd className="April16thPromise">{data.creator}</dd>
+                                          <dd className="seed">{data.creator}</dd>
                                         </div>
                                       )}
                                       {data.cast !== null && (
@@ -2020,7 +2017,7 @@ export default function JejeupDetail({
                                           ) : (
                                             <dt>주요 성우</dt>
                                           )}
-                                          <dd className="April16thPromise">{data.cast}</dd>
+                                          <dd className="seed">{data.cast}</dd>
                                         </div>
                                       )}
                                       {data.dubbing !== null && (
@@ -2030,13 +2027,13 @@ export default function JejeupDetail({
                                             {data.dubbingLang === 'english' && '미국'}
                                             {data.dubbingLang === null && '한국'} 성우
                                           </dt>
-                                          <dd className="April16thPromise">{data.dubbing}</dd>
+                                          <dd className="seed">{data.dubbing}</dd>
                                         </div>
                                       )}
                                       {data.characters !== null && (
                                         <div>
                                           <dt>캐릭터</dt>
-                                          <dd className="April16thPromise">{data.characters}</dd>
+                                          <dd className="seed">{data.characters}</dd>
                                         </div>
                                       )}
                                     </dl>

@@ -1001,7 +1001,7 @@ function Amusement({
                         )}
                       </div>
                       <strong>
-                        <span className="April16thPromise">
+                        <span className="seed">
                           {amusement.category === 'game_fan'
                             ? `'${amusement.title}' 팬 게임 콜렉션`
                             : amusement.titleKorean
@@ -1444,9 +1444,7 @@ function Amusement({
                         )}
                       </div>
                       <strong>
-                        <span className="April16thPromise">
-                          {amusement.titleKorean ? amusement.titleKorean : amusement.title}
-                        </span>
+                        <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
                     </Link>
                   ))}
@@ -1829,9 +1827,7 @@ function Amusement({
                         </dl>
                       </div>
                       <strong>
-                        <span className="April16thPromise">
-                          {amusement.titleKorean ? amusement.titleKorean : amusement.title}
-                        </span>
+                        <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
                     </Link>
                   ))}

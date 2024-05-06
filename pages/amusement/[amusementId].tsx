@@ -984,22 +984,40 @@ export default function Amusement({
                 <dt>원제</dt>
                 <dd>
                   {amusementData.attributes.lang === 'chineseBeonche' && (
-                    <span lang="zh-Hant">{amusementData.attributes.title}</span>
+                    <span className="seed" lang="zh-Hant">
+                      {amusementData.attributes.title}
+                    </span>
                   )}
                   {amusementData.attributes.lang === 'chineseGanche' && (
-                    <span lang="zh-Hans">{amusementData.attributes.title}</span>
+                    <span className="seed" lang="zh-Hans">
+                      {amusementData.attributes.title}
+                    </span>
                   )}
                   {amusementData.attributes.lang === 'europe' && (
-                    <span lang="en">{amusementData.attributes.title}</span>
+                    <span className="seed" lang="en">
+                      {amusementData.attributes.title}
+                    </span>
                   )}
                   {amusementData.attributes.lang === 'english' && (
-                    <span lang="en-US">{amusementData.attributes.title}</span>
+                    <span className="seed" lang="en-US">
+                      {amusementData.attributes.title}
+                    </span>
                   )}
                   {amusementData.attributes.lang === 'japanese' && (
-                    <span lang="ja">{amusementData.attributes.title}</span>
+                    <span className="seed" lang="ja">
+                      {amusementData.attributes.title}
+                    </span>
                   )}
-                  {amusementData.attributes.lang === 'thai' && <span lang="th">{amusementData.attributes.title}</span>}
-                  {amusementData.attributes.lang === null && <span lang="ko">{amusementData.attributes.title}</span>}
+                  {amusementData.attributes.lang === 'thai' && (
+                    <span className="seed" lang="th">
+                      {amusementData.attributes.title}
+                    </span>
+                  )}
+                  {amusementData.attributes.lang === null && (
+                    <span className="seed" lang="ko">
+                      {amusementData.attributes.title}
+                    </span>
+                  )}
                 </dd>
               </div>
             )}
@@ -1531,7 +1549,7 @@ export default function Amusement({
               amusementData.attributes.originalAuthor !== null && (
                 <div>
                   <dt>원작자</dt>
-                  <dd className="April16thPromise">{amusementData.attributes.originalAuthor}</dd>
+                  <dd className="seed">{amusementData.attributes.originalAuthor}</dd>
                 </div>
               )}
             {amusementData.attributes.publisher !== '?' && (
@@ -1541,7 +1559,7 @@ export default function Amusement({
                     ? '유통/배급'
                     : '제작/배급'}
                 </dt>
-                <dd className="April16thPromise">{truncateString(amusementData.attributes.publisher, 72)}</dd>
+                <dd className="seed">{truncateString(amusementData.attributes.publisher, 72)}</dd>
               </div>
             )}
             {amusementData.attributes.creator !== '?' && (
@@ -1551,7 +1569,7 @@ export default function Amusement({
                     ? '개발'
                     : '주요 제작자'}
                 </dt>
-                <dd className="April16thPromise">{truncateString(amusementData.attributes.creator, 72)}</dd>
+                <dd className="seed">{truncateString(amusementData.attributes.creator, 72)}</dd>
               </div>
             )}
             {amusementData.attributes.cast !== '?' && (
@@ -1569,7 +1587,7 @@ export default function Amusement({
                     ) : (
                       <dt>주요 성우</dt>
                     )}
-                    <dd className="April16thPromise">{truncateString(amusementData.attributes.cast, 72)}</dd>
+                    <dd className="seed">{truncateString(amusementData.attributes.cast, 72)}</dd>
                   </div>
                 )}
               </>
@@ -1581,13 +1599,13 @@ export default function Amusement({
                   {amusementData.attributes.dubbingLang === 'english' && '미국'}
                   {amusementData.attributes.dubbingLang === null && '한국'} 성우
                 </dt>
-                <dd className="April16thPromise">{truncateString(amusementData.attributes.dubbing, 72)}</dd>
+                <dd className="seed">{truncateString(amusementData.attributes.dubbing, 72)}</dd>
               </div>
             )}
             {amusementData.attributes.characters && (
               <div>
                 <dt>캐릭터</dt>
-                <dd className="April16thPromise">{truncateString(amusementData.attributes.characters, 72)}</dd>
+                <dd className="seed">{truncateString(amusementData.attributes.characters, 72)}</dd>
               </div>
             )}
             {amusementData.attributes.comment && (
@@ -1775,7 +1793,7 @@ export default function Amusement({
                 </span>
               )}
             </h3>
-            <div className={styles.contents}>
+            <div className={`${styles.contents} seed`}>
               <PerfectScrollbar className={`${styles['scrollbar-container']}`}>
                 <div className={styles.content}>
                   <dl className={styles.title}>
@@ -1793,13 +1811,19 @@ export default function Amusement({
                             <span lang="en">{amusementData.attributes.title}</span>
                           )}
                           {amusementData.attributes.lang === 'english' && (
-                            <span lang="en-US">{amusementData.attributes.title}</span>
+                            <span className="seed" lang="en-US">
+                              {amusementData.attributes.title}
+                            </span>
                           )}
                           {amusementData.attributes.lang === 'japanese' && (
-                            <span lang="ja">{amusementData.attributes.title}</span>
+                            <span className="seed" lang="ja">
+                              {amusementData.attributes.title}
+                            </span>
                           )}
                           {amusementData.attributes.lang === 'thai' && (
-                            <span lang="th">{amusementData.attributes.title}</span>
+                            <span className="seed" lang="th">
+                              {amusementData.attributes.title}
+                            </span>
                           )}
                           {amusementData.attributes.lang === null && (
                             <span lang="ko">{amusementData.attributes.title}</span>
