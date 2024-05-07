@@ -121,7 +121,7 @@
       +mq(maxExtraSmall)
         padding: 0 rem(25) 0 0
 
-      .title, .accent, .synopsys, .summary
+      .title, .accent, .comment, .synopsys, .summary
         dt
           +screen-reader-only
 
@@ -131,6 +131,15 @@
       .staff dd
         font-variation-settings: 'opsz' 700, 'wght' 700
         line-height: 1.57142857
+
+      .origin-title dd
+        font-size: rem(16)
+
+        &[lang="en-US"], &[lang="ko"]
+          font-variation-settings: 'opsz' 800, 'wght' 800
+
+        &[lang="zh-Hant"], &[lang="zh-Hans"], &[lang="en"], &[lang="ja"], &[lang="th"]
+          font-weight: 800
 
       .item
         flex-wrap: wrap

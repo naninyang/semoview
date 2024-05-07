@@ -1798,37 +1798,33 @@ export default function Amusement({
                 <div className={styles.content}>
                   <dl className={styles.title}>
                     {amusementData.attributes.titleKorean !== null && (
-                      <div>
+                      <div className={styles['origin-title']}>
                         <dt>원제</dt>
-                        <dd>
-                          {amusementData.attributes.lang === 'chineseBeonche' && (
-                            <span lang="zh-Hant">{amusementData.attributes.title}</span>
-                          )}
-                          {amusementData.attributes.lang === 'chineseGanche' && (
-                            <span lang="zh-Hans">{amusementData.attributes.title}</span>
-                          )}
-                          {amusementData.attributes.lang === 'europe' && (
-                            <span lang="en">{amusementData.attributes.title}</span>
-                          )}
-                          {amusementData.attributes.lang === 'english' && (
-                            <span className="seed" lang="en-US">
-                              {amusementData.attributes.title}
-                            </span>
-                          )}
-                          {amusementData.attributes.lang === 'japanese' && (
-                            <span className="seed" lang="ja">
-                              {amusementData.attributes.title}
-                            </span>
-                          )}
-                          {amusementData.attributes.lang === 'thai' && (
-                            <span className="seed" lang="th">
-                              {amusementData.attributes.title}
-                            </span>
-                          )}
-                          {amusementData.attributes.lang === null && (
-                            <span lang="ko">{amusementData.attributes.title}</span>
-                          )}
-                        </dd>
+                        {amusementData.attributes.lang === 'chineseBeonche' && (
+                          <dd lang="zh-Hant">{amusementData.attributes.title}</dd>
+                        )}
+                        {amusementData.attributes.lang === 'chineseGanche' && (
+                          <dd lang="zh-Hans">{amusementData.attributes.title}</dd>
+                        )}
+                        {amusementData.attributes.lang === 'europe' && (
+                          <dd lang="en">{amusementData.attributes.title}</dd>
+                        )}
+                        {amusementData.attributes.lang === 'english' && (
+                          <dd className="seed" lang="en-US">
+                            {amusementData.attributes.title}
+                          </dd>
+                        )}
+                        {amusementData.attributes.lang === 'japanese' && (
+                          <dd lang="ja">{amusementData.attributes.title}</dd>
+                        )}
+                        {amusementData.attributes.lang === 'thai' && (
+                          <dd lang="th">{amusementData.attributes.title}</dd>
+                        )}
+                        {amusementData.attributes.lang === null && (
+                          <dd className="seed" lang="ko">
+                            {amusementData.attributes.title}
+                          </dd>
+                        )}
                       </div>
                     )}
                     {amusementData.attributes.titleOther && (
@@ -1960,7 +1956,6 @@ export default function Amusement({
                                     amusementData.attributes.isMobile &&
                                     '모바일 '}
                                   {CategoryName(amusementData.attributes.category)}
-                                  {(amusementData.attributes.category as Category) === 'game_fan' && '팬 게임'}
                                 </em>
                               )}
                               {amusementData.attributes.category === 'ott_anime_film' && (
@@ -2066,30 +2061,14 @@ export default function Amusement({
                                   amusementData.attributes.anime === 'ova') && (
                                   <>
                                     {amusementData.attributes.rating === 'all' ? (
-                                      <>
-                                        <i className={`${styles.drama} ${styles.all} number`}>
-                                          {RatingsDrama(amusementData.attributes.rating)}
-                                        </i>
-                                        <span>전체 이용가</span>
-                                      </>
+                                      <span>전체 이용가</span>
                                     ) : (
-                                      <>
-                                        {amusementData.attributes.rating === 'd19' ? (
-                                          <>
-                                            <i className={`${styles.drama} ${styles.d19} number`}>
-                                              {RatingsDrama(amusementData.attributes.rating)}
-                                            </i>
-                                            <span>세 미만 이용불가</span>
-                                          </>
-                                        ) : (
-                                          <>
-                                            <i className={`${styles.drama} number`}>
-                                              {RatingsDrama(amusementData.attributes.rating)}
-                                            </i>
-                                            <span>세 이상 이용가</span>
-                                          </>
-                                        )}
-                                      </>
+                                      <span>
+                                        {RatingsDrama(amusementData.attributes.rating)}
+                                        {amusementData.attributes.rating === 'd19'
+                                          ? '세 미만 이용불가'
+                                          : '세 이상 이용가'}
+                                      </span>
                                     )}
                                   </>
                                 )}
@@ -2100,52 +2079,20 @@ export default function Amusement({
                                   amusementData.attributes.category === 'ott_documentary_film' ||
                                   amusementData.attributes.anime === 'film') && (
                                   <>
-                                    {amusementData.attributes.rating === 'all' && (
-                                      <>
-                                        <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
-                                      </>
-                                    )}
-                                    {amusementData.attributes.rating === 'b12' && (
-                                      <>
-                                        <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
-                                      </>
-                                    )}
-                                    {amusementData.attributes.rating === 'c15' && (
-                                      <>
-                                        <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
-                                      </>
-                                    )}
-                                    {amusementData.attributes.rating === 'd19' && (
-                                      <>
-                                        <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
-                                      </>
-                                    )}
+                                    {amusementData.attributes.rating === 'all' && <span>전체 이용가</span>}
+                                    {amusementData.attributes.rating === 'b12' && <span>12세 이용가</span>}
+                                    {amusementData.attributes.rating === 'c15' && <span>15세 이용가</span>}
+                                    {amusementData.attributes.rating === 'd19' && <span>청소년 이용불가</span>}
                                   </>
                                 )}
                               </>
                             )}
                             {amusementData.attributes.category === 'game' && (
                               <>
-                                {amusementData.attributes.rating === 'all' && (
-                                  <>
-                                    <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
-                                  </>
-                                )}
-                                {amusementData.attributes.rating === 'b12' && (
-                                  <>
-                                    <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
-                                  </>
-                                )}
-                                {amusementData.attributes.rating === 'c15' && (
-                                  <>
-                                    <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
-                                  </>
-                                )}
-                                {amusementData.attributes.rating === 'd19' && (
-                                  <>
-                                    <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
-                                  </>
-                                )}
+                                {amusementData.attributes.rating === 'all' && <span>전체 이용가</span>}
+                                {amusementData.attributes.rating === 'b12' && <span>12세 이용가</span>}
+                                {amusementData.attributes.rating === 'c15' && <span>15세 이용가</span>}
+                                {amusementData.attributes.rating === 'd19' && <span>청소년 이용불가</span>}
                               </>
                             )}
                             {(amusementData.attributes.ott === 'amazonOriginal' ||
@@ -2186,23 +2133,13 @@ export default function Amusement({
                     )}
                     {amusementData.attributes.publisher !== '?' && (
                       <div>
-                        <dt>
-                          {amusementData.attributes.category === 'game' ||
-                          amusementData.attributes.category === 'game_fan'
-                            ? '유통/배급'
-                            : '제작/배급'}
-                        </dt>
+                        <dt>{amusementData.attributes.category === 'game' ? '유통/배급' : '제작/배급'}</dt>
                         <dd className="seed">{amusementData.attributes.publisher}</dd>
                       </div>
                     )}
                     {amusementData.attributes.creator !== '?' && (
                       <div>
-                        <dt>
-                          {amusementData.attributes.category === 'game' ||
-                          amusementData.attributes.category === 'game_fan'
-                            ? '개발'
-                            : '주요 제작자'}
-                        </dt>
+                        <dt>{amusementData.attributes.category === 'game' ? '개발' : '주요 제작자'}</dt>
                         <dd className="seed">{amusementData.attributes.creator}</dd>
                       </div>
                     )}
@@ -2246,6 +2183,7 @@ export default function Amusement({
                       <div className={styles.comment}>
                         <dt>작품 추가 정보</dt>
                         <dd
+                          className="seed"
                           dangerouslySetInnerHTML={{
                             __html: amusementData.attributes.comment.replace(/\n/g, '<br />'),
                           }}
