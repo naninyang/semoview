@@ -178,6 +178,13 @@
               & + dd::before
                 content: '· '
 
+      .synopsys
+        width: 72%
+
+        dd
+          text-wrap: balance
+          word-break: keep-all
+
       dl
         display: flex
         flex-direction: column
@@ -763,7 +770,6 @@
 
           dd
             +col
-            font-weight: 700
             text-wrap: balance
             font-variation-settings: 'opsz' 700, 'wght' 700
 
@@ -779,6 +785,8 @@
               +line-abbr(2, 67, 1.5)
               font-weight: 400
               font-variation-settings: 'opsz' 400, 'wght' 400
+              text-wrap: balance
+              word-break: keep-all
 
           &.comment
             dd

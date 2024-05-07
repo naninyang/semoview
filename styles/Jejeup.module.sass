@@ -617,7 +617,6 @@
               display: flex
               align-items: center
               +col
-              font-weight: 800
               color: $hex-dark
               font-variation-settings: 'opsz' 800, 'wght' 800
 
@@ -661,15 +660,12 @@
         border-radius: rem(3)
         padding: rem(12)
 
-        strong
-          font-weight: 800
-
         p, ul, ol
           margin: rem(7)
 
         p, li
           font-size: rem(14)
-          font-weight: 700
+          font-weight: 500
           line-height: 1.375
 
           +mq(minSmall)
@@ -681,12 +677,16 @@
 
           li
             margin: rem(3) 0
+            font-weight: 500
 
         ol
           list-style-type: decimal
 
         ul
           list-style-type: disc
+
+        strong
+          font-weight: 800
 
         a
           color: $hex-accent
