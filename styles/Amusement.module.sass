@@ -466,7 +466,7 @@
               display: inline-block
               height: rem(18)
 
-        .link, .relation
+        .link
           padding: rem(7) 0
 
           dd
@@ -477,121 +477,7 @@
             em
               font-style: normal
 
-            ul
-              width: calc(100% - rem(50))
-              padding: 0 rem(7)
-
-              &:not(.relation-default)
-                .relation-current
-                  display: none
-
-                .relation-selected
-                  display: flex
-
-                &.relation-open
-                  .relation-current
-                    display: flex
-
-                  li
-                    button
-                      i
-                        display: none
-
-                    &:first-of-type
-                      button
-                        display: flex
-                        justify-content: space-between
-                        align-items: center
-                        gap: rem(7)
-
-                        i
-                          display: inline-block
-                          width: rem(24)
-                          height: rem(24)
-
-              &.relation-default
-                padding: 0
-
-              &:not(.relation-default)
-                &.relation-open
-                  li
-                    &.relation-current
-                      button
-                        color: $hex-black
-                        font-weight: 400
-
-                    &.relation-selected
-                      button
-                        color: $hex-accent
-                        font-weight: 800
-
-              &:not(.relation-open)
-                padding: 0
-
-              &.relation-open
-                display: flex
-                flex-direction: column
-                background-color: $hex-white
-                border-radius: rem(3)
-                overflow: hidden
-
-                li
-                  display: flex
-                  width: 100%
-                  background-color: transparent
-                  border-top: rem(2) solid rgba($hex-dark, .2)
-
-                  &:first-of-type
-                    border-top: 0
-
-                  &.relation-selected,
-                  &.relation-current
-                    button
-                      background-color: transparent
-                      border-color: transparent
-                      border-radius: 0
-                      padding: rem(7) 0
-                      color: $hex-accent
-                      font-weight: 800
-
-                  button
-                    width: 100%
-                    border: rem(2) solid transparent
-                    padding: rem(7) 0
-                    background-color: transparent
-                    color: $hex-black
-                    text-align: left
-                    line-height: 1.25
-
-              li
-                display: none
-
-                &.relation-selected,
-                &.relation-current
-                  display: flex
-                  width: 100%
-
-                  button
-                    display: flex
-                    justify-content: space-between
-                    align-items: center
-                    width: 100%
-                    border: rem(2) solid $hex-accent
-                    border-radius: rem(3)
-                    padding: rem(3) rem(7)
-                    background-color: rgba($hex-black, .35)
-                    color: $hex-white
-                    text-align: left
-                    line-height: 1.25
-                    font-weight: 800
-
-                    i
-                      display: inline-block
-                      width: rem(24)
-                      height: rem(24)
-
-            a,
-            & > button
+            a
               background-color: $hex-white
               height: rem(35)
               border: 0
@@ -603,58 +489,72 @@
               +mq(maxExtraSmall)
                 font-size: rem(14)
 
-            & > button
-              width: rem(45)
-
-            em
-              display: flex
-              justify-content: space-between
-              align-items: center
-              width: 100%
-              height: rem(35)
-              border: rem(2) solid $hex-accent
-              border-radius: rem(3)
-              padding: rem(7)
-              background-color: rgba($hex-black, .35)
-              color: $hex-white
-              text-align: left
-              line-height: 1.25
-              font-weight: 800
-
         .relation
-          padding-left: 0
-          width: calc(100vw - rem(160))
-
-          +mq(minMedium)
-            width: calc(100vw - rem(550))
-
-          +mq(minLarge)
-            width: calc(100vw - rem(610))
-
-          +mq(minExtraLarge)
-            width: calc(100vw - rem(750))
-
-          &:not(.relation-open)
-            dd
-              min-height: auto
-              height: auto
-
-              ul
-                position: relative
-
           dd
-            position: relative
             display: flex
-            justify-content: flex-end
             gap: rem(7)
-            width: 100%
-            height: rem(38)
 
-            ul
-              position: absolute
-              top: 0
-              left: 0
-              width: calc(100% - rem(52))
+            div
+              padding-left: 0
+              position: relative
+
+              select
+                position: absolute
+                top: 0
+                bottom: 0
+                left: 0
+                z-index: 1
+                width: 100%
+                opacity: 0
+
+              > span
+                display: flex
+                position: relative
+                justify-content: space-between
+                align-items: center
+                gap: rem(7)
+                background-color: rgba(0, 0, 0, .35)
+                border: rem(2) solid #ef233c
+                border-radius: rem(3)
+                padding: rem(4) rem(7)
+                min-height: rem(35)
+                color: #fff
+                text-align: left
+                line-height: 1.25
+                font-weight: 800
+
+                em
+                  font-style: normal
+
+                span
+                  display: flex
+                  align-items: center
+                  position: absolute
+                  top: 0
+                  left: 0
+                  padding: 0 rem(7)
+                  height: 100%
+
+                  + em
+                    opacity: 0
+
+                i
+                  display: inline-block
+                  width: rem(24)
+                  height: rem(24)
+
+        button
+          background-color: $hex-white
+          flex-grow: 1
+          border: 0
+          border-radius: rem(3)
+          padding: rem(5) rem(12)
+          color: $hex-accent
+          font-weight: 800
+          line-height: 1
+
+          +mq(maxExtraSmall)
+            font-size: rem(14)
 
         .item
           display: flex

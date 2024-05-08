@@ -239,10 +239,6 @@ const RatingGameD19 = styled.i({
   background: `url(${vectors.ratings.game.d19}) no-repeat 50% 50%/contain`,
 });
 
-const UpIcon = styled.i({
-  background: `url(${vectors.up}) no-repeat 50% 50%/contain`,
-});
-
 const DownIcon = styled.i({
   background: `url(${vectors.down}) no-repeat 50% 50%/contain`,
 });
@@ -505,10 +501,10 @@ export default function Amusement({
   const [isJejeupsError, setIsJejeupsError] = useState<null | string>(null);
   const [isActive, setIsActive] = useState(true);
   const [relations, setRelations] = useState<AmusementData | null>(null);
-  const [isRelationsOpen, setIsRelationsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedRelation, setSelectedRelation] = useState<string>('');
+  const [currentRelation, setCurrentRelation] = useState<string>('');
   const [isMore, setIsMore] = useState<boolean>(false);
 
   const handleButtonClick = () => {
@@ -699,35 +695,14 @@ export default function Amusement({
     return () => clearTimeout(timer);
   }, []);
 
-  const [selectedStatus, setSelectedStatus] = useState(
-    new Array(Array.isArray(relations) ? relations.length : 0).fill(false),
-  );
   useEffect(() => {
     if (Array.isArray(relations) && relations.length > 0) {
-      setSelectedStatus(new Array(relations.length).fill(false));
+      const defaultRelation = relations.find((relation) => relation.idx !== amusementId);
+      if (defaultRelation) {
+        setSelectedRelation(`/amusement/${defaultRelation.idx}`);
+      }
     }
-  }, [relations]);
-  const handleRelationChange = (index: number, path: string) => {
-    const updatedStatus = new Array(Array.isArray(relations) ? relations.length : 0).fill(false);
-    updatedStatus[index] = true;
-
-    setSelectedStatus(updatedStatus);
-    setSelectedRelation(path);
-    if (isRelationsOpen) {
-      setIsRelationsOpen(false);
-    } else {
-      setIsRelationsOpen(true);
-    }
-  };
-
-  const handleRelationSubmit = () => {
-    if (!selectedRelation) {
-      alert('작품을 선택해 주세요');
-    } else {
-      setIsRelationsOpen(false);
-      router.push({ pathname: selectedRelation });
-    }
-  };
+  }, [relations, amusementId]);
 
   if (!amusementData) {
     if (timeoutReached) {
@@ -829,6 +804,23 @@ export default function Amusement({
     setIsActive(!isActive);
   };
 
+  const handleRelationChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedIndex = event.target.selectedIndex;
+    const selectedOption = event.target.options[selectedIndex];
+    const displayText = selectedOption.text;
+    setSelectedRelation(event.target.value);
+    setCurrentRelation(displayText);
+  };
+
+  const handleRelationSubmit = () => {
+    if (!currentRelation || currentRelation === '') {
+      alert('작품을 선택해 주세요');
+    } else {
+      router.push({ pathname: selectedRelation });
+      setCurrentRelation('');
+    }
+  };
+
   function RelationSelect() {
     if (
       Array.isArray(relations) &&
@@ -838,28 +830,40 @@ export default function Amusement({
       !isLoading &&
       !error
     ) {
-      const isAllFalse = selectedStatus.every((status) => !status);
+      const longCheck = relations.reduce((longest, current) => {
+        const currentTitle = current.titleKorean || current.title;
+        return currentTitle.length > longest.length ? currentTitle : longest;
+      }, '');
       return (
-        <div className={`${styles.relation} ${isRelationsOpen ? styles['relation-open'] : ''}`}>
+        <div className={styles.relation}>
           <dt>시리즈 선택</dt>
           <dd>
-            <ul
-              className={`${isRelationsOpen ? styles['relation-open'] : ''} ${isAllFalse ? styles['relation-default'] : ''}`}
-            >
-              {relations
-                .sort((a, b) => parseInt(a.order, 10) - parseInt(b.order, 10))
-                .map((relation, index) => (
-                  <li
-                    key={index}
-                    className={`${selectedStatus[index] ? styles['relation-selected'] : ''} ${router.asPath === `/amusement/${relation.idx}` ? styles['relation-current'] : ''}`}
-                  >
-                    <button onClick={() => handleRelationChange(index, `/amusement/${relation.idx}`)} type="button">
+            <div>
+              <select defaultValue={`${router.asPath}`} onChange={handleRelationChange}>
+                {[...relations]
+                  .sort((a, b) => a.order - b.order)
+                  .map((relation) => (
+                    <option key={relation.idx} value={`/amusement/${relation.idx}`}>
                       {relation.titleKorean ? relation.titleKorean : relation.title}
-                      {isRelationsOpen ? <UpIcon /> : <DownIcon />}
-                    </button>
-                  </li>
-                ))}
-            </ul>
+                    </option>
+                  ))}
+              </select>
+              <span aria-hidden="true">
+                {currentRelation === '' ? (
+                  <>
+                    {amusementData.attributes.titleKorean ? (
+                      <span>{amusementData.attributes.titleKorean}</span>
+                    ) : (
+                      <span>{amusementData.attributes.title}</span>
+                    )}
+                  </>
+                ) : (
+                  <span>{currentRelation}</span>
+                )}
+                <em>{longCheck}</em>
+                <DownIcon />
+              </span>
+            </div>
             <button type="button" onClick={handleRelationSubmit}>
               이동
             </button>
@@ -1188,7 +1192,11 @@ export default function Amusement({
                 <div className={styles.relation}>
                   <dt>다른 버전 보기</dt>
                   <dd>
-                    <em>목록 불러오는 중...</em>
+                    <div>
+                      <span>
+                        <em>목록 불러오는 중...</em>
+                      </span>
+                    </div>
                   </dd>
                 </div>
               )}
