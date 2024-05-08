@@ -1034,11 +1034,14 @@ export default function Amusement({
             {amusementData.attributes.originalAuthor &&
               amusementData.attributes.original &&
               amusementData.attributes.originTitle && (
-                <span className={styles.accent}>
-                  &apos;{amusementData.attributes.originalAuthor}&apos;의{' '}
-                  {OriginalName(amusementData.attributes.original)} &apos;
-                  {amusementData.attributes.originTitle}&apos; 원작
-                </span>
+                <div className={styles.accent}>
+                  <dt>원작</dt>
+                  <dd>
+                    &apos;{amusementData.attributes.originalAuthor}&apos;의{' '}
+                    {OriginalName(amusementData.attributes.original)} &apos;
+                    {amusementData.attributes.originTitle}&apos; 원작
+                  </dd>
+                </div>
               )}
             {amusementData.attributes.original !== null &&
               amusementData.attributes.originTitle === null &&

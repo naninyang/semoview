@@ -1336,27 +1336,6 @@ export default function JejeupDetail({
                                                     {data.titleOther}
                                                   </span>
                                                 )}
-                                                {data.release !== '?' && (
-                                                  <>
-                                                    {(data.category === 'drama' ||
-                                                      data.category === 'ott_drama' ||
-                                                      data.category === 'ott_anime' ||
-                                                      data.anime === 'tva' ||
-                                                      data.anime === 'ova') && (
-                                                      <time aria-label="방영년도">{data.release}</time>
-                                                    )}
-                                                    {(data.category === 'film' ||
-                                                      data.category === 'anime_film' ||
-                                                      data.category === 'ott_anime_film' ||
-                                                      data.category === 'ott_film' ||
-                                                      data.anime === 'film') && (
-                                                      <time aria-label="상영년도">{data.release}</time>
-                                                    )}
-                                                    {data.category === 'game' && (
-                                                      <time aria-label="출시년도">{data.release}</time>
-                                                    )}
-                                                  </>
-                                                )}
                                               </strong>
                                               {(data.original !== null || data.etc !== null) && (
                                                 <p>
@@ -1397,6 +1376,26 @@ export default function JejeupDetail({
                                               <div>
                                                 <dt>제작국가</dt>
                                                 <dd className="seed">{data.country}</dd>
+                                              </div>
+                                            )}
+                                            {data.release !== '?' && (
+                                              <div>
+                                                <dt>
+                                                  {(data.category === 'drama' ||
+                                                    data.category === 'ott_drama' ||
+                                                    data.category === 'ott_anime' ||
+                                                    data.anime === 'tva' ||
+                                                    data.anime === 'ova') &&
+                                                    '방영년도'}
+                                                  {(data.category === 'film' ||
+                                                    data.category === 'anime_film' ||
+                                                    data.category === 'ott_anime_film' ||
+                                                    data.category === 'ott_film' ||
+                                                    data.anime === 'film') &&
+                                                    '상영년도'}
+                                                  {data.category === 'game' && '출시년도'}
+                                                </dt>
+                                                <dd className="seed">{data.release}</dd>
                                               </div>
                                             )}
                                             {data.runningTime && (
@@ -1914,27 +1913,6 @@ export default function JejeupDetail({
                                               {data.titleOther}
                                             </span>
                                           )}
-                                          {data.release !== '?' && (
-                                            <>
-                                              {(data.category === 'drama' ||
-                                                data.category === 'ott_drama' ||
-                                                data.category === 'ott_anime' ||
-                                                data.anime === 'tva' ||
-                                                data.anime === 'ova') && (
-                                                <time aria-label="방영년도">{data.release}</time>
-                                              )}
-                                              {(data.category === 'film' ||
-                                                data.category === 'anime_film' ||
-                                                data.category === 'ott_anime_film' ||
-                                                data.category === 'ott_film' ||
-                                                data.anime === 'film') && (
-                                                <time aria-label="상영년도">{data.release}</time>
-                                              )}
-                                              {data.category === 'game' && (
-                                                <time aria-label="출시년도">{data.release}</time>
-                                              )}
-                                            </>
-                                          )}
                                         </strong>
                                         {(data.original !== null || data.etc !== null) && (
                                           <p>
@@ -1974,6 +1952,26 @@ export default function JejeupDetail({
                                         <div>
                                           <dt>제작국가</dt>
                                           <dd className="seed">{data.country}</dd>
+                                        </div>
+                                      )}
+                                      {data.release !== '?' && (
+                                        <div>
+                                          <dt>
+                                            {(data.category === 'drama' ||
+                                              data.category === 'ott_drama' ||
+                                              data.category === 'ott_anime' ||
+                                              data.anime === 'tva' ||
+                                              data.anime === 'ova') &&
+                                              '방영년도'}
+                                            {(data.category === 'film' ||
+                                              data.category === 'anime_film' ||
+                                              data.category === 'ott_anime_film' ||
+                                              data.category === 'ott_film' ||
+                                              data.anime === 'film') &&
+                                              '상영년도'}
+                                            {data.category === 'game' && '출시년도'}
+                                          </dt>
+                                          <dd className="seed">{data.release}</dd>
                                         </div>
                                       )}
                                       {data.runningTime && (
