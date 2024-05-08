@@ -1828,9 +1828,13 @@ export default function Amusement({
                       </div>
                     )}
                     {amusementData.attributes.titleOther && (
-                      <div>
+                      <div className={amusementData.attributes.lang === null ? styles['origin-title'] : ''}>
                         <dt>작품의 다른 언어 제목</dt>
-                        <dd className="lang">{amusementData.attributes.titleOther}</dd>
+                        <dd className="lang">
+                          {amusementData.attributes.lang !== null && '('}
+                          {amusementData.attributes.titleOther}
+                          {amusementData.attributes.lang !== null && ')'}
+                        </dd>
                       </div>
                     )}
                     {amusementData.attributes.etc && (
