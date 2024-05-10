@@ -68,19 +68,27 @@ const Related = ({ videoId, videoDescription, title, sorting, key }: Props) => {
         body.classList.remove(jejeus.open);
       }
     }
-    const preventScroll = (e: Event) => {
+    const preventScroll = (e: Event): void => {
       e.preventDefault();
+    };
+    const preventScrollKeys = (e: KeyboardEvent): void => {
+      if (['ArrowUp', 'ArrowDown', 'Space', 'PageUp', 'PageDown', 'Home', 'End'].includes(e.code)) {
+        e.preventDefault();
+      }
     };
     if (selectedRelated) {
       window.addEventListener('wheel', preventScroll, { passive: false });
       window.addEventListener('touchmove', preventScroll, { passive: false });
+      window.addEventListener('keydown', preventScrollKeys, { passive: false });
     } else {
       window.removeEventListener('wheel', preventScroll);
       window.removeEventListener('touchmove', preventScroll);
+      window.removeEventListener('keydown', preventScrollKeys);
     }
     return () => {
       window.removeEventListener('wheel', preventScroll);
       window.removeEventListener('touchmove', preventScroll);
+      window.removeEventListener('keydown', preventScrollKeys);
     };
   }, [selectedRelated]);
 
