@@ -615,6 +615,7 @@
                     color: $hex-white
 
                 &.rating-amazon
+                  +col
                   background-color: #33373d
                   border-radius: rem(3)
                   padding: rem(3) rem(7)
@@ -629,25 +630,35 @@
                 +screen-reader-only
 
               .custom
-                display: inline-flex
+                position: relative
+                display: inline-block
+                width: rem(20)
+                height: rem(20)
 
                 button
+                  position: absolute
+                  top: 0
+                  left: 0
+                  display: inline-block
                   background-color: white
                   border: rem(2) solid $hex-accent
                   border-radius: 100%
+                  padding: 0
                   width: rem(20)
                   height: rem(20)
                   text-align: center
 
                   i::before
                     content: '?'
+                    position: absolute
+                    top: 50%
+                    left: 50%
+                    transform: translate(-50%, -50%)
                     font-size: rem(14)
                     font-weight: 800
                     font-style: normal
                     color: $hex-accent
-
-                  span
-                    +screen-reader-only
+                    line-height: 1
 
       .staff
         display: flex

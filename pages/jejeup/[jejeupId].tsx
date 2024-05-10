@@ -262,6 +262,74 @@ const RelatedList = ({ related }: { related: any }) => {
   }
 };
 
+const ReviewList = ({ review, current }: { review: string; current: number }) => {
+  const [amusementData, setAmusementData] = useState<JejeupData[] | null>(null);
+
+  useEffect(() => {
+    async function fetchAmusementData() {
+      const amusementIds = review.match(/\d+/g);
+
+      if (amusementIds) {
+        Promise.all(
+          amusementIds.map((id: string) =>
+            fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/jejeupAmusement?page=1&amusementId=${id}`).then((response) =>
+              response.json(),
+            ),
+          ),
+        )
+          .then((data: JejeupData[]) => {
+            setAmusementData(data);
+          })
+          .catch((error) => {
+            console.error('Failed to fetch amusement data:', error);
+          });
+      }
+    }
+
+    fetchAmusementData();
+  }, []);
+
+  const validItems: JejeupData[] = [];
+
+  amusementData?.forEach((data: any) => {
+    data.jejeups?.forEach((item: any) => {
+      if (item.idx !== current && !validItems.some((v) => v.idx === item.idx)) {
+        validItems.push(item);
+      }
+    });
+  });
+
+  if (validItems.length > 0) {
+    return (
+      <aside className={styles['items-related']}>
+        <h2>작품의 다른 리뷰</h2>
+        <div className={styles.list}>
+          {validItems.map((item, index) => (
+            <div className={styles.item} key={index}>
+              <Anchor href={`/jejeup/${item.idx}`}>
+                <Image
+                  src={`https://i.ytimg.com/vi/${item.video}/hqdefault.jpg`}
+                  width={640}
+                  height={480}
+                  unoptimized
+                  priority
+                  alt={item.subject}
+                />
+                <span>
+                  [{item.amusementData.titleKorean ? item.amusementData.titleKorean : item.amusementData.title}]{' '}
+                  {item.subject}
+                </span>
+              </Anchor>
+            </div>
+          ))}
+        </div>
+      </aside>
+    );
+  } else {
+    return null;
+  }
+};
+
 const GameList = ({ game, current, creator }: { game: number; current: number; creator: string }) => {
   const [amusementData, setAmusementData] = useState<AmusementData | null>(null);
   const [loading, setLoading] = useState(false);
@@ -294,7 +362,7 @@ const GameList = ({ game, current, creator }: { game: number; current: number; c
 
   if (!loading && amusementData && Object.keys(amusementData).length > 1) {
     return (
-      <aside className={styles['items-fan']}>
+      <aside className={styles['items-related']}>
         <h2>{creator}의 다른 팬게임 영상</h2>
         <div className={styles.list}>
           {amusementData &&
@@ -2123,6 +2191,9 @@ export default function JejeupDetail({
                   creator={jejeupData.amusementData[0].title}
                 />
               )}
+            {Array.isArray(jejeupData.amusementData) && (
+              <ReviewList review={jejeupData.attributes.amusements} current={jejeupId} />
+            )}
           </>
         )}
       </article>

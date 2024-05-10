@@ -1400,7 +1400,6 @@ export default function Amusement({
                   <dd>{amusementData.attributes.country}</dd>
                 </div>
               )}
-              {amusementData.attributes.supportLang !== null && <ADCC items={amusementData.attributes.supportLang} />}
               {amusementData.attributes.release !== '?' && (
                 <div className={styles.release}>
                   <dt>
@@ -1422,17 +1421,20 @@ export default function Amusement({
                   <dd>{amusementData.attributes.release}년</dd>
                 </div>
               )}
+              {amusementData.attributes.supportLang !== null && <ADCC items={amusementData.attributes.supportLang} />}
               {amusementData.attributes.category !== 'game_fan' && (
                 <div className={styles.rating}>
                   <dt>{amusementData.attributes.category === 'game' ? '심의등급' : '시청등급'}</dt>
                   <dd>
                     {amusementData.attributes.ott === 'amazonOriginal' ? (
-                      <i className={`${styles['rating-amazon']} number`} aria-label="시청 가능 연령">
+                      <i className={`${styles['rating-amazon']} number`}>
+                        <span>시청 가능 연령 </span>
                         {amusementData.attributes.rating === 'all' && 'All'}
                         {amusementData.attributes.rating === 'a7' && '7+'}
                         {amusementData.attributes.rating === 'b12' && '13+'}
                         {amusementData.attributes.rating === 'c15' && '16+'}
                         {amusementData.attributes.rating === 'd19' && '18+'}
+                        <span>세 이상</span>
                       </i>
                     ) : (
                       <>
