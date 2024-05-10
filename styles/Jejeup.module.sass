@@ -764,6 +764,10 @@
           strong
             +screen-reader-only
 
+      + .scrollbar-container
+        +mq(minLarge)
+          height: calc(100% - rem(286))
+
       h2
         display: flex
         align-items: center
@@ -827,6 +831,7 @@
               font-size: rem(14)
               font-weight: 700
               line-height: 1.42857143
+              +ellipsis
 
 @keyframes loading
   0%

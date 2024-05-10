@@ -2181,7 +2181,6 @@ export default function JejeupDetail({
         </div>
         {jejeupData.attributes && jejeupData.attributes.publishedAt !== null && (
           <>
-            {Array.isArray(jejeupData.amusementData) && <RelatedList related={jejeupData.amusementData} />}
             {Array.isArray(jejeupData.amusementData) &&
               jejeupData.amusementData[0].category === 'game_fan' &&
               jejeupData.attributes.title !== null && (
@@ -2194,6 +2193,7 @@ export default function JejeupDetail({
             {Array.isArray(jejeupData.amusementData) && (
               <ReviewList review={jejeupData.attributes.amusements} current={jejeupId} />
             )}
+            {Array.isArray(jejeupData.amusementData) && <RelatedList related={jejeupData.amusementData} />}
           </>
         )}
       </article>
