@@ -15,7 +15,6 @@ interface Props {
   videoDescription: string;
   sorting?: string;
   title: string;
-  key: string;
 }
 
 const CloseLightIcon = styled.i({
@@ -35,7 +34,7 @@ export function useMobile() {
   return isMobile;
 }
 
-const Related = ({ videoId, videoDescription, title, sorting, key }: Props) => {
+const Related = ({ videoId, videoDescription, title, sorting }: Props) => {
   const [selectedRelated, setSelectedRelated] = useState<boolean>(false);
 
   const handleButtonClick = () => {
@@ -47,6 +46,12 @@ const Related = ({ videoId, videoDescription, title, sorting, key }: Props) => {
   };
 
   const isMobile = useMobile();
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      setSelectedRelated(false);
+    }
+  };
 
   useEffect(() => {
     const isAmusement = sorting === 'amusement' ? true : false;
@@ -85,7 +90,9 @@ const Related = ({ videoId, videoDescription, title, sorting, key }: Props) => {
       window.removeEventListener('touchmove', preventScroll);
       window.removeEventListener('keydown', preventScrollKeys);
     }
+    document.addEventListener('keydown', handleKeyDown);
     return () => {
+      document.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('wheel', preventScroll);
       window.removeEventListener('touchmove', preventScroll);
       window.removeEventListener('keydown', preventScrollKeys);
@@ -95,7 +102,6 @@ const Related = ({ videoId, videoDescription, title, sorting, key }: Props) => {
   return (
     <div
       className={`${styles.item} ${selectedRelated ? styles.current : ''} ${sorting === 'amusement' ? styles['item-amusement'] : ''}`}
-      key={key}
     >
       {isMobile ? (
         <div className={styles.item}>

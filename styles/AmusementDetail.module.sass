@@ -1,0 +1,226 @@
+@import './designSystem'
+
+.modal
+  position: fixed
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  top: 0
+  left: 0
+  z-index: 9999
+  border: 0
+  padding: 0
+  width: 100%
+  height: 100%
+  background-color: rgba($hex-black, .7)
+  backdrop-filter: blur(rem(20))
+
+  +mq(maxExtraSmall)
+    background-color: $hex-dark
+
+  .container
+    position: relative
+    display: flex
+    flex-direction: column
+    padding: calc(env(safe-area-inset-top) + rem(52)) calc(env(safe-area-inset-right) + rem(52)) calc(env(safe-area-inset-bottom) + rem(52)) calc(env(safe-area-inset-left) + rem(52))
+
+    +mq(minSmall)
+      padding: calc(env(safe-area-inset-top) + rem(25)) calc(env(safe-area-inset-right) + rem(25)) calc(env(safe-area-inset-bottom) + rem(25)) calc(env(safe-area-inset-left) + rem(25))
+      width: 100%
+      max-height: 100dvh
+
+    +mq(minMedium)
+      padding: calc(env(safe-area-inset-top) + rem(52)) calc(env(safe-area-inset-right) + rem(52)) calc(env(safe-area-inset-bottom) + rem(52)) calc(env(safe-area-inset-left) + rem(52))
+      width: 92%
+
+    +mq(minLarge)
+      width: 77%
+
+    +mq(maxExtraSmall)
+      flex-grow: 1
+      padding: calc(env(safe-area-inset-top) + rem(50)) calc(env(safe-area-inset-right) + rem(25)) calc(env(safe-area-inset-bottom) + rem(50)) calc(env(safe-area-inset-left) + rem(25))
+      width: 100%
+
+    > button
+      background-color: transparent
+      position: absolute
+      top: calc(env(safe-area-inset-top) + rem(25))
+      right: calc(env(safe-area-inset-right) + rem(25))
+      width: rem(20)
+      height: rem(20)
+
+      +mq(minMedium)
+        top: calc(env(safe-area-inset-top) + rem(52))
+        right: calc(env(safe-area-inset-right) + rem(52))
+
+      +mq(minLarge)
+        top: calc(env(safe-area-inset-top) + rem(52))
+        right: calc(env(safe-area-inset-right) + rem(52))
+
+      +mq(minLarge)
+        width: rem(36)
+        height: rem(36)
+
+      +mq(maxExtraSmall)
+        top: calc(env(safe-area-inset-top) + rem(50))
+        right: calc(env(safe-area-inset-right) + rem(25))
+
+      i
+        display: inline-block
+        width: rem(20)
+        height: rem(20)
+
+        +mq(minLarge)
+          width: rem(36)
+          height: rem(36)
+
+      span
+        +screen-reader-only
+
+    h3
+      padding-right: rem(40)
+      padding-bottom: rem(23)
+      font-size: rem(20)
+      font-weight: 800
+      line-height: 1.16666667
+      color: $hex-azalea
+
+      span
+        display: block
+        +ellipsis
+
+      +mq(minLarge)
+        padding-right: rem(100)
+        padding-bottom: rem(27)
+        font-size: rem(36)
+
+    .contents
+      background-color: $hex-dark
+      border-radius: rem(12)
+
+      +mq(minSmall)
+        max-height: calc(100dvh - rem(103))
+
+      +mq(minMedium)
+        max-height: calc(100dvh - rem(223))
+
+      +mq(minLarge)
+        max-height: calc(100dvh - rem(283))
+
+      +mq(maxExtraSmall)
+        max-height: calc(100dvh - rem(173))
+        border-radius: 0
+
+    .content
+      display: flex
+      flex-direction: column
+      gap: rem(12)
+      padding: rem(25)
+
+      +mq(maxExtraSmall)
+        padding: 0 rem(25) 0 0
+
+      .title, .accent, .comment, .synopsys, .summary
+        dt
+          +screen-reader-only
+
+      .title, .summary
+        gap: rem(3)
+
+      .staff dd
+        font-variation-settings: 'opsz' 700, 'wght' 700
+        line-height: 1.57142857
+
+      .origin-title dd
+        font-size: rem(16)
+
+        &[lang="en-US"], &[lang="ko"]
+          font-variation-settings: 'opsz' 800, 'wght' 800
+
+        &[lang="zh-Hant"], &[lang="zh-Hans"], &[lang="en"], &[lang="ja"], &[lang="th"], &:not([lang])
+          font-weight: 800
+
+      .item
+        flex-wrap: wrap
+        gap: rem(3)
+
+        > div
+          gap: rem(3)
+
+          &::after
+            content: '|'
+            color: $hex-light
+
+          &:last-of-type::after
+            content: ''
+
+          dd
+            white-space: nowrap
+
+          &.category
+            gap: 0
+
+            dd
+              display: flex
+              align-items: flex-start
+              gap: rem(3)
+
+              em
+                display: flex
+                gap: rem(3)
+
+                &::after
+                  content: '· '
+                  color: $hex-light
+
+                &:last-of-type::after
+                  content: ''
+
+          &.rating
+            dd
+              display: flex
+              gap: rem(3)
+
+          &.ad-cc
+            dd
+              & + dd::before
+                content: '· '
+
+      .synopsys
+        width: 72%
+
+        dd
+          text-wrap: balance
+          word-break: keep-all
+
+      dl
+        display: flex
+        flex-direction: column
+        gap: rem(7)
+
+        div
+          display: flex
+          gap: rem(7)
+
+      dt, dd
+        font-size: rem(14)
+
+        +mq(minLarge)
+          font-size: rem(16)
+
+      dt
+        width: rem(70)
+        color: $hex-azalea
+        white-space: nowrap
+
+        +mq(minLarge)
+          width: rem(80)
+
+      dd
+        +col
+        color: $hex-white
+        line-height: 1.42857143
+
+        em, i
+          font-style: normal
