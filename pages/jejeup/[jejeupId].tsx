@@ -444,7 +444,7 @@ const ReviewContent = ({ data }: { data: any }) => {
   return <div className={styles['review-comment']}>{renderContent(data)}</div>;
 };
 
-function TagsItem({ items }: { items: any }) {
+export function TagsItem({ items, type }: { items: any; type: string }) {
   const excludeTags = ['game', 'anime', 'film', 'drama'];
   const filteredTags = items.tags && items.tags.filter((items: any) => !excludeTags.includes(items));
 
@@ -452,17 +452,34 @@ function TagsItem({ items }: { items: any }) {
     return null;
   }
 
-  return (
-    <div className={styles.tags}>
-      <dt>관련 태그</dt>
-      <dd className="seed">
-        {filteredTags.map((tag: string, index: number) => (
-          <span key={index}>{`#${TagName(tag)}`} </span>
-        ))}
-        {items.category && <span> #{TagCategoryName(items.category)}</span>}
-      </dd>
-    </div>
-  );
+  if (type === 'tag') {
+    return (
+      <div className={styles.tags}>
+        <dt>장르</dt>
+        <dd className="seed">
+          {filteredTags.map((tag: string, index: number) => (
+            <span key={index}>{`#${TagName(tag, 'tag')}`} </span>
+          ))}
+          {items.category && <span> #{TagCategoryName(items.category)}</span>}
+        </dd>
+      </div>
+    );
+  } else if (type === 'genre') {
+    return (
+      <div>
+        <dt>장르</dt>
+        <dd className="seed">
+          {items.genre},{' '}
+          {filteredTags.map((tag: string, index: number) => (
+            <React.Fragment key={index}>
+              {TagName(tag, 'genre')}
+              {index < filteredTags.length - 1 ? ', ' : ''}
+            </React.Fragment>
+          ))}
+        </dd>
+      </div>
+    );
+  }
 }
 
 function ADCC({ items }: { items: any }) {
@@ -1399,47 +1416,10 @@ export default function JejeupDetail({
                                                 {data.lang === 'english' && <span lang="en-US">{data.title}</span>}
                                                 {data.lang === 'japanese' && <span lang="ja">{data.title}</span>}
                                                 {data.lang === 'thai' && <span lang="th">{data.title}</span>}
-                                                {data.titleOther !== null && (
-                                                  <span className="lang" aria-label="작품의 다른 언어 제목">
-                                                    {data.titleOther}
-                                                  </span>
-                                                )}
                                               </strong>
-                                              {(data.original !== null || data.etc !== null) && (
-                                                <p>
-                                                  {data.originalAuthor && data.original && data.originTitle && (
-                                                    <span>
-                                                      &apos;{data.originalAuthor}&apos;의 {OriginalName(data.original)}{' '}
-                                                      &apos;
-                                                      {data.originTitle}&apos; 원작
-                                                    </span>
-                                                  )}
-                                                  {data.original !== null &&
-                                                    data.originTitle === null &&
-                                                    data.originalAuthor !== null && (
-                                                      <span className={styles.origin}>
-                                                        동명의 {OriginalName(data.original)} 원작
-                                                      </span>
-                                                    )}
-                                                  {data.original !== null && data.etc !== null && ' | '}
-                                                  {data.etc !== null && (
-                                                    <em className="lang" aria-label="작품 추가설명">
-                                                      {data.etc}
-                                                    </em>
-                                                  )}
-                                                </p>
-                                              )}
                                             </dd>
                                           </dl>
                                           <dl className={styles.info}>
-                                            {data.original !== null &&
-                                              data.originTitle === null &&
-                                              data.originalAuthor !== null && (
-                                                <div>
-                                                  <dt>원작자</dt>
-                                                  <dd className="seed">{data.originalAuthor}</dd>
-                                                </div>
-                                              )}
                                             {data.country !== '?' && (
                                               <div>
                                                 <dt>제작국가</dt>
@@ -1463,7 +1443,7 @@ export default function JejeupDetail({
                                                     '상영년도'}
                                                   {data.category === 'game' && '출시년도'}
                                                 </dt>
-                                                <dd className="seed">{data.release}</dd>
+                                                <dd className="seed">{data.release}년</dd>
                                               </div>
                                             )}
                                             {data.runningTime && (
@@ -1475,17 +1455,44 @@ export default function JejeupDetail({
                                               </div>
                                             )}
                                             {data.supportLang !== null && <ADCC items={data.supportLang} />}
-                                            {data.genre !== '?' && (
+                                            {data.genre !== '?' && data.tags === null && (
                                               <div>
                                                 <dt>장르</dt>
                                                 <dd className="seed">{data.genre}</dd>
                                               </div>
                                             )}
-                                            {data.tags !== null && <TagsItem items={data} />}
-                                            {data.publisher !== '?' && (
+                                            {data.genre !== '?' && data.tags !== null && (
+                                              <TagsItem items={data} type="genre" />
+                                            )}
+                                            {data.studio && (
+                                              <div>
+                                                <dt>스튜디오</dt>
+                                                <dd className="seed">{data.studio}</dd>
+                                              </div>
+                                            )}
+                                            {data.distributor ? (
+                                              data.publisher !== '?' && (
+                                                <>
+                                                  <div>
+                                                    <dt>제작</dt>
+                                                    <dd className="seed">{data.distributor}</dd>
+                                                  </div>
+                                                  <div>
+                                                    <dt>제작참여</dt>
+                                                    <dd className="seed">{data.publisher}</dd>
+                                                  </div>
+                                                </>
+                                              )
+                                            ) : (
                                               <div>
                                                 <dt>{data.category === 'game' ? '유통/배급' : '제작/배급'}</dt>
                                                 <dd className="seed">{data.publisher}</dd>
+                                              </div>
+                                            )}
+                                            {data.director && (
+                                              <div>
+                                                <dt>감독/연출</dt>
+                                                <dd className="seed">{data.director}</dd>
                                               </div>
                                             )}
                                             {data.creator !== '?' && (
@@ -1502,28 +1509,10 @@ export default function JejeupDetail({
                                                 data.category !== 'ott_anime_film' &&
                                                 data.category !== 'game' ? (
                                                   <dt>주요 출연자</dt>
-                                                ) : data.dubbing !== null ? (
-                                                  <dt>원어 성우</dt>
                                                 ) : (
                                                   <dt>주요 성우</dt>
                                                 )}
                                                 <dd className="seed">{data.cast}</dd>
-                                              </div>
-                                            )}
-                                            {data.dubbing !== null && (
-                                              <div>
-                                                <dt>
-                                                  {data.dubbingLang === 'japanese' && '일본'}
-                                                  {data.dubbingLang === 'english' && '미국'}
-                                                  {data.dubbingLang === null && '한국'} 성우
-                                                </dt>
-                                                <dd className="seed">{data.dubbing}</dd>
-                                              </div>
-                                            )}
-                                            {data.characters !== null && (
-                                              <div>
-                                                <dt>캐릭터</dt>
-                                                <dd className="seed">{data.characters}</dd>
                                               </div>
                                             )}
                                           </dl>
@@ -1960,14 +1949,14 @@ export default function JejeupDetail({
                                         )}
                                         {data.ott === null && data.ottAddr !== null && (
                                           <Anchor href={data.ottAddr}>
-                                            단편영화 &apos;{data.titleKorean ? data.titleKorean : data.title}&apos;
-                                            보러가기
+                                            단편영화 &apos;{data.titleKorean ? data.titleKorean : data.title}
+                                            &apos; 보러가기
                                           </Anchor>
                                         )}
                                       </dt>
                                       <dd>
                                         <strong>
-                                          <span className={`${styles.title} April16thPromise`} aria-label="작품명">
+                                          <span className={`${styles.title} seed`} aria-label="작품명">
                                             {data.titleKorean ? data.titleKorean : data.title}
                                           </span>
                                           {data.lang === 'chineseBeonche' && <span lang="zh-Hant">{data.title} </span>}
@@ -1976,46 +1965,10 @@ export default function JejeupDetail({
                                           {data.lang === 'english' && <span lang="en-US">{data.title}</span>}
                                           {data.lang === 'japanese' && <span lang="ja">{data.title}</span>}
                                           {data.lang === 'thai' && <span lang="th">{data.title}</span>}
-                                          {data.titleOther !== null && (
-                                            <span className="lang" aria-label="작품의 다른 언어 제목">
-                                              {data.titleOther}
-                                            </span>
-                                          )}
                                         </strong>
-                                        {(data.original !== null || data.etc !== null) && (
-                                          <p>
-                                            {data.originalAuthor && data.original && data.originTitle && (
-                                              <span>
-                                                &apos;{data.originalAuthor}&apos;의 {OriginalName(data.original)} &apos;
-                                                {data.originTitle}&apos; 원작
-                                              </span>
-                                            )}
-                                            {data.original !== null &&
-                                              data.originTitle === null &&
-                                              data.originalAuthor !== null && (
-                                                <span className={styles.origin}>
-                                                  동명의 {OriginalName(data.original)} 원작
-                                                </span>
-                                              )}
-                                            {data.original !== null && data.etc !== null && ' | '}
-                                            {data.etc !== null && (
-                                              <em className="lang" aria-label="작품 추가설명">
-                                                {data.etc}
-                                              </em>
-                                            )}
-                                          </p>
-                                        )}
                                       </dd>
                                     </dl>
                                     <dl className={styles.info}>
-                                      {data.original !== null &&
-                                        data.originTitle === null &&
-                                        data.originalAuthor !== null && (
-                                          <div>
-                                            <dt>원작자</dt>
-                                            <dd className="seed">{data.originalAuthor}</dd>
-                                          </div>
-                                        )}
                                       {data.country !== '?' && (
                                         <div>
                                           <dt>제작국가</dt>
@@ -2039,29 +1992,56 @@ export default function JejeupDetail({
                                               '상영년도'}
                                             {data.category === 'game' && '출시년도'}
                                           </dt>
-                                          <dd className="seed">{data.release}</dd>
+                                          <dd className="seed">{data.release}년</dd>
                                         </div>
                                       )}
                                       {data.runningTime && (
                                         <div>
                                           <dt>재생시간</dt>
-                                          <dd className="seed">
+                                          <dd>
                                             {data.runningTime}분{formatTime(data.runningTime)}
                                           </dd>
                                         </div>
                                       )}
                                       {data.supportLang !== null && <ADCC items={data.supportLang} />}
-                                      {data.genre !== '?' && (
+                                      {data.genre !== '?' && data.tags === null && (
                                         <div>
                                           <dt>장르</dt>
                                           <dd className="seed">{data.genre}</dd>
                                         </div>
                                       )}
-                                      {data.tags !== null && <TagsItem items={data} />}
-                                      {data.publisher !== '?' && (
+                                      {data.genre !== '?' && data.tags !== null && (
+                                        <TagsItem items={data} type="genre" />
+                                      )}
+                                      {data.studio && (
                                         <div>
-                                          <dt>{data.category === 'game' ? '유통/배급' : '퍼블리싱'}</dt>
+                                          <dt>스튜디오</dt>
+                                          <dd className="seed">{data.studio}</dd>
+                                        </div>
+                                      )}
+                                      {data.distributor ? (
+                                        data.publisher !== '?' && (
+                                          <>
+                                            <div>
+                                              <dt>제작</dt>
+                                              <dd className="seed">{data.distributor}</dd>
+                                            </div>
+                                            <div>
+                                              <dt>제작참여</dt>
+                                              <dd className="seed">{data.publisher}</dd>
+                                            </div>
+                                          </>
+                                        )
+                                      ) : (
+                                        <div>
+                                          <dt>{data.category === 'game' ? '유통/배급' : '제작/배급'}</dt>
                                           <dd className="seed">{data.publisher}</dd>
+                                        </div>
+                                      )}
+                                      {data.director && (
+                                        <div>
+                                          <dt>감독/연출</dt>
+                                          <dd className="seed">{data.director}</dd>
                                         </div>
                                       )}
                                       {data.creator !== '?' && (
@@ -2078,28 +2058,10 @@ export default function JejeupDetail({
                                           data.category !== 'ott_anime_film' &&
                                           data.category !== 'game' ? (
                                             <dt>주요 출연자</dt>
-                                          ) : data.dubbing !== null ? (
-                                            <dt>원어 성우</dt>
                                           ) : (
                                             <dt>주요 성우</dt>
                                           )}
                                           <dd className="seed">{data.cast}</dd>
-                                        </div>
-                                      )}
-                                      {data.dubbing !== null && (
-                                        <div>
-                                          <dt>
-                                            {data.dubbingLang === 'japanese' && '일본'}
-                                            {data.dubbingLang === 'english' && '미국'}
-                                            {data.dubbingLang === null && '한국'} 성우
-                                          </dt>
-                                          <dd className="seed">{data.dubbing}</dd>
-                                        </div>
-                                      )}
-                                      {data.characters !== null && (
-                                        <div>
-                                          <dt>캐릭터</dt>
-                                          <dd className="seed">{data.characters}</dd>
                                         </div>
                                       )}
                                     </dl>

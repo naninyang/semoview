@@ -448,7 +448,7 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
   );
 }
 
-export function TagsItem({ items }: { items: any }) {
+export function TagsItem({ items, type }: { items: any; type: string }) {
   const excludeTags = ['game', 'anime', 'film', 'drama'];
   const filteredTags = items.tags && items.tags.filter((items: any) => !excludeTags.includes(items));
 
@@ -456,17 +456,34 @@ export function TagsItem({ items }: { items: any }) {
     return null;
   }
 
-  return (
-    <div className={styles.tags}>
-      <dt>태그</dt>
-      <dd className="April16thPromise">
-        {filteredTags.map((tag: string, index: number) => (
-          <span key={index}>{`#${TagName(tag)}`} </span>
-        ))}
-        {items.category && <span>#{TagCategoryName(items.category)}</span>}
-      </dd>
-    </div>
-  );
+  if (type === 'tag') {
+    return (
+      <div className={styles.tags}>
+        <dt>태그</dt>
+        <dd className="April16thPromise">
+          {filteredTags.map((tag: string, index: number) => (
+            <span key={index}>{`#${TagName(tag, 'tag')}`} </span>
+          ))}
+          {items.category && <span>#{TagCategoryName(items.category)}</span>}
+        </dd>
+      </div>
+    );
+  } else if (type === 'genre') {
+    return (
+      <div>
+        <dt>장르</dt>
+        <dd className="seed">
+          {items.genre},{' '}
+          {filteredTags.map((tag: string, index: number) => (
+            <React.Fragment key={index}>
+              {TagName(tag, 'genre')}
+              {index < filteredTags.length - 1 ? ', ' : ''}
+            </React.Fragment>
+          ))}
+        </dd>
+      </div>
+    );
+  }
 }
 
 export function ADCC({ items }: { items: any }) {
@@ -1554,18 +1571,29 @@ export default function Amusement({
                 </div>
               )}
             </div>
-            {amusementData.attributes.tags !== null && <TagsItem items={amusementData.attributes} />}
+            {amusementData.attributes.tags !== null && <TagsItem items={amusementData.attributes} type="tag" />}
           </dl>
           <dl className={styles.staff}>
-            {amusementData.attributes.original !== null &&
-              amusementData.attributes.originTitle === null &&
-              amusementData.attributes.originalAuthor !== null && (
-                <div>
-                  <dt>원작자</dt>
-                  <dd className="seed">{amusementData.attributes.originalAuthor}</dd>
-                </div>
-              )}
-            {amusementData.attributes.publisher !== '?' && (
+            {amusementData.attributes.studio && (
+              <div>
+                <dt>스튜디오</dt>
+                <dd className="seed">{amusementData.attributes.studio}</dd>
+              </div>
+            )}
+            {amusementData.attributes.distributor ? (
+              amusementData.attributes.publisher !== '?' && (
+                <>
+                  <div>
+                    <dt>제작</dt>
+                    <dd className="seed">{truncateString(amusementData.attributes.distributor, 72)}</dd>
+                  </div>
+                  <div>
+                    <dt>제작참여</dt>
+                    <dd className="seed">{truncateString(amusementData.attributes.publisher, 72)}</dd>
+                  </div>
+                </>
+              )
+            ) : (
               <div>
                 <dt>
                   {amusementData.attributes.category === 'game' || amusementData.attributes.category === 'game_fan'
@@ -1585,6 +1613,12 @@ export default function Amusement({
                 <dd className="seed">{truncateString(amusementData.attributes.creator, 72)}</dd>
               </div>
             )}
+            {amusementData.attributes.director && (
+              <div>
+                <dt>감독/연출</dt>
+                <dd className="seed">{truncateString(amusementData.attributes.director, 72)}</dd>
+              </div>
+            )}
             {amusementData.attributes.cast !== '?' && (
               <>
                 {amusementData.attributes.cast !== null && (
@@ -1595,8 +1629,6 @@ export default function Amusement({
                     amusementData.attributes.category !== 'ott_anime_film' &&
                     amusementData.attributes.category !== 'game' ? (
                       <dt>주요 출연자</dt>
-                    ) : amusementData.attributes.dubbing !== null ? (
-                      <dt>원어 성우</dt>
                     ) : (
                       <dt>주요 성우</dt>
                     )}
@@ -1604,22 +1636,6 @@ export default function Amusement({
                   </div>
                 )}
               </>
-            )}
-            {amusementData.attributes.dubbing && (
-              <div>
-                <dt>
-                  {amusementData.attributes.dubbingLang === 'japanese' && '일본'}
-                  {amusementData.attributes.dubbingLang === 'english' && '미국'}
-                  {amusementData.attributes.dubbingLang === null && '한국'} 성우
-                </dt>
-                <dd className="seed">{truncateString(amusementData.attributes.dubbing, 72)}</dd>
-              </div>
-            )}
-            {amusementData.attributes.characters && (
-              <div>
-                <dt>캐릭터</dt>
-                <dd className="seed">{truncateString(amusementData.attributes.characters, 72)}</dd>
-              </div>
             )}
             {amusementData.attributes.comment && (
               <div className={styles.comment}>
@@ -2142,11 +2158,18 @@ export default function Amusement({
                           <dd className="seed">{amusementData.attributes.originalAuthor}</dd>
                         </div>
                       )}
-                    {amusementData.attributes.genre !== '?' && (
+                    {amusementData.attributes.genre !== '?' && amusementData.attributes.tags === null && (
                       <div>
                         <dt>장르</dt>
-                        <dd className="seed">{amusementData.attributes.genre}</dd>
+                        <dd className="seed">
+                          {amusementData.attributes.genre}
+                          {amusementData.attributes.tags !== null &&
+                            `, ${TagName(amusementData.attributes.tags, 'genre')}`}
+                        </dd>
                       </div>
+                    )}
+                    {amusementData.attributes.genre !== '?' && amusementData.attributes.tags !== null && (
+                      <TagsItem items={amusementData.attributes} type="genre" />
                     )}
                     {amusementData.attributes.publisher !== '?' && (
                       <div>
