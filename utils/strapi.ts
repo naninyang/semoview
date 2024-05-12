@@ -626,6 +626,8 @@ export async function getAmusementData(amusement: string) {
     tags: amusementData.attributes.tags,
     supportLang: amusementData.attributes.supportLang,
     runningTime: amusementData.attributes.runningTime,
+    comment: amusementData.attributes.comment,
+    synopsys: amusementData.attributes.synopsys,
   };
 
   return rowsData;
