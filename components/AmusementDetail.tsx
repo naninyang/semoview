@@ -420,18 +420,17 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                     <dd className="seed">{amusement.publisher}</dd>
                   </div>
                 )}
-                {amusement.director ? (
+                {amusement.director && (
                   <div>
                     <dt>{amusement.category === 'drama' || amusement.category === 'ott_drama' ? '연출' : '감독'}</dt>
+                    <dd className="seed">{amusement.director}</dd>
+                  </div>
+                )}
+                {amusement.creator !== '?' && (
+                  <div>
+                    <dt>{amusement.category === 'game' ? '개발' : '주요 제작자'}</dt>
                     <dd className="seed">{amusement.creator}</dd>
                   </div>
-                ) : (
-                  amusement.creator !== '?' && (
-                    <div>
-                      <dt>{amusement.category === 'game' ? '개발' : '주요 제작자'}</dt>
-                      <dd className="seed">{amusement.creator}</dd>
-                    </div>
-                  )
                 )}
                 {amusement.cast !== '?' && (
                   <>
