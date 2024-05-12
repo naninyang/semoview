@@ -1970,7 +1970,7 @@ export async function getServerSideProps(context: any) {
           throw new Error('Network response was not ok');
         }
         tagData = await response.json();
-        pageTitle = TagTitle(tag as keyof typeof TagTitle, category);
+        pageTitle = TagTitle(tag as keyof typeof TagTitle);
       } catch (err) {
         error = err instanceof Error ? err.message : 'An unknown error occurred';
       }
@@ -1994,7 +1994,7 @@ export async function getServerSideProps(context: any) {
           throw new Error('Network response was not ok');
         }
         tagData = await response.json();
-        pageTitle = TagTitle(tag as keyof typeof TagTitle);
+        pageTitle = TagTitle(tag as keyof typeof TagTitle, category);
       } catch (err) {
         error = err instanceof Error ? err.message : 'An unknown error occurred';
       }
