@@ -1133,7 +1133,7 @@ function Amusement({
                   <em dangerouslySetInnerHTML={{ __html: title }} />{' '}
                   {tagData.total > 0 && <span>({tagData.total}개 작품)</span>}
                   <strong>
-                    #{TagName(`${router.query.tag}`)} {category && `#${CategoryName(category)}`} #유튜브리뷰{' '}
+                    #{TagName(`${router.query.tag}`, 'tag')} {category && `#${CategoryName(category)}`} #유튜브리뷰{' '}
                     {category === 'game' && '#유튜브실황'}
                   </strong>
                 </h1>
@@ -1849,7 +1849,7 @@ function Amusement({
 
 export default Amusement;
 
-function CategoryTitle(category: keyof typeof categoryTitles): string {
+function CategoryTitle(category: keyof typeof CategoryTitle): string {
   const categoryTitles = {
     drama: '개가 짖어도\n드라마는 정주행 할 수밖에 없다!',
     film: '영화 사회에서는\n영원한 우방도, 영원한 적도 없다!',
@@ -1861,7 +1861,7 @@ function CategoryTitle(category: keyof typeof categoryTitles): string {
   return categoryTitles[category] || '카테고리/태그/플랫폼 선택';
 }
 
-function TagTitle(tag: keyof typeof tagTitles, category?: string): string {
+function TagTitle(tag: keyof typeof TagTitle, category?: string): string {
   const tagTitles = {
     queer: 'Love Wins',
     yuri: '그 백합잎에 입맞춤을',
@@ -1889,7 +1889,7 @@ function TagTitle(tag: keyof typeof tagTitles, category?: string): string {
   return tagTitles[tag] || '태그 선택';
 }
 
-function PlatformTitle(platform: keyof typeof platformTitles): string {
+function PlatformTitle(platform: keyof typeof PlatformTitle): string {
   const platformTitles = {
     KBS2: 'KBS 2TV\n드라마 리뷰',
     MBC: 'MBC\n드라마 리뷰',
@@ -1945,7 +1945,7 @@ export async function getServerSideProps(context: any) {
         throw new Error('Network response was not ok');
       }
       categoryData = await response.json();
-      pageTitle = CategoryTitle(category);
+      pageTitle = CategoryTitle(category as keyof typeof CategoryTitle);
     } catch (err) {
       error = err instanceof Error ? err.message : 'An unknown error occurred';
     }
@@ -1970,7 +1970,7 @@ export async function getServerSideProps(context: any) {
           throw new Error('Network response was not ok');
         }
         tagData = await response.json();
-        pageTitle = TagTitle(tag);
+        pageTitle = TagTitle(tag as keyof typeof TagTitle, category);
       } catch (err) {
         error = err instanceof Error ? err.message : 'An unknown error occurred';
       }
@@ -1994,7 +1994,7 @@ export async function getServerSideProps(context: any) {
           throw new Error('Network response was not ok');
         }
         tagData = await response.json();
-        pageTitle = TagTitle(tag, category);
+        pageTitle = PlatformTitle(platform as keyof typeof PlatformTitle);
       } catch (err) {
         error = err instanceof Error ? err.message : 'An unknown error occurred';
       }
