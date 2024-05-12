@@ -2022,7 +2022,7 @@ export async function getServerSideProps(context: any) {
         throw new Error('Network response was not ok');
       }
       platformData = await response.json();
-      pageTitle = PlatformTitle(platform);
+      pageTitle = PlatformTitle(platform as keyof typeof PlatformTitle);
     } catch (err) {
       error = err instanceof Error ? err.message : 'An unknown error occurred';
     }
