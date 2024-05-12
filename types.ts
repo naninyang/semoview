@@ -94,6 +94,7 @@ export interface JejeupMetaData {
 }
 
 export interface JejeupPermalinkData {
+  amusementData: AmusementData[];
   attributes: {
     idx: string;
     subject: string;
@@ -126,68 +127,6 @@ export interface JejeupPermalinkData {
     pressAvatar?: string;
     duration: string;
     ownerUrl: string;
-  };
-  amusementData: {
-    title: string;
-    lang: string;
-    titleOther: string;
-    titleKorean: string;
-    etc: string;
-    release: string;
-    original: string;
-    originalAuthor: string;
-    originTitle: string;
-    rating: string;
-    ratingCustom: string;
-    country: string;
-    category: string;
-    isMobile: boolean;
-    genre: string;
-    anime: string;
-    animeBroadcast1: string;
-    animeBroadcast2: string;
-    ott: string;
-    ottAddr: string;
-    studio: string;
-    director: string;
-    broadcast: string;
-    distributor: string;
-    publisher: string;
-    creator: string;
-    cast: string;
-    synopsys: string;
-    posterDefault: string;
-    posterOther: string;
-    relations: string;
-  };
-  amusementData2: {
-    title: string;
-    lang: string;
-    titleOther: string;
-    titleKorean: string;
-    etc: string;
-    release: string;
-    original: string;
-    originalAuthor: string;
-    originTitle: string;
-    rating: string;
-    ratingCustom: string;
-    country: string;
-    category: string;
-    isMobile: boolean;
-    genre: string;
-    anime: string;
-    animeBroadcast1: string;
-    animeBroadcast2: string;
-    ott: string;
-    ottAddr: string;
-    broadcast: string;
-    publisher: string;
-    creator: string;
-    cast: string;
-    posterDefault: string;
-    posterOther: string;
-    relations: string;
   };
 }
 
@@ -236,6 +175,8 @@ export interface AmusementData {
   tags: any;
   supportLang: any;
   runningTime: number;
+  comment: string;
+  synopsys: string;
 }
 
 export interface AmusementPermalinkData {
@@ -281,6 +222,9 @@ export interface AmusementPermalinkData {
     supportLang: any;
     comment: string;
     runningTime: number;
+    id: string;
+    idx: string;
+    order: string;
   };
 }
 

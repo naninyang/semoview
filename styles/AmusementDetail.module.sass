@@ -13,11 +13,44 @@
   padding: 0
   width: 100%
   height: 100%
-  background-color: rgba($hex-black, .7)
+  background-color: rgba($hex-white, .5)
   backdrop-filter: blur(rem(20))
 
   +mq(maxExtraSmall)
-    background-color: $hex-dark
+    background-color: $hex-light
+
+  &.modal-amusement
+    background-color: rgba($hex-black, .7)
+
+    +mq(maxExtraSmall)
+      background-color: $hex-dark
+
+    .container
+      > button
+
+      h3
+        color: $hex-azalea
+
+      .contents
+        background-color: $hex-dark
+
+      .content
+        .item
+          > div
+            &::after
+              color: $hex-light
+
+            &.category
+              dd
+                em
+                  &::after
+                    color: $hex-light
+
+        dt
+          color: $hex-azalea
+
+        dd
+          color: $hex-white
 
   .container
     position: relative
@@ -84,7 +117,7 @@
       font-size: rem(20)
       font-weight: 800
       line-height: 1.16666667
-      color: $hex-azalea
+      color: $hex-dark
 
       span
         display: block
@@ -96,7 +129,7 @@
         font-size: rem(36)
 
     .contents
-      background-color: $hex-dark
+      background-color: $hex-light
       border-radius: rem(12)
 
       +mq(minSmall)
@@ -150,7 +183,7 @@
 
           &::after
             content: '|'
-            color: $hex-light
+            color: $hex-dark
 
           &:last-of-type::after
             content: ''
@@ -172,7 +205,7 @@
 
                 &::after
                   content: '· '
-                  color: $hex-light
+                  color: $hex-dark
 
                 &:last-of-type::after
                   content: ''
@@ -211,7 +244,7 @@
 
       dt
         width: rem(70)
-        color: $hex-azalea
+        color: $hex-dark
         white-space: nowrap
 
         +mq(minLarge)
@@ -219,7 +252,7 @@
 
       dd
         +col
-        color: $hex-white
+        color: $hex-black
         line-height: 1.42857143
 
         em, i

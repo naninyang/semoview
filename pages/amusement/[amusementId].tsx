@@ -21,13 +21,13 @@ import { vectors } from '@/components/vectors';
 import Anchor from '@/components/Anchor';
 import Related from '@/components/Related';
 import YouTubeController from '@/components/YouTubeController';
+import AmusementDetail from '@/components/AmusementDetail';
 import { formatTime } from '@/components/FormatTime';
 import { rem } from '@/styles/designSystem';
 import header from '@/styles/Header.module.sass';
 import footer from '@/styles/Footer.module.sass';
 import styles from '@/styles/Amusement.module.sass';
 import 'react-perfect-scrollbar/dist/css/styles.css';
-import AmusementDetail from '@/components/AmusementDetail';
 
 const BackButton = styled.i({
   display: 'block',
@@ -1800,7 +1800,11 @@ export default function Amusement({
         </section>
       )}
       {selectedAmusementId && selectedAmusement && (
-        <AmusementDetail amusement={amusementData} onClose={handleCloseAmusementDetail} />
+        <AmusementDetail
+          amusement={amusementData.attributes}
+          sorting="amusement"
+          onClose={handleCloseAmusementDetail}
+        />
       )}
     </main>
   );

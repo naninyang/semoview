@@ -18,8 +18,8 @@ import { RatingsDrama } from '@/components/RatingsDrama';
 import { formatDuration } from '@/components/FormatDuration';
 import { formatDate } from '@/components/FormatDate';
 import { formatTime } from '@/components/FormatTime';
-import { OriginalName } from '@/components/OriginalName';
 import { SupportLang } from '@/components/SupportLang';
+import AmusementDetail from '@/components/AmusementDetail';
 import Related from '@/components/Related';
 import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Jejeup.module.sass';
@@ -531,6 +531,44 @@ export default function JejeupDetail({
     window.scrollTo(0, 0);
     return () => clearTimeout(timer);
   }, []);
+
+  const [selectedAmusementId, setSelectedAmusementId] = useState<string | null>(null);
+
+  const handleButtonClick = (id: string) => {
+    setSelectedAmusementId(id);
+  };
+
+  const handleCloseAmusementDetail = () => {
+    setSelectedAmusementId(null);
+  };
+
+  const selectedAmusement = jejeupData?.amusementData.find((amusement) => amusement.id === selectedAmusementId);
+  useEffect(() => {
+    const preventScroll = (e: Event): void => {
+      e.preventDefault();
+    };
+
+    const preventScrollKeys = (e: KeyboardEvent): void => {
+      if (['ArrowUp', 'ArrowDown', 'Space', 'PageUp', 'PageDown', 'Home', 'End'].includes(e.code)) {
+        e.preventDefault();
+      }
+    };
+
+    if (selectedAmusement !== undefined) {
+      window.addEventListener('wheel', preventScroll, { passive: false });
+      window.addEventListener('touchmove', preventScroll, { passive: false });
+      window.addEventListener('keydown', preventScrollKeys, { passive: false });
+    } else {
+      window.removeEventListener('wheel', preventScroll);
+      window.removeEventListener('touchmove', preventScroll);
+      window.removeEventListener('keydown', preventScrollKeys);
+    }
+    return () => {
+      window.removeEventListener('wheel', preventScroll);
+      window.removeEventListener('touchmove', preventScroll);
+      window.removeEventListener('keydown', preventScrollKeys);
+    };
+  }, [selectedAmusement]);
 
   if (!jejeupData) {
     if (timeoutReached) {
@@ -1516,6 +1554,12 @@ export default function JejeupDetail({
                                               </div>
                                             )}
                                           </dl>
+                                          <div className={styles.more}>
+                                            ...{' '}
+                                            <button type="button" onClick={() => handleButtonClick(String(data.id))}>
+                                              <span>더보기</span>
+                                            </button>
+                                          </div>
                                         </div>
                                       </div>
                                     ))}
@@ -2065,6 +2109,12 @@ export default function JejeupDetail({
                                         </div>
                                       )}
                                     </dl>
+                                    <div className={styles.more}>
+                                      ...{' '}
+                                      <button type="button" onClick={() => handleButtonClick(String(data.id))}>
+                                        <span>더보기</span>
+                                      </button>
+                                    </div>
                                   </div>
                                 ))}
                               </div>
@@ -2159,6 +2209,9 @@ export default function JejeupDetail({
           </>
         )}
       </article>
+      {selectedAmusementId && selectedAmusement && (
+        <AmusementDetail amusement={selectedAmusement} sorting="review" onClose={handleCloseAmusementDetail} />
+      )}
     </main>
   );
 }
