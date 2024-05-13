@@ -1583,23 +1583,16 @@ export default function Amusement({
             {amusementData.attributes.studio && (
               <div>
                 <dt>스튜디오</dt>
-                <dd className="seed">{amusementData.attributes.studio}</dd>
+                <dd className="seed">{truncateString(amusementData.attributes.studio, 72)}</dd>
               </div>
             )}
-            {amusementData.attributes.distributor ? (
-              amusementData.attributes.publisher !== '?' && (
-                <>
-                  <div>
-                    <dt>제작</dt>
-                    <dd className="seed">{truncateString(amusementData.attributes.distributor, 72)}</dd>
-                  </div>
-                  <div>
-                    <dt>제작참여</dt>
-                    <dd className="seed">{truncateString(amusementData.attributes.publisher, 72)}</dd>
-                  </div>
-                </>
-              )
-            ) : (
+            {amusementData.attributes.distributor && (
+              <div>
+                <dt>제작</dt>
+                <dd className="seed">{truncateString(amusementData.attributes.distributor, 72)}</dd>
+              </div>
+            )}
+            {amusementData.attributes.publisher !== '?' && (
               <div>
                 <dt>
                   {amusementData.attributes.category === 'game' || amusementData.attributes.category === 'game_fan'

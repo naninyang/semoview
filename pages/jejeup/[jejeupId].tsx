@@ -1410,22 +1410,17 @@ export default function JejeupDetail({
               <dd className="seed">{amusementData.studio}</dd>
             </div>
           )}
-          {amusementData.distributor ? (
-            amusementData.publisher !== '?' && (
-              <>
-                <div>
-                  <dt>제작</dt>
-                  <dd className="seed">{amusementData.distributor}</dd>
-                </div>
-                <div>
-                  <dt>제작참여</dt>
-                  <dd className="seed">{amusementData.publisher}</dd>
-                </div>
-              </>
-            )
-          ) : (
+          {amusementData.distributor && (
             <div>
-              <dt>{amusementData.category === 'game' ? '유통/배급' : '제작/배급'}</dt>
+              <dt>제작</dt>
+              <dd className="seed">{amusementData.distributor}</dd>
+            </div>
+          )}
+          {amusementData.publisher !== '?' && (
+            <div>
+              <dt>
+                {amusementData.category === 'game' || amusementData.category === 'game_fan' ? '유통/배급' : '제작/배급'}
+              </dt>
               <dd className="seed">{amusementData.publisher}</dd>
             </div>
           )}

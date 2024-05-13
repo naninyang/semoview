@@ -392,27 +392,13 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                     <dd className="seed">{amusement.studio}</dd>
                   </div>
                 )}
-                {amusement.distributor ? (
-                  amusement.publisher !== '?' && (
-                    <>
-                      <div>
-                        <dt>제작</dt>
-                        <dd className="seed">{amusement.distributor}</dd>
-                      </div>
-                      <div>
-                        <dt>
-                          {amusement.category === 'anime' ||
-                          amusement.category === 'drama' ||
-                          amusement.category === 'ott_anime' ||
-                          amusement.category === 'ott_drama'
-                            ? '제작참여'
-                            : '배급/수입'}
-                        </dt>
-                        <dd className="seed">{amusement.publisher}</dd>
-                      </div>
-                    </>
-                  )
-                ) : (
+                {amusement.distributor && (
+                  <div>
+                    <dt>제작</dt>
+                    <dd className="seed">{amusement.distributor}</dd>
+                  </div>
+                )}
+                {amusement.publisher !== '?' && (
                   <div>
                     <dt>
                       {amusement.category === 'game' || amusement.category === 'game_fan' ? '유통/배급' : '제작/배급'}
