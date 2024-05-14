@@ -185,7 +185,7 @@
             content: '|'
             color: $hex-dark
 
-          &:last-of-type::after
+          &:last-of-type::after, &.ott-category::after, &.custom-rating::after
             content: ''
 
           dd
@@ -214,11 +214,6 @@
             dd
               display: flex
               gap: rem(3)
-
-          &.ad-cc
-            dd
-              & + dd::before
-                content: '· '
 
       .synopsys
         width: 72%

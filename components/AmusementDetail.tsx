@@ -158,7 +158,7 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                       </dd>
                     </div>
                   )}
-                  <div className={styles.category}>
+                  <div className={`${styles.category} ${amusement.ott !== null ? styles['ott-category'] : ''}`}>
                     <dt>카테고리</dt>
                     <dd className="seed">
                       {amusement.category !== 'anime_film' ? (
@@ -173,8 +173,8 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                             <em>
                               {amusement.broadcast
                                 ? amusement.broadcast === 'KBS2'
-                                  ? 'KBS 2TV'
-                                  : amusement.broadcast
+                                  ? 'KBS 2TV '
+                                  : `${amusement.broadcast} `
                                 : ''}
                               {(amusement.animeBroadcast1 !== null || amusement.animeBroadcast2 !== null) && (
                                 <>
@@ -282,7 +282,11 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                 <div className={styles.item}>
                   {amusement.supportLang !== null && <ADCC items={amusement.supportLang} />}
                   {amusement.release !== '?' && (
-                    <div className={styles.release}>
+                    <div
+                      className={
+                        amusement.ott !== 'amazonOriginal' || amusement.ratingCustom ? styles['custom-rating'] : ''
+                      }
+                    >
                       <dt>
                         {(amusement.category === 'drama' ||
                           amusement.category === 'ott_drama' ||
