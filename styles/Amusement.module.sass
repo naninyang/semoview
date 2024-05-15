@@ -210,7 +210,7 @@
                 span
                   +screen-reader-only
 
-          .country, .release, .ad-cc
+          .country, .release
             dd
               border: 1px solid $hex-white
               border-radius: rem(3)
@@ -221,6 +221,15 @@
           .ad-cc
             display: flex
             gap: rem(7)
+            border: 1px solid $hex-white
+            border-radius: rem(3)
+            padding: rem(2) rem(7)
+            color: $hex-white
+            line-height: rem(23)
+
+            dd
+              & + dd::before
+                padding-right: rem(7)
 
         .platform
           dd
