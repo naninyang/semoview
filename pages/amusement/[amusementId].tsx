@@ -239,6 +239,18 @@ const DownIcon = styled.i({
   background: `url(${vectors.down}) no-repeat 50% 50%/contain`,
 });
 
+const CCicon = styled.i({
+  width: rem(23),
+  height: rem(23),
+  background: `url(${vectors.adccCCwhite}) no-repeat 50% 50%/contain`,
+});
+
+const ADicon = styled.i({
+  width: rem(53),
+  height: rem(20),
+  background: `url(${vectors.adccADwhite}) no-repeat 50% 50%/contain`,
+});
+
 export function truncateString(str: string, num: number) {
   if (str.length > num) {
     return str.slice(0, num) + '...';
@@ -489,13 +501,32 @@ export function ADCC({ items }: { items: any }) {
     return null;
   }
 
+  const subtitleDubbing = items.filter((item: string) => ['subtitle', 'dubbing', 'unofficial'].includes(item));
+  const adCC = items.filter((item: string) => ['cc', 'description'].includes(item));
+
   return (
-    <div className={styles['ad-cc']}>
-      <dt>자막/더빙</dt>
-      {adcc.map((item: string, index: number) => (
-        <dd key={index}>{SupportLang(item)}</dd>
-      ))}
-    </div>
+    <>
+      {subtitleDubbing.length > 0 && (
+        <div className={styles['sub-dub']}>
+          <dt>자막/더빙</dt>
+          {subtitleDubbing.map((item: string, index: number) => (
+            <dd key={index}>{SupportLang(item)}</dd>
+          ))}
+        </div>
+      )}
+      {adCC.length > 0 && (
+        <div className={styles['ad-cc']}>
+          <dt>배리어프리</dt>
+          {adCC.map((item: string, index: number) => (
+            <dd key={index}>
+              {item === 'cc' && <CCicon />}
+              {item === 'description' && <ADicon />}
+              <span>{SupportLang(item)}</span>
+            </dd>
+          ))}
+        </div>
+      )}
+    </>
   );
 }
 

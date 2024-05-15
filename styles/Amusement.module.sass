@@ -218,7 +218,7 @@
               color: $hex-white
               line-height: rem(23)
 
-          .ad-cc
+          .sub-dub
             display: flex
             gap: rem(7)
             border: 1px solid $hex-white
@@ -228,8 +228,41 @@
             line-height: rem(23)
 
             dd
+              position: relative
+
               & + dd::before
+                content: '· '
                 padding-right: rem(7)
+
+          .ad-cc
+            display: flex
+            gap: rem(12)
+            padding-right: rem(7)
+            padding-left: rem(7)
+
+            dd
+              position: relative
+
+              i
+                display: inline-block
+
+                & + span
+                  position: absolute
+                  transform: translateX(-50%)
+                  top: rem(37)
+                  left: 50%
+                  width: 0
+                  height: 0
+                  overflow: hidden
+
+                &:hover + span
+                  width: auto
+                  height: auto
+                  border-radius: rem(3)
+                  padding: rem(7) rem(12)
+                  background-color: $hex-light
+                  white-space: nowrap
+                  color: $hex-dark
 
         .platform
           dd
@@ -895,11 +928,6 @@
                       font-weight: 800
                       text-transform: uppercase
                       color: $hex-white
-
-.ad-cc
-  dd
-    &+ dd::before
-      content: '· '
 
 .open
   .amusement

@@ -13,6 +13,11 @@ export const vectors = {
   warning: require('./warning.svg'),
   crossDark: require('./crossDark.svg'),
   crossLight: require('./crossLight.svg'),
+  adccADblack: require('./adccADblack.svg'),
+  adccCCblack: require('./adccCCblack.svg'),
+  adccADwhite: require('./adccADwhite.svg'),
+  adccCCwhite: require('./adccCCwhite.svg'),
+  supportLang: require('./supportLang.svg'),
   ott: {
     amazon: require('./ott/amazon.svg'),
     amazon2: require('./ott/amazon2.svg'),
