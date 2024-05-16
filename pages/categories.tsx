@@ -1127,6 +1127,14 @@ function Categories({
               </section>
             </>
           )}
+          <aside>
+            <div className={styles.sideA} />
+            <div className={styles.sideB} />
+            <p>자막 / 더빙 / 베리어프리 작품 확인!</p>
+            <p className="April16thPromise">
+              <Anchor href="/hanguk">작품 확인하기!</Anchor>
+            </p>
+          </aside>
         </div>
       )}
     </main>

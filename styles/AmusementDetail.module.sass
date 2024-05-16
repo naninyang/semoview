@@ -252,3 +252,13 @@
 
         em, i
           font-style: normal
+
+.hanguk
+  dd
+    &::before
+      content: '· '
+
+    &:first-of-type
+      &::before
+        content: ''
+        padding-right: 0

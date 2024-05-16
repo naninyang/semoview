@@ -8,11 +8,13 @@ import { OriginalName } from './OriginalName';
 import { CategoryName } from './CategoryName';
 import { AnimeName } from './AnimeName';
 import { formatTime } from './FormatTime';
-import { ADCC, TagsItem } from '@/pages/amusement/[amusementId]';
+import { TagsItem } from '@/pages/amusement/[amusementId]';
 import { RatingsDrama } from './RatingsDrama';
 import { TagName } from './TagName';
 import styles from '@/styles/AmusementDetail.module.sass';
 import 'react-perfect-scrollbar/dist/css/styles.css';
+import { rem } from '@/styles/designSystem';
+import { SupportLang } from './SupportLang';
 
 type AmusementDetailProps = {
   amusement: AmusementData;
@@ -28,6 +30,35 @@ const CloseDarkIcon = styled.i({
   background: `url(${vectors.crossDark}) no-repeat 50% 50%/contain`,
 });
 
+const CCicon = styled.i({
+  width: rem(23),
+  height: rem(23),
+  background: `url(${vectors.adccCCwhite}) no-repeat 50% 50%/contain`,
+});
+
+const ADicon = styled.i({
+  width: rem(53),
+  height: rem(20),
+  background: `url(${vectors.adccADwhite}) no-repeat 50% 50%/contain`,
+});
+
+export function ADCC({ items }: { items: any }) {
+  const adcc = items && items.filter((items: any) => items);
+
+  if (!adcc) {
+    return null;
+  }
+
+  return (
+    <div className={styles['hanguk']}>
+      <dt>자막/더빙/베리어프리</dt>
+      {adcc.map((item: string, index: number) => (
+        <dd key={index}>{SupportLang(item)}</dd>
+      ))}
+    </div>
+  );
+}
+
 const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, onClose }) => {
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
@@ -40,6 +71,7 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [onClose]);
+
   return (
     <dialog className={`${styles.modal} ${sorting === 'amusement' ? styles['modal-amusement'] : ''}`}>
       <div className={styles.container}>

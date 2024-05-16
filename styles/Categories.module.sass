@@ -426,6 +426,18 @@
           span
             font-variation-settings: 'opsz' 700, 'wght' 700
 
+            > span
+              &::after
+                content: ', '
+
+              &:first-of-type
+                &::before
+                  content: '('
+
+              &:last-of-type
+                &::after
+                  content: ')'
+
           cite
             display: block
             font-size: rem(14)
@@ -734,6 +746,19 @@
               right: rem(7)
               bottom: rem(7)
               left: auto
+
+  .asides
+    display: flex
+    gap: rem(12)
+    margin: rem(52) calc(env(safe-area-inset-right) + rem(12)) 0 calc(env(safe-area-inset-left) + rem(12))
+
+    +mq(maxSmall)
+      flex-direction: column
+      gap: rem(24)
+
+    aside
+      +col
+      margin: 0
 
   aside
     display: flex
