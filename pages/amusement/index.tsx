@@ -326,8 +326,6 @@ function Amusement({
                 <option value="game_fan">팬 게임</option>
               </select>
               <button onClick={handleCategorySubmit}>카테고리 선택</button>
-            </div>
-            <div className={styles.form}>
               <select value={selectedPlatform} onChange={handlePlatformChange}>
                 <option value="">플랫폼(OTT 또는 방송국) 선택</option>
                 <optgroup label="OTT 플랫폼">
@@ -335,7 +333,7 @@ function Amusement({
                   <option value="paramount">파라마운트+</option>
                   <option value="amazon">아마존 프라임비디오</option>
                   <option value="netflix">넷플릭스</option>
-                  <option value="disney">디즈니++</option>
+                  <option value="disney">디즈니+</option>
                   <option value="tving">티빙</option>
                   <option value="watcha">왓챠</option>
                   <option value="wavve">웨이브</option>
@@ -369,20 +367,18 @@ function Amusement({
                 </optgroup>
               </select>
               <button onClick={handlePlatformSubmit}>플랫폼 선택</button>
-              <div className={styles.form}>
-                <select value={selectedHanguk} onChange={handleHangukChange}>
-                  <option value="">선택</option>
-                  <option value="subtitle">자막 지원</option>
-                  <option value="subtitle,game">자막 지원 게임</option>
-                  <option value="dubbing">더빙 지원</option>
-                  <option value="unofficial,game">비공식 자막 지원 게임</option>
-                  <option value="cc">청각 장애인용 자막 지원</option>
-                  <option value="description">화면 해설 지원</option>
-                  <option value="anything">모든 작품</option>
-                  <option value="anything,game">모든 게임</option>
-                </select>
-                <button onClick={handleHangukSubmit}>자막 및 화면해설 선택</button>
-              </div>
+              <select value={selectedHanguk} onChange={handleHangukChange}>
+                <option value="">선택</option>
+                <option value="subtitle">자막 지원</option>
+                <option value="subtitle,game">자막 지원 게임</option>
+                <option value="dubbing">더빙 지원</option>
+                <option value="unofficial,game">비공식 자막 지원 게임</option>
+                <option value="cc">청각 장애인용 자막 지원</option>
+                <option value="description">화면 해설 지원</option>
+                <option value="anything">모든 작품</option>
+                <option value="anything,game">모든 게임</option>
+              </select>
+              <button onClick={handleHangukSubmit}>자막 및 화면해설 선택</button>
             </div>
             <div className={styles.tags}>
               <strong>세상의 모든 해시태그</strong>
