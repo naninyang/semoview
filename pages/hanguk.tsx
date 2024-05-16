@@ -188,13 +188,15 @@ function Hanguk({
     sessionStorage.removeItem('amusementCategory');
     sessionStorage.removeItem('amusementTag');
     sessionStorage.removeItem('amusementPlatform');
+    sessionStorage.removeItem('amusementHanguk');
 
     sessionStorage.removeItem('category');
     sessionStorage.removeItem('platform');
+    sessionStorage.removeItem('tag');
 
     sessionStorage.setItem('backhistory', router.asPath);
     sessionStorage.setItem('semoview', router.asPath);
-    sessionStorage.setItem('tag', router.asPath);
+    sessionStorage.setItem('hanguk', router.asPath);
   }, [router.asPath]);
 
   return (

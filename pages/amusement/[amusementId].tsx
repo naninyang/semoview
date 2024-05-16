@@ -647,9 +647,11 @@ export default function Amusement({
       sessionStorage.getItem('amusementCategory') ||
       sessionStorage.getItem('amusementTag') ||
       sessionStorage.getItem('amusementPlatform') ||
+      sessionStorage.getItem('amusementHanguk') ||
       sessionStorage.getItem('category') ||
       sessionStorage.getItem('tag') ||
-      sessionStorage.getItem('platform');
+      sessionStorage.getItem('platform') ||
+      sessionStorage.getItem('hanguk');
     if (previousPage) {
       router.push(`${previousPage}`);
     } else {
