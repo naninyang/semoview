@@ -56,7 +56,8 @@ export default function Header() {
         {router.pathname === '/' ||
         router.pathname === '/categories' ||
         router.pathname === '/tags' ||
-        router.pathname === '/platforms' ? undefined : (
+        router.pathname === '/platforms' ||
+        router.pathname === '/hanguk' ? undefined : (
           <s />
         )}
         <h1>
@@ -66,7 +67,8 @@ export default function Header() {
             ) : router.pathname === '/' ||
               router.pathname === '/categories' ||
               router.pathname === '/tags' ||
-              router.pathname === '/platforms' ? (
+              router.pathname === '/platforms' ||
+              router.pathname === '/hanguk' ? (
               <JejeupDefault />
             ) : (
               <JejeupLogo />
@@ -88,7 +90,8 @@ export default function Header() {
       {(router.pathname === '/' ||
         router.pathname === '/categories' ||
         router.pathname === '/tags' ||
-        router.pathname === '/platforms') && (
+        router.pathname === '/platforms' ||
+        router.pathname === '/hanguk') && (
         <div className={styles.tab}>
           <nav>
             <ol>

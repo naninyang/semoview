@@ -521,9 +521,11 @@ function Hanguk({
                       </div>
                       <strong>
                         <span className="seed">
-                          {amusement.supportLang.map((item: string, index: number) => (
-                            <>{item === 'dubbing' && <span key={index}>더빙 지원</span>}</>
-                          ))}{' '}
+                          {amusement.supportLang
+                            .filter((item: string) => item === 'dubbing')
+                            .map((index: number) => (
+                              <span key={index}>더빙 지원</span>
+                            ))}{' '}
                           {amusement.titleKorean ? amusement.titleKorean : amusement.title}
                         </span>
                       </strong>
@@ -589,9 +591,11 @@ function Hanguk({
                       </div>
                       <strong>
                         <span className="seed">
-                          {amusement.supportLang.map((item: string, index: number) => (
-                            <>{item === 'dubbing' && <span key={index}>더빙 지원</span>}</>
-                          ))}{' '}
+                          {amusement.supportLang
+                            .filter((item: string) => item === 'dubbing')
+                            .map((index: number) => (
+                              <span key={index}>더빙 지원</span>
+                            ))}{' '}
                           {amusement.titleKorean ? amusement.titleKorean : amusement.title}
                         </span>
                       </strong>
@@ -897,10 +901,11 @@ function Hanguk({
                       </div>
                       <strong>
                         <span className="seed">
-                          {amusement.supportLang.map((item: string, index: number) => (
-                            <>{item === 'subtitle' && <span key={index}>자막 지원</span>}</>
-                          ))}{' '}
-                          {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                          {amusement.supportLang
+                            .filter((item: string) => item === 'subtitle')
+                            .map((index: number) => (
+                              <span key={index}>자막 지원</span>
+                            ))}{' '}
                         </span>
                       </strong>
                     </Link>
@@ -1266,9 +1271,11 @@ function Hanguk({
                       </div>
                       <strong>
                         <span className="seed">
-                          {amusement.supportLang.map((item: string, index: number) => (
-                            <>{item === 'description' && <span key={index}>화면해설 지원</span>}</>
-                          ))}{' '}
+                          {amusement.supportLang
+                            .filter((item: string) => item === 'description')
+                            .map((index: number) => (
+                              <span key={index}>화면해설 지원</span>
+                            ))}{' '}
                           {amusement.titleKorean ? amusement.titleKorean : amusement.title}
                         </span>
                       </strong>
@@ -1574,9 +1581,11 @@ function Hanguk({
                       </div>
                       <strong>
                         <span className="seed">
-                          {amusement.supportLang.map((item: string, index: number) => (
-                            <>{item === 'cc' && <span key={index}>청각장애인 자막</span>}</>
-                          ))}{' '}
+                          {amusement.supportLang
+                            .filter((item: string) => item === 'cc')
+                            .map((index: number) => (
+                              <span key={index}>청각장애인 자막</span>
+                            ))}{' '}
                           {amusement.titleKorean ? amusement.titleKorean : amusement.title}
                         </span>
                       </strong>

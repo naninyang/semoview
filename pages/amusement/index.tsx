@@ -2199,9 +2199,11 @@ function Amusement({
                       </div>
                       <strong>
                         <span className="seed">
-                          {amusement.supportLang.map((item: string, index: number) => (
-                            <>{item !== router.query.hanguk && <span key={index}>{SupportLang(item)}</span>}</>
-                          ))}{' '}
+                          {amusement.supportLang
+                            .filter((item: string) => item === router.query.hanguk)
+                            .map((item: string, index: number) => (
+                              <span key={index}>{SupportLang(item)}</span>
+                            ))}{' '}
                           {amusement.titleKorean ? amusement.titleKorean : amusement.title}
                         </span>
                       </strong>
