@@ -165,6 +165,10 @@ const RatingGameD19 = styled.i({
   background: `url(${vectors.ratings.game.d19}) no-repeat 50% 50%/contain`,
 });
 
+const Hanguk = styled.div({
+  background: `url(${vectors.supportLang}) no-repeat 50% 50%/cover`,
+});
+
 function Categories({
   dramaData,
   filmData,
@@ -1127,9 +1131,8 @@ function Categories({
               </section>
             </>
           )}
-          <aside>
-            <div className={styles.sideA} />
-            <div className={styles.sideB} />
+          <aside className={styles.hanguk}>
+            <Hanguk />
             <p>자막 / 더빙 / 베리어프리 작품 확인!</p>
             <p className="April16thPromise">
               <Anchor href="/hanguk">작품 확인하기!</Anchor>

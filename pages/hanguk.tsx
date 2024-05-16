@@ -164,6 +164,10 @@ const RatingGameD19 = styled.i({
   background: `url(${vectors.ratings.game.d19}) no-repeat 50% 50%/contain`,
 });
 
+const HangukBackground = styled.div({
+  background: `url(${vectors.supportLang}) no-repeat 50% 50%/cover`,
+});
+
 function Hanguk({
   subtitleData,
   subtitleGameData,
@@ -1595,17 +1599,15 @@ function Hanguk({
             </>
           )}
           <div className={styles.asides}>
+            <HangukBackground />
             <aside>
-              <div className={styles.sideA} />
-              <div className={styles.sideB} />
               <p>한눈에 모든 작품 보기! (게임 제외)</p>
               <p className="April16thPromise">
                 <Anchor href="/amusement?hanguk=anything&page=1">작품 확인하기!</Anchor>
               </p>
             </aside>
+            <hr />
             <aside>
-              <div className={styles.sideA} />
-              <div className={styles.sideB} />
               <p>한눈에 모든 게임 보기!</p>
               <p className="April16thPromise">
                 <Anchor href="/amusement?hanguk=anything&category=game&page=1">게임 확인하기!</Anchor>
