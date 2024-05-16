@@ -1,20 +1,21 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { isSafari } from 'react-device-detect';
+import { useMediaQuery } from 'react-responsive';
 import { AmusementData, Category } from 'types';
 import { vectors } from './vectors';
 import { OriginalName } from './OriginalName';
 import { CategoryName } from './CategoryName';
 import { AnimeName } from './AnimeName';
 import { formatTime } from './FormatTime';
+import { SupportLang } from './SupportLang';
 import { TagsItem } from '@/pages/amusement/[amusementId]';
 import { RatingsDrama } from './RatingsDrama';
 import { TagName } from './TagName';
+import { rem } from '@/styles/designSystem';
 import styles from '@/styles/AmusementDetail.module.sass';
 import 'react-perfect-scrollbar/dist/css/styles.css';
-import { rem } from '@/styles/designSystem';
-import { SupportLang } from './SupportLang';
 
 type AmusementDetailProps = {
   amusement: AmusementData;
@@ -30,17 +31,14 @@ const CloseDarkIcon = styled.i({
   background: `url(${vectors.crossDark}) no-repeat 50% 50%/contain`,
 });
 
-const CCicon = styled.i({
-  width: rem(23),
-  height: rem(23),
-  background: `url(${vectors.adccCCwhite}) no-repeat 50% 50%/contain`,
-});
-
-const ADicon = styled.i({
-  width: rem(53),
-  height: rem(20),
-  background: `url(${vectors.adccADwhite}) no-repeat 50% 50%/contain`,
-});
+export function useMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  const mobile = useMediaQuery({ query: `(max-width: ${rem(575)}` });
+  useEffect(() => {
+    setIsMobile(mobile);
+  }, [mobile]);
+  return isMobile;
+}
 
 export function ADCC({ items }: { items: any }) {
   const adcc = items && items.filter((items: any) => items);
@@ -71,6 +69,8 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [onClose]);
+
+  const isMobile = useMobile();
 
   return (
     <dialog className={`${styles.modal} ${sorting === 'amusement' ? styles['modal-amusement'] : ''}`}>
@@ -296,21 +296,58 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                       {amusement.anime !== null && <em>{AnimeName(amusement.anime)}</em>}
                     </dd>
                   </div>
-                  {amusement.runningTime && (
-                    <div className={styles.country}>
-                      <dt>재생시간</dt>
-                      <dd className="seed">
-                        {amusement.runningTime}분{formatTime(amusement.runningTime)}
-                      </dd>
-                    </div>
-                  )}
-                  {amusement.country !== '?' && (
-                    <div className={styles.country}>
-                      <dt>제작국가</dt>
-                      <dd className="seed">{amusement.country}</dd>
-                    </div>
+                  {((!isMobile &&
+                    (amusement.category === 'ott_film' ||
+                      amusement.category === 'ott_anime_film' ||
+                      amusement.category === 'ott_documentary_film')) ||
+                    amusement.category === 'drama' ||
+                    amusement.category === 'game' ||
+                    amusement.category === 'anime' ||
+                    amusement.category === 'anime_film' ||
+                    amusement.category === 'ott_anime' ||
+                    amusement.category === 'ott_drama' ||
+                    amusement.category === 'ott_documentary' ||
+                    amusement.category === 'game' ||
+                    amusement.category === 'game_fan') && (
+                    <>
+                      {amusement.runningTime && (
+                        <div className={styles.country}>
+                          <dt>재생시간</dt>
+                          <dd className="seed">
+                            {amusement.runningTime}분{formatTime(amusement.runningTime)}
+                          </dd>
+                        </div>
+                      )}
+                      {amusement.country !== '?' && (
+                        <div className={styles.country}>
+                          <dt>제작국가</dt>
+                          <dd className="seed">{amusement.country}</dd>
+                        </div>
+                      )}
+                    </>
                   )}
                 </div>
+                {isMobile &&
+                  (amusement.category === 'ott_film' ||
+                    amusement.category === 'ott_anime_film' ||
+                    amusement.category === 'ott_documentary_film') && (
+                    <div className={styles.item}>
+                      {amusement.runningTime && (
+                        <div className={styles.country}>
+                          <dt>재생시간</dt>
+                          <dd className="seed">
+                            {amusement.runningTime}분{formatTime(amusement.runningTime)}
+                          </dd>
+                        </div>
+                      )}
+                      {amusement.country !== '?' && (
+                        <div className={styles.country}>
+                          <dt>제작국가</dt>
+                          <dd className="seed">{amusement.country}</dd>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 <div className={styles.item}>
                   {amusement.supportLang !== null && <ADCC items={amusement.supportLang} />}
                   {amusement.release !== '?' && (
@@ -337,7 +374,7 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                       <dd className="seed">{amusement.release}년</dd>
                     </div>
                   )}
-                  {amusement.category !== 'game_fan' && (
+                  {!isMobile && amusement.category !== 'game_fan' && (
                     <div className={styles.rating}>
                       <dt>{amusement.category === 'game' ? '심의등급' : '시청등급'}</dt>
                       <dd className="seed">
@@ -404,6 +441,74 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                     </div>
                   )}
                 </div>
+                {isMobile && amusement.category !== 'game_fan' && (
+                  <div className={styles.item}>
+                    <div className={styles.rating}>
+                      <dt>{amusement.category === 'game' ? '심의등급' : '시청등급'}</dt>
+                      <dd className="seed">
+                        {amusement.ott === 'amazonOriginal' ? (
+                          <i className={`${styles['rating-amazon']} number`} aria-label="시청 가능 연령">
+                            {amusement.rating === 'all' && 'All'}
+                            {amusement.rating === 'a7' && '7+'}
+                            {amusement.rating === 'b12' && '13+'}
+                            {amusement.rating === 'c15' && '16+'}
+                            {amusement.rating === 'd19' && '18+'}
+                          </i>
+                        ) : (
+                          <>
+                            {(amusement.category === 'drama' ||
+                              amusement.category === 'ott_drama' ||
+                              amusement.category === 'ott_anime' ||
+                              amusement.anime === 'tva' ||
+                              amusement.anime === 'ova') && (
+                              <>
+                                {amusement.rating === 'all' ? (
+                                  <span>전체 이용가</span>
+                                ) : (
+                                  <span>
+                                    {RatingsDrama(amusement.rating)}
+                                    {amusement.rating === 'd19' ? '세 미만 이용불가' : '세 이상 이용가'}
+                                  </span>
+                                )}
+                              </>
+                            )}
+                            {(amusement.category === 'film' ||
+                              amusement.category === 'anime_film' ||
+                              amusement.category === 'ott_anime_film' ||
+                              amusement.category === 'ott_film' ||
+                              amusement.category === 'ott_documentary_film' ||
+                              amusement.anime === 'film') && (
+                              <>
+                                {amusement.rating === 'all' && <span>전체 이용가</span>}
+                                {amusement.rating === 'b12' && <span>12세 이용가</span>}
+                                {amusement.rating === 'c15' && <span>15세 이용가</span>}
+                                {amusement.rating === 'd19' && <span>청소년 이용불가</span>}
+                              </>
+                            )}
+                          </>
+                        )}
+                        {amusement.category === 'game' && (
+                          <>
+                            {amusement.rating === 'all' && <span>전체 이용가</span>}
+                            {amusement.rating === 'b12' && <span>12세 이용가</span>}
+                            {amusement.rating === 'c15' && <span>15세 이용가</span>}
+                            {amusement.rating === 'd19' && <span>청소년 이용불가</span>}
+                          </>
+                        )}
+                        {(amusement.ott === 'amazonOriginal' || amusement.ratingCustom) && (
+                          <div className={styles.custom}>
+                            ({amusement.ott === 'amazonOriginal' && !amusement.ratingCustom && '아마존 자체 심의등급'}
+                            {amusement.ott === 'amazonOriginal' &&
+                              amusement.ratingCustom &&
+                              '한국 리전 아마존 시청 불가'}
+                            {amusement.ott !== 'amazonOriginal' && amusement.ratingCustom && '세모뷰 자체설정 심의등급'}
+                            )
+                          </div>
+                        )}
+                      </dd>
+                    </div>
+                  </div>
+                )}
               </dl>
               <dl className={styles.staff}>
                 {amusement.original !== null && amusement.originTitle === null && amusement.originalAuthor !== null && (
