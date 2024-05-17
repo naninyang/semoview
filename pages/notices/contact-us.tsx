@@ -1,16 +1,10 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { isSafari } from 'react-device-detect';
-import styled from '@emotion/styled';
 import Seo, { originTitle } from '@/components/Seo';
-import { vectors } from '@/components/vectors';
+import { BackButton } from '@/components/Icons';
 import Anchor from '@/components/Anchor';
 import styles from '@/styles/Notice.module.sass';
-
-const BackButton = styled.i({
-  display: 'block',
-  background: `url(${vectors.backward}) no-repeat 50% 50%/contain`,
-});
 
 function ContactForm() {
   const router = useRouter();

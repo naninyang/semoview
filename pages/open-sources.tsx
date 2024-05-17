@@ -1,20 +1,13 @@
-import { useState } from 'react';
 import fs from 'fs';
 import path from 'path';
 import { useRouter } from 'next/router';
 import { isSafari } from 'react-device-detect';
-import styled from '@emotion/styled';
 import { License } from 'types';
 import Seo, { originTitle } from '@/components/Seo';
+import { BackButton } from '@/components/Icons';
 import Anchor from '@/components/Anchor';
-import { vectors } from '@/components/vectors';
 import footer from '@/styles/Footer.module.sass';
 import styles from '@/styles/Open.module.sass';
-
-const BackButton = styled.i({
-  display: 'block',
-  background: `url(${vectors.backwardDark}) no-repeat 50% 50%/contain`,
-});
 
 function OpenSources({ licenses }: { licenses: License[] }) {
   const router = useRouter();

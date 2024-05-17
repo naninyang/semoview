@@ -1,15 +1,9 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import styled from '@emotion/styled';
 import { NoticePermalinkData } from 'types';
 import Seo, { originTitle } from '@/components/Seo';
 import Anchor from '@/components/Anchor';
-import { vectors } from '@/components/vectors';
 import styles from '@/styles/Notice.module.sass';
-
-const BackButton = styled.i({
-  display: 'block',
-  background: `url(${vectors.backward}) no-repeat 50% 50%/contain`,
-});
+import { BackButton } from '@/components/Icons';
 
 const NoticeContent = ({ data }: { data: any }) => {
   const renderChildren = (children: any) => {

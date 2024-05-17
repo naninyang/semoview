@@ -2,21 +2,15 @@ import { useEffect, useState } from 'react';
 import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { isSafari } from 'react-device-detect';
-import styled from '@emotion/styled';
 import { NoticeData } from 'types';
 import Seo, { originTitle } from '@/components/Seo';
+import { BackButton } from '@/components/Icons';
 import Anchor from '@/components/Anchor';
-import { vectors } from '@/components/vectors';
 import styles from '@/styles/Notice.module.sass';
 
 interface NoticeProps {
   notices: NoticeData[];
 }
-
-const BackButton = styled.i({
-  display: 'block',
-  background: `url(${vectors.backward}) no-repeat 50% 50%/contain`,
-});
 
 const Notices: NextPage<NoticeProps> = ({ notices }) => {
   const [currentPage, setCurrentPage] = useState<string | null>(null);
