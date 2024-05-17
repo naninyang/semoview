@@ -69,6 +69,7 @@ import {
   TooniverseWhite,
   TvingOnlyWhite,
   TvingOriginalWhite,
+  TvingWhite,
   TvnWhite,
   TvtokyoWhite,
   WatchaOnlyWhite,
@@ -829,7 +830,7 @@ export default function Amusement({
                     )}
                     {service.service === 'TVING' && (
                       <>
-                        <TvingOnlyWhite />
+                        <TvingWhite />
                         <span>티빙</span>
                       </>
                     )}

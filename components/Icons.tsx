@@ -472,7 +472,7 @@ export const NetflixWhite = styled.i({
   background: `url(${vectors.bfree.netflixWhite}) no-repeat 50% 50%/contain`,
 });
 
-const TvingWhite = styled.i({
+export const TvingWhite = styled.i({
   width: rem(91),
   background: `url(${vectors.bfree.tvingWhite}) no-repeat 50% 50%/contain`,
 });
