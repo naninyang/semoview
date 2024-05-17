@@ -477,10 +477,14 @@ export default function Amusement({
       sessionStorage.getItem('amusementTag') ||
       sessionStorage.getItem('amusementPlatform') ||
       sessionStorage.getItem('amusementHanguk') ||
+      sessionStorage.getItem('amusementSubdub') ||
+      sessionStorage.getItem('amusementBfree') ||
       sessionStorage.getItem('category') ||
       sessionStorage.getItem('tag') ||
       sessionStorage.getItem('platform') ||
-      sessionStorage.getItem('hanguk');
+      sessionStorage.getItem('hanguk') ||
+      sessionStorage.getItem('subdub') ||
+      sessionStorage.getItem('bfree');
     if (previousPage) {
       router.push(`${previousPage}`);
     } else {

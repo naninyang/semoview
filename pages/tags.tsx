@@ -74,9 +74,15 @@ function Tags({
     sessionStorage.removeItem('amusementCategory');
     sessionStorage.removeItem('amusementTag');
     sessionStorage.removeItem('amusementPlatform');
+    sessionStorage.removeItem('amusementHanguk');
+    sessionStorage.removeItem('amusementSubdub');
+    sessionStorage.removeItem('amusementBfree');
 
     sessionStorage.removeItem('category');
     sessionStorage.removeItem('platform');
+    sessionStorage.removeItem('hanguk');
+    sessionStorage.removeItem('subdub');
+    sessionStorage.removeItem('bfree');
 
     sessionStorage.setItem('backhistory', router.asPath);
     sessionStorage.setItem('semoview', router.asPath);

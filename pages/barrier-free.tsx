@@ -72,6 +72,7 @@ function BarrierFree({
     sessionStorage.removeItem('amusementPlatform');
     sessionStorage.removeItem('amusementHanguk');
     sessionStorage.removeItem('amusementSubdub');
+    sessionStorage.removeItem('amusementBfree');
 
     sessionStorage.removeItem('category');
     sessionStorage.removeItem('platform');

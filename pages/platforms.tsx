@@ -70,6 +70,9 @@ function Platforms({
     sessionStorage.removeItem('amusementCategory');
     sessionStorage.removeItem('amusementTag');
     sessionStorage.removeItem('amusementPlatform');
+    sessionStorage.removeItem('amusementHanguk');
+    sessionStorage.removeItem('amusementSubdub');
+    sessionStorage.removeItem('amusementBfree');
 
     sessionStorage.removeItem('category');
     sessionStorage.removeItem('tag');

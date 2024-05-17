@@ -99,15 +99,18 @@ function Amusement({
     sessionStorage.removeItem('amusementTag');
     sessionStorage.removeItem('amusementPlatform');
     sessionStorage.removeItem('amusementHanguk');
+    sessionStorage.removeItem('amusementSubdub');
+    sessionStorage.removeItem('amusementBfree');
 
     sessionStorage.removeItem('category');
-    sessionStorage.removeItem('tag');
     sessionStorage.removeItem('platform');
-    sessionStorage.removeItem('hanguk');
+    sessionStorage.removeItem('tag');
+    sessionStorage.removeItem('subdub');
+    sessionStorage.removeItem('bfree');
 
     sessionStorage.setItem('backhistory', router.asPath);
     sessionStorage.setItem(
-      `${category && !tag ? 'amusementCategory' : ''}${category && tag ? 'amusementTag' : ''}${!category && tag ? 'amusementTag' : ''}${platform ? 'amusementPlatform' : ''}${category && hanguk ? 'amusementHanguk' : ''}${!category && hanguk ? 'amusementHanguk' : ''}`,
+      `${category && !tag ? 'amusementCategory' : ''}${category && tag ? 'amusementTag' : ''}${!category && tag ? 'amusementTag' : ''}${platform ? 'amusementPlatform' : ''}${category && hanguk ? 'amusementHanguk' : ''}${!category && hanguk ? 'amusementHanguk' : ''}${subdub ? 'amusementSubdub' : ''}${bfree ? 'amusementBfree' : ''}`,
       router.asPath,
     );
   }, [router.asPath]);
