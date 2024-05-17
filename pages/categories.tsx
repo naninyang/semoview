@@ -20,7 +20,6 @@ import {
   AniplusIcon,
   AppleIcon,
   AtxIcon,
-  BackButton,
   DaewonIcon,
   DisneyIcon,
   EnaIcon,
