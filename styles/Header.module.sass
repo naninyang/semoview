@@ -175,7 +175,7 @@ header.header
       li
         +col
         position: relative
-        padding: 0 rem(23)
+        text-align: center
 
         &::before
           content: ''
@@ -189,8 +189,6 @@ header.header
           background-color: rgba($hex-dark, .7)
 
         &:first-of-type
-          text-align: right
-
           &::before
             display: none
 
@@ -217,6 +215,6 @@ header.header
           color: $hex-accent
 
           &::after
-            left: 0
-            width: 100%
+            left: rem(12)
+            width: calc(100% - rem(24))
             background-color: $hex-accent

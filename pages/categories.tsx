@@ -7,7 +7,7 @@ import styled from '@emotion/styled';
 import { AmusementData, Counts } from 'types';
 import Seo, { originTitle } from '@/components/Seo';
 import Anchor from '@/components/Anchor';
-import Choice from '@/components/Choice';
+import ChoiceGenre from '@/components/ChoiceGenre';
 import { vectors } from '@/components/vectors';
 import { RatingsDrama } from '@/components/RatingsDrama';
 import { formatNumber } from '@/components/FormatNumber';
@@ -225,7 +225,7 @@ function Categories({
         pageDescription="OTT / 영화 / 애니메이션 / 드라마 / 게임"
         pageImg={`https://semo.dev1stud.io/og-categories.webp?ts=${timestamp}`}
       />
-      <Choice />
+      <ChoiceGenre />
       <h1>
         <span className="April16thPromise">
           <i className="preview" />

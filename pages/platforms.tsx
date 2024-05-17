@@ -7,7 +7,7 @@ import styled from '@emotion/styled';
 import { AmusementData } from 'types';
 import Seo, { originTitle } from '@/components/Seo';
 import Anchor from '@/components/Anchor';
-import Choice from '@/components/Choice';
+import ChoiceGenre from '@/components/ChoiceGenre';
 import { vectors } from '@/components/vectors';
 import { RatingsDrama } from '@/components/RatingsDrama';
 import styles from '@/styles/Categories.module.sass';
@@ -188,7 +188,7 @@ function Platforms({
         pageDescription="아마존 프라임비디오 / 애플 TV+ / 디즈니+ & 스타+ / 넷플릭스 / 티빙 & 파라마운트+ / 왓챠 / 웨이브 / KBS 2TV / MBC / SBS / JTBC / OCN / tvN / ENA / ABC & 20th & FOX & FX "
         pageImg={`https://semo.dev1stud.io/og-platforms.webp?ts=${timestamp}`}
       />
-      <Choice />
+      <ChoiceGenre />
       <h1>
         <span className="April16thPromise">
           <i className="preview" />

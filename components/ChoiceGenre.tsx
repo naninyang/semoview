@@ -8,7 +8,7 @@ const WarningIcon = styled.i({
   background: `url(${vectors.warning}) no-repeat 50% 50%/contain`,
 });
 
-export default function Choice() {
+export default function ChoiceGenre() {
   const router = useRouter();
   return (
     <div className={styles.choice}>

@@ -57,7 +57,9 @@ export default function Header() {
         router.pathname === '/categories' ||
         router.pathname === '/tags' ||
         router.pathname === '/platforms' ||
-        router.pathname === '/hanguk' ? undefined : (
+        router.pathname === '/hanguk' ||
+        router.pathname === '/subdub' ||
+        router.pathname === '/barrier-free' ? undefined : (
           <s />
         )}
         <h1>
@@ -68,7 +70,9 @@ export default function Header() {
               router.pathname === '/categories' ||
               router.pathname === '/tags' ||
               router.pathname === '/platforms' ||
-              router.pathname === '/hanguk' ? (
+              router.pathname === '/hanguk' ||
+              router.pathname === '/subdub' ||
+              router.pathname === '/barrier-free' ? (
               <JejeupDefault />
             ) : (
               <JejeupLogo />
@@ -91,13 +95,15 @@ export default function Header() {
         router.pathname === '/categories' ||
         router.pathname === '/tags' ||
         router.pathname === '/platforms' ||
-        router.pathname === '/hanguk') && (
+        router.pathname === '/hanguk' ||
+        router.pathname === '/subdub' ||
+        router.pathname === '/barrier-free') && (
         <div className={styles.tab}>
           <nav>
             <ol>
               <li className={router.pathname === '/' ? styles.current : ''}>
                 <Anchor href="/">
-                  <span>영상 기준 정렬</span>
+                  <span>리뷰보기</span>
                 </Anchor>
               </li>
               <li
@@ -108,7 +114,18 @@ export default function Header() {
                 }
               >
                 <Anchor href="/categories">
-                  <span>작품 기준 정렬</span>
+                  <span>장르보기</span>
+                </Anchor>
+              </li>
+              <li
+                className={
+                  router.pathname === '/hanguk' || router.pathname === '/subdub' || router.pathname === '/barrier-free'
+                    ? styles.current
+                    : ''
+                }
+              >
+                <Anchor href="/hanguk">
+                  <span>베리어프리</span>
                 </Anchor>
               </li>
             </ol>

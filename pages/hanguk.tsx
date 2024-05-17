@@ -7,7 +7,7 @@ import styled from '@emotion/styled';
 import { AmusementData } from 'types';
 import Seo, { originTitle } from '@/components/Seo';
 import Anchor from '@/components/Anchor';
-import Choice from '@/components/Choice';
+import ChoiceBarrierFree from '@/components/ChoiceBarrierFree';
 import { vectors } from '@/components/vectors';
 import { RatingsDrama } from '@/components/RatingsDrama';
 import styles from '@/styles/Categories.module.sass';
@@ -206,12 +206,12 @@ function Hanguk({
   return (
     <main className={styles.categories}>
       <Seo
-        pageTitles={`자막 여부 선택하기 - ${originTitle}`}
-        pageTitle={`자막 여부 선택하기`}
-        pageDescription="한글 자막, 한국어 더빙, 베리어프리"
+        pageTitles={`자막/더빙/베리어프리 지원 여부 확인하기 - ${originTitle}`}
+        pageTitle={`자막/더빙/베리어프리 지원 여부 확인하기`}
+        pageDescription="한글 자막, 한국어 더빙, 베리어프리(CC/AD)"
         pageImg={`https://semo.dev1stud.io/og-hanguk.webp?ts=${timestamp}`}
       />
-      <Choice />
+      <ChoiceBarrierFree />
       <h1>
         <span className="April16thPromise">
           <i className="preview" />
@@ -910,6 +910,7 @@ function Hanguk({
                             .map((index: number) => (
                               <span key={index}>자막 지원</span>
                             ))}{' '}
+                          {amusement.titleKorean ? amusement.titleKorean : amusement.title}
                         </span>
                       </strong>
                     </Link>
