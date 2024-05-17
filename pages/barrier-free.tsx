@@ -205,7 +205,7 @@ function BarrierFree({
         pageTitles={`베리어프리 지원 여부 확인하기 - ${originTitle}`}
         pageTitle={`베리어프리 지원 여부 확인하기`}
         pageDescription="청각 장애인용 자막 (CC), 화면 해설 (AD)"
-        pageImg={`https://semo.dev1stud.io/og-subdub.webp?ts=${timestamp}`}
+        pageImg={`https://semo.dev1stud.io/og-barrier-free.webp?ts=${timestamp}`}
       />
       <ChoiceBarrierFree />
       <h1>
