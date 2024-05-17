@@ -669,6 +669,35 @@
         color: $hex-azalea
         font-weight: 800
 
+    .barrier-free
+      position: relative
+      z-index: 7
+      padding-left: rem(12)
+
+      dl
+        display: flex
+        flex-direction: column
+        gap: rem(12)
+
+        div
+          display: flex
+          gap: rem(12)
+
+          span
+            +screen-reader-only
+
+        dt
+          i
+            display: inline-flex
+            height: rem(23)
+
+        dd
+          a
+            display: inline-flex
+
+            i
+              display: inline-flex
+
     .related-list
       span
         strong

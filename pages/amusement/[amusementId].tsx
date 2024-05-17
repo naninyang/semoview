@@ -251,6 +251,41 @@ const ADicon = styled.i({
   background: `url(${vectors.adccADwhite}) no-repeat 50% 50%/contain`,
 });
 
+const AmazonWhite = styled.i({
+  width: rem(73),
+  background: `url(${vectors.bfree.amazonWhite}) no-repeat 50% 50%/contain`,
+});
+
+const AppleWhite = styled.i({
+  width: rem(59),
+  background: `url(${vectors.bfree.appleWhite}) no-repeat 50% 50%/contain`,
+});
+
+const DisneyWhite = styled.i({
+  width: rem(42),
+  background: `url(${vectors.bfree.disneyWhite}) no-repeat 50% 50%/contain`,
+});
+
+const NetflixWhite = styled.i({
+  width: rem(81),
+  background: `url(${vectors.bfree.netflixWhite}) no-repeat 50% 50%/contain`,
+});
+
+const TvingWhite = styled.i({
+  width: rem(91),
+  background: `url(${vectors.bfree.tvingWhite}) no-repeat 50% 50%/contain`,
+});
+
+const WatchaWhite = styled.i({
+  width: rem(78),
+  background: `url(${vectors.bfree.watchaWhite}) no-repeat 50% 50%/contain`,
+});
+
+const WavveWhite = styled.i({
+  width: rem(103),
+  background: `url(${vectors.bfree.wavveWhite}) no-repeat 50% 50%/contain`,
+});
+
 export function truncateString(str: string, num: number) {
   if (str.length > num) {
     return str.slice(0, num) + '...';
@@ -959,6 +994,93 @@ export default function Amusement({
       return `${word}이 해보는 ${word}의 팬게임`;
     }
     return `${word}가 해보는 ${word}의 팬게임`;
+  }
+
+  function bfreeService(services: any) {
+    return (
+      <>
+        {Array.isArray(services) && (
+          <div className={styles['barrier-free']}>
+            <dl>
+              {services.map((service: any, index: number) => (
+                <div key={index}>
+                  <dt>
+                    {service.service === 'Amazon' && (
+                      <>
+                        <AmazonWhite />
+                        <span>프라임비디오</span>
+                      </>
+                    )}
+                    {service.service === 'Apple' && (
+                      <>
+                        <AppleWhite />
+                        <span lang="en">Apple TV+</span>
+                      </>
+                    )}
+                    {service.service === 'Disney' && (
+                      <>
+                        <DisneyWhite />
+                        <span lang="en">Disney+</span>
+                      </>
+                    )}
+                    {service.service === 'NETFLIX' && (
+                      <>
+                        <NetflixWhite />
+                        <span>넷플릭스</span>
+                      </>
+                    )}
+                    {service.service === 'TVING' && (
+                      <>
+                        <TvingWhite />
+                        <span>티빙</span>
+                      </>
+                    )}
+                    {service.service === 'WATCHA' && (
+                      <span>
+                        <WatchaWhite />
+                        <span>왓챠</span>
+                      </span>
+                    )}
+                    {service.service === 'Wavve' && (
+                      <>
+                        <WavveWhite />
+                        <span>웨이브</span>
+                      </>
+                    )}
+                  </dt>
+                  {Array.isArray(service.options) &&
+                    service.options.map((option: any, index: number) => (
+                      <dd key={index}>
+                        <Anchor href={option.url}>
+                          {option.bfree === 'cc' && (
+                            <>
+                              <CCicon />
+                              <span>청각 장애인용 자막(CC) 콘텐츠 시청하기</span>
+                            </>
+                          )}
+                          {option.bfree === 'ad' && (
+                            <>
+                              <ADicon />
+                              <span>화면 해설(AD) 콘텐츠 시청하기</span>
+                            </>
+                          )}
+                          {option.bfree === 'both' && (
+                            <>
+                              <CCicon />
+                              <ADicon />
+                              <span>베리어프리 콘텐츠 시청하기</span>
+                            </>
+                          )}
+                        </Anchor>
+                      </dd>
+                    ))}
+                </div>
+              ))}
+            </dl>
+          </div>
+        )}
+      </>
+    );
   }
 
   return (
@@ -1758,6 +1880,12 @@ export default function Amusement({
           )}
         </div>
       </div>
+      {amusementData.attributes.bfree !== null && (
+        <section>
+          <h2 className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>베리어프리 작품 보기</h2>
+          {bfreeService(amusementData.attributes.bfree)}
+        </section>
+      )}
       {amusementData.attributes.related !== null && Array.isArray(amusementData.attributes.related) && (
         <section>
           <h2 className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>관련 영상</h2>

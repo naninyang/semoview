@@ -225,6 +225,7 @@ export interface AmusementPermalinkData {
     id: string;
     idx: string;
     order: string;
+    bfree: any;
   };
 }
 
