@@ -3,7 +3,6 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
-import styled from '@emotion/styled';
 import { Category, Counts, JejeupData, JejeupMetaData } from 'types';
 import Seo from '@/components/Seo';
 import { CategoryName } from '@/components/CategoryName';
@@ -12,207 +11,51 @@ import { RatingsDrama } from '@/components/RatingsDrama';
 import { formatDate } from '@/components/FormatDate';
 import { formatDuration } from '@/components/FormatDuration';
 import { formatNumber } from '@/components/FormatNumber';
-import { vectors } from '@/components/vectors';
 import { Pagination } from '@/components/Pagination';
-import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Home.module.sass';
-
-const AmazonOriginal = styled.i({
-  width: rem(52),
-  background: `url(${vectors.ott.amazon}) no-repeat 50% 50%/contain`,
-});
-
-const AppleOriginal = styled.i({
-  width: rem(42),
-  background: `url(${vectors.ott.apple}) no-repeat 50% 50%/contain`,
-});
-
-const DisneyOriginal = styled.i({
-  width: rem(29),
-  background: `url(${vectors.ott.disney}) no-repeat 50% 50%/contain`,
-});
-
-const StarOriginal = styled.i({
-  width: rem(49),
-  background: `url(${vectors.ott.star}) no-repeat 50% 50%/contain`,
-});
-
-const NetflixOriginal = styled.i({
-  width: rem(59),
-  background: `url(${vectors.ott.netflix}) no-repeat 50% 50%/contain`,
-});
-
-const TvingOriginal = styled.i({
-  width: rem(63),
-  background: `url(${vectors.ott.tvingOrigin2}) no-repeat 50% 50%/contain`,
-});
-
-const TvingOnly = styled.i({
-  width: rem(70),
-  background: `url(${vectors.ott.tvingOnly2}) no-repeat 50% 50%/contain`,
-});
-
-const WatchaOriginal = styled.i({
-  width: rem(55),
-  background: `url(${vectors.ott.watchaOrigin2}) no-repeat 50% 50%/contain`,
-});
-
-const WatchaOnly = styled.i({
-  width: rem(70),
-  background: `url(${vectors.ott.watchaOnly2}) no-repeat 50% 50%/contain`,
-});
-
-const WavveOriginal = styled.i({
-  width: rem(72),
-  background: `url(${vectors.ott.wavveOrigin2}) no-repeat 50% 50%/contain`,
-});
-
-const WavveOnly = styled.i({
-  width: rem(50),
-  background: `url(${vectors.ott.wavveOnly2}) no-repeat 50% 50%/contain`,
-});
-
-const Paramount = styled.i({
-  width: rem(81),
-  background: `url(${vectors.ott.paramount}) no-repeat 50% 50%/contain`,
-});
-
-const Ena = styled.i({
-  width: rem(37),
-  background: `url(${vectors.broadcast.ena}) no-repeat 0 50%/contain`,
-});
-
-const Jtbc = styled.i({
-  width: rem(27),
-  background: `url(${vectors.broadcast.jtbc}) no-repeat 0 50%/contain`,
-});
-
-const Kbs2tv = styled.i({
-  width: rem(43),
-  background: `url(${vectors.broadcast.kbs2tv}) no-repeat 0 50%/contain`,
-});
-
-const Mbc = styled.i({
-  width: rem(49),
-  background: `url(${vectors.broadcast.mbc}) no-repeat 0 50%/contain`,
-});
-
-const Ocn = styled.i({
-  width: rem(42),
-  background: `url(${vectors.broadcast.ocn}) no-repeat 0 50%/contain`,
-});
-
-const Sbs = styled.i({
-  width: rem(31),
-  background: `url(${vectors.broadcast.sbs}) no-repeat 0 50%/contain`,
-});
-
-const Tvn = styled.i({
-  width: rem(34),
-  background: `url(${vectors.broadcast.tvn}) no-repeat 0 50%/contain`,
-});
-
-const Abc = styled.i({
-  width: rem(34),
-  background: `url(${vectors.broadcast.abc}) no-repeat 0 50%/contain`,
-});
-
-const Anibox = styled.i({
-  width: rem(48),
-  background: `url(${vectors.anime.anibox}) no-repeat 0 50%/contain`,
-});
-
-const Animax = styled.i({
-  width: rem(40),
-  background: `url(${vectors.anime.animax}) no-repeat 0 50%/contain`,
-});
-
-const Aniplus = styled.i({
-  width: rem(93),
-  background: `url(${vectors.anime.aniplus}) no-repeat 0 50%/contain`,
-});
-
-const Atx = styled.i({
-  width: rem(22),
-  background: `url(${vectors.anime.atx}) no-repeat 0 50%/contain`,
-});
-
-const Daewon = styled.i({
-  width: rem(44),
-  background: `url(${vectors.anime.daewon}) no-repeat 0 50%/contain`,
-});
-
-const Fujitv = styled.i({
-  width: rem(81),
-  background: `url(${vectors.anime.fujitv}) no-repeat 0 50%/contain`,
-});
-
-const Mbs = styled.i({
-  width: rem(42),
-  background: `url(${vectors.anime.mbs}) no-repeat 0 50%/contain`,
-});
-
-const Nippontv = styled.i({
-  width: rem(30),
-  background: `url(${vectors.anime.nippontv}) no-repeat 0 50%/contain`,
-});
-
-const Tbs = styled.i({
-  width: rem(31),
-  background: `url(${vectors.anime.tbs}) no-repeat 0 50%/contain`,
-});
-
-const Tokyomx = styled.i({
-  width: rem(108),
-  background: `url(${vectors.anime.tokyomx}) no-repeat 0 50%/contain`,
-});
-
-const Tooniverse = styled.i({
-  width: rem(93),
-  background: `url(${vectors.anime.tooniverse}) no-repeat 0 50%/contain`,
-});
-
-const Tvtokyo = styled.i({
-  width: rem(42),
-  background: `url(${vectors.anime.tvtokyo}) no-repeat 0 50%/contain`,
-});
-
-const Wowow = styled.i({
-  width: rem(108),
-  background: `url(${vectors.anime.wowow}) no-repeat 0 50%/contain`,
-});
-
-const RatingFilmAll = styled.i({
-  background: `url(${vectors.ratings.film.all}) no-repeat 50% 50%/contain`,
-});
-
-const RatingFilmB12 = styled.i({
-  background: `url(${vectors.ratings.film.b12}) no-repeat 50% 50%/contain`,
-});
-
-const RatingFilmC15 = styled.i({
-  background: `url(${vectors.ratings.film.c15}) no-repeat 50% 50%/contain`,
-});
-
-const RatingFilmD18 = styled.i({
-  background: `url(${vectors.ratings.film.d18}) no-repeat 50% 50%/contain`,
-});
-
-const RatingGameAll = styled.i({
-  background: `url(${vectors.ratings.game.all}) no-repeat 50% 50%/contain`,
-});
-
-const RatingGameB12 = styled.i({
-  background: `url(${vectors.ratings.game.b12}) no-repeat 50% 50%/contain`,
-});
-
-const RatingGameC15 = styled.i({
-  background: `url(${vectors.ratings.game.c15}) no-repeat 50% 50%/contain`,
-});
-
-const RatingGameD19 = styled.i({
-  background: `url(${vectors.ratings.game.d19}) no-repeat 50% 50%/contain`,
-});
+import {
+  Abc,
+  AmazonOriginal,
+  Anibox,
+  Animax,
+  Aniplus,
+  AppleOriginal,
+  Atx,
+  Daewon,
+  DisneyOriginal,
+  Ena,
+  Fujitv,
+  Jtbc,
+  Kbs2tv,
+  Mbc,
+  Mbs,
+  NetflixOriginal,
+  Nippontv,
+  Ocn,
+  Paramount,
+  RatingFilmAll,
+  RatingFilmB12,
+  RatingFilmC15,
+  RatingFilmD18,
+  RatingGameAll,
+  RatingGameB12,
+  RatingGameC15,
+  RatingGameD19,
+  Sbs,
+  StarOriginal,
+  Tbs,
+  Tokyomx,
+  Tooniverse,
+  TvingOnly,
+  TvingOriginal,
+  Tvn,
+  Tvtokyo,
+  WatchaOnly,
+  WatchaOriginal,
+  WavveOnly,
+  WavveOriginal,
+  Wowow,
+} from '@/components/Icons';
 
 export function Amusements({ jejeup }: { jejeup: any }) {
   const items = jejeup.split(',');
@@ -712,14 +555,11 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                               <AmazonOriginal /> AMAZON ORIGINAL
                             </cite>
                           )}
-                          {jejeup.amusementData.ott === 'appleOriginal' && (
+                          {(jejeup.amusementData.ott === 'appleOriginal' ||
+                            jejeup.amusementData.ott === 'appleFilm') && (
                             <cite>
-                              <AppleOriginal /> An Apple Original
-                            </cite>
-                          )}
-                          {jejeup.amusementData.ott === 'appleFilm' && (
-                            <cite>
-                              <AppleOriginal /> Apple Original Films
+                              <AppleOriginal /> {jejeup.amusementData.ott === 'appleOriginal' && 'An Apple Original'}
+                              {jejeup.amusementData.ott === 'appleFilm' && 'Apple Original Films'}
                             </cite>
                           )}
                           {jejeup.amusementData.ott === 'disneyOriginal' && (
@@ -734,21 +574,22 @@ function Home({ data, error, currentPage }: { data: any; error: string; currentP
                           )}
                           {(jejeup.amusementData.ott === 'netflixSeries' ||
                             jejeup.amusementData.ott === 'netflixOriginal' ||
-                            jejeup.amusementData.ott === 'netflixAnime') && (
-                            <cite>
-                              <NetflixOriginal /> A NETFLIX Series
-                            </cite>
-                          )}
-                          {(jejeup.amusementData.ott === 'netflixPresents' ||
+                            jejeup.amusementData.ott === 'netflixAnime' ||
+                            jejeup.amusementData.ott === 'netflixPresents' ||
                             jejeup.amusementData.ott === 'netflixFilm' ||
-                            jejeup.amusementData.ott === 'netflixAnimeFilm') && (
+                            jejeup.amusementData.ott === 'netflixAnimeFilm' ||
+                            jejeup.amusementData.ott === 'netflixDocumentary') && (
                             <cite>
-                              <NetflixOriginal /> NETFLIX Presents
-                            </cite>
-                          )}
-                          {jejeup.amusementData.ott === 'netflixDocumentary' && (
-                            <cite>
-                              <NetflixOriginal /> A NETFLIX Documentary
+                              <NetflixOriginal />
+                              {(jejeup.amusementData.ott === 'netflixSeries' ||
+                                jejeup.amusementData.ott === 'netflixOriginal' ||
+                                jejeup.amusementData.ott === 'netflixAnime') &&
+                                'A NETFLIX Series'}
+                              {(jejeup.amusementData.ott === 'netflixPresents' ||
+                                jejeup.amusementData.ott === 'netflixFilm' ||
+                                jejeup.amusementData.ott === 'netflixAnimeFilm') &&
+                                'NETFLIX Presents'}
+                              {jejeup.amusementData.ott === 'netflixDocumentary' && 'A NETFLIX Documentary'}
                             </cite>
                           )}
                           {jejeup.amusementData.ott === 'tvingOriginal' && (

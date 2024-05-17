@@ -5,16 +5,16 @@ import Anchor from './Anchor';
 import { vectors } from './vectors';
 import styles from '@/styles/Header.module.sass';
 
-const JejeupLogo = styled.i({
-  background: `url(${vectors.jejeup}) no-repeat 50% 50%/contain`,
+const SemoviewLogo = styled.i({
+  background: `url(${vectors.semoview}) no-repeat 50% 50%/contain`,
 });
 
-const JejeupDark = styled.i({
-  background: `url(${vectors.jejeupDark}) no-repeat 50% 50%/contain`,
+const SemoviewDark = styled.i({
+  background: `url(${vectors.semoviewDark}) no-repeat 50% 50%/contain`,
 });
 
-const JejeupDefault = styled.i({
-  background: `url(${vectors.jejeupDefault}) no-repeat 50% 50%/contain`,
+const SemoviewDefault = styled.i({
+  background: `url(${vectors.semoviewDefault}) no-repeat 50% 50%/contain`,
 });
 
 export default function Header() {
@@ -65,7 +65,7 @@ export default function Header() {
         <h1>
           <Anchor href="/">
             {router.pathname === '/amusement/[amusementId]' || router.pathname === '/open-sources' ? (
-              <JejeupDark />
+              <SemoviewDark />
             ) : router.pathname === '/' ||
               router.pathname === '/categories' ||
               router.pathname === '/tags' ||
@@ -73,9 +73,9 @@ export default function Header() {
               router.pathname === '/hanguk' ||
               router.pathname === '/subdub' ||
               router.pathname === '/barrier-free' ? (
-              <JejeupDefault />
+              <SemoviewDefault />
             ) : (
-              <JejeupLogo />
+              <SemoviewLogo />
             )}
             <span>세상의 모든 리뷰</span>
           </Anchor>

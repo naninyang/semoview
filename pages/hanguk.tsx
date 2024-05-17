@@ -11,158 +11,46 @@ import ChoiceBarrierFree from '@/components/ChoiceBarrierFree';
 import { vectors } from '@/components/vectors';
 import { RatingsDrama } from '@/components/RatingsDrama';
 import styles from '@/styles/Categories.module.sass';
-
-const AmazonIcon = styled.i({
-  background: `url(${vectors.ott.amazonIcon}) no-repeat 50% 50%/contain`,
-});
-
-const AppleIcon = styled.i({
-  background: `url(${vectors.ott.appleIcon}) no-repeat 50% 50%/contain`,
-});
-
-const DisneyIcon = styled.i({
-  background: `url(${vectors.ott.disneyIcon}) no-repeat 50% 50%/contain`,
-});
-
-const StarIcon = styled.i({
-  background: `url(${vectors.ott.starIcon}) no-repeat 50% 50%/contain`,
-});
-
-const NetflixIcon = styled.i({
-  background: `url(${vectors.ott.netflixIcon}) no-repeat 50% 50%/contain`,
-});
-
-const TvingIcon = styled.i({
-  background: `url(${vectors.ott.tvingIcon}) no-repeat 50% 50%/contain`,
-});
-
-const WatchaIcon = styled.i({
-  background: `url(${vectors.ott.watchaIcon}) no-repeat 50% 50%/contain`,
-});
-
-const WavveIcon = styled.i({
-  background: `url(${vectors.ott.wavveIcon}) no-repeat 50% 50%/contain`,
-});
-
-const ParamountIcon = styled.i({
-  background: `url(${vectors.ott.paramountIcon}) no-repeat 50% 50%/contain`,
-});
-
-const EnaIcon = styled.i({
-  background: `url(${vectors.broadcast.enaIcon}) no-repeat 50% 50%/contain`,
-});
-
-const JtbcIcon = styled.i({
-  background: `url(${vectors.broadcast.jtbcIcon}) no-repeat 50% 50%/contain`,
-});
-
-const Kbs2Icon = styled.i({
-  background: `url(${vectors.broadcast.kbs2Icon}) no-repeat 50% 50%/contain`,
-});
-
-const MbcIcon = styled.i({
-  background: `url(${vectors.broadcast.mbcIcon}) no-repeat 50% 50%/contain`,
-});
-
-const OcnIcon = styled.i({
-  background: `url(${vectors.broadcast.ocnIcon}) no-repeat 50% 50%/contain`,
-});
-
-const SbsIcon = styled.i({
-  background: `url(${vectors.broadcast.sbsIcon}) no-repeat 50% 50%/contain`,
-});
-
-const TvnIcon = styled.i({
-  background: `url(${vectors.broadcast.tvnIcon}) no-repeat 50% 50%/contain`,
-});
-
-const AbcIcon = styled.i({
-  background: `url(${vectors.broadcast.abcIcon}) no-repeat 50% 50%/contain`,
-});
-
-const AniboxIcon = styled.i({
-  background: `url(${vectors.anime.aniboxIcon}) no-repeat 0 50%/contain`,
-});
-
-const AnimaxIcon = styled.i({
-  background: `url(${vectors.anime.animaxIcon}) no-repeat 0 50%/contain`,
-});
-
-const AniplusIcon = styled.i({
-  background: `url(${vectors.anime.aniplusIcon}) no-repeat 0 50%/contain`,
-});
-
-const AtxIcon = styled.i({
-  background: `url(${vectors.anime.atxIcon}) no-repeat 0 50%/contain`,
-});
-
-const DaewonIcon = styled.i({
-  background: `url(${vectors.anime.daewonIcon}) no-repeat 0 50%/contain`,
-});
-
-const FujitvIcon = styled.i({
-  background: `url(${vectors.anime.fujitvIcon}) no-repeat 0 50%/contain`,
-});
-
-const MbsIcon = styled.i({
-  background: `url(${vectors.anime.mbsIcon}) no-repeat 0 50%/contain`,
-});
-
-const NippontvIcon = styled.i({
-  background: `url(${vectors.anime.nippontvIcon}) no-repeat 0 50%/contain`,
-});
-
-const TbsIcon = styled.i({
-  background: `url(${vectors.anime.tbsIcon}) no-repeat 0 50%/contain`,
-});
-
-const TokyomxIcon = styled.i({
-  background: `url(${vectors.anime.tokyomxIcon}) no-repeat 0 50%/contain`,
-});
-
-const TooniverseIcon = styled.i({
-  background: `url(${vectors.anime.tooniverseIcon}) no-repeat 0 50%/contain`,
-});
-
-const TvtokyoIcon = styled.i({
-  background: `url(${vectors.anime.tvtokyoIcon}) no-repeat 0 50%/contain`,
-});
-
-const WowowIcon = styled.i({
-  background: `url(${vectors.anime.wowowIcon}) no-repeat 0 50%/contain`,
-});
-
-const RatingFilmAll = styled.i({
-  background: `url(${vectors.ratings.film.all}) no-repeat 50% 50%/contain`,
-});
-
-const RatingFilmB12 = styled.i({
-  background: `url(${vectors.ratings.film.b12}) no-repeat 50% 50%/contain`,
-});
-
-const RatingFilmC15 = styled.i({
-  background: `url(${vectors.ratings.film.c15}) no-repeat 50% 50%/contain`,
-});
-
-const RatingFilmD18 = styled.i({
-  background: `url(${vectors.ratings.film.d18}) no-repeat 50% 50%/contain`,
-});
-
-const RatingGameAll = styled.i({
-  background: `url(${vectors.ratings.game.all}) no-repeat 50% 50%/contain`,
-});
-
-const RatingGameB12 = styled.i({
-  background: `url(${vectors.ratings.game.b12}) no-repeat 50% 50%/contain`,
-});
-
-const RatingGameC15 = styled.i({
-  background: `url(${vectors.ratings.game.c15}) no-repeat 50% 50%/contain`,
-});
-
-const RatingGameD19 = styled.i({
-  background: `url(${vectors.ratings.game.d19}) no-repeat 50% 50%/contain`,
-});
+import {
+  AbcIcon,
+  AmazonIcon,
+  AniboxIcon,
+  AnimaxIcon,
+  AniplusIcon,
+  AppleIcon,
+  AtxIcon,
+  DaewonIcon,
+  DisneyIcon,
+  EnaIcon,
+  FujitvIcon,
+  JtbcIcon,
+  Kbs2Icon,
+  MbcIcon,
+  MbsIcon,
+  NetflixIcon,
+  NippontvIcon,
+  OcnIcon,
+  ParamountIcon,
+  RatingFilmAll,
+  RatingFilmB12,
+  RatingFilmC15,
+  RatingFilmD18,
+  RatingGameAll,
+  RatingGameB12,
+  RatingGameC15,
+  RatingGameD19,
+  SbsIcon,
+  StarIcon,
+  TbsIcon,
+  TokyomxIcon,
+  TooniverseIcon,
+  TvingIcon,
+  TvnIcon,
+  TvtokyoIcon,
+  WatchaIcon,
+  WavveIcon,
+  WowowIcon,
+} from '@/components/Icons';
 
 const HangukBackground = styled.div({
   background: `url(${vectors.supportLang}) no-repeat 50% 50%/cover`,
@@ -280,7 +168,7 @@ function Hanguk({
                                 )}
                                 {amusement.animeBroadcast2 === 'animax' && (
                                   <>
-                                    <AniboxIcon /> <span>애니박스</span>
+                                    <AnimaxIcon /> <span>애니맥스 코리아</span>
                                   </>
                                 )}
                               </dd>

@@ -3,13 +3,11 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import styled from '@emotion/styled';
 import { AmusementData, JejeupData, JejeupMetaData, JejeupPermalinkData } from 'types';
 import { formatDateDetail } from '@/utils/strapi';
 import Seo, { originTitle } from '@/components/Seo';
 import YouTubeController from '@/components/YouTubeController';
 import Anchor from '@/components/Anchor';
-import { vectors } from '@/components/vectors';
 import { CategoryName } from '@/components/CategoryName';
 import { TagCategoryName } from '@/components/TagCategory';
 import { TagName } from '@/components/TagName';
@@ -21,215 +19,53 @@ import { formatTime } from '@/components/FormatTime';
 import { SupportLang } from '@/components/SupportLang';
 import AmusementDetail from '@/components/AmusementDetail';
 import Related from '@/components/Related';
-import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Jejeup.module.sass';
 import 'react-perfect-scrollbar/dist/css/styles.css';
-
-const BackButton = styled.i({
-  display: 'block',
-  background: `url(${vectors.backward}) no-repeat 50% 50%/contain`,
-});
-
-const AmazonOriginal = styled.i({
-  width: rem(52),
-  background: `url(${vectors.ott.amazon}) no-repeat 50% 50%/contain`,
-});
-
-const AppleOriginal = styled.i({
-  width: rem(42),
-  background: `url(${vectors.ott.apple}) no-repeat 50% 50%/contain`,
-});
-
-const DisneyOriginal = styled.i({
-  width: rem(29),
-  background: `url(${vectors.ott.disney}) no-repeat 50% 50%/contain`,
-});
-
-const StarOriginal = styled.i({
-  width: rem(43),
-  background: `url(${vectors.ott.star}) no-repeat 50% 50%/contain`,
-});
-
-const NetflixOriginal = styled.i({
-  width: rem(59),
-  background: `url(${vectors.ott.netflix}) no-repeat 50% 50%/contain`,
-});
-
-const TvingOriginal = styled.i({
-  width: rem(63),
-  background: `url(${vectors.ott.tvingOrigin2}) no-repeat 50% 50%/contain`,
-});
-
-const TvingOnly = styled.i({
-  width: rem(70),
-  background: `url(${vectors.ott.tvingOnly2}) no-repeat 50% 50%/contain`,
-});
-
-const WatchaOriginal = styled.i({
-  width: rem(55),
-  background: `url(${vectors.ott.watchaOrigin2}) no-repeat 50% 50%/contain`,
-});
-
-const WatchaOnly = styled.i({
-  width: rem(70),
-  background: `url(${vectors.ott.watchaOnly2}) no-repeat 50% 50%/contain`,
-});
-
-const WavveOriginal = styled.i({
-  width: rem(72),
-  background: `url(${vectors.ott.wavveOrigin2}) no-repeat 50% 50%/contain`,
-});
-
-const WavveOnly = styled.i({
-  width: rem(50),
-  background: `url(${vectors.ott.wavveOnly2}) no-repeat 50% 50%/contain`,
-});
-
-const Paramount = styled.i({
-  width: rem(81),
-  background: `url(${vectors.ott.paramount}) no-repeat 50% 50%/contain`,
-});
-
-const Ena = styled.i({
-  width: rem(37),
-  background: `url(${vectors.broadcast.ena}) no-repeat 0 50%/contain`,
-});
-
-const Jtbc = styled.i({
-  width: rem(27),
-  background: `url(${vectors.broadcast.jtbc}) no-repeat 0 50%/contain`,
-});
-
-const Kbs2tv = styled.i({
-  width: rem(43),
-  background: `url(${vectors.broadcast.kbs2tv}) no-repeat 0 50%/contain`,
-});
-
-const Mbc = styled.i({
-  width: rem(49),
-  background: `url(${vectors.broadcast.mbc}) no-repeat 0 50%/contain`,
-});
-
-const Ocn = styled.i({
-  width: rem(42),
-  background: `url(${vectors.broadcast.ocn}) no-repeat 0 50%/contain`,
-});
-
-const Sbs = styled.i({
-  width: rem(31),
-  background: `url(${vectors.broadcast.sbs}) no-repeat 0 50%/contain`,
-});
-
-const Tvn = styled.i({
-  width: rem(34),
-  background: `url(${vectors.broadcast.tvn}) no-repeat 0 50%/contain`,
-});
-
-const Abc = styled.i({
-  width: rem(34),
-  background: `url(${vectors.broadcast.abc}) no-repeat 0 50%/contain`,
-});
-
-const Anibox = styled.i({
-  width: rem(48),
-  background: `url(${vectors.anime.anibox}) no-repeat 0 50%/contain`,
-});
-
-const Animax = styled.i({
-  width: rem(40),
-  background: `url(${vectors.anime.animax}) no-repeat 0 50%/contain`,
-});
-
-const Aniplus = styled.i({
-  width: rem(93),
-  background: `url(${vectors.anime.aniplus}) no-repeat 0 50%/contain`,
-});
-
-const Atx = styled.i({
-  width: rem(22),
-  background: `url(${vectors.anime.atx}) no-repeat 0 50%/contain`,
-});
-
-const Daewon = styled.i({
-  width: rem(44),
-  background: `url(${vectors.anime.daewon}) no-repeat 0 50%/contain`,
-});
-
-const Fujitv = styled.i({
-  width: rem(81),
-  background: `url(${vectors.anime.fujitv}) no-repeat 0 50%/contain`,
-});
-
-const Mbs = styled.i({
-  width: rem(42),
-  background: `url(${vectors.anime.mbs}) no-repeat 0 50%/contain`,
-});
-
-const Nippontv = styled.i({
-  width: rem(30),
-  background: `url(${vectors.anime.nippontv}) no-repeat 0 50%/contain`,
-});
-
-const Tbs = styled.i({
-  width: rem(31),
-  background: `url(${vectors.anime.tbs}) no-repeat 0 50%/contain`,
-});
-
-const Tokyomx = styled.i({
-  width: rem(108),
-  background: `url(${vectors.anime.tokyomx}) no-repeat 0 50%/contain`,
-});
-
-const Tooniverse = styled.i({
-  width: rem(93),
-  background: `url(${vectors.anime.tooniverse}) no-repeat 0 50%/contain`,
-});
-
-const Tvtokyo = styled.i({
-  width: rem(42),
-  background: `url(${vectors.anime.tvtokyo}) no-repeat 0 50%/contain`,
-});
-
-const Wowow = styled.i({
-  width: rem(108),
-  background: `url(${vectors.anime.wowow}) no-repeat 0 50%/contain`,
-});
-
-const RatingFilmAll = styled.i({
-  background: `url(${vectors.ratings.film.all}) no-repeat 50% 50%/contain`,
-});
-
-const RatingFilmB12 = styled.i({
-  background: `url(${vectors.ratings.film.b12}) no-repeat 50% 50%/contain`,
-});
-
-const RatingFilmC15 = styled.i({
-  background: `url(${vectors.ratings.film.c15}) no-repeat 50% 50%/contain`,
-});
-
-const RatingFilmD18 = styled.i({
-  background: `url(${vectors.ratings.film.d18}) no-repeat 50% 50%/contain`,
-});
-
-const RatingGameAll = styled.i({
-  background: `url(${vectors.ratings.game.all}) no-repeat 50% 50%/contain`,
-});
-
-const RatingGameB12 = styled.i({
-  background: `url(${vectors.ratings.game.b12}) no-repeat 50% 50%/contain`,
-});
-
-const RatingGameC15 = styled.i({
-  background: `url(${vectors.ratings.game.c15}) no-repeat 50% 50%/contain`,
-});
-
-const RatingGameD19 = styled.i({
-  background: `url(${vectors.ratings.game.d19}) no-repeat 50% 50%/contain`,
-});
-
-const ClipboardIcon = styled.i({
-  background: `url(${vectors.share}) no-repeat 50% 50%/contain`,
-});
+import {
+  Abc,
+  AmazonOriginal,
+  Anibox,
+  Animax,
+  Aniplus,
+  AppleOriginal,
+  Atx,
+  BackButton,
+  ClipboardIcon,
+  Daewon,
+  DisneyOriginal,
+  Ena,
+  Fujitv,
+  Jtbc,
+  Kbs2tv,
+  Mbc,
+  Mbs,
+  NetflixOriginal,
+  Nippontv,
+  Ocn,
+  Paramount,
+  RatingFilmAll,
+  RatingFilmB12,
+  RatingFilmC15,
+  RatingFilmD18,
+  RatingGameAll,
+  RatingGameB12,
+  RatingGameC15,
+  RatingGameD19,
+  Sbs,
+  StarOriginal,
+  Tbs,
+  Tokyomx,
+  Tooniverse,
+  TvingOnly,
+  TvingOriginal,
+  Tvn,
+  Tvtokyo,
+  WatchaOnly,
+  WatchaOriginal,
+  WavveOnly,
+  WavveOriginal,
+  Wowow,
+} from '@/components/Icons';
 
 const RelatedList = ({ related }: { related: any }) => {
   const validData = related.filter((data: any) => data.related !== null && Array.isArray(data.related));

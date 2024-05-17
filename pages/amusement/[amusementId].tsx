@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 import { isSafari } from 'react-device-detect';
-import styled from '@emotion/styled';
 import { AmusementData, AmusementPermalinkData, Category, JejeupData, JejeupMetaData } from 'types';
 import { formatDateDetail } from '@/utils/strapi';
 import Seo, { originTitle } from '@/components/Seo';
@@ -17,274 +16,69 @@ import { OriginalName } from '@/components/OriginalName';
 import { SupportLang } from '@/components/SupportLang';
 import { formatDate } from '@/components/FormatDate';
 import { formatDuration } from '@/components/FormatDuration';
-import { vectors } from '@/components/vectors';
 import Anchor from '@/components/Anchor';
 import Related from '@/components/Related';
 import YouTubeController from '@/components/YouTubeController';
 import AmusementDetail from '@/components/AmusementDetail';
 import { formatTime } from '@/components/FormatTime';
-import { rem } from '@/styles/designSystem';
 import header from '@/styles/Header.module.sass';
 import footer from '@/styles/Footer.module.sass';
 import styles from '@/styles/Amusement.module.sass';
 import 'react-perfect-scrollbar/dist/css/styles.css';
-
-const BackButton = styled.i({
-  display: 'block',
-  background: `url(${vectors.backwardDark}) no-repeat 50% 50%/contain`,
-});
-
-const ClipboardIcon = styled.i({
-  background: `url(${vectors.share2}) no-repeat 50% 50%/contain`,
-});
-
-const AmazonOriginal = styled.i({
-  width: rem(52),
-  background: `url(${vectors.ott.amazon2}) no-repeat 50% 50%/contain`,
-});
-
-const AppleOriginal = styled.i({
-  width: rem(42),
-  background: `url(${vectors.ott.apple2}) no-repeat 50% 50%/contain`,
-});
-
-const DisneyOriginal = styled.i({
-  width: rem(29),
-  background: `url(${vectors.ott.disney2}) no-repeat 50% 50%/contain`,
-});
-
-const StarOriginal = styled.i({
-  width: rem(49),
-  background: `url(${vectors.ott.star2}) no-repeat 50% 50%/contain`,
-});
-
-const NetflixOriginal = styled.i({
-  width: rem(59),
-  background: `url(${vectors.ott.netflix}) no-repeat 50% 50%/contain`,
-});
-
-const TvingOriginal = styled.i({
-  width: rem(105),
-  background: `url(${vectors.ott.tvingOrigin}) no-repeat 50% 50%/contain`,
-});
-
-const TvingOnly = styled.i({
-  width: rem(70),
-  background: `url(${vectors.ott.tvingOnly}) no-repeat 50% 50%/contain`,
-});
-
-const WatchaOriginal = styled.i({
-  width: rem(55),
-  background: `url(${vectors.ott.watchaOrigin}) no-repeat 50% 50%/contain`,
-});
-
-const WatchaOnly = styled.i({
-  width: rem(70),
-  background: `url(${vectors.ott.watchaOnly}) no-repeat 50% 50%/contain`,
-});
-
-const WavveOriginal = styled.i({
-  width: rem(72),
-  background: `url(${vectors.ott.wavveOrigin}) no-repeat 50% 50%/contain`,
-});
-
-const WavveOnly = styled.i({
-  width: rem(50),
-  background: `url(${vectors.ott.wavveOnly}) no-repeat 50% 50%/contain`,
-});
-
-const Paramount = styled.i({
-  width: rem(81),
-  background: `url(${vectors.ott.paramount}) no-repeat 50% 50%/contain`,
-});
-
-const Ena = styled.i({
-  width: rem(37),
-  background: `url(${vectors.broadcast.ena2}) no-repeat 0 50%/contain`,
-});
-
-const Jtbc = styled.i({
-  width: rem(27),
-  background: `url(${vectors.broadcast.jtbc2}) no-repeat 0 50%/contain`,
-});
-
-const Kbs2tv = styled.i({
-  width: rem(43),
-  background: `url(${vectors.broadcast.kbs2tv2}) no-repeat 0 50%/contain`,
-});
-
-const Mbc = styled.i({
-  width: rem(49),
-  background: `url(${vectors.broadcast.mbc2}) no-repeat 0 50%/contain`,
-});
-
-const Ocn = styled.i({
-  width: rem(42),
-  background: `url(${vectors.broadcast.ocn2}) no-repeat 0 50%/contain`,
-});
-
-const Sbs = styled.i({
-  width: rem(31),
-  background: `url(${vectors.broadcast.sbs2}) no-repeat 0 50%/contain`,
-});
-
-const Tvn = styled.i({
-  width: rem(34),
-  background: `url(${vectors.broadcast.tvn2}) no-repeat 0 50%/contain`,
-});
-
-const Abc = styled.i({
-  width: rem(34),
-  background: `url(${vectors.broadcast.abc2}) no-repeat 0 50%/contain`,
-});
-
-const Anibox = styled.i({
-  width: rem(48),
-  background: `url(${vectors.anime.anibox2}) no-repeat 0 50%/contain`,
-});
-
-const Animax = styled.i({
-  width: rem(40),
-  background: `url(${vectors.anime.animax2}) no-repeat 0 50%/contain`,
-});
-
-const Aniplus = styled.i({
-  width: rem(93),
-  background: `url(${vectors.anime.aniplus2}) no-repeat 0 50%/contain`,
-});
-
-const Atx = styled.i({
-  width: rem(22),
-  background: `url(${vectors.anime.atx2}) no-repeat 0 50%/contain`,
-});
-
-const Daewon = styled.i({
-  width: rem(44),
-  background: `url(${vectors.anime.daewon2}) no-repeat 0 50%/contain`,
-});
-
-const Fujitv = styled.i({
-  width: rem(81),
-  background: `url(${vectors.anime.fujitv2}) no-repeat 0 50%/contain`,
-});
-
-const Mbs = styled.i({
-  width: rem(42),
-  background: `url(${vectors.anime.mbs2}) no-repeat 0 50%/contain`,
-});
-
-const Nippontv = styled.i({
-  width: rem(30),
-  background: `url(${vectors.anime.nippontv2}) no-repeat 0 50%/contain`,
-});
-
-const Tbs = styled.i({
-  width: rem(31),
-  background: `url(${vectors.anime.tbs2}) no-repeat 0 50%/contain`,
-});
-
-const Tokyomx = styled.i({
-  width: rem(108),
-  background: `url(${vectors.anime.tokyomx2}) no-repeat 0 50%/contain`,
-});
-
-const Tooniverse = styled.i({
-  width: rem(93),
-  background: `url(${vectors.anime.tooniverse2}) no-repeat 0 50%/contain`,
-});
-
-const Tvtokyo = styled.i({
-  width: rem(42),
-  background: `url(${vectors.anime.tvtokyo2}) no-repeat 0 50%/contain`,
-});
-
-const Wowow = styled.i({
-  width: rem(108),
-  background: `url(${vectors.anime.wowow2}) no-repeat 0 50%/contain`,
-});
-
-const RatingFilmAll = styled.i({
-  background: `url(${vectors.ratings.film.all}) no-repeat 50% 50%/contain`,
-});
-
-const RatingFilmB12 = styled.i({
-  background: `url(${vectors.ratings.film.b12}) no-repeat 50% 50%/contain`,
-});
-
-const RatingFilmC15 = styled.i({
-  background: `url(${vectors.ratings.film.c15}) no-repeat 50% 50%/contain`,
-});
-
-const RatingFilmD18 = styled.i({
-  background: `url(${vectors.ratings.film.d18}) no-repeat 50% 50%/contain`,
-});
-
-const RatingGameAll = styled.i({
-  background: `url(${vectors.ratings.game.all}) no-repeat 50% 50%/contain`,
-});
-
-const RatingGameB12 = styled.i({
-  background: `url(${vectors.ratings.game.b12}) no-repeat 50% 50%/contain`,
-});
-
-const RatingGameC15 = styled.i({
-  background: `url(${vectors.ratings.game.c15}) no-repeat 50% 50%/contain`,
-});
-
-const RatingGameD19 = styled.i({
-  background: `url(${vectors.ratings.game.d19}) no-repeat 50% 50%/contain`,
-});
-
-const DownIcon = styled.i({
-  background: `url(${vectors.down}) no-repeat 50% 50%/contain`,
-});
-
-const CCicon = styled.i({
-  width: rem(23),
-  height: rem(23),
-  background: `url(${vectors.adccCCwhite}) no-repeat 50% 50%/contain`,
-});
-
-const ADicon = styled.i({
-  width: rem(53),
-  height: rem(20),
-  background: `url(${vectors.adccADwhite}) no-repeat 50% 50%/contain`,
-});
-
-const AmazonWhite = styled.i({
-  width: rem(73),
-  background: `url(${vectors.bfree.amazonWhite}) no-repeat 50% 50%/contain`,
-});
-
-const AppleWhite = styled.i({
-  width: rem(59),
-  background: `url(${vectors.bfree.appleWhite}) no-repeat 50% 50%/contain`,
-});
-
-const DisneyWhite = styled.i({
-  width: rem(42),
-  background: `url(${vectors.bfree.disneyWhite}) no-repeat 50% 50%/contain`,
-});
-
-const NetflixWhite = styled.i({
-  width: rem(81),
-  background: `url(${vectors.bfree.netflixWhite}) no-repeat 50% 50%/contain`,
-});
-
-const TvingWhite = styled.i({
-  width: rem(91),
-  background: `url(${vectors.bfree.tvingWhite}) no-repeat 50% 50%/contain`,
-});
-
-const WatchaWhite = styled.i({
-  width: rem(78),
-  background: `url(${vectors.bfree.watchaWhite}) no-repeat 50% 50%/contain`,
-});
-
-const WavveWhite = styled.i({
-  width: rem(103),
-  background: `url(${vectors.bfree.wavveWhite}) no-repeat 50% 50%/contain`,
-});
+import {
+  ADiconWhite,
+  AbcWhite,
+  AmazonOriginalWhite,
+  AmazonWhite,
+  AniboxWhite,
+  AnimaxWhite,
+  AniplusWhite,
+  AppleOriginalWhite,
+  AppleWhite,
+  AtxWhite,
+  BackButtonLight,
+  CCiconWhite,
+  ClipboardIconLight,
+  DaewonWhite,
+  DisneyOriginalWhite,
+  DisneyWhite,
+  DownIcon,
+  EnaWhite,
+  FujitvWhite,
+  JtbcWhite,
+  Kbs2tvWhite,
+  MbcWhite,
+  MbsWhite,
+  NetflixOriginalWhite,
+  NetflixWhite,
+  NippontvWhite,
+  OcnWhite,
+  ParamountWhite,
+  RatingFilmAll,
+  RatingFilmB12,
+  RatingFilmC15,
+  RatingFilmD18,
+  RatingGameAll,
+  RatingGameB12,
+  RatingGameC15,
+  RatingGameD19,
+  SbsWhite,
+  StarOriginalWhite,
+  TbsWhite,
+  TokyomxWhite,
+  TooniverseWhite,
+  TvingOnlyWhite,
+  TvingOriginalWhite,
+  TvnWhite,
+  TvtokyoWhite,
+  WatchaOnlyWhite,
+  WatchaOriginalWhite,
+  WatchaWhite,
+  WavveOnlyWhite,
+  WavveOriginalWhite,
+  WavveWhite,
+  WowowWhite,
+} from '@/components/Icons';
 
 export function truncateString(str: string, num: number) {
   if (str.length > num) {
@@ -554,8 +348,8 @@ export function ADCC({ items }: { items: any }) {
           <dt>배리어프리</dt>
           {adCC.map((item: string, index: number) => (
             <dd key={index}>
-              {item === 'cc' && <CCicon />}
-              {item === 'description' && <ADicon />}
+              {item === 'cc' && <CCiconWhite />}
+              {item === 'description' && <ADiconWhite />}
               <span>{SupportLang(item)}</span>
             </dd>
           ))}
@@ -801,7 +595,7 @@ export default function Amusement({
         <main className={`${header.amusement} ${footer.amusement} ${styles.amusement} ${styles.error}`}>
           <div className="top-link">
             <Anchor href="/amusement">
-              <BackButton />
+              <BackButtonLight />
               <span>뒤로가기</span>
             </Anchor>
           </div>
@@ -1031,7 +825,7 @@ export default function Amusement({
                     )}
                     {service.service === 'TVING' && (
                       <>
-                        <TvingWhite />
+                        <TvingOnlyWhite />
                         <span>티빙</span>
                       </>
                     )}
@@ -1054,20 +848,20 @@ export default function Amusement({
                         <Anchor href={option.url}>
                           {option.bfree === 'cc' && (
                             <>
-                              <CCicon />
+                              <CCiconWhite />
                               <span>청각 장애인용 자막(CC) 콘텐츠 시청하기</span>
                             </>
                           )}
                           {option.bfree === 'ad' && (
                             <>
-                              <ADicon />
+                              <ADiconWhite />
                               <span>화면 해설(AD) 콘텐츠 시청하기</span>
                             </>
                           )}
                           {option.bfree === 'both' && (
                             <>
-                              <CCicon />
-                              <ADicon />
+                              <CCiconWhite />
+                              <ADiconWhite />
                               <span>베리어프리 콘텐츠 시청하기</span>
                             </>
                           )}
@@ -1094,7 +888,7 @@ export default function Amusement({
       />
       <div className={`top-link ${styles['top-link']}`}>
         <button onClick={previousPageHandler} type="button">
-          <BackButton />
+          <BackButtonLight />
           <span>뒤로가기</span>
         </button>
       </div>
@@ -1238,81 +1032,82 @@ export default function Amusement({
                   <dd>
                     {amusementData.attributes.ott === 'amazonOriginal' && (
                       <>
-                        <AmazonOriginal /> AMAZON ORIGINAL
+                        <AmazonOriginalWhite /> AMAZON ORIGINAL
                       </>
                     )}
                     {amusementData.attributes.ott === 'appleOriginal' && (
                       <>
-                        <AppleOriginal /> An Apple Original
+                        <AppleOriginalWhite /> An Apple Original
                       </>
                     )}
                     {amusementData.attributes.ott === 'appleFilm' && (
                       <cite>
-                        <AppleOriginal /> Apple Original Films
+                        <AppleOriginalWhite /> Apple Original Films
                       </cite>
                     )}
                     {amusementData.attributes.ott === 'disneyOriginal' && (
                       <cite>
-                        <DisneyOriginal /> Disney Original
+                        <DisneyOriginalWhite /> Disney Original
                       </cite>
                     )}
                     {amusementData.attributes.ott === 'disneyStar' && (
                       <cite>
-                        <StarOriginal /> Star Original
+                        <StarOriginalWhite /> Star Original
                       </cite>
                     )}
                     {(amusementData.attributes.ott === 'netflixSeries' ||
                       amusementData.attributes.ott === 'netflixOriginal' ||
-                      amusementData.attributes.ott === 'netflixAnime') && (
-                      <cite>
-                        <NetflixOriginal /> A NETFLIX Series
-                      </cite>
-                    )}
-                    {(amusementData.attributes.ott === 'netflixPresents' ||
+                      amusementData.attributes.ott === 'netflixAnime' ||
+                      amusementData.attributes.ott === 'netflixPresents' ||
                       amusementData.attributes.ott === 'netflixFilm' ||
-                      amusementData.attributes.ott === 'netflixAnimeFilm') && (
-                      <>
-                        <NetflixOriginal /> NETFLIX Presents
-                      </>
-                    )}
-                    {amusementData.attributes.ott === 'netflixDocumentary' && (
-                      <>
-                        <NetflixOriginal /> A NETFLIX Documentary
-                      </>
+                      amusementData.attributes.ott === 'netflixAnimeFilm' ||
+                      amusementData.attributes.ott === 'netflixDocumentary') && (
+                      <cite>
+                        <NetflixOriginalWhite />
+                        {(amusementData.attributes.ott === 'netflixSeries' ||
+                          amusementData.attributes.ott === 'netflixOriginal' ||
+                          amusementData.attributes.ott === 'netflixAnime') &&
+                          'A NETFLIX Series'}
+                        {(amusementData.attributes.ott === 'netflixPresents' ||
+                          amusementData.attributes.ott === 'netflixFilm' ||
+                          amusementData.attributes.ott === 'netflixAnimeFilm') &&
+                          'NETFLIX Presents'}
+                        {amusementData.attributes.ott === 'netflixDocumentary' && 'A NETFLIX Documentary'}
+                      </cite>
                     )}
                     {amusementData.attributes.ott === 'tvingOriginal' && (
                       <>
-                        <TvingOriginal /> 티빙 오리지널
+                        <TvingOriginalWhite /> 티빙 오리지널
                       </>
                     )}
                     {amusementData.attributes.ott === 'tvingOnly' && (
                       <>
-                        <TvingOnly /> 오직 티빙에서
+                        <TvingOnlyWhite /> 오직 티빙에서
                       </>
                     )}
                     {amusementData.attributes.ott === 'watchaOriginal' && (
                       <>
-                        <WatchaOriginal /> 왓챠 오리지널
+                        <WatchaOriginalWhite /> 왓챠 오리지널
                       </>
                     )}
                     {amusementData.attributes.ott === 'watchaExclusive' && (
                       <>
-                        <WatchaOnly /> 오직 왓챠에서
+                        <WatchaOnlyWhite /> 오직 왓챠에서
                       </>
                     )}
                     {amusementData.attributes.ott === 'wavveOriginal' && (
                       <>
-                        <WavveOriginal /> 웨이브 오리지널
+                        <WavveOriginalWhite /> 웨이브 오리지널
                       </>
                     )}
                     {amusementData.attributes.ott === 'wavveOnly' && (
                       <>
-                        <WavveOnly /> 오직 웨이브에서
+                        <WavveOnlyWhite /> 오직 웨이브에서
                       </>
                     )}
                     {amusementData.attributes.ott === 'paramount' && (
                       <>
-                        <Paramount /> Paramount+
+                        <ParamountWhite /> Paramount+
                       </>
                     )}
                   </dd>
@@ -1384,7 +1179,7 @@ export default function Amusement({
               <RelationSelect />
             </dl>
             <button onClick={copyToClipboard}>
-              <ClipboardIcon /> <span>URL 복사</span>
+              <ClipboardIconLight /> <span>URL 복사</span>
             </button>
           </div>
           <dl className={styles.summary}>
@@ -1404,42 +1199,42 @@ export default function Amusement({
                         <em>
                           {amusementData.attributes.broadcast === 'ENA' && (
                             <>
-                              <Ena /> <span>ENA</span>
+                              <EnaWhite /> <span>ENA</span>
                             </>
                           )}
                           {amusementData.attributes.broadcast === 'JTBC' && (
                             <>
-                              <Jtbc /> <span>JTBC</span>
+                              <JtbcWhite /> <span>JTBC</span>
                             </>
                           )}
                           {amusementData.attributes.broadcast === 'KBS2' && (
                             <>
-                              <Kbs2tv /> <span>KBS 2TV</span>
+                              <Kbs2tvWhite /> <span>KBS 2TV</span>
                             </>
                           )}
                           {amusementData.attributes.broadcast === 'MBC' && (
                             <>
-                              <Mbc /> <span>MBC</span>
+                              <MbcWhite /> <span>MBC</span>
                             </>
                           )}
                           {amusementData.attributes.broadcast === 'OCN' && (
                             <>
-                              <Ocn /> <span>OCN</span>
+                              <OcnWhite /> <span>OCN</span>
                             </>
                           )}
                           {amusementData.attributes.broadcast === 'SBS' && (
                             <>
-                              <Sbs /> <span>SBS</span>
+                              <SbsWhite /> <span>SBS</span>
                             </>
                           )}
                           {amusementData.attributes.broadcast === 'tvN' && (
                             <>
-                              <Tvn /> <span>tvN</span>
+                              <TvnWhite /> <span>tvN</span>
                             </>
                           )}
                           {amusementData.attributes.broadcast === 'ABC' && (
                             <>
-                              <Abc /> <span>ABC</span>
+                              <AbcWhite /> <span>ABC</span>
                             </>
                           )}
                           {(amusementData.attributes.animeBroadcast1 !== null ||
@@ -1447,72 +1242,72 @@ export default function Amusement({
                             <>
                               {amusementData.attributes.animeBroadcast1 === 'tokyomx' && (
                                 <>
-                                  <Tokyomx /> <span>도쿄MX</span>
+                                  <TokyomxWhite /> <span>도쿄MX</span>
                                 </>
                               )}
                               {amusementData.attributes.animeBroadcast1 === 'tvtokyo' && (
                                 <>
-                                  <Tvtokyo /> <span>테레토</span>
+                                  <TvtokyoWhite /> <span>테레토</span>
                                 </>
                               )}
                               {amusementData.attributes.animeBroadcast1 === 'fujitv' && (
                                 <>
-                                  <Fujitv /> <span>후지테레비</span>
+                                  <FujitvWhite /> <span>후지테레비</span>
                                 </>
                               )}
                               {amusementData.attributes.animeBroadcast1 === 'mbs' && (
                                 <>
-                                  <Mbs /> <span>MBS</span>
+                                  <MbsWhite /> <span>MBS</span>
                                 </>
                               )}
                               {amusementData.attributes.animeBroadcast1 === 'tbs' && (
                                 <>
-                                  <Tbs /> <span>TBS</span>
+                                  <TbsWhite /> <span>TBS</span>
                                 </>
                               )}
                               {amusementData.attributes.animeBroadcast1 === 'atx' && (
                                 <>
-                                  <Atx /> <span>AT-X</span>
+                                  <AtxWhite /> <span>AT-X</span>
                                 </>
                               )}
                               {amusementData.attributes.animeBroadcast1 === 'nippontv' && (
                                 <>
-                                  <Nippontv /> <span>닛테레</span>
+                                  <NippontvWhite /> <span>닛테레</span>
                                 </>
                               )}
                               {amusementData.attributes.animeBroadcast1 === 'wowow' && (
                                 <>
-                                  <Wowow /> <span>WOWOW</span>
+                                  <WowowWhite /> <span>WOWOW</span>
                                 </>
                               )}
                               {amusementData.attributes.animeBroadcast2 === 'aniplus' && (
                                 <>
                                   {amusementData.attributes.animeBroadcast1 !== null && '|'}
-                                  <Aniplus /> <span>애니플러스</span> 방영{' '}
+                                  <AniplusWhite /> <span>애니플러스</span> 방영{' '}
                                 </>
                               )}
                               {amusementData.attributes.animeBroadcast2 === 'daewon' && (
                                 <>
                                   {amusementData.attributes.animeBroadcast1 !== null && '|'}
-                                  <Daewon /> <span>애니원</span> 방영{' '}
+                                  <DaewonWhite /> <span>애니원</span> 방영{' '}
                                 </>
                               )}
                               {amusementData.attributes.animeBroadcast2 === 'anibox' && (
                                 <>
                                   {amusementData.attributes.animeBroadcast1 !== null && '|'}
-                                  <Anibox /> <span>애니박스</span> 방영{' '}
+                                  <AniboxWhite /> <span>애니박스</span> 방영{' '}
                                 </>
                               )}
                               {amusementData.attributes.animeBroadcast2 === 'tooniverse' && (
                                 <>
                                   {amusementData.attributes.animeBroadcast1 !== null && '|'}
-                                  <Tooniverse /> <span>투니버스</span> 방영{' '}
+                                  <TooniverseWhite /> <span>투니버스</span> 방영{' '}
                                 </>
                               )}
                               {amusementData.attributes.animeBroadcast2 === 'animax' && (
                                 <>
                                   {amusementData.attributes.animeBroadcast1 !== null && '|'}
-                                  <Animax /> <span>애니맥스</span> 방영{' '}
+                                  <AnimaxWhite /> <span>애니맥스</span> 방영{' '}
                                 </>
                               )}
                             </>

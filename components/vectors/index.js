@@ -1,9 +1,9 @@
 export const vectors = {
   backward: require('./backward.svg'),
-  backwardDark: require('./backwardDark.svg'),
-  jejeup: require('./jejeup.svg'),
-  jejeupDark: require('./jejeupDark.svg'),
-  jejeupDefault: require('./jejeupDefault.svg'),
+  backwardLight: require('./backwardLight.svg'),
+  semoview: require('./semoview.svg'),
+  semoviewDark: require('./semoviewDark.svg'),
+  semoviewDefault: require('./semoviewDefault.svg'),
   play: require('./play.svg'),
   share: require('./share.svg'),
   share2: require('./share2.svg'),
