@@ -487,6 +487,11 @@ export const WavveWhite = styled.i({
   background: `url(${vectors.bfree.wavveWhite}) no-repeat 50% 50%/contain`,
 });
 
+export const SeriesWhite = styled.i({
+  width: rem(78),
+  background: `url(${vectors.bfree.seriesWhite}) no-repeat 50% 50%/contain`,
+});
+
 export const RatingFilmAll = styled.i({
   background: `url(${vectors.ratings.film.all}) no-repeat 50% 50%/contain`,
 });

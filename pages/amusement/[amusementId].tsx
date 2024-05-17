@@ -63,6 +63,7 @@ import {
   RatingGameC15,
   RatingGameD19,
   SbsWhite,
+  SeriesWhite,
   StarOriginalWhite,
   TbsWhite,
   TokyomxWhite,
@@ -844,6 +845,12 @@ export default function Amusement({
                       <>
                         <WavveWhite />
                         <span>웨이브</span>
+                      </>
+                    )}
+                    {service.service === 'Series' && (
+                      <>
+                        <SeriesWhite />
+                        <span>시리즈온</span>
                       </>
                     )}
                   </dt>

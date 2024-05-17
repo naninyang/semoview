@@ -144,6 +144,8 @@ export const vectors = {
     disneyOrigin: require('./bfree/disneyOrigin.svg'),
     netflixWhite: require('./bfree/netflixWhite.svg'),
     netflixOrigin: require('./bfree/netflixOrigin.svg'),
+    seriesWhite: require('./bfree/seriesWhite.svg'),
+    seriesOrigin: require('./bfree/seriesOrigin.svg'),
     tvingWhite: require('./bfree/tvingWhite.svg'),
     tvingOrigin: require('./bfree/tvingOrigin.svg'),
     watchaWhite: require('./bfree/watchaWhite.svg'),
