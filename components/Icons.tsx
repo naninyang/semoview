@@ -488,7 +488,7 @@ export const WavveWhite = styled.i({
 });
 
 export const SeriesWhite = styled.i({
-  width: rem(78),
+  width: rem(130),
   background: `url(${vectors.bfree.seriesWhite}) no-repeat 50% 50%/contain`,
 });
 
