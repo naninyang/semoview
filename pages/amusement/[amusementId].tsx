@@ -891,7 +891,7 @@ export default function Amusement({
                             </Anchor>
                           </p>
                         )}
-                        {service.service === 'Wavve' && (
+                        {service.service === 'Wavve' && (option.bfree === 'ad' || option.bfree === 'both') && (
                           <p>
                             웨이브에서 AD를 이용하기 위해서는 &apos;화면해설&apos; 또는 &apos;베리어프리&apos;를
                             선택해야 시청이 가능할 수 있습니다.
