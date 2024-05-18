@@ -836,10 +836,10 @@ export default function Amusement({
                       </>
                     )}
                     {service.service === 'WATCHA' && (
-                      <span>
+                      <>
                         <WatchaWhite />
                         <span>왓챠</span>
-                      </span>
+                      </>
                     )}
                     {service.service === 'Wavve' && (
                       <>
