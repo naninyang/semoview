@@ -1307,11 +1307,76 @@ export default function JejeupDetail({
     );
   }
 
-  function bfreeService(services: any) {
+  function bfreeServiceItems(services: any) {
     return (
       <>
         {Array.isArray(services) && (
-          <dl className={styles['barrier-free']}>
+          <dl className={styles['barrier-free-items']}>
+            <dt>베리어프리 작품 지원 스트리밍 서비스</dt>
+            {services.map((service: any, index: number) => (
+              <React.Fragment key={index}>
+                {Array.isArray(service.options) && (
+                  <div>
+                    <dt>
+                      {service.service === 'Amazon' && <span>프라임비디오</span>}
+                      {service.service === 'Apple' && <span lang="en">Apple TV+</span>}
+                      {service.service === 'Disney' && <span lang="en">Disney+</span>}
+                      {service.service === 'NETFLIX' && <span>넷플릭스</span>}
+                      {service.service === 'TVING' && <span>티빙</span>}
+                      {service.service === 'WATCHA' && <span>왓챠</span>}
+                      {service.service === 'Wavve' && <span>웨이브</span>}
+                      {service.service === 'Series' && <span>시리즈온</span>}
+                    </dt>
+                    {service.options.map((option: any, index: number) => (
+                      <dd key={index}>
+                        <Anchor href={option.url}>
+                          <i aria-hidden="true">
+                            {option.bfree === 'cc' && 'CC'}
+                            {option.bfree === 'ad' && 'AD'}
+                            {option.bfree === 'both' && 'BF'}
+                          </i>
+                          <span>
+                            {option.bfree === 'cc' && '청각 장애인용 자막(CC)'}
+                            {option.bfree === 'ad' && '화면 해설(AD)'}
+                            {option.bfree === 'both' && '베리어프리'}
+                          </span>
+                        </Anchor>
+                        {service.service === 'Apple' && (
+                          <p>
+                            Apple TV+의 CC는 SDH 설정 후 이용 가능합니다.
+                            <br />
+                            <Anchor href="https://support.apple.com/ko-kr/guide/iphone/iph3e2e23d1/ios">
+                              Iphone
+                            </Anchor>{' '}
+                            <Anchor href="https://support.apple.com/ko-kr/guide/mac-help/mchlc1cb8d54/mac">Mac</Anchor>{' '}
+                            <Anchor href="https://support.apple.com/ko-kr/guide/tvapp/atvb5ca42eb9/web">
+                              Apple TV
+                            </Anchor>
+                          </p>
+                        )}
+                        {service.service === 'Wavve' && (option.bfree === 'ad' || option.bfree === 'both') && (
+                          <p>
+                            웨이브에서 AD를 이용하기 위해서는 &apos;화면해설&apos; 또는 &apos;베리어프리&apos;를
+                            선택해야 시청이 가능할 수 있습니다.
+                          </p>
+                        )}
+                      </dd>
+                    ))}
+                  </div>
+                )}
+              </React.Fragment>
+            ))}
+          </dl>
+        )}
+      </>
+    );
+  }
+
+  function bfreeServiceItem(services: any) {
+    return (
+      <>
+        {Array.isArray(services) && (
+          <dl className={styles['barrier-free-item']}>
             {services.map((service: any, index: number) => (
               <div key={index}>
                 <dt>
@@ -1493,7 +1558,7 @@ export default function JejeupDetail({
                                         </div>
                                         <div className={styles['info-container']}>
                                           <AmusementInfo amusementData={data} />
-                                          {data.bfree !== null && bfreeService(data.bfree)}
+                                          {data.bfree !== null && bfreeServiceItems(data.bfree)}
                                         </div>
                                       </div>
                                     ))}
@@ -1509,7 +1574,7 @@ export default function JejeupDetail({
                                       <div className={styles.bfree}>
                                         <h2 className="April16thPromise">베리어프리 작품 보기</h2>
                                         {jejeupData.amusementData.map((data, index) => (
-                                          <React.Fragment key={index}>{bfreeService(data.bfree)}</React.Fragment>
+                                          <React.Fragment key={index}>{bfreeServiceItem(data.bfree)}</React.Fragment>
                                         ))}
                                       </div>
                                     )}

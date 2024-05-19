@@ -292,7 +292,7 @@
       .figcaption
         display: flex
         flex-direction: column
-        gap: rem(12)
+        gap: rem(23)
         overflow: hidden
 
         .worst
@@ -355,8 +355,6 @@
               gap: rem(17)
 
         .title-item
-          padding-bottom: rem(23)
-
           .poster
             width: calc(50% - rem(6))
 
@@ -364,7 +362,7 @@
           .title-info
             display: flex
             flex-direction: column
-            gap: rem(17)
+            gap: rem(7)
             width: 100%
 
           .summary
@@ -668,9 +666,68 @@
         .bfree
           display: flex
           flex-direction: column
-          gap: rem(12)
+          gap: rem(17)
+          margin-top: rem(23)
 
-        dl.barrier-free
+        dl.barrier-free-items
+          display: flex
+          flex-direction: column
+          gap: rem(3)
+
+          dt, dd
+            font-size: rem(14)
+
+          > dt
+            margin-bottom: rem(3)
+            color: $hex-accent
+
+          div
+            display: flex
+
+            dt
+              width: rem(82)
+
+            dd
+              +col
+
+              a
+                position: relative
+
+                &::before, &::after
+                  font-weight: 800
+
+                &::before
+                  content: '['
+
+                &::after
+                  content: ']'
+
+                &:hover, &:focus
+                  span
+                    width: auto
+                    height: auto
+                    border-radius: rem(3)
+                    padding: rem(7) rem(12)
+                    background-color: $hex-dark
+                    white-space: nowrap
+                    color: $hex-light
+
+              i
+                font-style: normal
+                font-weight: 800
+                color: $hex-dark
+
+              span
+                position: absolute
+                transform: translateX(-50%)
+                z-index: 1
+                top: rem(-37)
+                left: 50%
+                width: 0
+                height: 0
+                overflow: hidden
+
+        dl.barrier-free-item
           display: flex
           flex-direction: column
           gap: rem(7)
@@ -682,7 +739,7 @@
           dt
             display: flex
             width: rem(129)
-            justify-content: flex-end
+            justify-content: center
 
             i
               display: inline-flex
