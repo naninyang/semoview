@@ -665,6 +665,84 @@
             width: rem(5)
             height: rem(20)
 
+        .bfree
+          display: flex
+          flex-direction: column
+          gap: rem(12)
+
+        dl.barrier-free
+          display: flex
+          flex-direction: column
+          gap: rem(7)
+
+          div
+            display: flex
+            gap: rem(7)
+
+          dt
+            display: flex
+            width: rem(129)
+            justify-content: flex-end
+
+            i
+              display: inline-flex
+              height: rem(23)
+
+            span
+              +screen-reader-only
+
+          dd
+            &:nth-of-type(2)
+              display: flex
+
+              &::before
+                content: ''
+                display: inline-flex
+                margin-right: rem(12)
+                width: rem(2)
+                height: 100%
+                background-color: $hex-white
+
+            > a
+              position: relative
+              display: inline-flex
+              gap: rem(12)
+              opacity: .7
+              transition: opacity .4s cubic-bezier(.4,0,.2,1)
+
+              &:hover, &:focus
+                opacity: 1
+
+                span
+                  width: auto
+                  height: auto
+                  border-radius: rem(3)
+                  padding: rem(7) rem(12)
+                  background-color: $hex-dark
+                  white-space: nowrap
+                  color: $hex-light
+
+              i
+                display: inline-flex
+
+              span
+                position: absolute
+                transform: translateX(-50%)
+                z-index: 1
+                top: rem(-52)
+                left: 50%
+                width: 0
+                height: 0
+                overflow: hidden
+
+            p
+              color: $hex-azalea
+
+              a
+                color: $hex-azalea
+                text-decoration: underline
+                font-weight: 800
+
       .review-comment
         background-color: rgba($hex-accent, .05)
         border-radius: rem(3)

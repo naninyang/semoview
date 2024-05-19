@@ -22,16 +22,21 @@ import Related from '@/components/Related';
 import styles from '@/styles/Jejeup.module.sass';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import {
+  ADiconBlack,
   Abc,
+  AmazonOrigin,
   AmazonOriginal,
   Anibox,
   Animax,
   Aniplus,
+  AppleOrigin,
   AppleOriginal,
   Atx,
   BackButton,
+  CCiconBlack,
   ClipboardIcon,
   Daewon,
+  DisneyOrigin,
   DisneyOriginal,
   Ena,
   Fujitv,
@@ -39,6 +44,7 @@ import {
   Kbs2tv,
   Mbc,
   Mbs,
+  NetflixOrigin,
   NetflixOriginal,
   Nippontv,
   Ocn,
@@ -52,17 +58,21 @@ import {
   RatingGameC15,
   RatingGameD19,
   Sbs,
+  SeriesOrigin,
   StarOriginal,
   Tbs,
   Tokyomx,
   Tooniverse,
   TvingOnly,
+  TvingOrigin,
   TvingOriginal,
   Tvn,
   Tvtokyo,
   WatchaOnly,
+  WatchaOrigin,
   WatchaOriginal,
   WavveOnly,
+  WavveOrigin,
   WavveOriginal,
   Wowow,
 } from '@/components/Icons';
@@ -1297,6 +1307,114 @@ export default function JejeupDetail({
     );
   }
 
+  function bfreeService(services: any) {
+    return (
+      <>
+        {Array.isArray(services) && (
+          <dl className={styles['barrier-free']}>
+            {services.map((service: any, index: number) => (
+              <div key={index}>
+                <dt>
+                  {service.service === 'Amazon' && (
+                    <>
+                      <AmazonOrigin />
+                      <span>프라임비디오</span>
+                    </>
+                  )}
+                  {service.service === 'Apple' && (
+                    <>
+                      <AppleOrigin />
+                      <span lang="en">Apple TV+</span>
+                    </>
+                  )}
+                  {service.service === 'Disney' && (
+                    <>
+                      <DisneyOrigin />
+                      <span lang="en">Disney+</span>
+                    </>
+                  )}
+                  {service.service === 'NETFLIX' && (
+                    <>
+                      <NetflixOrigin />
+                      <span>넷플릭스</span>
+                    </>
+                  )}
+                  {service.service === 'TVING' && (
+                    <>
+                      <TvingOrigin />
+                      <span>티빙</span>
+                    </>
+                  )}
+                  {service.service === 'WATCHA' && (
+                    <>
+                      <WatchaOrigin />
+                      <span>왓챠</span>
+                    </>
+                  )}
+                  {service.service === 'Wavve' && (
+                    <>
+                      <WavveOrigin />
+                      <span>웨이브</span>
+                    </>
+                  )}
+                  {service.service === 'Series' && (
+                    <>
+                      <SeriesOrigin />
+                      <span>시리즈온</span>
+                    </>
+                  )}
+                </dt>
+                {Array.isArray(service.options) &&
+                  service.options.map((option: any, index: number) => (
+                    <dd key={index}>
+                      <Anchor href={option.url}>
+                        {option.bfree === 'cc' && (
+                          <>
+                            <CCiconBlack />
+                            <span>청각 장애인용 자막(CC) 콘텐츠 시청하기</span>
+                          </>
+                        )}
+                        {option.bfree === 'ad' && (
+                          <>
+                            <ADiconBlack />
+                            <span>화면 해설(AD) 콘텐츠 시청하기</span>
+                          </>
+                        )}
+                        {option.bfree === 'both' && (
+                          <>
+                            <CCiconBlack />
+                            <ADiconBlack />
+                            <span>베리어프리 콘텐츠 시청하기</span>
+                          </>
+                        )}
+                      </Anchor>
+                      {service.service === 'Apple' && (
+                        <p>
+                          Apple TV+의 CC는 SDH 설정 후 이용 가능합니다.
+                          <br />
+                          <Anchor href="https://support.apple.com/ko-kr/guide/iphone/iph3e2e23d1/ios">
+                            Iphone
+                          </Anchor>{' '}
+                          <Anchor href="https://support.apple.com/ko-kr/guide/mac-help/mchlc1cb8d54/mac">Mac</Anchor>{' '}
+                          <Anchor href="https://support.apple.com/ko-kr/guide/tvapp/atvb5ca42eb9/web">Apple TV</Anchor>
+                        </p>
+                      )}
+                      {service.service === 'Wavve' && (option.bfree === 'ad' || option.bfree === 'both') && (
+                        <p>
+                          웨이브에서 AD를 이용하기 위해서는 &apos;화면해설&apos; 또는 &apos;베리어프리&apos;를 선택해야
+                          시청이 가능할 수 있습니다.
+                        </p>
+                      )}
+                    </dd>
+                  ))}
+              </div>
+            ))}
+          </dl>
+        )}
+      </>
+    );
+  }
+
   const validData = Array.isArray(jejeupData.amusementData)
     ? jejeupData.amusementData.filter((data: any) => data.related !== null && Array.isArray(data.related))
     : [];
@@ -1375,6 +1493,7 @@ export default function JejeupDetail({
                                         </div>
                                         <div className={styles['info-container']}>
                                           <AmusementInfo amusementData={data} />
+                                          {data.bfree !== null && bfreeService(data.bfree)}
                                         </div>
                                       </div>
                                     ))}
@@ -1386,6 +1505,14 @@ export default function JejeupDetail({
                                 {jejeupData.amusementData.map((data, index) => (
                                   <div className={styles['title-info']} key={index}>
                                     <AmusementInfo amusementData={data} />
+                                    {data.bfree !== null && (
+                                      <div className={styles.bfree}>
+                                        <h2 className="April16thPromise">베리어프리 작품 보기</h2>
+                                        {jejeupData.amusementData.map((data, index) => (
+                                          <React.Fragment key={index}>{bfreeService(data.bfree)}</React.Fragment>
+                                        ))}
+                                      </div>
+                                    )}
                                   </div>
                                 ))}
                               </div>
@@ -1490,7 +1617,6 @@ export default function JejeupDetail({
 export const getStaticProps: GetStaticProps = async (context) => {
   const jejeupId = context.params?.jejeupId;
   let jejeupData = null;
-  let amusementData = null;
 
   if (jejeupId && typeof jejeupId === 'string') {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/jejeups?id=${jejeupId.substring(14)}`);

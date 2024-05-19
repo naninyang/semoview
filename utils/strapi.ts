@@ -996,6 +996,7 @@ export async function getAmusementData(amusement: string) {
     runningTime: amusementData.attributes.runningTime,
     comment: amusementData.attributes.comment,
     synopsys: amusementData.attributes.synopsys,
+    bfree: amusementData.attributes.bfree,
   };
 
   return rowsData;

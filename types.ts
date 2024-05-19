@@ -177,6 +177,7 @@ export interface AmusementData {
   runningTime: number;
   comment: string;
   synopsys: string;
+  bfree: any;
 }
 
 export interface AmusementPermalinkData {

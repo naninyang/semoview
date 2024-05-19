@@ -492,6 +492,46 @@ export const SeriesWhite = styled.i({
   background: `url(${vectors.bfree.seriesWhite}) no-repeat 50% 50%/contain`,
 });
 
+export const AmazonOrigin = styled.i({
+  width: rem(73),
+  background: `url(${vectors.bfree.amazonOrigin}) no-repeat 50% 50%/contain`,
+});
+
+export const AppleOrigin = styled.i({
+  width: rem(59),
+  background: `url(${vectors.bfree.appleOrigin}) no-repeat 50% 50%/contain`,
+});
+
+export const DisneyOrigin = styled.i({
+  width: rem(42),
+  background: `url(${vectors.bfree.disneyOrigin}) no-repeat 50% 50%/contain`,
+});
+
+export const NetflixOrigin = styled.i({
+  width: rem(81),
+  background: `url(${vectors.bfree.netflixOrigin}) no-repeat 50% 50%/contain`,
+});
+
+export const TvingOrigin = styled.i({
+  width: rem(91),
+  background: `url(${vectors.bfree.tvingOrigin}) no-repeat 50% 50%/contain`,
+});
+
+export const WatchaOrigin = styled.i({
+  width: rem(78),
+  background: `url(${vectors.bfree.watchaOrigin}) no-repeat 50% 50%/contain`,
+});
+
+export const WavveOrigin = styled.i({
+  width: rem(103),
+  background: `url(${vectors.bfree.wavveOrigin}) no-repeat 50% 50%/contain`,
+});
+
+export const SeriesOrigin = styled.i({
+  width: rem(130),
+  background: `url(${vectors.bfree.seriesOrigin}) no-repeat 50% 50%/contain`,
+});
+
 export const RatingFilmAll = styled.i({
   background: `url(${vectors.ratings.film.all}) no-repeat 50% 50%/contain`,
 });
@@ -552,6 +592,18 @@ export const ADiconWhite = styled.i({
   width: rem(53),
   height: rem(20),
   background: `url(${vectors.adccADwhite}) no-repeat 50% 50%/contain`,
+});
+
+export const CCiconBlack = styled.i({
+  width: rem(23),
+  height: rem(23),
+  background: `url(${vectors.adccCCblack}) no-repeat 50% 50%/contain`,
+});
+
+export const ADiconBlack = styled.i({
+  width: rem(53),
+  height: rem(20),
+  background: `url(${vectors.adccADblack}) no-repeat 50% 50%/contain`,
 });
 
 export const DownIcon = styled.i({
