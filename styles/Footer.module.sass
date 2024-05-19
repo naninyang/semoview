@@ -3,57 +3,128 @@
 main.amusement,
 main.open
   & + footer.footer
-    background-color: $hex-black
+    background-color: $hex-dark
+    color: $hex-light
 
     .container
-      p
-        color: $hex-white
+      .content
+        > div
+          &.law, &.etc
+            dt
+              button
+                border-color: $hex-azalea
+                color: $hex-azalea
 
-        &.copyright
-          strong
-            color: $hex-azalea
+          &.scp
+            dt
+              button
+                border-color: $hex-light
+                color: $hex-light
 
-        &.copyrights
-          color: $hex-azalea
-
-        &.scp
-          color: rgba($hex-light, .7)
+      dt
+        button
+          border-bottom: rem(2) solid $hex-light
+          color: $hex-light
 
 footer.footer
-  background-color: rgba($hex-white, .7)
+  background-color: $hex-light
   width: 100%
   padding: rem(72) calc(env(safe-area-inset-right) + rem(19)) calc(env(safe-area-inset-bottom) + rem(23)) calc(env(safe-area-inset-left) + rem(19))
 
   .container
     display: flex
     flex-direction: column
-    gap: rem(23)
+    gap: rem(12)
     width: 100%
     font-size: rem(14)
-    font-weight: 800
 
-    p
-      &.copyright
-        font-size: rem(12)
-        font-weight: 400
+    +mq(minSmall)
+      position: relative
 
-        strong
-          font-weight: 900
-          color: $hex-accent
+    .site
+      display: flex
+      gap: rem(12)
+
+      +mq(maxExtraSmall)
+        padding-bottom: rem(12)
+
+      +mq(minSmall)
+        position: absolute
+        right: 0
+        bottom: 0
+
+      a
+        i
+          display: inline-block
+          width: rem(20)
+          height: rem(20)
 
         span
-          +mq(maxExtraSmall)
-            +screen-reader-only
+          +screen-reader-only
 
-      &.copyrights
-        color: rgba($hex-accent, .7)
+    .content
+      display: flex
+      gap: rem(12)
 
-      &.scp
-        color: rgba($hex-dark, .7)
+      +mq(maxExtraSmall)
+        flex-direction: column
 
-      &.copyrights, &.scp
+      > div
+        +mq(minSmall)
+          +col
+
+        &.law, &.etc
+          dt
+            button
+              border-color: $hex-accent
+              color: $hex-accent
+
+        &.scp
+          dt
+            button
+              border-color: $hex-dark
+              color: $hex-dark
+
+    dl
+      display: flex
+      flex-direction: column
+      gap: rem(12)
+
+      > div
+        display: flex
+        flex-direction: column
+
+        strong
+          padding-top: rem(12)
+
+    dt
+      button
+        background-color: transparent
+        border-bottom: rem(2) solid $hex-dark
+        font-size: rem(14)
+        font-weight: 700
+
+    dd
+      i
+        +screen-reader-only
+
+      strong
         display: flex
         flex-direction: column
         gap: rem(7)
         font-size: rem(12)
+        font-weight: 500
         line-height: 1.66666667
+
+    .studio
+      padding-top: rem(12)
+      font-size: rem(12)
+      font-weight: 400
+
+      strong
+        +screen-reader-only
+
+      i
+        display: inline-block
+        aspect-ratio: 547 / 70
+        height: rem(14)

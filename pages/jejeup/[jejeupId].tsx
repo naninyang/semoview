@@ -521,6 +521,7 @@ export default function JejeupDetail({
       try {
         const jejeupMeta = await fetch(`/api/jejeup?url=https://youtu.be/${jejeupData.attributes.video}`);
         const jejeupMetaDataResponse = await jejeupMeta.json();
+        console.log('jejeupMetaDataResponse: ', jejeupMetaDataResponse);
 
         if (
           Array.isArray(jejeupMetaDataResponse) === false &&
@@ -579,10 +580,13 @@ export default function JejeupDetail({
 
     return (
       <>
+        {console.log('jejeupMetaData #1: ', jejeupMetaData)}
         {!isLoading && !error && jejeupData && jejeupMetaData ? (
           <>
+            {console.log('jejeupMetaData #2: ', jejeupMetaData)}
             {Object.keys(jejeupMetaData).length > 0 ? (
               <>
+                {console.log('jejeupMetaData #3: ', jejeupMetaData)}
                 {jejeupMetaData.error === 'Failed to fetch data' || jejeupMetaData.originalTitle === ' - YouTube' ? (
                   <div className={`${styles.preview} ${styles.more} ${styles['preview-dummy']}`}>
                     <div className={`${styles.dummy} ${styles.skeleton}`} />

@@ -937,6 +937,7 @@ export async function fetchMetaItemdata(url: string) {
   try {
     const response = await fetch(`${process.env.PREVIEW_OLD_API_URL}?url=${encodeURIComponent(url)}`);
     const previewResponse = await response.json();
+    console.log('previewResponse: ', previewResponse);
     return previewResponse;
   } catch (error) {
     console.error('Failed to fetch article metadata', error);
