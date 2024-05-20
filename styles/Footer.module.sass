@@ -6,25 +6,13 @@ main.open
     background-color: $hex-dark
     color: $hex-light
 
-    .container
-      .content
+    .content
+      dl
         > div
-          &.law, &.etc
-            dt
-              button
-                border-color: $hex-azalea
-                color: $hex-azalea
-
-          &.scp
-            dt
-              button
-                border-color: $hex-light
+          > div
+            dd
+              a
                 color: $hex-light
-
-      dt
-        button
-          border-bottom: rem(2) solid $hex-light
-          color: $hex-light
 
 footer.footer
   background-color: $hex-light
@@ -34,12 +22,13 @@ footer.footer
   .container
     display: flex
     flex-direction: column
-    gap: rem(12)
+    gap: rem(27)
     width: 100%
     font-size: rem(14)
 
     +mq(minSmall)
       position: relative
+      gap: rem(52)
 
     .site
       display: flex
@@ -63,58 +52,39 @@ footer.footer
           +screen-reader-only
 
     .content
-      display: flex
-      gap: rem(12)
+      max-width: rem(770)
 
-      +mq(maxExtraSmall)
-        flex-direction: column
+      dl
+        display: flex
+        gap: rem(12)
 
-      > div
-        +mq(minSmall)
+        +mq(maxExtraSmall)
+          flex-direction: column
+          gap: rem(52)
+
+        div
+          display: flex
+          flex-direction: column
+
+        > div
+          gap: rem(17)
           +col
 
-        &.law, &.etc
           dt
-            button
-              border-color: $hex-accent
-              color: $hex-accent
+            font-size: rem(16)
+            font-weight: 800
 
-        &.scp
-          dt
-            button
-              border-color: $hex-dark
-              color: $hex-dark
+          > div
+            gap: rem(3)
 
-    dl
-      display: flex
-      flex-direction: column
-      gap: rem(12)
+            dd
+              font-size: rem(14)
 
-      > div
-        display: flex
-        flex-direction: column
+              a
+                color: $hex-dark
 
-        strong
-          padding-top: rem(12)
-
-    dt
-      button
-        background-color: transparent
-        border-bottom: rem(2) solid $hex-dark
-        font-size: rem(14)
-        font-weight: 700
-
-    dd
-      i
-        +screen-reader-only
-
-      strong
-        display: flex
-        flex-direction: column
-        gap: rem(7)
-        font-size: rem(12)
-        font-weight: 500
-        line-height: 1.66666667
+                &:hover, &:focus
+                  text-decoration: underline
 
     .studio
       padding-top: rem(12)
