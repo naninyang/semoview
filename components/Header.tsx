@@ -54,6 +54,7 @@ export default function Header() {
     >
       <div className={styles.container}>
         {router.pathname === '/' ||
+        router.pathname === '/reviews' ||
         router.pathname === '/categories' ||
         router.pathname === '/tags' ||
         router.pathname === '/platforms' ||
@@ -67,6 +68,7 @@ export default function Header() {
             {router.pathname === '/amusement/[amusementId]' || router.pathname === '/open-sources' ? (
               <SemoviewDark />
             ) : router.pathname === '/' ||
+              router.pathname === '/reviews' ||
               router.pathname === '/categories' ||
               router.pathname === '/tags' ||
               router.pathname === '/platforms' ||
@@ -91,7 +93,7 @@ export default function Header() {
           </ol>
         </nav>
       </div>
-      {(router.pathname === '/' ||
+      {(router.pathname === '/reviews' ||
         router.pathname === '/categories' ||
         router.pathname === '/tags' ||
         router.pathname === '/platforms' ||
@@ -101,8 +103,8 @@ export default function Header() {
         <div className={styles.tab}>
           <nav>
             <ol>
-              <li className={router.pathname === '/' ? styles.current : ''}>
-                <Anchor href="/">
+              <li className={router.pathname === '/reviews' ? styles.current : ''}>
+                <Anchor href="/reviews">
                   <span>리뷰보기</span>
                 </Anchor>
               </li>

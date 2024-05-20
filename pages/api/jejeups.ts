@@ -3,11 +3,20 @@ import { getAmusementData, getJejeupData } from '@/utils/strapi';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const id = req.query.id as string;
+  const page = Number(req.query.page) || 1;
+  const main = req.query.main as string;
 
-  if (!id) {
+  if (!id && !main) {
     try {
-      const page = Number(req.query.page) || 1;
-      const data = await getJejeupData(page);
+      const data = await getJejeupData(page, 12);
+      res.status(200).json(data);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  } else if (!id && main) {
+    try {
+      const data = await getJejeupData(1, 4);
       res.status(200).json(data);
     } catch (error) {
       console.error(error);
