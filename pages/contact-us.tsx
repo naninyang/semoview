@@ -44,9 +44,12 @@ function ContactForm() {
     }
   };
 
-  const handleClose = () => {
-    if (typeof window !== 'undefined') {
-      window.close();
+  const previousPageHandler = () => {
+    const previousPage = sessionStorage.getItem('backhistory');
+    if (previousPage) {
+      router.push(`${previousPage}`);
+    } else {
+      router.push('/');
     }
   };
 
@@ -61,10 +64,10 @@ function ContactForm() {
         pageImg={`https://semo.dev1stud.io/og-image.webp?ts=${timestamp}`}
       />
       <div className="top-link">
-        <Anchor href="/notices">
+        <button onClick={previousPageHandler} type="button">
           <BackButton />
           <span>뒤로가기</span>
-        </Anchor>
+        </button>
       </div>
       <div className={styles.content}>
         <h1>
@@ -142,10 +145,10 @@ function ContactForm() {
             <div className={styles['button-group']}>
               <button type="submit">문의하기</button>
               <div className={styles.cancel}>
-                <Anchor href="/notices">
+                <button onClick={previousPageHandler} type="button">
                   <BackButton />
                   <span>뒤로가기</span>
-                </Anchor>
+                </button>
               </div>
             </div>
           </fieldset>
