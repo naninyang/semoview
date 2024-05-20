@@ -13,13 +13,6 @@ interface NoticeProps {
 }
 
 const Notices: NextPage<NoticeProps> = ({ notices }) => {
-  const [currentPage, setCurrentPage] = useState<string | null>(null);
-
-  useEffect(() => {
-    const storedPage = localStorage.getItem('currentPage');
-    setCurrentPage(storedPage);
-  }, []);
-
   const [noticesData, setNoticesData] = useState<NoticeData[]>([]);
   useEffect(() => {
     setNoticesData(notices);

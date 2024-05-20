@@ -1,0 +1,110 @@
+@import './designSystem'
+
+.usage
+  display: flex
+  justify-content: center
+  gap: rem(25)
+  padding: rem(27) calc(env(safe-area-inset-right) + rem(15)) rem(57) calc(env(safe-area-inset-left) + rem(15))
+
+  +mq(minLarge)
+    padding: rem(57) calc(env(safe-area-inset-right) + rem(25)) rem(72) calc(env(safe-area-inset-left) + rem(25))
+
+  .content
+    display: flex
+    flex-direction: column
+    gap: rem(52)
+    max-width: rem(720)
+    width: 100%
+
+    h1
+      display: flex
+      align-items: flex-end
+      justify-content: center
+      gap: rem(7)
+      font-size: rem(24)
+      font-weight: 900
+      color: $hex-azalea
+
+      +mq(minSmall)
+        font-size: rem(64)
+
+      em
+        font-size: rem(16)
+        font-weight: 300
+        font-style: normal
+
+        +mq(minSmall)
+          font-size: rem(36)
+
+    .container
+      display: flex
+      flex-direction: column
+      gap: rem(27)
+      margin: rem(17) 0
+
+      article
+        display: flex
+        flex-direction: column
+        gap: rem(7)
+
+      +mq(minSmall)
+        gap: rem(52)
+        margin: rem(52) 0
+
+      h2
+        font-size: rem(16)
+
+        +mq(minSmall)
+          font-size: rem(20)
+
+      section
+        display: flex
+        flex-direction: column
+        gap: rem(7)
+        background-color: rgba($hex-azalea, .07)
+        border-radius: rem(3)
+        padding: rem(17)
+
+      p
+        display: flex
+        flex-direction: column
+        font-size: rem(14)
+        line-height: 1.3
+
+        +mq(minSmall)
+          font-size: rem(16)
+
+      .button-group
+        display: flex
+        justify-content: center
+        align-items: center
+        margin: rem(32) 0
+        gap: rem(12)
+        text-align: center
+
+        +mq(minSmall)
+          flex-direction: row
+          margin: rem(52) 0 rem(32)
+
+        a, button
+          display: inline-flex
+          background-color: transparent
+          width: rem(170)
+          justify-content: center
+          border: rem(1) solid $hex-accent
+          border-radius: rem(3)
+          padding: rem(12) rem(32)
+          font-size: rem(16)
+          font-weight: 700
+          line-height: 1
+          color: $hex-accent
+          transition: all .3s cubic-bezier(.4,0,.2,1)
+
+          +mq(minSmall)
+            width: auto
+            padding: rem(17) rem(52)
+            font-size: rem(20)
+
+          &:hover, &:focus
+            background-color: $hex-accent
+            color: $hex-light
