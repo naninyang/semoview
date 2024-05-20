@@ -245,7 +245,7 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                                   {amusement.animeBroadcast2 === 'animax' && (
                                     <>
                                       {amusement.animeBroadcast1 !== null && '& '}
-                                      <span>애니맥스</span> 방영{' '}
+                                      <span>애니맥스 코리아</span> 방영{' '}
                                     </>
                                   )}
                                 </>

@@ -158,7 +158,7 @@ function Platforms({
                                 )}
                                 {amusement.animeBroadcast2 === 'animax' && (
                                   <>
-                                    <AnimaxIcon /> <span>애니박스</span>
+                                    <AnimaxIcon /> <span>애니맥스 코리아</span>
                                   </>
                                 )}
                               </dd>
@@ -389,7 +389,7 @@ function Platforms({
                                 )}
                                 {amusement.animeBroadcast2 === 'animax' && (
                                   <>
-                                    <AnimaxIcon /> <span>애니박스</span>
+                                    <AnimaxIcon /> <span>애니맥스 코리아</span>
                                   </>
                                 )}
                               </dd>
@@ -620,7 +620,7 @@ function Platforms({
                                 )}
                                 {amusement.animeBroadcast2 === 'animax' && (
                                   <>
-                                    <AnimaxIcon /> <span>애니박스</span>
+                                    <AnimaxIcon /> <span>애니맥스 코리아</span>
                                   </>
                                 )}
                               </dd>
@@ -796,7 +796,7 @@ function Platforms({
                                 )}
                                 {amusement.animeBroadcast2 === 'animax' && (
                                   <>
-                                    <AnimaxIcon /> <span>애니박스</span>
+                                    <AnimaxIcon /> <span>애니맥스 코리아</span>
                                   </>
                                 )}
                               </dd>
@@ -1052,7 +1052,7 @@ function Platforms({
                                 )}
                                 {amusement.animeBroadcast2 === 'animax' && (
                                   <>
-                                    <AnimaxIcon /> <span>애니박스</span>
+                                    <AnimaxIcon /> <span>애니맥스 코리아</span>
                                   </>
                                 )}
                               </dd>
@@ -1308,7 +1308,7 @@ function Platforms({
                                 )}
                                 {amusement.animeBroadcast2 === 'animax' && (
                                   <>
-                                    <AnimaxIcon /> <span>애니박스</span>
+                                    <AnimaxIcon /> <span>애니맥스 코리아</span>
                                   </>
                                 )}
                               </dd>
