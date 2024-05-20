@@ -114,13 +114,12 @@ function Categories({
         pageImg={`https://semo.dev1stud.io/og-categories.webp?ts=${timestamp}`}
       />
       <ChoiceGenre />
-      <h1>
-        <span className="April16thPromise">
-          <i className="preview" />
-          카테고리별 보고싶다? 골라보세요 💁‍♀️
-        </span>
-        {count && <em>({formatNumber(count.amusement)}개 작품)</em>}
-      </h1>
+      <div className="headline">
+        <h1 className="April16thPromise">
+          <em dangerouslySetInnerHTML={{ __html: '카테고리별 보고싶다?<br/>골라보세요' }} />{' '}
+          {count && <span>({formatNumber(count.amusement)}개 작품)</span>}
+        </h1>
+      </div>
       {error && (
         <div className={styles.error}>
           <p>데이터를 불러오는데 실패했습니다.</p>

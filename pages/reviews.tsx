@@ -309,13 +309,12 @@ function Review({ data, error, currentPage }: { data: any; error: string; curren
         pageDescription="세상의 모든 리뷰를 수집한다"
         pageImg={`https://semo.dev1stud.io/og-image.webp?ts=${timestamp}`}
       />
-      <h1>
-        <span className="April16thPromise">
-          <i className="preview" />
-          리뷰영상을 클릭하지 않아도 작품 정보를 알 수 있게 도와드려요 💃
-        </span>
-        {count && <em>({formatNumber(count.jejeup)}개 리뷰/실황)</em>}
-      </h1>
+      <div className="headline">
+        <h1 className="April16thPromise">
+          <em dangerouslySetInnerHTML={{ __html: '유튜브<br/>리뷰/실황 보기' }} />{' '}
+          {count && <span>({count.jejeup}개 리뷰/실황)</span>}
+        </h1>
+      </div>
       <div className={styles.list}>
         {error && (
           <div className={styles.error}>

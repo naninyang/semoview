@@ -2,7 +2,7 @@
 
 .reviews
   margin-top: calc(env(safe-area-inset-top) + rem(114))
-  padding: rem(7) calc(env(safe-area-inset-right) + rem(12)) rem(57) calc(env(safe-area-inset-left) + rem(12))
+  padding: rem(7) 0 rem(57)
   min-height: calc(100dvh - rem(78))
   font-size: rem(16)
 
@@ -23,46 +23,9 @@
       text-decoration: underline
       color: $hex-accent
 
-  h1
-    display: flex
-    gap: rem(2)
-    padding: rem(15) rem(7) rem(3)
-    font-size: rem(20)
-    font-weight: 800
-    line-height: 1.2
-
-    +mq(maxSmall)
-      flex-direction: column
-
-    +mq(minMedium)
-      align-items: flex-end
-      gap: rem(17)
-
-    span
-      display: flex
-      gap: rem(5)
-
-    i::before
-      content: '•'
-      position: relative
-      top: rem(-2)
-      padding: 0 rem(4)
-      font-size: rem(20)
-      font-style: normal
-      color: $hex-accent
-
-    em
-      font-size: rem(16)
-      font-weight: 900
-      font-style: normal
-      color: $hex-accent
-
-      +mq(maxSmall)
-        padding-left: rem(24)
-
   .jejeup-content
     display: flex
-    padding: rem(5) 0
+    padding: rem(5) calc(env(safe-area-inset-right) + rem(12)) rem(5) calc(env(safe-area-inset-left) + rem(12))
     transition: all .4s cubic-bezier(.4,0,.2,1)
 
     +mq(maxExtraSmall)

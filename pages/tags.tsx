@@ -98,12 +98,11 @@ function Tags({
         pageImg={`https://semo.dev1stud.io/og-tags.webp?ts=${timestamp}`}
       />
       <ChoiceGenre />
-      <h1>
-        <span className="April16thPromise">
-          <i className="preview" />
-          태그 골라보기! 💁‍♀️
-        </span>
-      </h1>
+      <div className="headline">
+        <h1 className="April16thPromise">
+          <em dangerouslySetInnerHTML={{ __html: '태그 골라보기!' }} />
+        </h1>
+      </div>
       {error && (
         <div className={styles.error}>
           <p>데이터를 불러오는데 실패했습니다.</p>

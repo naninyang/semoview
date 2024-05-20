@@ -90,12 +90,11 @@ function Platforms({
         pageImg={`https://semo.dev1stud.io/og-platforms.webp?ts=${timestamp}`}
       />
       <ChoiceGenre />
-      <h1>
-        <span className="April16thPromise">
-          <i className="preview" />
-          OTT 플랫폼 또는 방송국을 골라보세요! 💁‍♀️
-        </span>
-      </h1>
+      <div className="headline">
+        <h1 className="April16thPromise">
+          <em dangerouslySetInnerHTML={{ __html: 'OTT 플랫폼/방송사를<br/>골라보세요!' }} />
+        </h1>
+      </div>
       {error && (
         <div className={styles.error}>
           <p>데이터를 불러오는데 실패했습니다.</p>

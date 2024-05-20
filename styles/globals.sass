@@ -140,3 +140,123 @@ main
 .scrollbar-container
   position: relative
   height: 100%
+
+.headline
+  display: flex
+  align-items: center
+  justify-content: space-between
+  gap: rem(7)
+  padding: rem(52) calc(env(safe-area-inset-right) + rem(12)) rem(17) calc(env(safe-area-inset-left) + rem(12))
+
+  +mq(minMedium)
+    justify-content: flex-start
+    gap: rem(27)
+
+  h1, h2
+    font-size: rem(20)
+    font-weight: 800
+
+    +mq(minMedium)
+      font-size: rem(24)
+
+  h1
+    em
+      font-size: rem(32)
+      font-style: normal
+      line-height: 1.25
+      color: $hex-light
+
+    span
+      font-size: rem(14)
+      font-weight: 800
+      color: $hex-azalea
+      white-space: nowrap
+
+      +mq(minMedium)
+        font-size: rem(16)
+
+    strong
+      display: block
+      margin-top: rem(7)
+      font-size: rem(16)
+      font-weight: 800
+      color: $hex-white
+
+  h2
+    a
+      color: $hex-dark
+      line-height: 1.42857143
+
+      &:hover, &:focus
+        color: $hex-accent
+
+      span
+        white-space: nowrap
+
+  .select
+    display: flex
+    gap: rem(7)
+
+    select, button
+      background-color: $hex-white
+      border: 1px solid rgba($hex-black, .7)
+      border-radius: rem(3)
+      padding: rem(3) rem(7)
+      font-weight: 800
+
+      +mq(maxSmall)
+        font-size: rem(14)
+
+  > a
+    display: inline-flex
+    align-items: center
+    font-weight: 800
+    color: $hex-dark
+
+    +mq(maxSmall)
+      font-size: rem(14)
+
+    &:hover, &:focus
+      span
+        border-bottom: 0
+        color: $hex-accent
+        border-bottom: rem(2) solid $hex-accent
+
+      svg
+        path
+          fill: $hex-accent
+
+    svg
+      display: inline-block
+      width: rem(24)
+      height: rem(24)
+
+    +mq(maxSmall)
+      span
+        +screen-reader-only
+
+.headline
+  display: flex
+  justify-content: flex-start
+  background-color: $hex-dark
+  padding: rem(37) calc(env(safe-area-inset-right) + rem(12)) rem(17) calc(env(safe-area-inset-left) + rem(12))
+
+  +mq(maxSmall)
+    flex-direction: column
+    align-items: flex-start
+    gap: rem(27)
+
+  +mq(minMedium)
+    justify-content: space-between
+    align-items: flex-end
+    padding: rem(52) calc(env(safe-area-inset-right) + rem(12)) rem(27) calc(env(safe-area-inset-left) + rem(12))
+
+  .select
+    display: flex
+    gap: rem(7)
+
+    select, button
+      border: 1px solid rgba($hex-black, .7)
+      border-radius: rem(3)
+      padding: rem(3) rem(7)
+      font-weight: 800

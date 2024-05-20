@@ -93,12 +93,11 @@ function BarrierFree({
         pageImg={`https://semo.dev1stud.io/og-barrier-free.webp?ts=${timestamp}`}
       />
       <ChoiceBarrierFree />
-      <h1>
-        <span className="April16thPromise">
-          <i className="preview" />
-          베리어프리 지원 작품!
-        </span>
-      </h1>
+      <div className="headline">
+        <h1 className="April16thPromise">
+          <em dangerouslySetInnerHTML={{ __html: '베리어프리<br />지원 작품!' }} />
+        </h1>
+      </div>
       {error && (
         <div className={styles.error}>
           <p>데이터를 불러오는데 실패했습니다.</p>
