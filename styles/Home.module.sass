@@ -1,7 +1,7 @@
 @import './designSystem'
 
 .main
-  padding: 0 0 rem(57)
+  padding: 0 0 rem(102)
   min-height: calc(100dvh - rem(78))
   font-size: rem(16)
 
@@ -85,14 +85,13 @@
         +mq(maxSmall)
           font-size: rem(14)
 
+          span
+            +screen-reader-only
+
         &:hover, &:focus
           span
             color: $hex-accent
-            border-bottom: rem(2) solid $hex-accent
             border-bottom: 0
-
-            +mq(maxSmall)
-              +screen-reader-only
 
           svg
             display: inline-block

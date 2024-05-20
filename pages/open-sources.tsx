@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { isSafari } from 'react-device-detect';
 import { License } from 'types';
 import Seo, { originTitle } from '@/components/Seo';
-import { BackButton } from '@/components/Icons';
+import { BackButtonLight } from '@/components/Icons';
 import Anchor from '@/components/Anchor';
 import footer from '@/styles/Footer.module.sass';
 import styles from '@/styles/Open.module.sass';
@@ -31,7 +31,7 @@ function OpenSources({ licenses }: { licenses: License[] }) {
       />
       <div className={`top-link ${styles['top-link']}`}>
         <button onClick={previousPageHandler} type="button">
-          <BackButton />
+          <BackButtonLight />
           <span>뒤로가기</span>
         </button>
       </div>

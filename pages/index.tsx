@@ -368,7 +368,7 @@ function Home({
             <div className={styles['review-content']}>
               <div className={styles.headline}>
                 <h2 className="April16thPromise">
-                  <Anchor href="/reviews&page=1">최근 리뷰</Anchor>
+                  <Anchor href="/reviews?page=1">최근 리뷰</Anchor>
                   {process.env.NODE_ENV === 'development' && count && ` ${count.jejeup}개`}
                 </h2>
                 <Anchor href="/reviews?page=1">
