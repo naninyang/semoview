@@ -651,7 +651,7 @@ export default function JejeupDetail({
                       <h1>{jejeupMetaData.ogTitle}</h1>
                       <div className={styles.detail}>
                         <Image
-                          src={`${jejeupMetaData.ownerAvatar === undefined ? 'https://cdn.dev1stud.io/jejeup/-/' + jejeupMetaData.ownerUrl?.split('@')[1] + '.webp' : jejeupMetaData.ownerAvatar}`}
+                          src={`${jejeupMetaData.ownerAvatar === undefined ? 'https://cdn.dev1stud.io/semoview/-/' + jejeupMetaData.ownerUrl?.split('@')[1] + '.webp' : jejeupMetaData.ownerAvatar}`}
                           width="36"
                           height="36"
                           alt=""
