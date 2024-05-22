@@ -127,7 +127,7 @@ function Platforms({
                   tvingData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                         <dl>
                           {amusement.animeBroadcast2 !== null && (
                             <div
@@ -358,7 +358,7 @@ function Platforms({
                   netflixData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                         <dl>
                           {amusement.animeBroadcast2 !== null && (
                             <div
@@ -589,7 +589,7 @@ function Platforms({
                   amazonData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                         <dl>
                           {amusement.animeBroadcast2 !== null && (
                             <div
@@ -765,7 +765,7 @@ function Platforms({
                   kbsData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                         <dl>
                           {amusement.animeBroadcast2 !== null && (
                             <div
@@ -1021,7 +1021,7 @@ function Platforms({
                   tvnData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                         <dl>
                           {amusement.animeBroadcast2 !== null && (
                             <div
@@ -1277,7 +1277,7 @@ function Platforms({
                   jtbcData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                         <dl>
                           {amusement.animeBroadcast2 !== null && (
                             <div

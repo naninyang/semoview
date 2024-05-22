@@ -131,7 +131,7 @@ function Subdub({
                   subtitleData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                         <dl>
                           {amusement.animeBroadcast2 !== null && (
                             <div
@@ -441,7 +441,7 @@ function Subdub({
                   dubbingData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                         <dl>
                           {amusement.animeBroadcast2 !== null && (
                             <div
@@ -751,7 +751,7 @@ function Subdub({
                   bothData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                         <dl>
                           {amusement.animeBroadcast2 !== null && (
                             <div

@@ -137,7 +137,7 @@ function Tags({
                   horrorDramaData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                         <dl>
                           {amusement.broadcast !== null && (
                             <div className={`${styles.broadcast} ${amusement.ott !== null ? styles.broadcasts : ''}`}>
@@ -358,7 +358,7 @@ function Tags({
                   horrorFilmData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                         <dl>
                           {amusement.animeBroadcast2 !== null && (
                             <div
@@ -663,7 +663,7 @@ function Tags({
                   horrorAnimeData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                         <dl>
                           {amusement.animeBroadcast2 !== null && (
                             <div
@@ -900,7 +900,7 @@ function Tags({
                   horrorGameData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width="460" height="215" alt="" unoptimized />
+                        <Image src={amusement.posterDefault} width="460" height="215" alt="" unoptimized priority />
                         {amusement.category !== 'game_fan' && (
                           <dl>
                             <div className={styles.game}>
@@ -964,7 +964,7 @@ function Tags({
                   healingData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                         <dl>
                           {amusement.animeBroadcast2 !== null && (
                             <div
@@ -1270,7 +1270,7 @@ function Tags({
                   healingGameData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width="460" height="215" alt="" unoptimized />
+                        <Image src={amusement.posterDefault} width="460" height="215" alt="" unoptimized priority />
                         {amusement.category !== 'game_fan' && (
                           <dl>
                             <div className={styles.game}>

@@ -130,7 +130,7 @@ function BarrierFree({
                   ccData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                         <dl>
                           {amusement.animeBroadcast2 !== null && (
                             <div
@@ -440,7 +440,7 @@ function BarrierFree({
                   descriptionData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                         <dl>
                           {amusement.animeBroadcast2 !== null && (
                             <div
@@ -750,7 +750,7 @@ function BarrierFree({
                   bfreeData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                         <dl>
                           {amusement.animeBroadcast2 !== null && (
                             <div

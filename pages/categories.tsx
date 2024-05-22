@@ -152,7 +152,7 @@ function Categories({
                   dramaData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                         <dl>
                           {amusement.broadcast !== null && (
                             <div className={`${styles.broadcast} ${amusement.ott !== null ? styles.broadcasts : ''}`}>
@@ -323,7 +323,7 @@ function Categories({
                   filmData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                         <dl>
                           {amusement.ott !== null && (
                             <div className={styles.platform}>
@@ -461,7 +461,7 @@ function Categories({
                   animeData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                         <dl>
                           {amusement.animeBroadcast2 !== null && (
                             <div
@@ -695,7 +695,7 @@ function Categories({
                   ottData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                        <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                         <dl>
                           {amusement.animeBroadcast1 !== null && (
                             <div
@@ -940,7 +940,7 @@ function Categories({
                   gameData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width="460" height="215" alt="" unoptimized />
+                        <Image src={amusement.posterDefault} width="460" height="215" alt="" unoptimized priority />
                         {amusement.category !== 'game_fan' && (
                           <dl>
                             <div className={styles.game}>
@@ -1008,7 +1008,7 @@ function Categories({
                   fanData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width="460" height="215" alt="" unoptimized />
+                        <Image src={amusement.posterDefault} width="460" height="215" alt="" unoptimized priority />
                       </div>
                       <strong>
                         <span className="seed">&apos;{amusement.title}&apos; 팬 게임 콜렉션</span>

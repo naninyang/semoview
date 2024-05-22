@@ -645,6 +645,7 @@ function Amusement({
                           height={category === 'game' || category === 'game_fan' ? 215 : 560}
                           alt=""
                           unoptimized
+                          priority
                         />
                         {amusement.category !== 'game_fan' && (
                           <dl>
@@ -1093,6 +1094,7 @@ function Amusement({
                           height={category === 'game' ? 215 : 560}
                           alt=""
                           unoptimized
+                          priority
                         />
                         {amusement.category !== 'game_fan' && (
                           <dl>
@@ -1459,7 +1461,7 @@ function Amusement({
                   {platformData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                       <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width={390} height={560} alt="" unoptimized />
+                        <Image src={amusement.posterDefault} width={390} height={560} alt="" unoptimized priority />
                         <dl>
                           {amusement.animeBroadcast2 !== null && platform !== amusement.animeBroadcast2 && (
                             <div
@@ -1820,6 +1822,7 @@ function Amusement({
                           height={category === 'game' ? 215 : 560}
                           alt=""
                           unoptimized
+                          priority
                         />
                         {amusement.category !== 'game_fan' && (
                           <dl>
@@ -2172,6 +2175,7 @@ function Amusement({
                           height={category === 'game' ? 215 : 560}
                           alt=""
                           unoptimized
+                          priority
                         />
                         {amusement.category !== 'game_fan' && (
                           <dl>
@@ -2523,6 +2527,7 @@ function Amusement({
                           height={category === 'game' ? 215 : 560}
                           alt=""
                           unoptimized
+                          priority
                         />
                         {amusement.category !== 'game_fan' && (
                           <dl>
@@ -3082,7 +3087,6 @@ export async function getServerSideProps(context: any) {
         }
         hangukData = await response.json();
         pageTitle = HangukTitle(hanguk as keyof typeof HangukTitle, category);
-        console.log(pageTitle);
       } catch (err) {
         error = err instanceof Error ? err.message : 'An unknown error occurred';
       }
