@@ -19,17 +19,16 @@
 - SASS
 - Google YouTube iframe API
 - PWA
-- Strapi rest API
+- Strapi API
 - Node 18
 - vercel deployment
 
-### Web Opengraph Scrap API Server
+### YouTube Opengraph Scrapping API Server
 
-- Next.js
-- TypeScript
+- Node 20
+- express
 - jsdom
-- Node 18
-- vercel deployment
+- Heroku
 
 ### Backend
 
@@ -43,15 +42,15 @@
 
 ## Troubleshooting
 
-이슈를 등록해 주시거나 [여기](https://semo.dev1stud.io/notices)를 이용해 주세요.
+이슈를 등록해 주시거나 [여기](https://semo.dev1stud.io/contact-us)를 이용해 주세요.
 
 ### 발견되거나 알려진 버그
 
-- Not yet
+- 속도 이슈
 
 ### TO-DO
 
-- 코드 정리
+- ...
 
 ## Supported PWA App. Download
 
