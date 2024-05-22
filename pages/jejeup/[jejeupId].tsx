@@ -521,8 +521,6 @@ export default function JejeupDetail({
       try {
         const jejeupMeta = await fetch(`/api/jejeup?url=https://youtu.be/${jejeupData.attributes.video}`);
         const jejeupMetaDataResponse = await jejeupMeta.json();
-        console.log('jejeupMetaDataResponse: ', jejeupMetaDataResponse);
-
         if (
           Array.isArray(jejeupMetaDataResponse) === false &&
           Object.keys(jejeupMetaDataResponse).length === 0 &&
@@ -580,13 +578,10 @@ export default function JejeupDetail({
 
     return (
       <>
-        {console.log('jejeupMetaData #1: ', jejeupMetaData)}
         {!isLoading && !error && jejeupData && jejeupMetaData ? (
           <>
-            {console.log('jejeupMetaData #2: ', jejeupMetaData)}
             {Object.keys(jejeupMetaData).length > 0 ? (
               <>
-                {console.log('jejeupMetaData #3: ', jejeupMetaData)}
                 {jejeupMetaData.error === 'Failed to fetch data' || jejeupMetaData.originalTitle === ' - YouTube' ? (
                   <div className={`${styles.preview} ${styles.more} ${styles['preview-dummy']}`}>
                     <div className={`${styles.dummy} ${styles.skeleton}`} />
@@ -716,34 +711,24 @@ export default function JejeupDetail({
                 )}
               </>
             ) : (
-              <div className={`${styles.preview} ${styles.more} ${styles['preview-dummy']}`}>
-                <div className={styles.notice}>
-                  <p>알 수 없는 사유로 불러오지 못했습니다.</p>
-                  <p>
+              <div className={`${styles.preview} ${styles['preview-dummy']}`}>
+                <div className={`${styles.dummy} ${styles.skeleton}`} />
+                <div className={`${styles.youtube} ${styles.more}`}>
+                  <h1>
+                    알 수 없는 사유로 불러오지 못했습니다.{' '}
                     <button type="button" data-video={jejeupData.video} onClick={handleRetry}>
                       새로고침
                     </button>
                     해 주세요.
-                  </p>
-                </div>
-                <div className={styles['preview-container']} aria-hidden="true">
-                  <div className={styles.thumbnail}>
-                    <div className={`${styles.dummy} ${styles.skeleton}`} />
-                  </div>
-                  <div className={styles['preview-info']}>
-                    <div className={styles.detail}>
-                      <div className={`${styles['user-info']}`}>
-                        <strong className={styles.skeleton} />
-                        <div className={styles.user}>
-                          <cite>
-                            <i className={styles.skeleton} />
-                          </cite>
-                          <time className={styles.skeleton} />
-                        </div>
-                      </div>
+                  </h1>
+                  <div className={styles.detail} aria-hidden="true">
+                    <div className={`${styles.avatar} ${styles.skeleton}`} />
+                    <div className={styles.user}>
+                      <cite className={styles.skeleton} />
+                      <time className={styles.skeleton} />
                     </div>
-                    <div className={`${styles.learnmore} ${styles.skeleton}`} />
                   </div>
+                  <div className={`${styles.learnmore} ${styles.skeleton}`} />
                 </div>
               </div>
             )}
