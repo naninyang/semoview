@@ -426,13 +426,13 @@ function Home({
   const settings = {
     dots: false,
     infinite: true,
-    speed: 500,
+    speed: 700,
     centerPadding: '14%',
     centerMode: isMobile ? false : true,
     className: 'center',
     slidesToShow: 1,
     autoplay: true,
-    autoplaySpeed: 2700,
+    autoplaySpeed: 5200,
     arrows: false,
     afterChange: (current: number) => setCurrentSlide(current),
   };
