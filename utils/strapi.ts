@@ -58,7 +58,7 @@ export async function getJejeupData(page?: number, pageSize?: number) {
     createdAt: data.attributes.createdAt,
     subject: data.attributes.subject,
     video: data.attributes.video,
-    ownerAvatar: data.attributes.ownerAvatar,
+    channelProfileImageUrl: data.attributes.channelProfileImageUrl,
     comment: data.attributes.comment,
     title: data.attributes.title,
     worst: data.attributes.worst,
@@ -879,7 +879,7 @@ export async function getJejeupAmusementData(page?: number, pageSize?: number, a
     createdAt: data.attributes.createdAt,
     subject: data.attributes.subject,
     video: data.attributes.video,
-    ownerAvatar: data.attributes.ownerAvatar,
+    channelProfileImageUrl: data.attributes.channelProfileImageUrl,
     comment: data.attributes.comment,
     title: data.attributes.title,
     worst: data.attributes.worst,
@@ -951,7 +951,7 @@ export async function getNoticeData() {
 
 export async function fetchMetadata(url: string) {
   try {
-    const response = await fetch(`${process.env.PREVIEW_NEW_API_URL}?url=${encodeURIComponent(url)}`);
+    const response = await fetch(`${process.env.PREVIEW_NEW_API_URL}?videoId=${encodeURIComponent(url)}`);
     const previewResponse = await response.json();
     return previewResponse;
   } catch (error) {
@@ -962,9 +962,8 @@ export async function fetchMetadata(url: string) {
 
 export async function fetchMetaItemdata(url: string) {
   try {
-    const response = await fetch(`${process.env.PREVIEW_OLD_API_URL}?url=${encodeURIComponent(url)}`);
+    const response = await fetch(`${process.env.PREVIEW_OLD_API_URL}?videoId=${encodeURIComponent(url)}`);
     const previewResponse = await response.json();
-    console.log('previewResponse: ', previewResponse);
     return previewResponse;
   } catch (error) {
     console.error('Failed to fetch article metadata', error);
@@ -1048,7 +1047,7 @@ export async function getRelationsData(relations: string, type: string) {
       createdAt: data.attributes.createdAt,
       subject: data.attributes.subject,
       video: data.attributes.video,
-      ownerAvatar: data.attributes.ownerAvatar,
+      channelProfileImageUrl: data.attributes.channelProfileImageUrl,
       comment: data.attributes.comment,
       title: data.attributes.title,
       relations: data.attributes.relations,

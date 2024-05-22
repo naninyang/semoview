@@ -92,17 +92,17 @@ export function truncateString(str: string, num: number) {
 
 export function JejeupMeta({ jejeup }: { jejeup: any }) {
   const [jejeupMetaData, setJejeupMetaData] = useState<JejeupMetaData | null>(null);
-  const [isJejeupMetaLoading, setIsJejeupMetaLoading] = useState(true);
-  const maxRetries = 7;
+  const [isLoading, setIsLoading] = useState(true);
+  const maxRetries = 2;
 
   const fetchMetadata = async (currentRetryCount = 0) => {
     try {
-      const jejeupMeta = await fetch(`/api/metadata?url=https://youtu.be/${jejeup.video}`);
+      const jejeupMeta = await fetch(`/api/metadata?url=${jejeup.video}`);
       const jejeupMetaDataResponse = await jejeupMeta.json();
-
       if (
         Array.isArray(jejeupMetaDataResponse) === false &&
         Object.keys(jejeupMetaDataResponse).length === 0 &&
+        jejeupMetaDataResponse.duration === undefined &&
         currentRetryCount < maxRetries
       ) {
         setTimeout(() => fetchMetadata(currentRetryCount + 1), 5000);
@@ -116,13 +116,13 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
 
   const handleRetry = () => {
     setJejeupMetaData(null);
-    setIsJejeupMetaLoading(true);
-    fetchMetadata().finally(() => setIsJejeupMetaLoading(false));
+    setIsLoading(true);
+    fetchMetadata().finally(() => setIsLoading(false));
   };
 
   useEffect(() => {
-    setIsJejeupMetaLoading(true);
-    fetchMetadata().finally(() => setIsJejeupMetaLoading(false));
+    setIsLoading(true);
+    fetchMetadata().finally(() => setIsLoading(false));
   }, []);
 
   const handleReport = async (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -152,11 +152,11 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
 
   return (
     <>
-      {!isJejeupMetaLoading && jejeupMetaData ? (
+      {!isLoading && jejeupMetaData ? (
         <>
           {Object.keys(jejeupMetaData).length > 0 ? (
             <>
-              {jejeupMetaData.error === 'Failed to fetch data' || jejeupMetaData.originalTitle === ' - YouTube' ? (
+              {jejeupMetaData.error === 'Video not found or is deleted/private' ? (
                 <div className={`${styles.preview} ${styles['preview-dummy']}`}>
                   <div className={styles.notice}>
                     <p>유튜버가 삭제했거나 비공개 처리한 영상입니다.</p>
@@ -164,7 +164,7 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
                       <button type="button" data-video={jejeup.video} onClick={handleReport}>
                         세모뷰 운영자에게 제보
                       </button>
-                      해 주세요.
+                      해 주세요. {process.env.NODE_ENV === 'development' && jejeup.idx}
                     </p>
                   </div>
                   <div className={styles['preview-container']}>
@@ -191,28 +191,35 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
                   <div className={`${styles.preview} preview`}>
                     <div className={styles['preview-container']}>
                       <div className={styles.thumbnail}>
-                        <Image src={jejeupMetaData.ogImage} width="1920" height="1080" alt="" unoptimized />
-                        <em>{formatDuration(jejeupMetaData.duration)}</em>
+                        <Image
+                          src={jejeupMetaData.thumbnailUrl}
+                          width="1920"
+                          height="1080"
+                          alt=""
+                          unoptimized
+                          priority
+                        />
+                        <em aria-label="재생시간">{formatDuration(jejeupMetaData.duration)}</em>
                       </div>
                       <div className={styles['preview-info']}>
                         <div className={styles.detail}>
                           <div className={`${styles['user-info']}`}>
-                            <strong>{jejeupMetaData.ogTitle}</strong>
+                            <strong aria-label="영상제목">{jejeupMetaData.title}</strong>
                             <div className={styles.user}>
-                              <cite>{jejeupMetaData.ownerName}</cite>
-                              <time dateTime={jejeupMetaData.datePublished}>
-                                {formatDate(`${jejeupMetaData.datePublished}`)}
+                              <cite aria-label="유튜브 채널이름">{jejeupMetaData.channelTitle}</cite>
+                              <time dateTime={jejeupMetaData.publishedAt}>
+                                {formatDate(`${jejeupMetaData.publishedAt}`)}
                               </time>
                             </div>
                             {(jejeup.worst || jejeup.embeddingOff) && (
                               <div className={styles.option}>
                                 {jejeup.worst && (
-                                  <div className={styles.worst}>
+                                  <div className={styles.worst} aria-label="Worst 영상">
                                     <strong className="number">Worst</strong>
                                   </div>
                                 )}
                                 {jejeup.embeddingOff && (
-                                  <div className={styles.embed}>
+                                  <div className={styles.embed} aria-label="퍼가기 금지 영상">
                                     <strong className="preview">퍼가기 금지 콘텐츠</strong>
                                   </div>
                                 )}
@@ -237,7 +244,7 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
                   해 주세요.
                 </p>
               </div>
-              <div className={styles['preview-container']}>
+              <div className={styles['preview-container']} aria-hidden="true">
                 <div className={styles.thumbnail}>
                   <div className={`${styles.dummy} ${styles.skeleton}`} />
                 </div>
@@ -263,7 +270,7 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
           <div className={styles.notice} hidden>
             <p>불러오는 중</p>
           </div>
-          <div className={styles['preview-container']}>
+          <div className={styles['preview-container']} aria-hidden="true">
             <div className={styles.thumbnail}>
               <div className={`${styles.dummy} ${styles.skeleton}`} />
             </div>
@@ -614,6 +621,7 @@ export default function Amusement({
                   width="1920"
                   height="1080"
                   unoptimized
+                  priority
                   className={`${isActive ? styles.active : ''}`}
                 />
               </div>
@@ -940,6 +948,7 @@ export default function Amusement({
                   : 560
               }
               unoptimized
+              priority
               className={`${isActive ? styles.active : ''}`}
             />
             {amusementData.attributes.posterOther && (
@@ -957,6 +966,7 @@ export default function Amusement({
                     : 560
                 }
                 unoptimized
+                priority
                 className={`${!isActive ? styles.active : ''}`}
               />
             )}
@@ -1670,6 +1680,7 @@ export default function Amusement({
                   : 560
               }
               unoptimized
+              priority
               className={`${isActive ? styles.active : ''}`}
             />
             {amusementData.attributes.posterOther && (
@@ -1687,6 +1698,7 @@ export default function Amusement({
                     : 560
                 }
                 unoptimized
+                priority
                 className={`${!isActive ? styles.active : ''}`}
               />
             )}

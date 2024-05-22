@@ -4,7 +4,7 @@ export interface JejeupData {
   idx: number;
   subject: string;
   video: string;
-  ownerAvatar: string;
+  channelProfileImageUrl: string;
   comment: string;
   title: string;
   worst: boolean;
@@ -12,14 +12,13 @@ export interface JejeupData {
   amusements: string;
   createdAt: string;
   error: string;
-  ogTitle: string;
   originalTitle: string;
   jejeups: {
     id: string;
     idx: string;
     subject: string;
     video: string;
-    ownerAvatar: string;
+    channelProfileImageUrl: string;
     comment: string;
     title: string;
     worst: boolean;
@@ -27,19 +26,14 @@ export interface JejeupData {
   };
   jejeupMetaData: {
     error: string;
-    ogTitle: string;
+    title: string;
     originalTitle: string;
-    ogUrl: string;
-    ogImage: string;
-    ogDescription: string;
-    ogSiteName?: string;
-    twitterSite?: string;
-    twitterCreator?: string;
-    datePublished?: string;
-    ownerAvatar?: string;
-    ownerName?: string;
-    pressPublished?: string;
-    pressAvatar?: string;
+    customUrl: string;
+    thumbnailUrl: string;
+    description: string;
+    publishedAt?: string;
+    channelProfileImageUrl?: string;
+    channelTitle?: string;
     duration: string;
   };
   amusementData: {
@@ -76,18 +70,18 @@ export interface JejeupData {
 
 export interface JejeupMetaData {
   error: string;
-  ogTitle: string;
+  title: string;
   originalTitle: string;
-  ogUrl: string;
-  ogImage: string;
-  ogDescription: string;
+  customUrl: string;
+  thumbnailUrl: string;
+  description: string;
   ogSiteName?: string;
   twitterSite?: string;
   twitterCreator?: string;
-  datePublished?: string;
+  publishedAt?: string;
   ownerUrl?: string;
-  ownerAvatar?: string;
-  ownerName?: string;
+  channelProfileImageUrl?: string;
+  channelTitle?: string;
   pressPublished?: string;
   pressAvatar?: string;
   duration: string;
@@ -99,7 +93,7 @@ export interface JejeupPermalinkData {
     idx: string;
     subject: string;
     video: string;
-    ownerAvatar: string;
+    channelProfileImageUrl: string;
     comment: string;
     review: any;
     title: string;
@@ -112,17 +106,17 @@ export interface JejeupPermalinkData {
   };
   jejeupMetaData: {
     error: string;
-    ogTitle: string;
+    title: string;
     originalTitle: string;
-    ogUrl: string;
-    ogImage: string;
-    ogDescription: string;
+    customUrl: string;
+    thumbnailUrl: string;
+    description: string;
     ogSiteName?: string;
     twitterSite?: string;
     twitterCreator?: string;
-    datePublished?: string;
-    ownerAvatar?: string;
-    ownerName?: string;
+    publishedAt?: string;
+    channelProfileImageUrl?: string;
+    channelTitle?: string;
     pressPublished?: string;
     pressAvatar?: string;
     duration: string;

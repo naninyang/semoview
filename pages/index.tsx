@@ -134,7 +134,7 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
 
   const fetchMetadata = async (currentRetryCount = 0) => {
     try {
-      const jejeupMeta = await fetch(`/api/metadata?url=https://youtu.be/${jejeup.video}`);
+      const jejeupMeta = await fetch(`/api/metadata?url=${jejeup.video}`);
       const jejeupMetaDataResponse = await jejeupMeta.json();
       if (
         Array.isArray(jejeupMetaDataResponse) === false &&
@@ -193,7 +193,7 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
         <>
           {Object.keys(jejeupMetaData).length > 0 ? (
             <>
-              {jejeupMetaData.error === 'Failed to fetch data' || jejeupMetaData.originalTitle === ' - YouTube' ? (
+              {jejeupMetaData.error === 'Video not found or is deleted/private' ? (
                 <div className={`${styles.preview} ${styles['preview-dummy']}`}>
                   <div className={styles.notice}>
                     <p>유튜버가 삭제했거나 비공개 처리한 영상입니다.</p>
@@ -228,17 +228,24 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
                   <div className={`${styles.preview} preview`}>
                     <div className={styles['preview-container']}>
                       <div className={styles.thumbnail}>
-                        <Image src={jejeupMetaData.ogImage} width="1920" height="1080" alt="" unoptimized />
+                        <Image
+                          src={jejeupMetaData.thumbnailUrl}
+                          width="1920"
+                          height="1080"
+                          alt=""
+                          unoptimized
+                          priority
+                        />
                         <em aria-label="재생시간">{formatDuration(jejeupMetaData.duration)}</em>
                       </div>
                       <div className={styles['preview-info']}>
                         <div className={styles.detail}>
                           <div className={`${styles['user-info']}`}>
-                            <strong aria-label="영상제목">{jejeupMetaData.ogTitle}</strong>
+                            <strong aria-label="영상제목">{jejeupMetaData.title}</strong>
                             <div className={styles.user}>
-                              <cite aria-label="유튜브 채널이름">{jejeupMetaData.ownerName}</cite>
-                              <time dateTime={jejeupMetaData.datePublished}>
-                                {formatDate(`${jejeupMetaData.datePublished}`)}
+                              <cite aria-label="유튜브 채널이름">{jejeupMetaData.channelTitle}</cite>
+                              <time dateTime={jejeupMetaData.publishedAt}>
+                                {formatDate(`${jejeupMetaData.publishedAt}`)}
                               </time>
                             </div>
                             {(jejeup.worst || jejeup.embeddingOff) && (
@@ -570,7 +577,7 @@ function Home({
                     ottData.data.map((amusement: AmusementData, index: number) => (
                       <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                         <div className={styles.thumbnail}>
-                          <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                          <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                           <dl>
                             {amusement.animeBroadcast1 !== null && (
                               <div
@@ -819,7 +826,7 @@ function Home({
                     gameData.data.map((amusement: AmusementData, index: number) => (
                       <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                         <div className={styles.thumbnail}>
-                          <Image src={amusement.posterDefault} width="460" height="215" alt="" unoptimized />
+                          <Image src={amusement.posterDefault} width="460" height="215" alt="" unoptimized priority />
                           {amusement.category !== 'game_fan' && (
                             <dl>
                               <div className={styles.game}>
@@ -891,7 +898,7 @@ function Home({
                     healingData.data.map((amusement: AmusementData, index: number) => (
                       <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                         <div className={styles.thumbnail}>
-                          <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                          <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                           <dl>
                             {amusement.animeBroadcast2 !== null && (
                               <div
@@ -1199,7 +1206,7 @@ function Home({
                     horrorGameData.data.map((amusement: AmusementData, index: number) => (
                       <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                         <div className={styles.thumbnail}>
-                          <Image src={amusement.posterDefault} width="460" height="215" alt="" unoptimized />
+                          <Image src={amusement.posterDefault} width="460" height="215" alt="" unoptimized priority />
                           {amusement.category !== 'game_fan' && (
                             <dl>
                               <div className={styles.game}>
@@ -1262,7 +1269,7 @@ function Home({
                     tvnData.data.map((amusement: AmusementData, index: number) => (
                       <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                         <div className={styles.thumbnail}>
-                          <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                          <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                           <dl>
                             {amusement.animeBroadcast2 !== null && (
                               <div
@@ -1520,7 +1527,7 @@ function Home({
                     jtbcData.data.map((amusement: AmusementData, index: number) => (
                       <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                         <div className={styles.thumbnail}>
-                          <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                          <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                           <dl>
                             {amusement.animeBroadcast2 !== null && (
                               <div
@@ -1778,7 +1785,7 @@ function Home({
                     dubbingData.data.map((amusement: AmusementData, index: number) => (
                       <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                         <div className={styles.thumbnail}>
-                          <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                          <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                           <dl>
                             {amusement.animeBroadcast2 !== null && (
                               <div
@@ -2088,7 +2095,7 @@ function Home({
                     bfreeData.data.map((amusement: AmusementData, index: number) => (
                       <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                         <div className={styles.thumbnail}>
-                          <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized />
+                          <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                           <dl>
                             {amusement.animeBroadcast2 !== null && (
                               <div
