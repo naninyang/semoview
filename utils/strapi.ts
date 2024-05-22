@@ -1,4 +1,4 @@
-import { AmusementData, JejeupData, NoticeData } from 'types';
+import { AmusementData, BannerData, JejeupData, NoticeData } from 'types';
 
 export const formatDate = (datetime: string) => {
   const date = new Date(datetime);
@@ -896,6 +896,33 @@ export async function getJejeupAmusementData(page?: number, pageSize?: number, a
     }),
   );
   return { jejeups, pageCount: pageCount };
+}
+
+export async function getBannerData() {
+  const response = await fetch(
+    `${process.env.STRAPI_URL}/api/banner-semoviews?sort[0]=id:desc&pagination[page]=1&pagination[pageSize]=10`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
+      },
+    },
+  );
+  const bannerResponse = await response.json();
+  const bannerData = bannerResponse.data;
+  const banners: BannerData[] = bannerData.map((data: any) => ({
+    id: data.id,
+    link: data.attributes.link,
+    description: data.attributes.description,
+    author: data.attributes.author,
+    title: data.attributes.title,
+    color: data.attributes.color,
+    order: data.attributes.order,
+    isLight: data.attributes.isLight,
+    type: data.attributes.type,
+  }));
+
+  return banners;
 }
 
 export async function getNoticeData() {

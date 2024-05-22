@@ -301,6 +301,18 @@ export interface NoticeData {
   created: string;
 }
 
+export interface BannerData {
+  id: number;
+  link: string;
+  description: string;
+  author: string;
+  title: string;
+  color: string;
+  order: number;
+  isLight: boolean;
+  type: string;
+}
+
 export interface NoticePermalinkData {
   attributes: {
     idx: string;

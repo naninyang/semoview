@@ -1,15 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { AmusementData, Category, Counts, JejeupData, JejeupMetaData } from 'types';
+import Slider from 'react-slick';
+import { useMediaQuery } from 'react-responsive';
+import styled from '@emotion/styled';
+import { AmusementData, BannerData, Category, Counts, JejeupData, JejeupMetaData } from 'types';
 import Seo from '@/components/Seo';
 import Anchor from '@/components/Anchor';
+import { vectors } from '@/components/vectors';
 import { CategoryName } from '@/components/CategoryName';
 import { AnimeName } from '@/components/AnimeName';
 import { RatingsDrama } from '@/components/RatingsDrama';
 import { formatDate } from '@/components/FormatDate';
 import { formatDuration } from '@/components/FormatDuration';
+import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Home.module.sass';
 import {
   Abc,
@@ -84,6 +89,33 @@ import {
   Wowow,
   WowowIcon,
 } from '@/components/Icons';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
+const NextIcon = styled.i({
+  background: `url(${vectors.slide.next}) no-repeat 50% 50%/contain`,
+});
+
+const PauseIcon = styled.i({
+  background: `url(${vectors.slide.pause}) no-repeat 50% 50%/contain`,
+});
+
+const PlayIcon = styled.i({
+  background: `url(${vectors.slide.play}) no-repeat 50% 50%/contain`,
+});
+
+const PrevIcon = styled.i({
+  background: `url(${vectors.slide.prev}) no-repeat 50% 50%/contain`,
+});
+
+export function useMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  const mobile = useMediaQuery({ query: `(max-width: ${rem(575)}` });
+  useEffect(() => {
+    setIsMobile(mobile);
+  }, [mobile]);
+  return isMobile;
+}
 
 export function Amusements({ jejeup }: { jejeup: any }) {
   const items = jejeup.split(',');
@@ -96,6 +128,7 @@ export function Amusements({ jejeup }: { jejeup: any }) {
 }
 
 function Home({
+  bannerData,
   reviewData,
   gameData,
   ottData,
@@ -107,6 +140,7 @@ function Home({
   bfreeData,
   error,
 }: {
+  bannerData: any;
   reviewData: any;
   gameData: any;
   ottData: any;
@@ -119,6 +153,7 @@ function Home({
   error: string;
 }) {
   const timestamp = Date.now();
+  const isMobile = useMobile();
 
   const amazonRatingHandler = () => {
     alert('아마존 자체 심의등급으로 설정된 작품입니다.\n아마존 프라임 비디오에 가입이 되어 있다면 시청 가능합니다.');
@@ -347,6 +382,70 @@ function Home({
     );
   }
 
+  function Background({ color }: { color: string }) {
+    const hexToRgb = (hex: string) => {
+      hex = hex.replace(/^#/, '');
+      let bigint = parseInt(hex, 16);
+      let r = (bigint >> 16) & 255;
+      let g = (bigint >> 8) & 255;
+      let b = bigint & 255;
+
+      return { r, g, b };
+    };
+
+    const rgbColor = hexToRgb(color);
+    return (
+      <div className={styles.semo}>
+        {isMobile ? (
+          <>
+            <div
+              style={{
+                background: `linear-gradient(180deg, rgba(${rgbColor.r}, ${rgbColor.g}, ${rgbColor.b}, 0) 0%, rgba(255, 255, 255, 1) 100%)`,
+              }}
+            />
+            <div style={{ backgroundColor: '#fff' }} />
+          </>
+        ) : (
+          <>
+            <div
+              style={{
+                background: `linear-gradient(180deg, rgba(${rgbColor.r}, ${rgbColor.g}, ${rgbColor.b}, 0) 0%, rgba(${rgbColor.r}, ${rgbColor.g}, ${rgbColor.b}, 0.9) 100%)`,
+              }}
+            />
+            <div style={{ backgroundColor: `#${color}` }} />
+          </>
+        )}
+      </div>
+    );
+  }
+
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const sliderRef = useRef<Slider>(null);
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    centerPadding: '14%',
+    centerMode: isMobile ? false : true,
+    className: 'center',
+    slidesToShow: 1,
+    autoplay: true,
+    autoplaySpeed: 2700,
+    arrows: false,
+    afterChange: (current: number) => setCurrentSlide(current),
+  };
+
+  const toggleAutoplay = () => {
+    if (isPlaying) {
+      sliderRef.current?.slickPause();
+    } else {
+      sliderRef.current?.slickPlay();
+    }
+    setIsPlaying(!isPlaying);
+  };
+
   return (
     <main className={styles.main}>
       <Seo
@@ -365,6 +464,90 @@ function Home({
       {!error && (
         <>
           <div className={styles.content}>
+            {bannerData && (
+              <div className={styles.banners}>
+                <Slider ref={sliderRef} {...settings}>
+                  {Array.isArray(bannerData) &&
+                    bannerData.map((banner: BannerData) => (
+                      <div key={banner.order}>
+                        {isMobile ? (
+                          <Anchor
+                            href={banner.link}
+                            style={{
+                              background: `url(https://cdn.dev1stud.io/semoview/banner/pao-${banner.type}.webp) no-repeat 50% 50%/contain`,
+                            }}
+                          >
+                            <div className={styles.summary} style={{ color: '#000' }}>
+                              <p>{banner.description}</p>
+                              <em>
+                                ({banner.author} ‘{banner.title}’)
+                              </em>
+                            </div>
+                            <Background color={banner.color} />
+                          </Anchor>
+                        ) : (
+                          <Anchor
+                            href={banner.link}
+                            style={{
+                              background: `url(https://cdn.dev1stud.io/semoview/banner/bread-${banner.type}.webp) no-repeat 50% 50%/contain`,
+                            }}
+                          >
+                            <div className={styles.summary} style={{ color: banner.isLight ? '#000' : '#fff' }}>
+                              <p>{banner.description}</p>
+                              <em>
+                                ({banner.author} ‘{banner.title}’)
+                              </em>
+                            </div>
+                            <Background color={banner.color} />
+                          </Anchor>
+                        )}
+                      </div>
+                    ))}
+                </Slider>
+                <button
+                  type="button"
+                  className={`${styles.prev} ${styles.move}`}
+                  onClick={() => sliderRef.current?.slickPrev()}
+                >
+                  <PrevIcon />
+                  <span>이전으로 이동</span>
+                </button>
+                <button
+                  type="button"
+                  className={`${styles.next} ${styles.move}`}
+                  onClick={() => sliderRef.current?.slickNext()}
+                >
+                  <NextIcon />
+                  <span>다음으로 이동</span>
+                </button>
+                <div className={styles.paging}>
+                  <button type="button" className={styles.stat} onClick={toggleAutoplay}>
+                    {isPlaying ? (
+                      <>
+                        <PauseIcon />
+                        <span>일시멈춤</span>
+                      </>
+                    ) : (
+                      <>
+                        <PlayIcon />
+                        <span>재생</span>
+                      </>
+                    )}
+                  </button>
+                  {bannerData.map((_: string, index: number) => (
+                    <button
+                      key={index}
+                      type="button"
+                      className={`${styles.pager} ${currentSlide === index ? styles.active : ''}`}
+                      onClick={() => sliderRef.current?.slickGoTo(index)}
+                    >
+                      <i />
+                      <span>{index + 1}번째</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
             {ottData && (
               <>
                 <div className={styles.headline}>
@@ -2705,6 +2888,7 @@ function Home({
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  let bannerData = null;
   let reviewData = null;
   let gameData = null;
   let ottData = null;
@@ -2717,6 +2901,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let error = null;
 
   try {
+    const banner = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/banners`);
+    if (!banner.ok) {
+      throw new Error('Network response was not ok');
+    }
+    bannerData = await banner.json();
+
     const review = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/jejeups?page=1&main=true}`);
     if (!review.ok) {
       throw new Error('Network response was not ok');
@@ -2778,6 +2968,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
+      bannerData,
       reviewData,
       gameData,
       ottData,

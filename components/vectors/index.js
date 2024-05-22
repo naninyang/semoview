@@ -159,4 +159,10 @@ export const vectors = {
     wavveWhite: require('./bfree/wavveWhite.svg'),
     wavveOrigin: require('./bfree/wavveOrigin.svg'),
   },
+  slide: {
+    next: require('./slide/next.svg'),
+    pause: require('./slide/pause.svg'),
+    play: require('./slide/play.svg'),
+    prev: require('./slide/prev.svg'),
+  },
 };

@@ -50,7 +50,7 @@ export default function Header() {
   };
   return (
     <header
-      className={`${styles.header} ${router.pathname === '/amusement/[amusementId]' || router.pathname === '/open-sources' ? styles.dark : ''}`}
+      className={`${styles.header} ${router.pathname === '/amusement/[amusementId]' || router.pathname === '/open-sources' ? styles.dark : router.pathname === '/' ? styles.main : ''}`}
     >
       <div className={styles.container}>
         {router.pathname === '/' ||
