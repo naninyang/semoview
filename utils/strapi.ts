@@ -70,9 +70,11 @@ export async function getJejeupData(page?: number, pageSize?: number) {
   const jejeups = await Promise.all(
     rowsData.map(async (preview) => {
       const amusementData = await getAmusementData(preview.title);
+      const reviewData = await fetchMetadata(preview.video);
       return {
         ...preview,
         amusementData,
+        reviewData,
       };
     }),
   );

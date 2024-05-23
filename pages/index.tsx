@@ -128,39 +128,7 @@ export function Amusements({ jejeup }: { jejeup: any }) {
 }
 
 export function JejeupMeta({ jejeup }: { jejeup: any }) {
-  const [jejeupMetaData, setJejeupMetaData] = useState<JejeupMetaData | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const maxRetries = 2;
-
-  const fetchMetadata = async (currentRetryCount = 0) => {
-    try {
-      const jejeupMeta = await fetch(`/api/metadata?url=${jejeup.video}`);
-      const jejeupMetaDataResponse = await jejeupMeta.json();
-      if (
-        Array.isArray(jejeupMetaDataResponse) === false &&
-        Object.keys(jejeupMetaDataResponse).length === 0 &&
-        jejeupMetaDataResponse.duration === undefined &&
-        currentRetryCount < maxRetries
-      ) {
-        setTimeout(() => fetchMetadata(currentRetryCount + 1), 5000);
-      } else {
-        setJejeupMetaData(jejeupMetaDataResponse);
-      }
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-
-  const handleRetry = () => {
-    setJejeupMetaData(null);
-    setIsLoading(true);
-    fetchMetadata().finally(() => setIsLoading(false));
-  };
-
-  useEffect(() => {
-    setIsLoading(true);
-    fetchMetadata().finally(() => setIsLoading(false));
-  }, []);
+  const jejeupMetaData = jejeup.reviewData;
 
   const handleReport = async (event: React.MouseEvent<HTMLButtonElement>) => {
     const jejeupVideo = event.currentTarget.getAttribute('data-video');
@@ -189,9 +157,9 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
 
   return (
     <>
-      {!isLoading && jejeupMetaData ? (
+      {jejeupMetaData ? (
         <>
-          {Object.keys(jejeupMetaData).length > 0 ? (
+          {Object.keys(jejeupMetaData).length > 0 && (
             <>
               {jejeupMetaData.error === 'Video not found or is deleted/private' ? (
                 <div className={`${styles.preview} ${styles['preview-dummy']}`}>
@@ -270,36 +238,6 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
                 </Link>
               )}
             </>
-          ) : (
-            <div className={`${styles.preview} ${styles['preview-dummy']}`}>
-              <div className={styles.notice}>
-                <p>알 수 없는 사유로 불러오지 못했습니다.</p>
-                <p>
-                  <button type="button" data-video={jejeup.video} onClick={handleRetry}>
-                    새로고침
-                  </button>
-                  해 주세요.
-                </p>
-              </div>
-              <div className={styles['preview-container']} aria-hidden="true">
-                <div className={styles.thumbnail}>
-                  <div className={`${styles.dummy} ${styles.skeleton}`} />
-                </div>
-                <div className={styles['preview-info']}>
-                  <div className={styles.detail}>
-                    <div className={`${styles['user-info']}`}>
-                      <strong className={styles.skeleton} />
-                      <div className={styles.user}>
-                        <cite>
-                          <i className={styles.skeleton} />
-                        </cite>
-                        <time className={styles.skeleton} />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           )}
         </>
       ) : (
@@ -2401,7 +2339,7 @@ function Home({
                   reviewData.jejeups.map((jejeup: JejeupData) => (
                     <div className={styles.item} key={jejeup.id}>
                       <figure>
-                        <JejeupMeta key={jejeup.idx} jejeup={jejeup} />
+                        <JejeupMeta jejeup={jejeup} />
                         <figcaption>
                           {jejeup.worst && (
                             <dl className={styles.worst}>

@@ -348,43 +348,11 @@ function ADCC({ items }: { items: any }) {
 }
 
 export function JejeupMeta({ jejeupData, jejeupId }: { jejeupData: any; jejeupId: number }) {
-  const [jejeupMetaData, setJejeupMetaData] = useState<JejeupMetaData | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
   const [relations, setRelations] = useState<JejeupData | null>(null);
   const [error, setError] = useState(null);
-  const maxRetries = 7;
-
-  const fetchMetadata = async (currentRetryCount = 0) => {
-    try {
-      const jejeupMeta = await fetch(`/api/metadata?url=${jejeupData.attributes.video}`);
-      const jejeupMetaDataResponse = await jejeupMeta.json();
-      if (
-        Array.isArray(jejeupMetaDataResponse) === false &&
-        Object.keys(jejeupMetaDataResponse).length === 0 &&
-        jejeupMetaDataResponse.duration === undefined &&
-        currentRetryCount < maxRetries
-      ) {
-        setTimeout(() => fetchMetadata(currentRetryCount + 1), 5000);
-      } else {
-        setJejeupMetaData(jejeupMetaDataResponse);
-      }
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-
-  const handleRetry = () => {
-    setJejeupMetaData(null);
-    setIsLoading(true);
-    fetchMetadata().finally(() => setIsLoading(false));
-  };
-
-  useEffect(() => {
-    setIsLoading(true);
-    fetchMetadata().finally(() => setIsLoading(false));
-  }, []);
-
   const [isRelationsLoading, setIsRelationsLoading] = useState(false);
+
+  const jejeupMetaData = jejeupData.reviewData;
 
   const loadRelations = async () => {
     if (jejeupData) {
@@ -440,9 +408,9 @@ export function JejeupMeta({ jejeupData, jejeupId }: { jejeupData: any; jejeupId
 
   return (
     <>
-      {!isLoading && !error && jejeupData && jejeupMetaData ? (
+      {jejeupData && jejeupMetaData ? (
         <>
-          {Object.keys(jejeupMetaData).length > 0 ? (
+          {Object.keys(jejeupMetaData).length > 0 && (
             <>
               {jejeupMetaData.error === 'Video not found or is deleted/private' ? (
                 <div className={`${styles.preview} ${styles.more} ${styles['preview-dummy']}`}>
@@ -456,27 +424,6 @@ export function JejeupMeta({ jejeupData, jejeupId }: { jejeupData: any; jejeupId
                       해 주세요.
                     </h1>
                     <div className={styles.detail}>
-                      <div className={`${styles.avatar} ${styles.skeleton}`} />
-                      <div className={styles.user}>
-                        <cite className={styles.skeleton} />
-                        <time className={styles.skeleton} />
-                      </div>
-                    </div>
-                    <div className={`${styles.learnmore} ${styles.skeleton}`} />
-                  </div>
-                </div>
-              ) : jejeupMetaData.duration === undefined ? (
-                <div className={`${styles.preview} ${styles['preview-dummy']}`}>
-                  <div className={`${styles.dummy} ${styles.skeleton}`} />
-                  <div className={`${styles.youtube} ${styles.more}`}>
-                    <h1>
-                      알 수 없는 사유로 불러오지 못했습니다.{' '}
-                      <button type="button" data-video={jejeupData.attributes.video} onClick={handleRetry}>
-                        새로고침
-                      </button>
-                      해 주세요.
-                    </h1>
-                    <div className={styles.detail} aria-hidden="true">
                       <div className={`${styles.avatar} ${styles.skeleton}`} />
                       <div className={styles.user}>
                         <cite className={styles.skeleton} />
@@ -584,27 +531,6 @@ export function JejeupMeta({ jejeupData, jejeupId }: { jejeupData: any; jejeupId
                 </div>
               )}
             </>
-          ) : (
-            <div className={`${styles.preview} ${styles['preview-dummy']}`}>
-              <div className={`${styles.dummy} ${styles.skeleton}`} />
-              <div className={`${styles.youtube} ${styles.more}`}>
-                <h1>
-                  알 수 없는 사유로 불러오지 못했습니다.{' '}
-                  <button type="button" data-video={jejeupData.video} onClick={handleRetry}>
-                    새로고침
-                  </button>
-                  해 주세요.
-                </h1>
-                <div className={styles.detail} aria-hidden="true">
-                  <div className={`${styles.avatar} ${styles.skeleton}`} />
-                  <div className={styles.user}>
-                    <cite className={styles.skeleton} />
-                    <time className={styles.skeleton} />
-                  </div>
-                </div>
-                <div className={`${styles.learnmore} ${styles.skeleton}`} />
-              </div>
-            </div>
           )}
         </>
       ) : (

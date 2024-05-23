@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getAmusementData, getJejeupData } from '@/utils/strapi';
+import { fetchMetadata, getAmusementData, getJejeupData } from '@/utils/strapi';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const id = req.query.id as string;
@@ -33,6 +33,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         throw new Error('Failed to fetch article data');
       }
       const jejeupResponse = await response.json();
+
       const amusementSource = jejeupResponse.data.attributes.isAmusements
         ? jejeupResponse.data.attributes.amusements
         : jejeupResponse.data.attributes.title;
@@ -42,9 +43,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const amusementMap = amusementTitles.map((title) => getAmusementData(title));
       const amusementData = await Promise.all(amusementMap);
 
+      const reviewData = await fetchMetadata(jejeupResponse.data.attributes.video);
+
       const jejeups = {
         ...jejeupResponse.data,
         amusementData,
+        reviewData,
       };
 
       res.status(200).json(jejeups);
