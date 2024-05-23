@@ -17,18 +17,17 @@
 - TypeScript
 - Emotion
 - SASS
-- Google YouTube iframe API
+- YouTube iframe API
 - PWA
 - Strapi API
 - Node 18
 - vercel deployment
 
-### YouTube Opengraph Scrapping API Server
+### YouTube API Server
 
 - Node 20
-- express
-- jsdom
-- Heroku
+- YouTube Data API v3
+- netlify deployment
 
 ### Backend
 
@@ -46,11 +45,11 @@
 
 ### 발견되거나 알려진 버그
 
-- 속도 이슈
+- NONE
 
 ### TO-DO
 
-- ...
+- 드라마, 애니인 경우 총 몇화인지 집계
 
 ## Supported PWA App. Download
 
