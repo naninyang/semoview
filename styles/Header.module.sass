@@ -55,15 +55,16 @@ header.header
         position: absolute
         left: 0
         width: 100%
-        height: 50%
 
       &::before
+        background-color: rgba($hex-white, .9)
         top: 0
-        background-color: $hex-white
+        bottom: rem(37)
 
       &::after
-        top: 50%
-        background: linear-gradient(to bottom,rgba(255,255,255,1),rgba(255,255,255,0))
+        background: linear-gradient(to bottom,rgba(255,255,255,.9),rgba(255,255,255,0))
+        bottom: 0
+        height: rem(37)
 
     .container
       position: relative
