@@ -1093,21 +1093,23 @@ export default function JejeupDetail({
             )}
             {amusementData.ott !== null && amusementData.ottAddr !== null && (
               <Anchor href={amusementData.ottAddr}>
-                {amusementData.ott === 'amazonOriginal' && 'Prime Video'}
+                {amusementData.ott === 'amazonOriginal' && '프라임 비디오'}
                 {(amusementData.ott === 'appleOriginal' || amusementData.ott === 'appleFilm') && 'Apple TV+'}
                 {(amusementData.ott === 'disneyOriginal' || amusementData.ott === 'disneyStar') && 'Disney+'}
                 {(amusementData.ott === 'netflixOriginal' ||
                   amusementData.ott === 'netflixFilm' ||
                   amusementData.ott === 'netflixAnime' ||
                   amusementData.ott === 'netflixAnimeFilm' ||
-                  amusementData.ott === 'netflixDocumentary') &&
-                  'NETFLIX'}
+                  amusementData.ott === 'netflixDocumentary' ||
+                  amusementData.ott === 'netflixSeries' ||
+                  amusementData.ott === 'netflixPresents') &&
+                  '넷플릭스'}
                 {(amusementData.ott === 'tvingOriginal' ||
                   amusementData.ott === 'tvingOnly' ||
                   amusementData.ott === 'paramount') &&
-                  'TVING'}
-                {(amusementData.ott === 'watchaOriginal' || amusementData.ott === 'watchaExclusive') && 'WATCHA'}
-                {(amusementData.ott === 'wavveOriginal' || amusementData.ott === 'wavveOnly') && 'Wavve'}
+                  '티빙'}
+                {(amusementData.ott === 'watchaOriginal' || amusementData.ott === 'watchaExclusive') && '왓챠'}
+                {(amusementData.ott === 'wavveOriginal' || amusementData.ott === 'wavveOnly') && '웨이브'}
                 에서 시청하기
               </Anchor>
             )}
@@ -1165,6 +1167,12 @@ export default function JejeupDetail({
               <dd>
                 {amusementData.runningTime}분{formatTime(amusementData.runningTime)}
               </dd>
+            </div>
+          )}
+          {amusementData.series && (
+            <div>
+              <dt>에피소드</dt>
+              <dd className="seed">{amusementData.series > 1 ? `${amusementData.series}부작` : '단막극'}</dd>
             </div>
           )}
           {amusementData.supportLang !== null && <ADCC items={amusementData.supportLang} />}

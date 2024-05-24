@@ -1026,6 +1026,9 @@ export async function getAmusementData(amusement: string) {
     comment: amusementData.attributes.comment,
     synopsys: amusementData.attributes.synopsys,
     bfree: amusementData.attributes.bfree,
+    series: amusementData.attributes.series,
+    season: amusementData.attributes.season,
+    franchise: amusementData.attributes.franchise,
   };
 
   return rowsData;
@@ -1102,4 +1105,51 @@ export async function getRelationsData(relations: string, type: string) {
 
     return rowsData;
   }
+}
+
+export async function getSeasonData(season: string) {
+  const response = await fetch(
+    `${process.env.STRAPI_URL}/api/amusement-jejeups/?sort[0]=id:desc&pagination[page]=1&pagination[pageSize]=100&filters[season][$contains]=${season}`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
+      },
+    },
+  );
+  const seasonResponse = await response.json();
+  const seasonData = seasonResponse.data;
+  const rowsData: AmusementData[] = seasonData.map((data: any) => ({
+    idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+    title: data.attributes.title,
+    lang: data.attributes.lang,
+    titleKorean: data.attributes.titleKorean,
+    titleOther: data.attributes.titleOther,
+    etc: data.attributes.etc,
+    release: data.attributes.release,
+    original: data.attributes.original,
+    originalAuthor: data.attributes.originalAuthor,
+    originTitle: data.attributes.originTitle,
+    rating: data.attributes.rating,
+    ratingCustom: data.attributes.ratingCustom,
+    country: data.attributes.country,
+    category: data.attributes.category,
+    isMobile: data.attributes.isMobile,
+    genre: data.attributes.genre,
+    anime: data.attributes.anime,
+    animeBroadcast1: data.attributes.animeBroadcast1,
+    animeBroadcast2: data.attributes.animeBroadcast2,
+    ott: data.attributes.ott,
+    ottAddr: data.attributes.ottAddr,
+    broadcast: data.attributes.broadcast,
+    publisher: data.attributes.publisher,
+    creator: data.attributes.creator,
+    cast: data.attributes.cast,
+    posterDefault: data.attributes.posterDefault,
+    posterOther: data.attributes.posterOther,
+    season: data.attributes.season,
+    order: data.attributes.order,
+  }));
+
+  return rowsData;
 }

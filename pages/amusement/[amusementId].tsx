@@ -383,10 +383,13 @@ export default function Amusement({
   const [isJejeupsError, setIsJejeupsError] = useState<null | string>(null);
   const [isActive, setIsActive] = useState(true);
   const [relations, setRelations] = useState<AmusementData | null>(null);
+  const [season, setSeason] = useState<AmusementData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedRelation, setSelectedRelation] = useState<string>('');
   const [currentRelation, setCurrentRelation] = useState<string>('');
+  const [selectedSeason, setSelectedSeason] = useState<string>('');
+  const [currentSeason, setCurrentSeason] = useState<string>('');
   const [selectedAmusementId, setSelectedAmusementId] = useState<string | null>(null);
 
   const handleButtonClick = (id: string) => {
@@ -473,11 +476,143 @@ export default function Amusement({
           setIsJejeupsLoading(false);
         }
       }
+      if (amusementData.attributes.season) {
+        setIsLoading(true);
+        setError(null);
+        setIsJejeupsLoading(true);
+        setIsJejeupsError(null);
+        try {
+          const response = await fetch(`/api/season?season=${amusementData.attributes.season}&type=amusement`);
+          const seasonResponse = await response.json();
+          setRelations(seasonResponse);
+          const renewResponse =
+            amusementData && (await fetch(`/api/renewAmusement?page=${currentPage}&amusementId=${amusementData.id}`));
+          const renewData = renewResponse && (await renewResponse.json());
+          const renewValue = renewData.renew;
+          const cachedData = amusementData && localStorage.getItem(`amusementData${currentPage}${amusementData.id}`);
+          let dataToUse;
+
+          if (cachedData) {
+            const parsedData = JSON.parse(cachedData);
+            if (parsedData.jejeups.length > 0 && parsedData.jejeups[0].createdAt) {
+              if (parsedData.jejeups[0].createdAt === renewValue) {
+                dataToUse = parsedData;
+              }
+            }
+          }
+
+          if (!dataToUse && amusementData) {
+            const response = await fetch(`/api/jejeupAmusement?page=${currentPage}&amusementId=${amusementData.id}`);
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            const newData = await response.json();
+            localStorage.setItem(`amusementData${currentPage}${amusementData.id}`, JSON.stringify(newData));
+            dataToUse = newData;
+          }
+          setData(dataToUse);
+        } catch (err) {
+          console.error(err);
+        } finally {
+          setIsLoading(false);
+          setIsJejeupsLoading(false);
+        }
+      }
+    }
+  };
+
+  const loadSeason = async () => {
+    if (amusementData) {
+      if (amusementData.attributes.relations) {
+        setIsLoading(true);
+        setError(null);
+        setIsJejeupsLoading(true);
+        setIsJejeupsError(null);
+        try {
+          const response = await fetch(`/api/season?season=${amusementData.attributes.season}`);
+          const seasonResponse = await response.json();
+          setSeason(seasonResponse);
+          const renewResponse =
+            amusementData && (await fetch(`/api/renewAmusement?page=${currentPage}&amusementId=${amusementData.id}`));
+          const renewData = renewResponse && (await renewResponse.json());
+          const renewValue = renewData.renew;
+          const cachedData = amusementData && localStorage.getItem(`amusementData${currentPage}${amusementData.id}`);
+          let dataToUse;
+
+          if (cachedData) {
+            const parsedData = JSON.parse(cachedData);
+            if (parsedData.jejeups.length > 0 && parsedData.jejeups[0].createdAt) {
+              if (parsedData.jejeups[0].createdAt === renewValue) {
+                dataToUse = parsedData;
+              }
+            }
+          }
+
+          if (!dataToUse && amusementData) {
+            const response = await fetch(`/api/jejeupAmusement?page=${currentPage}&amusementId=${amusementData.id}`);
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            const newData = await response.json();
+            localStorage.setItem(`amusementData${currentPage}${amusementData.id}`, JSON.stringify(newData));
+            dataToUse = newData;
+          }
+          setData(dataToUse);
+        } catch (err) {
+          console.error(err);
+        } finally {
+          setIsLoading(false);
+          setIsJejeupsLoading(false);
+        }
+      }
+      if (amusementData.attributes.season) {
+        setIsLoading(true);
+        setError(null);
+        setIsJejeupsLoading(true);
+        setIsJejeupsError(null);
+        try {
+          const response = await fetch(`/api/season?season=${amusementData.attributes.season}&type=amusement`);
+          const seasonResponse = await response.json();
+          setSeason(seasonResponse);
+          const renewResponse =
+            amusementData && (await fetch(`/api/renewAmusement?page=${currentPage}&amusementId=${amusementData.id}`));
+          const renewData = renewResponse && (await renewResponse.json());
+          const renewValue = renewData.renew;
+          const cachedData = amusementData && localStorage.getItem(`amusementData${currentPage}${amusementData.id}`);
+          let dataToUse;
+
+          if (cachedData) {
+            const parsedData = JSON.parse(cachedData);
+            if (parsedData.jejeups.length > 0 && parsedData.jejeups[0].createdAt) {
+              if (parsedData.jejeups[0].createdAt === renewValue) {
+                dataToUse = parsedData;
+              }
+            }
+          }
+
+          if (!dataToUse && amusementData) {
+            const response = await fetch(`/api/jejeupAmusement?page=${currentPage}&amusementId=${amusementData.id}`);
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            const newData = await response.json();
+            localStorage.setItem(`amusementData${currentPage}${amusementData.id}`, JSON.stringify(newData));
+            dataToUse = newData;
+          }
+          setData(dataToUse);
+        } catch (err) {
+          console.error(err);
+        } finally {
+          setIsLoading(false);
+          setIsJejeupsLoading(false);
+        }
+      }
     }
   };
 
   useEffect(() => {
     loadRelations();
+    loadSeason();
   }, [amusementData]);
 
   const previousPageHandler = () => {
@@ -600,7 +735,13 @@ export default function Amusement({
         setSelectedRelation(`/amusement/${defaultRelation.idx}`);
       }
     }
-  }, [relations, amusementId]);
+    if (Array.isArray(season) && season.length > 0) {
+      const defaultSeason = season.find((season) => season.idx !== amusementId);
+      if (defaultSeason) {
+        setSelectedSeason(`/amusement/${defaultSeason.idx}`);
+      }
+    }
+  }, [relations, season, amusementId]);
 
   if (!amusementData) {
     if (timeoutReached) {
@@ -772,6 +913,82 @@ export default function Amusement({
     }
   }
 
+  const handleSeasonChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedIndex = event.target.selectedIndex;
+    const selectedOption = event.target.options[selectedIndex];
+    const displayText = selectedOption.text;
+    setSelectedSeason(event.target.value);
+    setCurrentSeason(displayText);
+  };
+
+  const handleSeasonSubmit = () => {
+    if (!currentSeason || currentSeason === '') {
+      alert('작품을 선택해 주세요');
+    } else {
+      router.push({ pathname: selectedSeason });
+      setCurrentSeason('');
+    }
+  };
+
+  function SeasonSelect() {
+    if (
+      Array.isArray(season) &&
+      season.length > 1 &&
+      amusementData &&
+      amusementData.attributes.season !== null &&
+      !isLoading &&
+      !error
+    ) {
+      const longCheck = season.reduce((longest, current) => {
+        const currentTitle = current.titleKorean || current.title;
+        return currentTitle.length > longest.length ? currentTitle : longest;
+      }, '');
+      return (
+        <div className={styles.relation}>
+          <dt>
+            {amusementData.attributes.category === 'drama' ||
+            amusementData.attributes.category === 'ott_drama' ||
+            amusementData.attributes.category === 'anime' ||
+            amusementData.attributes.category === 'ott_anime'
+              ? '시즌 선택'
+              : '시리즈 선택'}
+          </dt>
+          <dd>
+            <div>
+              <select defaultValue={`${router.asPath}`} onChange={handleSeasonChange}>
+                {[...season]
+                  .sort((a, b) => a.order - b.order)
+                  .map((relation) => (
+                    <option key={relation.idx} value={`/amusement/${relation.idx}`}>
+                      {relation.titleKorean ? relation.titleKorean : relation.title}
+                    </option>
+                  ))}
+              </select>
+              <span aria-hidden="true">
+                {currentSeason === '' ? (
+                  <>
+                    {amusementData.attributes.titleKorean ? (
+                      <span>{amusementData.attributes.titleKorean}</span>
+                    ) : (
+                      <span>{amusementData.attributes.title}</span>
+                    )}
+                  </>
+                ) : (
+                  <span>{currentSeason}</span>
+                )}
+                <em>{longCheck}</em>
+                <DownIcon />
+              </span>
+            </div>
+            <button type="button" onClick={handleSeasonSubmit}>
+              이동
+            </button>
+          </dd>
+        </div>
+      );
+    }
+  }
+
   const handleRequest = async (event: React.MouseEvent<HTMLButtonElement>) => {
     const jejeupAmusement = event.currentTarget.getAttribute('data-video');
 
@@ -816,7 +1033,7 @@ export default function Amusement({
                     {service.service === 'Amazon' && (
                       <>
                         <AmazonWhite />
-                        <span>프라임비디오</span>
+                        <span>프라임 비디오</span>
                       </>
                     )}
                     {service.service === 'Apple' && (
@@ -1159,7 +1376,7 @@ export default function Amusement({
                   <dt>OTT에서 보기</dt>
                   <dd>
                     <Anchor href={amusementData.attributes.ottAddr}>
-                      {amusementData.attributes.ott === 'amazonOriginal' && 'Prime Video'}
+                      {amusementData.attributes.ott === 'amazonOriginal' && '프라임 비디오'}
                       {(amusementData.attributes.ott === 'appleOriginal' ||
                         amusementData.attributes.ott === 'appleFilm') &&
                         'Apple TV+'}
@@ -1173,17 +1390,17 @@ export default function Amusement({
                         amusementData.attributes.ott === 'netflixAnime' ||
                         amusementData.attributes.ott === 'netflixAnimeFilm' ||
                         amusementData.attributes.ott === 'netflixDocumentary') &&
-                        'NETFLIX'}
+                        '넷플릭스'}
                       {(amusementData.attributes.ott === 'tvingOriginal' ||
                         amusementData.attributes.ott === 'tvingOnly' ||
                         amusementData.attributes.ott === 'paramount') &&
-                        'TVING'}
+                        '티빙'}
                       {(amusementData.attributes.ott === 'watchaOriginal' ||
                         amusementData.attributes.ott === 'watchaExclusive') &&
-                        'WATCHA'}
+                        '왓챠'}
                       {(amusementData.attributes.ott === 'wavveOriginal' ||
                         amusementData.attributes.ott === 'wavveOnly') &&
-                        'Wavve'}
+                        '웨이브'}
                       에서 시청하기
                     </Anchor>
                   </dd>
@@ -1218,6 +1435,7 @@ export default function Amusement({
                 </div>
               )}
               <RelationSelect />
+              <SeasonSelect />
             </dl>
             <button onClick={copyToClipboard}>
               <ClipboardIconLight /> <span>URL 복사</span>
@@ -1348,7 +1566,7 @@ export default function Amusement({
                               {amusementData.attributes.animeBroadcast2 === 'animax' && (
                                 <>
                                   {amusementData.attributes.animeBroadcast1 !== null && '|'}
-                                  <AnimaxWhite /> <span>애니맥스</span> 방영{' '}
+                                  <AnimaxWhite /> <span>애니맥스 코리아</span> 방영{' '}
                                 </>
                               )}
                             </>
@@ -1406,6 +1624,12 @@ export default function Amusement({
                   <dd>
                     {amusementData.attributes.runningTime}분{formatTime(amusementData.attributes.runningTime)}
                   </dd>
+                </div>
+              )}
+              {amusementData.attributes.series && (
+                <div className={styles.country}>
+                  <dt>에피소드</dt>
+                  <dd>{amusementData.attributes.series > 1 ? `${amusementData.attributes.series}부작` : '단막극'}</dd>
                 </div>
               )}
               {amusementData.attributes.country !== '?' && (
@@ -1593,6 +1817,16 @@ export default function Amusement({
                 <dd className="seed">{truncateString(amusementData.attributes.publisher, 72)}</dd>
               </div>
             )}
+            {amusementData.attributes.director && (
+              <div>
+                <dt>
+                  {amusementData.attributes.category === 'drama' || amusementData.attributes.category === 'ott_drama'
+                    ? '연출'
+                    : '감독'}
+                </dt>
+                <dd className="seed">{truncateString(amusementData.attributes.director, 72)}</dd>
+              </div>
+            )}
             {amusementData.attributes.creator !== '?' && (
               <div>
                 <dt>
@@ -1601,12 +1835,6 @@ export default function Amusement({
                     : '주요 제작자'}
                 </dt>
                 <dd className="seed">{truncateString(amusementData.attributes.creator, 72)}</dd>
-              </div>
-            )}
-            {amusementData.attributes.director && (
-              <div>
-                <dt>감독/연출</dt>
-                <dd className="seed">{truncateString(amusementData.attributes.director, 72)}</dd>
               </div>
             )}
             {amusementData.attributes.cast !== '?' && (

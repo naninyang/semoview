@@ -172,6 +172,9 @@ export interface AmusementData {
   comment: string;
   synopsys: string;
   bfree: any;
+  series: number;
+  season: string;
+  franchise: string;
 }
 
 export interface AmusementPermalinkData {
@@ -221,6 +224,9 @@ export interface AmusementPermalinkData {
     idx: string;
     order: string;
     bfree: any;
+    series: number;
+    season: string;
+    franchise: string;
   };
 }
 

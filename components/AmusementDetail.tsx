@@ -318,6 +318,12 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                           </dd>
                         </div>
                       )}
+                      {amusement.series && (
+                        <div className={styles.country}>
+                          <dt>에피소드</dt>
+                          <dd className="seed">{amusement.series > 1 ? `${amusement.series}부작` : '단막극'}</dd>
+                        </div>
+                      )}
                       {amusement.country !== '?' && (
                         <div className={styles.country}>
                           <dt>제작국가</dt>
