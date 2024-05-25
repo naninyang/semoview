@@ -162,7 +162,7 @@ function Amusement({
     }
   };
 
-  const amuseTitles = pageTitle ? pageTitle : literatureData.attributes.subject;
+  const amuseTitles = pageTitle ? pageTitle.replace(/\n/g, ' ') : literatureData.attributes.subject;
   const title = pageTitle ? pageTitle.replace(/\n/g, '<br />') : literatureData.attributes.subject;
   const description = pageTitle
     ? '원하는 카테고리/태그/OTT & 방송국을 선택해 리뷰영상을 즐기세요!'
