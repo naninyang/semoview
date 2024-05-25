@@ -846,6 +846,51 @@ export async function getBarrierFreeData(page?: number, pageSize?: number, bfree
   }
 }
 
+export async function getLiteratureData(page?: number, pageSize?: number, amuseId?: number, type?: string) {
+  const response = await fetch(
+    `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[${type}][$eq]=${amuseId}`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
+      },
+    },
+  );
+  const platformResponse = await response.json();
+  const platformResponseData = platformResponse.data;
+  const data: AmusementData = platformResponseData.map((data: any) => ({
+    id: `${data.id}`,
+    idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+    title: data.attributes.title,
+    lang: data.attributes.lang,
+    titleKorean: data.attributes.titleKorean,
+    titleOther: data.attributes.titleOther,
+    etc: data.attributes.etc,
+    release: data.attributes.release,
+    original: data.attributes.original,
+    originalAuthor: data.attributes.originalAuthor,
+    originTitle: data.attributes.originTitle,
+    rating: data.attributes.rating,
+    country: data.attributes.country,
+    category: data.attributes.category,
+    isMobile: data.attributes.isMobile,
+    genre: data.attributes.genre,
+    anime: data.attributes.anime,
+    animeBroadcast1: data.attributes.animeBroadcast1,
+    animeBroadcast2: data.attributes.animeBroadcast2,
+    ott: data.attributes.ott,
+    broadcast: data.attributes.broadcast,
+    publisher: data.attributes.publisher,
+    creator: data.attributes.creator,
+    cast: data.attributes.cast,
+    posterDefault: data.attributes.posterDefault,
+    posterOther: data.attributes.posterOther,
+  }));
+  const pageCount = platformResponse.meta.pagination.pageCount;
+  const total = platformResponse.meta.pagination.total;
+  return { data, pageCount: pageCount, total: total };
+}
+
 export async function getRenewAmusement(page?: number, pageSize?: number, amusementId?: string) {
   const response = await fetch(
     `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[title][$eq]=${amusementId}`,
@@ -1029,6 +1074,7 @@ export async function getAmusementData(amusement: string) {
     series: amusementData.attributes.series,
     season: amusementData.attributes.season,
     franchise: amusementData.attributes.franchise,
+    relName: amusementData.attributes.relName,
   };
 
   return rowsData;
@@ -1149,6 +1195,7 @@ export async function getSeasonData(season: string) {
     posterOther: data.attributes.posterOther,
     season: data.attributes.season,
     order: data.attributes.order,
+    relName: data.attributes.relName,
   }));
 
   return rowsData;

@@ -10,6 +10,7 @@ export function Pagination({
   hanguk,
   subdub,
   bfree,
+  literature,
   currentPage,
   pageCount,
 }: {
@@ -20,6 +21,7 @@ export function Pagination({
   hanguk?: string;
   subdub?: string;
   bfree?: string;
+  literature?: string;
   currentPage: number;
   pageCount: number;
 }) {
@@ -128,9 +130,20 @@ export function Pagination({
                       <span>이전</span>
                     </Anchor>
                   )}
+                  {literature && (
+                    <Anchor href={`/amusement?bfree=${literature}&page=${prevGroupPage}`}>
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M5 2.46484L1.46484 6L5 9.53516L5.75 8.78516L3.46484 6.5H10.5V5.5H3.46484L5.75 3.21484L5 2.46484Z"
+                          fill="black"
+                        />
+                      </svg>
+                      <span>이전</span>
+                    </Anchor>
+                  )}
                 </>
               ) : (
-                <Anchor href={`/reviews?page=${prevGroupPage}`}>
+                <Anchor href={`/literature?page=${prevGroupPage}`}>
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M5 2.46484L1.46484 6L5 9.53516L5.75 8.78516L3.46484 6.5H10.5V5.5H3.46484L5.75 3.21484L5 2.46484Z"
@@ -174,6 +187,9 @@ export function Pagination({
                       )}
                       {!category && hanguk && (
                         <Anchor href={`/amusement?hanguk=${hanguk}&page=${pageNumber}`}>{pageNumber}</Anchor>
+                      )}
+                      {literature && (
+                        <Anchor href={`/amusement?literature=${literature}&page=${pageNumber}`}>{pageNumber}</Anchor>
                       )}
                     </>
                   ) : (
@@ -266,6 +282,17 @@ export function Pagination({
                   )}
                   {!category && hanguk && (
                     <Anchor href={`/amusement?hanguk=${hanguk}&page=${nextGroupPage}`}>
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M7 2.46484L6.25 3.21484L8.53516 5.5H1.5V6.5H8.53516L6.25 8.78516L7 9.53516L10.5352 6L7 2.46484Z"
+                          fill="black"
+                        />
+                      </svg>
+                      <span>다음</span>
+                    </Anchor>
+                  )}
+                  {literature && (
+                    <Anchor href={`/amusement?literature=${literature}&page=${nextGroupPage}`}>
                       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                           d="M7 2.46484L6.25 3.21484L8.53516 5.5H1.5V6.5H8.53516L6.25 8.78516L7 9.53516L10.5352 6L7 2.46484Z"

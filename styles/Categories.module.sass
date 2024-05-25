@@ -185,6 +185,14 @@
       align-items: center
       padding: rem(52) calc(env(safe-area-inset-right) + rem(12)) rem(17) calc(env(safe-area-inset-left) + rem(12))
 
+      &.without-select
+        flex-direction: column
+        align-items: flex-start
+        gap: rem(12)
+
+        p
+          color: $hex-light
+
       h1, h2
         font-size: rem(20)
         font-weight: 800
@@ -419,7 +427,8 @@
           white-space: normal
           word-break: keep-all
           word-break: normal
-          line-height: 1.4375
+          line-height: 1.25
+          letter-spacing: -.07em
           font-weight: normal
           transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0s
 

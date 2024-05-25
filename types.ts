@@ -175,6 +175,7 @@ export interface AmusementData {
   series: number;
   season: string;
   franchise: string;
+  relName: string;
 }
 
 export interface AmusementPermalinkData {
@@ -227,6 +228,7 @@ export interface AmusementPermalinkData {
     series: number;
     season: string;
     franchise: string;
+    relName: string;
   };
 }
 
