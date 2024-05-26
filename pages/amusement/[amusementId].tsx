@@ -1246,35 +1246,38 @@ export default function Amusement({
                 >
                   <dt>OTT에서 보기</dt>
                   <dd>
-                    <Anchor href={amusementData.attributes.ottAddr}>
-                      {amusementData.attributes.ott === 'amazonOriginal' && '프라임 비디오'}
-                      {(amusementData.attributes.ott === 'appleOriginal' ||
-                        amusementData.attributes.ott === 'appleFilm') &&
-                        'Apple TV+'}
-                      {(amusementData.attributes.ott === 'disneyOriginal' ||
-                        amusementData.attributes.ott === 'disneyStar') &&
-                        'Disney+'}
-                      {(amusementData.attributes.ott === 'netflixSeries' ||
-                        amusementData.attributes.ott === 'netflixPresents' ||
-                        amusementData.attributes.ott === 'netflixOriginal' ||
-                        amusementData.attributes.ott === 'netflixFilm' ||
-                        amusementData.attributes.ott === 'netflixAnime' ||
-                        amusementData.attributes.ott === 'netflixAnimeFilm' ||
-                        amusementData.attributes.ott === 'netflixDocumentary') &&
-                        '넷플릭스'}
-                      {(amusementData.attributes.ott === 'tvingOriginal' ||
-                        amusementData.attributes.ott === 'tvingOnly' ||
-                        amusementData.attributes.ott === 'paramount') &&
-                        '티빙'}
-                      {(amusementData.attributes.ott === 'watchaOriginal' ||
-                        amusementData.attributes.ott === 'watchaExclusive') &&
-                        '왓챠'}
-                      {(amusementData.attributes.ott === 'wavveOriginal' ||
-                        amusementData.attributes.ott === 'wavveOnly') &&
-                        '웨이브'}
-                      에서 시청하기
-                      <ExternalIcon />
-                    </Anchor>
+                    {amusementData.attributes.ott === 'paramount' ? (
+                      <strong className={styles.out}>티빙 판권 종료</strong>
+                    ) : (
+                      <Anchor href={amusementData.attributes.ottAddr}>
+                        {amusementData.attributes.ott === 'amazonOriginal' && '프라임 비디오'}
+                        {(amusementData.attributes.ott === 'appleOriginal' ||
+                          amusementData.attributes.ott === 'appleFilm') &&
+                          'Apple TV+'}
+                        {(amusementData.attributes.ott === 'disneyOriginal' ||
+                          amusementData.attributes.ott === 'disneyStar') &&
+                          'Disney+'}
+                        {(amusementData.attributes.ott === 'netflixSeries' ||
+                          amusementData.attributes.ott === 'netflixPresents' ||
+                          amusementData.attributes.ott === 'netflixOriginal' ||
+                          amusementData.attributes.ott === 'netflixFilm' ||
+                          amusementData.attributes.ott === 'netflixAnime' ||
+                          amusementData.attributes.ott === 'netflixAnimeFilm' ||
+                          amusementData.attributes.ott === 'netflixDocumentary') &&
+                          '넷플릭스'}
+                        {(amusementData.attributes.ott === 'tvingOriginal' ||
+                          amusementData.attributes.ott === 'tvingOnly') &&
+                          '티빙'}
+                        {(amusementData.attributes.ott === 'watchaOriginal' ||
+                          amusementData.attributes.ott === 'watchaExclusive') &&
+                          '왓챠'}
+                        {(amusementData.attributes.ott === 'wavveOriginal' ||
+                          amusementData.attributes.ott === 'wavveOnly') &&
+                          '웨이브'}
+                        에서 시청하기
+                        <ExternalIcon />
+                      </Anchor>
+                    )}
                   </dd>
                 </div>
               )}

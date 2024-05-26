@@ -317,12 +317,11 @@
             em
               font-style: normal
 
-            a
+            strong.out, a
               display: inline-flex
               justify-content: center
               align-items: center
               gap: rem(12)
-              background-color: $hex-azalea
               width: 100%
               border: 0
               border-radius: rem(3)
@@ -330,6 +329,16 @@
               color: $hex-white
               font-size: rem(20)
               font-weight: 800
+
+              +mq(maxExtraSmall)
+                font-size: rem(16)
+
+            strong.out
+              background-color: $hex-accent
+              cursor: not-allowed
+
+            a
+              background-color: $hex-azalea
 
               +mq(maxExtraSmall)
                 font-size: rem(16)
