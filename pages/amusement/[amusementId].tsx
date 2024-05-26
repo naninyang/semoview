@@ -1053,75 +1053,76 @@ export default function Amusement({
           <div className={styles.dummy} />
         </div>
         <div className={styles.info}>
-          {logoData !== null && !isMobile ? (
+          {logoData !== null && !isMobile && (
             <Image src={logoData} width="100" height="100" unoptimized priority alt="" />
+          )}
+          {amusementData.attributes.titleKorean !== null ? (
+            amusementData.attributes.titleKorean.length >= 18 ? (
+              <h1 className={`${styles.long} ${isSafari ? 'April16thPromise' : 'April16thLife'}`}>
+                {amusementData.attributes.titleKorean}
+              </h1>
+            ) : (
+              <h1 className={`${isSafari ? 'April16thPromise' : 'April16thLife'}`}>
+                {amusementData.attributes.titleKorean}
+              </h1>
+            )
+          ) : amusementData.attributes.title.length >= 18 ? (
+            <h1 className={`${styles.long} ${isSafari ? 'April16thPromise' : 'April16thLife'}`}>
+              {amusementData.attributes.title}
+            </h1>
           ) : (
-            <>
-              {amusementData.attributes.titleKorean !== null ? (
-                amusementData.attributes.titleKorean.length >= 18 ? (
-                  <h1 className={`${styles.long} ${isSafari ? 'April16thPromise' : 'April16thLife'}`}>
-                    {amusementData.attributes.titleKorean}
-                  </h1>
-                ) : (
-                  <h1 className={`${isSafari ? 'April16thPromise' : 'April16thLife'}`}>
-                    {amusementData.attributes.titleKorean}
-                  </h1>
-                )
-              ) : amusementData.attributes.title.length >= 18 ? (
-                <h1 className={`${styles.long} ${isSafari ? 'April16thPromise' : 'April16thLife'}`}>
-                  {amusementData.attributes.title}
-                </h1>
-              ) : (
-                <h1 className={`${isSafari ? 'April16thPromise' : 'April16thLife'}`}>
-                  {amusementData.attributes.category === 'game_fan'
-                    ? `'${amusementData.attributes.title}' 팬 게임 콜렉션`
-                    : amusementData.attributes.title}
-                </h1>
-              )}
-            </>
+            <h1 className={`${isSafari ? 'April16thPromise' : 'April16thLife'}`}>
+              {amusementData.attributes.category === 'game_fan'
+                ? `'${amusementData.attributes.title}' 팬 게임 콜렉션`
+                : amusementData.attributes.title}
+            </h1>
           )}
           <dl className={styles.title}>
-            {amusementData.attributes.titleKorean !== null && (
-              <div>
-                <dt>원제</dt>
-                <dd>
-                  {amusementData.attributes.lang === 'chineseBeonche' && (
-                    <span className="seed" lang="zh-Hant">
-                      {amusementData.attributes.title}
-                    </span>
-                  )}
-                  {amusementData.attributes.lang === 'chineseGanche' && (
-                    <span className="seed" lang="zh-Hans">
-                      {amusementData.attributes.title}
-                    </span>
-                  )}
-                  {amusementData.attributes.lang === 'europe' && (
-                    <span className="seed" lang="en">
-                      {amusementData.attributes.title}
-                    </span>
-                  )}
-                  {amusementData.attributes.lang === 'english' && (
-                    <span className="seed" lang="en-US">
-                      {amusementData.attributes.title}
-                    </span>
-                  )}
-                  {amusementData.attributes.lang === 'japanese' && (
-                    <span className="seed" lang="ja">
-                      {amusementData.attributes.title}
-                    </span>
-                  )}
-                  {amusementData.attributes.lang === 'thai' && (
-                    <span className="seed" lang="th">
-                      {amusementData.attributes.title}
-                    </span>
-                  )}
-                  {amusementData.attributes.lang === null && (
-                    <span className="seed" lang="ko">
-                      {amusementData.attributes.title}
-                    </span>
-                  )}
-                </dd>
-              </div>
+            {(logoData === null || isMobile) && (
+              <>
+                {amusementData.attributes.titleKorean !== null && (
+                  <div>
+                    <dt>원제</dt>
+                    <dd>
+                      {amusementData.attributes.lang === 'chineseBeonche' && (
+                        <span className="seed" lang="zh-Hant">
+                          {amusementData.attributes.title}
+                        </span>
+                      )}
+                      {amusementData.attributes.lang === 'chineseGanche' && (
+                        <span className="seed" lang="zh-Hans">
+                          {amusementData.attributes.title}
+                        </span>
+                      )}
+                      {amusementData.attributes.lang === 'europe' && (
+                        <span className="seed" lang="en">
+                          {amusementData.attributes.title}
+                        </span>
+                      )}
+                      {amusementData.attributes.lang === 'english' && (
+                        <span className="seed" lang="en-US">
+                          {amusementData.attributes.title}
+                        </span>
+                      )}
+                      {amusementData.attributes.lang === 'japanese' && (
+                        <span className="seed" lang="ja">
+                          {amusementData.attributes.title}
+                        </span>
+                      )}
+                      {amusementData.attributes.lang === 'thai' && (
+                        <span className="seed" lang="th">
+                          {amusementData.attributes.title}
+                        </span>
+                      )}
+                      {amusementData.attributes.lang === null && (
+                        <span className="seed" lang="ko">
+                          {amusementData.attributes.title}
+                        </span>
+                      )}
+                    </dd>
+                  </div>
+                )}
+              </>
             )}
             {amusementData.attributes.etc && (
               <div className={styles.accent}>
