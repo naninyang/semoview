@@ -3281,7 +3281,7 @@ function PlatformTitle(platform: keyof typeof PlatformTitle): string {
     tving: '티빙\n오리지널 리뷰',
     watcha: '왓챠\n오리지널 리뷰',
     wavve: '웨이브\n오리지널 리뷰',
-    paramount: '티빙에서 볼 수 있는\n파라마운트+ 오리지널 리뷰',
+    paramount: '파라마운트+\n오리지널 리뷰',
     tokyomx: '도쿄MX\n東京MX\n방영 애니메이션',
     tvtokyo: '테레토\nテレ東\n방영 애니메이션',
     fujitv: '후지테레비\nフジテレビ\n방영 애니메이션',
