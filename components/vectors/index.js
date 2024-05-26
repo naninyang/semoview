@@ -14,6 +14,7 @@ export const vectors = {
   share: require('./share.svg'),
   share2: require('./share2.svg'),
   more: require('./more.svg'),
+  external: require('./external.svg'),
   up: require('./up.svg'),
   down: require('./down.svg'),
   warning: require('./warning.svg'),

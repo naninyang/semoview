@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 import { isSafari } from 'react-device-detect';
+import styled from '@emotion/styled';
 import { AmusementData, AmusementPermalinkData, Category, JejeupData, JejeupMetaData } from 'types';
 import { formatDateDetail } from '@/utils/strapi';
 import Seo, { originTitle } from '@/components/Seo';
@@ -21,6 +22,7 @@ import Related from '@/components/Related';
 import YouTubeController from '@/components/YouTubeController';
 import AmusementDetail from '@/components/AmusementDetail';
 import { formatTime } from '@/components/FormatTime';
+import { vectors } from '@/components/vectors';
 import header from '@/styles/Header.module.sass';
 import footer from '@/styles/Footer.module.sass';
 import styles from '@/styles/Amusement.module.sass';
@@ -81,6 +83,14 @@ import {
   WavveWhite,
   WowowWhite,
 } from '@/components/Icons';
+
+const MoreIcon = styled.i({
+  background: `url(${vectors.more}) no-repeat 50% 50%/contain`,
+});
+
+const ExternalIcon = styled.i({
+  background: `url(${vectors.external}) no-repeat 50% 50%/contain`,
+});
 
 export function truncateString(str: string, num: number) {
   if (str.length > num) {
@@ -1241,6 +1251,7 @@ export default function Amusement({
                         amusementData.attributes.ott === 'wavveOnly') &&
                         '웨이브'}
                       에서 시청하기
+                      <ExternalIcon />
                     </Anchor>
                   </dd>
                 </div>
@@ -1257,26 +1268,33 @@ export default function Amusement({
                           ? amusementData.attributes.titleKorean
                           : amusementData.attributes.title}
                         &apos; 보러가기
+                        <ExternalIcon />
                       </Anchor>
                     </dd>
                   </div>
                 )}
               {amusementData.attributes.relations && (
-                <div className={`${styles.link} ${amusementData.attributes.season ? styles.grow : ''}`}>
+                <div
+                  className={`${styles.link} ${styles.internal} ${amusementData.attributes.season ? styles.grow : ''}`}
+                >
                   <dt>관련 작품 보기</dt>
                   <dd>
                     <Anchor href={`/amusement?literature=${amusementData.attributes.relations}&page=1`}>
                       관련 {amusementData.attributes.category === 'game' ? '게임' : '작품'} 목록으로 이동
+                      <MoreIcon />
                     </Anchor>
                   </dd>
                 </div>
               )}
               {amusementData.attributes.franchise && (
-                <div className={`${styles.link} ${amusementData.attributes.season ? styles.grow : ''}`}>
+                <div
+                  className={`${styles.link} ${styles.internal} ${amusementData.attributes.season ? styles.grow : ''}`}
+                >
                   <dt>프랜차이즈 보기</dt>
                   <dd>
                     <Anchor href={`/amusement?literature=${amusementData.attributes.franchise}&page=1`}>
                       프랜차이즈 목록으로 이동
+                      <MoreIcon />
                     </Anchor>
                   </dd>
                 </div>

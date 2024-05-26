@@ -293,6 +293,11 @@
             dd
               width: 100%
 
+          &.internal
+            dd
+              a
+                background-color: $hex-dark
+
           dd
             display: flex
             border: 0
@@ -306,16 +311,27 @@
               display: inline-flex
               justify-content: center
               align-items: center
+              gap: rem(12)
               background-color: $hex-azalea
               width: 100%
               border: 0
               border-radius: rem(3)
-              padding: rem(5) rem(27)
+              padding: rem(5) rem(52)
               color: $hex-white
+              font-size: rem(20)
               font-weight: 800
 
               +mq(maxExtraSmall)
-                font-size: rem(14)
+                font-size: rem(16)
+
+              i
+                display: inline-flex
+                width: rem(20)
+                height: rem(20)
+
+                +mq(maxExtraSmall)
+                  width: rem(16)
+                  height: rem(16)
 
         .relation
           height: 100%
@@ -341,26 +357,31 @@
                 height: 100%
                 opacity: 0
 
+                +mq(minSmall)
+                  padding: rem(4) rem(52)
+
               > span
                 display: flex
                 position: relative
                 justify-content: space-between
                 align-items: center
                 gap: rem(7)
-                background-color: rgba(0, 0, 0, .35)
-                border: rem(2) solid #ef233c
+                background-color: $hex-dark
                 border-radius: rem(3)
-                min-height: rem(35)
+                min-height: rem(38)
                 height: 100%
-                color: #fff
+                color: $hex-white
                 text-align: left
                 line-height: 1.25
                 font-weight: 800
 
                 em
                   +col
-                  padding: 0 rem(38) 0 rem(27)
+                  padding: 0 rem(27)
                   font-style: normal
+
+                  +mq(minSmall)
+                    padding: 0 rem(27) 0 rem(52)
 
                 span
                   display: flex
@@ -368,8 +389,11 @@
                   position: absolute
                   top: 0
                   left: 0
-                  padding: 0 rem(38) 0 rem(27)
+                  padding: 0 rem(27)
                   height: 100%
+
+                  +mq(minSmall)
+                    padding: 0 rem(27) 0 rem(52)
 
                   + em
                     opacity: 0
@@ -384,13 +408,16 @@
           flex-grow: 1
           border: 0
           border-radius: rem(3)
-          padding: rem(5) rem(12)
-          color: $hex-accent
+          padding: rem(5) rem(27)
+          color: $hex-dark
           font-weight: 800
           line-height: 1
 
           +mq(maxExtraSmall)
             font-size: rem(14)
+
+          +mq(minSmall)
+            padding: rem(5) rem(52)
 
         .item
           display: flex
