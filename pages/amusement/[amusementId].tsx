@@ -3,6 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useMediaQuery } from 'react-responsive';
 import { isSafari } from 'react-device-detect';
 import styled from '@emotion/styled';
 import { AmusementData, AmusementPermalinkData, Category, JejeupData, JejeupMetaData } from 'types';
@@ -23,6 +24,7 @@ import YouTubeController from '@/components/YouTubeController';
 import AmusementDetail from '@/components/AmusementDetail';
 import { formatTime } from '@/components/FormatTime';
 import { vectors } from '@/components/vectors';
+import { rem } from '@/styles/designSystem';
 import header from '@/styles/Header.module.sass';
 import footer from '@/styles/Footer.module.sass';
 import styles from '@/styles/Amusement.module.sass';
@@ -91,6 +93,15 @@ const MoreIcon = styled.i({
 const ExternalIcon = styled.i({
   background: `url(${vectors.external}) no-repeat 50% 50%/contain`,
 });
+
+export function useMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  const mobile = useMediaQuery({ query: `(max-width: ${rem(767)}` });
+  useEffect(() => {
+    setIsMobile(mobile);
+  }, [mobile]);
+  return isMobile;
+}
 
 export function truncateString(str: string, num: number) {
   if (str.length > num) {
@@ -381,9 +392,11 @@ export function ADCC({ items }: { items: any }) {
 export default function Amusement({
   amusementData,
   amusementId,
+  logoData,
 }: {
   amusementData: AmusementPermalinkData | null;
   amusementId: number;
+  logoData: string;
 }) {
   const router = useRouter();
   const timestamp = Date.now();
@@ -397,6 +410,8 @@ export default function Amusement({
   const [selectedSeason, setSelectedSeason] = useState<string>('');
   const [currentSeason, setCurrentSeason] = useState<string>('');
   const [selectedAmusementId, setSelectedAmusementId] = useState<string | null>(null);
+
+  const isMobile = useMobile();
 
   const handleButtonClick = (id: string) => {
     setSelectedAmusementId(id);
@@ -648,7 +663,7 @@ export default function Amusement({
     if (Array.isArray(season) && season.length > 0) {
       const defaultSeason = season.find((season) => season.idx !== amusementId);
       if (defaultSeason) {
-        setSelectedSeason(`/amusement/${defaultSeason.idx}`);
+        setSelectedSeason(`/amusement/${amusementId}`);
       }
     }
   }, [season, amusementId]);
@@ -796,7 +811,7 @@ export default function Amusement({
           </dt>
           <dd>
             <div>
-              <select defaultValue={`${router.asPath}`} onChange={handleSeasonChange}>
+              <select defaultValue={selectedSeason} onChange={handleSeasonChange}>
                 {[...season]
                   .sort((a, b) => a.order - b.order)
                   .map((relation) => (
@@ -1038,26 +1053,32 @@ export default function Amusement({
           <div className={styles.dummy} />
         </div>
         <div className={styles.info}>
-          {amusementData.attributes.titleKorean !== null ? (
-            amusementData.attributes.titleKorean.length >= 18 ? (
-              <h1 className={`${styles.long} ${isSafari ? 'April16thPromise' : 'April16thLife'}`}>
-                {amusementData.attributes.titleKorean}
-              </h1>
-            ) : (
-              <h1 className={`${isSafari ? 'April16thPromise' : 'April16thLife'}`}>
-                {amusementData.attributes.titleKorean}
-              </h1>
-            )
-          ) : amusementData.attributes.title.length >= 18 ? (
-            <h1 className={`${styles.long} ${isSafari ? 'April16thPromise' : 'April16thLife'}`}>
-              {amusementData.attributes.title}
-            </h1>
+          {logoData !== null && !isMobile ? (
+            <Image src={logoData} width="100" height="100" unoptimized priority alt="" />
           ) : (
-            <h1 className={`${isSafari ? 'April16thPromise' : 'April16thLife'}`}>
-              {amusementData.attributes.category === 'game_fan'
-                ? `'${amusementData.attributes.title}' 팬 게임 콜렉션`
-                : amusementData.attributes.title}
-            </h1>
+            <>
+              {amusementData.attributes.titleKorean !== null ? (
+                amusementData.attributes.titleKorean.length >= 18 ? (
+                  <h1 className={`${styles.long} ${isSafari ? 'April16thPromise' : 'April16thLife'}`}>
+                    {amusementData.attributes.titleKorean}
+                  </h1>
+                ) : (
+                  <h1 className={`${isSafari ? 'April16thPromise' : 'April16thLife'}`}>
+                    {amusementData.attributes.titleKorean}
+                  </h1>
+                )
+              ) : amusementData.attributes.title.length >= 18 ? (
+                <h1 className={`${styles.long} ${isSafari ? 'April16thPromise' : 'April16thLife'}`}>
+                  {amusementData.attributes.title}
+                </h1>
+              ) : (
+                <h1 className={`${isSafari ? 'April16thPromise' : 'April16thLife'}`}>
+                  {amusementData.attributes.category === 'game_fan'
+                    ? `'${amusementData.attributes.title}' 팬 게임 콜렉션`
+                    : amusementData.attributes.title}
+                </h1>
+              )}
+            </>
           )}
           <dl className={styles.title}>
             {amusementData.attributes.titleKorean !== null && (
@@ -1918,21 +1939,38 @@ export default function Amusement({
 export const getStaticProps: GetStaticProps = async (context) => {
   const amusementId = context.params?.amusementId;
   let amusementData = null;
+  let logoData = null;
 
   if (amusementId && typeof amusementId === 'string') {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/amusement?amusementId=${amusementId.substring(14)}`,
     );
-    const amusementResponse = (await response.json()) as { data: AmusementPermalinkData };
+    const amusementResponse = (await response.json()) as {
+      logoImage: AmusementPermalinkData;
+      data: AmusementPermalinkData;
+    };
+
     amusementData =
       formatDateDetail(amusementResponse.data.attributes.createdAt) === amusementId.substring(0, 14) &&
       amusementResponse.data;
+    logoData = amusementResponse.logoImage;
   }
 
   if (!amusementData) {
     return {
       props: {
         amusementData: null,
+        logoData: null,
+      },
+    };
+  }
+
+  if (amusementData && !logoData) {
+    return {
+      props: {
+        amusementData,
+        amusementId,
+        logoData: null,
       },
     };
   }
@@ -1941,6 +1979,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     props: {
       amusementData,
       amusementId,
+      logoData,
     },
     revalidate: 1,
   };

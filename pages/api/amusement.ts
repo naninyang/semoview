@@ -12,7 +12,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       throw new Error('Failed to fetch amusement data');
     }
     const amusementData = await response.json();
-    res.status(200).json(amusementData);
+
+    const amuseId = `https://cdn.dev1stud.io/semoview/id/id-${amusementData.data.id}.webp`;
+    const logoResponse = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/amuseId?amuseId=${encodeURIComponent(amuseId)}`,
+    );
+    const logoData = await logoResponse.json();
+    const logoImage = logoData.amuseId;
+
+    const amusementsData = {
+      ...amusementData,
+      logoImage,
+    };
+    res.status(200).json(amusementsData);
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
   }

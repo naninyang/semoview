@@ -180,6 +180,7 @@ export interface AmusementData {
 
 export interface AmusementPermalinkData {
   id: string;
+  logoImage: string;
   attributes: {
     title: string;
     lang: string;

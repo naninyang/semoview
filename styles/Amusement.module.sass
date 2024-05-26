@@ -95,6 +95,16 @@
       width: 100%
       color: $hex-light
 
+      img
+        width: auto
+        max-width: 100%
+        height: rem(100)
+        object-fit: contain
+        object-position: 0 50%
+
+      img + h1
+        +screen-reader-only
+
       h1
         font-size: rem(30)
         font-weight: 800
@@ -393,7 +403,7 @@
                   height: 100%
 
                   +mq(minSmall)
-                    padding: 0 rem(27) 0 rem(52)
+                    padding: 0 rem(52)
 
                   + em
                     opacity: 0
