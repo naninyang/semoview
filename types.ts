@@ -230,6 +230,7 @@ export interface AmusementPermalinkData {
     season: string;
     franchise: string;
     relName: string;
+    logoSize: string;
   };
 }
 

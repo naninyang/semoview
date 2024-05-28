@@ -96,11 +96,20 @@
       color: $hex-light
 
       img
-        width: auto
-        max-width: 100%
-        height: rem(100)
         object-fit: contain
         object-position: 0 100%
+        margin-bottom: rem(27)
+        width: auto
+        max-width: 100%
+
+        &.default
+          height: rem(100)
+
+        &.half
+          height: rem(75)
+
+        &.double
+          height: rem(150)
 
       img + h1
         +screen-reader-only
