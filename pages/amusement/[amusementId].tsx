@@ -1061,13 +1061,13 @@ export default function Amusement({
               unoptimized
               priority
               alt=""
-              className={
+              className={`${
                 amusementData.attributes.logoSize === 'half'
                   ? styles.half
                   : amusementData.attributes.logoSize === 'double'
                     ? styles.double
                     : styles.default
-              }
+              } ${amusementData.attributes.category === 'game' ? styles['game-title'] : ''}`}
             />
           )}
           {amusementData.attributes.titleKorean !== null ? (
