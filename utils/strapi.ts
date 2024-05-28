@@ -885,6 +885,7 @@ export async function getLiteratureData(page?: number, pageSize?: number, amuseI
     cast: data.attributes.cast,
     posterDefault: data.attributes.posterDefault,
     posterOther: data.attributes.posterOther,
+    order: data.attributes.order,
   }));
   const pageCount = platformResponse.meta.pagination.pageCount;
   const total = platformResponse.meta.pagination.total;

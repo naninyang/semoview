@@ -413,41 +413,43 @@ function Home({
               <div className={styles.banners}>
                 <Slider ref={sliderRef} {...settings}>
                   {Array.isArray(bannerData) &&
-                    bannerData.map((banner: BannerData) => (
-                      <div key={banner.order}>
-                        {isMobile ? (
-                          <Anchor
-                            href={banner.link}
-                            style={{
-                              background: `url(https://cdn.dev1stud.io/semoview/banner/pao-${banner.type}.webp) no-repeat 50% 50%/contain`,
-                            }}
-                          >
-                            <div className={styles.summary} style={{ color: '#000' }}>
-                              <p>{banner.description}</p>
-                              <em>
-                                ({banner.author} ‘{banner.title}’)
-                              </em>
-                            </div>
-                            <Background color={banner.color} />
-                          </Anchor>
-                        ) : (
-                          <Anchor
-                            href={banner.link}
-                            style={{
-                              background: `url(https://cdn.dev1stud.io/semoview/banner/bread-${banner.type}.webp) no-repeat 50% 50%/contain`,
-                            }}
-                          >
-                            <div className={styles.summary} style={{ color: banner.isLight ? '#000' : '#fff' }}>
-                              <p>{banner.description}</p>
-                              <em>
-                                ({banner.author} ‘{banner.title}’)
-                              </em>
-                            </div>
-                            <Background color={banner.color} />
-                          </Anchor>
-                        )}
-                      </div>
-                    ))}
+                    bannerData
+                      .sort((a, b) => a.order - b.order)
+                      .map((banner: BannerData) => (
+                        <div key={banner.order}>
+                          {isMobile ? (
+                            <Anchor
+                              href={banner.link}
+                              style={{
+                                background: `url(https://cdn.dev1stud.io/semoview/banner/pao-${banner.type}.webp) no-repeat 50% 50%/contain`,
+                              }}
+                            >
+                              <div className={styles.summary} style={{ color: '#000' }}>
+                                <p>{banner.description}</p>
+                                <em>
+                                  ({banner.author} ‘{banner.title}’)
+                                </em>
+                              </div>
+                              <Background color={banner.color} />
+                            </Anchor>
+                          ) : (
+                            <Anchor
+                              href={banner.link}
+                              style={{
+                                background: `url(https://cdn.dev1stud.io/semoview/banner/bread-${banner.type}.webp) no-repeat 50% 50%/contain`,
+                              }}
+                            >
+                              <div className={styles.summary} style={{ color: banner.isLight ? '#000' : '#fff' }}>
+                                <p>{banner.description}</p>
+                                <em>
+                                  ({banner.author} ‘{banner.title}’)
+                                </em>
+                              </div>
+                              <Background color={banner.color} />
+                            </Anchor>
+                          )}
+                        </div>
+                      ))}
                 </Slider>
                 <button
                   type="button"
