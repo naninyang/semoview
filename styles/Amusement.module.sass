@@ -316,6 +316,9 @@
             dd
               width: 100%
 
+            & + .internal dd
+              width: 100%
+
           &.internal
             dd
               a
@@ -344,6 +347,7 @@
               font-weight: 800
 
               +mq(maxExtraSmall)
+                padding: rem(5) rem(27)
                 font-size: rem(16)
 
             strong.out
