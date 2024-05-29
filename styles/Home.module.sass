@@ -203,7 +203,7 @@
         .pager
           background-color: transparent
           width: rem(23)
-          height: rem(22)
+          height: rem(23)
 
           +mq(minSmall)
             width: rem(32)
@@ -212,17 +212,23 @@
           &.active
             i
               opacity: 1
+              width: rem(23)
+
+              +mq(minSmall)
+                width: rem(32)
 
           i
             display: block
             opacity: .2
+            transition: all .5s cubic-bezier(.4,0,.2,1)
             background-color: $hex-dark
-            border-radius: rem(12)
+            border-radius: rem(3)
             width: rem(7)
             height: rem(7)
 
             +mq(minSmall)
               display: inline-block
+              border-radius: rem(6)
               width: rem(12)
               height: rem(12)
 
