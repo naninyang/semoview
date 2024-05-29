@@ -1295,6 +1295,17 @@ export default function Amusement({
                   </dd>
                 </div>
               )}
+              {amusementData.attributes.category === 'game_fan' && (
+                <div className={`${styles.link} ${styles['channel-link']}`}>
+                  <dt>{amusementData.attributes.title} 채널 이동</dt>
+                  <dd>
+                    <Anchor href={amusementData.attributes.ottAddr}>
+                      {amusementData.attributes.title} 채널 놀러가기
+                      <ExternalIcon />
+                    </Anchor>
+                  </dd>
+                </div>
+              )}
               {amusementData.attributes.ott === null &&
                 amusementData.attributes.category !== 'game_fan' &&
                 amusementData.attributes.ottAddr !== null && (
@@ -1801,16 +1812,12 @@ export default function Amusement({
               </div>
             )}
           </dl>
-          {amusementData.attributes.category !== 'game_fan' ? (
+          {amusementData.attributes.category !== 'game_fan' && (
             <div className={styles.more}>
               ...{' '}
               <button type="button" onClick={() => handleButtonClick(String(amusementId).substring(14))}>
                 <span>더보기</span>
               </button>
-            </div>
-          ) : (
-            <div className={styles.channel}>
-              <Anchor href={amusementData.attributes.ottAddr}>{amusementData.attributes.title} 채널 놀러가기</Anchor>
             </div>
           )}
         </div>
