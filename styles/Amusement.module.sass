@@ -103,10 +103,16 @@
         max-width: 100%
 
         &.default
-          height: rem(100)
+          height: rem(75)
+
+          +mq(minExtraLarge)
+            height: rem(100)
 
         &.half
-          height: rem(75)
+          height: rem(52)
+
+          +mq(minExtraLarge)
+            height: rem(75)
 
         &.double
           height: rem(150)
