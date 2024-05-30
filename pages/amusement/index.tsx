@@ -1055,6 +1055,18 @@ function Amusement({
                                   </>
                                 )}
                               </dd>
+                              {amusement.supportLang && (
+                                <>
+                                  <dt>추가지원</dt>
+                                  <dd>
+                                    {amusement.supportLang.map((item: string, index: number) => (
+                                      <i className={styles.supportLang} key={index}>
+                                        {BadgeLang(item)}
+                                      </i>
+                                    ))}
+                                  </dd>
+                                </>
+                              )}
                             </div>
                           </dl>
                         )}
@@ -1510,6 +1522,18 @@ function Amusement({
                                   </>
                                 )}
                               </dd>
+                              {amusement.supportLang && (
+                                <>
+                                  <dt>추가지원</dt>
+                                  <dd>
+                                    {amusement.supportLang.map((item: string, index: number) => (
+                                      <i className={styles.supportLang} key={index}>
+                                        {BadgeLang(item)}
+                                      </i>
+                                    ))}
+                                  </dd>
+                                </>
+                              )}
                             </div>
                           </dl>
                         )}
@@ -1894,6 +1918,18 @@ function Amusement({
                                 </>
                               )}
                             </dd>
+                            {amusement.supportLang && (
+                              <>
+                                <dt>추가지원</dt>
+                                <dd>
+                                  {amusement.supportLang.map((item: string, index: number) => (
+                                    <i className={styles.supportLang} key={index}>
+                                      {BadgeLang(item)}
+                                    </i>
+                                  ))}
+                                </dd>
+                              </>
+                            )}
                           </div>
                         </dl>
                       </div>
@@ -3355,6 +3391,18 @@ function Amusement({
                                     </>
                                   )}
                                 </dd>
+                                {amusement.supportLang && (
+                                  <>
+                                    <dt>추가지원</dt>
+                                    <dd>
+                                      {amusement.supportLang.map((item: string, index: number) => (
+                                        <i className={styles.supportLang} key={index}>
+                                          {BadgeLang(item)}
+                                        </i>
+                                      ))}
+                                    </dd>
+                                  </>
+                                )}
                               </div>
                             </dl>
                           )}

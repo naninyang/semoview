@@ -11,6 +11,7 @@ import ChoiceGenre from '@/components/ChoiceGenre';
 import { vectors } from '@/components/vectors';
 import { RatingsDrama } from '@/components/RatingsDrama';
 import { formatNumber } from '@/components/FormatNumber';
+import { BadgeLang } from '@/components/BadgeLang';
 import styles from '@/styles/Categories.module.sass';
 import {
   AbcIcon,
@@ -290,6 +291,18 @@ function Categories({
                                 </>
                               )}
                             </dd>
+                            {amusement.supportLang && (
+                              <>
+                                <dt>추가지원</dt>
+                                <dd>
+                                  {amusement.supportLang.map((item: string, index: number) => (
+                                    <i className={styles.supportLang} key={index}>
+                                      {BadgeLang(item)}
+                                    </i>
+                                  ))}
+                                </dd>
+                              </>
+                            )}
                           </div>
                         </dl>
                       </div>
@@ -428,6 +441,18 @@ function Categories({
                                 </>
                               )}
                             </dd>
+                            {amusement.supportLang && (
+                              <>
+                                <dt>추가지원</dt>
+                                <dd>
+                                  {amusement.supportLang.map((item: string, index: number) => (
+                                    <i className={styles.supportLang} key={index}>
+                                      {BadgeLang(item)}
+                                    </i>
+                                  ))}
+                                </dd>
+                              </>
+                            )}
                           </div>
                         </dl>
                       </div>
@@ -662,6 +687,18 @@ function Categories({
                                 </>
                               )}
                             </dd>
+                            {amusement.supportLang && (
+                              <>
+                                <dt>추가지원</dt>
+                                <dd>
+                                  {amusement.supportLang.map((item: string, index: number) => (
+                                    <i className={styles.supportLang} key={index}>
+                                      {BadgeLang(item)}
+                                    </i>
+                                  ))}
+                                </dd>
+                              </>
+                            )}
                           </div>
                         </dl>
                       </div>
@@ -907,6 +944,18 @@ function Categories({
                                 </>
                               )}
                             </dd>
+                            {amusement.supportLang && (
+                              <>
+                                <dt>추가지원</dt>
+                                <dd>
+                                  {amusement.supportLang.map((item: string, index: number) => (
+                                    <i className={styles.supportLang} key={index}>
+                                      {BadgeLang(item)}
+                                    </i>
+                                  ))}
+                                </dd>
+                              </>
+                            )}
                           </div>
                         </dl>
                       </div>
@@ -967,6 +1016,18 @@ function Categories({
                                   </>
                                 )}
                               </dd>
+                              {amusement.supportLang && (
+                                <>
+                                  <dt>추가지원</dt>
+                                  <dd>
+                                    {amusement.supportLang.map((item: string, index: number) => (
+                                      <i className={styles.supportLang} key={index}>
+                                        {BadgeLang(item)}
+                                      </i>
+                                    ))}
+                                  </dd>
+                                </>
+                              )}
                             </div>
                           </dl>
                         )}

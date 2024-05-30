@@ -8,6 +8,7 @@ import Seo, { originTitle } from '@/components/Seo';
 import Anchor from '@/components/Anchor';
 import ChoiceGenre from '@/components/ChoiceGenre';
 import { RatingsDrama } from '@/components/RatingsDrama';
+import { BadgeLang } from '@/components/BadgeLang';
 import styles from '@/styles/Categories.module.sass';
 import {
   AbcIcon,
@@ -325,6 +326,18 @@ function Platforms({
                                 </>
                               )}
                             </dd>
+                            {amusement.supportLang && (
+                              <>
+                                <dt>추가지원</dt>
+                                <dd>
+                                  {amusement.supportLang.map((item: string, index: number) => (
+                                    <i className={styles.supportLang} key={index}>
+                                      {BadgeLang(item)}
+                                    </i>
+                                  ))}
+                                </dd>
+                              </>
+                            )}
                           </div>
                         </dl>
                       </div>
@@ -556,6 +569,18 @@ function Platforms({
                                 </>
                               )}
                             </dd>
+                            {amusement.supportLang && (
+                              <>
+                                <dt>추가지원</dt>
+                                <dd>
+                                  {amusement.supportLang.map((item: string, index: number) => (
+                                    <i className={styles.supportLang} key={index}>
+                                      {BadgeLang(item)}
+                                    </i>
+                                  ))}
+                                </dd>
+                              </>
+                            )}
                           </div>
                         </dl>
                       </div>
@@ -732,6 +757,18 @@ function Platforms({
                                 {amusement.rating === 'd19' && '18+'}
                               </i>
                             </dd>
+                            {amusement.supportLang && (
+                              <>
+                                <dt>추가지원</dt>
+                                <dd>
+                                  {amusement.supportLang.map((item: string, index: number) => (
+                                    <i className={styles.supportLang} key={index}>
+                                      {BadgeLang(item)}
+                                    </i>
+                                  ))}
+                                </dd>
+                              </>
+                            )}
                           </div>
                         </dl>
                       </div>
@@ -988,6 +1025,18 @@ function Platforms({
                                 </>
                               )}
                             </dd>
+                            {amusement.supportLang && (
+                              <>
+                                <dt>추가지원</dt>
+                                <dd>
+                                  {amusement.supportLang.map((item: string, index: number) => (
+                                    <i className={styles.supportLang} key={index}>
+                                      {BadgeLang(item)}
+                                    </i>
+                                  ))}
+                                </dd>
+                              </>
+                            )}
                           </div>
                         </dl>
                       </div>
@@ -1244,6 +1293,18 @@ function Platforms({
                                 </>
                               )}
                             </dd>
+                            {amusement.supportLang && (
+                              <>
+                                <dt>추가지원</dt>
+                                <dd>
+                                  {amusement.supportLang.map((item: string, index: number) => (
+                                    <i className={styles.supportLang} key={index}>
+                                      {BadgeLang(item)}
+                                    </i>
+                                  ))}
+                                </dd>
+                              </>
+                            )}
                           </div>
                         </dl>
                       </div>
@@ -1500,6 +1561,18 @@ function Platforms({
                                 </>
                               )}
                             </dd>
+                            {amusement.supportLang && (
+                              <>
+                                <dt>추가지원</dt>
+                                <dd>
+                                  {amusement.supportLang.map((item: string, index: number) => (
+                                    <i className={styles.supportLang} key={index}>
+                                      {BadgeLang(item)}
+                                    </i>
+                                  ))}
+                                </dd>
+                              </>
+                            )}
                           </div>
                         </dl>
                       </div>
