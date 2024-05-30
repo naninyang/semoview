@@ -10,6 +10,7 @@ import Anchor from '@/components/Anchor';
 import ChoiceBarrierFree from '@/components/ChoiceBarrierFree';
 import { vectors } from '@/components/vectors';
 import { RatingsDrama } from '@/components/RatingsDrama';
+import { BadgeLang } from '@/components/BadgeLang';
 import styles from '@/styles/Categories.module.sass';
 import {
   AbcIcon,
@@ -400,18 +401,25 @@ function BarrierFree({
                                 </>
                               )}
                             </dd>
+                            {amusement.supportLang && (
+                              <>
+                                <dt>추가지원</dt>
+                                <dd>
+                                  {amusement.supportLang
+                                    .filter((item: string) => item !== 'cc')
+                                    .map((item: string, index: number) => (
+                                      <i className={styles.supportLang} key={index}>
+                                        {BadgeLang(item)}
+                                      </i>
+                                    ))}
+                                </dd>
+                              </>
+                            )}
                           </div>
                         </dl>
                       </div>
                       <strong>
-                        <span className="seed">
-                          {amusement.supportLang
-                            .filter((item: string) => item === 'description')
-                            .map((index: number) => (
-                              <span key={index}>화면해설 지원</span>
-                            ))}{' '}
-                          {amusement.titleKorean ? amusement.titleKorean : amusement.title}
-                        </span>
+                        <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
                     </Link>
                   ))}
@@ -710,18 +718,25 @@ function BarrierFree({
                                 </>
                               )}
                             </dd>
+                            {amusement.supportLang && (
+                              <>
+                                <dt>추가지원</dt>
+                                <dd>
+                                  {amusement.supportLang
+                                    .filter((item: string) => item !== 'description')
+                                    .map((item: string, index: number) => (
+                                      <i className={styles.supportLang} key={index}>
+                                        {BadgeLang(item)}
+                                      </i>
+                                    ))}
+                                </dd>
+                              </>
+                            )}
                           </div>
                         </dl>
                       </div>
                       <strong>
-                        <span className="seed">
-                          {amusement.supportLang
-                            .filter((item: string) => item === 'subtitle')
-                            .map((index: number) => (
-                              <span key={index}>자막 지원</span>
-                            ))}{' '}
-                          {amusement.titleKorean ? amusement.titleKorean : amusement.title}
-                        </span>
+                        <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
                     </Link>
                   ))}
@@ -1020,6 +1035,20 @@ function BarrierFree({
                                 </>
                               )}
                             </dd>
+                            {amusement.supportLang && (
+                              <>
+                                <dt>추가지원</dt>
+                                <dd>
+                                  {amusement.supportLang
+                                    .filter((item: string) => item !== 'cc' && item !== 'description')
+                                    .map((item: string, index: number) => (
+                                      <i className={styles.supportLang} key={index}>
+                                        {BadgeLang(item)}
+                                      </i>
+                                    ))}
+                                </dd>
+                              </>
+                            )}
                           </div>
                         </dl>
                       </div>

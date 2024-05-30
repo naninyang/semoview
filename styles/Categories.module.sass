@@ -291,8 +291,26 @@
             dl
               top: auto
               right: rem(7)
-              bottom: rem(7)
+              bottom: rem(12)
               left: auto
+              height: auto
+
+              div:last-of-type
+                display: flex
+
+                > dd
+                  height: rem(24)
+
+                  & + dt + dd
+                    position: static
+                    padding: 0 rem(7)
+
+                    &:empty
+                      display: none
+
+              i.supportLang
+                height: rem(24)
+                line-height: 1
 
       a
         &:hover, &:focus
@@ -326,6 +344,7 @@
             align-items: center
             gap: rem(3)
             width: 100%
+            height: 100%
 
             dt
               +screen-reader-only
@@ -384,9 +403,27 @@
               &:last-of-type
                 position: absolute
                 top: rem(7)
+                bottom: 0
                 left: rem(7)
 
                 dd
+                  & + dt + dd
+                    display: flex
+                    gap: rem(3)
+                    position: absolute
+                    bottom: rem(7)
+                    background-color: $hex-dark
+                    border-radius: rem(3)
+                    padding: rem(3) rem(7)
+
+                    i
+                      &::before
+                        content: '|'
+                        padding-right: rem(3)
+
+                      &:first-of-type::before
+                        content: ''
+
                   i
                     display: inline-flex
                     align-items: center
@@ -399,6 +436,11 @@
                     font-style: normal
                     line-height: 1
                     color: $hex-white
+
+                    &.supportLang
+                      margin: 0
+                      padding: 0
+                      width: auto
 
                     &.drama
                       background-color: #FFCB00

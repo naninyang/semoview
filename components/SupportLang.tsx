@@ -1,8 +1,8 @@
 export const SupportLang = (name: string) => {
   const names: { [key: string]: string } = {
-    subtitle: '한글 자막',
+    subtitle: '자막',
     unofficial: '비공식 한글 지원',
-    dubbing: '한국어 더빙',
+    dubbing: '더빙',
     cc: '청각 장애인용 자막',
     description: '화면 해설',
   };

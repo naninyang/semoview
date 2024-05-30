@@ -10,6 +10,7 @@ import Anchor from '@/components/Anchor';
 import ChoiceBarrierFree from '@/components/ChoiceBarrierFree';
 import { vectors } from '@/components/vectors';
 import { RatingsDrama } from '@/components/RatingsDrama';
+import { BadgeLang } from '@/components/BadgeLang';
 import styles from '@/styles/Categories.module.sass';
 import {
   AbcIcon,
@@ -401,18 +402,25 @@ function Subdub({
                                 </>
                               )}
                             </dd>
+                            {amusement.supportLang && (
+                              <>
+                                <dt>추가지원</dt>
+                                <dd>
+                                  {amusement.supportLang
+                                    .filter((item: string) => item !== 'subtitle')
+                                    .map((item: string, index: number) => (
+                                      <i className={styles.supportLang} key={index}>
+                                        {BadgeLang(item)}
+                                      </i>
+                                    ))}
+                                </dd>
+                              </>
+                            )}
                           </div>
                         </dl>
                       </div>
                       <strong>
-                        <span className="seed">
-                          {amusement.supportLang
-                            .filter((item: string) => item === 'dubbing')
-                            .map((index: number) => (
-                              <span key={index}>더빙 지원</span>
-                            ))}{' '}
-                          {amusement.titleKorean ? amusement.titleKorean : amusement.title}
-                        </span>
+                        <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
                     </Link>
                   ))}
@@ -711,18 +719,25 @@ function Subdub({
                                 </>
                               )}
                             </dd>
+                            {amusement.supportLang && (
+                              <>
+                                <dt>추가지원</dt>
+                                <dd>
+                                  {amusement.supportLang
+                                    .filter((item: string) => item !== 'dubbing')
+                                    .map((item: string, index: number) => (
+                                      <i className={styles.supportLang} key={index}>
+                                        {BadgeLang(item)}
+                                      </i>
+                                    ))}
+                                </dd>
+                              </>
+                            )}
                           </div>
                         </dl>
                       </div>
                       <strong>
-                        <span className="seed">
-                          {amusement.supportLang
-                            .filter((item: string) => item === 'subtitle')
-                            .map((index: number) => (
-                              <span key={index}>자막 지원</span>
-                            ))}{' '}
-                          {amusement.titleKorean ? amusement.titleKorean : amusement.title}
-                        </span>
+                        <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
                     </Link>
                   ))}
@@ -1021,6 +1036,20 @@ function Subdub({
                                 </>
                               )}
                             </dd>
+                            {amusement.supportLang && (
+                              <>
+                                <dt>추가지원</dt>
+                                <dd>
+                                  {amusement.supportLang
+                                    .filter((item: string) => item !== 'subtitle' && item !== 'dubbing')
+                                    .map((item: string, index: number) => (
+                                      <i className={styles.supportLang} key={index}>
+                                        {BadgeLang(item)}
+                                      </i>
+                                    ))}
+                                </dd>
+                              </>
+                            )}
                           </div>
                         </dl>
                       </div>

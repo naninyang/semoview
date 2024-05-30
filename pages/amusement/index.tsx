@@ -11,6 +11,7 @@ import styles from '@/styles/Categories.module.sass';
 import { CategoryName } from '@/components/CategoryName';
 import { TagName } from '@/components/TagName';
 import { SupportLang } from '@/components/SupportLang';
+import { BadgeLang } from '@/components/BadgeLang';
 import {
   AbcIcon,
   AmazonIcon,
@@ -2244,19 +2245,26 @@ function Amusement({
                                   </>
                                 )}
                               </dd>
+                              {amusement.supportLang && (
+                                <>
+                                  <dt>추가지원</dt>
+                                  <dd>
+                                    {amusement.supportLang
+                                      .filter((item: string) => item !== router.query.hanguk)
+                                      .map((item: string, index: number) => (
+                                        <i className={styles.supportLang} key={index}>
+                                          {BadgeLang(item)}
+                                        </i>
+                                      ))}
+                                  </dd>
+                                </>
+                              )}
                             </div>
                           </dl>
                         )}
                       </div>
                       <strong>
-                        <span className="seed">
-                          {amusement.supportLang
-                            .filter((item: string) => item === router.query.hanguk)
-                            .map((item: string, index: number) => (
-                              <span key={index}>{SupportLang(item)}</span>
-                            ))}{' '}
-                          {amusement.titleKorean ? amusement.titleKorean : amusement.title}
-                        </span>
+                        <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
                     </Link>
                   ))}
@@ -2604,19 +2612,26 @@ function Amusement({
                                   </>
                                 )}
                               </dd>
+                              {amusement.supportLang && (
+                                <>
+                                  <dt>추가지원</dt>
+                                  <dd>
+                                    {amusement.supportLang
+                                      .filter((item: string) => item !== router.query.subdub)
+                                      .map((item: string, index: number) => (
+                                        <i className={styles.supportLang} key={index}>
+                                          {BadgeLang(item)}
+                                        </i>
+                                      ))}
+                                  </dd>
+                                </>
+                              )}
                             </div>
                           </dl>
                         )}
                       </div>
                       <strong>
-                        <span className="seed">
-                          {amusement.supportLang
-                            .filter((item: string) => item === router.query.hanguk)
-                            .map((item: string, index: number) => (
-                              <span key={index}>{SupportLang(item)}</span>
-                            ))}{' '}
-                          {amusement.titleKorean ? amusement.titleKorean : amusement.title}
-                        </span>
+                        <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
                     </Link>
                   ))}
@@ -2963,19 +2978,26 @@ function Amusement({
                                   </>
                                 )}
                               </dd>
+                              {amusement.supportLang && (
+                                <>
+                                  <dt>추가지원</dt>
+                                  <dd>
+                                    {amusement.supportLang
+                                      .filter((item: string) => item !== router.query.bfree)
+                                      .map((item: string, index: number) => (
+                                        <i className={styles.supportLang} key={index}>
+                                          {BadgeLang(item)}
+                                        </i>
+                                      ))}
+                                  </dd>
+                                </>
+                              )}
                             </div>
                           </dl>
                         )}
                       </div>
                       <strong>
-                        <span className="seed">
-                          {amusement.supportLang
-                            .filter((item: string) => item === router.query.hanguk)
-                            .map((item: string, index: number) => (
-                              <span key={index}>{SupportLang(item)}</span>
-                            ))}{' '}
-                          {amusement.titleKorean ? amusement.titleKorean : amusement.title}
-                        </span>
+                        <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
                     </Link>
                   ))}
