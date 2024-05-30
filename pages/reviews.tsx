@@ -793,17 +793,17 @@ function Review({ data, error, currentPage }: { data: any; error: string; curren
                                   jejeup.amusementData.category === 'ott_anime' ||
                                   jejeup.amusementData.anime === 'tva' ||
                                   jejeup.amusementData.anime === 'ova') && (
-                                  <time aria-label="방영년도">{jejeup.amusementData.release}</time>
+                                  <time aria-label="방영년도">{jejeup.amusementData.release}년</time>
                                 )}
                                 {(jejeup.amusementData.category === 'film' ||
                                   jejeup.amusementData.category === 'anime_film' ||
                                   jejeup.amusementData.category === 'ott_anime_film' ||
                                   jejeup.amusementData.category === 'ott_film' ||
                                   jejeup.amusementData.anime === 'film') && (
-                                  <time aria-label="상영년도">{jejeup.amusementData.release}</time>
+                                  <time aria-label="상영년도">{jejeup.amusementData.release}년</time>
                                 )}
                                 {jejeup.amusementData.category === 'game' && (
-                                  <time aria-label="출시년도">{jejeup.amusementData.release}</time>
+                                  <time aria-label="출시년도">{jejeup.amusementData.release}년</time>
                                 )}
                               </>
                             )}

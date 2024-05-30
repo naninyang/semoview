@@ -1165,7 +1165,7 @@ export default function JejeupDetail({
           {amusementData.runningTime && (
             <div>
               <dt>재생시간</dt>
-              <dd>
+              <dd className="seed">
                 {amusementData.runningTime}분{formatTime(amusementData.runningTime)}
               </dd>
             </div>
