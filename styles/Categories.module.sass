@@ -23,6 +23,15 @@
       text-decoration: underline
       color: $hex-accent
 
+  section.error
+    flex-direction: column
+
+    p
+      font-weight: 500
+
+      button
+        font-weight: 900
+
   .choice
     display: flex
     flex-direction: column
@@ -712,6 +721,9 @@
     .content
       section
         padding: rem(27) env(safe-area-inset-right) 0 calc(env(safe-area-inset-left) + rem(12))
+
+        &.tag-error
+          height: auto
 
         +mq(minMedium)
           padding: rem(52) env(safe-area-inset-right) 0 calc(env(safe-area-inset-left) + rem(12))

@@ -162,11 +162,22 @@ function Amusement({
     }
   };
 
-  const amuseTitles = pageTitle ? pageTitle.replace(/\n/g, ' ') : literatureData.attributes.subject;
-  const title = pageTitle ? pageTitle.replace(/\n/g, '<br />') : literatureData.attributes.subject;
+  const amuseTitles = pageTitle
+    ? pageTitle.replace(/\n/g, ' ')
+    : literatureData === null
+      ? 'Not Found literature'
+      : literatureData?.attributes.subject;
+  const title = pageTitle
+    ? pageTitle.replace(/\n/g, '<br />')
+    : literatureData === null
+      ? 'Not Found literature'
+      : literatureData?.attributes.subject;
+
   const description = pageTitle
     ? '원하는 카테고리/태그/OTT & 방송국을 선택해 리뷰영상을 즐기세요!'
-    : literatureData.attributes.description.replace(/\\n/g, ' ');
+    : literatureData === null
+      ? 'Not Found literature'
+      : literatureData?.attributes.description.replace(/\\n/g, ' ');
 
   const previousPageHandler = () => {
     const previousPage = sessionStorage.getItem('literature');
@@ -242,12 +253,82 @@ function Amusement({
           )}
       </div>
       {error && (
-        <div className={styles.error}>
-          <p>데이터를 불러오는데 실패했습니다.</p>
-          <button type="button" onClick={() => window.location.reload()}>
-            다시 시도
-          </button>
-        </div>
+        <>
+          {router.query.literature && (
+            <div className={styles.content}>
+              <div className={`${styles.headline} ${styles['without-select']}`}>
+                <h1 className="April16thPromise">
+                  <em>찾을 수 없는 연결고리</em> <span>Not Found Literature</span>
+                </h1>
+              </div>
+              <section className={styles.error}>
+                <p>존재하지 않는 연결고리입니다.</p>
+                <p>
+                  <button onClick={previousPageHandler} type="button">
+                    뒤로 이동
+                  </button>
+                  해 주세요
+                </p>
+              </section>
+            </div>
+          )}
+          {router.query.platform && (
+            <div className={styles.content}>
+              <div className={styles.headline}>
+                <h1 className="April16thPromise">
+                  <em>플랫폼을 찾을 수 없어요</em> <span>Not found platform</span>
+                </h1>
+                <div className={styles.select}>
+                  <select onChange={handlePlatformChange} defaultValue={platform}>
+                    <option value="">플랫폼(OTT 또는 방송국) 선택</option>
+                    <optgroup label="OTT 플랫폼">
+                      <option value="apple">애플 TV+</option>
+                      <option value="paramount">파라마운트+</option>
+                      <option value="amazon">아마존 프라임비디오</option>
+                      <option value="netflix">넷플릭스</option>
+                      <option value="disney">디즈니+</option>
+                      <option value="tving">티빙</option>
+                      <option value="watcha">왓챠</option>
+                      <option value="wavve">웨이브</option>
+                    </optgroup>
+                    <optgroup label="드라마 송출 방송국">
+                      <option value="ABC">ABC</option>
+                      <option value="KBS2">KBS 2TV</option>
+                      <option value="MBC">MBC</option>
+                      <option value="SBS">SBS</option>
+                      <option value="tvN">tvN</option>
+                      <option value="OCN">OCN</option>
+                      <option value="JTBC">JTBC</option>
+                      <option value="ENA">ENA</option>
+                    </optgroup>
+                    <optgroup label="애니메이션 방영 일본 방송국">
+                      <option value="tokyomx">도쿄MX</option>
+                      <option value="tvtokyo">테레토</option>
+                      <option value="fujitv">후지테레비</option>
+                      <option value="mbs">MBS</option>
+                      <option value="tbs">TBS</option>
+                      <option value="atx">AT-X</option>
+                      <option value="nippontv">닛테레</option>
+                      <option value="wowow">wowow</option>
+                    </optgroup>
+                    <optgroup label="애니메이션 방영 한국 방송국">
+                      <option value="aniplus">애니플러스</option>
+                      <option value="daewon">애니원</option>
+                      <option value="anibox">애니박스</option>
+                      <option value="tooniverse">투니버스</option>
+                      <option value="animax">애니맥스 코리아</option>
+                    </optgroup>
+                  </select>
+                  <button onClick={handlePlatformSubmit}>선택</button>
+                </div>
+              </div>
+              <section className={styles.error}>
+                <p>존재하지 않는 플랫폼입니다.</p>
+                <p>플랫폼을 선택해 주세요</p>
+              </section>
+            </div>
+          )}
+        </>
       )}
       {!router.query.category &&
         !router.query.tag &&
@@ -643,6 +724,7 @@ function Amusement({
                 <h1 className="April16thPromise">
                   <em dangerouslySetInnerHTML={{ __html: title }} />{' '}
                   {categoryData.total > 0 && <span>({categoryData.total}개 작품)</span>}
+                  {categoryData.data.length === 0 && <span>Not found category</span>}
                 </h1>
                 <div className={styles.select}>
                   <select onChange={handleCategoryChange} defaultValue={category}>
@@ -657,6 +739,12 @@ function Amusement({
                   <button onClick={handleCategorySubmit}>선택</button>
                 </div>
               </div>
+              {categoryData.data.length === 0 && (
+                <section className={styles.error}>
+                  <p>존재하지 않는 카테고리입니다.</p>
+                  <p>카테고리를 선택해 주세요</p>
+                </section>
+              )}
               {Array.isArray(categoryData.data) && (
                 <section className={category === 'game' || category === 'game_fan' ? styles.game : ''}>
                   {categoryData.data.map((amusement: AmusementData, index: number) => (
@@ -1102,12 +1190,23 @@ function Amusement({
                 <h1 className="April16thPromise">
                   <em dangerouslySetInnerHTML={{ __html: title }} />{' '}
                   {tagData.total > 0 && <span>({tagData.total}개 작품)</span>}
+                  {tagData.data.length === 0 && <span>Not found hash tag</span>}
                   <strong>
-                    #{TagName(`${router.query.tag}`, 'tag')} {category && `#${CategoryName(category)}`} #유튜브리뷰{' '}
-                    {category === 'game' && '#유튜브실황'}
+                    {tagData.data.length > 0 && (
+                      <>
+                        #{TagName(router.query.tag as string, 'tag')} {category && `#${CategoryName(category)}`}{' '}
+                        #유튜브리뷰 {category === 'game' && '#유튜브실황'}
+                      </>
+                    )}
                   </strong>
                 </h1>
               </div>
+              {tagData.data.length === 0 && (
+                <section className={`${styles.error} ${styles['tag-error']}`}>
+                  <p>존재하지 않는 해시태그입니다.</p>
+                  <p>해시태그를 선택해 주세요</p>
+                </section>
+              )}
               {Array.isArray(tagData.data) && (
                 <section className={category === 'game' ? styles.game : ''}>
                   {tagData.data.map((amusement: AmusementData, index: number) => (
@@ -1818,6 +1917,7 @@ function Amusement({
                 <h1 className="April16thPromise">
                   <em dangerouslySetInnerHTML={{ __html: title }} />{' '}
                   {hangukData.total > 0 && <span>({hangukData.total}개 작품)</span>}
+                  {hangukData.data.length === 0 && <span>Not found script</span>}
                 </h1>
                 <div className={styles.select}>
                   <select value={selectedHanguk} onChange={handleHangukChange}>
@@ -1836,6 +1936,12 @@ function Amusement({
                   <button onClick={handleHangukSubmit}>자막 및 화면해설 선택</button>
                 </div>
               </div>
+              {hangukData.data.length === 0 && (
+                <section className={styles.error}>
+                  <p>또루뀨막똫!</p>
+                  <p>자막, 화면해설 또루뀨막똫!</p>
+                </section>
+              )}
               {Array.isArray(hangukData.data) && (
                 <section className={category === 'game' ? styles.game : ''}>
                   {hangukData.data.map((amusement: AmusementData, index: number) => (
@@ -2171,6 +2277,7 @@ function Amusement({
                 <h1 className="April16thPromise">
                   <em dangerouslySetInnerHTML={{ __html: title }} />{' '}
                   {subdubData.total > 0 && <span>({subdubData.total}개 작품)</span>}
+                  {subdubData.data.length === 0 && <span>Not found subtitle or dubbing</span>}
                 </h1>
                 <div className={styles.select}>
                   <select value={selectedHanguk} onChange={handleHangukChange}>
@@ -2189,6 +2296,12 @@ function Amusement({
                   <button onClick={handleHangukSubmit}>자막 및 화면해설 선택</button>
                 </div>
               </div>
+              {subdubData.data.length === 0 && (
+                <section className={styles.error}>
+                  <p>자막/더빙 지원여부 선택에 오류가 있어요</p>
+                  <p>다시 선택해 주세요</p>
+                </section>
+              )}
               {Array.isArray(subdubData.data) && (
                 <section className={category === 'game' ? styles.game : ''}>
                   {subdubData.data.map((amusement: AmusementData, index: number) => (
@@ -2523,6 +2636,7 @@ function Amusement({
                 <h1 className="April16thPromise">
                   <em dangerouslySetInnerHTML={{ __html: title }} />{' '}
                   {bfreeData.total > 0 && <span>({bfreeData.total}개 작품)</span>}
+                  {bfreeData.data.length === 0 && <span>Not found barrier-free</span>}
                 </h1>
                 <div className={styles.select}>
                   <select value={selectedHanguk} onChange={handleHangukChange}>
@@ -2541,6 +2655,12 @@ function Amusement({
                   <button onClick={handleHangukSubmit}>자막 및 화면해설 선택</button>
                 </div>
               </div>
+              {bfreeData.data.length === 0 && (
+                <section className={styles.error}>
+                  <p>베리어프리 지원여부 선택에 오류가 있어요</p>
+                  <p>다시 선택해 주세요</p>
+                </section>
+              )}
               {Array.isArray(bfreeData.data) && (
                 <section className={category === 'game' ? styles.game : ''}>
                   {bfreeData.data.map((amusement: AmusementData, index: number) => (
@@ -2867,6 +2987,19 @@ function Amusement({
                 bfree={bfree}
                 sorting={'amusement'}
               />
+            </div>
+          )}
+          {router.query.literature && literatureData === null && (
+            <div className={styles.content}>
+              <div className={`${styles.headline} ${styles['without-select']}`}>
+                <h1 className="April16thPromise">
+                  <em>찾을 수 없는 연결고리</em> <span>Not Found Literature</span>
+                </h1>
+              </div>
+              <section>
+                <p>존재하지 않는 연결고리입니다.</p>
+                <p>뒤로 이동해 주세요</p>
+              </section>
             </div>
           )}
           {router.query.literature && literatureData && (
@@ -3237,7 +3370,7 @@ function CategoryTitle(category: keyof typeof CategoryTitle): string {
     anime: '애니입니다만,\n문제라도?',
     ott: '퇴근 후,\n이세계 OTT에서만\n볼 수 있는 작품을.',
   };
-  return categoryTitles[category] || '카테고리/태그/플랫폼 선택';
+  return categoryTitles[category] || '카테고리를 찾을 수 없어요';
 }
 
 function TagTitle(tag: keyof typeof TagTitle, category?: string): string {
@@ -3265,7 +3398,7 @@ function TagTitle(tag: keyof typeof TagTitle, category?: string): string {
             ? '심신미약자, 임산부, 노약자\n시청금지 공포 영화!'
             : '심신미약자, 임산부, 노약자\n시청금지 공포 게임!',
   };
-  return tagTitles[tag] || '태그 선택';
+  return tagTitles[tag] || '해시태그를 찾을 수 없어요';
 }
 
 function PlatformTitle(platform: keyof typeof PlatformTitle): string {
@@ -3300,7 +3433,7 @@ function PlatformTitle(platform: keyof typeof PlatformTitle): string {
     tooniverse: '투니버스\n방영 애니메이션',
     animax: '애니맥스 코리아\n방영 애니메이션',
   };
-  return platformTitles[platform] || 'OTT플랫폼/방송국 선택';
+  return platformTitles[platform] || '플랫폼을 찾을 수 없어요';
 }
 
 function HangukTitle(hanguk: keyof typeof HangukTitle, category?: string): string {
@@ -3312,7 +3445,7 @@ function HangukTitle(hanguk: keyof typeof HangukTitle, category?: string): strin
     description: '화면 해설\n지원',
     anything: category === 'game' ? '모든 게임\n한눈에 보기' : '모든 작품\n한눈에 보기',
   };
-  return hangukTitles[hanguk] || '지원여부 선택';
+  return hangukTitles[hanguk] || '또루뀨막똫';
 }
 
 function SubdubTitle(subdub: keyof typeof SubdubTitle): string {
@@ -3321,7 +3454,7 @@ function SubdubTitle(subdub: keyof typeof SubdubTitle): string {
     dubbing: '한국어 더빙\n공식 지원!',
     both: '자막/더빙 둘다\n지원하는 작품!',
   };
-  return subdubTitles[subdub] || '지원여부 선택';
+  return subdubTitles[subdub] || '자막/더빙 지원여부 선택 오류';
 }
 
 function BfreeTitle(bfree: keyof typeof BfreeTitle): string {
@@ -3330,7 +3463,7 @@ function BfreeTitle(bfree: keyof typeof BfreeTitle): string {
     description: '화면 해설\n지원',
     bfree: 'CC/AD 둘다\n지원하는 작품!',
   };
-  return bfreeTitles[bfree] || '지원여부 선택';
+  return bfreeTitles[bfree] || '베리어프리 지원여부 선택 오류';
 }
 
 export async function getServerSideProps(context: any) {
