@@ -95,29 +95,31 @@
       width: 100%
       color: $hex-light
 
-      img
-        object-fit: contain
-        object-position: 0 100%
+      .logoID
         margin-bottom: rem(27)
-        width: auto
-        max-width: 100%
 
-        &.default
+        img
+          object-fit: contain
+          object-position: 0 100%
+          aspect-ratio: auto
+          width: auto
+          max-width: 100%
+
+        &.default img
           height: rem(75)
 
           +mq(minExtraLarge)
             height: rem(100)
 
-        &.half
+        &.half img
           height: rem(52)
 
           +mq(minExtraLarge)
             height: rem(75)
 
-        &.double
+        &.double img
           height: rem(150)
 
-      img
         &:not(.game-title) + h1
           +screen-reader-only
 

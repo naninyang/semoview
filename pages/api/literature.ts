@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { getLiteratureData } from '@/utils/strapi';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const id = req.query.id as string;
+  const id = Number(req.query.id);
   try {
     const response = await fetch(`${process.env.STRAPI_URL}/api/literature-semoviews/${id}`, {
       headers: {
@@ -18,6 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       ...semoviewResponse.data,
       amusementData,
     };
+    console.log('semoview: ', semoview);
     res.status(200).json(semoview);
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
