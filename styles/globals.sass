@@ -143,14 +143,27 @@ main
 
 .headline
   display: flex
-  align-items: center
-  justify-content: space-between
-  gap: rem(7)
-  padding: rem(52) calc(env(safe-area-inset-right) + rem(12)) rem(17) calc(env(safe-area-inset-left) + rem(12))
+  justify-content: flex-start
+  background-color: $hex-dark
+  padding: rem(37) calc(env(safe-area-inset-right) + rem(12)) rem(17) calc(env(safe-area-inset-left) + rem(12))
+
+  +mq(maxSmall)
+    flex-direction: column
+    align-items: flex-start
+    gap: rem(27)
 
   +mq(minMedium)
-    justify-content: flex-start
-    gap: rem(27)
+    justify-content: space-between
+    align-items: flex-end
+    padding: rem(52) calc(env(safe-area-inset-right) + rem(12)) rem(27) calc(env(safe-area-inset-left) + rem(12))
+
+  &.without-select
+    flex-direction: column
+    align-items: flex-start
+    gap: rem(12)
+
+    p
+      color: $hex-light
 
   h1, h2
     font-size: rem(20)
@@ -160,13 +173,17 @@ main
       font-size: rem(24)
 
   h1
+    em, span
+      vertical-align: sub
+      line-height: 1.25
+
     em
       font-size: rem(32)
       font-style: normal
-      line-height: 1.25
       color: $hex-light
 
     span
+      padding-left: rem(12)
       font-size: rem(14)
       font-weight: 800
       color: $hex-azalea
@@ -234,32 +251,6 @@ main
     +mq(maxSmall)
       span
         +screen-reader-only
-
-.headline
-  display: flex
-  justify-content: flex-start
-  background-color: $hex-dark
-  padding: rem(37) calc(env(safe-area-inset-right) + rem(12)) rem(17) calc(env(safe-area-inset-left) + rem(12))
-
-  +mq(maxSmall)
-    flex-direction: column
-    align-items: flex-start
-    gap: rem(27)
-
-  +mq(minMedium)
-    justify-content: space-between
-    align-items: flex-end
-    padding: rem(52) calc(env(safe-area-inset-right) + rem(12)) rem(27) calc(env(safe-area-inset-left) + rem(12))
-
-  .select
-    display: flex
-    gap: rem(7)
-
-    select, button
-      border: 1px solid rgba($hex-black, .7)
-      border-radius: rem(3)
-      padding: rem(3) rem(7)
-      font-weight: 800
 
 .slick-slider
   .slick-track

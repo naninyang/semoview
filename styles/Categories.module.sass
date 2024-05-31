@@ -210,10 +210,6 @@
           font-size: rem(24)
 
       h1
-        display: flex
-        align-items: flex-end
-        gap: rem(12)
-
         em
           font-size: rem(32)
           font-style: normal
@@ -221,6 +217,7 @@
           color: $hex-light
 
         span
+          padding-left: rem(12)
           font-size: rem(14)
           font-weight: 800
           line-height: 1.25
@@ -739,32 +736,6 @@
           width: 100%
           height: auto
           aspect-ratio: 345 / 294
-
-    .headline
-      display: flex
-      justify-content: flex-start
-      background-color: $hex-dark
-      padding: rem(37) calc(env(safe-area-inset-right) + rem(12)) rem(17) calc(env(safe-area-inset-left) + rem(12))
-
-      +mq(maxSmall)
-        flex-direction: column
-        align-items: flex-start
-        gap: rem(27)
-
-      +mq(minMedium)
-        justify-content: space-between
-        align-items: flex-end
-        padding: rem(52) calc(env(safe-area-inset-right) + rem(12)) rem(27) calc(env(safe-area-inset-left) + rem(12))
-
-      .select
-        display: flex
-        gap: rem(7)
-
-        select, button
-          border: 1px solid rgba($hex-black, .7)
-          border-radius: rem(3)
-          padding: rem(3) rem(7)
-          font-weight: 800
 
     .content
       section

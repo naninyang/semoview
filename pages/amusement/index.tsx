@@ -256,7 +256,7 @@ function Amusement({
         <>
           {router.query.literature && (
             <div className={styles.content}>
-              <div className={`${styles.headline} ${styles['without-select']}`}>
+              <div className="headline without-select">
                 <h1 className="April16thPromise">
                   <em>찾을 수 없는 연결고리</em> <span className="preview">Not Found Literature</span>
                 </h1>
@@ -274,11 +274,11 @@ function Amusement({
           )}
           {router.query.platform && (
             <div className={styles.content}>
-              <div className={styles.headline}>
+              <div className="headline">
                 <h1 className="April16thPromise">
                   <em>플랫폼을 찾을 수 없어요</em> <span className="preview">Not found platform</span>
                 </h1>
-                <div className={styles.select}>
+                <div className="select">
                   <select onChange={handlePlatformChange} defaultValue={platform}>
                     <option value="">플랫폼(OTT 또는 방송국) 선택</option>
                     <optgroup label="OTT 플랫폼">
@@ -720,13 +720,16 @@ function Amusement({
         <>
           {router.query.category && categoryData && (
             <div className={styles.content}>
-              <div className={styles.headline}>
+              <div className="headline">
                 <h1 className="April16thPromise">
-                  <em dangerouslySetInnerHTML={{ __html: title }} />{' '}
-                  {categoryData.total > 0 && <span>({categoryData.total}개 작품)</span>}
-                  {categoryData.data.length === 0 && <span className="preview">Not found category</span>}
+                  <em dangerouslySetInnerHTML={{ __html: title }} />
+                  {categoryData.data.length === 0 ? (
+                    <span className="preview">Not found category</span>
+                  ) : (
+                    process.env.NODE_ENV === 'development' && <span>({categoryData.total}개 작품)</span>
+                  )}
                 </h1>
-                <div className={styles.select}>
+                <div className="select">
                   <select onChange={handleCategoryChange} defaultValue={category}>
                     <option value="">카테고리 선택</option>
                     <option value="ott">오직 OTT에서</option>
@@ -1198,11 +1201,14 @@ function Amusement({
                   </li>
                 </ul>
               </div>
-              <div className={styles.headline}>
+              <div className="headline">
                 <h1 className="April16thPromise">
                   <em dangerouslySetInnerHTML={{ __html: title }} />{' '}
-                  {tagData.total > 0 && <span>({tagData.total}개 작품)</span>}
-                  {tagData.data.length === 0 && <span className="preview">Not found hash tag</span>}
+                  {tagData.data.length === 0 ? (
+                    <span className="preview">Not found hash tag</span>
+                  ) : (
+                    process.env.NODE_ENV === 'development' && <span>({tagData.total}개 작품)</span>
+                  )}
                   <strong>
                     {tagData.data.length > 0 && (
                       <>
@@ -1555,12 +1561,12 @@ function Amusement({
           )}
           {router.query.platform && platformData && (
             <div className={styles.content}>
-              <div className={styles.headline}>
+              <div className="headline">
                 <h1 className="April16thPromise">
                   <em dangerouslySetInnerHTML={{ __html: title }} />{' '}
-                  {platformData.total > 0 && <span>({platformData.total}개 작품)</span>}
+                  {process.env.NODE_ENV === 'development' && <span>({platformData.total}개 작품)</span>}
                 </h1>
-                <div className={styles.select}>
+                <div className="select">
                   <select onChange={handlePlatformChange} defaultValue={platform}>
                     <option value="">플랫폼(OTT 또는 방송국) 선택</option>
                     <optgroup label="OTT 플랫폼">
@@ -1949,13 +1955,16 @@ function Amusement({
           )}
           {router.query.hanguk && hangukData && (
             <div className={styles.content}>
-              <div className={styles.headline}>
+              <div className="headline">
                 <h1 className="April16thPromise">
                   <em dangerouslySetInnerHTML={{ __html: title }} />{' '}
-                  {hangukData.total > 0 && <span>({hangukData.total}개 작품)</span>}
-                  {hangukData.data.length === 0 && <span className="preview">Not found script</span>}
+                  {hangukData.data.length === 0 ? (
+                    <span className="preview">Not found script</span>
+                  ) : (
+                    process.env.NODE_ENV === 'development' && <span>({hangukData.total}개 작품)</span>
+                  )}
                 </h1>
-                <div className={styles.select}>
+                <div className="select">
                   <select value={selectedHanguk} onChange={handleHangukChange}>
                     <option value="">선택</option>
                     <option value="subtitle">자막 지원</option>
@@ -2316,13 +2325,16 @@ function Amusement({
           )}
           {router.query.subdub && subdubData && (
             <div className={styles.content}>
-              <div className={styles.headline}>
+              <div className="headline">
                 <h1 className="April16thPromise">
                   <em dangerouslySetInnerHTML={{ __html: title }} />{' '}
-                  {subdubData.total > 0 && <span>({subdubData.total}개 작품)</span>}
-                  {subdubData.data.length === 0 && <span className="preview">Not found subtitle or dubbing</span>}
+                  {subdubData.data.length === 0 ? (
+                    <span className="preview">Not found subtitle or dubbing</span>
+                  ) : (
+                    process.env.NODE_ENV === 'development' && <span>({subdubData.total}개 작품)</span>
+                  )}
                 </h1>
-                <div className={styles.select}>
+                <div className="select">
                   <select value={selectedHanguk} onChange={handleHangukChange}>
                     <option value="">선택</option>
                     <option value="subtitle">자막 지원</option>
@@ -2682,13 +2694,16 @@ function Amusement({
           )}
           {router.query.bfree && bfreeData && (
             <div className={styles.content}>
-              <div className={styles.headline}>
+              <div className="headline">
                 <h1 className="April16thPromise">
                   <em dangerouslySetInnerHTML={{ __html: title }} />{' '}
-                  {bfreeData.total > 0 && <span>({bfreeData.total}개 작품)</span>}
-                  {bfreeData.data.length === 0 && <span className="preview">Not found barrier-free</span>}
+                  {bfreeData.data.length === 0 ? (
+                    <span className="preview">Not found barrier-free</span>
+                  ) : (
+                    process.env.NODE_ENV === 'development' && <span>({bfreeData.total}개 작품)</span>
+                  )}
                 </h1>
-                <div className={styles.select}>
+                <div className="select">
                   <select value={selectedHanguk} onChange={handleHangukChange}>
                     <option value="">선택</option>
                     <option value="subtitle">자막 지원</option>
@@ -3048,7 +3063,7 @@ function Amusement({
           )}
           {router.query.literature && literatureData === null && (
             <div className={styles.content}>
-              <div className={`${styles.headline} ${styles['without-select']}`}>
+              <div className="headline without-select">
                 <h1 className="April16thPromise">
                   <em>찾을 수 없는 연결고리</em> <span className="preview">Not Found Literature</span>
                 </h1>
@@ -3061,7 +3076,7 @@ function Amusement({
           )}
           {router.query.literature && literatureData && (
             <div className={styles.content}>
-              <div className={`${styles.headline} ${styles['without-select']}`}>
+              <div className="headline without-select">
                 <h1 className="April16thPromise">
                   <em>
                     `{literatureData.attributes.subject}`{' '}
@@ -3071,7 +3086,7 @@ function Amusement({
                         ? '게임'
                         : '관련 작품'}
                   </em>{' '}
-                  {literatureData.total > 0 && <span>({literatureData.total}개 작품)</span>}
+                  {process.env.NODE_ENV === 'development' && <span>({literatureData.total}개 작품)</span>}
                 </h1>
                 <p
                   dangerouslySetInnerHTML={{ __html: literatureData.attributes.description.replace(/\\n/g, '<br />') }}
