@@ -3552,6 +3552,13 @@ export async function getServerSideProps(context: any) {
   let subdubData = null;
   let bfreeData = null;
   let literatureData = null;
+  let categoryQuery = null;
+  let tagQuery = null;
+  let platformQuery = null;
+  let hangukQuery = null;
+  let subdubQuery = null;
+  let bfreeQuery = null;
+  let literatureQuery = null;
   let error = null;
   let pageTitle = '카테고리/태그/플랫폼 선택';
 
@@ -3565,13 +3572,14 @@ export async function getServerSideProps(context: any) {
       }
       categoryData = await response.json();
       pageTitle = CategoryTitle(category as keyof typeof CategoryTitle);
+      categoryQuery = categoryData.data.length > 0 ? context.query.category : 'amusement-error';
     } catch (err) {
       error = err instanceof Error ? err.message : 'An unknown error occurred';
     }
     return {
       props: {
-        categoryQuery: context.query.category || '',
-        ogAddress: context.query.category || 'default',
+        categoryQuery: categoryQuery || '',
+        ogAddress: categoryQuery || 'amusement-error',
         categoryData,
         category,
         pageTitle,
@@ -3590,13 +3598,14 @@ export async function getServerSideProps(context: any) {
         }
         tagData = await response.json();
         pageTitle = TagTitle(tag as keyof typeof TagTitle);
+        tagQuery = tagData.data.length > 0 ? context.query.tag : 'amusement-error';
       } catch (err) {
         error = err instanceof Error ? err.message : 'An unknown error occurred';
       }
       return {
         props: {
-          tagQuery: context.query.tag || '',
-          ogAddress: context.query.tag || '',
+          tagQuery: tagQuery || '',
+          ogAddress: tagQuery || 'amusement-error',
           tagData,
           tag,
           pageTitle,
@@ -3614,6 +3623,7 @@ export async function getServerSideProps(context: any) {
         }
         tagData = await response.json();
         pageTitle = TagTitle(tag as keyof typeof TagTitle, category);
+        tagQuery = tagData.data.length > 0 ? context.query.tag + '-' + context.query.category : 'amusement-error';
       } catch (err) {
         error = err instanceof Error ? err.message : 'An unknown error occurred';
       }
@@ -3626,7 +3636,7 @@ export async function getServerSideProps(context: any) {
           categoryData,
           category,
           pageTitle,
-          ogAddress: context.query.tag + '-' + context.query.category || '',
+          ogAddress: tagQuery || 'amusement-error',
           currentPage,
           error,
         },
@@ -3643,13 +3653,14 @@ export async function getServerSideProps(context: any) {
         }
         hangukData = await response.json();
         pageTitle = HangukTitle(hanguk as keyof typeof HangukTitle);
+        hangukQuery = hangukData.data.length > 0 ? context.query.hanguk : 'amusement-error';
       } catch (err) {
         error = err instanceof Error ? err.message : 'An unknown error occurred';
       }
       return {
         props: {
-          hangukQuery: context.query.hanguk || '',
-          ogAddress: context.query.hanguk || '',
+          hangukQuery: hangukQuery || '',
+          ogAddress: hangukQuery || 'amusement-error',
           hangukData,
           hanguk,
           pageTitle,
@@ -3679,7 +3690,7 @@ export async function getServerSideProps(context: any) {
           categoryData,
           category,
           pageTitle,
-          ogAddress: context.query.hanguk + '-' + context.query.category || '',
+          ogAddress: context.query.hanguk + '-' + context.query.category || 'amusement-error',
           currentPage,
           error,
         },
@@ -3695,13 +3706,14 @@ export async function getServerSideProps(context: any) {
       }
       subdubData = await response.json();
       pageTitle = SubdubTitle(subdub as keyof typeof SubdubTitle);
+      subdubQuery = subdubData.data.length > 0 ? context.query.subdub : 'amusement-error';
     } catch (err) {
       error = err instanceof Error ? err.message : 'An unknown error occurred';
     }
     return {
       props: {
-        subdubQuery: context.query.subdub || '',
-        ogAddress: context.query.subdub || '',
+        subdubQuery: subdubQuery || '',
+        ogAddress: subdubQuery || 'amusement-error',
         subdubData,
         subdub,
         pageTitle,
@@ -3719,13 +3731,14 @@ export async function getServerSideProps(context: any) {
       }
       bfreeData = await response.json();
       pageTitle = BfreeTitle(bfree as keyof typeof BfreeTitle);
+      bfreeQuery = bfreeData.data.length > 0 ? context.query.bfree : 'amusement-error';
     } catch (err) {
       error = err instanceof Error ? err.message : 'An unknown error occurred';
     }
     return {
       props: {
-        subdubQuery: context.query.bfree || '',
-        ogAddress: context.query.bfree || '',
+        subdubQuery: bfreeQuery || '',
+        ogAddress: bfreeQuery || 'amusement-error',
         bfreeData,
         bfree,
         pageTitle,
@@ -3743,13 +3756,15 @@ export async function getServerSideProps(context: any) {
       }
       platformData = await response.json();
       pageTitle = PlatformTitle(platform as keyof typeof PlatformTitle);
+      platformQuery = context.query.platform;
     } catch (err) {
       error = err instanceof Error ? err.message : 'An unknown error occurred';
+      platformQuery = 'amusement-error';
     }
     return {
       props: {
-        platformQuery: context.query.platform || '',
-        ogAddress: context.query.platform || '',
+        platformQuery: platformQuery || '',
+        ogAddress: platformQuery || 'amusement-error',
         platformData,
         platform,
         pageTitle,
@@ -3766,13 +3781,15 @@ export async function getServerSideProps(context: any) {
         throw new Error('Network response was not ok');
       }
       literatureData = await response.json();
+      literatureQuery = 'literature-' + context.query.literature;
     } catch (err) {
       error = err instanceof Error ? err.message : 'An unknown error occurred';
+      literatureQuery = 'amusement-error';
     }
     return {
       props: {
         literatureQuery: context.query.literature || '',
-        ogAddress: 'literature-' + context.query.literature || '',
+        ogAddress: literatureQuery || 'amusement-error',
         literatureData,
         literature,
         currentPage,
