@@ -1054,21 +1054,17 @@ export default function Amusement({
         </div>
         <div className={styles.info}>
           {logoData !== null && !isMobile && (
-            <Image
-              src={logoData}
-              width="100"
-              height="100"
-              unoptimized
-              priority
-              alt=""
-              className={`${
+            <div
+              className={`${styles.logoID} ${
                 amusementData.attributes.logoSize === 'half'
                   ? styles.half
                   : amusementData.attributes.logoSize === 'double'
                     ? styles.double
                     : styles.default
               } ${amusementData.attributes.category === 'game' ? styles['game-title'] : ''}`}
-            />
+            >
+              <Image src={logoData} width="100" height="100" unoptimized priority alt="" />
+            </div>
           )}
           {amusementData.attributes.titleKorean !== null ? (
             amusementData.attributes.titleKorean.length >= 18 ? (
