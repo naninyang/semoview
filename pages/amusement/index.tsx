@@ -10,7 +10,6 @@ import Anchor from '@/components/Anchor';
 import styles from '@/styles/Categories.module.sass';
 import { CategoryName } from '@/components/CategoryName';
 import { TagName } from '@/components/TagName';
-import { SupportLang } from '@/components/SupportLang';
 import { BadgeLang } from '@/components/BadgeLang';
 import {
   AbcIcon,
@@ -259,7 +258,7 @@ function Amusement({
             <div className={styles.content}>
               <div className={`${styles.headline} ${styles['without-select']}`}>
                 <h1 className="April16thPromise">
-                  <em>찾을 수 없는 연결고리</em> <span>Not Found Literature</span>
+                  <em>찾을 수 없는 연결고리</em> <span className="preview">Not Found Literature</span>
                 </h1>
               </div>
               <section className={styles.error}>
@@ -277,7 +276,7 @@ function Amusement({
             <div className={styles.content}>
               <div className={styles.headline}>
                 <h1 className="April16thPromise">
-                  <em>플랫폼을 찾을 수 없어요</em> <span>Not found platform</span>
+                  <em>플랫폼을 찾을 수 없어요</em> <span className="preview">Not found platform</span>
                 </h1>
                 <div className={styles.select}>
                   <select onChange={handlePlatformChange} defaultValue={platform}>
@@ -725,7 +724,7 @@ function Amusement({
                 <h1 className="April16thPromise">
                   <em dangerouslySetInnerHTML={{ __html: title }} />{' '}
                   {categoryData.total > 0 && <span>({categoryData.total}개 작품)</span>}
-                  {categoryData.data.length === 0 && <span>Not found category</span>}
+                  {categoryData.data.length === 0 && <span className="preview">Not found category</span>}
                 </h1>
                 <div className={styles.select}>
                   <select onChange={handleCategoryChange} defaultValue={category}>
@@ -1203,7 +1202,7 @@ function Amusement({
                 <h1 className="April16thPromise">
                   <em dangerouslySetInnerHTML={{ __html: title }} />{' '}
                   {tagData.total > 0 && <span>({tagData.total}개 작품)</span>}
-                  {tagData.data.length === 0 && <span>Not found hash tag</span>}
+                  {tagData.data.length === 0 && <span className="preview">Not found hash tag</span>}
                   <strong>
                     {tagData.data.length > 0 && (
                       <>
@@ -1954,7 +1953,7 @@ function Amusement({
                 <h1 className="April16thPromise">
                   <em dangerouslySetInnerHTML={{ __html: title }} />{' '}
                   {hangukData.total > 0 && <span>({hangukData.total}개 작품)</span>}
-                  {hangukData.data.length === 0 && <span>Not found script</span>}
+                  {hangukData.data.length === 0 && <span className="preview">Not found script</span>}
                 </h1>
                 <div className={styles.select}>
                   <select value={selectedHanguk} onChange={handleHangukChange}>
@@ -2321,7 +2320,7 @@ function Amusement({
                 <h1 className="April16thPromise">
                   <em dangerouslySetInnerHTML={{ __html: title }} />{' '}
                   {subdubData.total > 0 && <span>({subdubData.total}개 작품)</span>}
-                  {subdubData.data.length === 0 && <span>Not found subtitle or dubbing</span>}
+                  {subdubData.data.length === 0 && <span className="preview">Not found subtitle or dubbing</span>}
                 </h1>
                 <div className={styles.select}>
                   <select value={selectedHanguk} onChange={handleHangukChange}>
@@ -2687,7 +2686,7 @@ function Amusement({
                 <h1 className="April16thPromise">
                   <em dangerouslySetInnerHTML={{ __html: title }} />{' '}
                   {bfreeData.total > 0 && <span>({bfreeData.total}개 작품)</span>}
-                  {bfreeData.data.length === 0 && <span>Not found barrier-free</span>}
+                  {bfreeData.data.length === 0 && <span className="preview">Not found barrier-free</span>}
                 </h1>
                 <div className={styles.select}>
                   <select value={selectedHanguk} onChange={handleHangukChange}>
@@ -3051,7 +3050,7 @@ function Amusement({
             <div className={styles.content}>
               <div className={`${styles.headline} ${styles['without-select']}`}>
                 <h1 className="April16thPromise">
-                  <em>찾을 수 없는 연결고리</em> <span>Not Found Literature</span>
+                  <em>찾을 수 없는 연결고리</em> <span className="preview">Not Found Literature</span>
                 </h1>
               </div>
               <section>
