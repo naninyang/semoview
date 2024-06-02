@@ -429,7 +429,7 @@ function Home({
                               <div className={styles.summary} style={{ color: '#000' }}>
                                 <p>{banner.description}</p>
                                 <em>
-                                  ({banner.author} ‘{banner.title}’)
+                                  ({banner.author} ‘{banner.title}’ {banner.type === 'wavve' && '시리즈'})
                                 </em>
                               </div>
                               <Background color={banner.color} />
@@ -444,7 +444,7 @@ function Home({
                               <div className={styles.summary} style={{ color: banner.isLight ? '#000' : '#fff' }}>
                                 <p>{banner.description}</p>
                                 <em>
-                                  ({banner.author} ‘{banner.title}’)
+                                  ({banner.author} ‘{banner.title}’ {banner.type === 'wavve' && '시리즈'})
                                 </em>
                               </div>
                               <Background color={banner.color} />
