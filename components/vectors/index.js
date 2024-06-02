@@ -101,10 +101,10 @@ export const vectors = {
     peacock2: require('./broadcast/peacock2.svg'),
     skyIcon: require('./broadcast/sky-icon.svg'),
     sky: require('./broadcast/sky.svg'),
-    sky2: require('./broadcast/sky.svg'),
+    sky2: require('./broadcast/sky2.svg'),
     syfyIcon: require('./broadcast/syfy-icon.svg'),
     syfy: require('./broadcast/syfy.svg'),
-    syfy2: require('./broadcast/syfy.svg'),
+    syfy2: require('./broadcast/syfy2.svg'),
   },
   ratings: {
     film: {
