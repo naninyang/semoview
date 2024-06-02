@@ -65,6 +65,7 @@ export interface JejeupData {
     posterDefault: string;
     posterOther: string;
     relations: string;
+    wavveSeries: any;
   };
 }
 
@@ -176,6 +177,7 @@ export interface AmusementData {
   season: string;
   franchise: string;
   relName: string;
+  wavveSeries: any;
 }
 
 export interface AmusementPermalinkData {
@@ -231,6 +233,7 @@ export interface AmusementPermalinkData {
     franchise: string;
     relName: string;
     logoSize: string;
+    wavveSeries: any;
   };
 }
 

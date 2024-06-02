@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
@@ -21,10 +21,13 @@ import {
   AniplusIcon,
   AppleIcon,
   AtxIcon,
+  BbcIcon,
   DaewonIcon,
   DisneyIcon,
   EnaIcon,
   FujitvIcon,
+  HbomaxIcon,
+  HuluIcon,
   JtbcIcon,
   Kbs2Icon,
   MbcIcon,
@@ -33,6 +36,7 @@ import {
   NippontvIcon,
   OcnIcon,
   ParamountIcon,
+  PeacockIcon,
   RatingFilmAll,
   RatingFilmB12,
   RatingFilmC15,
@@ -42,7 +46,9 @@ import {
   RatingGameC15,
   RatingGameD19,
   SbsIcon,
+  SkyIcon,
   StarIcon,
+  SyfyIcon,
   TbsIcon,
   TokyomxIcon,
   TooniverseIcon,
@@ -156,7 +162,7 @@ function Categories({
                       <div className={styles.thumbnail}>
                         <Image src={amusement.posterDefault} width="390" height="560" alt="" unoptimized priority />
                         <dl>
-                          {amusement.broadcast !== null && (
+                          {(amusement.broadcast !== null || amusement.wavveSeries !== null) && (
                             <div className={`${styles.broadcast} ${amusement.ott !== null ? styles.broadcasts : ''}`}>
                               <dt>방송국</dt>
                               <dd>
@@ -200,6 +206,47 @@ function Categories({
                                     <AbcIcon /> <span>ABC</span>
                                   </>
                                 )}
+                                {amusement.wavveSeries &&
+                                  amusement.wavveSeries.map((item: string, index: number) => (
+                                    <React.Fragment key={index}>
+                                      {item === 'bbc' && (
+                                        <>
+                                          <BbcIcon />
+                                          <span>BBC</span>
+                                        </>
+                                      )}
+                                      {item === 'hbomax' && (
+                                        <>
+                                          <HbomaxIcon />
+                                          <span>HBO맥스</span>
+                                        </>
+                                      )}
+                                      {item === 'hulu' && (
+                                        <>
+                                          <HuluIcon />
+                                          <span>Hulu</span>
+                                        </>
+                                      )}
+                                      {item === 'peacock' && (
+                                        <>
+                                          <PeacockIcon />
+                                          <span>Peacock</span>
+                                        </>
+                                      )}
+                                      {item === 'sky' && (
+                                        <>
+                                          <SkyIcon />
+                                          <span>SKY</span>
+                                        </>
+                                      )}
+                                      {item === 'syfy' && (
+                                        <>
+                                          <SyfyIcon />
+                                          <span>SYFY</span>
+                                        </>
+                                      )}
+                                    </React.Fragment>
+                                  ))}
                               </dd>
                             </div>
                           )}
@@ -853,7 +900,7 @@ function Categories({
                               </dd>
                             </div>
                           )}
-                          {amusement.broadcast !== null && (
+                          {(amusement.broadcast !== null || amusement.wavveSeries !== null) && (
                             <div className={`${styles.broadcast} ${amusement.ott !== null ? styles.broadcasts : ''}`}>
                               <dt>방송국</dt>
                               <dd>
@@ -897,6 +944,47 @@ function Categories({
                                     <AbcIcon /> <span>ABC</span>
                                   </>
                                 )}
+                                {amusement.wavveSeries &&
+                                  amusement.wavveSeries.map((item: string, index: number) => (
+                                    <React.Fragment key={index}>
+                                      {item === 'bbc' && (
+                                        <>
+                                          <BbcIcon />
+                                          <span>BBC</span>
+                                        </>
+                                      )}
+                                      {item === 'hbomax' && (
+                                        <>
+                                          <HbomaxIcon />
+                                          <span>HBO맥스</span>
+                                        </>
+                                      )}
+                                      {item === 'hulu' && (
+                                        <>
+                                          <HuluIcon />
+                                          <span>Hulu</span>
+                                        </>
+                                      )}
+                                      {item === 'peacock' && (
+                                        <>
+                                          <PeacockIcon />
+                                          <span>Peacock</span>
+                                        </>
+                                      )}
+                                      {item === 'sky' && (
+                                        <>
+                                          <SkyIcon />
+                                          <span>SKY</span>
+                                        </>
+                                      )}
+                                      {item === 'syfy' && (
+                                        <>
+                                          <SyfyIcon />
+                                          <span>SYFY</span>
+                                        </>
+                                      )}
+                                    </React.Fragment>
+                                  ))}
                               </dd>
                             </div>
                           )}

@@ -20,10 +20,13 @@ import {
   Aniplus,
   AppleOriginal,
   Atx,
+  Bbc,
   Daewon,
   DisneyOriginal,
   Ena,
   Fujitv,
+  Hbomax,
+  Hulu,
   Jtbc,
   Kbs2tv,
   Mbc,
@@ -32,6 +35,7 @@ import {
   Nippontv,
   Ocn,
   Paramount,
+  Peacock,
   RatingFilmAll,
   RatingFilmB12,
   RatingFilmC15,
@@ -41,7 +45,9 @@ import {
   RatingGameC15,
   RatingGameD19,
   Sbs,
+  Sky,
   StarOriginal,
+  Syfy,
   Tbs,
   Tokyomx,
   Tooniverse,
@@ -510,7 +516,53 @@ function Review({ data, error, currentPage }: { data: any; error: string; curren
                                 </>
                               )}
                               {jejeup.amusementData.category === 'ott_drama' &&
-                                jejeup.amusementData.broadcast === null && <em>드라마</em>}
+                                jejeup.amusementData.broadcast === null &&
+                                jejeup.amusementData.wavveSeries === null && <em>드라마</em>}
+                              {jejeup.amusementData.wavveSeries && (
+                                <em className={styles[jejeup.amusementData.broadcast]}>
+                                  {jejeup.amusementData.wavveSeries.map((item: string, index: number) => (
+                                    <React.Fragment key={index}>
+                                      {item === 'bbc' && (
+                                        <>
+                                          <Bbc />
+                                          <span>BBC</span>
+                                        </>
+                                      )}
+                                      {item === 'hbomax' && (
+                                        <>
+                                          <Hbomax />
+                                          <span>HBO맥스</span>
+                                        </>
+                                      )}
+                                      {item === 'hulu' && (
+                                        <>
+                                          <Hulu />
+                                          <span>Hulu</span>
+                                        </>
+                                      )}
+                                      {item === 'peacock' && (
+                                        <>
+                                          <Peacock />
+                                          <span>Peacock</span>
+                                        </>
+                                      )}
+                                      {item === 'sky' && (
+                                        <>
+                                          <Sky />
+                                          <span>SKY</span>
+                                        </>
+                                      )}
+                                      {item === 'syfy' && (
+                                        <>
+                                          <Syfy />
+                                          <span>SYFY</span>
+                                        </>
+                                      )}
+                                    </React.Fragment>
+                                  ))}
+                                  드라마
+                                </em>
+                              )}
                               {jejeup.amusementData.broadcast !== null && (
                                 <em className={styles[jejeup.amusementData.broadcast]}>
                                   {jejeup.amusementData.broadcast === 'ENA' && (

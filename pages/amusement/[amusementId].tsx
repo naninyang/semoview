@@ -41,6 +41,7 @@ import {
   AppleWhite,
   AtxWhite,
   BackButtonLight,
+  BbcWhite,
   CCiconWhite,
   ClipboardIconLight,
   DaewonWhite,
@@ -49,6 +50,8 @@ import {
   DownIcon,
   EnaWhite,
   FujitvWhite,
+  HbomaxWhite,
+  HuluWhite,
   JtbcWhite,
   Kbs2tvWhite,
   MbcWhite,
@@ -58,6 +61,7 @@ import {
   NippontvWhite,
   OcnWhite,
   ParamountWhite,
+  PeacockWhite,
   RatingFilmAll,
   RatingFilmB12,
   RatingFilmC15,
@@ -68,7 +72,9 @@ import {
   RatingGameD19,
   SbsWhite,
   SeriesWhite,
+  SkyWhite,
   StarOriginalWhite,
+  SyfyWhite,
   TbsWhite,
   TokyomxWhite,
   TooniverseWhite,
@@ -1474,6 +1480,47 @@ export default function Amusement({
                               <AbcWhite /> <span>ABC</span>
                             </>
                           )}
+                          {amusementData.attributes.wavveSeries &&
+                            amusementData.attributes.wavveSeries.map((item: string, index: number) => (
+                              <React.Fragment key={index}>
+                                {item === 'bbc' && (
+                                  <>
+                                    <BbcWhite />
+                                    <span>BBC</span>
+                                  </>
+                                )}
+                                {item === 'hbomax' && (
+                                  <>
+                                    <HbomaxWhite />
+                                    <span>HBO맥스</span>
+                                  </>
+                                )}
+                                {item === 'hulu' && (
+                                  <>
+                                    <HuluWhite />
+                                    <span>Hulu</span>
+                                  </>
+                                )}
+                                {item === 'peacock' && (
+                                  <>
+                                    <PeacockWhite />
+                                    <span>Peacock</span>
+                                  </>
+                                )}
+                                {item === 'sky' && (
+                                  <>
+                                    <SkyWhite />
+                                    <span>SKY</span>
+                                  </>
+                                )}
+                                {item === 'syfy' && (
+                                  <>
+                                    <SyfyWhite />
+                                    <span>SYFY</span>
+                                  </>
+                                )}
+                              </React.Fragment>
+                            ))}
                           {(amusementData.attributes.animeBroadcast1 !== null ||
                             amusementData.attributes.animeBroadcast2 !== null) && (
                             <>

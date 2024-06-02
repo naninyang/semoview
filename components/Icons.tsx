@@ -107,6 +107,36 @@ export const Abc = styled.i({
   background: `url(${vectors.broadcast.abc}) no-repeat 0 50%/contain`,
 });
 
+export const Bbc = styled.i({
+  width: rem(49),
+  background: `url(${vectors.broadcast.bbc}) no-repeat 0 50%/contain`,
+});
+
+export const Hbomax = styled.i({
+  width: rem(80),
+  background: `url(${vectors.broadcast.hbomax}) no-repeat 0 50%/contain`,
+});
+
+export const Hulu = styled.i({
+  width: rem(45),
+  background: `url(${vectors.broadcast.hulu}) no-repeat 0 50%/contain`,
+});
+
+export const Peacock = styled.i({
+  width: rem(46),
+  background: `url(${vectors.broadcast.peacock}) no-repeat 0 50%/contain`,
+});
+
+export const Sky = styled.i({
+  width: rem(23),
+  background: `url(${vectors.broadcast.sky}) no-repeat 0 50%/contain`,
+});
+
+export const Syfy = styled.i({
+  width: rem(57),
+  background: `url(${vectors.broadcast.syfy}) no-repeat 0 50%/contain`,
+});
+
 export const Anibox = styled.i({
   width: rem(48),
   background: `url(${vectors.anime.anibox}) no-repeat 0 50%/contain`,
@@ -277,6 +307,36 @@ export const AbcWhite = styled.i({
   background: `url(${vectors.broadcast.abc2}) no-repeat 0 50%/contain`,
 });
 
+export const BbcWhite = styled.i({
+  width: rem(49),
+  background: `url(${vectors.broadcast.bbc2}) no-repeat 0 50%/contain`,
+});
+
+export const HbomaxWhite = styled.i({
+  width: rem(80),
+  background: `url(${vectors.broadcast.hbomax2}) no-repeat 0 50%/contain`,
+});
+
+export const HuluWhite = styled.i({
+  width: rem(45),
+  background: `url(${vectors.broadcast.hulu2}) no-repeat 0 50%/contain`,
+});
+
+export const PeacockWhite = styled.i({
+  width: rem(46),
+  background: `url(${vectors.broadcast.peacock2}) no-repeat 0 50%/contain`,
+});
+
+export const SkyWhite = styled.i({
+  width: rem(23),
+  background: `url(${vectors.broadcast.sky2}) no-repeat 0 50%/contain`,
+});
+
+export const SyfyWhite = styled.i({
+  width: rem(57),
+  background: `url(${vectors.broadcast.syfy2}) no-repeat 0 50%/contain`,
+});
+
 export const AniboxWhite = styled.i({
   width: rem(48),
   background: `url(${vectors.anime.anibox2}) no-repeat 0 50%/contain`,
@@ -412,6 +472,36 @@ export const TvnIcon = styled.i({
 
 export const AbcIcon = styled.i({
   background: `url(${vectors.broadcast.abcIcon}) no-repeat 50% 50%/contain`,
+});
+
+export const BbcIcon = styled.i({
+  width: rem(49),
+  background: `url(${vectors.broadcast.bbcIcon}) no-repeat 0 50%/contain`,
+});
+
+export const HbomaxIcon = styled.i({
+  width: rem(80),
+  background: `url(${vectors.broadcast.hbomaxIcon}) no-repeat 0 50%/contain`,
+});
+
+export const HuluIcon = styled.i({
+  width: rem(45),
+  background: `url(${vectors.broadcast.huluIcon}) no-repeat 0 50%/contain`,
+});
+
+export const PeacockIcon = styled.i({
+  width: rem(46),
+  background: `url(${vectors.broadcast.peacockIcon}) no-repeat 0 50%/contain`,
+});
+
+export const SkyIcon = styled.i({
+  width: rem(23),
+  background: `url(${vectors.broadcast.skyIcon}) no-repeat 0 50%/contain`,
+});
+
+export const SyfyIcon = styled.i({
+  width: rem(57),
+  background: `url(${vectors.broadcast.syfyIcon}) no-repeat 0 50%/contain`,
 });
 
 export const AniboxIcon = styled.i({

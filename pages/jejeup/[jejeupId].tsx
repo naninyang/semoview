@@ -33,6 +33,7 @@ import {
   AppleOriginal,
   Atx,
   BackButton,
+  Bbc,
   CCiconBlack,
   ClipboardIcon,
   Daewon,
@@ -40,6 +41,8 @@ import {
   DisneyOriginal,
   Ena,
   Fujitv,
+  Hbomax,
+  Hulu,
   Jtbc,
   Kbs2tv,
   Mbc,
@@ -49,6 +52,7 @@ import {
   Nippontv,
   Ocn,
   Paramount,
+  Peacock,
   RatingFilmAll,
   RatingFilmB12,
   RatingFilmC15,
@@ -59,7 +63,9 @@ import {
   RatingGameD19,
   Sbs,
   SeriesOrigin,
+  Sky,
   StarOriginal,
+  Syfy,
   Tbs,
   Tokyomx,
   Tooniverse,
@@ -752,6 +758,47 @@ export default function JejeupDetail({
                         <Abc /> <span>ABC</span>
                       </>
                     )}
+                    {amusementData.wavveSeries &&
+                      amusementData.wavveSeries.map((item: string, index: number) => (
+                        <React.Fragment key={index}>
+                          {item === 'bbc' && (
+                            <>
+                              <Bbc />
+                              <span>BBC</span>
+                            </>
+                          )}
+                          {item === 'hbomax' && (
+                            <>
+                              <Hbomax />
+                              <span>HBO맥스</span>
+                            </>
+                          )}
+                          {item === 'hulu' && (
+                            <>
+                              <Hulu />
+                              <span>Hulu</span>
+                            </>
+                          )}
+                          {item === 'peacock' && (
+                            <>
+                              <Peacock />
+                              <span>Peacock</span>
+                            </>
+                          )}
+                          {item === 'sky' && (
+                            <>
+                              <Sky />
+                              <span>SKY</span>
+                            </>
+                          )}
+                          {item === 'syfy' && (
+                            <>
+                              <Syfy />
+                              <span>SYFY</span>
+                            </>
+                          )}
+                        </React.Fragment>
+                      ))}
                     {(amusementData.animeBroadcast1 !== null || amusementData.animeBroadcast2 !== null) && (
                       <>
                         {amusementData.animeBroadcast1 === 'tokyomx' && (

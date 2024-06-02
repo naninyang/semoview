@@ -130,6 +130,7 @@ export async function getCategoryData(page?: number, pageSize?: number, category
       posterDefault: data.attributes.posterDefault,
       posterOther: data.attributes.posterOther,
       supportLang: data.attributes.supportLang,
+      wavveSeries: data.attributes.wavveSeries,
     }));
     const pageCount = categoryResponse.meta.pagination.pageCount;
     const total = categoryResponse.meta.pagination.total;
@@ -175,6 +176,7 @@ export async function getCategoryData(page?: number, pageSize?: number, category
       posterOther: data.attributes.posterOther,
       relations: data.attributes.relations,
       supportLang: data.attributes.supportLang,
+      wavveSeries: data.attributes.wavveSeries,
     }));
     const pageCount = categoryResponse.meta.pagination.pageCount;
     const total = categoryResponse.meta.pagination.total;
@@ -223,6 +225,7 @@ export async function getTagData(page?: number, pageSize?: number, tagName?: str
       posterDefault: data.attributes.posterDefault,
       posterOther: data.attributes.posterOther,
       supportLang: data.attributes.supportLang,
+      wavveSeries: data.attributes.wavveSeries,
     }));
     const pageCount = tagResponse.meta.pagination.pageCount;
     const total = tagResponse.meta.pagination.total;
@@ -267,6 +270,7 @@ export async function getTagData(page?: number, pageSize?: number, tagName?: str
       posterDefault: data.attributes.posterDefault,
       posterOther: data.attributes.posterOther,
       supportLang: data.attributes.supportLang,
+      wavveSeries: data.attributes.wavveSeries,
     }));
     const pageCount = tagResponse.meta.pagination.pageCount;
     const total = tagResponse.meta.pagination.total;
@@ -324,6 +328,7 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
       posterDefault: data.attributes.posterDefault,
       posterOther: data.attributes.posterOther,
       supportLang: data.attributes.supportLang,
+      wavveSeries: data.attributes.wavveSeries,
     }));
     const pageCount = platformResponse.meta.pagination.pageCount;
     const total = platformResponse.meta.pagination.total;
@@ -481,6 +486,7 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
       posterDefault: data.attributes.posterDefault,
       posterOther: data.attributes.posterOther,
       supportLang: data.attributes.supportLang,
+      wavveSeries: data.attributes.wavveSeries,
     }));
     const pageCount = platformResponse.meta.pagination.pageCount;
     const total = platformResponse.meta.pagination.total;
@@ -530,6 +536,7 @@ export async function getHangukData(page?: number, pageSize?: number, hangukName
         posterDefault: data.attributes.posterDefault,
         posterOther: data.attributes.posterOther,
         supportLang: data.attributes.supportLang,
+        wavveSeries: data.attributes.wavveSeries,
       }));
       const pageCount = hangukResponse.meta.pagination.pageCount;
       const total = hangukResponse.meta.pagination.total;
@@ -574,6 +581,7 @@ export async function getHangukData(page?: number, pageSize?: number, hangukName
         posterDefault: data.attributes.posterDefault,
         posterOther: data.attributes.posterOther,
         supportLang: data.attributes.supportLang,
+        wavveSeries: data.attributes.wavveSeries,
       }));
       const pageCount = hangukResponse.meta.pagination.pageCount;
       const total = hangukResponse.meta.pagination.total;
@@ -620,6 +628,7 @@ export async function getHangukData(page?: number, pageSize?: number, hangukName
         posterDefault: data.attributes.posterDefault,
         posterOther: data.attributes.posterOther,
         supportLang: data.attributes.supportLang,
+        wavveSeries: data.attributes.wavveSeries,
       }));
       const pageCount = hangukResponse.meta.pagination.pageCount;
       const total = hangukResponse.meta.pagination.total;
@@ -664,6 +673,7 @@ export async function getHangukData(page?: number, pageSize?: number, hangukName
         posterDefault: data.attributes.posterDefault,
         posterOther: data.attributes.posterOther,
         supportLang: data.attributes.supportLang,
+        wavveSeries: data.attributes.wavveSeries,
       }));
       const pageCount = hangukResponse.meta.pagination.pageCount;
       const total = hangukResponse.meta.pagination.total;
@@ -713,6 +723,7 @@ export async function getSubdubData(page?: number, pageSize?: number, subdubName
       posterDefault: data.attributes.posterDefault,
       posterOther: data.attributes.posterOther,
       supportLang: data.attributes.supportLang,
+      wavveSeries: data.attributes.wavveSeries,
     }));
     const pageCount = hangukResponse.meta.pagination.pageCount;
     const total = hangukResponse.meta.pagination.total;
@@ -757,6 +768,7 @@ export async function getSubdubData(page?: number, pageSize?: number, subdubName
       posterDefault: data.attributes.posterDefault,
       posterOther: data.attributes.posterOther,
       supportLang: data.attributes.supportLang,
+      wavveSeries: data.attributes.wavveSeries,
     }));
     const pageCount = hangukResponse.meta.pagination.pageCount;
     const total = hangukResponse.meta.pagination.total;
@@ -805,6 +817,7 @@ export async function getBarrierFreeData(page?: number, pageSize?: number, bfree
       posterDefault: data.attributes.posterDefault,
       posterOther: data.attributes.posterOther,
       supportLang: data.attributes.supportLang,
+      wavveSeries: data.attributes.wavveSeries,
     }));
     const pageCount = hangukResponse.meta.pagination.pageCount;
     const total = hangukResponse.meta.pagination.total;
@@ -849,6 +862,7 @@ export async function getBarrierFreeData(page?: number, pageSize?: number, bfree
       posterDefault: data.attributes.posterDefault,
       posterOther: data.attributes.posterOther,
       supportLang: data.attributes.supportLang,
+      wavveSeries: data.attributes.wavveSeries,
     }));
     const pageCount = hangukResponse.meta.pagination.pageCount;
     const total = hangukResponse.meta.pagination.total;
@@ -896,6 +910,7 @@ export async function getLiteratureData(page?: number, pageSize?: number, amuseI
     posterDefault: data.attributes.posterDefault,
     posterOther: data.attributes.posterOther,
     order: data.attributes.order,
+    wavveSeries: data.attributes.wavveSeries,
   }));
   const pageCount = platformResponse.meta.pagination.pageCount;
   const total = platformResponse.meta.pagination.total;
@@ -1086,6 +1101,7 @@ export async function getAmusementData(amusement: string) {
     season: amusementData.attributes.season,
     franchise: amusementData.attributes.franchise,
     relName: amusementData.attributes.relName,
+    wavveSeries: amusementData.attributes.wavveSeries,
   };
 
   return rowsData;
