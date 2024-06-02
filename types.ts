@@ -297,6 +297,8 @@ export type Platform =
   | 'watchaExclusive'
   | 'wavveOriginal'
   | 'wavveOnly'
+  | 'waveOnly'
+  | 'waveFirstrun'
   | 'paramount';
 
 export interface NoticeData {

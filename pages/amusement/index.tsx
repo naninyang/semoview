@@ -1837,111 +1837,69 @@ function Amusement({
                               </dd>
                             </div>
                           )}
-                          {(amusement.broadcast !== null || amusement.wavveSeries !== null) &&
-                            platform !== amusement.broadcast && (
-                              <>
-                                {platform === 'disney' && (
-                                  <>
-                                    <div className={styles.broadcast}>
-                                      <dt>드라마 송출 방송국</dt>
-                                      <dd>
-                                        {amusement.broadcast === 'ENA' && (
-                                          <>
-                                            <EnaIcon /> <span>ENA</span>
-                                          </>
-                                        )}
-                                        {amusement.broadcast === 'JTBC' && (
-                                          <>
-                                            <JtbcIcon /> <span>JTBC</span>
-                                          </>
-                                        )}
-                                        {amusement.broadcast === 'KBS2' && (
-                                          <>
-                                            <Kbs2Icon /> <span>KBS 2TV</span>
-                                          </>
-                                        )}
-                                        {amusement.broadcast === 'MBC' && (
-                                          <>
-                                            <MbcIcon /> <span>MBC</span>
-                                          </>
-                                        )}
-                                        {amusement.broadcast === 'OCN' && (
-                                          <>
-                                            <OcnIcon /> <span>OCN</span>
-                                          </>
-                                        )}
-                                        {amusement.broadcast === 'SBS' && (
-                                          <>
-                                            <SbsIcon /> <span>SBS</span>
-                                          </>
-                                        )}
-                                        {amusement.broadcast === 'tvN' && (
-                                          <>
-                                            <TvnIcon /> <span>tvN</span>
-                                          </>
-                                        )}
-                                        {amusement.wavveSeries &&
-                                          amusement.wavveSeries.map((item: string, index: number) => (
-                                            <React.Fragment key={index}>
-                                              {item === 'bbc' && (
-                                                <>
-                                                  <BbcIcon />
-                                                  <span>BBC</span>
-                                                </>
-                                              )}
-                                              {item === 'hbomax' && (
-                                                <>
-                                                  <HbomaxIcon />
-                                                  <span>HBO맥스</span>
-                                                </>
-                                              )}
-                                              {item === 'hulu' && (
-                                                <>
-                                                  <HuluIcon />
-                                                  <span>Hulu</span>
-                                                </>
-                                              )}
-                                              {item === 'peacock' && (
-                                                <>
-                                                  <PeacockIcon />
-                                                  <span>Peacock</span>
-                                                </>
-                                              )}
-                                              {item === 'sky' && (
-                                                <>
-                                                  <SkyIcon />
-                                                  <span>SKY</span>
-                                                </>
-                                              )}
-                                              {item === 'syfy' && (
-                                                <>
-                                                  <SyfyIcon />
-                                                  <span>SYFY</span>
-                                                </>
-                                              )}
-                                            </React.Fragment>
-                                          ))}
-                                      </dd>
-                                    </div>
-                                    <div className={styles.platform}>
-                                      <dt>OTT 플랫폼</dt>
-                                      <dd>
-                                        {amusement.ott === 'disneyOriginal' && (
-                                          <>
-                                            <DisneyIcon /> <span>Disney+</span>
-                                          </>
-                                        )}
-                                        {amusement.ott === 'disneyStar' && (
-                                          <>
-                                            <StarIcon /> <span>Star+</span>
-                                          </>
-                                        )}
-                                      </dd>
-                                    </div>
-                                  </>
-                                )}
-                              </>
-                            )}
+                          {amusement.broadcast !== null && platform !== amusement.broadcast && (
+                            <>
+                              {platform === 'disney' && (
+                                <>
+                                  <div className={styles.broadcast}>
+                                    <dt>드라마 송출 방송국</dt>
+                                    <dd>
+                                      {amusement.broadcast === 'ENA' && (
+                                        <>
+                                          <EnaIcon /> <span>ENA</span>
+                                        </>
+                                      )}
+                                      {amusement.broadcast === 'JTBC' && (
+                                        <>
+                                          <JtbcIcon /> <span>JTBC</span>
+                                        </>
+                                      )}
+                                      {amusement.broadcast === 'KBS2' && (
+                                        <>
+                                          <Kbs2Icon /> <span>KBS 2TV</span>
+                                        </>
+                                      )}
+                                      {amusement.broadcast === 'MBC' && (
+                                        <>
+                                          <MbcIcon /> <span>MBC</span>
+                                        </>
+                                      )}
+                                      {amusement.broadcast === 'OCN' && (
+                                        <>
+                                          <OcnIcon /> <span>OCN</span>
+                                        </>
+                                      )}
+                                      {amusement.broadcast === 'SBS' && (
+                                        <>
+                                          <SbsIcon /> <span>SBS</span>
+                                        </>
+                                      )}
+                                      {amusement.broadcast === 'tvN' && (
+                                        <>
+                                          <TvnIcon /> <span>tvN</span>
+                                        </>
+                                      )}
+                                    </dd>
+                                  </div>
+                                  <div className={styles.platform}>
+                                    <dt>OTT 플랫폼</dt>
+                                    <dd>
+                                      {amusement.ott === 'disneyOriginal' && (
+                                        <>
+                                          <DisneyIcon /> <span>Disney+</span>
+                                        </>
+                                      )}
+                                      {amusement.ott === 'disneyStar' && (
+                                        <>
+                                          <StarIcon /> <span>Star+</span>
+                                        </>
+                                      )}
+                                    </dd>
+                                  </div>
+                                </>
+                              )}
+                            </>
+                          )}
                           {((platform as Platform) !== 'amazonOriginal' ||
                             (platform as Platform) !== 'appleOriginal' ||
                             (platform as Platform) !== 'appleFilm' ||
@@ -1960,88 +1918,60 @@ function Amusement({
                             (platform as Platform) !== 'watchaExclusive' ||
                             (platform as Platform) !== 'wavveOriginal' ||
                             (platform as Platform) !== 'wavveOnly' ||
+                            (platform as Platform) !== 'waveOnly' ||
+                            (platform as Platform) !== 'waveFirstrun' ||
                             (platform as Platform) !== 'paramount') && (
                             <>
                               {amusement.ott !== null && (
-                                <div className={styles.platform}>
-                                  <dt>플랫폼</dt>
-                                  <dd>
-                                    {amusement.ott === 'amazonOriginal' && (
-                                      <>
-                                        <AmazonIcon /> <span>아마존 프라임비디오</span>
-                                      </>
-                                    )}
-                                    {amusement.ott === 'appleOriginal' && (
-                                      <>
-                                        <AppleIcon /> <span>Apple TV+ 시리즈</span>
-                                      </>
-                                    )}
-                                    {amusement.ott === 'appleFilm' && (
-                                      <>
-                                        <AppleIcon /> <span>Apple TV+ 영화</span>
-                                      </>
-                                    )}
-                                    {amusement.ott === 'disneyOriginal' && (
-                                      <>
-                                        <DisneyIcon /> <span>Disney+</span>
-                                      </>
-                                    )}
-                                    {amusement.ott === 'disneyStar' && (
-                                      <>
-                                        <StarIcon /> <span>Star+</span>
-                                      </>
-                                    )}
-                                    {(amusement.ott === 'netflixSeries' ||
-                                      amusement.ott === 'netflixPresents' ||
-                                      amusement.ott === 'netflixOriginal' ||
-                                      amusement.ott === 'netflixFilm' ||
-                                      amusement.ott === 'netflixAnime' ||
-                                      amusement.ott === 'netflixAnimeFilm' ||
-                                      amusement.ott === 'netflixDocumentary') && (
-                                      <>
-                                        <NetflixIcon />
-                                        <span>
-                                          {(amusement.ott === 'netflixSeries' ||
-                                            amusement.ott === 'netflixOriginal' ||
-                                            amusement.ott === 'netflixAnime') &&
-                                            '넷플릭스 시리즈'}
-                                          {(amusement.ott === 'netflixPresents' ||
-                                            amusement.ott === 'netflixFilm' ||
-                                            amusement.ott === 'netflixAnimeFilm') &&
-                                            '넷플릭스 영화'}
-                                          {amusement.ott === 'netflixDocumentary' && '넷플릭스 다큐멘터리'}
-                                        </span>
-                                      </>
-                                    )}
-                                    {(amusement.ott === 'tvingOriginal' || amusement.ott === 'tvingOnly') && (
-                                      <>
-                                        <TvingIcon /> <span>티빙</span>
-                                      </>
-                                    )}
-                                    {(amusement.ott === 'watchaOriginal' || amusement.ott === 'watchaExclusive') && (
-                                      <>
-                                        <WatchaIcon /> <span>왓챠</span>
-                                      </>
-                                    )}
-                                    {(amusement.ott === 'wavveOriginal' ||
-                                      amusement.ott === 'wavveOnly' ||
-                                      amusement.ott === 'waveOnly') && (
-                                      <>
-                                        <WavveIcon /> <span>웨이브</span>
-                                      </>
-                                    )}
-                                    {amusement.ott === 'waveFirstrun' && (
-                                      <>
-                                        <WavveIcon2 /> <span>웨이브 해외시리즈</span>
-                                      </>
-                                    )}
-                                    {amusement.ott === 'paramount' && (
-                                      <>
-                                        <ParamountIcon /> <span>Paramount+</span>
-                                      </>
-                                    )}
-                                  </dd>
-                                </div>
+                                <>
+                                  {amusement.wavveSeries && (
+                                    <div className={styles.broadcast}>
+                                      <dt>드라마 송출 방송국</dt>
+                                      <dd>
+                                        {amusement.wavveSeries.map((item: string, index: number) => (
+                                          <React.Fragment key={index}>
+                                            {item === 'bbc' && (
+                                              <>
+                                                <BbcIcon />
+                                                <span>BBC</span>
+                                              </>
+                                            )}
+                                            {item === 'hbomax' && (
+                                              <>
+                                                <HbomaxIcon />
+                                                <span>HBO맥스</span>
+                                              </>
+                                            )}
+                                            {item === 'hulu' && (
+                                              <>
+                                                <HuluIcon />
+                                                <span>Hulu</span>
+                                              </>
+                                            )}
+                                            {item === 'peacock' && (
+                                              <>
+                                                <PeacockIcon />
+                                                <span>Peacock</span>
+                                              </>
+                                            )}
+                                            {item === 'sky' && (
+                                              <>
+                                                <SkyIcon />
+                                                <span>SKY</span>
+                                              </>
+                                            )}
+                                            {item === 'syfy' && (
+                                              <>
+                                                <SyfyIcon />
+                                                <span>SYFY</span>
+                                              </>
+                                            )}
+                                          </React.Fragment>
+                                        ))}
+                                      </dd>
+                                    </div>
+                                  )}
+                                </>
                               )}
                             </>
                           )}
