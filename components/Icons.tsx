@@ -57,6 +57,11 @@ export const WavveOnly = styled.i({
   background: `url(${vectors.ott.wavveOnly2}) no-repeat 50% 50%/contain`,
 });
 
+export const WavveFirstrun = styled.i({
+  width: rem(68),
+  background: `url(${vectors.ott.wavveFirstrun2}) no-repeat 50% 50%/contain`,
+});
+
 export const Paramount = styled.i({
   width: rem(81),
   background: `url(${vectors.ott.paramount}) no-repeat 50% 50%/contain`,
@@ -222,6 +227,11 @@ export const WavveOnlyWhite = styled.i({
   background: `url(${vectors.ott.wavveOnly}) no-repeat 50% 50%/contain`,
 });
 
+export const WavveFirstrunWhite = styled.i({
+  width: rem(68),
+  background: `url(${vectors.ott.wavveFirstrun}) no-repeat 50% 50%/contain`,
+});
+
 export const ParamountWhite = styled.i({
   width: rem(81),
   background: `url(${vectors.ott.paramount}) no-repeat 50% 50%/contain`,
@@ -362,6 +372,10 @@ export const WatchaIcon = styled.i({
 
 export const WavveIcon = styled.i({
   background: `url(${vectors.ott.wavveIcon}) no-repeat 50% 50%/contain`,
+});
+
+export const WavveIcon2 = styled.i({
+  background: `url(${vectors.ott.wavveIcon2}) no-repeat 50% 50%/contain`,
 });
 
 export const ParamountIcon = styled.i({

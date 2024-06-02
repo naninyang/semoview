@@ -1240,6 +1240,16 @@ export default function Amusement({
                     <WavveOnlyWhite /> 오직 웨이브에서
                   </>
                 )}
+                {amusementData.attributes.ott === 'waveOnly' && (
+                  <>
+                    <WavveOnlyWhite /> 웨이브 해외시리즈
+                  </>
+                )}
+                {amusementData.attributes.ott === 'waveFirstrun' && (
+                  <>
+                    <WavveOnlyWhite /> 웨이브 해외시리즈
+                  </>
+                )}
                 {amusementData.attributes.ott === 'paramount' && (
                   <>
                     <ParamountWhite /> Paramount+
@@ -1250,43 +1260,79 @@ export default function Amusement({
           )}
           <div className={styles.function}>
             <dl className={styles.summary}>
-              {amusementData.attributes.ott !== null && amusementData.attributes.ottAddr !== null && (
+              {amusementData.attributes.ott !== null && (
                 <div
                   className={`${styles.link} ${amusementData.attributes.season || amusementData.attributes.relations || amusementData.attributes.franchise ? styles.grow : ''}`}
                 >
                   <dt>OTT에서 보기</dt>
                   <dd>
                     {amusementData.attributes.ott === 'paramount' ? (
-                      <strong className={styles.out}>티빙 판권 종료</strong>
+                      <strong className={styles.out}>티빙 판권 만료</strong>
                     ) : (
-                      <Anchor href={amusementData.attributes.ottAddr}>
-                        {amusementData.attributes.ott === 'amazonOriginal' && '프라임 비디오'}
-                        {(amusementData.attributes.ott === 'appleOriginal' ||
-                          amusementData.attributes.ott === 'appleFilm') &&
-                          'Apple TV+'}
-                        {(amusementData.attributes.ott === 'disneyOriginal' ||
-                          amusementData.attributes.ott === 'disneyStar') &&
-                          'Disney+'}
-                        {(amusementData.attributes.ott === 'netflixSeries' ||
-                          amusementData.attributes.ott === 'netflixPresents' ||
-                          amusementData.attributes.ott === 'netflixOriginal' ||
-                          amusementData.attributes.ott === 'netflixFilm' ||
-                          amusementData.attributes.ott === 'netflixAnime' ||
-                          amusementData.attributes.ott === 'netflixAnimeFilm' ||
-                          amusementData.attributes.ott === 'netflixDocumentary') &&
-                          '넷플릭스'}
-                        {(amusementData.attributes.ott === 'tvingOriginal' ||
-                          amusementData.attributes.ott === 'tvingOnly') &&
-                          '티빙'}
-                        {(amusementData.attributes.ott === 'watchaOriginal' ||
-                          amusementData.attributes.ott === 'watchaExclusive') &&
-                          '왓챠'}
-                        {(amusementData.attributes.ott === 'wavveOriginal' ||
-                          amusementData.attributes.ott === 'wavveOnly') &&
-                          '웨이브'}
-                        에서 시청하기
-                        <ExternalIcon />
-                      </Anchor>
+                      <>
+                        {amusementData.attributes.ottAddr !== null ? (
+                          <Anchor href={amusementData.attributes.ottAddr}>
+                            {amusementData.attributes.ott === 'amazonOriginal' && '프라임 비디오'}
+                            {(amusementData.attributes.ott === 'appleOriginal' ||
+                              amusementData.attributes.ott === 'appleFilm') &&
+                              'Apple TV+'}
+                            {(amusementData.attributes.ott === 'disneyOriginal' ||
+                              amusementData.attributes.ott === 'disneyStar') &&
+                              'Disney+'}
+                            {(amusementData.attributes.ott === 'netflixSeries' ||
+                              amusementData.attributes.ott === 'netflixPresents' ||
+                              amusementData.attributes.ott === 'netflixOriginal' ||
+                              amusementData.attributes.ott === 'netflixFilm' ||
+                              amusementData.attributes.ott === 'netflixAnime' ||
+                              amusementData.attributes.ott === 'netflixAnimeFilm' ||
+                              amusementData.attributes.ott === 'netflixDocumentary') &&
+                              '넷플릭스'}
+                            {(amusementData.attributes.ott === 'tvingOriginal' ||
+                              amusementData.attributes.ott === 'tvingOnly') &&
+                              '티빙'}
+                            {(amusementData.attributes.ott === 'watchaOriginal' ||
+                              amusementData.attributes.ott === 'watchaExclusive') &&
+                              '왓챠'}
+                            {(amusementData.attributes.ott === 'wavveOriginal' ||
+                              amusementData.attributes.ott === 'wavveOnly' ||
+                              amusementData.attributes.ott === 'waveOnly' ||
+                              amusementData.attributes.ott === 'waveFirstrun') &&
+                              '웨이브'}
+                            에서 시청하기
+                            <ExternalIcon />
+                          </Anchor>
+                        ) : (
+                          <strong className={styles.out}>
+                            {amusementData.attributes.ott === 'amazonOriginal' && '프라임 비디오 한국리전'}
+                            {(amusementData.attributes.ott === 'appleOriginal' ||
+                              amusementData.attributes.ott === 'appleFilm') &&
+                              'Apple TV+ 한국리전'}
+                            {(amusementData.attributes.ott === 'disneyOriginal' ||
+                              amusementData.attributes.ott === 'disneyStar') &&
+                              'Disney+ 한국리전'}
+                            {(amusementData.attributes.ott === 'netflixSeries' ||
+                              amusementData.attributes.ott === 'netflixPresents' ||
+                              amusementData.attributes.ott === 'netflixOriginal' ||
+                              amusementData.attributes.ott === 'netflixFilm' ||
+                              amusementData.attributes.ott === 'netflixAnime' ||
+                              amusementData.attributes.ott === 'netflixAnimeFilm' ||
+                              amusementData.attributes.ott === 'netflixDocumentary') &&
+                              '넷플릭스 한국리전'}
+                            {(amusementData.attributes.ott === 'tvingOriginal' ||
+                              amusementData.attributes.ott === 'tvingOnly') &&
+                              '티빙'}
+                            {(amusementData.attributes.ott === 'watchaOriginal' ||
+                              amusementData.attributes.ott === 'watchaExclusive') &&
+                              '왓챠'}
+                            {(amusementData.attributes.ott === 'wavveOriginal' ||
+                              amusementData.attributes.ott === 'wavveOnly' ||
+                              amusementData.attributes.ott === 'waveOnly' ||
+                              amusementData.attributes.ott === 'waveFirstrun') &&
+                              '웨이브'}{' '}
+                            판권 만료
+                          </strong>
+                        )}
+                      </>
                     )}
                   </dd>
                 </div>

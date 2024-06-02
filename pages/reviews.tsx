@@ -51,6 +51,7 @@ import {
   Tvtokyo,
   WatchaOnly,
   WatchaOriginal,
+  WavveFirstrun,
   WavveOnly,
   WavveOriginal,
   Wowow,
@@ -625,6 +626,16 @@ function Review({ data, error, currentPage }: { data: any; error: string; curren
                           {jejeup.amusementData.ott === 'wavveOnly' && (
                             <cite>
                               <WavveOnly /> 오직 웨이브에서
+                            </cite>
+                          )}
+                          {jejeup.amusementData.ott === 'waveOnly' && (
+                            <cite>
+                              <WavveOnly /> 웨이브 해외시리즈
+                            </cite>
+                          )}
+                          {jejeup.amusementData.ott === 'waveFirstfun' && (
+                            <cite>
+                              <WavveFirstrun /> 웨이브 해외시리즈
                             </cite>
                           )}
                           {jejeup.amusementData.ott === 'paramount' && (

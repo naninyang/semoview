@@ -290,6 +290,7 @@ function Amusement({
                       <option value="tving">티빙</option>
                       <option value="watcha">왓챠</option>
                       <option value="wavve">웨이브</option>
+                      <option value="wave">웨이브 해외시리즈</option>
                     </optgroup>
                     <optgroup label="드라마 송출 방송국">
                       <option value="ABC">ABC</option>
@@ -1578,6 +1579,7 @@ function Amusement({
                       <option value="tving">티빙</option>
                       <option value="watcha">왓챠</option>
                       <option value="wavve">웨이브</option>
+                      <option value="wave">웨이브 해외시리즈</option>
                     </optgroup>
                     <optgroup label="드라마 송출 방송국">
                       <option value="ABC">ABC</option>
@@ -3501,7 +3503,8 @@ function PlatformTitle(platform: keyof typeof PlatformTitle): string {
     netflix: '넷플릭스\n오리지널 리뷰',
     tving: '티빙\n오리지널 리뷰',
     watcha: '왓챠\n오리지널 리뷰',
-    wavve: '웨이브\n오리지널 리뷰',
+    wavve: '웨이브\n온리/오리지널 리뷰',
+    wave: '웨이브\n해외시리즈 리뷰',
     paramount: '파라마운트+\n오리지널 리뷰',
     tokyomx: '도쿄MX\n東京MX\n방영 애니메이션',
     tvtokyo: '테레토\nテレ東\n방영 애니메이션',

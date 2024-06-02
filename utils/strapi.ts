@@ -439,6 +439,7 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
     platformName === 'tving' ||
     platformName === 'watcha' ||
     platformName === 'wavve' ||
+    platformName === 'wave' ||
     platformName === 'paramount'
   ) {
     const response = await fetch(

@@ -71,6 +71,7 @@ import {
   WatchaOnly,
   WatchaOrigin,
   WatchaOriginal,
+  WavveFirstrun,
   WavveOnly,
   WavveOrigin,
   WavveOriginal,
@@ -969,6 +970,16 @@ export default function JejeupDetail({
                 <WavveOnly /> 오직 웨이브에서
               </cite>
             )}
+            {amusementData.ott === 'waveOnly' && (
+              <cite>
+                <WavveOnly /> 웨이브 해외시리즈
+              </cite>
+            )}
+            {amusementData.ott === 'waveFirstfun' && (
+              <cite>
+                <WavveFirstrun /> 웨이브 해외시리즈
+              </cite>
+            )}
             {amusementData.ott === 'paramount' && (
               <cite>
                 <Paramount /> Paramaount+
@@ -1108,7 +1119,11 @@ export default function JejeupDetail({
                       '넷플릭스'}
                     {(amusementData.ott === 'tvingOriginal' || amusementData.ott === 'tvingOnly') && '티빙'}
                     {(amusementData.ott === 'watchaOriginal' || amusementData.ott === 'watchaExclusive') && '왓챠'}
-                    {(amusementData.ott === 'wavveOriginal' || amusementData.ott === 'wavveOnly') && '웨이브'}
+                    {(amusementData.ott === 'wavveOriginal' ||
+                      amusementData.ott === 'wavveOnly' ||
+                      amusementData.ott === 'waveOnly' ||
+                      amusementData.ott === 'waveFirstrun') &&
+                      '웨이브'}
                     에서 시청하기
                   </Anchor>
                 )}
