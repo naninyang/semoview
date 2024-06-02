@@ -975,7 +975,7 @@ export default function JejeupDetail({
                 <WavveOnly /> 웨이브 해외시리즈
               </cite>
             )}
-            {amusementData.ott === 'waveFirstfun' && (
+            {amusementData.ott === 'waveFirstrun' && (
               <cite>
                 <WavveFirstrun /> 웨이브 해외시리즈
               </cite>

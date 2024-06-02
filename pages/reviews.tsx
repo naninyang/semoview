@@ -633,7 +633,7 @@ function Review({ data, error, currentPage }: { data: any; error: string; curren
                               <WavveOnly /> 웨이브 해외시리즈
                             </cite>
                           )}
-                          {jejeup.amusementData.ott === 'waveFirstfun' && (
+                          {jejeup.amusementData.ott === 'waveFirstrun' && (
                             <cite>
                               <WavveFirstrun /> 웨이브 해외시리즈
                             </cite>

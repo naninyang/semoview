@@ -80,6 +80,7 @@ import {
   WatchaOnlyWhite,
   WatchaOriginalWhite,
   WatchaWhite,
+  WavveFirstrunWhite,
   WavveOnlyWhite,
   WavveOriginalWhite,
   WavveWhite,
@@ -1247,7 +1248,7 @@ export default function Amusement({
                 )}
                 {amusementData.attributes.ott === 'waveFirstrun' && (
                   <>
-                    <WavveOnlyWhite /> 웨이브 해외시리즈
+                    <WavveFirstrunWhite /> 웨이브 해외시리즈
                   </>
                 )}
                 {amusementData.attributes.ott === 'paramount' && (

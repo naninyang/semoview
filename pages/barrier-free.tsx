@@ -46,6 +46,7 @@ import {
   TvtokyoIcon,
   WatchaIcon,
   WavveIcon,
+  WavveIcon2,
   WowowIcon,
 } from '@/components/Icons';
 
@@ -269,12 +270,17 @@ function BarrierFree({
                               <dd>
                                 {amusement.ott === 'amazonOriginal' && (
                                   <>
-                                    <AmazonIcon /> <span>AMAZON</span>
+                                    <AmazonIcon /> <span>아마존 프라임비디오</span>
                                   </>
                                 )}
-                                {(amusement.ott === 'appleOriginal' || amusement.ott === 'appleFilm') && (
+                                {amusement.ott === 'appleOriginal' && (
                                   <>
-                                    <AppleIcon /> <span>Apple TV+</span>
+                                    <AppleIcon /> <span>Apple TV+ 시리즈</span>
+                                  </>
+                                )}
+                                {amusement.ott === 'appleFilm' && (
+                                  <>
+                                    <AppleIcon /> <span>Apple TV+ 영화</span>
                                   </>
                                 )}
                                 {amusement.ott === 'disneyOriginal' && (
@@ -295,7 +301,18 @@ function BarrierFree({
                                   amusement.ott === 'netflixAnimeFilm' ||
                                   amusement.ott === 'netflixDocumentary') && (
                                   <>
-                                    <NetflixIcon /> <span>NETFLIX</span>
+                                    <NetflixIcon />
+                                    <span>
+                                      {(amusement.ott === 'netflixSeries' ||
+                                        amusement.ott === 'netflixOriginal' ||
+                                        amusement.ott === 'netflixAnime') &&
+                                        '넷플릭스 시리즈'}
+                                      {(amusement.ott === 'netflixPresents' ||
+                                        amusement.ott === 'netflixFilm' ||
+                                        amusement.ott === 'netflixAnimeFilm') &&
+                                        '넷플릭스 영화'}
+                                      {amusement.ott === 'netflixDocumentary' && '넷플릭스 다큐멘터리'}
+                                    </span>
                                   </>
                                 )}
                                 {(amusement.ott === 'tvingOriginal' || amusement.ott === 'tvingOnly') && (
@@ -308,9 +325,16 @@ function BarrierFree({
                                     <WatchaIcon /> <span>왓챠</span>
                                   </>
                                 )}
-                                {(amusement.ott === 'wavveOriginal' || amusement.ott === 'wavveOnly') && (
+                                {(amusement.ott === 'wavveOriginal' ||
+                                  amusement.ott === 'wavveOnly' ||
+                                  amusement.ott === 'waveOnly') && (
                                   <>
                                     <WavveIcon /> <span>웨이브</span>
+                                  </>
+                                )}
+                                {amusement.ott === 'waveFirstrun' && (
+                                  <>
+                                    <WavveIcon2 /> <span>웨이브 해외시리즈</span>
                                   </>
                                 )}
                                 {amusement.ott === 'paramount' && (
@@ -586,12 +610,17 @@ function BarrierFree({
                               <dd>
                                 {amusement.ott === 'amazonOriginal' && (
                                   <>
-                                    <AmazonIcon /> <span>AMAZON</span>
+                                    <AmazonIcon /> <span>아마존 프라임비디오</span>
                                   </>
                                 )}
-                                {(amusement.ott === 'appleOriginal' || amusement.ott === 'appleFilm') && (
+                                {amusement.ott === 'appleOriginal' && (
                                   <>
-                                    <AppleIcon /> <span>Apple TV+</span>
+                                    <AppleIcon /> <span>Apple TV+ 시리즈</span>
+                                  </>
+                                )}
+                                {amusement.ott === 'appleFilm' && (
+                                  <>
+                                    <AppleIcon /> <span>Apple TV+ 영화</span>
                                   </>
                                 )}
                                 {amusement.ott === 'disneyOriginal' && (
@@ -612,7 +641,18 @@ function BarrierFree({
                                   amusement.ott === 'netflixAnimeFilm' ||
                                   amusement.ott === 'netflixDocumentary') && (
                                   <>
-                                    <NetflixIcon /> <span>NETFLIX</span>
+                                    <NetflixIcon />
+                                    <span>
+                                      {(amusement.ott === 'netflixSeries' ||
+                                        amusement.ott === 'netflixOriginal' ||
+                                        amusement.ott === 'netflixAnime') &&
+                                        '넷플릭스 시리즈'}
+                                      {(amusement.ott === 'netflixPresents' ||
+                                        amusement.ott === 'netflixFilm' ||
+                                        amusement.ott === 'netflixAnimeFilm') &&
+                                        '넷플릭스 영화'}
+                                      {amusement.ott === 'netflixDocumentary' && '넷플릭스 다큐멘터리'}
+                                    </span>
                                   </>
                                 )}
                                 {(amusement.ott === 'tvingOriginal' || amusement.ott === 'tvingOnly') && (
@@ -625,9 +665,16 @@ function BarrierFree({
                                     <WatchaIcon /> <span>왓챠</span>
                                   </>
                                 )}
-                                {(amusement.ott === 'wavveOriginal' || amusement.ott === 'wavveOnly') && (
+                                {(amusement.ott === 'wavveOriginal' ||
+                                  amusement.ott === 'wavveOnly' ||
+                                  amusement.ott === 'waveOnly') && (
                                   <>
                                     <WavveIcon /> <span>웨이브</span>
+                                  </>
+                                )}
+                                {amusement.ott === 'waveFirstrun' && (
+                                  <>
+                                    <WavveIcon2 /> <span>웨이브 해외시리즈</span>
                                   </>
                                 )}
                                 {amusement.ott === 'paramount' && (
@@ -903,12 +950,17 @@ function BarrierFree({
                               <dd>
                                 {amusement.ott === 'amazonOriginal' && (
                                   <>
-                                    <AmazonIcon /> <span>AMAZON</span>
+                                    <AmazonIcon /> <span>아마존 프라임비디오</span>
                                   </>
                                 )}
-                                {(amusement.ott === 'appleOriginal' || amusement.ott === 'appleFilm') && (
+                                {amusement.ott === 'appleOriginal' && (
                                   <>
-                                    <AppleIcon /> <span>Apple TV+</span>
+                                    <AppleIcon /> <span>Apple TV+ 시리즈</span>
+                                  </>
+                                )}
+                                {amusement.ott === 'appleFilm' && (
+                                  <>
+                                    <AppleIcon /> <span>Apple TV+ 영화</span>
                                   </>
                                 )}
                                 {amusement.ott === 'disneyOriginal' && (
@@ -929,7 +981,18 @@ function BarrierFree({
                                   amusement.ott === 'netflixAnimeFilm' ||
                                   amusement.ott === 'netflixDocumentary') && (
                                   <>
-                                    <NetflixIcon /> <span>NETFLIX</span>
+                                    <NetflixIcon />
+                                    <span>
+                                      {(amusement.ott === 'netflixSeries' ||
+                                        amusement.ott === 'netflixOriginal' ||
+                                        amusement.ott === 'netflixAnime') &&
+                                        '넷플릭스 시리즈'}
+                                      {(amusement.ott === 'netflixPresents' ||
+                                        amusement.ott === 'netflixFilm' ||
+                                        amusement.ott === 'netflixAnimeFilm') &&
+                                        '넷플릭스 영화'}
+                                      {amusement.ott === 'netflixDocumentary' && '넷플릭스 다큐멘터리'}
+                                    </span>
                                   </>
                                 )}
                                 {(amusement.ott === 'tvingOriginal' || amusement.ott === 'tvingOnly') && (
@@ -942,9 +1005,16 @@ function BarrierFree({
                                     <WatchaIcon /> <span>왓챠</span>
                                   </>
                                 )}
-                                {(amusement.ott === 'wavveOriginal' || amusement.ott === 'wavveOnly') && (
+                                {(amusement.ott === 'wavveOriginal' ||
+                                  amusement.ott === 'wavveOnly' ||
+                                  amusement.ott === 'waveOnly') && (
                                   <>
                                     <WavveIcon /> <span>웨이브</span>
+                                  </>
+                                )}
+                                {amusement.ott === 'waveFirstrun' && (
+                                  <>
+                                    <WavveIcon2 /> <span>웨이브 해외시리즈</span>
                                   </>
                                 )}
                                 {amusement.ott === 'paramount' && (
