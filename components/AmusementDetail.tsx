@@ -186,6 +186,7 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                         {amusement.ott === 'watchaExclusive' && '오직 왓챠에서'}
                         {amusement.ott === 'wavveOriginal' && '웨이브 오리지널'}
                         {amusement.ott === 'wavveOnly' && '오직 웨이브에서'}
+                        {(amusement.ott === 'waveOnly' || amusement.ott === 'waveFirstrun') && '웨이브 해외시리즈'}
                         {amusement.ott === 'paramount' && 'Paramount+'}
                       </dd>
                     </div>
