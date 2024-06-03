@@ -195,6 +195,542 @@ function Amusement({
     }
   };
 
+  function AmusementItem({ amusement }: { amusement: AmusementData }) {
+    const supportLanguage = router.query.hanguk || router.query.subdub || router.query.bfree;
+    return (
+      <div className={`${styles.thumbnail} ${category === 'game' || category === 'game_fan' ? styles.game : ''}`}>
+        <Image
+          src={amusement.posterDefault}
+          width={category === 'game' || category === 'game_fan' ? 460 : 390}
+          height={category === 'game' || category === 'game_fan' ? 215 : 560}
+          alt=""
+          unoptimized
+          priority
+        />
+        {amusement.category !== 'game_fan' && (
+          <dl>
+            {amusement.animeBroadcast2 !== null && (
+              <div className={`${styles.anime2} ${amusement.animeBroadcast1 === null ? styles.anime2only : ''}`}>
+                <dt>한국 방송사</dt>
+                <dd>
+                  {amusement.animeBroadcast2 === 'aniplus' && (
+                    <>
+                      <AniplusIcon /> <span>애니플러스</span>
+                    </>
+                  )}
+                  {amusement.animeBroadcast2 === 'daewon' && (
+                    <>
+                      <DaewonIcon /> <span>애니원</span>
+                    </>
+                  )}
+                  {amusement.animeBroadcast2 === 'anibox' && (
+                    <>
+                      <AniboxIcon /> <span>애니박스</span>
+                    </>
+                  )}
+                  {amusement.animeBroadcast2 === 'tooniverse' && (
+                    <>
+                      <TooniverseIcon /> <span>투니버스</span>
+                    </>
+                  )}
+                  {amusement.animeBroadcast2 === 'animax' && (
+                    <>
+                      <AnimaxIcon /> <span>애니맥스 코리아</span>
+                    </>
+                  )}
+                </dd>
+              </div>
+            )}
+            {amusement.animeBroadcast1 !== null && (
+              <div
+                className={`${styles.anime1} ${amusement.animeBroadcast1 !== null ? styles.anime1 : ''} ${amusement.ott !== null ? styles.broadcasts : ''}`}
+              >
+                <dt>일본 방송사</dt>
+                <dd>
+                  {amusement.animeBroadcast1 === 'tokyomx' && (
+                    <>
+                      <TokyomxIcon /> <span>도쿄MX</span>
+                    </>
+                  )}
+                  {amusement.animeBroadcast1 === 'tvtokyo' && (
+                    <>
+                      <TvtokyoIcon /> <span>테레토</span>
+                    </>
+                  )}
+                  {amusement.animeBroadcast1 === 'fujitv' && (
+                    <>
+                      <FujitvIcon /> <span>후지테레비</span>
+                    </>
+                  )}
+                  {amusement.animeBroadcast1 === 'mbs' && (
+                    <>
+                      <MbsIcon /> <span>MBS</span>
+                    </>
+                  )}
+                  {amusement.animeBroadcast1 === 'tbs' && (
+                    <>
+                      <TbsIcon /> <span>TBS</span>
+                    </>
+                  )}
+                  {amusement.animeBroadcast1 === 'atx' && (
+                    <>
+                      <AtxIcon /> <span>AT-X</span>
+                    </>
+                  )}
+                  {amusement.animeBroadcast1 === 'nippontv' && (
+                    <>
+                      <NippontvIcon /> <span>닛테레</span>
+                    </>
+                  )}
+                  {amusement.animeBroadcast1 === 'wowow' && (
+                    <>
+                      <WowowIcon /> <span>WOWOW</span>
+                    </>
+                  )}
+                </dd>
+              </div>
+            )}
+            {platform ? (
+              <>
+                {amusement.broadcast !== null && platform !== amusement.broadcast && (
+                  <>
+                    {platform === 'disney' && (
+                      <>
+                        <div className={styles.broadcast}>
+                          <dt>드라마 송출 방송국</dt>
+                          <dd>
+                            {amusement.broadcast === 'ENA' && (
+                              <>
+                                <EnaIcon /> <span>ENA</span>
+                              </>
+                            )}
+                            {amusement.broadcast === 'JTBC' && (
+                              <>
+                                <JtbcIcon /> <span>JTBC</span>
+                              </>
+                            )}
+                            {amusement.broadcast === 'KBS2' && (
+                              <>
+                                <Kbs2Icon /> <span>KBS 2TV</span>
+                              </>
+                            )}
+                            {amusement.broadcast === 'MBC' && (
+                              <>
+                                <MbcIcon /> <span>MBC</span>
+                              </>
+                            )}
+                            {amusement.broadcast === 'OCN' && (
+                              <>
+                                <OcnIcon /> <span>OCN</span>
+                              </>
+                            )}
+                            {amusement.broadcast === 'SBS' && (
+                              <>
+                                <SbsIcon /> <span>SBS</span>
+                              </>
+                            )}
+                            {amusement.broadcast === 'tvN' && (
+                              <>
+                                <TvnIcon /> <span>tvN</span>
+                              </>
+                            )}
+                          </dd>
+                        </div>
+                        <div className={styles.platform}>
+                          <dt>OTT 플랫폼</dt>
+                          <dd>
+                            {amusement.ott === 'disneyOriginal' && (
+                              <>
+                                <DisneyIcon /> <span>Disney+</span>
+                              </>
+                            )}
+                            {amusement.ott === 'disneyStar' && (
+                              <>
+                                <StarIcon /> <span>Star+</span>
+                              </>
+                            )}
+                          </dd>
+                        </div>
+                      </>
+                    )}
+                  </>
+                )}
+                {((platform as Platform) !== 'amazonOriginal' ||
+                  (platform as Platform) !== 'appleOriginal' ||
+                  (platform as Platform) !== 'appleFilm' ||
+                  (platform as Platform) !== 'disneyOriginal' ||
+                  (platform as Platform) !== 'disneyStar' ||
+                  (platform as Platform) !== 'netflixSeries' ||
+                  (platform as Platform) !== 'netflixPresents' ||
+                  (platform as Platform) !== 'netflixOriginal' ||
+                  (platform as Platform) !== 'netflixFilm' ||
+                  (platform as Platform) !== 'netflixAnime' ||
+                  (platform as Platform) !== 'netflixAnimeFilm' ||
+                  (platform as Platform) !== 'netflixDocumentary' ||
+                  (platform as Platform) !== 'tvingOriginal' ||
+                  (platform as Platform) !== 'tvingOnly' ||
+                  (platform as Platform) !== 'watchaOriginal' ||
+                  (platform as Platform) !== 'watchaExclusive' ||
+                  (platform as Platform) !== 'wavveOriginal' ||
+                  (platform as Platform) !== 'wavveOnly' ||
+                  (platform as Platform) !== 'waveOnly' ||
+                  (platform as Platform) !== 'waveFirstrun' ||
+                  (platform as Platform) !== 'paramount') && (
+                  <>
+                    {amusement.ott !== null && (
+                      <>
+                        {amusement.wavveSeries && (
+                          <div className={styles.broadcast}>
+                            <dt>드라마 송출 방송국</dt>
+                            <dd>
+                              {amusement.wavveSeries.map((item: string, index: number) => (
+                                <React.Fragment key={index}>
+                                  {item === 'bbc' && (
+                                    <>
+                                      <BbcIcon />
+                                      <span>BBC</span>
+                                    </>
+                                  )}
+                                  {item === 'hbomax' && (
+                                    <>
+                                      <HbomaxIcon />
+                                      <span>HBO맥스</span>
+                                    </>
+                                  )}
+                                  {item === 'hulu' && (
+                                    <>
+                                      <HuluIcon />
+                                      <span>Hulu</span>
+                                    </>
+                                  )}
+                                  {item === 'peacock' && (
+                                    <>
+                                      <PeacockIcon />
+                                      <span>Peacock</span>
+                                    </>
+                                  )}
+                                  {item === 'sky' && (
+                                    <>
+                                      <SkyIcon />
+                                      <span>SKY</span>
+                                    </>
+                                  )}
+                                  {item === 'syfy' && (
+                                    <>
+                                      <SyfyIcon />
+                                      <span>SYFY</span>
+                                    </>
+                                  )}
+                                </React.Fragment>
+                              ))}
+                            </dd>
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </>
+                )}
+              </>
+            ) : (
+              <>
+                {(amusement.broadcast !== null || amusement.wavveSeries !== null) && (
+                  <div className={`${styles.broadcast} ${amusement.ott !== null ? styles.broadcasts : ''}`}>
+                    <dt>방송사</dt>
+                    <dd>
+                      {amusement.broadcast === 'ENA' && (
+                        <>
+                          <EnaIcon /> <span>ENA</span>
+                        </>
+                      )}
+                      {amusement.broadcast === 'JTBC' && (
+                        <>
+                          <JtbcIcon /> <span>JTBC</span>
+                        </>
+                      )}
+                      {amusement.broadcast === 'KBS2' && (
+                        <>
+                          <Kbs2Icon /> <span>KBS 2TV</span>
+                        </>
+                      )}
+                      {amusement.broadcast === 'MBC' && (
+                        <>
+                          <MbcIcon /> <span>MBC</span>
+                        </>
+                      )}
+                      {amusement.broadcast === 'OCN' && (
+                        <>
+                          <OcnIcon /> <span>OCN</span>
+                        </>
+                      )}
+                      {amusement.broadcast === 'SBS' && (
+                        <>
+                          <SbsIcon /> <span>SBS</span>
+                        </>
+                      )}
+                      {amusement.broadcast === 'tvN' && (
+                        <>
+                          <TvnIcon /> <span>tvN</span>
+                        </>
+                      )}
+                      {amusement.broadcast === 'ABC' && (
+                        <>
+                          <AbcIcon /> <span>ABC</span>
+                        </>
+                      )}
+                      {amusement.wavveSeries &&
+                        amusement.wavveSeries.map((item: string, index: number) => (
+                          <React.Fragment key={index}>
+                            {item === 'bbc' && (
+                              <>
+                                <BbcIcon />
+                                <span>BBC</span>
+                              </>
+                            )}
+                            {item === 'hbomax' && (
+                              <>
+                                <HbomaxIcon />
+                                <span>HBO맥스</span>
+                              </>
+                            )}
+                            {item === 'hulu' && (
+                              <>
+                                <HuluIcon />
+                                <span>Hulu</span>
+                              </>
+                            )}
+                            {item === 'peacock' && (
+                              <>
+                                <PeacockIcon />
+                                <span>Peacock</span>
+                              </>
+                            )}
+                            {item === 'sky' && (
+                              <>
+                                <SkyIcon />
+                                <span>SKY</span>
+                              </>
+                            )}
+                            {item === 'syfy' && (
+                              <>
+                                <SyfyIcon />
+                                <span>SYFY</span>
+                              </>
+                            )}
+                          </React.Fragment>
+                        ))}
+                    </dd>
+                  </div>
+                )}
+                {amusement.ott !== null && (
+                  <div className={styles.platform}>
+                    <dt>OTT 플랫폼</dt>
+                    <dd>
+                      {amusement.ott === 'amazonOriginal' && (
+                        <>
+                          <AmazonIcon /> <span>아마존 프라임비디오</span>
+                        </>
+                      )}
+                      {amusement.ott === 'appleOriginal' && (
+                        <>
+                          <AppleIcon /> <span>Apple TV+ 시리즈</span>
+                        </>
+                      )}
+                      {amusement.ott === 'appleFilm' && (
+                        <>
+                          <AppleIcon /> <span>Apple TV+ 영화</span>
+                        </>
+                      )}
+                      {amusement.ott === 'disneyOriginal' && (
+                        <>
+                          <DisneyIcon /> <span>Disney+</span>
+                        </>
+                      )}
+                      {amusement.ott === 'disneyStar' && (
+                        <>
+                          <StarIcon /> <span>Star+</span>
+                        </>
+                      )}
+                      {(amusement.ott === 'netflixSeries' ||
+                        amusement.ott === 'netflixPresents' ||
+                        amusement.ott === 'netflixOriginal' ||
+                        amusement.ott === 'netflixFilm' ||
+                        amusement.ott === 'netflixAnime' ||
+                        amusement.ott === 'netflixAnimeFilm' ||
+                        amusement.ott === 'netflixDocumentary') && (
+                        <>
+                          <NetflixIcon />
+                          <span>
+                            {(amusement.ott === 'netflixSeries' ||
+                              amusement.ott === 'netflixOriginal' ||
+                              amusement.ott === 'netflixAnime') &&
+                              '넷플릭스 시리즈'}
+                            {(amusement.ott === 'netflixPresents' ||
+                              amusement.ott === 'netflixFilm' ||
+                              amusement.ott === 'netflixAnimeFilm') &&
+                              '넷플릭스 영화'}
+                            {amusement.ott === 'netflixDocumentary' && '넷플릭스 다큐멘터리'}
+                          </span>
+                        </>
+                      )}
+                      {(amusement.ott === 'tvingOriginal' || amusement.ott === 'tvingOnly') && (
+                        <>
+                          <TvingIcon /> <span>티빙</span>
+                        </>
+                      )}
+                      {(amusement.ott === 'watchaOriginal' || amusement.ott === 'watchaExclusive') && (
+                        <>
+                          <WatchaIcon /> <span>왓챠</span>
+                        </>
+                      )}
+                      {(amusement.ott === 'wavveOriginal' ||
+                        amusement.ott === 'wavveOnly' ||
+                        amusement.ott === 'waveOnly') && (
+                        <>
+                          <WavveIcon /> <span>웨이브</span>
+                        </>
+                      )}
+                      {amusement.ott === 'waveFirstrun' && (
+                        <>
+                          <WavveIcon2 /> <span>웨이브 해외시리즈</span>
+                        </>
+                      )}
+                      {amusement.ott === 'paramount' && (
+                        <>
+                          <ParamountIcon /> <span>Paramount+</span>
+                        </>
+                      )}
+                    </dd>
+                  </div>
+                )}
+              </>
+            )}
+            <div className={category === 'game' || category === 'game_fan' ? styles.game : ''}>
+              <dt>{category === 'game' ? '심의등급' : '시청등급'}</dt>
+              <dd>
+                {amusement.ott === 'amazonOriginal' ? (
+                  <i className={`${styles['rating-amazon']} number`} aria-label="시청 가능 연령">
+                    {amusement.rating === 'all' && 'All'}
+                    {amusement.rating === 'a7' && '7+'}
+                    {amusement.rating === 'b12' && '13+'}
+                    {amusement.rating === 'c15' && '16+'}
+                    {amusement.rating === 'd19' && '18+'}
+                  </i>
+                ) : (
+                  <>
+                    {(amusement.category === 'drama' ||
+                      amusement.category === 'ott_drama' ||
+                      amusement.category === 'ott_anime' ||
+                      amusement.category === 'ott_documentary' ||
+                      amusement.anime === 'tva' ||
+                      amusement.anime === 'ova') && (
+                      <>
+                        {amusement.rating === 'all' ? (
+                          <>
+                            <i className={`${styles.drama} ${styles.all} number`}>{RatingsDrama(amusement.rating)}</i>
+                            <span>전체 이용가</span>
+                          </>
+                        ) : (
+                          <>
+                            {amusement.rating === 'd19' ? (
+                              <>
+                                <i className={`${styles.drama} ${styles.d19} number`}>
+                                  {RatingsDrama(amusement.rating)}
+                                </i>
+                                <span>세 미만 이용불가</span>
+                              </>
+                            ) : (
+                              <>
+                                <i className={`${styles.drama} number`}>{RatingsDrama(amusement.rating)}</i>
+                                <span>세 이상 이용가</span>
+                              </>
+                            )}
+                          </>
+                        )}
+                      </>
+                    )}
+                    {(amusement.category === 'film' ||
+                      amusement.category === 'anime_film' ||
+                      amusement.category === 'ott_anime_film' ||
+                      amusement.category === 'ott_documentary_film' ||
+                      amusement.category === 'ott_film' ||
+                      amusement.anime === 'film') && (
+                      <>
+                        {amusement.rating === 'all' && (
+                          <>
+                            <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
+                          </>
+                        )}
+                        {amusement.rating === 'b12' && (
+                          <>
+                            <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
+                          </>
+                        )}
+                        {amusement.rating === 'c15' && (
+                          <>
+                            <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
+                          </>
+                        )}
+                        {amusement.rating === 'd19' && (
+                          <>
+                            <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
+                          </>
+                        )}
+                      </>
+                    )}
+                  </>
+                )}
+                {(amusement.category === 'game' || amusement.category === 'game_fan') && (
+                  <>
+                    {amusement.rating === 'all' && (
+                      <>
+                        <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
+                      </>
+                    )}
+                    {amusement.rating === 'b12' && (
+                      <>
+                        <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
+                      </>
+                    )}
+                    {amusement.rating === 'c15' && (
+                      <>
+                        <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
+                      </>
+                    )}
+                    {amusement.rating === 'd19' && (
+                      <>
+                        <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
+                      </>
+                    )}
+                  </>
+                )}
+              </dd>
+              {amusement.supportLang && (
+                <>
+                  <dt>추가지원</dt>
+                  <dd>
+                    {supportLanguage
+                      ? amusement.supportLang
+                          .filter((item: string) => item !== router.query.bfree)
+                          .map((item: string, index: number) => (
+                            <i className={styles.supportLang} key={index}>
+                              {BadgeLang(item)}
+                            </i>
+                          ))
+                      : amusement.supportLang.map((item: string, index: number) => (
+                          <i className={styles.supportLang} key={index}>
+                            {BadgeLang(item)}
+                          </i>
+                        ))}
+                  </dd>
+                </>
+              )}
+            </div>
+          </dl>
+        )}
+      </div>
+    );
+  }
+
   return (
     <main className={`${styles.categories} ${styles.amusement}`}>
       <Seo
@@ -760,391 +1296,7 @@ function Amusement({
                 <section className={category === 'game' || category === 'game_fan' ? styles.game : ''}>
                   {categoryData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                      <div
-                        className={`${styles.thumbnail} ${category === 'game' || category === 'game_fan' ? styles.game : ''}`}
-                      >
-                        <Image
-                          src={amusement.posterDefault}
-                          width={category === 'game' || category === 'game_fan' ? 460 : 390}
-                          height={category === 'game' || category === 'game_fan' ? 215 : 560}
-                          alt=""
-                          unoptimized
-                          priority
-                        />
-                        {amusement.category !== 'game_fan' && (
-                          <dl>
-                            {amusement.animeBroadcast2 !== null && (
-                              <div
-                                className={`${styles.anime2} ${amusement.animeBroadcast1 === null ? styles.anime2only : ''}`}
-                              >
-                                <dt>애니메이션 방영 한국 방송국</dt>
-                                <dd>
-                                  {amusement.animeBroadcast2 === 'aniplus' && (
-                                    <>
-                                      <AniplusIcon /> <span>애니플러스</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast2 === 'daewon' && (
-                                    <>
-                                      <DaewonIcon /> <span>애니원</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast2 === 'anibox' && (
-                                    <>
-                                      <AniboxIcon /> <span>애니박스</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast2 === 'tooniverse' && (
-                                    <>
-                                      <TooniverseIcon /> <span>투니버스</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast2 === 'animax' && (
-                                    <>
-                                      <AnimaxIcon /> <span>애니맥스 코리아</span>
-                                    </>
-                                  )}
-                                </dd>
-                              </div>
-                            )}
-                            {amusement.animeBroadcast1 !== null && (
-                              <div
-                                className={`${styles.anime1} ${amusement.animeBroadcast1 !== null ? styles.anime1 : ''} ${amusement.ott !== null ? styles.broadcasts : ''}`}
-                              >
-                                <dt>애니메이션 방영 일본 방송국</dt>
-                                <dd>
-                                  {amusement.animeBroadcast1 === 'tokyomx' && (
-                                    <>
-                                      <TokyomxIcon /> <span>도쿄MX</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'tvtokyo' && (
-                                    <>
-                                      <TvtokyoIcon /> <span>테레토</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'fujitv' && (
-                                    <>
-                                      <FujitvIcon /> <span>후지테레비</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'mbs' && (
-                                    <>
-                                      <MbsIcon /> <span>MBS</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'tbs' && (
-                                    <>
-                                      <TbsIcon /> <span>TBS</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'atx' && (
-                                    <>
-                                      <AtxIcon /> <span>AT-X</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'nippontv' && (
-                                    <>
-                                      <NippontvIcon /> <span>닛테레</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'wowow' && (
-                                    <>
-                                      <WowowIcon /> <span>WOWOW</span>
-                                    </>
-                                  )}
-                                </dd>
-                              </div>
-                            )}
-                            {(amusement.broadcast !== null || amusement.wavveSeries !== null) && (
-                              <div className={`${styles.broadcast} ${amusement.ott !== null ? styles.broadcasts : ''}`}>
-                                <dt>드라마 송출 방송국</dt>
-                                <dd>
-                                  {amusement.broadcast === 'ENA' && (
-                                    <>
-                                      <EnaIcon /> <span>ENA</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'JTBC' && (
-                                    <>
-                                      <JtbcIcon /> <span>JTBC</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'KBS2' && (
-                                    <>
-                                      <Kbs2Icon /> <span>KBS 2TV</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'MBC' && (
-                                    <>
-                                      <MbcIcon /> <span>MBC</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'OCN' && (
-                                    <>
-                                      <OcnIcon /> <span>OCN</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'SBS' && (
-                                    <>
-                                      <SbsIcon /> <span>SBS</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'tvN' && (
-                                    <>
-                                      <TvnIcon /> <span>tvN</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'ABC' && (
-                                    <>
-                                      <AbcIcon /> <span>ABC</span>
-                                    </>
-                                  )}
-                                  {amusement.wavveSeries &&
-                                    amusement.wavveSeries.map((item: string, index: number) => (
-                                      <React.Fragment key={index}>
-                                        {item === 'bbc' && (
-                                          <>
-                                            <BbcIcon />
-                                            <span>BBC</span>
-                                          </>
-                                        )}
-                                        {item === 'hbomax' && (
-                                          <>
-                                            <HbomaxIcon />
-                                            <span>HBO맥스</span>
-                                          </>
-                                        )}
-                                        {item === 'hulu' && (
-                                          <>
-                                            <HuluIcon />
-                                            <span>Hulu</span>
-                                          </>
-                                        )}
-                                        {item === 'peacock' && (
-                                          <>
-                                            <PeacockIcon />
-                                            <span>Peacock</span>
-                                          </>
-                                        )}
-                                        {item === 'sky' && (
-                                          <>
-                                            <SkyIcon />
-                                            <span>SKY</span>
-                                          </>
-                                        )}
-                                        {item === 'syfy' && (
-                                          <>
-                                            <SyfyIcon />
-                                            <span>SYFY</span>
-                                          </>
-                                        )}
-                                      </React.Fragment>
-                                    ))}
-                                </dd>
-                              </div>
-                            )}
-                            {amusement.ott !== null && (
-                              <div className={styles.platform}>
-                                <dt>OTT 플랫폼</dt>
-                                <dd>
-                                  {amusement.ott === 'amazonOriginal' && (
-                                    <>
-                                      <AmazonIcon /> <span>아마존 프라임비디오</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'appleOriginal' && (
-                                    <>
-                                      <AppleIcon /> <span>Apple TV+ 시리즈</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'appleFilm' && (
-                                    <>
-                                      <AppleIcon /> <span>Apple TV+ 영화</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'disneyOriginal' && (
-                                    <>
-                                      <DisneyIcon /> <span>Disney+</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'disneyStar' && (
-                                    <>
-                                      <StarIcon /> <span>Star+</span>
-                                    </>
-                                  )}
-                                  {(amusement.ott === 'netflixSeries' ||
-                                    amusement.ott === 'netflixPresents' ||
-                                    amusement.ott === 'netflixOriginal' ||
-                                    amusement.ott === 'netflixFilm' ||
-                                    amusement.ott === 'netflixAnime' ||
-                                    amusement.ott === 'netflixAnimeFilm' ||
-                                    amusement.ott === 'netflixDocumentary') && (
-                                    <>
-                                      <NetflixIcon />
-                                      <span>
-                                        {(amusement.ott === 'netflixSeries' ||
-                                          amusement.ott === 'netflixOriginal' ||
-                                          amusement.ott === 'netflixAnime') &&
-                                          '넷플릭스 시리즈'}
-                                        {(amusement.ott === 'netflixPresents' ||
-                                          amusement.ott === 'netflixFilm' ||
-                                          amusement.ott === 'netflixAnimeFilm') &&
-                                          '넷플릭스 영화'}
-                                        {amusement.ott === 'netflixDocumentary' && '넷플릭스 다큐멘터리'}
-                                      </span>
-                                    </>
-                                  )}
-                                  {(amusement.ott === 'tvingOriginal' || amusement.ott === 'tvingOnly') && (
-                                    <>
-                                      <TvingIcon /> <span>티빙</span>
-                                    </>
-                                  )}
-                                  {(amusement.ott === 'watchaOriginal' || amusement.ott === 'watchaExclusive') && (
-                                    <>
-                                      <WatchaIcon /> <span>왓챠</span>
-                                    </>
-                                  )}
-                                  {(amusement.ott === 'wavveOriginal' ||
-                                    amusement.ott === 'wavveOnly' ||
-                                    amusement.ott === 'waveOnly') && (
-                                    <>
-                                      <WavveIcon /> <span>웨이브</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'waveFirstrun' && (
-                                    <>
-                                      <WavveIcon2 /> <span>웨이브 해외시리즈</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'paramount' && (
-                                    <>
-                                      <ParamountIcon /> <span>Paramount+</span>
-                                    </>
-                                  )}
-                                </dd>
-                              </div>
-                            )}
-                            <div className={category === 'game' || category === 'game_fan' ? styles.game : ''}>
-                              <dt>{category === 'game' ? '심의등급' : '시청등급'}</dt>
-                              <dd>
-                                {amusement.ott === 'amazonOriginal' ? (
-                                  <i className={`${styles['rating-amazon']} number`} aria-label="시청 가능 연령">
-                                    {amusement.rating === 'all' && 'All'}
-                                    {amusement.rating === 'a7' && '7+'}
-                                    {amusement.rating === 'b12' && '13+'}
-                                    {amusement.rating === 'c15' && '16+'}
-                                    {amusement.rating === 'd19' && '18+'}
-                                  </i>
-                                ) : (
-                                  <>
-                                    {(amusement.category === 'drama' ||
-                                      amusement.category === 'ott_drama' ||
-                                      amusement.category === 'ott_anime' ||
-                                      amusement.category === 'ott_documentary' ||
-                                      amusement.anime === 'tva' ||
-                                      amusement.anime === 'ova') && (
-                                      <>
-                                        {amusement.rating === 'all' ? (
-                                          <>
-                                            <i className={`${styles.drama} ${styles.all} number`}>
-                                              {RatingsDrama(amusement.rating)}
-                                            </i>
-                                            <span>전체 이용가</span>
-                                          </>
-                                        ) : (
-                                          <>
-                                            {amusement.rating === 'd19' ? (
-                                              <>
-                                                <i className={`${styles.drama} ${styles.d19} number`}>
-                                                  {RatingsDrama(amusement.rating)}
-                                                </i>
-                                                <span>세 미만 이용불가</span>
-                                              </>
-                                            ) : (
-                                              <>
-                                                <i className={`${styles.drama} number`}>
-                                                  {RatingsDrama(amusement.rating)}
-                                                </i>
-                                                <span>세 이상 이용가</span>
-                                              </>
-                                            )}
-                                          </>
-                                        )}
-                                      </>
-                                    )}
-                                    {(amusement.category === 'film' ||
-                                      amusement.category === 'anime_film' ||
-                                      amusement.category === 'ott_anime_film' ||
-                                      amusement.category === 'ott_documentary_film' ||
-                                      amusement.category === 'ott_film' ||
-                                      amusement.anime === 'film') && (
-                                      <>
-                                        {amusement.rating === 'all' && (
-                                          <>
-                                            <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
-                                          </>
-                                        )}
-                                        {amusement.rating === 'b12' && (
-                                          <>
-                                            <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
-                                          </>
-                                        )}
-                                        {amusement.rating === 'c15' && (
-                                          <>
-                                            <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
-                                          </>
-                                        )}
-                                        {amusement.rating === 'd19' && (
-                                          <>
-                                            <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
-                                          </>
-                                        )}
-                                      </>
-                                    )}
-                                  </>
-                                )}
-                                {(amusement.category === 'game' || amusement.category === 'game_fan') && (
-                                  <>
-                                    {amusement.rating === 'all' && (
-                                      <>
-                                        <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
-                                      </>
-                                    )}
-                                    {amusement.rating === 'b12' && (
-                                      <>
-                                        <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
-                                      </>
-                                    )}
-                                    {amusement.rating === 'c15' && (
-                                      <>
-                                        <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
-                                      </>
-                                    )}
-                                    {amusement.rating === 'd19' && (
-                                      <>
-                                        <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
-                                      </>
-                                    )}
-                                  </>
-                                )}
-                              </dd>
-                              {amusement.supportLang && (
-                                <>
-                                  <dt>추가지원</dt>
-                                  <dd>
-                                    {amusement.supportLang.map((item: string, index: number) => (
-                                      <i className={styles.supportLang} key={index}>
-                                        {BadgeLang(item)}
-                                      </i>
-                                    ))}
-                                  </dd>
-                                </>
-                              )}
-                            </div>
-                          </dl>
-                        )}
-                      </div>
+                      <AmusementItem amusement={amusement} />
                       <strong>
                         <span className="seed">
                           {amusement.category === 'game_fan'
@@ -1301,384 +1453,7 @@ function Amusement({
                 <section className={category === 'game' ? styles.game : ''}>
                   {tagData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                      <div className={`${styles.thumbnail} ${category === 'game' ? styles.game : ''}`}>
-                        <Image
-                          src={amusement.posterDefault}
-                          width={category === 'game' ? 460 : 390}
-                          height={category === 'game' ? 215 : 560}
-                          alt=""
-                          unoptimized
-                          priority
-                        />
-                        {amusement.category !== 'game_fan' && (
-                          <dl>
-                            {amusement.animeBroadcast2 !== null && (
-                              <div
-                                className={`${styles.anime2} ${amusement.animeBroadcast1 === null ? styles.anime2only : ''}`}
-                              >
-                                <dt>애니메이션 방영 한국 방송국</dt>
-                                <dd>
-                                  {amusement.animeBroadcast2 === 'aniplus' && (
-                                    <>
-                                      <AniplusIcon /> <span>애니플러스</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast2 === 'daewon' && (
-                                    <>
-                                      <DaewonIcon /> <span>애니원</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast2 === 'anibox' && (
-                                    <>
-                                      <AniboxIcon /> <span>애니박스</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast2 === 'tooniverse' && (
-                                    <>
-                                      <TooniverseIcon /> <span>투니버스</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast2 === 'animax' && (
-                                    <>
-                                      <AnimaxIcon /> <span>애니맥스 코리아</span>
-                                    </>
-                                  )}
-                                </dd>
-                              </div>
-                            )}
-                            {amusement.animeBroadcast1 !== null && (
-                              <div
-                                className={`${styles.anime1} ${amusement.animeBroadcast1 !== null ? styles.anime1 : ''} ${amusement.ott !== null ? styles.broadcasts : ''}`}
-                              >
-                                <dt>애니메이션 방영 일본 방송국</dt>
-                                <dd>
-                                  {amusement.animeBroadcast1 === 'tokyomx' && (
-                                    <>
-                                      <TokyomxIcon /> <span>도쿄MX</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'tvtokyo' && (
-                                    <>
-                                      <TvtokyoIcon /> <span>테레토</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'fujitv' && (
-                                    <>
-                                      <FujitvIcon /> <span>후지테레비</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'mbs' && (
-                                    <>
-                                      <MbsIcon /> <span>MBS</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'tbs' && (
-                                    <>
-                                      <TbsIcon /> <span>TBS</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'atx' && (
-                                    <>
-                                      <AtxIcon /> <span>AT-X</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'nippontv' && (
-                                    <>
-                                      <NippontvIcon /> <span>닛테레</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'wowow' && (
-                                    <>
-                                      <WowowIcon /> <span>WOWOW</span>
-                                    </>
-                                  )}
-                                </dd>
-                              </div>
-                            )}
-                            {(amusement.broadcast !== null || amusement.wavveSeries !== null) && (
-                              <div className={`${styles.broadcast} ${amusement.ott !== null ? styles.broadcasts : ''}`}>
-                                <dt>드라마 송출 방송국</dt>
-                                <dd>
-                                  {amusement.broadcast === 'ENA' && (
-                                    <>
-                                      <EnaIcon /> <span>ENA</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'JTBC' && (
-                                    <>
-                                      <JtbcIcon /> <span>JTBC</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'KBS2' && (
-                                    <>
-                                      <Kbs2Icon /> <span>KBS 2TV</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'MBC' && (
-                                    <>
-                                      <MbcIcon /> <span>MBC</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'OCN' && (
-                                    <>
-                                      <OcnIcon /> <span>OCN</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'SBS' && (
-                                    <>
-                                      <SbsIcon /> <span>SBS</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'tvN' && (
-                                    <>
-                                      <TvnIcon /> <span>tvN</span>
-                                    </>
-                                  )}
-                                  {amusement.wavveSeries &&
-                                    amusement.wavveSeries.map((item: string, index: number) => (
-                                      <React.Fragment key={index}>
-                                        {item === 'bbc' && (
-                                          <>
-                                            <BbcIcon />
-                                            <span>BBC</span>
-                                          </>
-                                        )}
-                                        {item === 'hbomax' && (
-                                          <>
-                                            <HbomaxIcon />
-                                            <span>HBO맥스</span>
-                                          </>
-                                        )}
-                                        {item === 'hulu' && (
-                                          <>
-                                            <HuluIcon />
-                                            <span>Hulu</span>
-                                          </>
-                                        )}
-                                        {item === 'peacock' && (
-                                          <>
-                                            <PeacockIcon />
-                                            <span>Peacock</span>
-                                          </>
-                                        )}
-                                        {item === 'sky' && (
-                                          <>
-                                            <SkyIcon />
-                                            <span>SKY</span>
-                                          </>
-                                        )}
-                                        {item === 'syfy' && (
-                                          <>
-                                            <SyfyIcon />
-                                            <span>SYFY</span>
-                                          </>
-                                        )}
-                                      </React.Fragment>
-                                    ))}
-                                </dd>
-                              </div>
-                            )}
-                            {amusement.ott !== null && (
-                              <div className={styles.platform}>
-                                <dt>OTT 플랫폼</dt>
-                                <dd>
-                                  {amusement.ott === 'amazonOriginal' && (
-                                    <>
-                                      <AmazonIcon /> <span>아마존 프라임비디오</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'appleOriginal' && (
-                                    <>
-                                      <AppleIcon /> <span>Apple TV+ 시리즈</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'appleFilm' && (
-                                    <>
-                                      <AppleIcon /> <span>Apple TV+ 영화</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'disneyOriginal' && (
-                                    <>
-                                      <DisneyIcon /> <span>Disney+</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'disneyStar' && (
-                                    <>
-                                      <StarIcon /> <span>Star+</span>
-                                    </>
-                                  )}
-                                  {(amusement.ott === 'netflixSeries' ||
-                                    amusement.ott === 'netflixPresents' ||
-                                    amusement.ott === 'netflixOriginal' ||
-                                    amusement.ott === 'netflixFilm' ||
-                                    amusement.ott === 'netflixAnime' ||
-                                    amusement.ott === 'netflixAnimeFilm' ||
-                                    amusement.ott === 'netflixDocumentary') && (
-                                    <>
-                                      <NetflixIcon />
-                                      <span>
-                                        {(amusement.ott === 'netflixSeries' ||
-                                          amusement.ott === 'netflixOriginal' ||
-                                          amusement.ott === 'netflixAnime') &&
-                                          '넷플릭스 시리즈'}
-                                        {(amusement.ott === 'netflixPresents' ||
-                                          amusement.ott === 'netflixFilm' ||
-                                          amusement.ott === 'netflixAnimeFilm') &&
-                                          '넷플릭스 영화'}
-                                        {amusement.ott === 'netflixDocumentary' && '넷플릭스 다큐멘터리'}
-                                      </span>
-                                    </>
-                                  )}
-                                  {(amusement.ott === 'tvingOriginal' || amusement.ott === 'tvingOnly') && (
-                                    <>
-                                      <TvingIcon /> <span>티빙</span>
-                                    </>
-                                  )}
-                                  {(amusement.ott === 'watchaOriginal' || amusement.ott === 'watchaExclusive') && (
-                                    <>
-                                      <WatchaIcon /> <span>왓챠</span>
-                                    </>
-                                  )}
-                                  {(amusement.ott === 'wavveOriginal' ||
-                                    amusement.ott === 'wavveOnly' ||
-                                    amusement.ott === 'waveOnly') && (
-                                    <>
-                                      <WavveIcon /> <span>웨이브</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'waveFirstrun' && (
-                                    <>
-                                      <WavveIcon2 /> <span>웨이브 해외시리즈</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'paramount' && (
-                                    <>
-                                      <ParamountIcon /> <span>Paramount+</span>
-                                    </>
-                                  )}
-                                </dd>
-                              </div>
-                            )}
-                            <div className={category === 'game' ? styles.game : ''}>
-                              <dt>{category === 'game' ? '심의등급' : '시청등급'}</dt>
-                              <dd>
-                                {amusement.ott === 'amazonOriginal' ? (
-                                  <i className={`${styles['rating-amazon']} number`} aria-label="시청 가능 연령">
-                                    {amusement.rating === 'all' && 'All'}
-                                    {amusement.rating === 'a7' && '7+'}
-                                    {amusement.rating === 'b12' && '13+'}
-                                    {amusement.rating === 'c15' && '16+'}
-                                    {amusement.rating === 'd19' && '18+'}
-                                  </i>
-                                ) : (
-                                  <>
-                                    {(amusement.category === 'drama' ||
-                                      amusement.category === 'ott_drama' ||
-                                      amusement.category === 'ott_anime' ||
-                                      amusement.category === 'ott_documentary' ||
-                                      amusement.anime === 'tva' ||
-                                      amusement.anime === 'ova') && (
-                                      <>
-                                        {amusement.rating === 'all' ? (
-                                          <>
-                                            <i className={`${styles.drama} ${styles.all} number`}>
-                                              {RatingsDrama(amusement.rating)}
-                                            </i>
-                                            <span>전체 이용가</span>
-                                          </>
-                                        ) : (
-                                          <>
-                                            {amusement.rating === 'd19' ? (
-                                              <>
-                                                <i className={`${styles.drama} ${styles.d19} number`}>
-                                                  {RatingsDrama(amusement.rating)}
-                                                </i>
-                                                <span>세 미만 이용불가</span>
-                                              </>
-                                            ) : (
-                                              <>
-                                                <i className={`${styles.drama} number`}>
-                                                  {RatingsDrama(amusement.rating)}
-                                                </i>
-                                                <span>세 이상 이용가</span>
-                                              </>
-                                            )}
-                                          </>
-                                        )}
-                                      </>
-                                    )}
-                                    {(amusement.category === 'film' ||
-                                      amusement.category === 'anime_film' ||
-                                      amusement.category === 'ott_anime_film' ||
-                                      amusement.category === 'ott_documentary_film' ||
-                                      amusement.category === 'ott_film' ||
-                                      amusement.anime === 'film') && (
-                                      <>
-                                        {amusement.rating === 'all' && (
-                                          <>
-                                            <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
-                                          </>
-                                        )}
-                                        {amusement.rating === 'b12' && (
-                                          <>
-                                            <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
-                                          </>
-                                        )}
-                                        {amusement.rating === 'c15' && (
-                                          <>
-                                            <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
-                                          </>
-                                        )}
-                                        {amusement.rating === 'd19' && (
-                                          <>
-                                            <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
-                                          </>
-                                        )}
-                                      </>
-                                    )}
-                                  </>
-                                )}
-                                {(amusement.category === 'game' || amusement.category === 'game_fan') && (
-                                  <>
-                                    {amusement.rating === 'all' && (
-                                      <>
-                                        <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
-                                      </>
-                                    )}
-                                    {amusement.rating === 'b12' && (
-                                      <>
-                                        <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
-                                      </>
-                                    )}
-                                    {amusement.rating === 'c15' && (
-                                      <>
-                                        <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
-                                      </>
-                                    )}
-                                    {amusement.rating === 'd19' && (
-                                      <>
-                                        <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
-                                      </>
-                                    )}
-                                  </>
-                                )}
-                              </dd>
-                              {amusement.supportLang && (
-                                <>
-                                  <dt>추가지원</dt>
-                                  <dd>
-                                    {amusement.supportLang.map((item: string, index: number) => (
-                                      <i className={styles.supportLang} key={index}>
-                                        {BadgeLang(item)}
-                                      </i>
-                                    ))}
-                                  </dd>
-                                </>
-                              )}
-                            </div>
-                          </dl>
-                        )}
-                      </div>
+                      <AmusementItem amusement={amusement} />
                       <strong>
                         <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
@@ -1751,325 +1526,7 @@ function Amusement({
                 <section>
                   {platformData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                      <div className={styles.thumbnail}>
-                        <Image src={amusement.posterDefault} width={390} height={560} alt="" unoptimized priority />
-                        <dl>
-                          {amusement.animeBroadcast2 !== null && platform !== amusement.animeBroadcast2 && (
-                            <div
-                              className={`${styles.anime2} ${amusement.ott === 'disneyOriginal' || amusement.ott === 'disneyStar' ? styles.broadcasts : ''} ${platform === amusement.animeBroadcast1 ? styles.anime2only : ''}`}
-                            >
-                              <dt>한국 애니 방송사</dt>
-                              <dd>
-                                {amusement.animeBroadcast2 === 'aniplus' && (
-                                  <>
-                                    <AniplusIcon /> <span>애니플러스</span>
-                                  </>
-                                )}
-                                {amusement.animeBroadcast2 === 'daewon' && (
-                                  <>
-                                    <DaewonIcon /> <span>애니원</span>
-                                  </>
-                                )}
-                                {amusement.animeBroadcast2 === 'anibox' && (
-                                  <>
-                                    <AniboxIcon /> <span>애니박스</span>
-                                  </>
-                                )}
-                                {amusement.animeBroadcast2 === 'tooniverse' && (
-                                  <>
-                                    <TooniverseIcon /> <span>투니버스</span>
-                                  </>
-                                )}
-                                {amusement.animeBroadcast2 === 'animax' && (
-                                  <>
-                                    <AnimaxIcon /> <span>애니맥스 코리아</span>
-                                  </>
-                                )}
-                              </dd>
-                            </div>
-                          )}
-                          {amusement.animeBroadcast1 !== null && platform !== amusement.animeBroadcast1 && (
-                            <div
-                              className={`${styles.anime1} ${amusement.ott === 'disneyOriginal' || amusement.ott === 'disneyStar' ? styles.broadcasts : ''}`}
-                            >
-                              <dt>애니메이션 방영 일본 방송국</dt>
-                              <dd>
-                                {amusement.animeBroadcast1 === 'tokyomx' && (
-                                  <>
-                                    <TokyomxIcon /> <span>도쿄MX</span>
-                                  </>
-                                )}
-                                {amusement.animeBroadcast1 === 'tvtokyo' && (
-                                  <>
-                                    <TvtokyoIcon /> <span>테레토</span>
-                                  </>
-                                )}
-                                {amusement.animeBroadcast1 === 'fujitv' && (
-                                  <>
-                                    <FujitvIcon /> <span>후지테레비</span>
-                                  </>
-                                )}
-                                {amusement.animeBroadcast1 === 'mbs' && (
-                                  <>
-                                    <MbsIcon /> <span>MBS</span>
-                                  </>
-                                )}
-                                {amusement.animeBroadcast1 === 'tbs' && (
-                                  <>
-                                    <TbsIcon /> <span>TBS</span>
-                                  </>
-                                )}
-                                {amusement.animeBroadcast1 === 'atx' && (
-                                  <>
-                                    <AtxIcon /> <span>AT-X</span>
-                                  </>
-                                )}
-                                {amusement.animeBroadcast1 === 'nippontv' && (
-                                  <>
-                                    <NippontvIcon /> <span>닛테레</span>
-                                  </>
-                                )}
-                                {amusement.animeBroadcast1 === 'wowow' && (
-                                  <>
-                                    <WowowIcon /> <span>WOWOW</span>
-                                  </>
-                                )}
-                              </dd>
-                            </div>
-                          )}
-                          {amusement.broadcast !== null && platform !== amusement.broadcast && (
-                            <>
-                              {platform === 'disney' && (
-                                <>
-                                  <div className={styles.broadcast}>
-                                    <dt>드라마 송출 방송국</dt>
-                                    <dd>
-                                      {amusement.broadcast === 'ENA' && (
-                                        <>
-                                          <EnaIcon /> <span>ENA</span>
-                                        </>
-                                      )}
-                                      {amusement.broadcast === 'JTBC' && (
-                                        <>
-                                          <JtbcIcon /> <span>JTBC</span>
-                                        </>
-                                      )}
-                                      {amusement.broadcast === 'KBS2' && (
-                                        <>
-                                          <Kbs2Icon /> <span>KBS 2TV</span>
-                                        </>
-                                      )}
-                                      {amusement.broadcast === 'MBC' && (
-                                        <>
-                                          <MbcIcon /> <span>MBC</span>
-                                        </>
-                                      )}
-                                      {amusement.broadcast === 'OCN' && (
-                                        <>
-                                          <OcnIcon /> <span>OCN</span>
-                                        </>
-                                      )}
-                                      {amusement.broadcast === 'SBS' && (
-                                        <>
-                                          <SbsIcon /> <span>SBS</span>
-                                        </>
-                                      )}
-                                      {amusement.broadcast === 'tvN' && (
-                                        <>
-                                          <TvnIcon /> <span>tvN</span>
-                                        </>
-                                      )}
-                                    </dd>
-                                  </div>
-                                  <div className={styles.platform}>
-                                    <dt>OTT 플랫폼</dt>
-                                    <dd>
-                                      {amusement.ott === 'disneyOriginal' && (
-                                        <>
-                                          <DisneyIcon /> <span>Disney+</span>
-                                        </>
-                                      )}
-                                      {amusement.ott === 'disneyStar' && (
-                                        <>
-                                          <StarIcon /> <span>Star+</span>
-                                        </>
-                                      )}
-                                    </dd>
-                                  </div>
-                                </>
-                              )}
-                            </>
-                          )}
-                          {((platform as Platform) !== 'amazonOriginal' ||
-                            (platform as Platform) !== 'appleOriginal' ||
-                            (platform as Platform) !== 'appleFilm' ||
-                            (platform as Platform) !== 'disneyOriginal' ||
-                            (platform as Platform) !== 'disneyStar' ||
-                            (platform as Platform) !== 'netflixSeries' ||
-                            (platform as Platform) !== 'netflixPresents' ||
-                            (platform as Platform) !== 'netflixOriginal' ||
-                            (platform as Platform) !== 'netflixFilm' ||
-                            (platform as Platform) !== 'netflixAnime' ||
-                            (platform as Platform) !== 'netflixAnimeFilm' ||
-                            (platform as Platform) !== 'netflixDocumentary' ||
-                            (platform as Platform) !== 'tvingOriginal' ||
-                            (platform as Platform) !== 'tvingOnly' ||
-                            (platform as Platform) !== 'watchaOriginal' ||
-                            (platform as Platform) !== 'watchaExclusive' ||
-                            (platform as Platform) !== 'wavveOriginal' ||
-                            (platform as Platform) !== 'wavveOnly' ||
-                            (platform as Platform) !== 'waveOnly' ||
-                            (platform as Platform) !== 'waveFirstrun' ||
-                            (platform as Platform) !== 'paramount') && (
-                            <>
-                              {amusement.ott !== null && (
-                                <>
-                                  {amusement.wavveSeries && (
-                                    <div className={styles.broadcast}>
-                                      <dt>드라마 송출 방송국</dt>
-                                      <dd>
-                                        {amusement.wavveSeries.map((item: string, index: number) => (
-                                          <React.Fragment key={index}>
-                                            {item === 'bbc' && (
-                                              <>
-                                                <BbcIcon />
-                                                <span>BBC</span>
-                                              </>
-                                            )}
-                                            {item === 'hbomax' && (
-                                              <>
-                                                <HbomaxIcon />
-                                                <span>HBO맥스</span>
-                                              </>
-                                            )}
-                                            {item === 'hulu' && (
-                                              <>
-                                                <HuluIcon />
-                                                <span>Hulu</span>
-                                              </>
-                                            )}
-                                            {item === 'peacock' && (
-                                              <>
-                                                <PeacockIcon />
-                                                <span>Peacock</span>
-                                              </>
-                                            )}
-                                            {item === 'sky' && (
-                                              <>
-                                                <SkyIcon />
-                                                <span>SKY</span>
-                                              </>
-                                            )}
-                                            {item === 'syfy' && (
-                                              <>
-                                                <SyfyIcon />
-                                                <span>SYFY</span>
-                                              </>
-                                            )}
-                                          </React.Fragment>
-                                        ))}
-                                      </dd>
-                                    </div>
-                                  )}
-                                </>
-                              )}
-                            </>
-                          )}
-                          <div>
-                            <dt>시청등급</dt>
-                            <dd>
-                              {amusement.ott === 'amazonOriginal' ? (
-                                <i className={`${styles['rating-amazon']} number`} aria-label="시청 가능 연령">
-                                  {amusement.rating === 'all' && 'All'}
-                                  {amusement.rating === 'a7' && '7+'}
-                                  {amusement.rating === 'b12' && '13+'}
-                                  {amusement.rating === 'c15' && '16+'}
-                                  {amusement.rating === 'd19' && '18+'}
-                                </i>
-                              ) : (
-                                <>
-                                  {(amusement.category === 'drama' ||
-                                    amusement.category === 'ott_drama' ||
-                                    amusement.category === 'ott_anime' ||
-                                    amusement.category === 'ott_documentary' ||
-                                    amusement.anime === 'tva' ||
-                                    amusement.anime === 'ova') && (
-                                    <>
-                                      {amusement.rating === 'all' ? (
-                                        <>
-                                          <i className={`${styles.drama} ${styles.all} number`}>
-                                            {RatingsDrama(amusement.rating)}
-                                          </i>
-                                          <span>전체 이용가</span>
-                                        </>
-                                      ) : (
-                                        <>
-                                          {amusement.rating === 'd19' ? (
-                                            <>
-                                              <i className={`${styles.drama} ${styles.d19} number`}>
-                                                {RatingsDrama(amusement.rating)}
-                                              </i>
-                                              <span>세 미만 이용불가</span>
-                                            </>
-                                          ) : (
-                                            <>
-                                              <i className={`${styles.drama} number`}>
-                                                {RatingsDrama(amusement.rating)}
-                                              </i>
-                                              <span>세 이상 이용가</span>
-                                            </>
-                                          )}
-                                        </>
-                                      )}
-                                    </>
-                                  )}
-                                  {(amusement.category === 'film' ||
-                                    amusement.category === 'anime_film' ||
-                                    amusement.category === 'ott_anime_film' ||
-                                    amusement.category === 'ott_documentary_film' ||
-                                    amusement.category === 'ott_film' ||
-                                    amusement.anime === 'film') && (
-                                    <>
-                                      {amusement.rating === 'all' && (
-                                        <>
-                                          <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
-                                        </>
-                                      )}
-                                      {amusement.rating === 'b12' && (
-                                        <>
-                                          <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
-                                        </>
-                                      )}
-                                      {amusement.rating === 'c15' && (
-                                        <>
-                                          <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
-                                        </>
-                                      )}
-                                      {amusement.rating === 'd19' && (
-                                        <>
-                                          <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
-                                        </>
-                                      )}
-                                    </>
-                                  )}
-                                </>
-                              )}
-                            </dd>
-                            {amusement.supportLang && (
-                              <>
-                                <dt>추가지원</dt>
-                                <dd>
-                                  {amusement.supportLang.map((item: string, index: number) => (
-                                    <i className={styles.supportLang} key={index}>
-                                      {BadgeLang(item)}
-                                    </i>
-                                  ))}
-                                </dd>
-                              </>
-                            )}
-                          </div>
-                        </dl>
-                      </div>
+                      <AmusementItem amusement={amusement} />
                       <strong>
                         <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
@@ -2123,386 +1580,7 @@ function Amusement({
                 <section className={category === 'game' ? styles.game : ''}>
                   {hangukData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                      <div className={`${styles.thumbnail} ${category === 'game' ? styles.game : ''}`}>
-                        <Image
-                          src={amusement.posterDefault}
-                          width={category === 'game' ? 460 : 390}
-                          height={category === 'game' ? 215 : 560}
-                          alt=""
-                          unoptimized
-                          priority
-                        />
-                        {amusement.category !== 'game_fan' && (
-                          <dl>
-                            {amusement.animeBroadcast2 !== null && (
-                              <div
-                                className={`${styles.anime2} ${amusement.animeBroadcast1 === null ? styles.anime2only : ''}`}
-                              >
-                                <dt>애니메이션 방영 한국 방송국</dt>
-                                <dd>
-                                  {amusement.animeBroadcast2 === 'aniplus' && (
-                                    <>
-                                      <AniplusIcon /> <span>애니플러스</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast2 === 'daewon' && (
-                                    <>
-                                      <DaewonIcon /> <span>애니원</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast2 === 'anibox' && (
-                                    <>
-                                      <AniboxIcon /> <span>애니박스</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast2 === 'tooniverse' && (
-                                    <>
-                                      <TooniverseIcon /> <span>투니버스</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast2 === 'animax' && (
-                                    <>
-                                      <AnimaxIcon /> <span>애니맥스 코리아</span>
-                                    </>
-                                  )}
-                                </dd>
-                              </div>
-                            )}
-                            {amusement.animeBroadcast1 !== null && (
-                              <div
-                                className={`${styles.anime1} ${amusement.animeBroadcast1 !== null ? styles.anime1 : ''} ${amusement.ott !== null ? styles.broadcasts : ''}`}
-                              >
-                                <dt>애니메이션 방영 일본 방송국</dt>
-                                <dd>
-                                  {amusement.animeBroadcast1 === 'tokyomx' && (
-                                    <>
-                                      <TokyomxIcon /> <span>도쿄MX</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'tvtokyo' && (
-                                    <>
-                                      <TvtokyoIcon /> <span>테레토</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'fujitv' && (
-                                    <>
-                                      <FujitvIcon /> <span>후지테레비</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'mbs' && (
-                                    <>
-                                      <MbsIcon /> <span>MBS</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'tbs' && (
-                                    <>
-                                      <TbsIcon /> <span>TBS</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'atx' && (
-                                    <>
-                                      <AtxIcon /> <span>AT-X</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'nippontv' && (
-                                    <>
-                                      <NippontvIcon /> <span>닛테레</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'wowow' && (
-                                    <>
-                                      <WowowIcon /> <span>WOWOW</span>
-                                    </>
-                                  )}
-                                </dd>
-                              </div>
-                            )}
-                            {(amusement.broadcast !== null || amusement.wavveSeries !== null) && (
-                              <div className={`${styles.broadcast} ${amusement.ott !== null ? styles.broadcasts : ''}`}>
-                                <dt>드라마 송출 방송국</dt>
-                                <dd>
-                                  {amusement.broadcast === 'ENA' && (
-                                    <>
-                                      <EnaIcon /> <span>ENA</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'JTBC' && (
-                                    <>
-                                      <JtbcIcon /> <span>JTBC</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'KBS2' && (
-                                    <>
-                                      <Kbs2Icon /> <span>KBS 2TV</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'MBC' && (
-                                    <>
-                                      <MbcIcon /> <span>MBC</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'OCN' && (
-                                    <>
-                                      <OcnIcon /> <span>OCN</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'SBS' && (
-                                    <>
-                                      <SbsIcon /> <span>SBS</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'tvN' && (
-                                    <>
-                                      <TvnIcon /> <span>tvN</span>
-                                    </>
-                                  )}
-                                  {amusement.wavveSeries &&
-                                    amusement.wavveSeries.map((item: string, index: number) => (
-                                      <React.Fragment key={index}>
-                                        {item === 'bbc' && (
-                                          <>
-                                            <BbcIcon />
-                                            <span>BBC</span>
-                                          </>
-                                        )}
-                                        {item === 'hbomax' && (
-                                          <>
-                                            <HbomaxIcon />
-                                            <span>HBO맥스</span>
-                                          </>
-                                        )}
-                                        {item === 'hulu' && (
-                                          <>
-                                            <HuluIcon />
-                                            <span>Hulu</span>
-                                          </>
-                                        )}
-                                        {item === 'peacock' && (
-                                          <>
-                                            <PeacockIcon />
-                                            <span>Peacock</span>
-                                          </>
-                                        )}
-                                        {item === 'sky' && (
-                                          <>
-                                            <SkyIcon />
-                                            <span>SKY</span>
-                                          </>
-                                        )}
-                                        {item === 'syfy' && (
-                                          <>
-                                            <SyfyIcon />
-                                            <span>SYFY</span>
-                                          </>
-                                        )}
-                                      </React.Fragment>
-                                    ))}
-                                </dd>
-                              </div>
-                            )}
-                            {amusement.ott !== null && (
-                              <div className={styles.platform}>
-                                <dt>OTT 플랫폼</dt>
-                                <dd>
-                                  {amusement.ott === 'amazonOriginal' && (
-                                    <>
-                                      <AmazonIcon /> <span>아마존 프라임비디오</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'appleOriginal' && (
-                                    <>
-                                      <AppleIcon /> <span>Apple TV+ 시리즈</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'appleFilm' && (
-                                    <>
-                                      <AppleIcon /> <span>Apple TV+ 영화</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'disneyOriginal' && (
-                                    <>
-                                      <DisneyIcon /> <span>Disney+</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'disneyStar' && (
-                                    <>
-                                      <StarIcon /> <span>Star+</span>
-                                    </>
-                                  )}
-                                  {(amusement.ott === 'netflixSeries' ||
-                                    amusement.ott === 'netflixPresents' ||
-                                    amusement.ott === 'netflixOriginal' ||
-                                    amusement.ott === 'netflixFilm' ||
-                                    amusement.ott === 'netflixAnime' ||
-                                    amusement.ott === 'netflixAnimeFilm' ||
-                                    amusement.ott === 'netflixDocumentary') && (
-                                    <>
-                                      <NetflixIcon />
-                                      <span>
-                                        {(amusement.ott === 'netflixSeries' ||
-                                          amusement.ott === 'netflixOriginal' ||
-                                          amusement.ott === 'netflixAnime') &&
-                                          '넷플릭스 시리즈'}
-                                        {(amusement.ott === 'netflixPresents' ||
-                                          amusement.ott === 'netflixFilm' ||
-                                          amusement.ott === 'netflixAnimeFilm') &&
-                                          '넷플릭스 영화'}
-                                        {amusement.ott === 'netflixDocumentary' && '넷플릭스 다큐멘터리'}
-                                      </span>
-                                    </>
-                                  )}
-                                  {(amusement.ott === 'tvingOriginal' || amusement.ott === 'tvingOnly') && (
-                                    <>
-                                      <TvingIcon /> <span>티빙</span>
-                                    </>
-                                  )}
-                                  {(amusement.ott === 'watchaOriginal' || amusement.ott === 'watchaExclusive') && (
-                                    <>
-                                      <WatchaIcon /> <span>왓챠</span>
-                                    </>
-                                  )}
-                                  {(amusement.ott === 'wavveOriginal' ||
-                                    amusement.ott === 'wavveOnly' ||
-                                    amusement.ott === 'waveOnly') && (
-                                    <>
-                                      <WavveIcon /> <span>웨이브</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'waveFirstrun' && (
-                                    <>
-                                      <WavveIcon2 /> <span>웨이브 해외시리즈</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'paramount' && (
-                                    <>
-                                      <ParamountIcon /> <span>Paramount+</span>
-                                    </>
-                                  )}
-                                </dd>
-                              </div>
-                            )}
-                            <div className={category === 'game' ? styles.game : ''}>
-                              <dt>{category === 'game' ? '심의등급' : '시청등급'}</dt>
-                              <dd>
-                                {amusement.ott === 'amazonOriginal' ? (
-                                  <i className={`${styles['rating-amazon']} number`} aria-label="시청 가능 연령">
-                                    {amusement.rating === 'all' && 'All'}
-                                    {amusement.rating === 'a7' && '7+'}
-                                    {amusement.rating === 'b12' && '13+'}
-                                    {amusement.rating === 'c15' && '16+'}
-                                    {amusement.rating === 'd19' && '18+'}
-                                  </i>
-                                ) : (
-                                  <>
-                                    {(amusement.category === 'drama' ||
-                                      amusement.category === 'ott_drama' ||
-                                      amusement.category === 'ott_anime' ||
-                                      amusement.category === 'ott_documentary' ||
-                                      amusement.anime === 'tva' ||
-                                      amusement.anime === 'ova') && (
-                                      <>
-                                        {amusement.rating === 'all' ? (
-                                          <>
-                                            <i className={`${styles.drama} ${styles.all} number`}>
-                                              {RatingsDrama(amusement.rating)}
-                                            </i>
-                                            <span>전체 이용가</span>
-                                          </>
-                                        ) : (
-                                          <>
-                                            {amusement.rating === 'd19' ? (
-                                              <>
-                                                <i className={`${styles.drama} ${styles.d19} number`}>
-                                                  {RatingsDrama(amusement.rating)}
-                                                </i>
-                                                <span>세 미만 이용불가</span>
-                                              </>
-                                            ) : (
-                                              <>
-                                                <i className={`${styles.drama} number`}>
-                                                  {RatingsDrama(amusement.rating)}
-                                                </i>
-                                                <span>세 이상 이용가</span>
-                                              </>
-                                            )}
-                                          </>
-                                        )}
-                                      </>
-                                    )}
-                                    {(amusement.category === 'film' ||
-                                      amusement.category === 'anime_film' ||
-                                      amusement.category === 'ott_anime_film' ||
-                                      amusement.category === 'ott_documentary_film' ||
-                                      amusement.category === 'ott_film' ||
-                                      amusement.anime === 'film') && (
-                                      <>
-                                        {amusement.rating === 'all' && (
-                                          <>
-                                            <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
-                                          </>
-                                        )}
-                                        {amusement.rating === 'b12' && (
-                                          <>
-                                            <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
-                                          </>
-                                        )}
-                                        {amusement.rating === 'c15' && (
-                                          <>
-                                            <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
-                                          </>
-                                        )}
-                                        {amusement.rating === 'd19' && (
-                                          <>
-                                            <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
-                                          </>
-                                        )}
-                                      </>
-                                    )}
-                                  </>
-                                )}
-                                {(amusement.category === 'game' || amusement.category === 'game_fan') && (
-                                  <>
-                                    {amusement.rating === 'all' && (
-                                      <>
-                                        <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
-                                      </>
-                                    )}
-                                    {amusement.rating === 'b12' && (
-                                      <>
-                                        <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
-                                      </>
-                                    )}
-                                    {amusement.rating === 'c15' && (
-                                      <>
-                                        <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
-                                      </>
-                                    )}
-                                    {amusement.rating === 'd19' && (
-                                      <>
-                                        <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
-                                      </>
-                                    )}
-                                  </>
-                                )}
-                              </dd>
-                              {amusement.supportLang && (
-                                <>
-                                  <dt>추가지원</dt>
-                                  <dd>
-                                    {amusement.supportLang
-                                      .filter((item: string) => item !== router.query.hanguk)
-                                      .map((item: string, index: number) => (
-                                        <i className={styles.supportLang} key={index}>
-                                          {BadgeLang(item)}
-                                        </i>
-                                      ))}
-                                  </dd>
-                                </>
-                              )}
-                            </div>
-                          </dl>
-                        )}
-                      </div>
+                      <AmusementItem amusement={amusement} />
                       <strong>
                         <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
@@ -2557,386 +1635,7 @@ function Amusement({
                 <section className={category === 'game' ? styles.game : ''}>
                   {subdubData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                      <div className={`${styles.thumbnail} ${category === 'game' ? styles.game : ''}`}>
-                        <Image
-                          src={amusement.posterDefault}
-                          width={category === 'game' ? 460 : 390}
-                          height={category === 'game' ? 215 : 560}
-                          alt=""
-                          unoptimized
-                          priority
-                        />
-                        {amusement.category !== 'game_fan' && (
-                          <dl>
-                            {amusement.animeBroadcast2 !== null && (
-                              <div
-                                className={`${styles.anime2} ${amusement.animeBroadcast1 === null ? styles.anime2only : ''}`}
-                              >
-                                <dt>애니메이션 방영 한국 방송국</dt>
-                                <dd>
-                                  {amusement.animeBroadcast2 === 'aniplus' && (
-                                    <>
-                                      <AniplusIcon /> <span>애니플러스</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast2 === 'daewon' && (
-                                    <>
-                                      <DaewonIcon /> <span>애니원</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast2 === 'anibox' && (
-                                    <>
-                                      <AniboxIcon /> <span>애니박스</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast2 === 'tooniverse' && (
-                                    <>
-                                      <TooniverseIcon /> <span>투니버스</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast2 === 'animax' && (
-                                    <>
-                                      <AnimaxIcon /> <span>애니맥스 코리아</span>
-                                    </>
-                                  )}
-                                </dd>
-                              </div>
-                            )}
-                            {amusement.animeBroadcast1 !== null && (
-                              <div
-                                className={`${styles.anime1} ${amusement.animeBroadcast1 !== null ? styles.anime1 : ''} ${amusement.ott !== null ? styles.broadcasts : ''}`}
-                              >
-                                <dt>애니메이션 방영 일본 방송국</dt>
-                                <dd>
-                                  {amusement.animeBroadcast1 === 'tokyomx' && (
-                                    <>
-                                      <TokyomxIcon /> <span>도쿄MX</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'tvtokyo' && (
-                                    <>
-                                      <TvtokyoIcon /> <span>테레토</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'fujitv' && (
-                                    <>
-                                      <FujitvIcon /> <span>후지테레비</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'mbs' && (
-                                    <>
-                                      <MbsIcon /> <span>MBS</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'tbs' && (
-                                    <>
-                                      <TbsIcon /> <span>TBS</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'atx' && (
-                                    <>
-                                      <AtxIcon /> <span>AT-X</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'nippontv' && (
-                                    <>
-                                      <NippontvIcon /> <span>닛테레</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'wowow' && (
-                                    <>
-                                      <WowowIcon /> <span>WOWOW</span>
-                                    </>
-                                  )}
-                                </dd>
-                              </div>
-                            )}
-                            {(amusement.broadcast !== null || amusement.wavveSeries !== null) && (
-                              <div className={`${styles.broadcast} ${amusement.ott !== null ? styles.broadcasts : ''}`}>
-                                <dt>드라마 송출 방송국</dt>
-                                <dd>
-                                  {amusement.broadcast === 'ENA' && (
-                                    <>
-                                      <EnaIcon /> <span>ENA</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'JTBC' && (
-                                    <>
-                                      <JtbcIcon /> <span>JTBC</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'KBS2' && (
-                                    <>
-                                      <Kbs2Icon /> <span>KBS 2TV</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'MBC' && (
-                                    <>
-                                      <MbcIcon /> <span>MBC</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'OCN' && (
-                                    <>
-                                      <OcnIcon /> <span>OCN</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'SBS' && (
-                                    <>
-                                      <SbsIcon /> <span>SBS</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'tvN' && (
-                                    <>
-                                      <TvnIcon /> <span>tvN</span>
-                                    </>
-                                  )}
-                                  {amusement.wavveSeries &&
-                                    amusement.wavveSeries.map((item: string, index: number) => (
-                                      <React.Fragment key={index}>
-                                        {item === 'bbc' && (
-                                          <>
-                                            <BbcIcon />
-                                            <span>BBC</span>
-                                          </>
-                                        )}
-                                        {item === 'hbomax' && (
-                                          <>
-                                            <HbomaxIcon />
-                                            <span>HBO맥스</span>
-                                          </>
-                                        )}
-                                        {item === 'hulu' && (
-                                          <>
-                                            <HuluIcon />
-                                            <span>Hulu</span>
-                                          </>
-                                        )}
-                                        {item === 'peacock' && (
-                                          <>
-                                            <PeacockIcon />
-                                            <span>Peacock</span>
-                                          </>
-                                        )}
-                                        {item === 'sky' && (
-                                          <>
-                                            <SkyIcon />
-                                            <span>SKY</span>
-                                          </>
-                                        )}
-                                        {item === 'syfy' && (
-                                          <>
-                                            <SyfyIcon />
-                                            <span>SYFY</span>
-                                          </>
-                                        )}
-                                      </React.Fragment>
-                                    ))}
-                                </dd>
-                              </div>
-                            )}
-                            {amusement.ott !== null && (
-                              <div className={styles.platform}>
-                                <dt>OTT 플랫폼</dt>
-                                <dd>
-                                  {amusement.ott === 'amazonOriginal' && (
-                                    <>
-                                      <AmazonIcon /> <span>아마존 프라임비디오</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'appleOriginal' && (
-                                    <>
-                                      <AppleIcon /> <span>Apple TV+ 시리즈</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'appleFilm' && (
-                                    <>
-                                      <AppleIcon /> <span>Apple TV+ 영화</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'disneyOriginal' && (
-                                    <>
-                                      <DisneyIcon /> <span>Disney+</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'disneyStar' && (
-                                    <>
-                                      <StarIcon /> <span>Star+</span>
-                                    </>
-                                  )}
-                                  {(amusement.ott === 'netflixSeries' ||
-                                    amusement.ott === 'netflixPresents' ||
-                                    amusement.ott === 'netflixOriginal' ||
-                                    amusement.ott === 'netflixFilm' ||
-                                    amusement.ott === 'netflixAnime' ||
-                                    amusement.ott === 'netflixAnimeFilm' ||
-                                    amusement.ott === 'netflixDocumentary') && (
-                                    <>
-                                      <NetflixIcon />
-                                      <span>
-                                        {(amusement.ott === 'netflixSeries' ||
-                                          amusement.ott === 'netflixOriginal' ||
-                                          amusement.ott === 'netflixAnime') &&
-                                          '넷플릭스 시리즈'}
-                                        {(amusement.ott === 'netflixPresents' ||
-                                          amusement.ott === 'netflixFilm' ||
-                                          amusement.ott === 'netflixAnimeFilm') &&
-                                          '넷플릭스 영화'}
-                                        {amusement.ott === 'netflixDocumentary' && '넷플릭스 다큐멘터리'}
-                                      </span>
-                                    </>
-                                  )}
-                                  {(amusement.ott === 'tvingOriginal' || amusement.ott === 'tvingOnly') && (
-                                    <>
-                                      <TvingIcon /> <span>티빙</span>
-                                    </>
-                                  )}
-                                  {(amusement.ott === 'watchaOriginal' || amusement.ott === 'watchaExclusive') && (
-                                    <>
-                                      <WatchaIcon /> <span>왓챠</span>
-                                    </>
-                                  )}
-                                  {(amusement.ott === 'wavveOriginal' ||
-                                    amusement.ott === 'wavveOnly' ||
-                                    amusement.ott === 'waveOnly') && (
-                                    <>
-                                      <WavveIcon /> <span>웨이브</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'waveFirstrun' && (
-                                    <>
-                                      <WavveIcon2 /> <span>웨이브 해외시리즈</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'paramount' && (
-                                    <>
-                                      <ParamountIcon /> <span>Paramount+</span>
-                                    </>
-                                  )}
-                                </dd>
-                              </div>
-                            )}
-                            <div className={category === 'game' ? styles.game : ''}>
-                              <dt>{category === 'game' ? '심의등급' : '시청등급'}</dt>
-                              <dd>
-                                {amusement.ott === 'amazonOriginal' ? (
-                                  <i className={`${styles['rating-amazon']} number`} aria-label="시청 가능 연령">
-                                    {amusement.rating === 'all' && 'All'}
-                                    {amusement.rating === 'a7' && '7+'}
-                                    {amusement.rating === 'b12' && '13+'}
-                                    {amusement.rating === 'c15' && '16+'}
-                                    {amusement.rating === 'd19' && '18+'}
-                                  </i>
-                                ) : (
-                                  <>
-                                    {(amusement.category === 'drama' ||
-                                      amusement.category === 'ott_drama' ||
-                                      amusement.category === 'ott_anime' ||
-                                      amusement.category === 'ott_documentary' ||
-                                      amusement.anime === 'tva' ||
-                                      amusement.anime === 'ova') && (
-                                      <>
-                                        {amusement.rating === 'all' ? (
-                                          <>
-                                            <i className={`${styles.drama} ${styles.all} number`}>
-                                              {RatingsDrama(amusement.rating)}
-                                            </i>
-                                            <span>전체 이용가</span>
-                                          </>
-                                        ) : (
-                                          <>
-                                            {amusement.rating === 'd19' ? (
-                                              <>
-                                                <i className={`${styles.drama} ${styles.d19} number`}>
-                                                  {RatingsDrama(amusement.rating)}
-                                                </i>
-                                                <span>세 미만 이용불가</span>
-                                              </>
-                                            ) : (
-                                              <>
-                                                <i className={`${styles.drama} number`}>
-                                                  {RatingsDrama(amusement.rating)}
-                                                </i>
-                                                <span>세 이상 이용가</span>
-                                              </>
-                                            )}
-                                          </>
-                                        )}
-                                      </>
-                                    )}
-                                    {(amusement.category === 'film' ||
-                                      amusement.category === 'anime_film' ||
-                                      amusement.category === 'ott_anime_film' ||
-                                      amusement.category === 'ott_documentary_film' ||
-                                      amusement.category === 'ott_film' ||
-                                      amusement.anime === 'film') && (
-                                      <>
-                                        {amusement.rating === 'all' && (
-                                          <>
-                                            <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
-                                          </>
-                                        )}
-                                        {amusement.rating === 'b12' && (
-                                          <>
-                                            <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
-                                          </>
-                                        )}
-                                        {amusement.rating === 'c15' && (
-                                          <>
-                                            <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
-                                          </>
-                                        )}
-                                        {amusement.rating === 'd19' && (
-                                          <>
-                                            <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
-                                          </>
-                                        )}
-                                      </>
-                                    )}
-                                  </>
-                                )}
-                                {(amusement.category === 'game' || amusement.category === 'game_fan') && (
-                                  <>
-                                    {amusement.rating === 'all' && (
-                                      <>
-                                        <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
-                                      </>
-                                    )}
-                                    {amusement.rating === 'b12' && (
-                                      <>
-                                        <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
-                                      </>
-                                    )}
-                                    {amusement.rating === 'c15' && (
-                                      <>
-                                        <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
-                                      </>
-                                    )}
-                                    {amusement.rating === 'd19' && (
-                                      <>
-                                        <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
-                                      </>
-                                    )}
-                                  </>
-                                )}
-                              </dd>
-                              {amusement.supportLang && (
-                                <>
-                                  <dt>추가지원</dt>
-                                  <dd>
-                                    {amusement.supportLang
-                                      .filter((item: string) => item !== router.query.subdub)
-                                      .map((item: string, index: number) => (
-                                        <i className={styles.supportLang} key={index}>
-                                          {BadgeLang(item)}
-                                        </i>
-                                      ))}
-                                  </dd>
-                                </>
-                              )}
-                            </div>
-                          </dl>
-                        )}
-                      </div>
+                      <AmusementItem amusement={amusement} />
                       <strong>
                         <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
@@ -2990,386 +1689,7 @@ function Amusement({
                 <section className={category === 'game' ? styles.game : ''}>
                   {bfreeData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                      <div className={`${styles.thumbnail} ${category === 'game' ? styles.game : ''}`}>
-                        <Image
-                          src={amusement.posterDefault}
-                          width={category === 'game' ? 460 : 390}
-                          height={category === 'game' ? 215 : 560}
-                          alt=""
-                          unoptimized
-                          priority
-                        />
-                        {amusement.category !== 'game_fan' && (
-                          <dl>
-                            {amusement.animeBroadcast2 !== null && (
-                              <div
-                                className={`${styles.anime2} ${amusement.animeBroadcast1 === null ? styles.anime2only : ''}`}
-                              >
-                                <dt>애니메이션 방영 한국 방송국</dt>
-                                <dd>
-                                  {amusement.animeBroadcast2 === 'aniplus' && (
-                                    <>
-                                      <AniplusIcon /> <span>애니플러스</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast2 === 'daewon' && (
-                                    <>
-                                      <DaewonIcon /> <span>애니원</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast2 === 'anibox' && (
-                                    <>
-                                      <AniboxIcon /> <span>애니박스</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast2 === 'tooniverse' && (
-                                    <>
-                                      <TooniverseIcon /> <span>투니버스</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast2 === 'animax' && (
-                                    <>
-                                      <AnimaxIcon /> <span>애니맥스 코리아</span>
-                                    </>
-                                  )}
-                                </dd>
-                              </div>
-                            )}
-                            {amusement.animeBroadcast1 !== null && (
-                              <div
-                                className={`${styles.anime1} ${amusement.animeBroadcast1 !== null ? styles.anime1 : ''} ${amusement.ott !== null ? styles.broadcasts : ''}`}
-                              >
-                                <dt>애니메이션 방영 일본 방송국</dt>
-                                <dd>
-                                  {amusement.animeBroadcast1 === 'tokyomx' && (
-                                    <>
-                                      <TokyomxIcon /> <span>도쿄MX</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'tvtokyo' && (
-                                    <>
-                                      <TvtokyoIcon /> <span>테레토</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'fujitv' && (
-                                    <>
-                                      <FujitvIcon /> <span>후지테레비</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'mbs' && (
-                                    <>
-                                      <MbsIcon /> <span>MBS</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'tbs' && (
-                                    <>
-                                      <TbsIcon /> <span>TBS</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'atx' && (
-                                    <>
-                                      <AtxIcon /> <span>AT-X</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'nippontv' && (
-                                    <>
-                                      <NippontvIcon /> <span>닛테레</span>
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast1 === 'wowow' && (
-                                    <>
-                                      <WowowIcon /> <span>WOWOW</span>
-                                    </>
-                                  )}
-                                </dd>
-                              </div>
-                            )}
-                            {(amusement.broadcast !== null || amusement.wavveSeries !== null) && (
-                              <div className={`${styles.broadcast} ${amusement.ott !== null ? styles.broadcasts : ''}`}>
-                                <dt>드라마 송출 방송국</dt>
-                                <dd>
-                                  {amusement.broadcast === 'ENA' && (
-                                    <>
-                                      <EnaIcon /> <span>ENA</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'JTBC' && (
-                                    <>
-                                      <JtbcIcon /> <span>JTBC</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'KBS2' && (
-                                    <>
-                                      <Kbs2Icon /> <span>KBS 2TV</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'MBC' && (
-                                    <>
-                                      <MbcIcon /> <span>MBC</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'OCN' && (
-                                    <>
-                                      <OcnIcon /> <span>OCN</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'SBS' && (
-                                    <>
-                                      <SbsIcon /> <span>SBS</span>
-                                    </>
-                                  )}
-                                  {amusement.broadcast === 'tvN' && (
-                                    <>
-                                      <TvnIcon /> <span>tvN</span>
-                                    </>
-                                  )}
-                                  {amusement.wavveSeries &&
-                                    amusement.wavveSeries.map((item: string, index: number) => (
-                                      <React.Fragment key={index}>
-                                        {item === 'bbc' && (
-                                          <>
-                                            <BbcIcon />
-                                            <span>BBC</span>
-                                          </>
-                                        )}
-                                        {item === 'hbomax' && (
-                                          <>
-                                            <HbomaxIcon />
-                                            <span>HBO맥스</span>
-                                          </>
-                                        )}
-                                        {item === 'hulu' && (
-                                          <>
-                                            <HuluIcon />
-                                            <span>Hulu</span>
-                                          </>
-                                        )}
-                                        {item === 'peacock' && (
-                                          <>
-                                            <PeacockIcon />
-                                            <span>Peacock</span>
-                                          </>
-                                        )}
-                                        {item === 'sky' && (
-                                          <>
-                                            <SkyIcon />
-                                            <span>SKY</span>
-                                          </>
-                                        )}
-                                        {item === 'syfy' && (
-                                          <>
-                                            <SyfyIcon />
-                                            <span>SYFY</span>
-                                          </>
-                                        )}
-                                      </React.Fragment>
-                                    ))}
-                                </dd>
-                              </div>
-                            )}
-                            {amusement.ott !== null && (
-                              <div className={styles.platform}>
-                                <dt>OTT 플랫폼</dt>
-                                <dd>
-                                  {amusement.ott === 'amazonOriginal' && (
-                                    <>
-                                      <AmazonIcon /> <span>아마존 프라임비디오</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'appleOriginal' && (
-                                    <>
-                                      <AppleIcon /> <span>Apple TV+ 시리즈</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'appleFilm' && (
-                                    <>
-                                      <AppleIcon /> <span>Apple TV+ 영화</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'disneyOriginal' && (
-                                    <>
-                                      <DisneyIcon /> <span>Disney+</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'disneyStar' && (
-                                    <>
-                                      <StarIcon /> <span>Star+</span>
-                                    </>
-                                  )}
-                                  {(amusement.ott === 'netflixSeries' ||
-                                    amusement.ott === 'netflixPresents' ||
-                                    amusement.ott === 'netflixOriginal' ||
-                                    amusement.ott === 'netflixFilm' ||
-                                    amusement.ott === 'netflixAnime' ||
-                                    amusement.ott === 'netflixAnimeFilm' ||
-                                    amusement.ott === 'netflixDocumentary') && (
-                                    <>
-                                      <NetflixIcon />
-                                      <span>
-                                        {(amusement.ott === 'netflixSeries' ||
-                                          amusement.ott === 'netflixOriginal' ||
-                                          amusement.ott === 'netflixAnime') &&
-                                          '넷플릭스 시리즈'}
-                                        {(amusement.ott === 'netflixPresents' ||
-                                          amusement.ott === 'netflixFilm' ||
-                                          amusement.ott === 'netflixAnimeFilm') &&
-                                          '넷플릭스 영화'}
-                                        {amusement.ott === 'netflixDocumentary' && '넷플릭스 다큐멘터리'}
-                                      </span>
-                                    </>
-                                  )}
-                                  {(amusement.ott === 'tvingOriginal' || amusement.ott === 'tvingOnly') && (
-                                    <>
-                                      <TvingIcon /> <span>티빙</span>
-                                    </>
-                                  )}
-                                  {(amusement.ott === 'watchaOriginal' || amusement.ott === 'watchaExclusive') && (
-                                    <>
-                                      <WatchaIcon /> <span>왓챠</span>
-                                    </>
-                                  )}
-                                  {(amusement.ott === 'wavveOriginal' ||
-                                    amusement.ott === 'wavveOnly' ||
-                                    amusement.ott === 'waveOnly') && (
-                                    <>
-                                      <WavveIcon /> <span>웨이브</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'waveFirstrun' && (
-                                    <>
-                                      <WavveIcon2 /> <span>웨이브 해외시리즈</span>
-                                    </>
-                                  )}
-                                  {amusement.ott === 'paramount' && (
-                                    <>
-                                      <ParamountIcon /> <span>Paramount+</span>
-                                    </>
-                                  )}
-                                </dd>
-                              </div>
-                            )}
-                            <div className={category === 'game' ? styles.game : ''}>
-                              <dt>{category === 'game' ? '심의등급' : '시청등급'}</dt>
-                              <dd>
-                                {amusement.ott === 'amazonOriginal' ? (
-                                  <i className={`${styles['rating-amazon']} number`} aria-label="시청 가능 연령">
-                                    {amusement.rating === 'all' && 'All'}
-                                    {amusement.rating === 'a7' && '7+'}
-                                    {amusement.rating === 'b12' && '13+'}
-                                    {amusement.rating === 'c15' && '16+'}
-                                    {amusement.rating === 'd19' && '18+'}
-                                  </i>
-                                ) : (
-                                  <>
-                                    {(amusement.category === 'drama' ||
-                                      amusement.category === 'ott_drama' ||
-                                      amusement.category === 'ott_anime' ||
-                                      amusement.category === 'ott_documentary' ||
-                                      amusement.anime === 'tva' ||
-                                      amusement.anime === 'ova') && (
-                                      <>
-                                        {amusement.rating === 'all' ? (
-                                          <>
-                                            <i className={`${styles.drama} ${styles.all} number`}>
-                                              {RatingsDrama(amusement.rating)}
-                                            </i>
-                                            <span>전체 이용가</span>
-                                          </>
-                                        ) : (
-                                          <>
-                                            {amusement.rating === 'd19' ? (
-                                              <>
-                                                <i className={`${styles.drama} ${styles.d19} number`}>
-                                                  {RatingsDrama(amusement.rating)}
-                                                </i>
-                                                <span>세 미만 이용불가</span>
-                                              </>
-                                            ) : (
-                                              <>
-                                                <i className={`${styles.drama} number`}>
-                                                  {RatingsDrama(amusement.rating)}
-                                                </i>
-                                                <span>세 이상 이용가</span>
-                                              </>
-                                            )}
-                                          </>
-                                        )}
-                                      </>
-                                    )}
-                                    {(amusement.category === 'film' ||
-                                      amusement.category === 'anime_film' ||
-                                      amusement.category === 'ott_anime_film' ||
-                                      amusement.category === 'ott_documentary_film' ||
-                                      amusement.category === 'ott_film' ||
-                                      amusement.anime === 'film') && (
-                                      <>
-                                        {amusement.rating === 'all' && (
-                                          <>
-                                            <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
-                                          </>
-                                        )}
-                                        {amusement.rating === 'b12' && (
-                                          <>
-                                            <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
-                                          </>
-                                        )}
-                                        {amusement.rating === 'c15' && (
-                                          <>
-                                            <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
-                                          </>
-                                        )}
-                                        {amusement.rating === 'd19' && (
-                                          <>
-                                            <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
-                                          </>
-                                        )}
-                                      </>
-                                    )}
-                                  </>
-                                )}
-                                {(amusement.category === 'game' || amusement.category === 'game_fan') && (
-                                  <>
-                                    {amusement.rating === 'all' && (
-                                      <>
-                                        <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
-                                      </>
-                                    )}
-                                    {amusement.rating === 'b12' && (
-                                      <>
-                                        <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
-                                      </>
-                                    )}
-                                    {amusement.rating === 'c15' && (
-                                      <>
-                                        <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
-                                      </>
-                                    )}
-                                    {amusement.rating === 'd19' && (
-                                      <>
-                                        <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
-                                      </>
-                                    )}
-                                  </>
-                                )}
-                              </dd>
-                              {amusement.supportLang && (
-                                <>
-                                  <dt>추가지원</dt>
-                                  <dd>
-                                    {amusement.supportLang
-                                      .filter((item: string) => item !== router.query.bfree)
-                                      .map((item: string, index: number) => (
-                                        <i className={styles.supportLang} key={index}>
-                                          {BadgeLang(item)}
-                                        </i>
-                                      ))}
-                                  </dd>
-                                </>
-                              )}
-                            </div>
-                          </dl>
-                        )}
-                      </div>
+                      <AmusementItem amusement={amusement} />
                       <strong>
                         <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
@@ -3422,393 +1742,7 @@ function Amusement({
                     .sort((a: any, b: any) => a.order - b.order)
                     .map((amusement: AmusementData) => (
                       <Link key={amusement.order} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                        <div
-                          className={`${styles.thumbnail} ${category === 'game' || category === 'game_fan' ? styles.game : ''}`}
-                        >
-                          <Image
-                            src={amusement.posterDefault}
-                            width={category === 'game' || category === 'game_fan' ? 460 : 390}
-                            height={category === 'game' || category === 'game_fan' ? 215 : 560}
-                            alt=""
-                            unoptimized
-                            priority
-                          />
-                          {amusement.category !== 'game_fan' && (
-                            <dl>
-                              {amusement.animeBroadcast2 !== null && (
-                                <div
-                                  className={`${styles.anime2} ${amusement.animeBroadcast1 === null ? styles.anime2only : ''}`}
-                                >
-                                  <dt>애니메이션 방영 한국 방송국</dt>
-                                  <dd>
-                                    {amusement.animeBroadcast2 === 'aniplus' && (
-                                      <>
-                                        <AniplusIcon /> <span>애니플러스</span>
-                                      </>
-                                    )}
-                                    {amusement.animeBroadcast2 === 'daewon' && (
-                                      <>
-                                        <DaewonIcon /> <span>애니원</span>
-                                      </>
-                                    )}
-                                    {amusement.animeBroadcast2 === 'anibox' && (
-                                      <>
-                                        <AniboxIcon /> <span>애니박스</span>
-                                      </>
-                                    )}
-                                    {amusement.animeBroadcast2 === 'tooniverse' && (
-                                      <>
-                                        <TooniverseIcon /> <span>투니버스</span>
-                                      </>
-                                    )}
-                                    {amusement.animeBroadcast2 === 'animax' && (
-                                      <>
-                                        <AnimaxIcon /> <span>애니맥스 코리아</span>
-                                      </>
-                                    )}
-                                  </dd>
-                                </div>
-                              )}
-                              {amusement.animeBroadcast1 !== null && (
-                                <div
-                                  className={`${styles.anime1} ${amusement.animeBroadcast1 !== null ? styles.anime1 : ''} ${amusement.ott !== null ? styles.broadcasts : ''}`}
-                                >
-                                  <dt>애니메이션 방영 일본 방송국</dt>
-                                  <dd>
-                                    {amusement.animeBroadcast1 === 'tokyomx' && (
-                                      <>
-                                        <TokyomxIcon /> <span>도쿄MX</span>
-                                      </>
-                                    )}
-                                    {amusement.animeBroadcast1 === 'tvtokyo' && (
-                                      <>
-                                        <TvtokyoIcon /> <span>테레토</span>
-                                      </>
-                                    )}
-                                    {amusement.animeBroadcast1 === 'fujitv' && (
-                                      <>
-                                        <FujitvIcon /> <span>후지테레비</span>
-                                      </>
-                                    )}
-                                    {amusement.animeBroadcast1 === 'mbs' && (
-                                      <>
-                                        <MbsIcon /> <span>MBS</span>
-                                      </>
-                                    )}
-                                    {amusement.animeBroadcast1 === 'tbs' && (
-                                      <>
-                                        <TbsIcon /> <span>TBS</span>
-                                      </>
-                                    )}
-                                    {amusement.animeBroadcast1 === 'atx' && (
-                                      <>
-                                        <AtxIcon /> <span>AT-X</span>
-                                      </>
-                                    )}
-                                    {amusement.animeBroadcast1 === 'nippontv' && (
-                                      <>
-                                        <NippontvIcon /> <span>닛테레</span>
-                                      </>
-                                    )}
-                                    {amusement.animeBroadcast1 === 'wowow' && (
-                                      <>
-                                        <WowowIcon /> <span>WOWOW</span>
-                                      </>
-                                    )}
-                                  </dd>
-                                </div>
-                              )}
-                              {(amusement.broadcast !== null || amusement.wavveSeries !== null) && (
-                                <div
-                                  className={`${styles.broadcast} ${amusement.ott !== null ? styles.broadcasts : ''}`}
-                                >
-                                  <dt>드라마 송출 방송국</dt>
-                                  <dd>
-                                    {amusement.broadcast === 'ENA' && (
-                                      <>
-                                        <EnaIcon /> <span>ENA</span>
-                                      </>
-                                    )}
-                                    {amusement.broadcast === 'JTBC' && (
-                                      <>
-                                        <JtbcIcon /> <span>JTBC</span>
-                                      </>
-                                    )}
-                                    {amusement.broadcast === 'KBS2' && (
-                                      <>
-                                        <Kbs2Icon /> <span>KBS 2TV</span>
-                                      </>
-                                    )}
-                                    {amusement.broadcast === 'MBC' && (
-                                      <>
-                                        <MbcIcon /> <span>MBC</span>
-                                      </>
-                                    )}
-                                    {amusement.broadcast === 'OCN' && (
-                                      <>
-                                        <OcnIcon /> <span>OCN</span>
-                                      </>
-                                    )}
-                                    {amusement.broadcast === 'SBS' && (
-                                      <>
-                                        <SbsIcon /> <span>SBS</span>
-                                      </>
-                                    )}
-                                    {amusement.broadcast === 'tvN' && (
-                                      <>
-                                        <TvnIcon /> <span>tvN</span>
-                                      </>
-                                    )}
-                                    {amusement.broadcast === 'ABC' && (
-                                      <>
-                                        <AbcIcon /> <span>ABC</span>
-                                      </>
-                                    )}
-                                    {amusement.wavveSeries &&
-                                      amusement.wavveSeries.map((item: string, index: number) => (
-                                        <React.Fragment key={index}>
-                                          {item === 'bbc' && (
-                                            <>
-                                              <BbcIcon />
-                                              <span>BBC</span>
-                                            </>
-                                          )}
-                                          {item === 'hbomax' && (
-                                            <>
-                                              <HbomaxIcon />
-                                              <span>HBO맥스</span>
-                                            </>
-                                          )}
-                                          {item === 'hulu' && (
-                                            <>
-                                              <HuluIcon />
-                                              <span>Hulu</span>
-                                            </>
-                                          )}
-                                          {item === 'peacock' && (
-                                            <>
-                                              <PeacockIcon />
-                                              <span>Peacock</span>
-                                            </>
-                                          )}
-                                          {item === 'sky' && (
-                                            <>
-                                              <SkyIcon />
-                                              <span>SKY</span>
-                                            </>
-                                          )}
-                                          {item === 'syfy' && (
-                                            <>
-                                              <SyfyIcon />
-                                              <span>SYFY</span>
-                                            </>
-                                          )}
-                                        </React.Fragment>
-                                      ))}
-                                  </dd>
-                                </div>
-                              )}
-                              {amusement.ott !== null && (
-                                <div className={styles.platform}>
-                                  <dt>OTT 플랫폼</dt>
-                                  <dd>
-                                    {amusement.ott === 'amazonOriginal' && (
-                                      <>
-                                        <AmazonIcon /> <span>아마존 프라임비디오</span>
-                                      </>
-                                    )}
-                                    {amusement.ott === 'appleOriginal' && (
-                                      <>
-                                        <AppleIcon /> <span>Apple TV+ 시리즈</span>
-                                      </>
-                                    )}
-                                    {amusement.ott === 'appleFilm' && (
-                                      <>
-                                        <AppleIcon /> <span>Apple TV+ 영화</span>
-                                      </>
-                                    )}
-                                    {amusement.ott === 'disneyOriginal' && (
-                                      <>
-                                        <DisneyIcon /> <span>Disney+</span>
-                                      </>
-                                    )}
-                                    {amusement.ott === 'disneyStar' && (
-                                      <>
-                                        <StarIcon /> <span>Star+</span>
-                                      </>
-                                    )}
-                                    {(amusement.ott === 'netflixSeries' ||
-                                      amusement.ott === 'netflixPresents' ||
-                                      amusement.ott === 'netflixOriginal' ||
-                                      amusement.ott === 'netflixFilm' ||
-                                      amusement.ott === 'netflixAnime' ||
-                                      amusement.ott === 'netflixAnimeFilm' ||
-                                      amusement.ott === 'netflixDocumentary') && (
-                                      <>
-                                        <NetflixIcon />
-                                        <span>
-                                          {(amusement.ott === 'netflixSeries' ||
-                                            amusement.ott === 'netflixOriginal' ||
-                                            amusement.ott === 'netflixAnime') &&
-                                            '넷플릭스 시리즈'}
-                                          {(amusement.ott === 'netflixPresents' ||
-                                            amusement.ott === 'netflixFilm' ||
-                                            amusement.ott === 'netflixAnimeFilm') &&
-                                            '넷플릭스 영화'}
-                                          {amusement.ott === 'netflixDocumentary' && '넷플릭스 다큐멘터리'}
-                                        </span>
-                                      </>
-                                    )}
-                                    {(amusement.ott === 'tvingOriginal' || amusement.ott === 'tvingOnly') && (
-                                      <>
-                                        <TvingIcon /> <span>티빙</span>
-                                      </>
-                                    )}
-                                    {(amusement.ott === 'watchaOriginal' || amusement.ott === 'watchaExclusive') && (
-                                      <>
-                                        <WatchaIcon /> <span>왓챠</span>
-                                      </>
-                                    )}
-                                    {(amusement.ott === 'wavveOriginal' ||
-                                      amusement.ott === 'wavveOnly' ||
-                                      amusement.ott === 'waveOnly') && (
-                                      <>
-                                        <WavveIcon /> <span>웨이브</span>
-                                      </>
-                                    )}
-                                    {amusement.ott === 'waveFirstrun' && (
-                                      <>
-                                        <WavveIcon2 /> <span>웨이브 해외시리즈</span>
-                                      </>
-                                    )}
-                                    {amusement.ott === 'paramount' && (
-                                      <>
-                                        <ParamountIcon /> <span>Paramount+</span>
-                                      </>
-                                    )}
-                                  </dd>
-                                </div>
-                              )}
-                              <div className={category === 'game' || category === 'game_fan' ? styles.game : ''}>
-                                <dt>{category === 'game' ? '심의등급' : '시청등급'}</dt>
-                                <dd>
-                                  {amusement.ott === 'amazonOriginal' ? (
-                                    <i className={`${styles['rating-amazon']} number`} aria-label="시청 가능 연령">
-                                      {amusement.rating === 'all' && 'All'}
-                                      {amusement.rating === 'a7' && '7+'}
-                                      {amusement.rating === 'b12' && '13+'}
-                                      {amusement.rating === 'c15' && '16+'}
-                                      {amusement.rating === 'd19' && '18+'}
-                                    </i>
-                                  ) : (
-                                    <>
-                                      {(amusement.category === 'drama' ||
-                                        amusement.category === 'ott_drama' ||
-                                        amusement.category === 'ott_anime' ||
-                                        amusement.category === 'ott_documentary' ||
-                                        amusement.anime === 'tva' ||
-                                        amusement.anime === 'ova') && (
-                                        <>
-                                          {amusement.rating === 'all' ? (
-                                            <>
-                                              <i className={`${styles.drama} ${styles.all} number`}>
-                                                {RatingsDrama(amusement.rating)}
-                                              </i>
-                                              <span>전체 이용가</span>
-                                            </>
-                                          ) : (
-                                            <>
-                                              {amusement.rating === 'd19' ? (
-                                                <>
-                                                  <i className={`${styles.drama} ${styles.d19} number`}>
-                                                    {RatingsDrama(amusement.rating)}
-                                                  </i>
-                                                  <span>세 미만 이용불가</span>
-                                                </>
-                                              ) : (
-                                                <>
-                                                  <i className={`${styles.drama} number`}>
-                                                    {RatingsDrama(amusement.rating)}
-                                                  </i>
-                                                  <span>세 이상 이용가</span>
-                                                </>
-                                              )}
-                                            </>
-                                          )}
-                                        </>
-                                      )}
-                                      {(amusement.category === 'film' ||
-                                        amusement.category === 'anime_film' ||
-                                        amusement.category === 'ott_anime_film' ||
-                                        amusement.category === 'ott_documentary_film' ||
-                                        amusement.category === 'ott_film' ||
-                                        amusement.anime === 'film') && (
-                                        <>
-                                          {amusement.rating === 'all' && (
-                                            <>
-                                              <RatingFilmAll className={styles.rating} /> <span>전체 이용가</span>
-                                            </>
-                                          )}
-                                          {amusement.rating === 'b12' && (
-                                            <>
-                                              <RatingFilmB12 className={styles.rating} /> <span>12세 이용가</span>
-                                            </>
-                                          )}
-                                          {amusement.rating === 'c15' && (
-                                            <>
-                                              <RatingFilmC15 className={styles.rating} /> <span>15세 이용가</span>
-                                            </>
-                                          )}
-                                          {amusement.rating === 'd19' && (
-                                            <>
-                                              <RatingFilmD18 className={styles.rating} /> <span>청소년 이용불가</span>
-                                            </>
-                                          )}
-                                        </>
-                                      )}
-                                    </>
-                                  )}
-                                  {(amusement.category === 'game' || amusement.category === 'game_fan') && (
-                                    <>
-                                      {amusement.rating === 'all' && (
-                                        <>
-                                          <RatingGameAll className={styles.rating} /> <span>전체 이용가</span>
-                                        </>
-                                      )}
-                                      {amusement.rating === 'b12' && (
-                                        <>
-                                          <RatingGameB12 className={styles.rating} /> <span>12세 이용가</span>
-                                        </>
-                                      )}
-                                      {amusement.rating === 'c15' && (
-                                        <>
-                                          <RatingGameC15 className={styles.rating} /> <span>15세 이용가</span>
-                                        </>
-                                      )}
-                                      {amusement.rating === 'd19' && (
-                                        <>
-                                          <RatingGameD19 className={styles.rating} /> <span>청소년 이용불가</span>
-                                        </>
-                                      )}
-                                    </>
-                                  )}
-                                </dd>
-                                {amusement.supportLang && (
-                                  <>
-                                    <dt>추가지원</dt>
-                                    <dd>
-                                      {amusement.supportLang.map((item: string, index: number) => (
-                                        <i className={styles.supportLang} key={index}>
-                                          {BadgeLang(item)}
-                                        </i>
-                                      ))}
-                                    </dd>
-                                  </>
-                                )}
-                              </div>
-                            </dl>
-                          )}
-                        </div>
+                        <AmusementItem amusement={amusement} />
                         <strong>
                           <span className="seed">
                             {amusement.category === 'game_fan'
