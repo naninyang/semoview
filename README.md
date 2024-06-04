@@ -49,7 +49,7 @@
 
 ### TO-DO
 
-- 드라마, 애니인 경우 총 몇화인지 집계
+- 코드 다이어트
 
 ## Supported PWA App. Download
 
