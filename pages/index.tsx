@@ -497,7 +497,7 @@ function Home({
               <>
                 <div className={styles.headline}>
                   <h2 className="April16thPromise">
-                    <Anchor href="/amusement?bfree=bfree&page=1">CC/AD 둘다 지원하는 작품!</Anchor>
+                    <Anchor href="/amusement?bfree=bfree&page=1">CC(SDH)/AD 둘다 지원하는 작품!</Anchor>
                     {process.env.NODE_ENV === 'development' && ` ${bfreeData.total}개`}
                   </h2>
                   <Anchor href="/amusement?bfree=bfree&page=1">

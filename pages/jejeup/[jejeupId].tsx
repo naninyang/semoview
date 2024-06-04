@@ -1334,14 +1334,14 @@ export default function JejeupDetail({
                             {option.bfree === 'both' && 'BF'}
                           </i>
                           <span>
-                            {option.bfree === 'cc' && '청각 장애인용 자막(CC)'}
+                            {option.bfree === 'cc' && '청각 장애인용 자막(CC/SDH)'}
                             {option.bfree === 'ad' && '화면 해설(AD)'}
                             {option.bfree === 'both' && '베리어프리'}
                           </span>
                         </Anchor>
                         {service.service === 'Apple' && (
                           <p>
-                            Apple TV+의 CC는 SDH 설정 후 이용 가능합니다.
+                            Apple TV+의 CC/SDH는 SDH 설정 후 이용 가능합니다.
                             <br />
                             <Anchor href="https://support.apple.com/ko-kr/guide/iphone/iph3e2e23d1/ios">
                               Iphone
@@ -1434,7 +1434,7 @@ export default function JejeupDetail({
                         {option.bfree === 'cc' && (
                           <>
                             <CCiconBlack />
-                            <span>청각 장애인용 자막(CC) 콘텐츠 시청하기</span>
+                            <span>청각 장애인용 자막(CC/SDH) 콘텐츠 시청하기</span>
                           </>
                         )}
                         {option.bfree === 'ad' && (
@@ -1453,7 +1453,7 @@ export default function JejeupDetail({
                       </Anchor>
                       {service.service === 'Apple' && (
                         <p>
-                          Apple TV+의 CC는 SDH 설정 후 이용 가능합니다.
+                          Apple TV+의 CC/SDH는 SDH 설정 후 이용 가능합니다.
                           <br />
                           <Anchor href="https://support.apple.com/ko-kr/guide/iphone/iph3e2e23d1/ios">
                             Iphone

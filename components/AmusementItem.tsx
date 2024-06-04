@@ -578,7 +578,7 @@ export function AmusementItem({
                           .filter((item: string) => item !== 'subtitle' && item !== 'dubbing')
                           .map((item: string, index: number) => (
                             <i className={styles.supportLang} key={index}>
-                              {BadgeLang(item)}
+                              {BadgeLang(item, amusement.country)}
                             </i>
                           ))
                       : supportLanguage === 'bfree'
@@ -586,19 +586,19 @@ export function AmusementItem({
                             .filter((item: string) => item !== 'cc' && item !== 'description')
                             .map((item: string, index: number) => (
                               <i className={styles.supportLang} key={index}>
-                                {BadgeLang(item)}
+                                {BadgeLang(item, amusement.country)}
                               </i>
                             ))
                         : amusement.supportLang
                             .filter((item: string) => item !== supportLanguage)
                             .map((item: string, index: number) => (
                               <i className={styles.supportLang} key={index}>
-                                {BadgeLang(item)}
+                                {BadgeLang(item, amusement.country)}
                               </i>
                             ))
                     : amusement.supportLang.map((item: string, index: number) => (
                         <i className={styles.supportLang} key={index}>
-                          {BadgeLang(item)}
+                          {BadgeLang(item, amusement.country)}
                         </i>
                       ))}
                 </dd>

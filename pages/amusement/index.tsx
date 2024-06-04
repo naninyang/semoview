@@ -713,12 +713,12 @@ function Amusement({
                           .filter((item: string) => item !== router.query.bfree)
                           .map((item: string, index: number) => (
                             <i className={styles.supportLang} key={index}>
-                              {BadgeLang(item)}
+                              {BadgeLang(item, amusement.country)}
                             </i>
                           ))
                       : amusement.supportLang.map((item: string, index: number) => (
                           <i className={styles.supportLang} key={index}>
-                            {BadgeLang(item)}
+                            {BadgeLang(item, amusement.country)}
                           </i>
                         ))}
                   </dd>
@@ -1868,7 +1868,7 @@ function BfreeTitle(bfree: keyof typeof BfreeTitle): string {
   const bfreeTitles = {
     cc: '청각 장애인용\n자막 지원!',
     description: '화면 해설\n지원',
-    bfree: 'CC/AD 둘다\n지원하는 작품!',
+    bfree: 'CC(SDH)/AD 둘다\n지원하는 작품!',
   };
   return bfreeTitles[bfree] || '베리어프리 지원여부 선택 오류';
 }
