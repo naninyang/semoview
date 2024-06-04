@@ -47,433 +47,433 @@
     +mq(minExtraLarge)
       width: 25%
 
-  figure
-    transition: all .4s cubic-bezier(.4,0,.2,1)
+figure.figure
+  transition: all .4s cubic-bezier(.4,0,.2,1)
+  display: flex
+  flex-direction: column
+  gap: rem(7)
+  border: 1px solid rgba($hex-dark, .2)
+  border-radius: rem(3)
+  overflow: hidden
+  width: 100%
+
+  .metaloading
     display: flex
-    flex-direction: column
-    gap: rem(7)
-    border: 1px solid rgba($hex-dark, .2)
-    border-radius: rem(3)
-    overflow: hidden
+    justify-content: center
+    align-items: center
     width: 100%
+    padding: rem(15) rem(15) 0
+    aspect-ratio: 1920 / 1080
+    font-weight: 800
+    color: $hex-accent
 
-    .metaloading
-      display: flex
-      justify-content: center
-      align-items: center
-      width: 100%
-      padding: rem(15) rem(15) 0
-      aspect-ratio: 1920 / 1080
-      font-weight: 800
-      color: $hex-accent
+  .preview
+    position: relative
+    padding: rem(15) rem(15) 0
 
-    .preview
-      position: relative
-      padding: rem(15) rem(15) 0
+    &.preview-dummy
+      .skeleton
+        background: linear-gradient(90deg, #eeeeee 25%, #dddddd 50%, #eeeeee 75%)
+        background-size: 200% 100%
+        animation: loading 1.5s infinite
 
-      &.preview-dummy
-        .skeleton
-          background: linear-gradient(90deg, #eeeeee 25%, #dddddd 50%, #eeeeee 75%)
-          background-size: 200% 100%
-          animation: loading 1.5s infinite
-
-        .notice
-          position: absolute
-          top: rem(15)
-          left: 0
-          z-index: 1
-          display: flex
-          flex-direction: column
-          justify-content: center
-          align-items: center
-          width: 100%
-          aspect-ratio: 1920/1080
-
-          &[hidden]
-            +screen-reader-only
-
-          p
-            text-align: center
-            line-height: 1.25
-
-            button
-              background-color: transparent
-              border: 0
-              padding: 0
-              color: $hex-accent
-              font-weight: 800
-              text-decoration: underline
-
-        .preview-container
-          .thumbnail
-            .dummy
-              aspect-ratio: 1920 / 1080
-
-          .preview-info
-            .detail
-              .user-info
-                strong
-                  width: 100%
-                  height: rem(18)
-
-                cite, time
-                  height: rem(16)
-                  vertical-align: top
-
-                cite
-                  > i, &::after
-                    display: inline-block
-
-                  i
-                    width: rem(72)
-                    height: rem(16)
-
-                time
-                  width: rem(160)
-
-      .preview-container
+      .notice
+        position: absolute
+        top: rem(15)
+        left: 0
+        z-index: 1
         display: flex
         flex-direction: column
-        gap: rem(12)
+        justify-content: center
+        align-items: center
+        width: 100%
+        aspect-ratio: 1920/1080
 
+        &[hidden]
+          +screen-reader-only
+
+        p
+          text-align: center
+          line-height: 1.25
+
+          button
+            background-color: transparent
+            border: 0
+            padding: 0
+            color: $hex-accent
+            font-weight: 800
+            text-decoration: underline
+
+      .preview-container
         .thumbnail
-          position: relative
-          aspect-ratio: 1920 / 1080
-
-          img
-            display: block
-            border-radius: rem(7)
+          .dummy
             aspect-ratio: 1920 / 1080
-            object-fit: cover
-            width: 100%!important
-            height: auto!important
-
-          em
-            position: absolute
-            right: rem(4)
-            bottom: rem(4)
-            background-color: $hex-black
-            border-radius: rem(4)
-            padding: rem(3) rem(4)
-            font-size: rem(12)
-            font-weight: 700
-            font-style: normal
-            color: $hex-white
-            line-height: 1
 
         .preview-info
           .detail
-            display: flex
-            gap: rem(7)
-
-            img
-              border-radius: 100%
-              width: rem(36)
-              height: rem(36)
-
             .user-info
-              display: flex
-              flex-direction: column
-              gap: rem(4)
-              +col
+              strong
+                width: 100%
+                height: rem(18)
+
+              cite, time
+                height: rem(16)
+                vertical-align: top
+
+              cite
+                > i, &::after
+                  display: inline-block
+
+                i
+                  width: rem(72)
+                  height: rem(16)
+
+              time
+                width: rem(160)
+
+    .preview-container
+      display: flex
+      flex-direction: column
+      gap: rem(12)
+
+      .thumbnail
+        position: relative
+        aspect-ratio: 1920 / 1080
+
+        img
+          display: block
+          border-radius: rem(7)
+          aspect-ratio: 1920 / 1080
+          object-fit: cover
+          width: 100%!important
+          height: auto!important
+
+        em
+          position: absolute
+          right: rem(4)
+          bottom: rem(4)
+          background-color: $hex-black
+          border-radius: rem(4)
+          padding: rem(3) rem(4)
+          font-size: rem(12)
+          font-weight: 700
+          font-style: normal
+          color: $hex-white
+          line-height: 1
+
+      .preview-info
+        .detail
+          display: flex
+          gap: rem(7)
+
+          img
+            border-radius: 100%
+            width: rem(36)
+            height: rem(36)
+
+          .user-info
+            display: flex
+            flex-direction: column
+            gap: rem(4)
+            +col
+            color: $hex-dark
+
+            strong
+              +line-abbr(1, 36, 18px)
+              font-size: rem(14)
+              font-weight: 700
               color: $hex-dark
 
-              strong
-                +line-abbr(1, 36, 18px)
+            .user
+              font-size: rem(14)
+              font-weight: 400
+              line-height: 1.175
+
+              cite, time
+                display: inline-flex
+                align-items: center
                 font-size: rem(14)
-                font-weight: 700
                 color: $hex-dark
 
-              .user
-                font-size: rem(14)
-                font-weight: 400
-                line-height: 1.175
-
-                cite, time
-                  display: inline-flex
-                  align-items: center
+              cite
+                &::after
+                  content: '•'
+                  padding: 0 rem(4)
                   font-size: rem(14)
                   color: $hex-dark
 
-                cite
-                  &::after
-                    content: '•'
-                    padding: 0 rem(4)
-                    font-size: rem(14)
-                    color: $hex-dark
+            .option
+              display: flex
+              gap: rem(12)
 
-              .option
-                display: flex
-                gap: rem(12)
+              strong
+                display: inline-flex
+                background-color: $hex-accent
+                border-radius: rem(3)
+                padding: rem(3) rem(5)
+                font-size: rem(12)
+                font-weight: 800
+                text-transform: uppercase
+                color: $hex-white
 
-                strong
-                  display: inline-flex
-                  background-color: $hex-accent
-                  border-radius: rem(3)
-                  padding: rem(3) rem(5)
-                  font-size: rem(12)
-                  font-weight: 800
-                  text-transform: uppercase
-                  color: $hex-white
+  figcaption
+    display: flex
+    flex-direction: column
+    gap: rem(7)
+    border-top: 1px solid rgba($hex-dark, .2)
+    padding: rem(12) rem(15) rem(15)
 
-    figcaption
+    p
+      strong
+        display: inline-flex
+        background-color: $hex-dark
+        border-radius: rem(3)
+        padding: rem(3) rem(5)
+        font-size: rem(12)
+        font-weight: 800
+        color: $hex-white
+
+    .worst
+      padding-bottom: rem(7)
+
+      dt
+        +screen-reader-only
+
+      dd
+        font-size: rem(12)
+        font-weight: 900
+        color: $hex-accent
+
+    .summary
       display: flex
       flex-direction: column
       gap: rem(7)
-      border-top: 1px solid rgba($hex-dark, .2)
-      padding: rem(12) rem(15) rem(15)
 
-      p
-        strong
-          display: inline-flex
-          background-color: $hex-dark
-          border-radius: rem(3)
-          padding: rem(3) rem(5)
-          font-size: rem(12)
-          font-weight: 800
-          color: $hex-white
-
-      .worst
-        padding-bottom: rem(7)
-
-        dt
-          +screen-reader-only
-
-        dd
-          font-size: rem(12)
-          font-weight: 900
-          color: $hex-accent
-
-      .summary
+      dt
         display: flex
-        flex-direction: column
+        flex-wrap: wrap
+        align-items: center
         gap: rem(7)
 
-        dt
-          display: flex
-          flex-wrap: wrap
+        cite
+          display: inline-flex
           align-items: center
-          gap: rem(7)
+          padding-top: rem(1)
+          font-size: rem(14)
+          font-weight: 800
+          font-style: normal
+          color: $hex-accent
 
-          cite
-            display: inline-flex
-            align-items: center
-            padding-top: rem(1)
-            font-size: rem(14)
-            font-weight: 800
-            font-style: normal
-            color: $hex-accent
+          i
+            position: relative
+            top: rem(-1)
+            display: inline-block
+            margin-right: rem(7)
+            height: rem(18)
 
-            i
-              position: relative
-              top: rem(-1)
-              display: inline-block
-              margin-right: rem(7)
-              height: rem(18)
+        em
+          display: inline-flex
+          align-items: center
+          height: rem(24)
+          border: 2px solid $hex-accent
+          border-radius: rem(3)
+          padding: rem(3) rem(5)
+          font-size: rem(14)
+          font-weight: 700
+          line-height: 1
+          font-style: normal
+          color: $hex-accent
+          vertical-align: top
 
-          em
-            display: inline-flex
-            align-items: center
-            height: rem(24)
-            border: 2px solid $hex-accent
-            border-radius: rem(3)
-            padding: rem(3) rem(5)
-            font-size: rem(14)
-            font-weight: 700
-            line-height: 1
-            font-style: normal
-            color: $hex-accent
+          &.ENA
+            border-color: #3B31E0
+            color: #3B31E0
+
+          &.JTBC
+            border-color: #F0047F
+            color: #F0047F
+
+          &.KBS2
+            border-color: #FAB700
+            color: #FAB700
+
+          &.MBC
+            border-color: #42515E
+            color: #42515E
+
+          &.OCN
+            border-color: #FFB514
+            color: #FFB514
+
+          &.SBS
+            border-color: #005A91
+            color: #005A91
+
+          &.tvN
+            border-color: #FA0029
+            color: #FA0029
+
+          i
+            display: inline-block
+            margin-right: rem(5)
+            height: rem(14)
+
+            & ~ i
+              margin-left: rem(5)
+
+          span
+            +screen-reader-only
+
+          & + i.rating
             vertical-align: top
 
-            &.ENA
-              border-color: #3B31E0
-              color: #3B31E0
+        > i
+          display: inline-flex
+          width: rem(24)
+          height: rem(24)
+          padding: rem(6) 0 rem(10)
+          font-size: rem(12)
+          font-weight: 800
+          font-style: normal
+          line-height: 1
+          color: $hex-white
 
-            &.JTBC
-              border-color: #F0047F
-              color: #F0047F
+          &.drama
+            background-color: #FFCB00
+            border-radius: rem(24)
+            color: $hex-black
+            justify-content: center
 
-            &.KBS2
-              border-color: #FAB700
-              color: #FAB700
+            &.all
+              font-size: rem(10)
 
-            &.MBC
-              border-color: #42515E
-              color: #42515E
+            &.d19
+              background-color: #D61D28
+              color: $hex-white
 
-            &.OCN
-              border-color: #FFB514
-              color: #FFB514
+          &.rating
+            padding: 0
+            vertical-align: bottom
 
-            &.SBS
-              border-color: #005A91
-              color: #005A91
-
-            &.tvN
-              border-color: #FA0029
-              color: #FA0029
-
-            i
-              display: inline-block
-              margin-right: rem(5)
-              height: rem(14)
-
-              & ~ i
-                margin-left: rem(5)
-
-            span
-              +screen-reader-only
-
-            & + i.rating
-              vertical-align: top
-
-          > i
-            display: inline-flex
-            width: rem(24)
-            height: rem(24)
-            padding: rem(6) 0 rem(10)
+          &.rating-amazon
+            background-color: #33373d
+            border-radius: rem(3)
+            padding: rem(3) rem(7)
+            width: auto
+            height: auto
             font-size: rem(12)
             font-weight: 800
-            font-style: normal
             line-height: 1
             color: $hex-white
 
-            &.drama
-              background-color: #FFCB00
-              border-radius: rem(24)
-              color: $hex-black
-              justify-content: center
+          &.drama + span,
+          &.rating + span
+            +screen-reader-only
 
-              &.all
-                font-size: rem(10)
+        .custom
+          display: inline-flex
 
-              &.d19
-                background-color: #D61D28
-                color: $hex-white
+          button
+            background-color: transparent
+            border: rem(2) solid $hex-accent
+            border-radius: 100%
+            width: rem(20)
+            height: rem(20)
 
-            &.rating
-              padding: 0
-              vertical-align: bottom
-
-            &.rating-amazon
-              background-color: #33373d
-              border-radius: rem(3)
-              padding: rem(3) rem(7)
-              width: auto
-              height: auto
-              font-size: rem(12)
+            i::before
+              content: '?'
+              font-size: rem(14)
               font-weight: 800
-              line-height: 1
-              color: $hex-white
-
-            &.drama + span,
-            &.rating + span
-              +screen-reader-only
-
-          .custom
-            display: inline-flex
-
-            button
-              background-color: transparent
-              border: rem(2) solid $hex-accent
-              border-radius: 100%
-              width: rem(20)
-              height: rem(20)
-
-              i::before
-                content: '?'
-                font-size: rem(14)
-                font-weight: 800
-                font-style: normal
-                color: $hex-accent
-
-              span
-                +screen-reader-only
-
-        dd
-          padding-top: rem(3)
-
-          strong
-            display: flex
-            flex-direction: column
-            line-height: 1.125
-            color: $hex-dark
-
-            +mq(maxExtraSmall)
-              gap: rem(2)
-
-            +mq(minSmall)
-              line-height: rem(20)
+              font-style: normal
+              color: $hex-accent
 
             span
-              font-size: rem(14)
-              font-weight: 600
-              color: rgba($hex-dark, .5)
+              +screen-reader-only
+
+      dd
+        padding-top: rem(3)
+
+        strong
+          display: flex
+          flex-direction: column
+          line-height: 1.125
+          color: $hex-dark
+
+          +mq(maxExtraSmall)
+            gap: rem(2)
+
+          +mq(minSmall)
+            line-height: rem(20)
+
+          span
+            font-size: rem(14)
+            font-weight: 600
+            color: rgba($hex-dark, .5)
+
+            +mq(minSmall)
+              +ellipsis
+
+            &.title
+              margin-bottom: rem(5)
+              font-size: rem(20)
+              font-weight: 800
+              color: $hex-dark
 
               +mq(minSmall)
                 +ellipsis
 
-              &.title
-                margin-bottom: rem(5)
-                font-size: rem(20)
-                font-weight: 800
-                color: $hex-dark
+            &[lang="en"], &[lang="ko"]
+              font-weight: 800
 
-                +mq(minSmall)
-                  +ellipsis
-
-              &[lang="en"], &[lang="ko"]
-                font-weight: 800
-
-              &.origin
-                font-weight: 400
-                font-size: rem(14)
-                color: rgba($hex-dark, .7)
-
-            time
-              display: flex
-              align-items: center
-              gap: rem(7)
-              margin-top: rem(3)
-              font-size: rem(14)
+            &.origin
               font-weight: 400
-              line-height: 1
-              color: $hex-dark
+              font-size: rem(14)
+              color: rgba($hex-dark, .7)
 
-          em
-            display: block
+          time
+            display: flex
+            align-items: center
+            gap: rem(7)
+            margin-top: rem(3)
             font-size: rem(14)
-            font-style: normal
-            color: $hex-accent
+            font-weight: 400
+            line-height: 1
+            color: $hex-dark
 
-      a:hover, a:focus
-        .summary dd strong
-          text-decoration: underline
-
-      .info
-        display: flex
-        flex-direction: column
-        gap: rem(3)
-
-        > div
-          display: inline-flex
-          gap: rem(7)
-
-        dt, dd
+        em
+          display: block
           font-size: rem(14)
-
-        dt
-          width: rem(70)
+          font-style: normal
           color: $hex-accent
-          white-space: nowrap
 
-        dd
-          +col
-          font-weight: 800
-          color: $hex-dark
+    a:hover, a:focus
+      .summary dd strong
+        text-decoration: underline
 
-          +mq(minSmall)
-            +ellipsis
+    .info
+      display: flex
+      flex-direction: column
+      gap: rem(3)
+
+      > div
+        display: inline-flex
+        gap: rem(7)
+
+      dt, dd
+        font-size: rem(14)
+
+      dt
+        width: rem(70)
+        color: $hex-accent
+        white-space: nowrap
+
+      dd
+        +col
+        font-weight: 800
+        color: $hex-dark
+
+        +mq(minSmall)
+          +ellipsis
 
 @keyframes loading
   0%

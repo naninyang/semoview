@@ -285,36 +285,6 @@
       +mq(minMedium)
         padding: 0 env(safe-area-inset-right) 0 calc(env(safe-area-inset-left) + rem(12))
 
-      &.game
-        a
-          .thumbnail
-            img
-              aspect-ratio: 460 / 215
-
-            dl
-              top: auto
-              right: rem(7)
-              bottom: rem(12)
-              left: auto
-              height: auto
-
-              div:last-of-type
-                display: flex
-
-                > dd
-                  height: rem(24)
-
-                  & + dt + dd
-                    position: static
-                    padding: 0 rem(7)
-
-                    &:empty
-                      display: none
-
-              i.supportLang
-                height: rem(24)
-                line-height: 1
-
       a
         &:hover, &:focus
           .thumbnail img
@@ -322,159 +292,6 @@
 
           strong
             color: $hex-accent
-
-        .thumbnail
-          position: relative
-          overflow: hidden
-          border-radius: rem(3)
-
-          +mq(minSmall)
-            border-radius: rem(7)
-
-          img
-            display: block
-            width: 100%
-            height: auto
-            aspect-ratio: 390 / 560
-            object-fit: cover
-            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0s
-
-          dl
-            position: absolute
-            top: 0
-            left: 0
-            display: flex
-            align-items: center
-            gap: rem(3)
-            width: 100%
-            height: 100%
-
-            dt
-              +screen-reader-only
-
-            div
-              &.broadcast,
-              &.platform,
-              &.anime1,
-              &.anime2
-                position: absolute
-                top: 0
-
-                i
-                  display: inline-block
-                  border-radius: 0 0 0 rem(3)
-                  width: rem(37)
-                  height: rem(37)
-
-                  +mq(minSmall)
-                    border-radius: 0 0 0 rem(7)
-                    width: rem(43)
-                    height: rem(43)
-
-              dd
-                span
-                  +screen-reader-only
-
-              &.broadcast, &.anime1
-                right: 0
-
-                &.broadcasts
-                  right: rem(37)
-
-                  +mq(minSmall)
-                    right: rem(43)
-
-                  & + .platform
-                    i
-                      border-radius: 0
-
-              &.anime2
-                right: rem(37)
-
-                +mq(minSmall)
-                  right: rem(43)
-
-                & + .anime1 i
-                  border-radius: 0
-
-                &.anime2only
-                  right: 0
-
-              &.platform
-                right: 0
-
-              &:last-of-type
-                position: absolute
-                top: rem(7)
-                bottom: 0
-                left: rem(7)
-
-                dd
-                  & + dt + dd
-                    display: flex
-                    gap: rem(3)
-                    position: absolute
-                    bottom: rem(7)
-                    background-color: $hex-dark
-                    border-radius: rem(3)
-                    padding: rem(3) rem(7)
-
-                    i
-                      &::before
-                        content: '|'
-                        padding-right: rem(3)
-
-                      &:first-of-type::before
-                        content: ''
-
-                  i
-                    display: inline-flex
-                    align-items: center
-                    width: rem(24)
-                    height: rem(24)
-                    margin-left: rem(3)
-                    padding: rem(6) 0 rem(10)
-                    font-size: rem(12)
-                    font-weight: 800
-                    font-style: normal
-                    line-height: 1
-                    color: $hex-white
-
-                    &.supportLang
-                      margin: 0
-                      padding: 0
-                      width: auto
-
-                    &.drama
-                      background-color: #FFCB00
-                      border-radius: rem(24)
-                      padding: 0
-                      color: $hex-black
-                      justify-content: center
-
-                      &.all
-                        font-size: rem(10)
-
-                      &.d19
-                        background-color: #D61D28
-                        color: $hex-white
-
-                    &.rating-amazon
-                      background-color: #33373d
-                      border-radius: rem(3)
-                      padding: rem(3) rem(7)
-                      width: auto
-                      height: auto
-                      font-size: rem(12)
-                      font-weight: 800
-                      line-height: 1
-                      color: $hex-white
-
-              &.game
-                top: auto
-                right: auto
-                bottom: rem(-7)
-                left: rem(7)
 
         strong
           color: $hex-dark
@@ -488,18 +305,6 @@
 
           span
             font-variation-settings: 'opsz' 700, 'wght' 700
-
-            > span
-              &::after
-                content: ', '
-
-              &:first-of-type
-                &::before
-                  content: '('
-
-              &:last-of-type
-                &::after
-                  content: ')'
 
           cite
             display: block
@@ -777,16 +582,6 @@
           +mq(minExtraLarge)
             width: calc(12.5% - rem(12))
 
-          .thumbnail.game
-            img
-              aspect-ratio: 460 / 215
-
-            dl
-              top: auto
-              right: rem(7)
-              bottom: rem(7)
-              left: auto
-
   .asides
     display: flex
     gap: rem(12)
@@ -869,6 +664,187 @@
     a
       color: $hex-white
       text-decoration: underline
+
+.thumbnail
+  position: relative
+  overflow: hidden
+  border-radius: rem(3)
+
+  +mq(minSmall)
+    border-radius: rem(7)
+
+  &.game
+    img
+      aspect-ratio: 460 / 215
+
+    dl
+      top: auto
+      right: rem(7)
+      bottom: rem(12)
+      left: auto
+      height: auto
+
+      div:last-of-type
+        display: flex
+
+        > dd
+          height: rem(24)
+
+          & + dt + dd
+            position: static
+            padding: 0 rem(7)
+
+            &:empty
+              display: none
+
+      i.supportLang
+        height: rem(24)
+        line-height: 1
+
+  img
+    display: block
+    width: 100%
+    height: auto
+    aspect-ratio: 390 / 560
+    object-fit: cover
+    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0s
+
+  dl
+    position: absolute
+    top: 0
+    left: 0
+    display: flex
+    align-items: center
+    gap: rem(3)
+    width: 100%
+    height: 100%
+
+    dt
+      +screen-reader-only
+
+    div
+      &.broadcast,
+      &.platform,
+      &.anime1,
+      &.anime2
+        position: absolute
+        top: 0
+
+        i
+          display: inline-block
+          border-radius: 0 0 0 rem(3)
+          width: rem(37)
+          height: rem(37)
+
+          +mq(minSmall)
+            border-radius: 0 0 0 rem(7)
+            width: rem(43)
+            height: rem(43)
+
+      dd
+        span
+          +screen-reader-only
+
+      &.broadcast, &.anime1
+        right: 0
+
+        &.broadcasts
+          right: rem(37)
+
+          +mq(minSmall)
+            right: rem(43)
+
+          & + .platform
+            i
+              border-radius: 0
+
+      &.anime2
+        right: rem(37)
+
+        +mq(minSmall)
+          right: rem(43)
+
+        & + .anime1 i
+          border-radius: 0
+
+        &.anime2only
+          right: 0
+
+      &.platform
+        right: 0
+
+      &:last-of-type
+        position: absolute
+        top: rem(7)
+        bottom: 0
+        left: rem(7)
+
+        dd
+          & + dt + dd
+            display: flex
+            gap: rem(3)
+            position: absolute
+            bottom: rem(7)
+            background-color: $hex-dark
+            border-radius: rem(3)
+            padding: rem(3) rem(7)
+
+            i
+              &::before
+                content: '|'
+                padding-right: rem(3)
+
+              &:first-of-type::before
+                content: ''
+
+          i
+            display: inline-flex
+            align-items: center
+            width: rem(24)
+            height: rem(24)
+            margin-left: rem(3)
+            padding: rem(6) 0 rem(10)
+            font-size: rem(12)
+            font-weight: 800
+            font-style: normal
+            line-height: 1
+            color: $hex-white
+
+            &.supportLang
+              margin: 0
+              padding: 0
+              width: auto
+
+            &.drama
+              background-color: #FFCB00
+              border-radius: rem(24)
+              padding: 0
+              color: $hex-black
+              justify-content: center
+
+              &.all
+                font-size: rem(10)
+
+              &.d19
+                background-color: #D61D28
+                color: $hex-white
+
+            &.rating-amazon
+              background-color: #33373d
+              border-radius: rem(3)
+              padding: rem(3) rem(7)
+              width: auto
+              height: auto
+              font-size: rem(12)
+              font-weight: 800
+              line-height: 1
+              color: $hex-white
+
+      &.game
+        top: auto
+        right: auto
+        bottom: rem(-7)
+        left: rem(7)
 
 @keyframes  aside
   0%

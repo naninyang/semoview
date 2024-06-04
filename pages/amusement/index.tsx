@@ -4,13 +4,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { AmusementData, Platform } from 'types';
 import Seo, { originTitle } from '@/components/Seo';
+import Anchor from '@/components/Anchor';
 import { RatingsDrama } from '@/components/RatingsDrama';
 import { Pagination } from '@/components/Pagination';
-import Anchor from '@/components/Anchor';
-import styles from '@/styles/Categories.module.sass';
 import { CategoryName } from '@/components/CategoryName';
 import { TagName } from '@/components/TagName';
 import { BadgeLang } from '@/components/BadgeLang';
+import styles from '@/styles/Categories.module.sass';
 import {
   AbcIcon,
   AmazonIcon,
