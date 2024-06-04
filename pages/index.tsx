@@ -413,7 +413,7 @@ function Home({
                   {Array.isArray(tvnData.data) &&
                     tvnData.data.map((amusement: AmusementData, index: number) => (
                       <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                        <AmusementItem amusement={amusement} platform={'tvn'} />
+                        <AmusementItem amusement={amusement} platform={'tvN'} />
                         <strong>
                           <span className="seed">
                             {amusement.titleKorean ? amusement.titleKorean : amusement.title}
@@ -445,7 +445,7 @@ function Home({
                   {Array.isArray(jtbcData.data) &&
                     jtbcData.data.map((amusement: AmusementData, index: number) => (
                       <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                        <AmusementItem amusement={amusement} platform={'jtbc'} />
+                        <AmusementItem amusement={amusement} platform={'JTBC'} />
                         <strong>
                           <span className="seed">
                             {amusement.titleKorean ? amusement.titleKorean : amusement.title}

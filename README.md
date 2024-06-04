@@ -45,11 +45,10 @@
 
 ### 발견되거나 알려진 버그
 
-- `amusement`가 `platform`일 때 OTT, 방송사 로고 display 조건에 오류가 있음
+- none
 
 ### TO-DO
 
-- `amusement`가 `platform`일 때 OTT, 방송사 로고 display 로직 변경
 - 코드 다이어트
 
 ## Supported PWA App. Download

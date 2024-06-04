@@ -179,7 +179,7 @@ function Platforms({
                 {Array.isArray(kbsData.data) &&
                   kbsData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                      <AmusementItem amusement={amusement} platform={'kbs'} />
+                      <AmusementItem amusement={amusement} platform={'KBS2'} />
                       <strong>
                         <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
@@ -209,7 +209,7 @@ function Platforms({
                 {Array.isArray(tvnData.data) &&
                   tvnData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                      <AmusementItem amusement={amusement} platform={'tvn'} />
+                      <AmusementItem amusement={amusement} platform={'tvN'} />
                       <strong>
                         <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
@@ -239,7 +239,7 @@ function Platforms({
                 {Array.isArray(jtbcData.data) &&
                   jtbcData.data.map((amusement: AmusementData, index: number) => (
                     <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                      <AmusementItem amusement={amusement} platform={'jtbc'} />
+                      <AmusementItem amusement={amusement} platform={'JTBC'} />
                       <strong>
                         <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
                       </strong>
