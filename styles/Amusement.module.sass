@@ -838,12 +838,30 @@
               overflow: hidden
 
           p
+            padding: rem(5) 0
             color: $hex-azalea
 
-            a
-              color: $hex-azalea
-              text-decoration: underline
-              font-weight: 800
+          ul
+            display: flex
+            gap: rem(12)
+
+            li
+              display: flex
+              align-items: center
+              gap: rem(5)
+
+              &::before
+                content: ''
+                display: inline-block
+                background-color: $hex-azalea
+                border-radius: 100%
+                width: rem(4)
+                height: rem(4)
+
+              a
+                color: $hex-azalea
+                text-decoration: underline
+                font-weight: 800
 
     .related-list
       span

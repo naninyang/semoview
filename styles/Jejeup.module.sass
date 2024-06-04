@@ -793,12 +793,30 @@
                 overflow: hidden
 
             p
-              color: $hex-azalea
+              padding: rem(2) 0
+              color: $hex-accent
 
-              a
-                color: $hex-azalea
-                text-decoration: underline
-                font-weight: 800
+            ul
+              display: flex
+              gap: rem(12)
+
+              li
+                display: flex
+                align-items: center
+                gap: rem(5)
+
+                &::before
+                  content: ''
+                  display: inline-block
+                  background-color: $hex-accent
+                  border-radius: 100%
+                  width: rem(4)
+                  height: rem(4)
+
+                a
+                  color: $hex-accent
+                  text-decoration: underline
+                  font-weight: 800
 
       .review-comment
         background-color: rgba($hex-accent, .05)

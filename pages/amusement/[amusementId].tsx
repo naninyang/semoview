@@ -973,17 +973,26 @@ export default function Amusement({
                           )}
                         </Anchor>
                         {service.service === 'Apple' && (
-                          <p>
-                            Apple TV+의 CC/SDH는 SDH 설정 후 이용 가능합니다.
-                            <br />
-                            <Anchor href="https://support.apple.com/ko-kr/guide/iphone/iph3e2e23d1/ios">
-                              Iphone
-                            </Anchor>{' '}
-                            <Anchor href="https://support.apple.com/ko-kr/guide/mac-help/mchlc1cb8d54/mac">Mac</Anchor>{' '}
-                            <Anchor href="https://support.apple.com/ko-kr/guide/tvapp/atvb5ca42eb9/web">
-                              Apple TV
-                            </Anchor>
-                          </p>
+                          <>
+                            <p>Apple TV+의 CC/SDH는 SDH 설정 후 이용 가능합니다.</p>
+                            <ul>
+                              <li>
+                                <Anchor href="https://support.apple.com/ko-kr/guide/iphone/iph3e2e23d1/ios">
+                                  아이폰
+                                </Anchor>
+                              </li>
+                              <li>
+                                <Anchor href="https://support.apple.com/ko-kr/guide/mac-help/mchlc1cb8d54/mac">
+                                  맥OS
+                                </Anchor>
+                              </li>
+                              <li>
+                                <Anchor href="https://support.apple.com/ko-kr/guide/tvapp/atvb5ca42eb9/web">
+                                  애플TV
+                                </Anchor>
+                              </li>
+                            </ul>
+                          </>
                         )}
                         {service.service === 'Wavve' && (option.bfree === 'ad' || option.bfree === 'both') && (
                           <p>
