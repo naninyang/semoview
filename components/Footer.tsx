@@ -42,7 +42,7 @@ const Footer = () => {
             ) : (
               <Dev1studioDark />
             )}
-            <span>데브런닷스튜디오</span>
+            <span>데브런닷스튜디오 (DEV1L.studios)</span>
           </Anchor>
           <Anchor href="https://github.com/naninyang/semoview">
             {router.pathname === '/amusement/[amusementId]' || router.pathname === '/open-sources' ? (
