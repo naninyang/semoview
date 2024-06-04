@@ -49,7 +49,8 @@
 
 ### TO-DO
 
-- 코드 다이어트
+- 애플 TV+ 베리어프리 안내 링크 UX 변경
+- CC, SDH 분리
 
 ## Supported PWA App. Download
 
