@@ -2036,7 +2036,7 @@ export default function Amusement({
               ))
             ) : (
               <div className={styles.warning}>
-                <p>이 작품을 리뷰한 영상이 삭제되어 남아있는 영상이 없습니다.</p>
+                <p>리뷰 영상 등록 전이거나 등록된 리뷰가 삭제되어 등록된 리뷰가 아직 업습니다..</p>
                 <p>
                   운영자에게 영상 등록을{' '}
                   <button type="button" data-video={amusementData.id} onClick={handleRequest}>
