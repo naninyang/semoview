@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Slider from 'react-slick';
 import { useMediaQuery } from 'react-responsive';
 import styled from '@emotion/styled';
-import { AmusementData, BannerData, Category, Counts, JejeupData, JejeupMetaData } from 'types';
+import { AmusementData, BannerData, Counts, JejeupData } from 'types';
 import Seo from '@/components/Seo';
 import Anchor from '@/components/Anchor';
 import { vectors } from '@/components/vectors';
