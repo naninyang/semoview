@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { isSafari } from 'react-device-detect';
 import Seo, { originTitle } from '@/components/Seo';
@@ -50,7 +49,7 @@ function Usage() {
       </div>
       <div className={styles.content}>
         <div className={`${styles.about} seed`}>
-          <section>
+          <section className={deviceSafari !== 'isSafari' ? 'safari' : ''}>
             <div className={styles.primary}>
               <h1>
                 <span>
@@ -257,7 +256,7 @@ function Usage() {
             <h2>심의등급 안내</h2>
             <section>
               <p>
-                한국 내에서 심의를 받은 콘텐츠는 공식 심의등급이 표시가 되며{' '}
+                한국 심의를 받은 콘텐츠는 공식 심의등급이 표시가 되며{' '}
                 <span>그렇지 않은 경우에는 세모뷰 임의로 등급을 정합니다.</span>
               </p>
               <p>세모뷰 자체 심의등급은 법적 구속력이 없습니다.</p>

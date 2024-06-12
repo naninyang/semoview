@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { isSafari } from 'react-device-detect';
 import Seo, { originTitle } from '@/components/Seo';
@@ -7,14 +5,6 @@ import { BackButton } from '@/components/Icons';
 import styles from '@/styles/Usage.module.sass';
 
 function Licenses() {
-  const [deviceSafari, setDeviceSafari] = useState<string>();
-
-  useEffect(() => {
-    if (isSafari) {
-      setDeviceSafari('isSafari');
-    }
-  }, []);
-
   const router = useRouter();
   const previousPageHandler = () => {
     const previousPage = sessionStorage.getItem('backhistory');

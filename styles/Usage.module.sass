@@ -24,10 +24,22 @@
         &:not(.amusement)
           justify-content: center
           align-items: center
+          padding: rem(52) rem(27)
           min-height: calc(100vh - rem(78))
+
+          > div
+            width: 100%
+
+          img
+            max-width: 100%
+            height: auto
+            object-fit: contain
 
         &:nth-of-type(1)
           background: url('/about/primary.webp') no-repeat fixed 50% 50%/cover
+
+          &.safari
+            background-attachment: scroll
 
         &:nth-of-type(3), &:nth-of-type(5)
           background-color: $hex-light
@@ -44,10 +56,16 @@
             gap: rem(27)
 
             span
-              font-size: rem(64)
+              font-size: rem(24)
               line-height: 1
               color: $hex-white
               font-variation-settings: "opsz" 900,"wght" 900
+
+              +mq(minSmall)
+                font-size: rem(32)
+
+              +mq(minMedium)
+                font-size: rem(64)
 
               em, i
                 font-style: normal
@@ -60,30 +78,41 @@
 
             > i
               display: inline-block
-              width: rem(370)
-              height: rem(105)
+              aspect-ratio: 370 / 105
+              width: rem(123)
+
+              +mq(minSmall)
+                width: rem(187)
+
+              +mq(minMedium)
+                width: rem(370)
 
           p
             display: flex
             flex-direction: column
             align-items: center
-            font-size: rem(24)
+            font-size: rem(14)
             line-height: 1.541
             color: $hex-light
 
+            +mq(minSmall)
+              font-size: rem(20)
+
+            +mq(minMedium)
+              font-size: rem(24)
+
         .soul
           .image
-            max-width: 100%
-            height: auto
-            object-fit: contain
-            aspect-ratio: 570 / 436
+            display: flex
+            justify-content: center
+
+            img
+              aspect-ratio: 570 / 436
 
         .fit
           .image
-            max-width: 100%
-            height: auto
-            object-fit: contain
-            aspect-ratio: 570 / 433
+            img
+              aspect-ratio: 570 / 433
 
         .life
           margin: 0 auto
@@ -93,8 +122,15 @@
             display: flex
             gap: rem(23)
 
+            +mq(maxExtraSmall)
+              flex-direction: column
+
             .image
-              width: calc(33.33% - rem(23))
+              display: flex
+              justify-content: center
+
+              +mq(minSmall)
+                width: calc(33.33% - rem(23))
 
               img
                 width: 100%
@@ -106,6 +142,15 @@
           margin: 0 auto
           max-width: rem(1320)
 
+          .headline
+            h2
+              width: 100%
+              font-size: rem(24)!important
+              font-variation-settings: "opsz" 900,"wght" 900
+
+              +mq(minSmall)
+                font-size: rem(32)!important
+
           .images
             display: flex
             flex-wrap: wrap
@@ -114,9 +159,14 @@
             .image
               display: flex
               flex-direction: column
-              gap: rem(17)
-              width: calc(25% - rem(23))
-              padding-bottom: rem(27)
+              gap: rem(7)
+              width: calc(50% - rem(12))
+              padding-bottom: rem(7)
+
+              +mq(minSmall)
+                gap: rem(7)
+                width: calc(25% - rem(18))
+                padding-bottom: rem(12)
 
               img
                 display: block
@@ -126,12 +176,21 @@
                 object-fit: cover
 
               span
-                font-size: rem(20)
+                font-size: rem(14)
+
+                +mq(minSmall)
+                  font-size: rem(16)
+
+                +mq(minMedium)
+                  font-size: rem(20)
 
         > div:not(.primary)
           display: flex
           flex-direction: column
-          gap: rem(72)
+          gap: rem(37)
+
+          +mq(minSmall)
+            gap: rem(72)
 
           .headline
             display: flex
@@ -140,24 +199,39 @@
             gap: rem(37)
 
             h2
-              font-size: rem(64)
+              font-size: rem(24)
               line-height: 1
+
+              +mq(minSmall)
+                font-size: rem(32)
+
+              +mq(minMedium)
+                font-size: rem(64)
 
             p
               display: flex
               flex-direction: column
               align-items: center
-              font-size: rem(24)
+              font-size: rem(14)
               line-height: 1.54
 
+              +mq(minSmall)
+                font-size: rem(16)
+
+              +mq(minMedium)
+                font-size: rem(24)
+
             em
-              font-size: rem(16)
+              font-size: rem(14)
               line-height: 1
+
+              +mq(minMedium)
+                font-size: rem(16)
 
     .container
       display: flex
       flex-direction: column
-      gap: rem(27)
+      gap: rem(52)
       margin: rem(17) 0
       padding: 0 rem(27) rem(57)
 
@@ -166,15 +240,18 @@
         flex-direction: column
         gap: rem(37)
 
-      +mq(minSmall)
-        gap: rem(52)
-        margin: rem(52) 0
+        +mq(minMedium)
+          gap: rem(52)
+          margin: rem(52) 0
 
       h2
-        font-size: rem(32)
+        font-size: rem(20)
         text-align: center
 
         +mq(minSmall)
+          font-size: rem(32)
+
+        +mq(minMedium)
           font-size: rem(64)
 
       section
@@ -185,12 +262,15 @@
       p
         display: flex
         flex-direction: column
-        font-size: rem(16)
+        font-size: rem(14)
         line-height: 1.3
         color: $hex-dark
         text-align: center
 
         +mq(minSmall)
+          font-size: rem(16)
+
+        +mq(minMedium)
           font-size: rem(24)
 
       .button-group
@@ -201,7 +281,7 @@
         gap: rem(12)
         text-align: center
 
-        +mq(minSmall)
+        +mq(minMedium)
           flex-direction: row
           margin: rem(52) 0 rem(32)
 
@@ -219,7 +299,7 @@
           color: $hex-accent
           transition: all .3s cubic-bezier(.4,0,.2,1)
 
-          +mq(minSmall)
+          +mq(minMedium)
             width: auto
             padding: rem(17) rem(52)
             font-size: rem(20)
