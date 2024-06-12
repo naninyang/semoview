@@ -4,76 +4,194 @@
   display: flex
   justify-content: center
   gap: rem(25)
-  padding: rem(27) calc(env(safe-area-inset-right) + rem(15)) rem(72) calc(env(safe-area-inset-left) + rem(15))
-
-  +mq(minLarge)
-    padding: rem(57) calc(env(safe-area-inset-right) + rem(25)) rem(102) calc(env(safe-area-inset-left) + rem(25))
 
   .content
     display: flex
     flex-direction: column
     gap: rem(52)
-    max-width: rem(720)
     width: 100%
 
-    h1
+    .about
       display: flex
-      align-items: flex-end
-      justify-content: center
-      gap: rem(7)
-      font-size: rem(24)
-      font-weight: 900
-      color: $hex-azalea
+      flex-direction: column
+      align-items: center
 
-      +mq(minSmall)
-        font-size: rem(64)
+      section
+        display: flex
+        width: 100%
+        padding: rem(52) rem(27)
 
-      em
-        font-size: rem(16)
-        font-weight: 300
-        font-style: normal
+        &:not(.amusement)
+          justify-content: center
+          align-items: center
+          min-height: calc(100vh - rem(78))
 
-        +mq(minSmall)
-          font-size: rem(36)
+        &:nth-of-type(1)
+          background: url('/about/primary.webp') no-repeat fixed 50% 50%/cover
+
+        &:nth-of-type(3), &:nth-of-type(5)
+          background-color: $hex-light
+
+        .primary
+          display: flex
+          flex-direction: column
+          gap: rem(37)
+
+          h1
+            display: flex
+            flex-direction: column
+            align-items: center
+            gap: rem(27)
+
+            span
+              font-size: rem(64)
+              line-height: 1
+              color: $hex-white
+              font-variation-settings: "opsz" 900,"wght" 900
+
+              em, i
+                font-style: normal
+
+              em
+                color: $hex-azalea
+
+              i
+                color: $hex-accent
+
+            > i
+              display: inline-block
+              width: rem(370)
+              height: rem(105)
+
+          p
+            display: flex
+            flex-direction: column
+            align-items: center
+            font-size: rem(24)
+            line-height: 1.541
+            color: $hex-light
+
+        .soul
+          .image
+            max-width: 100%
+            height: auto
+            object-fit: contain
+            aspect-ratio: 570 / 436
+
+        .fit
+          .image
+            max-width: 100%
+            height: auto
+            object-fit: contain
+            aspect-ratio: 570 / 433
+
+        .life
+          margin: 0 auto
+          max-width: rem(1320)
+
+          .images
+            display: flex
+            gap: rem(23)
+
+            .image
+              width: calc(33.33% - rem(23))
+
+              img
+                width: 100%
+                height: auto
+                object-fit: contain
+                aspect-ratio: 430 / 570
+
+        .amusement
+          margin: 0 auto
+          max-width: rem(1320)
+
+          .images
+            display: flex
+            flex-wrap: wrap
+            gap: rem(23)
+
+            .image
+              display: flex
+              flex-direction: column
+              gap: rem(17)
+              width: calc(25% - rem(23))
+              padding-bottom: rem(27)
+
+              img
+                display: block
+                width: 100%
+                height: auto
+                aspect-ratio: 390 / 560
+                object-fit: cover
+
+              span
+                font-size: rem(20)
+
+        > div:not(.primary)
+          display: flex
+          flex-direction: column
+          gap: rem(72)
+
+          .headline
+            display: flex
+            flex-direction: column
+            align-items: center
+            gap: rem(37)
+
+            h2
+              font-size: rem(64)
+              line-height: 1
+
+            p
+              display: flex
+              flex-direction: column
+              align-items: center
+              font-size: rem(24)
+              line-height: 1.54
+
+            em
+              font-size: rem(16)
+              line-height: 1
 
     .container
       display: flex
       flex-direction: column
       gap: rem(27)
       margin: rem(17) 0
+      padding: 0 rem(27) rem(57)
 
       article
         display: flex
         flex-direction: column
-        gap: rem(7)
+        gap: rem(37)
 
       +mq(minSmall)
         gap: rem(52)
         margin: rem(52) 0
 
       h2
-        font-size: rem(16)
+        font-size: rem(32)
+        text-align: center
 
         +mq(minSmall)
-          font-size: rem(20)
+          font-size: rem(64)
 
       section
         display: flex
         flex-direction: column
         gap: rem(7)
-        background-color: $hex-dark
-        border-radius: rem(3)
-        padding: rem(17)
 
       p
         display: flex
         flex-direction: column
-        font-size: rem(14)
+        font-size: rem(16)
         line-height: 1.3
-        color: $hex-light
+        color: $hex-dark
+        text-align: center
 
         +mq(minSmall)
-          font-size: rem(16)
+          font-size: rem(24)
 
       .button-group
         display: flex

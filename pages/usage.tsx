@@ -5,6 +5,13 @@ import { isSafari } from 'react-device-detect';
 import Seo, { originTitle } from '@/components/Seo';
 import { BackButton } from '@/components/Icons';
 import styles from '@/styles/Usage.module.sass';
+import styled from '@emotion/styled';
+import { vectors } from '@/components/vectors';
+import Image from 'next/image';
+
+const SemoviewLogo = styled.i({
+  background: `url(${vectors.semoview}) no-repeat 50% 50%/contain`,
+});
 
 function Usage() {
   const [deviceSafari, setDeviceSafari] = useState<string>();
@@ -42,30 +49,216 @@ function Usage() {
         </button>
       </div>
       <div className={styles.content}>
-        <h1>
-          <span className={`${isSafari ? 'April16thPromise' : 'April16thLife'}`}>이용안내</span>
-          <em className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>semoview.usage</em>
-        </h1>
+        <div className={`${styles.about} seed`}>
+          <section>
+            <div className={styles.primary}>
+              <h1>
+                <span>
+                  <em>세</em>상의 <em>모</em>든 <i>리뷰</i>
+                </span>
+                <SemoviewLogo />
+              </h1>
+              <p>
+                세모뷰는 유튜브에 올라온 리뷰 영상들을 <span>눌러보지 않고도 어떤 작품인지 작품 정보를</span> 알 수 있게
+                해보자는 생각으로 탄생한 리뷰 전용 서비스입니다.
+              </p>
+            </div>
+          </section>
+          <section>
+            <div className={styles.soul}>
+              <div className={styles.headline}>
+                <h2>Feel your soul</h2>
+                <p>
+                  작품 보기 전, 당신이 찾아보고 싶은 작품의 리뷰를 먼저 보고{' '}
+                  <span>기본 정보를 이해한 뒤 작품을 본다면 더 재미있겠죠?!</span>
+                </p>
+              </div>
+              <div className={styles.image}>
+                <Image src="/about/soul.webp" width="570" height="436" alt="" />
+              </div>
+            </div>
+          </section>
+          <section>
+            <div className={styles.fit}>
+              <div className={styles.headline}>
+                <h2>Feel your fit</h2>
+                <p>당신이 가지고 있는 디바이스에 맞춰 세모뷰를 즐기세요!</p>
+              </div>
+              <div className={styles.image}>
+                <Image src="/about/fit.webp" width="988" height="433" alt="" />
+              </div>
+            </div>
+          </section>
+          <section>
+            <div className={styles.life}>
+              <div className={styles.headline}>
+                <h2>Feel your life</h2>
+                <p>
+                  당신의 라이프에 맞춰서 골라 보세요! <span>영화, 드라마, 애니메이션, 그리고 게임 실황까지.</span>
+                </p>
+              </div>
+              <div className={styles.images}>
+                <div className={styles.image}>
+                  <Image src="/about/life1.webp" width="430" height="570" alt="" />
+                </div>
+                <div className={styles.image}>
+                  <Image src="/about/life2.webp" width="430" height="570" alt="" />
+                </div>
+                <div className={styles.image}>
+                  <Image src="/about/life3.webp" width="430" height="570" alt="" />
+                </div>
+              </div>
+            </div>
+          </section>
+          <section className={styles.amusement}>
+            <div className={styles.amusement}>
+              <div className={styles.headline}>
+                <h2>featured AMUSEMENTS</h2>
+              </div>
+              <div className={styles.images}>
+                <div className={styles.image}>
+                  <Image
+                    src="https://cdn.dev1stud.io/semoview/EpZNLhW2jmJAXmVpeOKmhBs_AGIfRfrUMcww3iL3jmqD1dyqXBQaV7yZm4w30-MtOmha0oa_hASSJXmBwvGPhg_QSQbhDXMKDhvaKoIgO8XQEJVTmjZMFiu3A_RrjgGXRIfWp5YppL-ctJILXqIqiw.webp"
+                    width="390"
+                    height="560"
+                    alt=""
+                    unoptimized
+                    priority
+                  />
+                  <span>누군가는 거짓말을 하고 있다</span>
+                </div>
+                <div className={styles.image}>
+                  <Image
+                    src="https://cdn.dev1stud.io/jejeup/4B169OWhd0DFousPz0jXp6oArW78XpN6EW7gqIwB2DvU18De8MpEhnHxUZBnLxhXDzNTVKMxne2XPkxiblLcP-nAudghFEJ00ryari_tXsUnyTNbu1IRarK-iWevAA7J0LYjkfmMtCfVueTGGbIjmg.webp"
+                    width="390"
+                    height="560"
+                    alt=""
+                    unoptimized
+                    priority
+                  />
+                  <span>이상한 변호사 우영우</span>
+                </div>
+                <div className={styles.image}>
+                  <Image
+                    src="https://cdn.dev1stud.io/jejeup/FPolvRgxUwYWhK3biTFdqEo4si4SSeq6p0IhlM9ORhmlt9_wDYgwD2z5tvytmOTQmy95eyAc2jl0fZJSmMRB0hC7xzbwM74kKtqmuRAFSqhPJNms8G7zVfJSPMJvG0E9iXlC4hXoTefS5q75S8DM3Q.webp"
+                    width="390"
+                    height="560"
+                    alt=""
+                    unoptimized
+                    priority
+                  />
+                  <span>왓쳐</span>
+                </div>
+                <div className={styles.image}>
+                  <Image
+                    src="https://cdn.dev1stud.io/jejeup/gayBfQsk13TyNSB-0jv6myIkPnL8UPX4MMp4SZ6mQ2m4b8_vwaHugpF0voyubNLlBvLcgbjKN4zZza-5akLpB1hF2JPYHV8x8hX_cES-O39DwK_hjEjLDbydyGSL1NKnbtHsPUX3gMEU5gI5qSuXaA.webp"
+                    width="390"
+                    height="560"
+                    alt=""
+                    unoptimized
+                    priority
+                  />
+                  <span>기생수: 더 그레이</span>
+                </div>
+                <div className={styles.image}>
+                  <Image
+                    src="https://cdn.dev1stud.io/jejeup/NCdyhGX3H0R8e3T9MN8tKY5WU1UZvto_askemNHtPdsrPaFUX6av40cVHeNKztt5T2hHpKIqfHhsZo5rbzkmWad11nljIWJGxuN6R18IN8M3HJ7LV9XGM1R3EPpZPwtVGhu9Nb4Q2BBXgKzWvAx77A.webp"
+                    width="390"
+                    height="560"
+                    alt=""
+                    unoptimized
+                    priority
+                  />
+                  <span>오늘 밤, 세계에서 이 사랑이 사라진다 해도</span>
+                </div>
+                <div className={styles.image}>
+                  <Image
+                    src="https://cdn.dev1stud.io/jejeup/SOVqUUbC_3fv1ENRvgvTdFDiuOgePMWUev1WkZFZB8BlttDdvxbsyusdR7IdQ3sFjfnCUpeUHSydtGidiM75BB9SN8wWBpy8U69VUDFsbYmij3sSmXsXsHd5VJvBB9ipN8tfmHs6dXjTGWv9LYA1uMircWSEgg8NzNh3PMjnfK8.webp"
+                    width="390"
+                    height="560"
+                    alt=""
+                    unoptimized
+                    priority
+                  />
+                  <span>젠틀맨</span>
+                </div>
+                <div className={styles.image}>
+                  <Image
+                    src="https://cdn.dev1stud.io/jejeup/q2OsUK4Fnic8r4V04DD2djoft-0-h2fTmtjQTKJEaRIHi7IeOqw1Vhgq3RSrsIjA6Jcgc3jA9UAvHv4wl5I_0D5Vh_TEn3uOrfTc5t8yIDVrsgqEnXKBCA6m0uIiOphhYdaizMD81N5f1G8mfe3E2_vxBTK5nshaX3l22NmNa3c.webp"
+                    width="390"
+                    height="560"
+                    alt=""
+                    unoptimized
+                    priority
+                  />
+                  <span>서울괴담</span>
+                </div>
+                <div className={styles.image}>
+                  <Image
+                    src="https://cdn.dev1stud.io/jejeup/q2OsUK4Fnic8r4V04DD2dujPs7jimlauRz8SEW3bb9ElWTde1b6tEF1A7TX-4MfhTrYj_keORVG4QY2gffhlwng9mqIFV2CHj2Q400tcweCHlYRhmCwLnpjNHrkHbBb-_qmxAm0MHUSgIyjuFjwaSrt_rA-CWWeThmiL9jyL7_s.webp"
+                    width="390"
+                    height="560"
+                    alt=""
+                    unoptimized
+                    priority
+                  />
+                  <span>테트리스</span>
+                </div>
+                <div className={styles.image}>
+                  <Image
+                    src="https://cdn.dev1stud.io/jejeup/1zcPA0jfoHKcgfkjKfKdvEYQkH-UvY9L1ABzTm3LJPEEphcBmf-zxUMf8R9YZrGyz7ahadkpTEq3oqa0wn3_l9Z1xoD8Synm_lQMaTtQE-Xbi0lZxho_CodP-WKuz_R5bZzX-jyehuut68EMrhR0yw.webp"
+                    width="390"
+                    height="560"
+                    alt=""
+                    unoptimized
+                    priority
+                  />
+                  <span>사축 씨는 꼬마 유령에게 치유 받고 싶어</span>
+                </div>
+                <div className={styles.image}>
+                  <Image
+                    src="https://cdn.dev1stud.io/jejeup/F1Z8xrEcenSzS26tUgbZC-WdhD7EnyROdyaZU9aBAGKiYVft4N__2TwNDuDvXjUAozmitHLKrirbPOkV7arPikKI8_E9TDJDDKL0v402Yo9ia5b4ifKcB8DLBL8cEA9xl5-P2q4VbSGoS-gX6NB8Ig.webp"
+                    width="390"
+                    height="560"
+                    alt=""
+                    unoptimized
+                    priority
+                  />
+                  <span>논논비요리 논스톱</span>
+                </div>
+                <div className={styles.image}>
+                  <Image
+                    src="https://cdn.dev1stud.io/jejeup/9XdpzDYU7AN6TY5m-oao3aq9RlqqeHtvi3KSFavNzlUrCyvQoq6cpfb3LIMwawYe19C20kfeuIla00pLHNnPGvjriPMfArIRjWOC4sIrrz4BRaFfZdXMqMHOcZ1gq9eIOTkJBCkStzl60MoqKaoNJQ.webp"
+                    width="390"
+                    height="560"
+                    alt=""
+                    unoptimized
+                    priority
+                  />
+                  <span>citrus</span>
+                </div>
+                <div className={styles.image}>
+                  <Image
+                    src="https://cdn.dev1stud.io/jejeup/10RgdhHqxim_6778EsKjzWkhMQG3JOnJQzk5jU4VGDDNUkh_B6nmb_0EFLSXl_PaoXmxtQIQ0_IcEp2mxQXGxGDYKHuBt_b2NLrlLWOsF_nD49IxOen9KzJw_2TUxhtCJ_il0vmOu4GK1XDHxr9KSA.webp"
+                    width="390"
+                    height="560"
+                    alt=""
+                    unoptimized
+                    priority
+                  />
+                  <span>나 혼자만 레벨 업</span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
         <div className={styles.container}>
-          <article>
-            <h2>세모뷰?</h2>
-            <section>
-              <p>
-                평소에 리뷰 유튜버들이 작품정보를 <span>영상 제목이나 썸네일에 넣지 않아</span> 정보를 알 수 없어
-                불편하셨나요?
-              </p>
-              <p>
-                &apos;세모뷰&apos;에서는 그런 리뷰 영상들을 모아서{' '}
-                <span>눌러보기 전에 어떤 영상인지 알려드립니다!</span>
-              </p>
-            </section>
-          </article>
           <article>
             <h2>심의등급 안내</h2>
             <section>
               <p>
-                한국 내에서 심의를 받은 콘텐츠는 공식 심의등급이 표시가 되며 그렇지 않은 경우에는 세모뷰 임의로 등급을
-                정합니다.
+                한국 내에서 심의를 받은 콘텐츠는 공식 심의등급이 표시가 되며{' '}
+                <span>그렇지 않은 경우에는 세모뷰 임의로 등급을 정합니다.</span>
               </p>
               <p>세모뷰 자체 심의등급은 법적 구속력이 없습니다.</p>
             </section>
@@ -73,8 +266,12 @@ function Usage() {
           <article>
             <h2>베리어프리 콘텐츠 이용 안내</h2>
             <section>
-              <p>베리어프리 영상은 2024년 2분기 기준으로 판권 등록된 OTT 기준으로 링크를 제공하고 있습니다.</p>
-              <p>웨이브와 Apple TV+의 이용방법은 각 링크 하단에 첨부된 내용을 확인해 주세요.</p>
+              <p>
+                베리어프리 영상은 2024년 2분기 기준으로 <span>판권 등록된 OTT 기준으로 링크를 제공하고 있습니다.</span>
+              </p>
+              <p>
+                웨이브와 Apple TV+의 이용방법은 <span>각 링크 하단에 첨부된 내용을 확인해 주세요.</span>
+              </p>
             </section>
           </article>
         </div>
