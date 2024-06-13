@@ -157,6 +157,10 @@
         .amusement
           margin: 0 auto
           max-width: rem(1320)
+          gap: rem(17)!important
+
+          +mq(minSmall)
+            gap: rem(32)!important
 
           .headline
             h2
@@ -172,10 +176,6 @@
                 gap: rem(7)
                 color: $hex-dark
 
-                span, svg
-                  transition: all .5s cubic-bezier(.4,0,.2,1)
-                  display: inline-block
-
                 &:hover, &:focus
                   span
                     color: $hex-accent
@@ -184,8 +184,16 @@
                   svg
                     transform: translateX(rem(5))
 
+                span, svg
+                  transition: all .5s cubic-bezier(.4,0,.2,1)
+                  display: inline-block
+
                 span
                   border-bottom: rem(3) solid transparent
+                  font-size: rem(20)
+
+                  +mq(minSmall)
+                    font-size: rem(24)
 
                 svg
                   width: rem(24)
