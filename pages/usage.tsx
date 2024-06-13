@@ -49,7 +49,7 @@ function Usage() {
       </div>
       <div className={styles.content}>
         <div className={`${styles.about} seed`}>
-          <section className={deviceSafari !== 'isSafari' ? 'safari' : ''}>
+          <section className={deviceSafari !== 'isSafari' ? styles.safari : ''}>
             <div className={styles.primary}>
               <h1>
                 <span>
