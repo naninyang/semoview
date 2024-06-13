@@ -7,6 +7,7 @@ import styles from '@/styles/Usage.module.sass';
 import styled from '@emotion/styled';
 import { vectors } from '@/components/vectors';
 import Image from 'next/image';
+import Anchor from '@/components/Anchor';
 
 const SemoviewLogo = styled.i({
   background: `url(${vectors.semoview}) no-repeat 50% 50%/contain`,
@@ -72,9 +73,7 @@ function Usage() {
                   <span>기본 정보를 이해한 뒤 작품을 본다면 더 재미있겠죠?!</span>
                 </p>
               </div>
-              <div className={styles.image}>
-                <Image src="/about/soul.webp" width="570" height="436" alt="" />
-              </div>
+              <div className={styles.dummy} />
             </div>
           </section>
           <section>
@@ -83,9 +82,7 @@ function Usage() {
                 <h2>Feel your fit</h2>
                 <p>당신이 가지고 있는 디바이스에 맞춰 세모뷰를 즐기세요!</p>
               </div>
-              <div className={styles.image}>
-                <Image src="/about/fit.webp" width="988" height="433" alt="" />
-              </div>
+              <div className={styles.dummy} />
             </div>
           </section>
           <section>
@@ -96,23 +93,27 @@ function Usage() {
                   당신의 라이프에 맞춰서 골라 보세요! <span>영화, 드라마, 애니메이션, 그리고 게임 실황까지.</span>
                 </p>
               </div>
-              <div className={styles.images}>
-                <div className={styles.image}>
-                  <Image src="/about/life1.webp" width="430" height="570" alt="" />
-                </div>
-                <div className={styles.image}>
-                  <Image src="/about/life2.webp" width="430" height="570" alt="" />
-                </div>
-                <div className={styles.image}>
-                  <Image src="/about/life3.webp" width="430" height="570" alt="" />
-                </div>
+              <div className={styles.dummies}>
+                <div className={styles.dummy} />
+                <div className={styles.dummy} />
+                <div className={styles.dummy} />
               </div>
             </div>
           </section>
           <section className={styles.amusement}>
             <div className={styles.amusement}>
               <div className={styles.headline}>
-                <h2>featured AMUSEMENTS</h2>
+                <h2>
+                  <Anchor href="/categories">
+                    <span>featured Amusements</span>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                        fill="black"
+                      />
+                    </svg>
+                  </Anchor>
+                </h2>
               </div>
               <div className={styles.images}>
                 <div className={styles.image}>
