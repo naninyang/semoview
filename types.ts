@@ -322,6 +322,26 @@ export interface BannerData {
   type: string;
 }
 
+export interface RecommendData {
+  id: number;
+  idx: number;
+  subject: string;
+  description: string;
+  chloe: any;
+  gpt: any;
+}
+
+export interface RecommendParmalinkData {
+  id: number;
+  attributes: {
+    subject: string;
+    description: string;
+    chloe: any;
+    gpt: any;
+    createdAt: string;
+  };
+}
+
 export interface NoticePermalinkData {
   attributes: {
     idx: string;

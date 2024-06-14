@@ -134,12 +134,16 @@ export default function App({ Component, pageProps }: AppProps) {
       <style jsx global>
         {`
           body {
-            ${router.pathname === '/amusement/[amusementId]' || router.pathname === '/open-sources'
+            ${router.pathname === '/amusement/[amusementId]' ||
+            router.pathname === '/recommend/[recommendId]' ||
+            router.pathname === '/open-sources'
               ? 'background-color:black'
               : ''}
           }
           main {
-            ${router.pathname === '/amusement/[amusementId]' || router.pathname === '/open-sources'
+            ${router.pathname === '/amusement/[amusementId]' ||
+            router.pathname === '/recommend/[recommendId]' ||
+            router.pathname === '/open-sources'
               ? 'margin-top:0'
               : ''}
           }

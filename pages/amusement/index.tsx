@@ -118,6 +118,7 @@ function Amusement({
     sessionStorage.removeItem('tag');
     sessionStorage.removeItem('subdub');
     sessionStorage.removeItem('bfree');
+    sessionStorage.removeItem('hanguk');
 
     sessionStorage.setItem('backhistory', router.asPath);
     sessionStorage.setItem(

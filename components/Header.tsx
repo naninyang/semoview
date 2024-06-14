@@ -50,7 +50,7 @@ export default function Header() {
   };
   return (
     <header
-      className={`${styles.header} ${router.pathname === '/amusement/[amusementId]' || router.pathname === '/open-sources' ? styles.dark : router.pathname === '/' ? styles.main : ''}`}
+      className={`${styles.header} ${router.pathname === '/amusement/[amusementId]' || router.pathname === '/recommend/[recommendId]' || router.pathname === '/open-sources' ? styles.dark : router.pathname === '/' ? styles.main : ''}`}
     >
       <div className={styles.container}>
         {router.pathname === '/' ||
@@ -96,7 +96,8 @@ export default function Header() {
         router.pathname === '/platforms' ||
         router.pathname === '/hanguk' ||
         router.pathname === '/subdub' ||
-        router.pathname === '/barrier-free') && (
+        router.pathname === '/barrier-free' ||
+        router.pathname === '/chatgpt') && (
         <div className={styles.tab}>
           <nav>
             <ol>
@@ -113,7 +114,7 @@ export default function Header() {
                 }
               >
                 <Anchor href="/categories">
-                  <span>장르보기</span>
+                  <span>작품정보</span>
                 </Anchor>
               </li>
               <li
@@ -125,6 +126,11 @@ export default function Header() {
               >
                 <Anchor href="/hanguk">
                   <span>베리어프리</span>
+                </Anchor>
+              </li>
+              <li className={router.pathname === '/chatgpt' ? styles.current : ''}>
+                <Anchor href="/chatgpt">
+                  <span>AI추천</span>
                 </Anchor>
               </li>
             </ol>

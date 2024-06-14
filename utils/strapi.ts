@@ -1,5 +1,5 @@
 import { SupportLang } from '@/components/SupportLang';
-import { AmusementData, BannerData, JejeupData, NoticeData } from 'types';
+import { AmusementData, BannerData, JejeupData, NoticeData, RecommendData } from 'types';
 
 export const formatDate = (datetime: string) => {
   const date = new Date(datetime);
@@ -1226,4 +1226,29 @@ export async function getSeasonData(season: string) {
   }));
 
   return rowsData;
+}
+
+export async function getRecommendData(page?: number, pageSize?: number) {
+  const response = await fetch(
+    `${process.env.STRAPI_URL}/api/ai-semoviews?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
+      },
+    },
+  );
+  const recommendResponse = await response.json();
+  const recommendResponseData = recommendResponse.data;
+  const data: RecommendData = recommendResponseData.map((data: any) => ({
+    id: `${data.id}`,
+    idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+    subject: data.attributes.subject,
+    description: data.attributes.description,
+    chloe: data.attributes.chloe,
+    gpt: data.attributes.gpt,
+  }));
+  const pageCount = recommendResponse.meta.pagination.pageCount;
+  const total = recommendResponse.meta.pagination.total;
+  return { data, pageCount: pageCount, total: total };
 }

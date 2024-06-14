@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { vectors } from './vectors';
 import styles from '@/styles/Footer.module.sass';
 import styled from '@emotion/styled';
@@ -37,7 +36,9 @@ const Footer = () => {
       <div className={styles.container}>
         <div className={styles.site}>
           <Anchor href="https://dev1stud.io">
-            {router.pathname === '/amusement/[amusementId]' || router.pathname === '/open-sources' ? (
+            {router.pathname === '/amusement/[amusementId]' ||
+            router.pathname === '/recommend/[recommendId]' ||
+            router.pathname === '/open-sources' ? (
               <Dev1studioLight />
             ) : (
               <Dev1studioDark />
@@ -45,7 +46,9 @@ const Footer = () => {
             <span>데브런닷스튜디오</span>
           </Anchor>
           <Anchor href="https://github.com/naninyang/semoview">
-            {router.pathname === '/amusement/[amusementId]' || router.pathname === '/open-sources' ? (
+            {router.pathname === '/amusement/[amusementId]' ||
+            router.pathname === '/recommend/[recommendId]' ||
+            router.pathname === '/open-sources' ? (
               <GithubLight />
             ) : (
               <GithubDark />
@@ -102,7 +105,9 @@ const Footer = () => {
         <div className={styles.studio}>
           <p className={styles.copyright} lang="en">
             &copy; Copyrights{' '}
-            {router.pathname === '/amusement/[amusementId]' || router.pathname === '/open-sources' ? (
+            {router.pathname === '/amusement/[amusementId]' ||
+            router.pathname === '/recommend/[recommendId]' ||
+            router.pathname === '/open-sources' ? (
               <StudioDark />
             ) : (
               <StudioDefault />

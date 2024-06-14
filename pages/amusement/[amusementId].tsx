@@ -554,19 +554,7 @@ export default function Amusement({
   }, [amusementData]);
 
   const previousPageHandler = () => {
-    const previousPage =
-      sessionStorage.getItem('amusementCategory') ||
-      sessionStorage.getItem('amusementTag') ||
-      sessionStorage.getItem('amusementPlatform') ||
-      sessionStorage.getItem('amusementHanguk') ||
-      sessionStorage.getItem('amusementSubdub') ||
-      sessionStorage.getItem('amusementBfree') ||
-      sessionStorage.getItem('category') ||
-      sessionStorage.getItem('tag') ||
-      sessionStorage.getItem('platform') ||
-      sessionStorage.getItem('hanguk') ||
-      sessionStorage.getItem('subdub') ||
-      sessionStorage.getItem('bfree');
+    const previousPage = sessionStorage.getItem('ai');
     if (previousPage) {
       router.push(`${previousPage}`);
     } else {
