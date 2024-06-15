@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { RecommendData } from 'types';
 import Seo, { originTitle } from '@/components/Seo';
-import ChoiceGenre from '@/components/ChoiceGenre';
 import styles from '@/styles/Categories.module.sass';
 
 function Recommend({ aiData, error }: { aiData: any; error: string }) {

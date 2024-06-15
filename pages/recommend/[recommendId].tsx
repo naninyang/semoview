@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { RecommendParmalinkData } from 'types';
@@ -8,6 +8,100 @@ import Anchor from '@/components/Anchor';
 import footer from '@/styles/Footer.module.sass';
 import styles from '@/styles/Recommend.module.sass';
 import { BackButtonLight } from '@/components/Icons';
+
+interface TextNode {
+  type: 'text';
+  text: string;
+  bold?: boolean;
+  strikethrough?: boolean;
+}
+
+interface LinkNode {
+  type: 'link';
+  url: string;
+  children: Array<TextNode | LinkNode>;
+}
+
+interface ParagraphNode {
+  type: 'paragraph';
+  children: Array<TextNode | LinkNode>;
+}
+
+interface ListItemNode {
+  type: 'list-item';
+  children: Array<TextNode | LinkNode>;
+}
+
+interface ListNode {
+  type: 'list';
+  format: 'ordered' | 'unordered';
+  children: ListItemNode[];
+}
+
+type ContentNode = ParagraphNode | ListNode;
+
+interface TypingEffectProps {
+  content: ContentNode[];
+}
+
+const TypingEffect: React.FC<TypingEffectProps> = ({ content }) => {
+  const [displayedContent, setDisplayedContent] = useState<ContentNode[]>([]);
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (index < content.length) {
+      const timeoutId = setTimeout(() => {
+        setDisplayedContent([...displayedContent, content[index]]);
+        setIndex(index + 1);
+      }, 1000);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [index, content, displayedContent]);
+
+  const renderChildren = (children: Array<TextNode | LinkNode>) => {
+    return children.map((child, idx) => {
+      if (child.type === 'text') {
+        if (child.bold) {
+          return <strong key={idx}>{child.text}</strong>;
+        }
+        if (child.strikethrough) {
+          return <s key={idx}>{child.text}</s>;
+        }
+        return <span key={idx} dangerouslySetInnerHTML={{ __html: child.text.replace(/\n/g, '<br />') }} />;
+      } else if (child.type === 'link') {
+        return (
+          <a key={idx} href={child.url}>
+            {renderChildren(child.children)}
+          </a>
+        );
+      }
+    });
+  };
+
+  const renderContent = (content: ContentNode[]) => {
+    return content.map((item, idx) => {
+      if (item.type === 'paragraph') {
+        return <p key={idx}>{renderChildren(item.children)}</p>;
+      } else if (item.type === 'list') {
+        const ListComponent = item.format === 'ordered' ? 'ol' : 'ul';
+        return (
+          <ListComponent key={idx}>
+            {item.children.map((listItem, listItemIdx) => (
+              <li key={listItemIdx}>{renderChildren(listItem.children)}</li>
+            ))}
+          </ListComponent>
+        );
+      }
+    });
+  };
+
+  return (
+    <div className={styles.typingContainer}>
+      {renderContent(displayedContent)}
+      {index < content.length && <span className={styles.loadingCircle}> &#9679;</span>}
+    </div>
+  );
+};
 
 const BlockQuote = ({ data, cite }: { data: any; cite: string }) => {
   const renderChildren = (children: any) => {
@@ -56,7 +150,9 @@ const BlockQuote = ({ data, cite }: { data: any; cite: string }) => {
     });
   };
 
-  return <blockquote cite={cite}>{renderContent(data)}</blockquote>;
+  return (
+    <blockquote cite={cite}>{cite === 'ChatGPT 4o' ? <TypingEffect content={data} /> : renderContent(data)}</blockquote>
+  );
 };
 
 function RecommendDetail({
@@ -95,6 +191,7 @@ function RecommendDetail({
       router.push(`/recommend`);
     }
   };
+
   return (
     <main className={`${footer.recommend} ${styles.recommend}`}>
       <Seo
