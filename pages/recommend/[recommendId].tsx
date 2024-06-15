@@ -4,10 +4,10 @@ import { useRouter } from 'next/router';
 import { RecommendParmalinkData } from 'types';
 import { formatDateDetail } from '@/utils/strapi';
 import Seo, { originTitle } from '@/components/Seo';
+import { BackButtonLight } from '@/components/Icons';
 import Anchor from '@/components/Anchor';
 import footer from '@/styles/Footer.module.sass';
 import styles from '@/styles/Recommend.module.sass';
-import { BackButtonLight } from '@/components/Icons';
 
 interface TextNode {
   type: 'text';
@@ -184,12 +184,7 @@ function RecommendDetail({
   }, [router.asPath]);
 
   const previousPageHandler = () => {
-    const previousPage = sessionStorage.getItem('ai');
-    if (previousPage) {
-      router.push(`${previousPage}`);
-    } else {
-      router.push(`/recommend`);
-    }
+    router.push(`/recommends`);
   };
 
   return (
