@@ -97,7 +97,7 @@ export default function Header() {
         router.pathname === '/hanguk' ||
         router.pathname === '/subdub' ||
         router.pathname === '/barrier-free' ||
-        router.pathname === '/chatgpt') && (
+        router.pathname === '/recommends') && (
         <div className={styles.tab}>
           <nav>
             <ol>
@@ -128,8 +128,8 @@ export default function Header() {
                   <span>베리어프리</span>
                 </Anchor>
               </li>
-              <li className={router.pathname === '/chatgpt' ? styles.current : ''}>
-                <Anchor href="/chatgpt">
+              <li className={router.pathname === '/recommends' ? styles.current : ''}>
+                <Anchor href="/recommends">
                   <span>AI추천</span>
                 </Anchor>
               </li>

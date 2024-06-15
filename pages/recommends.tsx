@@ -7,7 +7,7 @@ import { RecommendData } from 'types';
 import Seo, { originTitle } from '@/components/Seo';
 import styles from '@/styles/Categories.module.sass';
 
-function Recommend({ aiData, error }: { aiData: any; error: string }) {
+function Recommends({ aiData, error }: { aiData: any; error: string }) {
   const router = useRouter();
   const timestamp = Date.now();
 
@@ -66,7 +66,7 @@ function Recommend({ aiData, error }: { aiData: any; error: string }) {
   );
 }
 
-export default Recommend;
+export default Recommends;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const currentPage = Number(context.query.page) || 1;
