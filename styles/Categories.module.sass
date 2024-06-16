@@ -860,7 +860,13 @@
 
     .thumbnail
       padding: rem(12)
-      width: 25%
+      width: 100%
+
+      +mq(minSmall)
+        width: 50%
+
+      +mq(minLarge)
+        width: 25%
 
     a
       display: block
