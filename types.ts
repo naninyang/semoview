@@ -337,6 +337,9 @@ export interface RecommendParmalinkData {
     description: string;
     chloe: any;
     gpt: any;
+    fieldName: string;
+    fieldValue: string;
+    question: string;
     createdAt: string;
   };
 }
