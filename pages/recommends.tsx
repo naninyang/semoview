@@ -44,10 +44,9 @@ function Recommends({ aiData, error }: { aiData: any; error: string }) {
                 <section>
                   {aiData.data
                     .filter((ai: RecommendData) => {
-                      if (process.env.NODE_ENV === 'development') {
-                        return true;
-                      }
-                      return ai.isPublish;
+                      if (process.env.NODE_ENV === 'production') {
+                        return ai.isPublish;
+                      } else return true;
                     })
                     .map((ai: RecommendData, index: number) => (
                       <div className={styles.thumbnail} key={index}>

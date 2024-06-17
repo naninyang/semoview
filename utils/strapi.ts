@@ -1289,6 +1289,7 @@ export async function getRecommendData(page?: number, pageSize?: number) {
     idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
     subject: data.attributes.subject,
     description: data.attributes.description,
+    isPublish: data.attributes.isPublish,
   }));
   const pageCount = recommendResponse.meta.pagination.pageCount;
   const total = recommendResponse.meta.pagination.total;
