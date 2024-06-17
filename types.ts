@@ -327,8 +327,7 @@ export interface RecommendData {
   idx: number;
   subject: string;
   description: string;
-  chloe: any;
-  gpt: any;
+  isPublish: boolean;
 }
 
 export interface RecommendParmalinkData {

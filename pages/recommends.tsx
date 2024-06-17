@@ -42,20 +42,27 @@ function Recommends({ aiData, error }: { aiData: any; error: string }) {
               </div>
               {Array.isArray(aiData.data) && (
                 <section>
-                  {aiData.data.map((ai: RecommendData, index: number) => (
-                    <div className={styles.thumbnail} key={index}>
-                      <Link href={`/recommend/${ai.idx}`} scroll={true} shallow={true}>
-                        <Image
-                          src={`https://cdn.dev1stud.io/semoview/ai/ai-${ai.id}.webp`}
-                          alt={ai.subject}
-                          width="1858"
-                          height="1080"
-                          unoptimized
-                          priority
-                        />
-                      </Link>
-                    </div>
-                  ))}
+                  {aiData.data
+                    .filter((ai: RecommendData) => {
+                      if (process.env.NODE_ENV === 'development') {
+                        return true;
+                      }
+                      return ai.isPublish;
+                    })
+                    .map((ai: RecommendData, index: number) => (
+                      <div className={styles.thumbnail} key={index}>
+                        <Link href={`/recommend/${ai.idx}`} scroll={true} shallow={true}>
+                          <Image
+                            src={`https://cdn.dev1stud.io/semoview/ai/ai-${ai.id}.webp`}
+                            alt={ai.subject}
+                            width="1858"
+                            height="1080"
+                            unoptimized
+                            priority
+                          />
+                        </Link>
+                      </div>
+                    ))}
                 </section>
               )}
             </>

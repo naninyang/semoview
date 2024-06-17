@@ -245,7 +245,6 @@ export default RecommendDetail;
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const recommendId = context.params?.recommendId;
   let recommendData = null;
-  let error = null;
 
   if (recommendId && typeof recommendId === 'string') {
     const ai = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/recommend?id=${recommendId.substring(14)}`);
