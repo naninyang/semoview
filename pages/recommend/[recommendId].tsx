@@ -192,28 +192,34 @@ const GPT = ({ fieldName, fieldValue, question }: { fieldName: string; fieldValu
 
   return (
     <blockquote>
-      {firstLine && <p>{firstLine}</p>}
-      <ol>
-        {cleanedLines.map((line, index) => {
-          const parts = line.split(' - ');
-          const titlePart = parts[0];
-          const detailsPart = parts.slice(1).join(' - ');
-          const titleMatch = titlePart.match(/^(.*?)(\s\((.*?)\))?$/);
-          const titleKorean = titleMatch?.[1] || '';
-          const title = titleMatch?.[3] || '';
-          return (
-            <li key={index}>
-              {titleKorean ? (
-                <Anchor href={idxList[index]}>{titleKorean}</Anchor>
-              ) : (
-                <Anchor href={idxList[index]}>{title}</Anchor>
-              )}{' '}
-              {detailsPart}
-            </li>
-          );
-        })}
-      </ol>
-      {lastLine && <p>{lastLine}</p>}
+      {answer ? (
+        <>
+          {firstLine && <p>{firstLine}</p>}
+          <ol>
+            {cleanedLines.map((line, index) => {
+              const parts = line.split(' - ');
+              const titlePart = parts[0];
+              const detailsPart = parts.slice(1).join(' - ');
+              const titleMatch = titlePart.match(/^(.*?)(\s\((.*?)\))?$/);
+              const titleKorean = titleMatch?.[1] || '';
+              const title = titleMatch?.[3] || '';
+              return (
+                <li key={index}>
+                  {titleKorean ? (
+                    <Anchor href={idxList[index]}>{titleKorean}</Anchor>
+                  ) : (
+                    <Anchor href={idxList[index]}>{title}</Anchor>
+                  )}{' '}
+                  {detailsPart}
+                </li>
+              );
+            })}
+          </ol>
+          {lastLine && <p>{lastLine}</p>}
+        </>
+      ) : (
+        <span className={styles.loadingCircle}> &#9679;</span>
+      )}
     </blockquote>
   );
 };
