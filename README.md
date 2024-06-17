@@ -19,6 +19,7 @@
 - SASS
 - YouTube iframe API
 - PWA
+- OpenAI ChatGPT AI Model
 - Strapi API
 - Node 18
 - vercel deployment
