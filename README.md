@@ -19,7 +19,7 @@
 - SASS
 - YouTube iframe API
 - PWA
-- OpenAI ChatGPT AI Model
+- OpenAI ChatGPT 3.5 Turbo AI Model API
 - Strapi API
 - Node 18
 - vercel deployment

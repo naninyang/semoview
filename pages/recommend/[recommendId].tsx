@@ -187,7 +187,7 @@ const GPT = ({ fieldName, fieldValue, question }: { fieldName: string; fieldValu
   const lines = answer.split('\n').filter((line) => line.trim() !== '');
   const firstLine = lines.length > 0 ? lines[0] : '';
   const lastLine = lines.length > 2 ? lines[lines.length - 1] : '';
-  const contentLines = lines.slice(1, lines.length - 1);
+  const contentLines = lines.slice(1, lines.length - 1).slice(0, 10);
   const cleanedLines = contentLines.map((line) => line.replace(/^\d+\.\s*/, '').trim());
 
   return (
