@@ -42,6 +42,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         model: 'gpt-3.5-turbo',
         messages: [
           {
+            role: 'system',
+            content: 'Ensure to include an introduction and a conclusion in your response.',
+          },
+          {
             role: 'user',
             content: `${question}: ${JSON.stringify(gptData)}`,
           },
