@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { isSafari } from 'react-device-detect';
 import Seo, { originTitle } from '@/components/Seo';
 import { BackButton } from '@/components/Icons';
-import Anchor from '@/components/Anchor';
 import styles from '@/styles/Notice.module.sass';
 
 function ContactForm() {

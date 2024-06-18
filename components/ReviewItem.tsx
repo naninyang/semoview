@@ -3,6 +3,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Category, JejeupMetaData } from 'types';
 import { formatDate } from '@/components/FormatDate';
+import { CategoryName } from './CategoryName';
+import { AnimeName } from './AnimeName';
+import { RatingsDrama } from './RatingsDrama';
 import { formatDuration } from '@/components/FormatDuration';
 import styles from '@/styles/Reviews.module.sass';
 import {
@@ -55,9 +58,6 @@ import {
   WavveOriginal,
   Wowow,
 } from './Icons';
-import { CategoryName } from './CategoryName';
-import { AnimeName } from './AnimeName';
-import { RatingsDrama } from './RatingsDrama';
 
 export function Amusements({ jejeup }: { jejeup: string }) {
   const items = jejeup.split(',');

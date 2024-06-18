@@ -10,8 +10,8 @@ import {
   Noto_Sans_Thai,
 } from 'next/font/google';
 import localFont from 'next/font/local';
-import { useRouter } from 'next/router';
 import Script from 'next/script';
+import { useRouter } from 'next/router';
 import { GA_TRACKING_ID, pageview } from '@/lib/gtag';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
