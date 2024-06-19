@@ -252,6 +252,7 @@ export interface AmusementPermalinkData {
     relName: string;
     logoSize: string;
     wavveSeries: any;
+    amusementsCount: number;
   };
 }
 
