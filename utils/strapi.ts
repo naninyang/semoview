@@ -189,6 +189,7 @@ export async function getCategoryData(page?: number, pageSize?: number, category
         relations: data.attributes.relations,
         supportLang: data.attributes.supportLang,
         wavveSeries: data.attributes.wavveSeries,
+        isPublish: data.attributes.isPublish,
       }));
     const pageCount = categoryResponse.meta.pagination.pageCount;
     const total = categoryResponse.meta.pagination.total;
@@ -244,6 +245,7 @@ export async function getTagData(page?: number, pageSize?: number, tagName?: str
         posterOther: data.attributes.posterOther,
         supportLang: data.attributes.supportLang,
         wavveSeries: data.attributes.wavveSeries,
+        isPublish: data.attributes.isPublish,
       }));
     const pageCount = tagResponse.meta.pagination.pageCount;
     const total = tagResponse.meta.pagination.total;
@@ -295,6 +297,7 @@ export async function getTagData(page?: number, pageSize?: number, tagName?: str
         posterOther: data.attributes.posterOther,
         supportLang: data.attributes.supportLang,
         wavveSeries: data.attributes.wavveSeries,
+        isPublish: data.attributes.isPublish,
       }));
     const pageCount = tagResponse.meta.pagination.pageCount;
     const total = tagResponse.meta.pagination.total;
@@ -359,6 +362,7 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
         posterOther: data.attributes.posterOther,
         supportLang: data.attributes.supportLang,
         wavveSeries: data.attributes.wavveSeries,
+        isPublish: data.attributes.isPublish,
       }));
     const pageCount = platformResponse.meta.pagination.pageCount;
     const total = platformResponse.meta.pagination.total;
@@ -418,6 +422,7 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
         posterDefault: data.attributes.posterDefault,
         posterOther: data.attributes.posterOther,
         supportLang: data.attributes.supportLang,
+        isPublish: data.attributes.isPublish,
       }));
     const pageCount = platformResponse.meta.pagination.pageCount;
     const total = platformResponse.meta.pagination.total;
@@ -474,6 +479,7 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
         posterDefault: data.attributes.posterDefault,
         posterOther: data.attributes.posterOther,
         supportLang: data.attributes.supportLang,
+        isPublish: data.attributes.isPublish,
       }));
     const pageCount = platformResponse.meta.pagination.pageCount;
     const total = platformResponse.meta.pagination.total;
@@ -534,6 +540,7 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
         posterOther: data.attributes.posterOther,
         supportLang: data.attributes.supportLang,
         wavveSeries: data.attributes.wavveSeries,
+        isPublish: data.attributes.isPublish,
       }));
     const pageCount = platformResponse.meta.pagination.pageCount;
     const total = platformResponse.meta.pagination.total;
@@ -585,6 +592,7 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
         posterOther: data.attributes.posterOther,
         supportLang: data.attributes.supportLang,
         wavveSeries: data.attributes.wavveSeries,
+        isPublish: data.attributes.isPublish,
       }));
     const pageCount = platformResponse.meta.pagination.pageCount;
     const total = platformResponse.meta.pagination.total;
@@ -641,6 +649,7 @@ export async function getHangukData(page?: number, pageSize?: number, hangukName
           posterOther: data.attributes.posterOther,
           supportLang: data.attributes.supportLang,
           wavveSeries: data.attributes.wavveSeries,
+          isPublish: data.attributes.isPublish,
         }));
       const pageCount = hangukResponse.meta.pagination.pageCount;
       const total = hangukResponse.meta.pagination.total;
@@ -692,6 +701,7 @@ export async function getHangukData(page?: number, pageSize?: number, hangukName
           posterOther: data.attributes.posterOther,
           supportLang: data.attributes.supportLang,
           wavveSeries: data.attributes.wavveSeries,
+          isPublish: data.attributes.isPublish,
         }));
       const pageCount = hangukResponse.meta.pagination.pageCount;
       const total = hangukResponse.meta.pagination.total;
@@ -745,6 +755,7 @@ export async function getHangukData(page?: number, pageSize?: number, hangukName
           posterOther: data.attributes.posterOther,
           supportLang: data.attributes.supportLang,
           wavveSeries: data.attributes.wavveSeries,
+          isPublish: data.attributes.isPublish,
         }));
       const pageCount = hangukResponse.meta.pagination.pageCount;
       const total = hangukResponse.meta.pagination.total;
@@ -796,6 +807,7 @@ export async function getHangukData(page?: number, pageSize?: number, hangukName
           posterOther: data.attributes.posterOther,
           supportLang: data.attributes.supportLang,
           wavveSeries: data.attributes.wavveSeries,
+          isPublish: data.attributes.isPublish,
         }));
       const pageCount = hangukResponse.meta.pagination.pageCount;
       const total = hangukResponse.meta.pagination.total;
@@ -852,6 +864,7 @@ export async function getSubdubData(page?: number, pageSize?: number, subdubName
         posterOther: data.attributes.posterOther,
         supportLang: data.attributes.supportLang,
         wavveSeries: data.attributes.wavveSeries,
+        isPublish: data.attributes.isPublish,
       }));
     const pageCount = hangukResponse.meta.pagination.pageCount;
     const total = hangukResponse.meta.pagination.total;
@@ -903,6 +916,7 @@ export async function getSubdubData(page?: number, pageSize?: number, subdubName
         posterOther: data.attributes.posterOther,
         supportLang: data.attributes.supportLang,
         wavveSeries: data.attributes.wavveSeries,
+        isPublish: data.attributes.isPublish,
       }));
     const pageCount = hangukResponse.meta.pagination.pageCount;
     const total = hangukResponse.meta.pagination.total;
@@ -958,6 +972,7 @@ export async function getBarrierFreeData(page?: number, pageSize?: number, bfree
         posterOther: data.attributes.posterOther,
         supportLang: data.attributes.supportLang,
         wavveSeries: data.attributes.wavveSeries,
+        isPublish: data.attributes.isPublish,
       }));
     const pageCount = hangukResponse.meta.pagination.pageCount;
     const total = hangukResponse.meta.pagination.total;
@@ -1009,6 +1024,7 @@ export async function getBarrierFreeData(page?: number, pageSize?: number, bfree
         posterOther: data.attributes.posterOther,
         supportLang: data.attributes.supportLang,
         wavveSeries: data.attributes.wavveSeries,
+        isPublish: data.attributes.isPublish,
       }));
     const pageCount = hangukResponse.meta.pagination.pageCount;
     const total = hangukResponse.meta.pagination.total;
@@ -1063,6 +1079,7 @@ export async function getLiteratureData(page?: number, pageSize?: number, amuseI
       posterOther: data.attributes.posterOther,
       order: data.attributes.order,
       wavveSeries: data.attributes.wavveSeries,
+      isPublish: data.attributes.isPublish,
     }));
   const pageCount = platformResponse.meta.pagination.pageCount;
   const total = platformResponse.meta.pagination.total;
@@ -1334,6 +1351,7 @@ export async function getRelationsData(relations: string, type: string) {
         posterOther: data.attributes.posterOther,
         relations: data.attributes.relations,
         order: data.attributes.order,
+        isPublish: data.attributes.isPublish,
       }));
 
     return rowsData;
@@ -1389,6 +1407,7 @@ export async function getSeasonData(season: string) {
       season: data.attributes.season,
       order: data.attributes.order,
       relName: data.attributes.relName,
+      isPublish: data.attributes.isPublish,
     }));
 
   return rowsData;
@@ -1466,6 +1485,7 @@ export async function getWorksData(page?: number, pageSize?: number) {
       supportLang: data.attributes.supportLang,
       wavveSeries: data.attributes.wavveSeries,
       related: data.attributes.related,
+      isPublish: data.attributes.isPublish,
     }));
   const pageCount = workResponse.meta.pagination.pageCount;
   const total = workResponse.meta.pagination.total;
