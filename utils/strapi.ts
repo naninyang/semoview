@@ -104,7 +104,7 @@ export async function getCategoryData(page?: number, pageSize?: number, category
     const data: AmusementData = categoryResponseData
       .filter((data: AmusementData) => {
         if (process.env.NODE_ENV === 'production') {
-          return data.isPublish;
+          return data.isPublish || data.isPublish === null;
         } else return true;
       })
       .map((data: any) => ({
@@ -156,7 +156,7 @@ export async function getCategoryData(page?: number, pageSize?: number, category
     const data: AmusementData = categoryResponseData
       .filter((data: AmusementData) => {
         if (process.env.NODE_ENV === 'production') {
-          return data.isPublish;
+          return data.isPublish || data.isPublish === null;
         } else return true;
       })
       .map((data: any) => ({
@@ -212,7 +212,7 @@ export async function getTagData(page?: number, pageSize?: number, tagName?: str
     const data: AmusementData = tagResponseData
       .filter((data: AmusementData) => {
         if (process.env.NODE_ENV === 'production') {
-          return data.isPublish;
+          return data.isPublish || data.isPublish === null;
         } else return true;
       })
       .map((data: any) => ({
@@ -263,7 +263,7 @@ export async function getTagData(page?: number, pageSize?: number, tagName?: str
     const data: AmusementData = tagResponseData
       .filter((data: AmusementData) => {
         if (process.env.NODE_ENV === 'production') {
-          return data.isPublish;
+          return data.isPublish || data.isPublish === null;
         } else return true;
       })
       .map((data: any) => ({
@@ -327,7 +327,7 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
     const data: AmusementData = platformResponseData
       .filter((data: AmusementData) => {
         if (process.env.NODE_ENV === 'production') {
-          return data.isPublish;
+          return data.isPublish || data.isPublish === null;
         } else return true;
       })
       .map((data: any) => ({
@@ -387,7 +387,7 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
     const data: AmusementData = platformResponseData
       .filter((data: AmusementData) => {
         if (process.env.NODE_ENV === 'production') {
-          return data.isPublish;
+          return data.isPublish || data.isPublish === null;
         } else return true;
       })
       .map((data: any) => ({
@@ -443,7 +443,7 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
     const data: AmusementData = platformResponseData
       .filter((data: AmusementData) => {
         if (process.env.NODE_ENV === 'production') {
-          return data.isPublish;
+          return data.isPublish || data.isPublish === null;
         } else return true;
       })
       .map((data: any) => ({
@@ -502,7 +502,7 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
     const data: AmusementData = platformResponseData
       .filter((data: AmusementData) => {
         if (process.env.NODE_ENV === 'production') {
-          return data.isPublish;
+          return data.isPublish || data.isPublish === null;
         } else return true;
       })
       .map((data: any) => ({
@@ -553,7 +553,7 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
     const data: AmusementData = platformResponseData
       .filter((data: AmusementData) => {
         if (process.env.NODE_ENV === 'production') {
-          return data.isPublish;
+          return data.isPublish || data.isPublish === null;
         } else return true;
       })
       .map((data: any) => ({
@@ -609,7 +609,7 @@ export async function getHangukData(page?: number, pageSize?: number, hangukName
       const data: AmusementData = hangukResponseData
         .filter((data: AmusementData) => {
           if (process.env.NODE_ENV === 'production') {
-            return data.isPublish;
+            return data.isPublish || data.isPublish === null;
           } else return true;
         })
         .map((data: any) => ({
@@ -660,7 +660,7 @@ export async function getHangukData(page?: number, pageSize?: number, hangukName
       const data: AmusementData = hangukResponseData
         .filter((data: AmusementData) => {
           if (process.env.NODE_ENV === 'production') {
-            return data.isPublish;
+            return data.isPublish || data.isPublish === null;
           } else return true;
         })
         .map((data: any) => ({
@@ -713,7 +713,7 @@ export async function getHangukData(page?: number, pageSize?: number, hangukName
       const data: AmusementData = hangukResponseData
         .filter((data: AmusementData) => {
           if (process.env.NODE_ENV === 'production') {
-            return data.isPublish;
+            return data.isPublish || data.isPublish === null;
           } else return true;
         })
         .map((data: any) => ({
@@ -764,7 +764,7 @@ export async function getHangukData(page?: number, pageSize?: number, hangukName
       const data: AmusementData = hangukResponseData
         .filter((data: AmusementData) => {
           if (process.env.NODE_ENV === 'production') {
-            return data.isPublish;
+            return data.isPublish || data.isPublish === null;
           } else return true;
         })
         .map((data: any) => ({
@@ -820,7 +820,7 @@ export async function getSubdubData(page?: number, pageSize?: number, subdubName
     const data: AmusementData = hangukResponseData
       .filter((data: AmusementData) => {
         if (process.env.NODE_ENV === 'production') {
-          return data.isPublish;
+          return data.isPublish || data.isPublish === null;
         } else return true;
       })
       .map((data: any) => ({
@@ -871,7 +871,7 @@ export async function getSubdubData(page?: number, pageSize?: number, subdubName
     const data: AmusementData = hangukResponseData
       .filter((data: AmusementData) => {
         if (process.env.NODE_ENV === 'production') {
-          return data.isPublish;
+          return data.isPublish || data.isPublish === null;
         } else return true;
       })
       .map((data: any) => ({
@@ -926,7 +926,7 @@ export async function getBarrierFreeData(page?: number, pageSize?: number, bfree
     const data: AmusementData = hangukResponseData
       .filter((data: AmusementData) => {
         if (process.env.NODE_ENV === 'production') {
-          return data.isPublish;
+          return data.isPublish || data.isPublish === null;
         } else return true;
       })
       .map((data: any) => ({
@@ -977,7 +977,7 @@ export async function getBarrierFreeData(page?: number, pageSize?: number, bfree
     const data: AmusementData = hangukResponseData
       .filter((data: AmusementData) => {
         if (process.env.NODE_ENV === 'production') {
-          return data.isPublish;
+          return data.isPublish || data.isPublish === null;
         } else return true;
       })
       .map((data: any) => ({
@@ -1031,7 +1031,7 @@ export async function getLiteratureData(page?: number, pageSize?: number, amuseI
   const data: AmusementData = platformResponseData
     .filter((data: AmusementData) => {
       if (process.env.NODE_ENV === 'production') {
-        return data.isPublish;
+        return data.isPublish || data.isPublish === null;
       } else return true;
     })
     .map((data: any) => ({
@@ -1301,7 +1301,7 @@ export async function getRelationsData(relations: string, type: string) {
     const rowsData: AmusementData[] = relationsData
       .filter((data: AmusementData) => {
         if (process.env.NODE_ENV === 'production') {
-          return data.isPublish;
+          return data.isPublish || data.isPublish === null;
         } else return true;
       })
       .map((data: any) => ({
@@ -1355,7 +1355,7 @@ export async function getSeasonData(season: string) {
   const rowsData: AmusementData[] = seasonData
     .filter((data: AmusementData) => {
       if (process.env.NODE_ENV === 'production') {
-        return data.isPublish;
+        return data.isPublish || data.isPublish === null;
       } else return true;
     })
     .map((data: any) => ({
@@ -1433,7 +1433,7 @@ export async function getWorksData(page?: number, pageSize?: number) {
   const data: any = workResponseData
     .filter((data: AmusementData) => {
       if (process.env.NODE_ENV === 'production') {
-        return data.isPublish;
+        return data.isPublish || data.isPublish === null;
       } else return true;
     })
     .map((data: any) => ({

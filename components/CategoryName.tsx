@@ -2,6 +2,7 @@ export const CategoryName = (org: string) => {
   const names: { [key: string]: string } = {
     drama: '드라마',
     ott_drama: '드라마',
+    drama_enter: '예능 드라마',
     film: '영화',
     ott_film: '영화',
     game: '게임',
