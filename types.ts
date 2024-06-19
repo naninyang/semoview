@@ -196,6 +196,7 @@ export interface AmusementData {
   relName: string;
   wavveSeries: any;
   amusementsCount: number;
+  isPublish: boolean;
 }
 
 export interface AmusementPermalinkData {
@@ -252,6 +253,7 @@ export interface AmusementPermalinkData {
     relName: string;
     logoSize: string;
     wavveSeries: any;
+    isPublish: boolean;
     amusementsCount: number;
   };
 }

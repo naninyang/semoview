@@ -76,7 +76,7 @@ function Categories({
       <div className="headline">
         <h1 className="April16thPromise">
           <em dangerouslySetInnerHTML={{ __html: '카테고리별 보고싶다?<br/>골라보세요' }} />{' '}
-          {count && <span>({formatNumber(count.amusement)}개 작품)</span>}
+          {process.env.NODE_ENV === 'development' && count && <span>({formatNumber(count.amusement)}개 작품)</span>}
         </h1>
       </div>
       {error && (

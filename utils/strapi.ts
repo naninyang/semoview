@@ -1,4 +1,4 @@
-import { AmusementData, BannerData, JejeupData, NoticeData, RecommendData, ReviewData } from 'types';
+import { AmusementData, BannerData, JejeupData, NoticeData, RecommendData } from 'types';
 
 export const formatDate = (datetime: string) => {
   const date = new Date(datetime);
@@ -101,36 +101,43 @@ export async function getCategoryData(page?: number, pageSize?: number, category
     );
     const categoryResponse = await response.json();
     const categoryResponseData = categoryResponse.data;
-    const data: AmusementData = categoryResponseData.map((data: any) => ({
-      id: `${data.id}`,
-      idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
-      title: data.attributes.title,
-      lang: data.attributes.lang,
-      titleKorean: data.attributes.titleKorean,
-      titleOther: data.attributes.titleOther,
-      etc: data.attributes.etc,
-      release: data.attributes.release,
-      original: data.attributes.original,
-      originalAuthor: data.attributes.originalAuthor,
-      originTitle: data.attributes.originTitle,
-      rating: data.attributes.rating,
-      country: data.attributes.country,
-      category: data.attributes.category,
-      isMobile: data.attributes.isMobile,
-      genre: data.attributes.genre,
-      anime: data.attributes.anime,
-      animeBroadcast1: data.attributes.animeBroadcast1,
-      animeBroadcast2: data.attributes.animeBroadcast2,
-      ott: data.attributes.ott,
-      broadcast: data.attributes.broadcast,
-      publisher: data.attributes.publisher,
-      creator: data.attributes.creator,
-      cast: data.attributes.cast,
-      posterDefault: data.attributes.posterDefault,
-      posterOther: data.attributes.posterOther,
-      supportLang: data.attributes.supportLang,
-      wavveSeries: data.attributes.wavveSeries,
-    }));
+    const data: AmusementData = categoryResponseData
+      .filter((data: AmusementData) => {
+        if (process.env.NODE_ENV === 'production') {
+          return data.isPublish;
+        } else return true;
+      })
+      .map((data: any) => ({
+        id: `${data.id}`,
+        idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+        title: data.attributes.title,
+        lang: data.attributes.lang,
+        titleKorean: data.attributes.titleKorean,
+        titleOther: data.attributes.titleOther,
+        etc: data.attributes.etc,
+        release: data.attributes.release,
+        original: data.attributes.original,
+        originalAuthor: data.attributes.originalAuthor,
+        originTitle: data.attributes.originTitle,
+        rating: data.attributes.rating,
+        country: data.attributes.country,
+        category: data.attributes.category,
+        isMobile: data.attributes.isMobile,
+        genre: data.attributes.genre,
+        anime: data.attributes.anime,
+        animeBroadcast1: data.attributes.animeBroadcast1,
+        animeBroadcast2: data.attributes.animeBroadcast2,
+        ott: data.attributes.ott,
+        broadcast: data.attributes.broadcast,
+        publisher: data.attributes.publisher,
+        creator: data.attributes.creator,
+        cast: data.attributes.cast,
+        posterDefault: data.attributes.posterDefault,
+        posterOther: data.attributes.posterOther,
+        supportLang: data.attributes.supportLang,
+        wavveSeries: data.attributes.wavveSeries,
+        isPublish: data.attributes.isPublish,
+      }));
     const pageCount = categoryResponse.meta.pagination.pageCount;
     const total = categoryResponse.meta.pagination.total;
     return { data, pageCount: pageCount, total: total };
@@ -146,37 +153,43 @@ export async function getCategoryData(page?: number, pageSize?: number, category
     );
     const categoryResponse = await response.json();
     const categoryResponseData = categoryResponse.data;
-    const data: AmusementData = categoryResponseData.map((data: any) => ({
-      id: `${data.id}`,
-      idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
-      title: data.attributes.title,
-      lang: data.attributes.lang,
-      titleKorean: data.attributes.titleKorean,
-      titleOther: data.attributes.titleOther,
-      etc: data.attributes.etc,
-      release: data.attributes.release,
-      original: data.attributes.original,
-      originalAuthor: data.attributes.originalAuthor,
-      originTitle: data.attributes.originTitle,
-      rating: data.attributes.rating,
-      country: data.attributes.country,
-      category: data.attributes.category,
-      isMobile: data.attributes.isMobile,
-      genre: data.attributes.genre,
-      anime: data.attributes.anime,
-      animeBroadcast1: data.attributes.animeBroadcast1,
-      animeBroadcast2: data.attributes.animeBroadcast2,
-      ott: data.attributes.ott,
-      broadcast: data.attributes.broadcast,
-      publisher: data.attributes.publisher,
-      creator: data.attributes.creator,
-      cast: data.attributes.cast,
-      posterDefault: data.attributes.posterDefault,
-      posterOther: data.attributes.posterOther,
-      relations: data.attributes.relations,
-      supportLang: data.attributes.supportLang,
-      wavveSeries: data.attributes.wavveSeries,
-    }));
+    const data: AmusementData = categoryResponseData
+      .filter((data: AmusementData) => {
+        if (process.env.NODE_ENV === 'production') {
+          return data.isPublish;
+        } else return true;
+      })
+      .map((data: any) => ({
+        id: `${data.id}`,
+        idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+        title: data.attributes.title,
+        lang: data.attributes.lang,
+        titleKorean: data.attributes.titleKorean,
+        titleOther: data.attributes.titleOther,
+        etc: data.attributes.etc,
+        release: data.attributes.release,
+        original: data.attributes.original,
+        originalAuthor: data.attributes.originalAuthor,
+        originTitle: data.attributes.originTitle,
+        rating: data.attributes.rating,
+        country: data.attributes.country,
+        category: data.attributes.category,
+        isMobile: data.attributes.isMobile,
+        genre: data.attributes.genre,
+        anime: data.attributes.anime,
+        animeBroadcast1: data.attributes.animeBroadcast1,
+        animeBroadcast2: data.attributes.animeBroadcast2,
+        ott: data.attributes.ott,
+        broadcast: data.attributes.broadcast,
+        publisher: data.attributes.publisher,
+        creator: data.attributes.creator,
+        cast: data.attributes.cast,
+        posterDefault: data.attributes.posterDefault,
+        posterOther: data.attributes.posterOther,
+        relations: data.attributes.relations,
+        supportLang: data.attributes.supportLang,
+        wavveSeries: data.attributes.wavveSeries,
+      }));
     const pageCount = categoryResponse.meta.pagination.pageCount;
     const total = categoryResponse.meta.pagination.total;
     return { data, pageCount: pageCount, total: total };
@@ -196,36 +209,42 @@ export async function getTagData(page?: number, pageSize?: number, tagName?: str
     );
     const tagResponse = await response.json();
     const tagResponseData = tagResponse.data;
-    const data: AmusementData = tagResponseData.map((data: any) => ({
-      id: `${data.id}`,
-      idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
-      title: data.attributes.title,
-      lang: data.attributes.lang,
-      titleKorean: data.attributes.titleKorean,
-      titleOther: data.attributes.titleOther,
-      etc: data.attributes.etc,
-      release: data.attributes.release,
-      original: data.attributes.original,
-      originalAuthor: data.attributes.originalAuthor,
-      originTitle: data.attributes.originTitle,
-      rating: data.attributes.rating,
-      country: data.attributes.country,
-      category: data.attributes.category,
-      isMobile: data.attributes.isMobile,
-      genre: data.attributes.genre,
-      anime: data.attributes.anime,
-      animeBroadcast1: data.attributes.animeBroadcast1,
-      animeBroadcast2: data.attributes.animeBroadcast2,
-      ott: data.attributes.ott,
-      broadcast: data.attributes.broadcast,
-      publisher: data.attributes.publisher,
-      creator: data.attributes.creator,
-      cast: data.attributes.cast,
-      posterDefault: data.attributes.posterDefault,
-      posterOther: data.attributes.posterOther,
-      supportLang: data.attributes.supportLang,
-      wavveSeries: data.attributes.wavveSeries,
-    }));
+    const data: AmusementData = tagResponseData
+      .filter((data: AmusementData) => {
+        if (process.env.NODE_ENV === 'production') {
+          return data.isPublish;
+        } else return true;
+      })
+      .map((data: any) => ({
+        id: `${data.id}`,
+        idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+        title: data.attributes.title,
+        lang: data.attributes.lang,
+        titleKorean: data.attributes.titleKorean,
+        titleOther: data.attributes.titleOther,
+        etc: data.attributes.etc,
+        release: data.attributes.release,
+        original: data.attributes.original,
+        originalAuthor: data.attributes.originalAuthor,
+        originTitle: data.attributes.originTitle,
+        rating: data.attributes.rating,
+        country: data.attributes.country,
+        category: data.attributes.category,
+        isMobile: data.attributes.isMobile,
+        genre: data.attributes.genre,
+        anime: data.attributes.anime,
+        animeBroadcast1: data.attributes.animeBroadcast1,
+        animeBroadcast2: data.attributes.animeBroadcast2,
+        ott: data.attributes.ott,
+        broadcast: data.attributes.broadcast,
+        publisher: data.attributes.publisher,
+        creator: data.attributes.creator,
+        cast: data.attributes.cast,
+        posterDefault: data.attributes.posterDefault,
+        posterOther: data.attributes.posterOther,
+        supportLang: data.attributes.supportLang,
+        wavveSeries: data.attributes.wavveSeries,
+      }));
     const pageCount = tagResponse.meta.pagination.pageCount;
     const total = tagResponse.meta.pagination.total;
     return { data, pageCount: pageCount, total: total };
@@ -241,36 +260,42 @@ export async function getTagData(page?: number, pageSize?: number, tagName?: str
     );
     const tagResponse = await response.json();
     const tagResponseData = tagResponse.data;
-    const data: AmusementData = tagResponseData.map((data: any) => ({
-      id: `${data.id}`,
-      idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
-      title: data.attributes.title,
-      lang: data.attributes.lang,
-      titleKorean: data.attributes.titleKorean,
-      titleOther: data.attributes.titleOther,
-      etc: data.attributes.etc,
-      release: data.attributes.release,
-      original: data.attributes.original,
-      originalAuthor: data.attributes.originalAuthor,
-      originTitle: data.attributes.originTitle,
-      rating: data.attributes.rating,
-      country: data.attributes.country,
-      category: data.attributes.category,
-      isMobile: data.attributes.isMobile,
-      genre: data.attributes.genre,
-      anime: data.attributes.anime,
-      animeBroadcast1: data.attributes.animeBroadcast1,
-      animeBroadcast2: data.attributes.animeBroadcast2,
-      ott: data.attributes.ott,
-      broadcast: data.attributes.broadcast,
-      publisher: data.attributes.publisher,
-      creator: data.attributes.creator,
-      cast: data.attributes.cast,
-      posterDefault: data.attributes.posterDefault,
-      posterOther: data.attributes.posterOther,
-      supportLang: data.attributes.supportLang,
-      wavveSeries: data.attributes.wavveSeries,
-    }));
+    const data: AmusementData = tagResponseData
+      .filter((data: AmusementData) => {
+        if (process.env.NODE_ENV === 'production') {
+          return data.isPublish;
+        } else return true;
+      })
+      .map((data: any) => ({
+        id: `${data.id}`,
+        idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+        title: data.attributes.title,
+        lang: data.attributes.lang,
+        titleKorean: data.attributes.titleKorean,
+        titleOther: data.attributes.titleOther,
+        etc: data.attributes.etc,
+        release: data.attributes.release,
+        original: data.attributes.original,
+        originalAuthor: data.attributes.originalAuthor,
+        originTitle: data.attributes.originTitle,
+        rating: data.attributes.rating,
+        country: data.attributes.country,
+        category: data.attributes.category,
+        isMobile: data.attributes.isMobile,
+        genre: data.attributes.genre,
+        anime: data.attributes.anime,
+        animeBroadcast1: data.attributes.animeBroadcast1,
+        animeBroadcast2: data.attributes.animeBroadcast2,
+        ott: data.attributes.ott,
+        broadcast: data.attributes.broadcast,
+        publisher: data.attributes.publisher,
+        creator: data.attributes.creator,
+        cast: data.attributes.cast,
+        posterDefault: data.attributes.posterDefault,
+        posterOther: data.attributes.posterOther,
+        supportLang: data.attributes.supportLang,
+        wavveSeries: data.attributes.wavveSeries,
+      }));
     const pageCount = tagResponse.meta.pagination.pageCount;
     const total = tagResponse.meta.pagination.total;
     return { data, pageCount: pageCount, total: total };
@@ -299,36 +324,42 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
     );
     const platformResponse = await response.json();
     const platformResponseData = platformResponse.data;
-    const data: AmusementData = platformResponseData.map((data: any) => ({
-      id: `${data.id}`,
-      idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
-      title: data.attributes.title,
-      lang: data.attributes.lang,
-      titleKorean: data.attributes.titleKorean,
-      titleOther: data.attributes.titleOther,
-      etc: data.attributes.etc,
-      release: data.attributes.release,
-      original: data.attributes.original,
-      originalAuthor: data.attributes.originalAuthor,
-      originTitle: data.attributes.originTitle,
-      rating: data.attributes.rating,
-      country: data.attributes.country,
-      category: data.attributes.category,
-      isMobile: data.attributes.isMobile,
-      genre: data.attributes.genre,
-      anime: data.attributes.anime,
-      animeBroadcast1: data.attributes.animeBroadcast1,
-      animeBroadcast2: data.attributes.animeBroadcast2,
-      ott: data.attributes.ott,
-      broadcast: data.attributes.broadcast,
-      publisher: data.attributes.publisher,
-      creator: data.attributes.creator,
-      cast: data.attributes.cast,
-      posterDefault: data.attributes.posterDefault,
-      posterOther: data.attributes.posterOther,
-      supportLang: data.attributes.supportLang,
-      wavveSeries: data.attributes.wavveSeries,
-    }));
+    const data: AmusementData = platformResponseData
+      .filter((data: AmusementData) => {
+        if (process.env.NODE_ENV === 'production') {
+          return data.isPublish;
+        } else return true;
+      })
+      .map((data: any) => ({
+        id: `${data.id}`,
+        idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+        title: data.attributes.title,
+        lang: data.attributes.lang,
+        titleKorean: data.attributes.titleKorean,
+        titleOther: data.attributes.titleOther,
+        etc: data.attributes.etc,
+        release: data.attributes.release,
+        original: data.attributes.original,
+        originalAuthor: data.attributes.originalAuthor,
+        originTitle: data.attributes.originTitle,
+        rating: data.attributes.rating,
+        country: data.attributes.country,
+        category: data.attributes.category,
+        isMobile: data.attributes.isMobile,
+        genre: data.attributes.genre,
+        anime: data.attributes.anime,
+        animeBroadcast1: data.attributes.animeBroadcast1,
+        animeBroadcast2: data.attributes.animeBroadcast2,
+        ott: data.attributes.ott,
+        broadcast: data.attributes.broadcast,
+        publisher: data.attributes.publisher,
+        creator: data.attributes.creator,
+        cast: data.attributes.cast,
+        posterDefault: data.attributes.posterDefault,
+        posterOther: data.attributes.posterOther,
+        supportLang: data.attributes.supportLang,
+        wavveSeries: data.attributes.wavveSeries,
+      }));
     const pageCount = platformResponse.meta.pagination.pageCount;
     const total = platformResponse.meta.pagination.total;
     return { data, pageCount: pageCount, total: total };
@@ -353,35 +384,41 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
     );
     const platformResponse = await response.json();
     const platformResponseData = platformResponse.data;
-    const data: AmusementData = platformResponseData.map((data: any) => ({
-      id: `${data.id}`,
-      idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
-      title: data.attributes.title,
-      lang: data.attributes.lang,
-      titleKorean: data.attributes.titleKorean,
-      titleOther: data.attributes.titleOther,
-      etc: data.attributes.etc,
-      release: data.attributes.release,
-      original: data.attributes.original,
-      originalAuthor: data.attributes.originalAuthor,
-      originTitle: data.attributes.originTitle,
-      rating: data.attributes.rating,
-      country: data.attributes.country,
-      category: data.attributes.category,
-      isMobile: data.attributes.isMobile,
-      genre: data.attributes.genre,
-      anime: data.attributes.anime,
-      animeBroadcast1: data.attributes.animeBroadcast1,
-      animeBroadcast2: data.attributes.animeBroadcast2,
-      ott: data.attributes.ott,
-      broadcast: data.attributes.broadcast,
-      publisher: data.attributes.publisher,
-      creator: data.attributes.creator,
-      cast: data.attributes.cast,
-      posterDefault: data.attributes.posterDefault,
-      posterOther: data.attributes.posterOther,
-      supportLang: data.attributes.supportLang,
-    }));
+    const data: AmusementData = platformResponseData
+      .filter((data: AmusementData) => {
+        if (process.env.NODE_ENV === 'production') {
+          return data.isPublish;
+        } else return true;
+      })
+      .map((data: any) => ({
+        id: `${data.id}`,
+        idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+        title: data.attributes.title,
+        lang: data.attributes.lang,
+        titleKorean: data.attributes.titleKorean,
+        titleOther: data.attributes.titleOther,
+        etc: data.attributes.etc,
+        release: data.attributes.release,
+        original: data.attributes.original,
+        originalAuthor: data.attributes.originalAuthor,
+        originTitle: data.attributes.originTitle,
+        rating: data.attributes.rating,
+        country: data.attributes.country,
+        category: data.attributes.category,
+        isMobile: data.attributes.isMobile,
+        genre: data.attributes.genre,
+        anime: data.attributes.anime,
+        animeBroadcast1: data.attributes.animeBroadcast1,
+        animeBroadcast2: data.attributes.animeBroadcast2,
+        ott: data.attributes.ott,
+        broadcast: data.attributes.broadcast,
+        publisher: data.attributes.publisher,
+        creator: data.attributes.creator,
+        cast: data.attributes.cast,
+        posterDefault: data.attributes.posterDefault,
+        posterOther: data.attributes.posterOther,
+        supportLang: data.attributes.supportLang,
+      }));
     const pageCount = platformResponse.meta.pagination.pageCount;
     const total = platformResponse.meta.pagination.total;
     return { data, pageCount: pageCount, total: total };
@@ -403,35 +440,41 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
     );
     const platformResponse = await response.json();
     const platformResponseData = platformResponse.data;
-    const data: AmusementData = platformResponseData.map((data: any) => ({
-      id: `${data.id}`,
-      idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
-      title: data.attributes.title,
-      lang: data.attributes.lang,
-      titleKorean: data.attributes.titleKorean,
-      titleOther: data.attributes.titleOther,
-      etc: data.attributes.etc,
-      release: data.attributes.release,
-      original: data.attributes.original,
-      originalAuthor: data.attributes.originalAuthor,
-      originTitle: data.attributes.originTitle,
-      rating: data.attributes.rating,
-      country: data.attributes.country,
-      category: data.attributes.category,
-      isMobile: data.attributes.isMobile,
-      genre: data.attributes.genre,
-      anime: data.attributes.anime,
-      animeBroadcast1: data.attributes.animeBroadcast1,
-      animeBroadcast2: data.attributes.animeBroadcast2,
-      ott: data.attributes.ott,
-      broadcast: data.attributes.broadcast,
-      publisher: data.attributes.publisher,
-      creator: data.attributes.creator,
-      cast: data.attributes.cast,
-      posterDefault: data.attributes.posterDefault,
-      posterOther: data.attributes.posterOther,
-      supportLang: data.attributes.supportLang,
-    }));
+    const data: AmusementData = platformResponseData
+      .filter((data: AmusementData) => {
+        if (process.env.NODE_ENV === 'production') {
+          return data.isPublish;
+        } else return true;
+      })
+      .map((data: any) => ({
+        id: `${data.id}`,
+        idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+        title: data.attributes.title,
+        lang: data.attributes.lang,
+        titleKorean: data.attributes.titleKorean,
+        titleOther: data.attributes.titleOther,
+        etc: data.attributes.etc,
+        release: data.attributes.release,
+        original: data.attributes.original,
+        originalAuthor: data.attributes.originalAuthor,
+        originTitle: data.attributes.originTitle,
+        rating: data.attributes.rating,
+        country: data.attributes.country,
+        category: data.attributes.category,
+        isMobile: data.attributes.isMobile,
+        genre: data.attributes.genre,
+        anime: data.attributes.anime,
+        animeBroadcast1: data.attributes.animeBroadcast1,
+        animeBroadcast2: data.attributes.animeBroadcast2,
+        ott: data.attributes.ott,
+        broadcast: data.attributes.broadcast,
+        publisher: data.attributes.publisher,
+        creator: data.attributes.creator,
+        cast: data.attributes.cast,
+        posterDefault: data.attributes.posterDefault,
+        posterOther: data.attributes.posterOther,
+        supportLang: data.attributes.supportLang,
+      }));
     const pageCount = platformResponse.meta.pagination.pageCount;
     const total = platformResponse.meta.pagination.total;
     return { data, pageCount: pageCount, total: total };
@@ -456,36 +499,42 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
     );
     const platformResponse = await response.json();
     const platformResponseData = platformResponse.data;
-    const data: AmusementData = platformResponseData.map((data: any) => ({
-      id: `${data.id}`,
-      idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
-      title: data.attributes.title,
-      lang: data.attributes.lang,
-      titleKorean: data.attributes.titleKorean,
-      titleOther: data.attributes.titleOther,
-      etc: data.attributes.etc,
-      release: data.attributes.release,
-      original: data.attributes.original,
-      originalAuthor: data.attributes.originalAuthor,
-      originTitle: data.attributes.originTitle,
-      rating: data.attributes.rating,
-      country: data.attributes.country,
-      category: data.attributes.category,
-      isMobile: data.attributes.isMobile,
-      genre: data.attributes.genre,
-      anime: data.attributes.anime,
-      animeBroadcast1: data.attributes.animeBroadcast1,
-      animeBroadcast2: data.attributes.animeBroadcast2,
-      ott: data.attributes.ott,
-      broadcast: data.attributes.broadcast,
-      publisher: data.attributes.publisher,
-      creator: data.attributes.creator,
-      cast: data.attributes.cast,
-      posterDefault: data.attributes.posterDefault,
-      posterOther: data.attributes.posterOther,
-      supportLang: data.attributes.supportLang,
-      wavveSeries: data.attributes.wavveSeries,
-    }));
+    const data: AmusementData = platformResponseData
+      .filter((data: AmusementData) => {
+        if (process.env.NODE_ENV === 'production') {
+          return data.isPublish;
+        } else return true;
+      })
+      .map((data: any) => ({
+        id: `${data.id}`,
+        idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+        title: data.attributes.title,
+        lang: data.attributes.lang,
+        titleKorean: data.attributes.titleKorean,
+        titleOther: data.attributes.titleOther,
+        etc: data.attributes.etc,
+        release: data.attributes.release,
+        original: data.attributes.original,
+        originalAuthor: data.attributes.originalAuthor,
+        originTitle: data.attributes.originTitle,
+        rating: data.attributes.rating,
+        country: data.attributes.country,
+        category: data.attributes.category,
+        isMobile: data.attributes.isMobile,
+        genre: data.attributes.genre,
+        anime: data.attributes.anime,
+        animeBroadcast1: data.attributes.animeBroadcast1,
+        animeBroadcast2: data.attributes.animeBroadcast2,
+        ott: data.attributes.ott,
+        broadcast: data.attributes.broadcast,
+        publisher: data.attributes.publisher,
+        creator: data.attributes.creator,
+        cast: data.attributes.cast,
+        posterDefault: data.attributes.posterDefault,
+        posterOther: data.attributes.posterOther,
+        supportLang: data.attributes.supportLang,
+        wavveSeries: data.attributes.wavveSeries,
+      }));
     const pageCount = platformResponse.meta.pagination.pageCount;
     const total = platformResponse.meta.pagination.total;
     return { data, pageCount: pageCount, total: total };
@@ -501,36 +550,42 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
     );
     const platformResponse = await response.json();
     const platformResponseData = platformResponse.data;
-    const data: AmusementData = platformResponseData.map((data: any) => ({
-      id: `${data.id}`,
-      idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
-      title: data.attributes.title,
-      lang: data.attributes.lang,
-      titleKorean: data.attributes.titleKorean,
-      titleOther: data.attributes.titleOther,
-      etc: data.attributes.etc,
-      release: data.attributes.release,
-      original: data.attributes.original,
-      originalAuthor: data.attributes.originalAuthor,
-      originTitle: data.attributes.originTitle,
-      rating: data.attributes.rating,
-      country: data.attributes.country,
-      category: data.attributes.category,
-      isMobile: data.attributes.isMobile,
-      genre: data.attributes.genre,
-      anime: data.attributes.anime,
-      animeBroadcast1: data.attributes.animeBroadcast1,
-      animeBroadcast2: data.attributes.animeBroadcast2,
-      ott: data.attributes.ott,
-      broadcast: data.attributes.broadcast,
-      publisher: data.attributes.publisher,
-      creator: data.attributes.creator,
-      cast: data.attributes.cast,
-      posterDefault: data.attributes.posterDefault,
-      posterOther: data.attributes.posterOther,
-      supportLang: data.attributes.supportLang,
-      wavveSeries: data.attributes.wavveSeries,
-    }));
+    const data: AmusementData = platformResponseData
+      .filter((data: AmusementData) => {
+        if (process.env.NODE_ENV === 'production') {
+          return data.isPublish;
+        } else return true;
+      })
+      .map((data: any) => ({
+        id: `${data.id}`,
+        idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+        title: data.attributes.title,
+        lang: data.attributes.lang,
+        titleKorean: data.attributes.titleKorean,
+        titleOther: data.attributes.titleOther,
+        etc: data.attributes.etc,
+        release: data.attributes.release,
+        original: data.attributes.original,
+        originalAuthor: data.attributes.originalAuthor,
+        originTitle: data.attributes.originTitle,
+        rating: data.attributes.rating,
+        country: data.attributes.country,
+        category: data.attributes.category,
+        isMobile: data.attributes.isMobile,
+        genre: data.attributes.genre,
+        anime: data.attributes.anime,
+        animeBroadcast1: data.attributes.animeBroadcast1,
+        animeBroadcast2: data.attributes.animeBroadcast2,
+        ott: data.attributes.ott,
+        broadcast: data.attributes.broadcast,
+        publisher: data.attributes.publisher,
+        creator: data.attributes.creator,
+        cast: data.attributes.cast,
+        posterDefault: data.attributes.posterDefault,
+        posterOther: data.attributes.posterOther,
+        supportLang: data.attributes.supportLang,
+        wavveSeries: data.attributes.wavveSeries,
+      }));
     const pageCount = platformResponse.meta.pagination.pageCount;
     const total = platformResponse.meta.pagination.total;
     return { data, pageCount: pageCount, total: total };
@@ -551,36 +606,42 @@ export async function getHangukData(page?: number, pageSize?: number, hangukName
       );
       const hangukResponse = await response.json();
       const hangukResponseData = hangukResponse.data;
-      const data: AmusementData = hangukResponseData.map((data: any) => ({
-        id: `${data.id}`,
-        idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
-        title: data.attributes.title,
-        lang: data.attributes.lang,
-        titleKorean: data.attributes.titleKorean,
-        titleOther: data.attributes.titleOther,
-        etc: data.attributes.etc,
-        release: data.attributes.release,
-        original: data.attributes.original,
-        originalAuthor: data.attributes.originalAuthor,
-        originTitle: data.attributes.originTitle,
-        rating: data.attributes.rating,
-        country: data.attributes.country,
-        category: data.attributes.category,
-        isMobile: data.attributes.isMobile,
-        genre: data.attributes.genre,
-        anime: data.attributes.anime,
-        animeBroadcast1: data.attributes.animeBroadcast1,
-        animeBroadcast2: data.attributes.animeBroadcast2,
-        ott: data.attributes.ott,
-        broadcast: data.attributes.broadcast,
-        publisher: data.attributes.publisher,
-        creator: data.attributes.creator,
-        cast: data.attributes.cast,
-        posterDefault: data.attributes.posterDefault,
-        posterOther: data.attributes.posterOther,
-        supportLang: data.attributes.supportLang,
-        wavveSeries: data.attributes.wavveSeries,
-      }));
+      const data: AmusementData = hangukResponseData
+        .filter((data: AmusementData) => {
+          if (process.env.NODE_ENV === 'production') {
+            return data.isPublish;
+          } else return true;
+        })
+        .map((data: any) => ({
+          id: `${data.id}`,
+          idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+          title: data.attributes.title,
+          lang: data.attributes.lang,
+          titleKorean: data.attributes.titleKorean,
+          titleOther: data.attributes.titleOther,
+          etc: data.attributes.etc,
+          release: data.attributes.release,
+          original: data.attributes.original,
+          originalAuthor: data.attributes.originalAuthor,
+          originTitle: data.attributes.originTitle,
+          rating: data.attributes.rating,
+          country: data.attributes.country,
+          category: data.attributes.category,
+          isMobile: data.attributes.isMobile,
+          genre: data.attributes.genre,
+          anime: data.attributes.anime,
+          animeBroadcast1: data.attributes.animeBroadcast1,
+          animeBroadcast2: data.attributes.animeBroadcast2,
+          ott: data.attributes.ott,
+          broadcast: data.attributes.broadcast,
+          publisher: data.attributes.publisher,
+          creator: data.attributes.creator,
+          cast: data.attributes.cast,
+          posterDefault: data.attributes.posterDefault,
+          posterOther: data.attributes.posterOther,
+          supportLang: data.attributes.supportLang,
+          wavveSeries: data.attributes.wavveSeries,
+        }));
       const pageCount = hangukResponse.meta.pagination.pageCount;
       const total = hangukResponse.meta.pagination.total;
       return { data, pageCount: pageCount, total: total };
@@ -596,36 +657,42 @@ export async function getHangukData(page?: number, pageSize?: number, hangukName
       );
       const hangukResponse = await response.json();
       const hangukResponseData = hangukResponse.data;
-      const data: AmusementData = hangukResponseData.map((data: any) => ({
-        id: `${data.id}`,
-        idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
-        title: data.attributes.title,
-        lang: data.attributes.lang,
-        titleKorean: data.attributes.titleKorean,
-        titleOther: data.attributes.titleOther,
-        etc: data.attributes.etc,
-        release: data.attributes.release,
-        original: data.attributes.original,
-        originalAuthor: data.attributes.originalAuthor,
-        originTitle: data.attributes.originTitle,
-        rating: data.attributes.rating,
-        country: data.attributes.country,
-        category: data.attributes.category,
-        isMobile: data.attributes.isMobile,
-        genre: data.attributes.genre,
-        anime: data.attributes.anime,
-        animeBroadcast1: data.attributes.animeBroadcast1,
-        animeBroadcast2: data.attributes.animeBroadcast2,
-        ott: data.attributes.ott,
-        broadcast: data.attributes.broadcast,
-        publisher: data.attributes.publisher,
-        creator: data.attributes.creator,
-        cast: data.attributes.cast,
-        posterDefault: data.attributes.posterDefault,
-        posterOther: data.attributes.posterOther,
-        supportLang: data.attributes.supportLang,
-        wavveSeries: data.attributes.wavveSeries,
-      }));
+      const data: AmusementData = hangukResponseData
+        .filter((data: AmusementData) => {
+          if (process.env.NODE_ENV === 'production') {
+            return data.isPublish;
+          } else return true;
+        })
+        .map((data: any) => ({
+          id: `${data.id}`,
+          idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+          title: data.attributes.title,
+          lang: data.attributes.lang,
+          titleKorean: data.attributes.titleKorean,
+          titleOther: data.attributes.titleOther,
+          etc: data.attributes.etc,
+          release: data.attributes.release,
+          original: data.attributes.original,
+          originalAuthor: data.attributes.originalAuthor,
+          originTitle: data.attributes.originTitle,
+          rating: data.attributes.rating,
+          country: data.attributes.country,
+          category: data.attributes.category,
+          isMobile: data.attributes.isMobile,
+          genre: data.attributes.genre,
+          anime: data.attributes.anime,
+          animeBroadcast1: data.attributes.animeBroadcast1,
+          animeBroadcast2: data.attributes.animeBroadcast2,
+          ott: data.attributes.ott,
+          broadcast: data.attributes.broadcast,
+          publisher: data.attributes.publisher,
+          creator: data.attributes.creator,
+          cast: data.attributes.cast,
+          posterDefault: data.attributes.posterDefault,
+          posterOther: data.attributes.posterOther,
+          supportLang: data.attributes.supportLang,
+          wavveSeries: data.attributes.wavveSeries,
+        }));
       const pageCount = hangukResponse.meta.pagination.pageCount;
       const total = hangukResponse.meta.pagination.total;
       return { data, pageCount: pageCount, total: total };
@@ -643,36 +710,42 @@ export async function getHangukData(page?: number, pageSize?: number, hangukName
       );
       const hangukResponse = await response.json();
       const hangukResponseData = hangukResponse.data;
-      const data: AmusementData = hangukResponseData.map((data: any) => ({
-        id: `${data.id}`,
-        idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
-        title: data.attributes.title,
-        lang: data.attributes.lang,
-        titleKorean: data.attributes.titleKorean,
-        titleOther: data.attributes.titleOther,
-        etc: data.attributes.etc,
-        release: data.attributes.release,
-        original: data.attributes.original,
-        originalAuthor: data.attributes.originalAuthor,
-        originTitle: data.attributes.originTitle,
-        rating: data.attributes.rating,
-        country: data.attributes.country,
-        category: data.attributes.category,
-        isMobile: data.attributes.isMobile,
-        genre: data.attributes.genre,
-        anime: data.attributes.anime,
-        animeBroadcast1: data.attributes.animeBroadcast1,
-        animeBroadcast2: data.attributes.animeBroadcast2,
-        ott: data.attributes.ott,
-        broadcast: data.attributes.broadcast,
-        publisher: data.attributes.publisher,
-        creator: data.attributes.creator,
-        cast: data.attributes.cast,
-        posterDefault: data.attributes.posterDefault,
-        posterOther: data.attributes.posterOther,
-        supportLang: data.attributes.supportLang,
-        wavveSeries: data.attributes.wavveSeries,
-      }));
+      const data: AmusementData = hangukResponseData
+        .filter((data: AmusementData) => {
+          if (process.env.NODE_ENV === 'production') {
+            return data.isPublish;
+          } else return true;
+        })
+        .map((data: any) => ({
+          id: `${data.id}`,
+          idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+          title: data.attributes.title,
+          lang: data.attributes.lang,
+          titleKorean: data.attributes.titleKorean,
+          titleOther: data.attributes.titleOther,
+          etc: data.attributes.etc,
+          release: data.attributes.release,
+          original: data.attributes.original,
+          originalAuthor: data.attributes.originalAuthor,
+          originTitle: data.attributes.originTitle,
+          rating: data.attributes.rating,
+          country: data.attributes.country,
+          category: data.attributes.category,
+          isMobile: data.attributes.isMobile,
+          genre: data.attributes.genre,
+          anime: data.attributes.anime,
+          animeBroadcast1: data.attributes.animeBroadcast1,
+          animeBroadcast2: data.attributes.animeBroadcast2,
+          ott: data.attributes.ott,
+          broadcast: data.attributes.broadcast,
+          publisher: data.attributes.publisher,
+          creator: data.attributes.creator,
+          cast: data.attributes.cast,
+          posterDefault: data.attributes.posterDefault,
+          posterOther: data.attributes.posterOther,
+          supportLang: data.attributes.supportLang,
+          wavveSeries: data.attributes.wavveSeries,
+        }));
       const pageCount = hangukResponse.meta.pagination.pageCount;
       const total = hangukResponse.meta.pagination.total;
       return { data, pageCount: pageCount, total: total };
@@ -688,36 +761,42 @@ export async function getHangukData(page?: number, pageSize?: number, hangukName
       );
       const hangukResponse = await response.json();
       const hangukResponseData = hangukResponse.data;
-      const data: AmusementData = hangukResponseData.map((data: any) => ({
-        id: `${data.id}`,
-        idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
-        title: data.attributes.title,
-        lang: data.attributes.lang,
-        titleKorean: data.attributes.titleKorean,
-        titleOther: data.attributes.titleOther,
-        etc: data.attributes.etc,
-        release: data.attributes.release,
-        original: data.attributes.original,
-        originalAuthor: data.attributes.originalAuthor,
-        originTitle: data.attributes.originTitle,
-        rating: data.attributes.rating,
-        country: data.attributes.country,
-        category: data.attributes.category,
-        isMobile: data.attributes.isMobile,
-        genre: data.attributes.genre,
-        anime: data.attributes.anime,
-        animeBroadcast1: data.attributes.animeBroadcast1,
-        animeBroadcast2: data.attributes.animeBroadcast2,
-        ott: data.attributes.ott,
-        broadcast: data.attributes.broadcast,
-        publisher: data.attributes.publisher,
-        creator: data.attributes.creator,
-        cast: data.attributes.cast,
-        posterDefault: data.attributes.posterDefault,
-        posterOther: data.attributes.posterOther,
-        supportLang: data.attributes.supportLang,
-        wavveSeries: data.attributes.wavveSeries,
-      }));
+      const data: AmusementData = hangukResponseData
+        .filter((data: AmusementData) => {
+          if (process.env.NODE_ENV === 'production') {
+            return data.isPublish;
+          } else return true;
+        })
+        .map((data: any) => ({
+          id: `${data.id}`,
+          idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+          title: data.attributes.title,
+          lang: data.attributes.lang,
+          titleKorean: data.attributes.titleKorean,
+          titleOther: data.attributes.titleOther,
+          etc: data.attributes.etc,
+          release: data.attributes.release,
+          original: data.attributes.original,
+          originalAuthor: data.attributes.originalAuthor,
+          originTitle: data.attributes.originTitle,
+          rating: data.attributes.rating,
+          country: data.attributes.country,
+          category: data.attributes.category,
+          isMobile: data.attributes.isMobile,
+          genre: data.attributes.genre,
+          anime: data.attributes.anime,
+          animeBroadcast1: data.attributes.animeBroadcast1,
+          animeBroadcast2: data.attributes.animeBroadcast2,
+          ott: data.attributes.ott,
+          broadcast: data.attributes.broadcast,
+          publisher: data.attributes.publisher,
+          creator: data.attributes.creator,
+          cast: data.attributes.cast,
+          posterDefault: data.attributes.posterDefault,
+          posterOther: data.attributes.posterOther,
+          supportLang: data.attributes.supportLang,
+          wavveSeries: data.attributes.wavveSeries,
+        }));
       const pageCount = hangukResponse.meta.pagination.pageCount;
       const total = hangukResponse.meta.pagination.total;
       return { data, pageCount: pageCount, total: total };
@@ -738,36 +817,42 @@ export async function getSubdubData(page?: number, pageSize?: number, subdubName
     );
     const hangukResponse = await response.json();
     const hangukResponseData = hangukResponse.data;
-    const data: AmusementData = hangukResponseData.map((data: any) => ({
-      id: `${data.id}`,
-      idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
-      title: data.attributes.title,
-      lang: data.attributes.lang,
-      titleKorean: data.attributes.titleKorean,
-      titleOther: data.attributes.titleOther,
-      etc: data.attributes.etc,
-      release: data.attributes.release,
-      original: data.attributes.original,
-      originalAuthor: data.attributes.originalAuthor,
-      originTitle: data.attributes.originTitle,
-      rating: data.attributes.rating,
-      country: data.attributes.country,
-      category: data.attributes.category,
-      isMobile: data.attributes.isMobile,
-      genre: data.attributes.genre,
-      anime: data.attributes.anime,
-      animeBroadcast1: data.attributes.animeBroadcast1,
-      animeBroadcast2: data.attributes.animeBroadcast2,
-      ott: data.attributes.ott,
-      broadcast: data.attributes.broadcast,
-      publisher: data.attributes.publisher,
-      creator: data.attributes.creator,
-      cast: data.attributes.cast,
-      posterDefault: data.attributes.posterDefault,
-      posterOther: data.attributes.posterOther,
-      supportLang: data.attributes.supportLang,
-      wavveSeries: data.attributes.wavveSeries,
-    }));
+    const data: AmusementData = hangukResponseData
+      .filter((data: AmusementData) => {
+        if (process.env.NODE_ENV === 'production') {
+          return data.isPublish;
+        } else return true;
+      })
+      .map((data: any) => ({
+        id: `${data.id}`,
+        idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+        title: data.attributes.title,
+        lang: data.attributes.lang,
+        titleKorean: data.attributes.titleKorean,
+        titleOther: data.attributes.titleOther,
+        etc: data.attributes.etc,
+        release: data.attributes.release,
+        original: data.attributes.original,
+        originalAuthor: data.attributes.originalAuthor,
+        originTitle: data.attributes.originTitle,
+        rating: data.attributes.rating,
+        country: data.attributes.country,
+        category: data.attributes.category,
+        isMobile: data.attributes.isMobile,
+        genre: data.attributes.genre,
+        anime: data.attributes.anime,
+        animeBroadcast1: data.attributes.animeBroadcast1,
+        animeBroadcast2: data.attributes.animeBroadcast2,
+        ott: data.attributes.ott,
+        broadcast: data.attributes.broadcast,
+        publisher: data.attributes.publisher,
+        creator: data.attributes.creator,
+        cast: data.attributes.cast,
+        posterDefault: data.attributes.posterDefault,
+        posterOther: data.attributes.posterOther,
+        supportLang: data.attributes.supportLang,
+        wavveSeries: data.attributes.wavveSeries,
+      }));
     const pageCount = hangukResponse.meta.pagination.pageCount;
     const total = hangukResponse.meta.pagination.total;
     return { data, pageCount: pageCount, total: total };
@@ -783,36 +868,42 @@ export async function getSubdubData(page?: number, pageSize?: number, subdubName
     );
     const hangukResponse = await response.json();
     const hangukResponseData = hangukResponse.data;
-    const data: AmusementData = hangukResponseData.map((data: any) => ({
-      id: `${data.id}`,
-      idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
-      title: data.attributes.title,
-      lang: data.attributes.lang,
-      titleKorean: data.attributes.titleKorean,
-      titleOther: data.attributes.titleOther,
-      etc: data.attributes.etc,
-      release: data.attributes.release,
-      original: data.attributes.original,
-      originalAuthor: data.attributes.originalAuthor,
-      originTitle: data.attributes.originTitle,
-      rating: data.attributes.rating,
-      country: data.attributes.country,
-      category: data.attributes.category,
-      isMobile: data.attributes.isMobile,
-      genre: data.attributes.genre,
-      anime: data.attributes.anime,
-      animeBroadcast1: data.attributes.animeBroadcast1,
-      animeBroadcast2: data.attributes.animeBroadcast2,
-      ott: data.attributes.ott,
-      broadcast: data.attributes.broadcast,
-      publisher: data.attributes.publisher,
-      creator: data.attributes.creator,
-      cast: data.attributes.cast,
-      posterDefault: data.attributes.posterDefault,
-      posterOther: data.attributes.posterOther,
-      supportLang: data.attributes.supportLang,
-      wavveSeries: data.attributes.wavveSeries,
-    }));
+    const data: AmusementData = hangukResponseData
+      .filter((data: AmusementData) => {
+        if (process.env.NODE_ENV === 'production') {
+          return data.isPublish;
+        } else return true;
+      })
+      .map((data: any) => ({
+        id: `${data.id}`,
+        idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+        title: data.attributes.title,
+        lang: data.attributes.lang,
+        titleKorean: data.attributes.titleKorean,
+        titleOther: data.attributes.titleOther,
+        etc: data.attributes.etc,
+        release: data.attributes.release,
+        original: data.attributes.original,
+        originalAuthor: data.attributes.originalAuthor,
+        originTitle: data.attributes.originTitle,
+        rating: data.attributes.rating,
+        country: data.attributes.country,
+        category: data.attributes.category,
+        isMobile: data.attributes.isMobile,
+        genre: data.attributes.genre,
+        anime: data.attributes.anime,
+        animeBroadcast1: data.attributes.animeBroadcast1,
+        animeBroadcast2: data.attributes.animeBroadcast2,
+        ott: data.attributes.ott,
+        broadcast: data.attributes.broadcast,
+        publisher: data.attributes.publisher,
+        creator: data.attributes.creator,
+        cast: data.attributes.cast,
+        posterDefault: data.attributes.posterDefault,
+        posterOther: data.attributes.posterOther,
+        supportLang: data.attributes.supportLang,
+        wavveSeries: data.attributes.wavveSeries,
+      }));
     const pageCount = hangukResponse.meta.pagination.pageCount;
     const total = hangukResponse.meta.pagination.total;
     return { data, pageCount: pageCount, total: total };
@@ -832,36 +923,42 @@ export async function getBarrierFreeData(page?: number, pageSize?: number, bfree
     );
     const hangukResponse = await response.json();
     const hangukResponseData = hangukResponse.data;
-    const data: AmusementData = hangukResponseData.map((data: any) => ({
-      id: `${data.id}`,
-      idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
-      title: data.attributes.title,
-      lang: data.attributes.lang,
-      titleKorean: data.attributes.titleKorean,
-      titleOther: data.attributes.titleOther,
-      etc: data.attributes.etc,
-      release: data.attributes.release,
-      original: data.attributes.original,
-      originalAuthor: data.attributes.originalAuthor,
-      originTitle: data.attributes.originTitle,
-      rating: data.attributes.rating,
-      country: data.attributes.country,
-      category: data.attributes.category,
-      isMobile: data.attributes.isMobile,
-      genre: data.attributes.genre,
-      anime: data.attributes.anime,
-      animeBroadcast1: data.attributes.animeBroadcast1,
-      animeBroadcast2: data.attributes.animeBroadcast2,
-      ott: data.attributes.ott,
-      broadcast: data.attributes.broadcast,
-      publisher: data.attributes.publisher,
-      creator: data.attributes.creator,
-      cast: data.attributes.cast,
-      posterDefault: data.attributes.posterDefault,
-      posterOther: data.attributes.posterOther,
-      supportLang: data.attributes.supportLang,
-      wavveSeries: data.attributes.wavveSeries,
-    }));
+    const data: AmusementData = hangukResponseData
+      .filter((data: AmusementData) => {
+        if (process.env.NODE_ENV === 'production') {
+          return data.isPublish;
+        } else return true;
+      })
+      .map((data: any) => ({
+        id: `${data.id}`,
+        idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+        title: data.attributes.title,
+        lang: data.attributes.lang,
+        titleKorean: data.attributes.titleKorean,
+        titleOther: data.attributes.titleOther,
+        etc: data.attributes.etc,
+        release: data.attributes.release,
+        original: data.attributes.original,
+        originalAuthor: data.attributes.originalAuthor,
+        originTitle: data.attributes.originTitle,
+        rating: data.attributes.rating,
+        country: data.attributes.country,
+        category: data.attributes.category,
+        isMobile: data.attributes.isMobile,
+        genre: data.attributes.genre,
+        anime: data.attributes.anime,
+        animeBroadcast1: data.attributes.animeBroadcast1,
+        animeBroadcast2: data.attributes.animeBroadcast2,
+        ott: data.attributes.ott,
+        broadcast: data.attributes.broadcast,
+        publisher: data.attributes.publisher,
+        creator: data.attributes.creator,
+        cast: data.attributes.cast,
+        posterDefault: data.attributes.posterDefault,
+        posterOther: data.attributes.posterOther,
+        supportLang: data.attributes.supportLang,
+        wavveSeries: data.attributes.wavveSeries,
+      }));
     const pageCount = hangukResponse.meta.pagination.pageCount;
     const total = hangukResponse.meta.pagination.total;
     return { data, pageCount: pageCount, total: total };
@@ -877,36 +974,42 @@ export async function getBarrierFreeData(page?: number, pageSize?: number, bfree
     );
     const hangukResponse = await response.json();
     const hangukResponseData = hangukResponse.data;
-    const data: AmusementData = hangukResponseData.map((data: any) => ({
-      id: `${data.id}`,
-      idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
-      title: data.attributes.title,
-      lang: data.attributes.lang,
-      titleKorean: data.attributes.titleKorean,
-      titleOther: data.attributes.titleOther,
-      etc: data.attributes.etc,
-      release: data.attributes.release,
-      original: data.attributes.original,
-      originalAuthor: data.attributes.originalAuthor,
-      originTitle: data.attributes.originTitle,
-      rating: data.attributes.rating,
-      country: data.attributes.country,
-      category: data.attributes.category,
-      isMobile: data.attributes.isMobile,
-      genre: data.attributes.genre,
-      anime: data.attributes.anime,
-      animeBroadcast1: data.attributes.animeBroadcast1,
-      animeBroadcast2: data.attributes.animeBroadcast2,
-      ott: data.attributes.ott,
-      broadcast: data.attributes.broadcast,
-      publisher: data.attributes.publisher,
-      creator: data.attributes.creator,
-      cast: data.attributes.cast,
-      posterDefault: data.attributes.posterDefault,
-      posterOther: data.attributes.posterOther,
-      supportLang: data.attributes.supportLang,
-      wavveSeries: data.attributes.wavveSeries,
-    }));
+    const data: AmusementData = hangukResponseData
+      .filter((data: AmusementData) => {
+        if (process.env.NODE_ENV === 'production') {
+          return data.isPublish;
+        } else return true;
+      })
+      .map((data: any) => ({
+        id: `${data.id}`,
+        idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+        title: data.attributes.title,
+        lang: data.attributes.lang,
+        titleKorean: data.attributes.titleKorean,
+        titleOther: data.attributes.titleOther,
+        etc: data.attributes.etc,
+        release: data.attributes.release,
+        original: data.attributes.original,
+        originalAuthor: data.attributes.originalAuthor,
+        originTitle: data.attributes.originTitle,
+        rating: data.attributes.rating,
+        country: data.attributes.country,
+        category: data.attributes.category,
+        isMobile: data.attributes.isMobile,
+        genre: data.attributes.genre,
+        anime: data.attributes.anime,
+        animeBroadcast1: data.attributes.animeBroadcast1,
+        animeBroadcast2: data.attributes.animeBroadcast2,
+        ott: data.attributes.ott,
+        broadcast: data.attributes.broadcast,
+        publisher: data.attributes.publisher,
+        creator: data.attributes.creator,
+        cast: data.attributes.cast,
+        posterDefault: data.attributes.posterDefault,
+        posterOther: data.attributes.posterOther,
+        supportLang: data.attributes.supportLang,
+        wavveSeries: data.attributes.wavveSeries,
+      }));
     const pageCount = hangukResponse.meta.pagination.pageCount;
     const total = hangukResponse.meta.pagination.total;
     return { data, pageCount: pageCount, total: total };
@@ -925,36 +1028,42 @@ export async function getLiteratureData(page?: number, pageSize?: number, amuseI
   );
   const platformResponse = await response.json();
   const platformResponseData = platformResponse.data;
-  const data: AmusementData = platformResponseData.map((data: any) => ({
-    id: `${data.id}`,
-    idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
-    title: data.attributes.title,
-    lang: data.attributes.lang,
-    titleKorean: data.attributes.titleKorean,
-    titleOther: data.attributes.titleOther,
-    etc: data.attributes.etc,
-    release: data.attributes.release,
-    original: data.attributes.original,
-    originalAuthor: data.attributes.originalAuthor,
-    originTitle: data.attributes.originTitle,
-    rating: data.attributes.rating,
-    country: data.attributes.country,
-    category: data.attributes.category,
-    isMobile: data.attributes.isMobile,
-    genre: data.attributes.genre,
-    anime: data.attributes.anime,
-    animeBroadcast1: data.attributes.animeBroadcast1,
-    animeBroadcast2: data.attributes.animeBroadcast2,
-    ott: data.attributes.ott,
-    broadcast: data.attributes.broadcast,
-    publisher: data.attributes.publisher,
-    creator: data.attributes.creator,
-    cast: data.attributes.cast,
-    posterDefault: data.attributes.posterDefault,
-    posterOther: data.attributes.posterOther,
-    order: data.attributes.order,
-    wavveSeries: data.attributes.wavveSeries,
-  }));
+  const data: AmusementData = platformResponseData
+    .filter((data: AmusementData) => {
+      if (process.env.NODE_ENV === 'production') {
+        return data.isPublish;
+      } else return true;
+    })
+    .map((data: any) => ({
+      id: `${data.id}`,
+      idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+      title: data.attributes.title,
+      lang: data.attributes.lang,
+      titleKorean: data.attributes.titleKorean,
+      titleOther: data.attributes.titleOther,
+      etc: data.attributes.etc,
+      release: data.attributes.release,
+      original: data.attributes.original,
+      originalAuthor: data.attributes.originalAuthor,
+      originTitle: data.attributes.originTitle,
+      rating: data.attributes.rating,
+      country: data.attributes.country,
+      category: data.attributes.category,
+      isMobile: data.attributes.isMobile,
+      genre: data.attributes.genre,
+      anime: data.attributes.anime,
+      animeBroadcast1: data.attributes.animeBroadcast1,
+      animeBroadcast2: data.attributes.animeBroadcast2,
+      ott: data.attributes.ott,
+      broadcast: data.attributes.broadcast,
+      publisher: data.attributes.publisher,
+      creator: data.attributes.creator,
+      cast: data.attributes.cast,
+      posterDefault: data.attributes.posterDefault,
+      posterOther: data.attributes.posterOther,
+      order: data.attributes.order,
+      wavveSeries: data.attributes.wavveSeries,
+    }));
   const pageCount = platformResponse.meta.pagination.pageCount;
   const total = platformResponse.meta.pagination.total;
   return { data, pageCount: pageCount, total: total };
@@ -1145,6 +1254,7 @@ export async function getAmusementData(amusement: string) {
     franchise: amusementData.attributes.franchise,
     relName: amusementData.attributes.relName,
     wavveSeries: amusementData.attributes.wavveSeries,
+    isPublish: amusementData.attributes.isPublish,
     amusementsCount: 0,
   };
 
@@ -1188,7 +1298,67 @@ export async function getRelationsData(relations: string, type: string) {
     );
     const relationsResponse = await response.json();
     const relationsData = relationsResponse.data;
-    const rowsData: AmusementData[] = relationsData.map((data: any) => ({
+    const rowsData: AmusementData[] = relationsData
+      .filter((data: AmusementData) => {
+        if (process.env.NODE_ENV === 'production') {
+          return data.isPublish;
+        } else return true;
+      })
+      .map((data: any) => ({
+        idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+        title: data.attributes.title,
+        lang: data.attributes.lang,
+        titleKorean: data.attributes.titleKorean,
+        titleOther: data.attributes.titleOther,
+        etc: data.attributes.etc,
+        release: data.attributes.release,
+        original: data.attributes.original,
+        originalAuthor: data.attributes.originalAuthor,
+        originTitle: data.attributes.originTitle,
+        rating: data.attributes.rating,
+        ratingCustom: data.attributes.ratingCustom,
+        country: data.attributes.country,
+        category: data.attributes.category,
+        isMobile: data.attributes.isMobile,
+        genre: data.attributes.genre,
+        anime: data.attributes.anime,
+        animeBroadcast1: data.attributes.animeBroadcast1,
+        animeBroadcast2: data.attributes.animeBroadcast2,
+        ott: data.attributes.ott,
+        ottAddr: data.attributes.ottAddr,
+        broadcast: data.attributes.broadcast,
+        publisher: data.attributes.publisher,
+        creator: data.attributes.creator,
+        cast: data.attributes.cast,
+        posterDefault: data.attributes.posterDefault,
+        posterOther: data.attributes.posterOther,
+        relations: data.attributes.relations,
+        order: data.attributes.order,
+      }));
+
+    return rowsData;
+  }
+}
+
+export async function getSeasonData(season: string) {
+  const response = await fetch(
+    `${process.env.STRAPI_URL}/api/amusement-jejeups/?sort[0]=id:desc&pagination[page]=1&pagination[pageSize]=100&filters[season][$contains]=${season}`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
+      },
+    },
+  );
+  const seasonResponse = await response.json();
+  const seasonData = seasonResponse.data;
+  const rowsData: AmusementData[] = seasonData
+    .filter((data: AmusementData) => {
+      if (process.env.NODE_ENV === 'production') {
+        return data.isPublish;
+      } else return true;
+    })
+    .map((data: any) => ({
       idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
       title: data.attributes.title,
       lang: data.attributes.lang,
@@ -1216,58 +1386,10 @@ export async function getRelationsData(relations: string, type: string) {
       cast: data.attributes.cast,
       posterDefault: data.attributes.posterDefault,
       posterOther: data.attributes.posterOther,
-      relations: data.attributes.relations,
+      season: data.attributes.season,
       order: data.attributes.order,
+      relName: data.attributes.relName,
     }));
-
-    return rowsData;
-  }
-}
-
-export async function getSeasonData(season: string) {
-  const response = await fetch(
-    `${process.env.STRAPI_URL}/api/amusement-jejeups/?sort[0]=id:desc&pagination[page]=1&pagination[pageSize]=100&filters[season][$contains]=${season}`,
-    {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
-      },
-    },
-  );
-  const seasonResponse = await response.json();
-  const seasonData = seasonResponse.data;
-  const rowsData: AmusementData[] = seasonData.map((data: any) => ({
-    idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
-    title: data.attributes.title,
-    lang: data.attributes.lang,
-    titleKorean: data.attributes.titleKorean,
-    titleOther: data.attributes.titleOther,
-    etc: data.attributes.etc,
-    release: data.attributes.release,
-    original: data.attributes.original,
-    originalAuthor: data.attributes.originalAuthor,
-    originTitle: data.attributes.originTitle,
-    rating: data.attributes.rating,
-    ratingCustom: data.attributes.ratingCustom,
-    country: data.attributes.country,
-    category: data.attributes.category,
-    isMobile: data.attributes.isMobile,
-    genre: data.attributes.genre,
-    anime: data.attributes.anime,
-    animeBroadcast1: data.attributes.animeBroadcast1,
-    animeBroadcast2: data.attributes.animeBroadcast2,
-    ott: data.attributes.ott,
-    ottAddr: data.attributes.ottAddr,
-    broadcast: data.attributes.broadcast,
-    publisher: data.attributes.publisher,
-    creator: data.attributes.creator,
-    cast: data.attributes.cast,
-    posterDefault: data.attributes.posterDefault,
-    posterOther: data.attributes.posterOther,
-    season: data.attributes.season,
-    order: data.attributes.order,
-    relName: data.attributes.relName,
-  }));
 
   return rowsData;
 }
@@ -1308,37 +1430,43 @@ export async function getWorksData(page?: number, pageSize?: number) {
   );
   const workResponse = await response.json();
   const workResponseData = workResponse.data;
-  const data: any = workResponseData.map((data: any) => ({
-    id: `${data.id}`,
-    idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
-    title: data.attributes.title,
-    lang: data.attributes.lang,
-    titleKorean: data.attributes.titleKorean,
-    titleOther: data.attributes.titleOther,
-    etc: data.attributes.etc,
-    release: data.attributes.release,
-    original: data.attributes.original,
-    originalAuthor: data.attributes.originalAuthor,
-    originTitle: data.attributes.originTitle,
-    rating: data.attributes.rating,
-    country: data.attributes.country,
-    category: data.attributes.category,
-    isMobile: data.attributes.isMobile,
-    genre: data.attributes.genre,
-    anime: data.attributes.anime,
-    animeBroadcast1: data.attributes.animeBroadcast1,
-    animeBroadcast2: data.attributes.animeBroadcast2,
-    ott: data.attributes.ott,
-    broadcast: data.attributes.broadcast,
-    publisher: data.attributes.publisher,
-    creator: data.attributes.creator,
-    cast: data.attributes.cast,
-    posterDefault: data.attributes.posterDefault,
-    posterOther: data.attributes.posterOther,
-    supportLang: data.attributes.supportLang,
-    wavveSeries: data.attributes.wavveSeries,
-    related: data.attributes.related,
-  }));
+  const data: any = workResponseData
+    .filter((data: AmusementData) => {
+      if (process.env.NODE_ENV === 'production') {
+        return data.isPublish;
+      } else return true;
+    })
+    .map((data: any) => ({
+      id: `${data.id}`,
+      idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+      title: data.attributes.title,
+      lang: data.attributes.lang,
+      titleKorean: data.attributes.titleKorean,
+      titleOther: data.attributes.titleOther,
+      etc: data.attributes.etc,
+      release: data.attributes.release,
+      original: data.attributes.original,
+      originalAuthor: data.attributes.originalAuthor,
+      originTitle: data.attributes.originTitle,
+      rating: data.attributes.rating,
+      country: data.attributes.country,
+      category: data.attributes.category,
+      isMobile: data.attributes.isMobile,
+      genre: data.attributes.genre,
+      anime: data.attributes.anime,
+      animeBroadcast1: data.attributes.animeBroadcast1,
+      animeBroadcast2: data.attributes.animeBroadcast2,
+      ott: data.attributes.ott,
+      broadcast: data.attributes.broadcast,
+      publisher: data.attributes.publisher,
+      creator: data.attributes.creator,
+      cast: data.attributes.cast,
+      posterDefault: data.attributes.posterDefault,
+      posterOther: data.attributes.posterOther,
+      supportLang: data.attributes.supportLang,
+      wavveSeries: data.attributes.wavveSeries,
+      related: data.attributes.related,
+    }));
   const pageCount = workResponse.meta.pagination.pageCount;
   const total = workResponse.meta.pagination.total;
   return { data, pageCount: pageCount, total: total };
