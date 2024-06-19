@@ -200,6 +200,7 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                             amusement.category === 'film' ||
                             amusement.category === 'game' ||
                             amusement.category === 'anime' ||
+                            amusement.category === 'drama_enter' ||
                             amusement.category === 'ott_drama' ||
                             amusement.category === 'ott_film' ||
                             amusement.category === 'ott_anime') && (
@@ -302,6 +303,7 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                       amusement.category === 'ott_anime_film' ||
                       amusement.category === 'ott_documentary_film')) ||
                     amusement.category === 'drama' ||
+                    amusement.category === 'drama_enter' ||
                     amusement.category === 'game' ||
                     amusement.category === 'anime' ||
                     amusement.category === 'anime_film' ||
@@ -365,6 +367,7 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                     >
                       <dt>
                         {(amusement.category === 'drama' ||
+                          amusement.category === 'drama_enter' ||
                           amusement.category === 'ott_drama' ||
                           amusement.category === 'ott_anime' ||
                           amusement.anime === 'tva') &&
@@ -396,6 +399,7 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                         ) : (
                           <>
                             {(amusement.category === 'drama' ||
+                              amusement.category === 'drama_enter' ||
                               amusement.category === 'ott_drama' ||
                               amusement.category === 'ott_anime' ||
                               amusement.anime === 'tva' ||
@@ -464,6 +468,7 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                         ) : (
                           <>
                             {(amusement.category === 'drama' ||
+                              amusement.category === 'drama_enter' ||
                               amusement.category === 'ott_drama' ||
                               amusement.category === 'ott_anime' ||
                               amusement.anime === 'tva' ||
