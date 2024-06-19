@@ -85,6 +85,9 @@ export default function Header() {
         <nav>
           <ol>
             <li>
+              <Anchor href="/works">작품목록</Anchor>
+            </li>
+            <li>
               <Anchor href="/contact-us">문의하기</Anchor>
             </li>
           </ol>

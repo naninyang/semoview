@@ -61,7 +61,7 @@ function Review({ data, error, currentPage }: { data: any; error: string; curren
                   <ReviewItem jejeup={jejeup} />
                 </div>
               ))}
-            <Pagination currentPage={currentPage} pageCount={data.pageCount} sorting={'jejeup'} />
+            <Pagination currentPage={currentPage} pageCount={data.pageCount} sorting={'review'} />
           </div>
         )}
       </div>

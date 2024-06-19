@@ -129,6 +129,23 @@ export interface JejeupResponse {
   data: JejeupPermalinkData;
 }
 
+export interface ReviewData {
+  id: string;
+  idx: string;
+  subject: string;
+  video: string;
+  channelProfileImageUrl: string;
+  comment: string;
+  review: any;
+  title: string;
+  worst: boolean;
+  amusements: string;
+  relations: string;
+  embeddingOff: boolean;
+  createdAt: string;
+  publishedAt: string;
+}
+
 export interface AmusementData {
   id: string;
   idx: string;
@@ -178,6 +195,7 @@ export interface AmusementData {
   franchise: string;
   relName: string;
   wavveSeries: any;
+  amusementsCount: number;
 }
 
 export interface AmusementPermalinkData {

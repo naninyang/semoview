@@ -1,0 +1,124 @@
+@import './designSystem'
+
+.works
+  display: flex
+  justify-content: center
+  gap: rem(25)
+  padding: rem(27) calc(env(safe-area-inset-right) + rem(15)) rem(72) calc(env(safe-area-inset-left) + rem(15))
+
+  +mq(minLarge)
+    padding: rem(57) calc(env(safe-area-inset-right) + rem(25)) rem(102) calc(env(safe-area-inset-left) + rem(25))
+
+  .top-link
+    button
+      span
+        color: $hex-white
+
+  .content
+    max-width: rem(1200)
+    width: 100%
+
+    h1
+      display: flex
+      align-items: flex-end
+      justify-content: center
+      gap: rem(7)
+      font-size: rem(24)
+      font-weight: 900
+      color: $hex-azalea
+
+      +mq(minSmall)
+        font-size: rem(64)
+
+      em
+        font-size: rem(16)
+        font-weight: 300
+        font-style: normal
+
+        +mq(minSmall)
+          font-size: rem(36)
+
+    .summary
+      display: flex
+      flex-direction: column
+      gap: rem(12)
+      margin: rem(17)
+
+      +mq(minSmall)
+        gap: rem(7)
+        margin: rem(52)
+
+      p
+        display: flex
+        flex-direction: column
+        font-size: rem(16)
+        line-height: 1.3
+        text-align: center
+
+        +mq(minSmall)
+          font-size: rem(20)
+
+      .button-group
+        display: flex
+        justify-content: center
+        align-items: center
+        margin: rem(32) 0
+        gap: rem(12)
+        text-align: center
+
+        +mq(minSmall)
+          flex-direction: row
+          margin: rem(52) 0 rem(32)
+
+        a, button
+          display: inline-flex
+          background-color: transparent
+          width: rem(170)
+          justify-content: center
+          border: rem(1) solid $hex-accent
+          border-radius: rem(3)
+          padding: rem(12) rem(32)
+          font-size: rem(16)
+          font-weight: 700
+          line-height: 1
+          color: $hex-accent
+          transition: all .3s cubic-bezier(.4,0,.2,1)
+
+          +mq(minSmall)
+            width: auto
+            padding: rem(17) rem(52)
+            font-size: rem(20)
+
+          &:hover, &:focus
+            background-color: $hex-accent
+            color: $hex-light
+
+    .list
+      display: flex
+      flex-wrap: wrap
+
+      .item
+        padding: 0 rem(12) rem(27)
+        width: 100%
+
+        +mq(minSmall)
+          width: 33.33%
+
+        +mq(minLarge)
+          width: 20%
+
+        a
+          &:hover, &:focus
+            span
+              color: $hex-accent
+
+          > div
+            margin-bottom: rem(7)
+
+          span
+            color: $hex-dark
+            font-variation-settings: 'opsz' 800, 'wght' 800
+
+          ul
+            padding-top: rem(7)
+            color: $hex-accent

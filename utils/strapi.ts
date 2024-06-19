@@ -1,5 +1,4 @@
-import { SupportLang } from '@/components/SupportLang';
-import { AmusementData, BannerData, JejeupData, NoticeData, RecommendData } from 'types';
+import { AmusementData, BannerData, JejeupData, NoticeData, RecommendData, ReviewData } from 'types';
 
 export const formatDate = (datetime: string) => {
   const date = new Date(datetime);
@@ -1146,6 +1145,7 @@ export async function getAmusementData(amusement: string) {
     franchise: amusementData.attributes.franchise,
     relName: amusementData.attributes.relName,
     wavveSeries: amusementData.attributes.wavveSeries,
+    amusementsCount: 0,
   };
 
   return rowsData;
@@ -1293,5 +1293,53 @@ export async function getRecommendData(page?: number, pageSize?: number) {
   }));
   const pageCount = recommendResponse.meta.pagination.pageCount;
   const total = recommendResponse.meta.pagination.total;
+  return { data, pageCount: pageCount, total: total };
+}
+
+export async function getWorksData(page?: number, pageSize?: number) {
+  const response = await fetch(
+    `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
+      },
+    },
+  );
+  const workResponse = await response.json();
+  const workResponseData = workResponse.data;
+  const data: any = workResponseData.map((data: any) => ({
+    id: `${data.id}`,
+    idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
+    title: data.attributes.title,
+    lang: data.attributes.lang,
+    titleKorean: data.attributes.titleKorean,
+    titleOther: data.attributes.titleOther,
+    etc: data.attributes.etc,
+    release: data.attributes.release,
+    original: data.attributes.original,
+    originalAuthor: data.attributes.originalAuthor,
+    originTitle: data.attributes.originTitle,
+    rating: data.attributes.rating,
+    country: data.attributes.country,
+    category: data.attributes.category,
+    isMobile: data.attributes.isMobile,
+    genre: data.attributes.genre,
+    anime: data.attributes.anime,
+    animeBroadcast1: data.attributes.animeBroadcast1,
+    animeBroadcast2: data.attributes.animeBroadcast2,
+    ott: data.attributes.ott,
+    broadcast: data.attributes.broadcast,
+    publisher: data.attributes.publisher,
+    creator: data.attributes.creator,
+    cast: data.attributes.cast,
+    posterDefault: data.attributes.posterDefault,
+    posterOther: data.attributes.posterOther,
+    supportLang: data.attributes.supportLang,
+    wavveSeries: data.attributes.wavveSeries,
+    related: data.attributes.related,
+  }));
+  const pageCount = workResponse.meta.pagination.pageCount;
+  const total = workResponse.meta.pagination.total;
   return { data, pageCount: pageCount, total: total };
 }

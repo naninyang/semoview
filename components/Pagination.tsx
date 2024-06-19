@@ -40,7 +40,7 @@ export function Pagination({
         <div className={styles.pagination}>
           {currentGroup > 0 && (
             <div className={styles.pager}>
-              {sorting === 'amusement' ? (
+              {sorting === 'amusement' && (
                 <>
                   {category && !tag && !hanguk && (
                     <Anchor href={`/amusement?category=${category}&page=${prevGroupPage}`}>
@@ -142,7 +142,19 @@ export function Pagination({
                     </Anchor>
                   )}
                 </>
-              ) : (
+              )}
+              {sorting === 'works' && (
+                <Anchor href={`/works?page=${prevGroupPage}`}>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M5 2.46484L1.46484 6L5 9.53516L5.75 8.78516L3.46484 6.5H10.5V5.5H3.46484L5.75 3.21484L5 2.46484Z"
+                      fill="black"
+                    />
+                  </svg>
+                  <span>이전</span>
+                </Anchor>
+              )}
+              {sorting === 'review' && (
                 <Anchor href={`/literature?page=${prevGroupPage}`}>
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -162,7 +174,7 @@ export function Pagination({
                 <div
                   className={`${styles.pages} ${pageNumber === currentPage ? styles.current : ''} ${endPage > 99 ? styles.many : ''}`}
                 >
-                  {sorting === 'amusement' ? (
+                  {sorting === 'amusement' && (
                     <>
                       {category && !tag && !hanguk && (
                         <Anchor href={`/amusement?category=${category}&page=${pageNumber}`}>{pageNumber}</Anchor>
@@ -192,16 +204,16 @@ export function Pagination({
                         <Anchor href={`/amusement?literature=${literature}&page=${pageNumber}`}>{pageNumber}</Anchor>
                       )}
                     </>
-                  ) : (
-                    <Anchor href={`/reviews?page=${pageNumber}`}>{pageNumber}</Anchor>
                   )}
+                  {sorting === 'works' && <Anchor href={`/works?page=${pageNumber}`}>{pageNumber}</Anchor>}
+                  {sorting === 'review' && <Anchor href={`/reviews?page=${pageNumber}`}>{pageNumber}</Anchor>}
                 </div>
               </React.Fragment>
             );
           })}
           {currentGroup < Math.ceil(pageCount / pageLimit) - 1 && (
             <div className={`${styles.pager} ${currentGroup === 0 ? styles.pagerNext : ''}`}>
-              {sorting === 'amusement' ? (
+              {sorting === 'amusement' && (
                 <>
                   {category && !tag && !hanguk && (
                     <Anchor href={`/amusement?category=${category}&page=${nextGroupPage}`}>
@@ -303,7 +315,19 @@ export function Pagination({
                     </Anchor>
                   )}
                 </>
-              ) : (
+              )}
+              {sorting === 'works' && (
+                <Anchor href={`/works?page=${nextGroupPage}`}>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M7 2.46484L6.25 3.21484L8.53516 5.5H1.5V6.5H8.53516L6.25 8.78516L7 9.53516L10.5352 6L7 2.46484Z"
+                      fill="black"
+                    />
+                  </svg>
+                  <span>다음</span>
+                </Anchor>
+              )}
+              {sorting === 'review' && (
                 <Anchor href={`/reviews?page=${nextGroupPage}`}>
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path

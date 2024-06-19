@@ -57,11 +57,13 @@ export function AmusementItem({
   isGame,
   platform,
   supportLanguage,
+  page,
 }: {
   amusement: AmusementData;
   isGame?: boolean;
   platform?: string;
   supportLanguage?: string;
+  page?: string;
 }) {
   const platformOtt =
     platform === 'apple' ||
@@ -98,7 +100,7 @@ export function AmusementItem({
     platform === 'tooniverse' ||
     platform === 'animax';
   return (
-    <div className={`${styles.thumbnail} ${isGame ? styles.game : ''}`}>
+    <div className={`${styles.thumbnail} ${isGame ? styles.game : ''} ${page === 'square' ? styles.square : ''}`}>
       <Image
         src={amusement.posterDefault}
         width={isGame ? 460 : 390}
@@ -107,6 +109,17 @@ export function AmusementItem({
         unoptimized
         priority
       />
+      <div className={page === 'square' ? styles.dummy : ''} />
+      {page === 'square' && (
+        <Image
+          src={amusement.posterDefault}
+          width={isGame ? 460 : 390}
+          height={isGame ? 215 : 560}
+          alt=""
+          unoptimized
+          priority
+        />
+      )}
       {amusement.category !== 'game_fan' && (
         <dl>
           {platform ? (
