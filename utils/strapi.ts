@@ -1037,15 +1037,17 @@ export async function getRenewAmusement(page?: number, pageSize?: number, amusem
 
 export async function getJejeupAmusementData(page?: number, pageSize?: number, amusementId?: string) {
   const amusementNumber = `'${amusementId}'`;
-  const response = await fetch(
-    `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[amusements][$contains]=${amusementNumber}`,
-    {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
-      },
+  let filterQuery = `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[amusements][$contains]=${amusementNumber}`;
+  if (isProduction) {
+    filterQuery += '&filters[isPublish][$null]=true';
+    filterQuery += '&filters[isPublish]=true';
+  }
+  const response = await fetch(filterQuery, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
     },
-  );
+  });
   const jejeupAmusementResponse = await response.json();
   const jejeupAmusementData = jejeupAmusementResponse.data;
   const rowsData: JejeupData[] = jejeupAmusementData.map((data: any) => ({
@@ -1059,6 +1061,8 @@ export async function getJejeupAmusementData(page?: number, pageSize?: number, a
     title: data.attributes.title,
     worst: data.attributes.worst,
     embeddingOff: data.attributes.embeddingOff,
+    isPublish: data.attributes.isPublish,
+    isZip: data.attributes.isZip,
   }));
   const pageCount = jejeupAmusementResponse.meta.pagination.pageCount;
   const jejeups = await Promise.all(
