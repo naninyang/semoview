@@ -42,15 +42,17 @@ export async function getRenew(page?: number) {
 }
 
 export async function getJejeupData(page?: number, pageSize?: number) {
-  const response = await fetch(
-    `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
-    {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
-      },
+  let filterQuery = `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`;
+  if (isProduction) {
+    filterQuery += '&filters[isPublish][$null]=true';
+    filterQuery += '&filters[isPublish]=true';
+  }
+  const response = await fetch(filterQuery, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
     },
-  );
+  });
   const jejeupResponse = await response.json();
   const jejeupsData = jejeupResponse.data;
   const rowsData: JejeupData[] = jejeupsData.map((data: any) => ({
@@ -66,6 +68,8 @@ export async function getJejeupData(page?: number, pageSize?: number) {
     isAmusements: data.attributes.isAmusements,
     amusements: data.attributes.amusements,
     embeddingOff: data.attributes.embeddingOff,
+    isPublish: data.attributes.isPublish,
+    isZip: data.attributes.isZip,
   }));
   const pageCount = jejeupResponse.meta.pagination.pageCount;
   const jejeups = await Promise.all(

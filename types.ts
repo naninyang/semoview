@@ -13,6 +13,8 @@ export interface JejeupData {
   createdAt: string;
   error: string;
   originalTitle: string;
+  isPublish: boolean;
+  isZip: boolean;
   jejeups: {
     id: string;
     idx: string;
