@@ -878,6 +878,59 @@
                 font-weight: 800
 
     .related-list
+      position: relative
+      z-index: 7
+
+      +mq(maxSmall)
+        > div > div > div > div > div
+          width: rem(320)
+
+      &.short-view > div:not(.dummy) > div
+        padding: 0 rem(35)
+
+      > div > div > div
+        margin: 0
+
+      .dummy
+        position: absolute
+        top: 0
+        bottom: 0
+        width: rem(35)
+
+        &.left
+          left: 0
+          border-radius: 0 rem(7) rem(7) 0
+          background: linear-gradient(90deg, rgba($hex-black, 1) 0%, rgba($hex-black, 0) 100%)
+
+        &.right
+          right: 0
+          border-radius: rem(7) 0 0 rem(7)
+          background: linear-gradient(-90deg, rgba($hex-black, 1) 0%, rgba($hex-black, 0) 100%)
+
+      .move
+        position: absolute
+        top: 50%
+        transform: translateY(-50%)
+        margin-top: rem(-27)
+        width: rem(35)
+        height: rem(100)
+        background-color: rgba($hex-black, .5)
+
+        svg
+          width: rem(25)
+          height: rem(25)
+
+        span
+          +screen-reader-only
+
+        &.prev
+          left: 0
+          border-radius: 0 rem(7) rem(7) 0
+
+        &.next
+          right: 0
+          border-radius: rem(7) 0 0 rem(7)
+
       span
         strong
           +screen-reader-only

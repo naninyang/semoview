@@ -1,3 +1,4 @@
+import ReactDOM from 'react-dom';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import styled from '@emotion/styled';
@@ -99,6 +100,8 @@ const Related = ({ videoId, videoDescription, title, sorting }: Props) => {
     };
   }, [selectedRelated]);
 
+  const dialogElement = (typeof window !== 'undefined' && document.getElementById('__next')) as HTMLElement | null;
+
   return (
     <div
       className={`${styles.item} ${selectedRelated ? styles.current : ''} ${sorting === 'amusement' ? styles['item-amusement'] : ''}`}
@@ -125,23 +128,26 @@ const Related = ({ videoId, videoDescription, title, sorting }: Props) => {
           </span>
         </button>
       )}
-      {selectedRelated && (
-        <dialog className={`${styles.dialog} ${sorting === 'amusement' ? styles['dialog-amusement'] : ''}`}>
-          <div className={styles.container}>
-            <button type="button" onClick={() => handleCloseRelatedDetail()}>
-              {sorting === 'amusement' ? <CloseLightIcon /> : <CloseDarkIcon />}
-              <span>닫기</span>
-            </button>
-            <h3 className="lang">
-              <span className={`${isSafari || sorting !== 'amusement' ? 'April16thPromise' : 'April16thSafety'}`}>
-                [{title}]
-              </span>{' '}
-              {videoDescription}
-            </h3>
-            <YouTubeController videoId={videoId} videoImage={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`} />
-          </div>
-        </dialog>
-      )}
+      {selectedRelated &&
+        dialogElement &&
+        ReactDOM.createPortal(
+          <dialog className={`${styles.dialog} ${sorting === 'amusement' ? styles['dialog-amusement'] : ''}`} open>
+            <div className={styles.container}>
+              <button type="button" onClick={() => handleCloseRelatedDetail()}>
+                {sorting === 'amusement' ? <CloseLightIcon /> : <CloseDarkIcon />}
+                <span>닫기</span>
+              </button>
+              <h3 className="lang">
+                <span className={`${isSafari || sorting !== 'amusement' ? 'April16thPromise' : 'April16thSafety'}`}>
+                  [{title}]
+                </span>{' '}
+                {videoDescription}
+              </h3>
+              <YouTubeController videoId={videoId} videoImage={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`} />
+            </div>
+          </dialog>,
+          dialogElement,
+        )}
     </div>
   );
 };

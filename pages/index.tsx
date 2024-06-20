@@ -167,7 +167,7 @@ function Home({
         <>
           <div className={styles.content}>
             {bannerData && (
-              <div className={styles.banners}>
+              <div className={`${styles.banners} home-banner`}>
                 <Slider ref={sliderRef} {...settings}>
                   {Array.isArray(bannerData) &&
                     bannerData

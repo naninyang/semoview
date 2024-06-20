@@ -252,17 +252,18 @@ main
       span
         +screen-reader-only
 
-.slick-slider
-  .slick-track
-    > div > div, > div > div > div, > div > div > div a
-      aspect-ratio: 590 / 650
+.home-banner
+  .slick-slider
+    .slick-track
+      > div > div, > div > div > div, > div > div > div a
+        aspect-ratio: 590 / 650
 
-      +mq(minSmall)
-        aspect-ratio: 1180 / 650
+        +mq(minSmall)
+          aspect-ratio: 1180 / 650
 
-    .slick-slide
-      width: 100%
+      .slick-slide
+        width: 100%
 
-      +mq(minSmall)
-        padding: 0 rem(12)
-        width: 72%
+        +mq(minSmall)
+          padding: 0 rem(12)
+          width: 72%

@@ -40,6 +40,7 @@
       right: 0
       width: rem(20)
       height: rem(20)
+      background-color: transparent
 
       +mq(minLarge)
         width: rem(36)
@@ -93,9 +94,13 @@
     position: relative
     z-index: 7
     padding: 0 rem(7) rem(23)
+    width: 100%
 
     button,
     .item
+      cursor: pointer
+      width: 100%
+
       span
         color: $hex-white
 
