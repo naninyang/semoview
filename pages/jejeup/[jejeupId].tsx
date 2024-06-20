@@ -714,7 +714,7 @@ export default function JejeupDetail({
                   amusementData.category === 'film' ||
                   amusementData.category === 'game' ||
                   amusementData.category === 'anime' ||
-                  amusementData.category === 'drama_enter' ||
+                  amusementData.category === 'ott_drama_enter' ||
                   amusementData.category === 'ott_drama' ||
                   amusementData.category === 'ott_film' ||
                   amusementData.category === 'ott_anime') && (
@@ -1044,7 +1044,7 @@ export default function JejeupDetail({
             ) : (
               <>
                 {(amusementData.category === 'drama' ||
-                  amusementData.category === 'drama_enter' ||
+                  amusementData.category === 'ott_drama_enter' ||
                   amusementData.category === 'ott_drama' ||
                   amusementData.category === 'ott_anime' ||
                   amusementData.anime === 'tva' ||
@@ -1210,7 +1210,7 @@ export default function JejeupDetail({
             <div>
               <dt>
                 {(amusementData.category === 'drama' ||
-                  amusementData.category === 'drama_enter' ||
+                  amusementData.category === 'ott_drama_enter' ||
                   amusementData.category === 'ott_drama' ||
                   amusementData.category === 'ott_anime' ||
                   amusementData.anime === 'tva' ||

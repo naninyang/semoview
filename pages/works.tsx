@@ -69,7 +69,13 @@ function Works({ currentPage, worksData, error }: { currentPage: number; worksDa
                           )}
                           {amusement.amusementsCount !== undefined && (
                             <li>
-                              <b>{amusement.amusementsCount}</b>개 유튜브 리뷰
+                              {amusement.amusementsCount > 0 ? (
+                                <>
+                                  <b>{amusement.amusementsCount}</b>개 유튜브 리뷰
+                                </>
+                              ) : (
+                                <b>리뷰가 없습니다</b>
+                              )}
                             </li>
                           )}
                         </ul>

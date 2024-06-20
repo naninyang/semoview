@@ -561,6 +561,7 @@ export default function Amusement({
       if (amusementData) {
         if (
           amusementData.attributes.category === 'ott_drama' ||
+          amusementData.attributes.category === 'ott_drama_enter' ||
           amusementData.attributes.category === 'ott_anime' ||
           amusementData.attributes.category === 'ott_anime_film' ||
           amusementData.attributes.category === 'ott_film'
@@ -797,6 +798,7 @@ export default function Amusement({
         <div className={styles.relation}>
           <dt>
             {amusementData.attributes.category === 'drama' ||
+            amusementData.attributes.category === 'ott_drama_enter' ||
             amusementData.attributes.category === 'ott_drama' ||
             amusementData.attributes.category === 'anime' ||
             amusementData.attributes.category === 'ott_anime'
@@ -1399,7 +1401,7 @@ export default function Amusement({
                 <div className={styles.relation}>
                   <dt>
                     {amusementData.attributes.category === 'drama' ||
-                    amusementData.attributes.category === 'drama_enter' ||
+                    amusementData.attributes.category === 'ott_drama_enter' ||
                     amusementData.attributes.category === 'ott_drama' ||
                     amusementData.attributes.category === 'anime' ||
                     amusementData.attributes.category === 'ott_anime'
@@ -1434,7 +1436,7 @@ export default function Amusement({
                         amusementData.attributes.category === 'film' ||
                         amusementData.attributes.category === 'game' ||
                         amusementData.attributes.category === 'anime' ||
-                        amusementData.attributes.category === 'drama_enter' ||
+                        amusementData.attributes.category === 'ott_drama_enter' ||
                         amusementData.attributes.category === 'ott_drama' ||
                         amusementData.attributes.category === 'ott_film' ||
                         amusementData.attributes.category === 'ott_anime') && (
@@ -1666,7 +1668,7 @@ export default function Amusement({
                 <div className={styles.release}>
                   <dt>
                     {(amusementData.attributes.category === 'drama' ||
-                      amusementData.attributes.category === 'drama_enter' ||
+                      amusementData.attributes.category === 'ott_drama_enter' ||
                       amusementData.attributes.category === 'ott_drama' ||
                       amusementData.attributes.category === 'ott_anime' ||
                       amusementData.attributes.anime === 'tva') &&
@@ -1702,7 +1704,7 @@ export default function Amusement({
                     ) : (
                       <>
                         {(amusementData.attributes.category === 'drama' ||
-                          amusementData.attributes.category === 'drama_enter' ||
+                          amusementData.attributes.category === 'ott_drama_enter' ||
                           amusementData.attributes.category === 'ott_drama' ||
                           amusementData.attributes.category === 'ott_anime' ||
                           amusementData.attributes.anime === 'tva' ||
