@@ -923,12 +923,9 @@
 
         .move
           position: absolute
-          top: 50%
-          transform: translateY(-50%)
-          margin-top: rem(-27)
-          width: rem(35)
-          height: rem(100)
-          background-color: rgba($hex-black, .5)
+          top: 0
+          bottom: 0
+          width: rem(52)
 
           svg
             width: rem(25)
@@ -939,11 +936,11 @@
 
           &.prev
             left: 0
-            border-radius: 0 rem(7) rem(7) 0
+            background: linear-gradient(90deg, rgba($hex-black, 1) 0%, rgba($hex-black, 0) 100%)
 
           &.next
             right: 0
-            border-radius: rem(7) 0 0 rem(7)
+            background: linear-gradient(-90deg, rgba($hex-black, 1) 0%, rgba($hex-black, 0) 100%)
 
       span
         strong
@@ -1086,6 +1083,30 @@
             flex-direction: column
             gap: rem(12)
 
+            .thumbnail
+              position: relative
+              aspect-ratio: 1920 / 1080
+
+              img
+                display: block
+                border-radius: rem(7)
+                aspect-ratio: 1920 / 1080
+                object-fit: cover
+                width: 100%!important
+                height: auto!important
+
+              span
+                position: absolute
+                left: rem(4)
+                top: rem(4)
+                background-color: $hex-azalea
+                border-radius: rem(4)
+                padding: rem(5) rem(7)
+                font-size: rem(14)
+                font-weight: 800
+                color: $hex-black
+                line-height: 1
+
             .option
               display: flex
               gap: rem(12)
@@ -1107,15 +1128,6 @@
 
               .thumbnail
                 width: 37%
-                aspect-ratio: 1920 / 1080
-
-                img
-                  display: block
-                  border-radius: rem(7)
-                  aspect-ratio: 1920 / 1080
-                  object-fit: cover
-                  width: 100%!important
-                  height: auto!important
 
               .user-info
                 display: flex
@@ -1141,17 +1153,6 @@
 
           .preview-container
             .thumbnail
-              position: relative
-              aspect-ratio: 1920 / 1080
-
-              img
-                display: block
-                border-radius: rem(7)
-                aspect-ratio: 1920 / 1080
-                object-fit: cover
-                width: 100%!important
-                height: auto!important
-
               em
                 position: absolute
                 right: rem(4)

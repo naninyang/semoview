@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import { isDesktop } from 'react-device-detect';
+import Slider from 'react-slick';
+import { useMediaQuery } from 'react-responsive';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { AmusementData, JejeupData, JejeupPermalinkData } from 'types';
 import { formatDateDetail } from '@/utils/strapi';
@@ -19,8 +22,11 @@ import { formatTime } from '@/components/FormatTime';
 import { SupportLang } from '@/components/SupportLang';
 import AmusementDetail from '@/components/AmusementDetail';
 import Related from '@/components/Related';
+import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Jejeup.module.sass';
 import 'react-perfect-scrollbar/dist/css/styles.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import {
   ADiconBlack,
   Abc,
@@ -84,29 +90,185 @@ import {
   Wowow,
 } from '@/components/Icons';
 
+export function useMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  const mobile = useMediaQuery({ query: `(max-width: ${rem(767)})` });
+  useEffect(() => {
+    setIsMobile(mobile);
+  }, [mobile]);
+  return isMobile;
+}
+
+export function useExtraSmall() {
+  const [isExtraSmall, setIsExtraSmall] = useState(false);
+  const extraSmall = useMediaQuery({ query: `(max-width: ${rem(575)})` });
+  useEffect(() => {
+    setIsExtraSmall(extraSmall);
+  }, [extraSmall]);
+  return isExtraSmall;
+}
+
+export function useMedium() {
+  const [isMedium, setIsMedium] = useState(false);
+  const medium = useMediaQuery({ query: `(min-width: ${rem(576)}) and (max-width: ${rem(991)})` });
+  useEffect(() => {
+    setIsMedium(medium);
+  }, [medium]);
+  return isMedium;
+}
+
+export function useLarge() {
+  const [isLarge, setIsLarge] = useState(false);
+  const large = useMediaQuery({ query: `(min-width: ${rem(992)})` });
+  useEffect(() => {
+    setIsLarge(large);
+  }, [large]);
+  return isLarge;
+}
+
 const RelatedList = ({ related }: { related: any }) => {
+  const isMobile = useMobile();
+  const isExtraSmall = useExtraSmall();
+  const isMedium = useMedium();
+  const isLarge = useLarge();
+  const sliderRef = useRef<Slider>(null);
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 700,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    autoplay: false,
+    autoplaySpeed: 5200,
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 575,
+        settings: {
+          slidesToShow: 1,
+          variableWidth: true,
+        },
+      },
+    ],
+  };
+
   const validData = related.filter((data: any) => data.related !== null && Array.isArray(data.related));
   if (validData.length > 0) {
     return (
       <PerfectScrollbar className={styles['scrollbar-container']}>
         <aside className={validData.length > 1 ? styles['items-aside'] : ''}>
           <h2>관련 영상</h2>
-          <div className={styles.list}>
-            {validData.map((data: any, index: number) => (
-              <React.Fragment key={index}>
-                {data.related.flatMap((item: any) =>
-                  Object.entries(item).map(([key, value]) => (
-                    <Related
-                      videoId={String(value)}
-                      videoDescription={key}
-                      key={key}
-                      title={data.titleKorean ? data.titleKorean : data.title}
-                    />
-                  )),
-                )}
-              </React.Fragment>
-            ))}
-          </div>
+          {isLarge ? (
+            <div className={styles.list}>
+              {validData.map((data: any, index: number) => (
+                <React.Fragment key={index}>
+                  {data.related.flatMap((item: any) =>
+                    Object.entries(item).map(([key, value]) => (
+                      <Related
+                        videoId={String(value)}
+                        videoDescription={key}
+                        key={key}
+                        title={data.titleKorean ? data.titleKorean : data.title}
+                      />
+                    )),
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
+          ) : (
+            <div className={styles.list}>
+              {validData.map((data: any, index: number) => (
+                <React.Fragment key={index}>
+                  <h3>{data.titleKorean ? data.titleKorean : data.title}</h3>
+                  {(isMedium && data.related.length < 3) || (isExtraSmall && data.related.length < 2) ? (
+                    <div className={styles.items}>
+                      {data.related.flatMap((item: any) =>
+                        Object.entries(item).map(([key, value]) => (
+                          <Related
+                            videoId={String(value)}
+                            videoDescription={key}
+                            key={key}
+                            title={data.titleKorean ? data.titleKorean : data.title}
+                          />
+                        )),
+                      )}
+                    </div>
+                  ) : (
+                    <div className={styles.slider}>
+                      <Slider ref={sliderRef} {...settings}>
+                        {data.related.flatMap((item: any) =>
+                          Object.entries(item).map(([key, value]) => (
+                            <Related
+                              videoId={String(value)}
+                              videoDescription={key}
+                              key={key}
+                              title={data.titleKorean ? data.titleKorean : data.title}
+                            />
+                          )),
+                        )}
+                      </Slider>
+                      {!isMobile || isDesktop ? (
+                        <>
+                          {((isLarge && data.related.length > 3) || (isMedium && data.related.length > 2)) && (
+                            <>
+                              <button
+                                type="button"
+                                className={`${styles.prev} ${styles.move}`}
+                                onClick={() => sliderRef.current?.slickPrev()}
+                              >
+                                <svg
+                                  width="24"
+                                  height="24"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M9.92902 12.0006L13.75 8.17964C14.164 7.76564 14.164 7.09364 13.75 6.67964C13.336 6.26564 12.664 6.26564 12.25 6.67964L7.63602 11.2936C7.24502 11.6846 7.24502 12.3176 7.63602 12.7076L12.25 17.3216C12.664 17.7356 13.336 17.7356 13.75 17.3216C14.164 16.9076 14.164 16.2356 13.75 15.8216L9.92902 12.0006Z"
+                                    fill="black"
+                                  />
+                                </svg>
+                                <span>이전으로 이동</span>
+                              </button>
+                              <button
+                                type="button"
+                                className={`${styles.next} ${styles.move}`}
+                                onClick={() => sliderRef.current?.slickNext()}
+                              >
+                                <svg
+                                  width="24"
+                                  height="24"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M13.071 12.0006L9.24995 8.17964C8.83595 7.76564 8.83595 7.09364 9.24995 6.67964C9.66395 6.26564 10.336 6.26564 10.75 6.67964L15.364 11.2936C15.755 11.6846 15.755 12.3176 15.364 12.7076L10.75 17.3216C10.336 17.7356 9.66395 17.7356 9.24995 17.3216C8.83595 16.9076 8.83595 16.2356 9.24995 15.8216L13.071 12.0006Z"
+                                    fill="black"
+                                  />
+                                </svg>
+                                <span>다음으로 이동</span>
+                              </button>
+                            </>
+                          )}
+                        </>
+                      ) : (
+                        <>
+                          {data.related.length > 1 && (
+                            <>
+                              <div className={`${styles.dummy} ${styles.left}`} />
+                              <div className={`${styles.dummy} ${styles.right}`} />
+                            </>
+                          )}
+                        </>
+                      )}
+                    </div>
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
+          )}
         </aside>
       </PerfectScrollbar>
     );
@@ -117,6 +279,7 @@ const RelatedList = ({ related }: { related: any }) => {
 
 const ReviewList = ({ review, current }: { review: string; current: number }) => {
   const [amusementData, setAmusementData] = useState<JejeupData[] | null>(null);
+  const isExtraSmall = useExtraSmall();
 
   useEffect(() => {
     async function fetchAmusementData() {
@@ -155,23 +318,47 @@ const ReviewList = ({ review, current }: { review: string; current: number }) =>
   if (validItems.length > 0) {
     return (
       <aside className={styles['items-related']}>
-        <h2>작품의 다른 리뷰</h2>
+        <h2>작품의 다른 리뷰 & 요약모음</h2>
         <div className={styles.list}>
           {validItems.map((item, index) => (
             <div className={styles.item} key={index}>
               <Anchor href={`/jejeup/${item.idx}`}>
-                <Image
-                  src={`https://i.ytimg.com/vi/${item.video}/hqdefault.jpg`}
-                  width={640}
-                  height={480}
-                  unoptimized
-                  priority
-                  alt={item.subject}
-                />
-                <span>
-                  [{item.amusementData.titleKorean ? item.amusementData.titleKorean : item.amusementData.title}]{' '}
-                  {item.subject}
-                </span>
+                {isExtraSmall ? (
+                  <>
+                    <div className={styles.amusement}>
+                      <Image
+                        src={`https://i.ytimg.com/vi/${item.video}/hqdefault.jpg`}
+                        width={640}
+                        height={480}
+                        unoptimized
+                        priority
+                        alt={item.subject}
+                      />
+                      <strong>
+                        <em>
+                          {item.amusementData.titleKorean ? item.amusementData.titleKorean : item.amusementData.title}
+                        </em>
+                        {item.isZip ? '요약' : '리뷰'}
+                      </strong>
+                    </div>
+                    <span>{item.subject}</span>
+                  </>
+                ) : (
+                  <>
+                    <Image
+                      src={`https://i.ytimg.com/vi/${item.video}/hqdefault.jpg`}
+                      width={640}
+                      height={480}
+                      unoptimized
+                      priority
+                      alt={item.subject}
+                    />
+                    <span>
+                      [{item.amusementData.titleKorean ? item.amusementData.titleKorean : item.amusementData.title} |{' '}
+                      {item.isZip ? '요약' : '리뷰'}] {item.subject}
+                    </span>
+                  </>
+                )}
               </Anchor>
             </div>
           ))}

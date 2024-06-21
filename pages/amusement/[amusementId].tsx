@@ -270,6 +270,7 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
                                 unoptimized
                                 priority
                               />
+                              <span>{jejeup.isZip ? '요약' : '리뷰'}</span>
                             </div>
                             <div className={`${styles['user-info']}`}>
                               <cite aria-label="유튜브 채널이름">{jejeupMetaData.channelTitle}</cite>
@@ -312,6 +313,7 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
                               unoptimized
                               priority
                             />
+                            <span>{jejeup.isZip ? '요약' : '리뷰'}</span>
                             <em aria-label="재생시간">{formatDuration(jejeupMetaData.duration)}</em>
                           </div>
                           <div className={styles['preview-info']}>
@@ -2120,7 +2122,7 @@ export default function Amusement({
                 : checkKorean(amusementData.attributes.title)}
             </h2>
           ) : (
-            <h2 className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>유튜브 리뷰/요약모음</h2>
+            <h2 className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>유튜브 리뷰 & 요약모음</h2>
           )}
           <div className={styles.list}>
             {Object.keys(data.jejeups).length > 0 && Array.isArray(data.jejeups) ? (

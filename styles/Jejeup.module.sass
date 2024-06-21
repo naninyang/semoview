@@ -915,13 +915,66 @@
         .list
           display: flex
           width: 100%
-          flex-wrap: wrap
+          flex-direction: column
 
-          +mq(maxExtraSmall)
-            flex-direction: column
+          +mq(maxSmall)
+            span
+              strong
+                +screen-reader-only
 
-          +mq(minLarge)
-            flex-direction: column
+          .items
+            > div
+              +mq(maxMedium)
+                width: 50%
+
+              +mq(maxExtraSmall)
+                width: rem(320)
+
+          .slider
+            position: relative
+            display: block
+            width: 100%
+
+            +mq(maxExtraSmall)
+              > div > div > div > div > div
+                width: rem(320)
+
+            .dummy
+              position: absolute
+              top: 0
+              bottom: 0
+              width: rem(35)
+
+              &.left
+                left: 0
+                border-radius: 0 rem(7) rem(7) 0
+                background: linear-gradient(90deg, rgba($hex-white, 1) 0%, rgba($hex-white, 0) 100%)
+
+              &.right
+                right: 0
+                border-radius: rem(7) 0 0 rem(7)
+                background: linear-gradient(-90deg, rgba($hex-white, 1) 0%, rgba($hex-white, 0) 100%)
+
+            .move
+              position: absolute
+              top: 0
+              bottom: 0
+              width: rem(52)
+
+              svg
+                width: rem(25)
+                height: rem(25)
+
+              span
+                +screen-reader-only
+
+              &.prev
+                left: 0
+                background: linear-gradient(90deg, rgba($hex-white, 1) 0%, rgba($hex-white, 0) 100%)
+
+              &.next
+                right: 0
+                background: linear-gradient(-90deg, rgba($hex-white, 1) 0%, rgba($hex-white, 0) 100%)
 
       &:not(.items-aside)
         span
@@ -947,6 +1000,17 @@
           width: rem(5)
           height: rem(20)
 
+      h3
+        margin-bottom: rem(7)
+        padding-left: rem(7)
+        font-size: rem(18)
+
+        &::before
+          content: '•'
+          padding-right: rem(3)
+          font-size: rem(14)
+          color: $hex-azalea
+
       &.items-related
         display: flex
         flex-direction: column
@@ -964,6 +1028,11 @@
 
         .item
           padding: 0 rem(7) rem(23)
+
+          +mq(maxExtraSmall)
+            margin-bottom: rem(27)
+            border-bottom: 1px solid rgba($hex-black, .27)
+            padding-bottom: rem(17)
 
           +mq(minSmall)
             width: 50%
@@ -993,9 +1062,38 @@
             span
               color: $hex-black
               font-size: rem(14)
-              font-weight: 700
+              font-weight: 500
               line-height: 1.42857143
               +ellipsis
+
+            .amusement
+              display: flex
+              align-items: center
+              gap: rem(8)
+
+              img
+                width: 37%
+
+              strong
+                +col
+                font-size: rem(14)
+                font-weight: 700
+                color: $hex-dark
+                line-height: 1.42857143
+
+                em
+                  font-style: normal
+
+                  &::after
+                    content: '•'
+                    padding: 0 rem(4)
+                    font-size: rem(12)
+                    line-height: 1.42857143
+
+              & + span
+                overflow: visible
+                text-overflow: clip
+                white-space: normal
 
 @keyframes loading
   0%

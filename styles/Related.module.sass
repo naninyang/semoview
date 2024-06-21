@@ -81,15 +81,6 @@
 .item
   display: flex
 
-  +mq(minSmall)
-    width: 50%
-
-  +mq(minLarge)
-    width: 33.33%
-
-  +mq(minExtraLarge)
-    width: 25%
-
   &.item-amusement
     position: relative
     z-index: 7
@@ -98,22 +89,11 @@
 
     button,
     .item
-      cursor: pointer
-      width: 100%
-
       span
         color: $hex-white
 
   &:not(.item-amusement)
-    padding: 0 0 rem(27)
-
-    +mq(minSmall)
-      width: 33.33%
-      padding: 0 rem(12) rem(27) 0
-
-    +mq(minLarge)
-      width: 100%
-      padding: 0 0 rem(27)
+    padding: 0 rem(7) rem(27)
 
     button,
     .item
