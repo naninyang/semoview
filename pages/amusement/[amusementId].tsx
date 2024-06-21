@@ -158,6 +158,12 @@ export function truncateString(str: string, num: number) {
 }
 
 export function JejeupMeta({ jejeup }: { jejeup: any }) {
+  const isMobile = useMobile();
+  const isExtraSmall = useExtraSmall();
+  const isMedium = useMedium();
+  const isLarge = useLarge();
+  const isMaxLarge = useMaxLarge();
+
   const [jejeupMetaData, setJejeupMetaData] = useState<JejeupMetaData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const maxRetries = 2;
@@ -254,50 +260,97 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
                   </div>
                 </div>
               ) : (
-                <Link key={jejeup.idx} href={`/jejeup/${jejeup.idx}`} scroll={false} shallow={true}>
-                  <div className={`${styles.preview} preview`}>
-                    <div className={styles['preview-container']}>
-                      <div className={styles.thumbnail}>
-                        <Image
-                          src={jejeupMetaData.thumbnailUrl}
-                          width="1920"
-                          height="1080"
-                          alt=""
-                          unoptimized
-                          priority
-                        />
-                        <em aria-label="재생시간">{formatDuration(jejeupMetaData.duration)}</em>
-                      </div>
-                      <div className={styles['preview-info']}>
-                        <div className={styles.detail}>
-                          <div className={`${styles['user-info']}`}>
-                            <strong aria-label="영상제목">{jejeupMetaData.title}</strong>
-                            <div className={styles.user}>
+                <>
+                  {isExtraSmall ? (
+                    <div className={`${styles.preview} ${styles.mini} preview`}>
+                      <Link key={jejeup.idx} href={`/jejeup/${jejeup.idx}`} scroll={false} shallow={true}>
+                        <div className={styles['preview-mini']}>
+                          <div className={styles['preview-info']}>
+                            <div className={styles.thumbnail}>
+                              <Image
+                                src={jejeupMetaData.thumbnailUrl}
+                                width="1920"
+                                height="1080"
+                                alt=""
+                                unoptimized
+                                priority
+                              />
+                            </div>
+                            <div className={`${styles['user-info']}`}>
                               <cite aria-label="유튜브 채널이름">{jejeupMetaData.channelTitle}</cite>
                               <time dateTime={jejeupMetaData.publishedAt}>
                                 {formatDate(`${jejeupMetaData.publishedAt}`)}
                               </time>
+                              <em aria-label="재생시간">{formatDuration(jejeupMetaData.duration, 'amusement')}</em>
+                              {(jejeup.worst || jejeup.embeddingOff) && (
+                                <div className={styles.option}>
+                                  {jejeup.worst && (
+                                    <div className={styles.worst} aria-label="Worst 영상">
+                                      <strong className="number">Worst</strong>
+                                    </div>
+                                  )}
+                                  {jejeup.embeddingOff && (
+                                    <div className={styles.embed} aria-label="퍼가기 금지 영상">
+                                      <strong className="preview">퍼가기 금지 콘텐츠</strong>
+                                    </div>
+                                  )}
+                                </div>
+                              )}
                             </div>
-                            {(jejeup.worst || jejeup.embeddingOff) && (
-                              <div className={styles.option}>
-                                {jejeup.worst && (
-                                  <div className={styles.worst} aria-label="Worst 영상">
-                                    <strong className="number">Worst</strong>
-                                  </div>
-                                )}
-                                {jejeup.embeddingOff && (
-                                  <div className={styles.embed} aria-label="퍼가기 금지 영상">
-                                    <strong className="preview">퍼가기 금지 콘텐츠</strong>
+                          </div>
+                          <div className={styles['preview-subject']}>
+                            <strong aria-label="영상제목">{jejeupMetaData.title}</strong>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  ) : (
+                    <Link key={jejeup.idx} href={`/jejeup/${jejeup.idx}`} scroll={false} shallow={true}>
+                      <div className={`${styles.preview} preview`}>
+                        <div className={styles['preview-container']}>
+                          <div className={styles.thumbnail}>
+                            <Image
+                              src={jejeupMetaData.thumbnailUrl}
+                              width="1920"
+                              height="1080"
+                              alt=""
+                              unoptimized
+                              priority
+                            />
+                            <em aria-label="재생시간">{formatDuration(jejeupMetaData.duration)}</em>
+                          </div>
+                          <div className={styles['preview-info']}>
+                            <div className={styles.detail}>
+                              <div className={`${styles['user-info']}`}>
+                                <strong aria-label="영상제목">{jejeupMetaData.title}</strong>
+                                <div className={styles.user}>
+                                  <cite aria-label="유튜브 채널이름">{jejeupMetaData.channelTitle}</cite>
+                                  <time dateTime={jejeupMetaData.publishedAt}>
+                                    {formatDate(`${jejeupMetaData.publishedAt}`)}
+                                  </time>
+                                </div>
+                                {(jejeup.worst || jejeup.embeddingOff) && (
+                                  <div className={styles.option}>
+                                    {jejeup.worst && (
+                                      <div className={styles.worst} aria-label="Worst 영상">
+                                        <strong className="number">Worst</strong>
+                                      </div>
+                                    )}
+                                    {jejeup.embeddingOff && (
+                                      <div className={styles.embed} aria-label="퍼가기 금지 영상">
+                                        <strong className="preview">퍼가기 금지 콘텐츠</strong>
+                                      </div>
+                                    )}
                                   </div>
                                 )}
                               </div>
-                            )}
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </Link>
+                    </Link>
+                  )}
+                </>
               )}
             </>
           ) : (
@@ -2052,6 +2105,50 @@ export default function Amusement({
           {bfreeService(amusementData.attributes.bfree)}
         </section>
       )}
+      {(isJejeupsError || isJejeupsLoading) && (
+        <section className={styles.not}>
+          {isJejeupsError && (
+            <p className={styles['amusement-error']}>
+              영상을 불러오지 못했습니다. 삭제된 영상이거나 인터넷 속도가 느립니다.{' '}
+              <Anchor href="/amusement">뒤로가기</Anchor>
+            </p>
+          )}
+          {isJejeupsLoading && <p className={styles['amusement-loading']}>리뷰 불러오는 중...</p>}
+        </section>
+      )}
+      {data && !isJejeupsLoading && !isJejeupsError && (
+        <section>
+          {amusementData.attributes.category === 'game' || amusementData.attributes.category === 'game_fan' ? (
+            <h2 className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>
+              {amusementData.attributes.category === 'game'
+                ? '유튜브 리뷰 & 실황모음'
+                : checkKorean(amusementData.attributes.title)}
+            </h2>
+          ) : (
+            <h2 className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>유튜브 리뷰/요약모음</h2>
+          )}
+          <div className={styles.list}>
+            {Object.keys(data.jejeups).length > 0 && Array.isArray(data.jejeups) ? (
+              data.jejeups.map((jejeup: JejeupData) => (
+                <div className={styles.item} key={jejeup.id}>
+                  <JejeupMeta key={jejeup.idx} jejeup={jejeup} />
+                </div>
+              ))
+            ) : (
+              <div className={styles.warning}>
+                <p>리뷰 영상 등록 전이거나 등록된 리뷰가 삭제되어 등록된 리뷰가 아직 업습니다..</p>
+                <p>
+                  운영자에게 영상 등록을{' '}
+                  <button type="button" data-video={amusementData.id} onClick={handleRequest}>
+                    요청
+                  </button>{' '}
+                  해 주세요!
+                </p>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
       {amusementData.attributes.related !== null && Array.isArray(amusementData.attributes.related) && (
         <section>
           <h2 className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>관련 영상</h2>
@@ -2144,50 +2241,6 @@ export default function Amusement({
               )}
             </div>
           )}
-        </section>
-      )}
-      {(isJejeupsError || isJejeupsLoading) && (
-        <section className={styles.not}>
-          {isJejeupsError && (
-            <p className={styles['amusement-error']}>
-              영상을 불러오지 못했습니다. 삭제된 영상이거나 인터넷 속도가 느립니다.{' '}
-              <Anchor href="/amusement">뒤로가기</Anchor>
-            </p>
-          )}
-          {isJejeupsLoading && <p className={styles['amusement-loading']}>리뷰 불러오는 중...</p>}
-        </section>
-      )}
-      {data && !isJejeupsLoading && !isJejeupsError && (
-        <section>
-          {amusementData.attributes.category === 'game' || amusementData.attributes.category === 'game_fan' ? (
-            <h2 className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>
-              {amusementData.attributes.category === 'game'
-                ? '유튜브 리뷰 & 실황모음'
-                : checkKorean(amusementData.attributes.title)}
-            </h2>
-          ) : (
-            <h2 className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>유튜브 리뷰/요약모음</h2>
-          )}
-          <div className={styles.list}>
-            {Object.keys(data.jejeups).length > 0 && Array.isArray(data.jejeups) ? (
-              data.jejeups.map((jejeup: JejeupData) => (
-                <div className={styles.item} key={jejeup.id}>
-                  <JejeupMeta key={jejeup.idx} jejeup={jejeup} />
-                </div>
-              ))
-            ) : (
-              <div className={styles.warning}>
-                <p>리뷰 영상 등록 전이거나 등록된 리뷰가 삭제되어 등록된 리뷰가 아직 업습니다..</p>
-                <p>
-                  운영자에게 영상 등록을{' '}
-                  <button type="button" data-video={amusementData.id} onClick={handleRequest}>
-                    요청
-                  </button>{' '}
-                  해 주세요!
-                </p>
-              </div>
-            )}
-          </div>
         </section>
       )}
       {selectedAmusementId && selectedAmusement && (

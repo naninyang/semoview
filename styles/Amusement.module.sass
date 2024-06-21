@@ -1000,7 +1000,7 @@
         flex-wrap: wrap
 
       .item
-        padding: 0 rem(7) rem(23)
+        padding: 0 rem(7) rem(37)
 
         +mq(minSmall)
           width: 50%
@@ -1034,6 +1034,10 @@
             flex-direction: column
             overflow: hidden
             width: 100%
+
+          &.mini
+            padding-bottom: rem(12)
+            border-bottom: 1px solid rgba($hex-light, .27)
 
           &.preview-dummy
             transition: all .4s cubic-bezier(.4,0,.2,1)
@@ -1075,38 +1079,65 @@
                   font-weight: 800
                   text-decoration: underline
 
-          .preview-container
-            .thumbnail
-              .dummy
-                aspect-ratio: 1920 / 1080
-
-            .preview-info
-              .detail
-                .user-info
-                  > strong
-                    width: 100%
-                    height: rem(18)
-
-                  cite, time
-                    height: rem(16)
-                    vertical-align: top
-
-                  cite
-                    > i, &::after
-                      display: inline-block
-
-                    i
-                      width: rem(72)
-                      height: rem(16)
-
-                  time
-                    width: rem(160)
-
-          .preview-container
+          .preview-mini, .preview-container
             display: flex
             flex-direction: column
             gap: rem(12)
 
+            .option
+              display: flex
+              gap: rem(12)
+
+              strong
+                display: inline-flex
+                background-color: $hex-accent
+                border-radius: rem(3)
+                padding: rem(3) rem(5)
+                font-size: rem(12)
+                font-weight: 800
+                text-transform: uppercase
+                color: $hex-white
+
+          .preview-mini
+            .preview-info
+              display: flex
+              gap: rem(12)
+
+              .thumbnail
+                width: 37%
+                aspect-ratio: 1920 / 1080
+
+                img
+                  display: block
+                  border-radius: rem(7)
+                  aspect-ratio: 1920 / 1080
+                  object-fit: cover
+                  width: 100%!important
+                  height: auto!important
+
+              .user-info
+                display: flex
+                flex-direction: column
+                justify-content: center
+                +col
+
+                cite, time, em
+                  font-style: normal
+                  color: $hex-light
+
+                cite
+                  font-size: rem(14)
+                  font-weight: 800
+
+                time, em
+                  font-size: rem(12)
+
+            .preview-subject
+              strong
+                font-size: rem(14)
+                color: $hex-white
+
+          .preview-container
             .thumbnail
               position: relative
               aspect-ratio: 1920 / 1080
@@ -1132,6 +1163,9 @@
                 color: $hex-white
                 line-height: 1
 
+              .dummy
+                aspect-ratio: 1920 / 1080
+
             .preview-info
               display: flex
               flex-direction: column
@@ -1145,47 +1179,49 @@
                   width: rem(36)
                   height: rem(36)
 
-                .user-info
-                  display: flex
-                  flex-direction: column
-                  gap: rem(4)
+              .user-info
+                display: flex
+                flex-direction: column
+                gap: rem(4)
+                color: $hex-light
+
+                .user
+                  font-size: rem(14)
+                  font-weight: 400
+                  line-height: 1.175
+
+                > strong
+                  width: 100%
+                  height: rem(18)
+
+                strong
+                  +line-abbr(1, 36, 18px)
+                  font-size: rem(14)
+                  font-weight: 700
                   color: $hex-light
 
-                  strong
-                    +line-abbr(1, 36, 18px)
+                cite, time
+                  height: rem(16)
+                  font-size: rem(14)
+                  color: $hex-light
+                  vertical-align: top
+
+                cite
+                  > i, &::after
+                    display: inline-block
+
+                  i
+                    width: rem(72)
+                    height: rem(16)
+
+                  &::after
+                    content: '•'
+                    padding: 0 rem(4)
                     font-size: rem(14)
-                    font-weight: 700
                     color: $hex-light
 
-                  .user
-                    font-size: rem(14)
-                    font-weight: 400
-                    line-height: 1.175
-
-                    cite, time
-                      font-size: rem(14)
-                      color: $hex-light
-
-                    cite
-                      &::after
-                        content: '•'
-                        padding: 0 rem(4)
-                        font-size: rem(14)
-                        color: $hex-light
-
-                  .option
-                    display: flex
-                    gap: rem(12)
-
-                    strong
-                      display: inline-flex
-                      background-color: $hex-accent
-                      border-radius: rem(3)
-                      padding: rem(3) rem(5)
-                      font-size: rem(12)
-                      font-weight: 800
-                      text-transform: uppercase
-                      color: $hex-white
+                time
+                  width: rem(160)
 
 .open
   .amusement
