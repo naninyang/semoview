@@ -210,7 +210,9 @@ const RelatedList = ({ related }: { related: any }) => {
                       </Slider>
                       {!isMobile || isDesktop ? (
                         <>
-                          {((isLarge && data.related.length > 3) || (isMedium && data.related.length > 2)) && (
+                          {((isLarge && data.related.length > 3) ||
+                            (isMedium && data.related.length > 2) ||
+                            (isExtraSmall && data.related.length > 1)) && (
                             <>
                               <button
                                 type="button"

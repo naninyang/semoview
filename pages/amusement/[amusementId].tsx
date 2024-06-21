@@ -2195,7 +2195,8 @@ export default function Amusement({
                 <>
                   {((isMaxLarge && amusementData.attributes.related.length > 4) ||
                     (isLarge && amusementData.attributes.related.length > 3) ||
-                    (isMedium && amusementData.attributes.related.length > 2)) && (
+                    (isMedium && amusementData.attributes.related.length > 2) ||
+                    (isExtraSmall && amusementData.attributes.related.length > 1)) && (
                     <>
                       <button
                         type="button"
