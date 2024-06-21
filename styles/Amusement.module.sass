@@ -878,58 +878,70 @@
                 font-weight: 800
 
     .related-list
-      position: relative
-      z-index: 7
+      &.list
+        > div
+          +mq(minSmall)
+            width: 50%
 
-      +mq(maxSmall)
-        > div > div > div > div > div
-          width: rem(320)
+          +mq(minLarge)
+            width: 33.33%
 
-      &.short-view > div:not(.dummy) > div
-        padding: 0 rem(35)
+          +mq(minExtraLarge)
+            width: 25%
 
-      > div > div > div
-        margin: 0
+      &:not(.list)
+        position: relative
+        z-index: 7
 
-      .dummy
-        position: absolute
-        top: 0
-        bottom: 0
-        width: rem(35)
+        +mq(maxExtraSmall)
+          > div > div > div > div > div
+            width: rem(320)
 
-        &.left
-          left: 0
-          border-radius: 0 rem(7) rem(7) 0
-          background: linear-gradient(90deg, rgba($hex-black, 1) 0%, rgba($hex-black, 0) 100%)
+        &.short-view > div:not(.dummy) > div
+          padding: 0 rem(35)
 
-        &.right
-          right: 0
-          border-radius: rem(7) 0 0 rem(7)
-          background: linear-gradient(-90deg, rgba($hex-black, 1) 0%, rgba($hex-black, 0) 100%)
+        > div > div > div
+          margin: 0
 
-      .move
-        position: absolute
-        top: 50%
-        transform: translateY(-50%)
-        margin-top: rem(-27)
-        width: rem(35)
-        height: rem(100)
-        background-color: rgba($hex-black, .5)
+        .dummy
+          position: absolute
+          top: 0
+          bottom: 0
+          width: rem(35)
 
-        svg
-          width: rem(25)
-          height: rem(25)
+          &.left
+            left: 0
+            border-radius: 0 rem(7) rem(7) 0
+            background: linear-gradient(90deg, rgba($hex-black, 1) 0%, rgba($hex-black, 0) 100%)
 
-        span
-          +screen-reader-only
+          &.right
+            right: 0
+            border-radius: rem(7) 0 0 rem(7)
+            background: linear-gradient(-90deg, rgba($hex-black, 1) 0%, rgba($hex-black, 0) 100%)
 
-        &.prev
-          left: 0
-          border-radius: 0 rem(7) rem(7) 0
+        .move
+          position: absolute
+          top: 50%
+          transform: translateY(-50%)
+          margin-top: rem(-27)
+          width: rem(35)
+          height: rem(100)
+          background-color: rgba($hex-black, .5)
 
-        &.next
-          right: 0
-          border-radius: rem(7) 0 0 rem(7)
+          svg
+            width: rem(25)
+            height: rem(25)
+
+          span
+            +screen-reader-only
+
+          &.prev
+            left: 0
+            border-radius: 0 rem(7) rem(7) 0
+
+          &.next
+            right: 0
+            border-radius: rem(7) 0 0 rem(7)
 
       span
         strong

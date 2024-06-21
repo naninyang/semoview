@@ -106,11 +106,47 @@ const ExternalIcon = styled.i({
 
 export function useMobile() {
   const [isMobile, setIsMobile] = useState(false);
-  const mobile = useMediaQuery({ query: `(max-width: ${rem(767)}` });
+  const mobile = useMediaQuery({ query: `(max-width: ${rem(767)})` });
   useEffect(() => {
     setIsMobile(mobile);
   }, [mobile]);
   return isMobile;
+}
+
+export function useExtraSmall() {
+  const [isExtraSmall, setIsExtraSmall] = useState(false);
+  const extraSmall = useMediaQuery({ query: `(max-width: ${rem(575)})` });
+  useEffect(() => {
+    setIsExtraSmall(extraSmall);
+  }, [extraSmall]);
+  return isExtraSmall;
+}
+
+export function useMedium() {
+  const [isMedium, setIsMedium] = useState(false);
+  const medium = useMediaQuery({ query: `(min-width: ${rem(576)}) and (max-width: ${rem(991)})` });
+  useEffect(() => {
+    setIsMedium(medium);
+  }, [medium]);
+  return isMedium;
+}
+
+export function useLarge() {
+  const [isLarge, setIsLarge] = useState(false);
+  const large = useMediaQuery({ query: `(min-width: ${rem(992)}) and (max-width: ${rem(1199)})` });
+  useEffect(() => {
+    setIsLarge(large);
+  }, [large]);
+  return isLarge;
+}
+
+export function useMaxLarge() {
+  const [isMaxLarge, setIsMaxLarge] = useState(false);
+  const maxLarge = useMediaQuery({ query: `(min-width: ${rem(1200)})` });
+  useEffect(() => {
+    setIsMaxLarge(maxLarge);
+  }, [maxLarge]);
+  return isMaxLarge;
 }
 
 export function truncateString(str: string, num: number) {
@@ -424,7 +460,7 @@ export default function Amusement({
 
   const settings = {
     dots: false,
-    infinite: false,
+    infinite: true,
     speed: 700,
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -433,13 +469,19 @@ export default function Amusement({
     arrows: false,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1199,
         settings: {
           slidesToShow: 3,
         },
       },
       {
-        breakpoint: 767,
+        breakpoint: 991,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 575,
         settings: {
           slidesToShow: 1,
           variableWidth: true,
@@ -449,6 +491,10 @@ export default function Amusement({
   };
 
   const isMobile = useMobile();
+  const isExtraSmall = useExtraSmall();
+  const isMedium = useMedium();
+  const isLarge = useLarge();
+  const isMaxLarge = useMaxLarge();
 
   const handleButtonClick = (id: string) => {
     setSelectedAmusementId(id);
@@ -2009,8 +2055,11 @@ export default function Amusement({
       {amusementData.attributes.related !== null && Array.isArray(amusementData.attributes.related) && (
         <section>
           <h2 className={`${isSafari ? 'April16thPromise' : 'April16thSafety'}`}>관련 영상</h2>
-          <div className={`${styles['related-list']} ${!isMobile || isDesktop ? '' : styles['short-view']}`}>
-            <Slider ref={sliderRef} {...settings}>
+          {(isMaxLarge && amusementData.attributes.related.length < 5) ||
+          (isLarge && amusementData.attributes.related.length < 4) ||
+          (isMedium && amusementData.attributes.related.length < 3) ||
+          (isExtraSmall && amusementData.attributes.related.length < 2) ? (
+            <div className={`${styles.list} ${styles['related-list']}`}>
               {amusementData.attributes.related.flatMap((item) =>
                 Object.entries(item).map(([key, value]) => (
                   <React.Fragment key={key}>
@@ -2027,51 +2076,74 @@ export default function Amusement({
                   </React.Fragment>
                 )),
               )}
-            </Slider>
-            {!isMobile || isDesktop ? (
-              <>
-                {amusementData.attributes.related.length > 4 && (
-                  <>
-                    <button
-                      type="button"
-                      className={`${styles.prev} ${styles.move}`}
-                      onClick={() => sliderRef.current?.slickPrev()}
-                    >
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M9.92902 12.0006L13.75 8.17964C14.164 7.76564 14.164 7.09364 13.75 6.67964C13.336 6.26564 12.664 6.26564 12.25 6.67964L7.63602 11.2936C7.24502 11.6846 7.24502 12.3176 7.63602 12.7076L12.25 17.3216C12.664 17.7356 13.336 17.7356 13.75 17.3216C14.164 16.9076 14.164 16.2356 13.75 15.8216L9.92902 12.0006Z"
-                          fill="white"
-                        />
-                      </svg>
-                      <span>이전으로 이동</span>
-                    </button>
-                    <button
-                      type="button"
-                      className={`${styles.next} ${styles.move}`}
-                      onClick={() => sliderRef.current?.slickNext()}
-                    >
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M13.071 12.0006L9.24995 8.17964C8.83595 7.76564 8.83595 7.09364 9.24995 6.67964C9.66395 6.26564 10.336 6.26564 10.75 6.67964L15.364 11.2936C15.755 11.6846 15.755 12.3176 15.364 12.7076L10.75 17.3216C10.336 17.7356 9.66395 17.7356 9.24995 17.3216C8.83595 16.9076 8.83595 16.2356 9.24995 15.8216L13.071 12.0006Z"
-                          fill="white"
-                        />
-                      </svg>
-                      <span>다음으로 이동</span>
-                    </button>
-                  </>
+            </div>
+          ) : (
+            <div className={`${styles['related-list']} ${!isMobile || isDesktop ? '' : styles['short-view']}`}>
+              <Slider ref={sliderRef} {...settings}>
+                {amusementData.attributes.related.flatMap((item) =>
+                  Object.entries(item).map(([key, value]) => (
+                    <React.Fragment key={key}>
+                      <Related
+                        videoId={String(value)}
+                        videoDescription={key}
+                        title={
+                          amusementData.attributes.titleKorean !== null
+                            ? amusementData.attributes.titleKorean
+                            : amusementData.attributes.title
+                        }
+                        sorting={'amusement'}
+                      />
+                    </React.Fragment>
+                  )),
                 )}
-              </>
-            ) : (
-              <>
-                {amusementData.attributes.related.length > 1 && (
-                  <>
-                    <div className={`${styles.dummy} ${styles.left}`} />
-                    <div className={`${styles.dummy} ${styles.right}`} />
-                  </>
-                )}
-              </>
-            )}
-          </div>
+              </Slider>
+              {!isMobile || isDesktop ? (
+                <>
+                  {((isMaxLarge && amusementData.attributes.related.length > 4) ||
+                    (isLarge && amusementData.attributes.related.length > 3) ||
+                    (isMedium && amusementData.attributes.related.length > 2)) && (
+                    <>
+                      <button
+                        type="button"
+                        className={`${styles.prev} ${styles.move}`}
+                        onClick={() => sliderRef.current?.slickPrev()}
+                      >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M9.92902 12.0006L13.75 8.17964C14.164 7.76564 14.164 7.09364 13.75 6.67964C13.336 6.26564 12.664 6.26564 12.25 6.67964L7.63602 11.2936C7.24502 11.6846 7.24502 12.3176 7.63602 12.7076L12.25 17.3216C12.664 17.7356 13.336 17.7356 13.75 17.3216C14.164 16.9076 14.164 16.2356 13.75 15.8216L9.92902 12.0006Z"
+                            fill="white"
+                          />
+                        </svg>
+                        <span>이전으로 이동</span>
+                      </button>
+                      <button
+                        type="button"
+                        className={`${styles.next} ${styles.move}`}
+                        onClick={() => sliderRef.current?.slickNext()}
+                      >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M13.071 12.0006L9.24995 8.17964C8.83595 7.76564 8.83595 7.09364 9.24995 6.67964C9.66395 6.26564 10.336 6.26564 10.75 6.67964L15.364 11.2936C15.755 11.6846 15.755 12.3176 15.364 12.7076L10.75 17.3216C10.336 17.7356 9.66395 17.7356 9.24995 17.3216C8.83595 16.9076 8.83595 16.2356 9.24995 15.8216L13.071 12.0006Z"
+                            fill="white"
+                          />
+                        </svg>
+                        <span>다음으로 이동</span>
+                      </button>
+                    </>
+                  )}
+                </>
+              ) : (
+                <>
+                  {amusementData.attributes.related.length > 1 && (
+                    <>
+                      <div className={`${styles.dummy} ${styles.left}`} />
+                      <div className={`${styles.dummy} ${styles.right}`} />
+                    </>
+                  )}
+                </>
+              )}
+            </div>
+          )}
         </section>
       )}
       {(isJejeupsError || isJejeupsLoading) && (
