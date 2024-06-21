@@ -158,14 +158,9 @@ export function truncateString(str: string, num: number) {
 }
 
 export function JejeupMeta({ jejeup }: { jejeup: any }) {
-  const isMobile = useMobile();
-  const isExtraSmall = useExtraSmall();
-  const isMedium = useMedium();
-  const isLarge = useLarge();
-  const isMaxLarge = useMaxLarge();
-
   const [jejeupMetaData, setJejeupMetaData] = useState<JejeupMetaData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const isExtraSmall = useExtraSmall();
   const maxRetries = 2;
 
   const fetchMetadata = async (currentRetryCount = 0) => {
@@ -683,7 +678,7 @@ export default function Amusement({
   }, [amusementData]);
 
   const previousPageHandler = () => {
-    const previousPage = sessionStorage.getItem('ai');
+    const previousPage = sessionStorage.getItem('ai') || sessionStorage.getItem('works');
     if (previousPage) {
       router.push(`${previousPage}`);
     } else {

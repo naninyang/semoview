@@ -13,6 +13,25 @@ import styles from '@/styles/Works.module.sass';
 function Works({ currentPage, worksData, error }: { currentPage: number; worksData: any; error: string }) {
   const router = useRouter();
 
+  useEffect(() => {
+    sessionStorage.removeItem('amusementCategory');
+    sessionStorage.removeItem('amusementTag');
+    sessionStorage.removeItem('amusementPlatform');
+    sessionStorage.removeItem('amusementHanguk');
+    sessionStorage.removeItem('amusementSubdub');
+    sessionStorage.removeItem('amusementBfree');
+
+    sessionStorage.removeItem('category');
+    sessionStorage.removeItem('tag');
+    sessionStorage.removeItem('platform');
+    sessionStorage.removeItem('hanguk');
+    sessionStorage.removeItem('subdub');
+    sessionStorage.removeItem('bfree');
+
+    sessionStorage.setItem('backhistory', router.asPath);
+    sessionStorage.setItem('works', router.asPath);
+  }, [router.asPath]);
+
   const previousPageHandler = () => {
     const previousPage = sessionStorage.getItem('backhistory');
     if (previousPage) {
