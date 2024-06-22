@@ -14,6 +14,9 @@ function Zip({ data, error, currentPage }: { data: any; error: string; currentPa
 
   useEffect(() => {
     sessionStorage.setItem('backhistory', router.asPath);
+    sessionStorage.setItem('semoview', router.asPath);
+    sessionStorage.removeItem('home');
+    sessionStorage.removeItem('works');
   }, [router.asPath]);
 
   const [count, setCount] = useState<Counts | null>(null);

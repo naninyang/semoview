@@ -39,6 +39,12 @@ function Platforms({
 
     sessionStorage.removeItem('category');
     sessionStorage.removeItem('tag');
+    sessionStorage.removeItem('hanguk');
+    sessionStorage.removeItem('subdub');
+    sessionStorage.removeItem('bfree');
+
+    sessionStorage.removeItem('ai');
+    sessionStorage.removeItem('works');
 
     sessionStorage.setItem('backhistory', router.asPath);
     sessionStorage.setItem('platform', router.asPath);

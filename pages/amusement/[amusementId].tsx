@@ -680,8 +680,32 @@ export default function Amusement({
   }, [amusementData]);
 
   const previousPageHandler = () => {
-    const previousPage = sessionStorage.getItem('ai') || sessionStorage.getItem('works');
-    if (previousPage) {
+    const previousPage =
+      sessionStorage.getItem('ai') ||
+      sessionStorage.getItem('works') ||
+      sessionStorage.getItem('amusementCategory') ||
+      sessionStorage.getItem('amusementTag') ||
+      sessionStorage.getItem('amusementPlatform') ||
+      sessionStorage.getItem('amusementHanguk') ||
+      sessionStorage.getItem('amusementSubdub') ||
+      sessionStorage.getItem('amusementBfree') ||
+      sessionStorage.getItem('amusementLiterature');
+    let refer = document.referrer !== '' || document.referrer.includes(window.location.origin);
+    if (!refer) {
+      if (amusementData) {
+        if (
+          amusementData.attributes.category === 'ott_drama' ||
+          amusementData.attributes.category === 'ott_drama_enter' ||
+          amusementData.attributes.category === 'ott_anime' ||
+          amusementData.attributes.category === 'ott_anime_film' ||
+          amusementData.attributes.category === 'ott_film'
+        )
+          router.push('/amusement?category=ott');
+        else if (amusementData.attributes.category === 'anime' || amusementData.attributes.category === 'anime_film')
+          router.push('/amusement?category=anime');
+        else router.push(`/amusement?category=${amusementData.attributes.category}`);
+      }
+    } else if (previousPage) {
       router.push(`${previousPage}`);
     } else {
       if (amusementData) {

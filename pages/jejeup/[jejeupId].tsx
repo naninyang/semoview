@@ -768,8 +768,14 @@ export default function JejeupDetail({
   }, [router.asPath]);
 
   const previousPageHandler = () => {
+    const homePage = sessionStorage.getItem('home');
     const previousPage = sessionStorage.getItem('semoview');
-    if (previousPage) {
+    let refer = document.referrer !== '' || document.referrer.includes(window.location.origin);
+    if (!refer) {
+      router.push('/reviews');
+    } else if (homePage) {
+      router.push('/reviews');
+    } else if (previousPage) {
       router.push(`${previousPage}`);
     } else {
       router.push('/');

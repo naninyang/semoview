@@ -14,6 +14,7 @@ import { AmusementItem } from '@/components/AmusementItem';
 import styles from '@/styles/Home.module.sass';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { useRouter } from 'next/router';
 
 const NextIcon = styled.i({
   background: `url(${vectors.slide.next}) no-repeat 50% 50%/contain`,
@@ -121,6 +122,7 @@ function Home({
     );
   }
 
+  const router = useRouter();
   const [isPlaying, setIsPlaying] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
   const sliderRef = useRef<Slider>(null);
@@ -147,6 +149,11 @@ function Home({
     }
     setIsPlaying(!isPlaying);
   };
+
+  useEffect(() => {
+    sessionStorage.setItem('home', router.asPath);
+    sessionStorage.setItem('backhistory', router.asPath);
+  }, [router.asPath]);
 
   return (
     <main className={styles.main}>

@@ -114,11 +114,14 @@ function Amusement({
     sessionStorage.removeItem('amusementBfree');
 
     sessionStorage.removeItem('category');
-    sessionStorage.removeItem('platform');
     sessionStorage.removeItem('tag');
+    sessionStorage.removeItem('platform');
+    sessionStorage.removeItem('hanguk');
     sessionStorage.removeItem('subdub');
     sessionStorage.removeItem('bfree');
-    sessionStorage.removeItem('hanguk');
+
+    sessionStorage.removeItem('works');
+    sessionStorage.removeItem('ai');
 
     sessionStorage.setItem('backhistory', router.asPath);
     sessionStorage.setItem(
@@ -189,7 +192,10 @@ function Amusement({
 
   const previousPageHandler = () => {
     const previousPage = sessionStorage.getItem('literature');
-    if (previousPage) {
+    let refer = document.referrer !== '' || document.referrer.includes(window.location.origin);
+    if (!refer) {
+      router.push(`/categories`);
+    } else if (previousPage) {
       router.push(`${previousPage}`);
     } else {
       router.push(`/categories`);

@@ -38,13 +38,17 @@ function BarrierFree({
     sessionStorage.removeItem('amusementBfree');
 
     sessionStorage.removeItem('category');
-    sessionStorage.removeItem('platform');
     sessionStorage.removeItem('tag');
+    sessionStorage.removeItem('platform');
     sessionStorage.removeItem('hanguk');
+    sessionStorage.removeItem('subdub');
+
+    sessionStorage.removeItem('ai');
+    sessionStorage.removeItem('works');
 
     sessionStorage.setItem('backhistory', router.asPath);
     sessionStorage.setItem('semoview', router.asPath);
-    sessionStorage.setItem('subdub', router.asPath);
+    sessionStorage.setItem('bfree', router.asPath);
   }, [router.asPath]);
 
   return (

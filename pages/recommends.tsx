@@ -12,6 +12,8 @@ function Recommends({ aiData, error }: { aiData: any; error: string }) {
   const timestamp = Date.now();
 
   useEffect(() => {
+    sessionStorage.removeItem('works');
+    sessionStorage.setItem('backhistory', router.asPath);
     sessionStorage.setItem('ai', router.asPath);
   }, [router.asPath]);
 

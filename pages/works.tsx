@@ -28,17 +28,12 @@ function Works({ currentPage, worksData, error }: { currentPage: number; worksDa
     sessionStorage.removeItem('subdub');
     sessionStorage.removeItem('bfree');
 
-    sessionStorage.setItem('backhistory', router.asPath);
+    sessionStorage.removeItem('ai');
     sessionStorage.setItem('works', router.asPath);
   }, [router.asPath]);
 
   const previousPageHandler = () => {
-    const previousPage = sessionStorage.getItem('backhistory');
-    if (previousPage) {
-      router.push(`${previousPage}`);
-    } else {
-      router.push('/');
-    }
+    router.push('/');
   };
 
   const timestamp = Date.now();

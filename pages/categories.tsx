@@ -40,9 +40,18 @@ function Categories({
     sessionStorage.removeItem('amusementCategory');
     sessionStorage.removeItem('amusementTag');
     sessionStorage.removeItem('amusementPlatform');
+    sessionStorage.removeItem('amusementHanguk');
+    sessionStorage.removeItem('amusementSubdub');
+    sessionStorage.removeItem('amusementBfree');
 
     sessionStorage.removeItem('tag');
     sessionStorage.removeItem('platform');
+    sessionStorage.removeItem('hanguk');
+    sessionStorage.removeItem('subdub');
+    sessionStorage.removeItem('bfree');
+
+    sessionStorage.removeItem('ai');
+    sessionStorage.removeItem('works');
 
     sessionStorage.setItem('backhistory', router.asPath);
     sessionStorage.setItem('category', router.asPath);

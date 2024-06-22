@@ -43,6 +43,9 @@ function Tags({
     sessionStorage.removeItem('subdub');
     sessionStorage.removeItem('bfree');
 
+    sessionStorage.removeItem('ai');
+    sessionStorage.removeItem('works');
+
     sessionStorage.setItem('backhistory', router.asPath);
     sessionStorage.setItem('semoview', router.asPath);
     sessionStorage.setItem('tag', router.asPath);

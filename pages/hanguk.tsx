@@ -44,10 +44,13 @@ function Hanguk({
     sessionStorage.removeItem('amusementBfree');
 
     sessionStorage.removeItem('category');
-    sessionStorage.removeItem('platform');
     sessionStorage.removeItem('tag');
+    sessionStorage.removeItem('platform');
     sessionStorage.removeItem('subdub');
     sessionStorage.removeItem('bfree');
+
+    sessionStorage.removeItem('ai');
+    sessionStorage.removeItem('works');
 
     sessionStorage.setItem('backhistory', router.asPath);
     sessionStorage.setItem('semoview', router.asPath);
