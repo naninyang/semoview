@@ -48,7 +48,7 @@ export async function getJejeupData(page?: number, pageSize?: number, zip?: stri
     filterQuery += '&filters[$or][1][isPublish]=true';
   }
   if (zip === 'false') {
-    filterQuery += '&filters[$or][0][isZip]=false';
+    filterQuery += '&filters[$and][0][isZip]=false';
     filterQuery += '&filters[$or][1][isZip][$null]=true';
   } else if (zip === 'true') {
     filterQuery += '&filters[isZip]=true';
