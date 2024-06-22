@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
-import Anchor from './Anchor';
-import styles from '@/styles/Categories.module.sass';
 import styled from '@emotion/styled';
+import Anchor from './Anchor';
 import { vectors } from './vectors';
+import styles from '@/styles/Categories.module.sass';
 
 const WarningIcon = styled.i({
   background: `url(${vectors.warning}) no-repeat 50% 50%/contain`,
