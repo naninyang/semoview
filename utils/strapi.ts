@@ -45,14 +45,14 @@ export async function getJejeupData(page?: number, pageSize?: number, zip?: stri
   let filterQuery = `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`;
   if (isProduction) {
     if (zip === 'false') {
-      filterQuery += '&filters[$or][0][isPublish][$null]=true';
-      filterQuery += '&filters[$or][1][isPublish]=true';
-      filterQuery += '&filters[$or][2][isZip]=false';
-      filterQuery += '&filters[$or][3][isZip][$null]=true';
+      filterQuery += '&filters[$and][0][$or][0][isPublish][$null]=true';
+      filterQuery += '&filters[$and][0][$or][1][isPublish]=true';
+      filterQuery += '&filters[$and][1][$or][0][isZip]=false';
+      filterQuery += '&filters[$and][1][$or][1][isZip][$null]=true';
     } else if (zip === 'true') {
-      filterQuery += '&filters[$or][0][isPublish][$null]=true';
-      filterQuery += '&filters[$or][1][isPublish]=true';
-      filterQuery += '&filters[$or][2][isZip]=true';
+      filterQuery += '&filters[$and][0][$or][0][isPublish][$null]=true';
+      filterQuery += '&filters[$and][0][$or][1][isPublish]=true';
+      filterQuery += '&filters[$and][1][isZip]=true';
     }
   } else {
     if (zip === 'false') {
