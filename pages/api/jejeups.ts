@@ -5,10 +5,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const id = req.query.id as string;
   const page = Number(req.query.page) || 1;
   const main = req.query.main as string;
+  const zip = req.query.zip as string;
 
   if (!id && !main) {
     try {
-      const data = await getJejeupData(page, 12);
+      const data = await getJejeupData(page, 12, zip);
       res.status(200).json(data);
     } catch (error) {
       console.error(error);

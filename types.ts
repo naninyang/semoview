@@ -380,7 +380,8 @@ export interface NoticePermalinkData {
 }
 
 export interface Counts {
-  jejeup: number;
+  total: number;
+  zip: number;
   amusement: number;
 }
 

@@ -8,7 +8,7 @@ import { Pagination } from '@/components/Pagination';
 import { ReviewItem } from '@/components/ReviewItem';
 import styles from '@/styles/Reviews.module.sass';
 
-function Review({ data, error, currentPage }: { data: any; error: string; currentPage: number }) {
+function Zip({ data, error, currentPage }: { data: any; error: string; currentPage: number }) {
   const router = useRouter();
   const timestamp = Date.now();
 
@@ -20,7 +20,7 @@ function Review({ data, error, currentPage }: { data: any; error: string; curren
 
   async function fetchCountData() {
     try {
-      const response = await fetch(`/api/count?zip=false`);
+      const response = await fetch(`/api/count?zip=true`);
       const data = await response.json();
       setCount(data);
     } catch (err: any) {
@@ -42,10 +42,10 @@ function Review({ data, error, currentPage }: { data: any; error: string; curren
       <ChoiceReview />
       <div className="headline">
         <h1 className="April16thPromise">
-          <em dangerouslySetInnerHTML={{ __html: '유튜브<br/>리뷰/실황 보기' }} />{' '}
+          <em dangerouslySetInnerHTML={{ __html: '방송사 공식 채널<br/>요약 보기' }} />{' '}
           {count && process.env.NODE_ENV === 'development' && (
             <span>
-              ({count.zip} / {count.total} 개 리뷰/실황)
+              ({count.zip} / {count.total} 개 요약)
             </span>
           )}
         </h1>
@@ -75,7 +75,7 @@ function Review({ data, error, currentPage }: { data: any; error: string; curren
   );
 }
 
-export default Review;
+export default Zip;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const currentPage = Number(context.query.page) || 1;
@@ -83,7 +83,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let error = null;
 
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/jejeups?page=${currentPage}&zip=false`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/jejeups?page=${currentPage}&zip=true`);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }

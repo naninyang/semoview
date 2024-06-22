@@ -41,11 +41,17 @@ export async function getRenew(page?: number) {
   return { renew: jejeupsRenew };
 }
 
-export async function getJejeupData(page?: number, pageSize?: number) {
+export async function getJejeupData(page?: number, pageSize?: number, zip?: string) {
   let filterQuery = `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`;
   if (isProduction) {
-    filterQuery += '&filters[isPublish][$null]=true';
-    filterQuery += '&filters[isPublish]=true';
+    filterQuery += '&filters[$or][0][isPublish][$null]=true';
+    filterQuery += '&filters[$or][1][isPublish]=true';
+  }
+  if (zip === 'false') {
+    filterQuery += '&filters[$or][0][isZip]=false';
+    filterQuery += '&filters[$or][1][isZip][$null]=true';
+  } else if (zip === 'true') {
+    filterQuery += '&filters[isZip]=true';
   }
   const response = await fetch(filterQuery, {
     method: 'GET',
@@ -97,8 +103,8 @@ export async function getCategoryData(page?: number, pageSize?: number, category
   ) {
     let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[ott][$null]=false`;
     if (isProduction) {
-      filterQuery += '&filters[isPublish][$null]=true';
-      filterQuery += '&filters[isPublish]=true';
+      filterQuery += '&filters[$or][0][isPublish][$null]=true';
+      filterQuery += '&filters[$or][1][isPublish]=true';
     }
     const response = await fetch(filterQuery, {
       method: 'GET',
@@ -145,8 +151,8 @@ export async function getCategoryData(page?: number, pageSize?: number, category
   } else {
     let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[category][$contains]=${categoryName}`;
     if (isProduction) {
-      filterQuery += '&filters[isPublish][$null]=true';
-      filterQuery += '&filters[isPublish]=true';
+      filterQuery += '&filters[$or][0][isPublish][$null]=true';
+      filterQuery += '&filters[$or][1][isPublish]=true';
     }
     const response = await fetch(filterQuery, {
       method: 'GET',
@@ -198,8 +204,8 @@ export async function getTagData(page?: number, pageSize?: number, tagName?: str
   if (categoryName) {
     let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][tags][$contains]=${tagName}&filters[$and][1][tags][$contains]=${categoryName}`;
     if (isProduction) {
-      filterQuery += '&filters[isPublish][$null]=true';
-      filterQuery += '&filters[isPublish]=true';
+      filterQuery += '&filters[$or][0][isPublish][$null]=true';
+      filterQuery += '&filters[$or][1][isPublish]=true';
     }
     const response = await fetch(filterQuery, {
       method: 'GET',
@@ -246,8 +252,8 @@ export async function getTagData(page?: number, pageSize?: number, tagName?: str
   } else {
     let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][tags][$contains]=${tagName}&filters[$and][1][tags][$not][$contains]=game`;
     if (isProduction) {
-      filterQuery += '&filters[isPublish][$null]=true';
-      filterQuery += '&filters[isPublish]=true';
+      filterQuery += '&filters[$or][0][isPublish][$null]=true';
+      filterQuery += '&filters[$or][1][isPublish]=true';
     }
     const response = await fetch(filterQuery, {
       method: 'GET',
@@ -307,8 +313,8 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
   ) {
     let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[broadcast][$eq]=${platformName}`;
     if (isProduction) {
-      filterQuery += '&filters[isPublish][$null]=true';
-      filterQuery += '&filters[isPublish]=true';
+      filterQuery += '&filters[$or][0][isPublish][$null]=true';
+      filterQuery += '&filters[$or][1][isPublish]=true';
     }
     const response = await fetch(filterQuery, {
       method: 'GET',
@@ -364,8 +370,8 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
   ) {
     let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[animeBroadcast1][$eq]=${platformName}`;
     if (isProduction) {
-      filterQuery += '&filters[isPublish][$null]=true';
-      filterQuery += '&filters[isPublish]=true';
+      filterQuery += '&filters[$or][0][isPublish][$null]=true';
+      filterQuery += '&filters[$or][1][isPublish]=true';
     }
     const response = await fetch(filterQuery, {
       method: 'GET',
@@ -417,8 +423,8 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
   ) {
     let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[animeBroadcast2][$eq]=${platformName}`;
     if (isProduction) {
-      filterQuery += '&filters[isPublish][$null]=true';
-      filterQuery += '&filters[isPublish]=true';
+      filterQuery += '&filters[$or][0][isPublish][$null]=true';
+      filterQuery += '&filters[$or][1][isPublish]=true';
     }
     const response = await fetch(filterQuery, {
       method: 'GET',
@@ -473,8 +479,8 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
   ) {
     let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[ott][$contains]=${platformName}`;
     if (isProduction) {
-      filterQuery += '&filters[isPublish][$null]=true';
-      filterQuery += '&filters[isPublish]=true';
+      filterQuery += '&filters[$or][0][isPublish][$null]=true';
+      filterQuery += '&filters[$or][1][isPublish]=true';
     }
     const response = await fetch(filterQuery, {
       method: 'GET',
@@ -521,8 +527,8 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
   } else if (platformName === 'wave') {
     let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][ott][$contains]=${platformName}&filters[$and][1][category][$contains]=drama`;
     if (isProduction) {
-      filterQuery += '&filters[isPublish][$null]=true';
-      filterQuery += '&filters[isPublish]=true';
+      filterQuery += '&filters[$or][0][isPublish][$null]=true';
+      filterQuery += '&filters[$or][1][isPublish]=true';
     }
     const response = await fetch(filterQuery, {
       method: 'GET',
@@ -574,8 +580,8 @@ export async function getHangukData(page?: number, pageSize?: number, hangukName
     if (categoryName) {
       let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][supportLang][$contains]=${hangukName}&filters[$and][1][category][$contains]=game`;
       if (isProduction) {
-        filterQuery += '&filters[isPublish][$null]=true';
-        filterQuery += '&filters[isPublish]=true';
+        filterQuery += '&filters[$or][0][isPublish][$null]=true';
+        filterQuery += '&filters[$or][1][isPublish]=true';
       }
       const response = await fetch(filterQuery, {
         method: 'GET',
@@ -622,8 +628,8 @@ export async function getHangukData(page?: number, pageSize?: number, hangukName
     } else {
       let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][supportLang][$contains]=${hangukName}&filters[$and][1][category][$notContains]=game`;
       if (isProduction) {
-        filterQuery += '&filters[isPublish][$null]=true';
-        filterQuery += '&filters[isPublish]=true';
+        filterQuery += '&filters[$or][0][isPublish][$null]=true';
+        filterQuery += '&filters[$or][1][isPublish]=true';
       }
       const response = await fetch(filterQuery, {
         method: 'GET',
@@ -672,8 +678,8 @@ export async function getHangukData(page?: number, pageSize?: number, hangukName
     if (categoryName) {
       let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][supportLang][$null]=false&filters[$and][1][category][$contains]=game`;
       if (isProduction) {
-        filterQuery += '&filters[isPublish][$null]=true';
-        filterQuery += '&filters[isPublish]=true';
+        filterQuery += '&filters[$or][0][isPublish][$null]=true';
+        filterQuery += '&filters[$or][1][isPublish]=true';
       }
       const response = await fetch(filterQuery, {
         method: 'GET',
@@ -720,8 +726,8 @@ export async function getHangukData(page?: number, pageSize?: number, hangukName
     } else {
       let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[supportLang][$null]=false&filters[$and][1][category][$notContains]=game`;
       if (isProduction) {
-        filterQuery += '&filters[isPublish][$null]=true';
-        filterQuery += '&filters[isPublish]=true';
+        filterQuery += '&filters[$or][0][isPublish][$null]=true';
+        filterQuery += '&filters[$or][1][isPublish]=true';
       }
       const response = await fetch(filterQuery, {
         method: 'GET',
@@ -773,8 +779,8 @@ export async function getSubdubData(page?: number, pageSize?: number, subdubName
   if (subdubName !== 'both') {
     let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][supportLang][$contains]=${subdubName}&filters[$and][1][category][$notContains]=game`;
     if (isProduction) {
-      filterQuery += '&filters[isPublish][$null]=true';
-      filterQuery += '&filters[isPublish]=true';
+      filterQuery += '&filters[$or][0][isPublish][$null]=true';
+      filterQuery += '&filters[$or][1][isPublish]=true';
     }
     const response = await fetch(filterQuery, {
       method: 'GET',
@@ -821,8 +827,8 @@ export async function getSubdubData(page?: number, pageSize?: number, subdubName
   } else {
     let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][supportLang][$contains]=subtitle&filters[$and][1][supportLang][$contains]=dubbing&filters[$and][2][category][$notContains]=game`;
     if (isProduction) {
-      filterQuery += '&filters[isPublish][$null]=true';
-      filterQuery += '&filters[isPublish]=true';
+      filterQuery += '&filters[$or][0][isPublish][$null]=true';
+      filterQuery += '&filters[$or][1][isPublish]=true';
     }
     const response = await fetch(filterQuery, {
       method: 'GET',
@@ -873,8 +879,8 @@ export async function getBarrierFreeData(page?: number, pageSize?: number, bfree
   if (bfreeName !== 'bfree') {
     let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][supportLang][$contains]=${bfreeName}&filters[$and][1][category][$notContains]=game`;
     if (isProduction) {
-      filterQuery += '&filters[isPublish][$null]=true';
-      filterQuery += '&filters[isPublish]=true';
+      filterQuery += '&filters[$or][0][isPublish][$null]=true';
+      filterQuery += '&filters[$or][1][isPublish]=true';
     }
     const response = await fetch(filterQuery, {
       method: 'GET',
@@ -921,8 +927,8 @@ export async function getBarrierFreeData(page?: number, pageSize?: number, bfree
   } else {
     let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][supportLang][$contains]=cc&filters[$and][1][supportLang][$contains]=description&filters[$and][2][category][$notContains]=game`;
     if (isProduction) {
-      filterQuery += '&filters[isPublish][$null]=true';
-      filterQuery += '&filters[isPublish]=true';
+      filterQuery += '&filters[$or][0][isPublish][$null]=true';
+      filterQuery += '&filters[$or][1][isPublish]=true';
     }
     const response = await fetch(filterQuery, {
       method: 'GET',
@@ -972,8 +978,8 @@ export async function getBarrierFreeData(page?: number, pageSize?: number, bfree
 export async function getLiteratureData(page?: number, pageSize?: number, amuseId?: number, type?: string) {
   let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[${type}][$eq]=${amuseId}`;
   if (isProduction) {
-    filterQuery += '&filters[isPublish][$null]=true';
-    filterQuery += '&filters[isPublish]=true';
+    filterQuery += '&filters[$or][0][isPublish][$null]=true';
+    filterQuery += '&filters[$or][1][isPublish]=true';
   }
   const response = await fetch(filterQuery, {
     method: 'GET',
@@ -1039,8 +1045,8 @@ export async function getJejeupAmusementData(page?: number, pageSize?: number, a
   const amusementNumber = `'${amusementId}'`;
   let filterQuery = `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[amusements][$contains]=${amusementNumber}`;
   if (isProduction) {
-    filterQuery += '&filters[isPublish][$null]=true';
-    filterQuery += '&filters[isPublish]=true';
+    filterQuery += '&filters[$or][0][isPublish][$null]=true';
+    filterQuery += '&filters[$or][1][isPublish]=true';
   }
   const response = await fetch(filterQuery, {
     method: 'GET',
@@ -1243,8 +1249,8 @@ export async function getRelationsData(relations: string, type: string) {
   } else {
     let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups/?sort[0]=id:desc&pagination[page]=1&pagination[pageSize]=100&filters[relations][$contains]=${relations}`;
     if (isProduction) {
-      filterQuery += '&filters[isPublish][$null]=true';
-      filterQuery += '&filters[isPublish]=true';
+      filterQuery += '&filters[$or][0][isPublish][$null]=true';
+      filterQuery += '&filters[$or][1][isPublish]=true';
     }
     const response = await fetch(filterQuery, {
       method: 'GET',
@@ -1294,8 +1300,8 @@ export async function getRelationsData(relations: string, type: string) {
 export async function getSeasonData(season: string) {
   let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups/?sort[0]=id:desc&pagination[page]=1&pagination[pageSize]=100&filters[season][$contains]=${season}`;
   if (isProduction) {
-    filterQuery += '&filters[isPublish][$null]=true';
-    filterQuery += '&filters[isPublish]=true';
+    filterQuery += '&filters[$or][0][isPublish][$null]=true';
+    filterQuery += '&filters[$or][1][isPublish]=true';
   }
   const response = await fetch(filterQuery, {
     method: 'GET',
@@ -1369,8 +1375,8 @@ export async function getRecommendData(page?: number, pageSize?: number) {
 export async function getWorksData(page?: number, pageSize?: number) {
   let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`;
   if (isProduction) {
-    filterQuery += '&filters[isPublish][$null]=true';
-    filterQuery += '&filters[isPublish]=true';
+    filterQuery += '&filters[$or][0][isPublish][$null]=true';
+    filterQuery += '&filters[$or][1][isPublish]=true';
   }
   const response = await fetch(filterQuery, {
     method: 'GET',
