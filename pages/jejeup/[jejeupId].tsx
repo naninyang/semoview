@@ -678,7 +678,7 @@ export function JejeupMeta({ jejeupData, jejeupId }: { jejeupData: any; jejeupId
                     </div>
                     {jejeupMetaData.description ? (
                       <div className={styles.learnmore}>
-                        <em>{formatDuration(jejeupMetaData.duration)}</em>
+                        <em>{formatDuration(jejeupMetaData.duration, 'jejeup')}</em>
                         <p
                           dangerouslySetInnerHTML={{
                             __html: jejeupMetaData.description.replace(/\n/g, '<br />'),
