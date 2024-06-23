@@ -273,7 +273,7 @@ function Usage() {
                 OTT 서비스는 <span>프라임 비디오, 애플 TV+, 디즈니+, 넷플릭스</span> 웨이브, 왓챠, 티빙 기준입니다.
               </p>
               <p>
-                웨이브와 Apple TV+의 이용방법은 <span>각 링크 하단에 첨부된 내용을 확인해 주세요.</span>
+                웨이브와 애플 TV+의 이용방법은 <span>각 링크 하단에 첨부된 내용을 확인해 주세요.</span>
               </p>
             </section>
           </article>
