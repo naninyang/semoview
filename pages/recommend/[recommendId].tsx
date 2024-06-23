@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
 import { RecommendParmalinkData } from 'types';
 import { formatDateDetail } from '@/utils/strapi';
@@ -361,5 +361,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       recommendId,
     },
     revalidate: 1,
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: 'blocking',
   };
 };
