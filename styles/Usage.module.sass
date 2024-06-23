@@ -4,12 +4,40 @@
   display: flex
   justify-content: center
   gap: rem(25)
+  padding-bottom: rem(72)
+
+  +mq(minLarge)
+    padding-bottom: rem(102)
 
   .content
     display: flex
     flex-direction: column
     gap: rem(52)
     width: 100%
+
+    h1
+      display: flex
+      align-items: flex-end
+      justify-content: center
+      gap: rem(7)
+      padding-top: rem(27)
+      font-size: rem(24)
+      font-weight: 900
+      color: $hex-azalea
+
+      +mq(minLarge)
+        padding-top: rem(57)
+
+      +mq(minSmall)
+        font-size: rem(64)
+
+      em
+        font-size: rem(16)
+        font-weight: 300
+        font-style: normal
+
+        +mq(minSmall)
+          font-size: rem(36)
 
     .about
       display: flex
