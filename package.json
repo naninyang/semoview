@@ -13,7 +13,6 @@
     "@emotion/styled": "^11.11.0",
     "@vercel/node": "^3.0.24",
     "date-fns": "2.30.0",
-    "jsdom": "^24.0.0",
     "next": "14.1.0",
     "next-images": "^1.8.5",
     "openai": "^4.51.0",
@@ -28,7 +27,6 @@
   },
   "devDependencies": {
     "@types/gtag.js": "^0.0.18",
-    "@types/jsdom": "^21.1.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
