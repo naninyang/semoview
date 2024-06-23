@@ -487,11 +487,6 @@ function Home({
                         <AmusementItem amusement={amusement} supportLanguage={'dubbing'} />
                         <strong>
                           <span className="seed">
-                            {amusement.supportLang
-                              .filter((item: string) => item === 'subtitle')
-                              .map((index: number) => (
-                                <span key={index}>자막 지원</span>
-                              ))}{' '}
                             {amusement.titleKorean ? amusement.titleKorean : amusement.title}
                           </span>
                         </strong>
