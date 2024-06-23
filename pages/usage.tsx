@@ -129,14 +129,14 @@ function Usage() {
                 </div>
                 <div className={styles.image}>
                   <Image
-                    src="https://cdn.dev1stud.io/jejeup/4B169OWhd0DFousPz0jXp6oArW78XpN6EW7gqIwB2DvU18De8MpEhnHxUZBnLxhXDzNTVKMxne2XPkxiblLcP-nAudghFEJ00ryari_tXsUnyTNbu1IRarK-iWevAA7J0LYjkfmMtCfVueTGGbIjmg.webp"
+                    src="https://cdn.dev1stud.io/jejeup/PuFSahyVDNbQLHubBlJUzRzjR7RJCIomI1dYfzQKh_dr2SBHI2S2JI67EkONetHLhZSmPCX6UV20osNcSjwWp0U-slL3NXucdjDu-Vm-Dp4Sq8UU30MCTvMOmzvLlo6iGU-zr-T8ixTJdQsk_ZrKVivFpi0XwDNYalTmABlWUdk.webp"
                     width="390"
                     height="560"
                     alt=""
                     unoptimized
                     priority
                   />
-                  <span>이상한 변호사 우영우</span>
+                  <span>소용없어 거짓말</span>
                 </div>
                 <div className={styles.image}>
                   <Image
@@ -162,6 +162,28 @@ function Usage() {
                 </div>
                 <div className={styles.image}>
                   <Image
+                    src="https://cdn.dev1stud.io/semoview/akHZzJOI59Ceg4ZVUDniyjSS9dkn_u5LMMQIp0OnNH67XCazQwhQRfFNn6wU9dif8s_aam-6C-GzTtqp4vI7vYR4SxDDJGTmRrpi-GTdxrTHTilNJV4JUMuzr6iDTflg-u7x_Mfu9fEfkgbr1ZzFCw.webp"
+                    width="390"
+                    height="560"
+                    alt=""
+                    unoptimized
+                    priority
+                  />
+                  <span>여고추리반3</span>
+                </div>
+                <div className={styles.image}>
+                  <Image
+                    src="https://cdn.dev1stud.io/semoview/jRTTVsGZDY7Zcim.webp"
+                    width="390"
+                    height="560"
+                    alt=""
+                    unoptimized
+                    priority
+                  />
+                  <span>레인코트 킬러: 유영철을 추격하다</span>
+                </div>
+                <div className={styles.image}>
+                  <Image
                     src="https://cdn.dev1stud.io/jejeup/NCdyhGX3H0R8e3T9MN8tKY5WU1UZvto_askemNHtPdsrPaFUX6av40cVHeNKztt5T2hHpKIqfHhsZo5rbzkmWad11nljIWJGxuN6R18IN8M3HJ7LV9XGM1R3EPpZPwtVGhu9Nb4Q2BBXgKzWvAx77A.webp"
                     width="390"
                     height="560"
@@ -170,28 +192,6 @@ function Usage() {
                     priority
                   />
                   <span>오늘 밤, 세계에서 이 사랑이 사라진다 해도</span>
-                </div>
-                <div className={styles.image}>
-                  <Image
-                    src="https://cdn.dev1stud.io/jejeup/SOVqUUbC_3fv1ENRvgvTdFDiuOgePMWUev1WkZFZB8BlttDdvxbsyusdR7IdQ3sFjfnCUpeUHSydtGidiM75BB9SN8wWBpy8U69VUDFsbYmij3sSmXsXsHd5VJvBB9ipN8tfmHs6dXjTGWv9LYA1uMircWSEgg8NzNh3PMjnfK8.webp"
-                    width="390"
-                    height="560"
-                    alt=""
-                    unoptimized
-                    priority
-                  />
-                  <span>젠틀맨</span>
-                </div>
-                <div className={styles.image}>
-                  <Image
-                    src="https://cdn.dev1stud.io/jejeup/q2OsUK4Fnic8r4V04DD2djoft-0-h2fTmtjQTKJEaRIHi7IeOqw1Vhgq3RSrsIjA6Jcgc3jA9UAvHv4wl5I_0D5Vh_TEn3uOrfTc5t8yIDVrsgqEnXKBCA6m0uIiOphhYdaizMD81N5f1G8mfe3E2_vxBTK5nshaX3l22NmNa3c.webp"
-                    width="390"
-                    height="560"
-                    alt=""
-                    unoptimized
-                    priority
-                  />
-                  <span>서울괴담</span>
                 </div>
                 <div className={styles.image}>
                   <Image
