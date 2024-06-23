@@ -71,6 +71,20 @@ footer.footer
           gap: rem(17)
           +col
 
+          +mq(maxExtraSmall)
+            &:last-of-type
+              div
+                flex-direction: row
+
+                dd
+                  &::before
+                    content: '/'
+                    padding: 0 rem(7)
+                    opacity: .5
+
+                  &:first-of-type::before
+                    display: none
+
           dt
             font-size: rem(16)
             font-weight: 800
