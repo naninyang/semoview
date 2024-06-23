@@ -90,7 +90,8 @@ function Usage() {
               <div className={styles.headline}>
                 <h2>Feel your life</h2>
                 <p>
-                  당신의 라이프에 맞춰서 골라 보세요! <span>영화, 드라마, 애니메이션, 그리고 게임 실황까지.</span>
+                  당신의 라이프에 맞춰서 골라 보세요! <span>영화, 드라마, 애니메이션, </span> 그리고 방송사 공식
+                  요약본에 게임 실황까지!
                 </p>
               </div>
               <div className={styles.dummies}>
