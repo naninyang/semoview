@@ -288,6 +288,7 @@ export interface JejeupAmusementData {
     posterDefault: string;
     posterOther: string;
   };
+  total: number;
 }
 
 export type Category =

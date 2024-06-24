@@ -376,6 +376,66 @@
             &:nth-of-type(3), &:nth-of-type(4)
               display: flex
 
+      .loading-indicator
+        display: flex
+        flex-direction: column
+        gap: rem(7)
+        padding-bottom: rem(12)
+        width: calc(33.33% - rem(12))
+        font-size: rem(14)
+
+        +mq(minSmall)
+          width: calc(25% - rem(12))
+
+        +mq(minMedium)
+          width: calc(20% - rem(12))
+
+        +mq(minLarge)
+          width: calc(16.66666667% - rem(12))
+
+        +mq(minExtraLarge)
+          width: calc(14.28571429% - rem(12))
+
+        +mq(maxSmall)
+          &:nth-of-type(5)
+            display: none
+
+        +mq(maxMedium)
+          &:nth-of-type(6)
+            display: none
+
+        +mq(maxLarge)
+          &:nth-of-type(7)
+            display: none
+
+        +mq(maxExtraSmall)
+          &:nth-of-type(5), &:nth-of-type(6)
+            display: flex
+
+        &.loading-game
+          i
+            aspect-ratio: 460 / 215
+
+        i
+          display: block
+          animation: loading 1.5s infinite
+          background: linear-gradient(90deg, #EEEEEE 25%, #DDDDDD 50%, #EEEEEE 75%)
+          background-size: 200% 100%
+          border-radius: rem(7)
+          width: 100%
+          height: auto
+          aspect-ratio: 390 / 560
+          object-fit: cover
+          transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0s
+
+        strong
+          display: block
+          width: 100%
+          height: rem(20)
+          background: linear-gradient(90deg, #EEEEEE 25%, #DDDDDD 50%, #EEEEEE 75%)
+          background-size: 200% 100%
+          animation: loading 1.5s infinite
+
       a
         display: flex
         flex-direction: column
@@ -916,3 +976,10 @@
     opacity: 1
   100%
     opacity: 0
+
+@keyframes loading
+  0%
+    background-position: 200% 0
+
+  100%
+    background-position: -200% 0
