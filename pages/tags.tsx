@@ -101,7 +101,7 @@ function Tags({ horrorDramaData, horrorDramaError }: { horrorDramaData: any; hor
         setHealingData(data);
         setHealingLoading(false);
 
-        response = await fetch('/api/tag?page=1&pageSize=7&tagName=healing&categoryName=game');
+        response = await fetch('/api/tag?page=1&pageSize=5&tagName=healing&categoryName=game');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

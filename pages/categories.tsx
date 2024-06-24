@@ -16,19 +16,6 @@ const Hanguk = styled.div({
   background: `url(${vectors.supportLang}) no-repeat 50% 50%/cover`,
 });
 
-const fetchSequentially = async (urls: any) => {
-  const results = [];
-  for (const url of urls) {
-    const res = await fetch(url);
-    if (!res.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const data = await res.json();
-    results.push(data);
-  }
-  return results;
-};
-
 const LoadingIndicator = ({ isGame }: { isGame: boolean }) => {
   const loadingBlocks = Array.from({ length: isGame ? 5 : 7 }, (_, index) => index);
   return (
@@ -112,7 +99,7 @@ function Categories({ dramaData, errorDrama }: { dramaData: any; errorDrama: str
         setFilmData(data);
         setFilmLoading(false);
 
-        response = await fetch('/api/category?categoryName=anime&page=1&pageSize=5');
+        response = await fetch('/api/category?categoryName=anime&page=1&pageSize=7');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -120,7 +107,7 @@ function Categories({ dramaData, errorDrama }: { dramaData: any; errorDrama: str
         setAnimeData(data);
         setAnimeLoading(false);
 
-        response = await fetch('/api/category?categoryName=ott&page=1&pageSize=5');
+        response = await fetch('/api/category?categoryName=ott&page=1&pageSize=7');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
