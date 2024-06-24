@@ -15,19 +15,6 @@ const HangukBackground = styled.div({
   background: `url(${vectors.supportLang}) no-repeat 50% 50%/cover`,
 });
 
-const fetchSequentially = async (urls: any) => {
-  const results = [];
-  for (const url of urls) {
-    const res = await fetch(url);
-    if (!res.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const data = await res.json();
-    results.push(data);
-  }
-  return results;
-};
-
 const LoadingIndicator = ({ isGame }: { isGame: boolean }) => {
   const loadingBlocks = Array.from({ length: isGame ? 5 : 7 }, (_, index) => index);
   return (
@@ -77,26 +64,70 @@ function Hanguk({ subtitleData, subtitleError }: { subtitleData: any; subtitleEr
   const [unofficialGameData, setUnofficialGameData] = useState<JejeupAmusementData | null>(null);
   const [ccData, setCcData] = useState<JejeupAmusementData | null>(null);
   const [descriptionData, setDescriptionData] = useState<JejeupAmusementData | null>(null);
-  const [error, setError] = useState(null);
+
+  const [subtitleGameLoading, setSubtitleGameLoading] = useState(true);
+  const [dubbingLoading, setDubbingLoading] = useState(true);
+  const [unofficialGameLoading, setUnofficialGameLoading] = useState(true);
+  const [ccLoading, setCcLoading] = useState(true);
+  const [descriptionLoading, setDescriptionLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const urls = [
-      `/api/hanguk?page=1&pageSize=5&hangukName=subtitle&categoryName=game`,
-      `/api/hanguk?page=1&pageSize=7&hangukName=dubbing`,
-      `/api/hanguk?page=1&pageSize=5&hangukName=unofficial&categoryName=game`,
-      `/api/hanguk?page=1&pageSize=7&hangukName=cc`,
-      `/api/hanguk?page=1&pageSize=7&hangukName=description`,
-    ];
+    const fetchData = async () => {
+      try {
+        let response = await fetch('/api/hanguk?page=1&pageSize=5&hangukName=subtitle&categoryName=game');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        let data = await response.json();
+        setSubtitleGameData(data);
+        setSubtitleGameLoading(false);
 
-    fetchSequentially(urls)
-      .then((results) => {
-        setSubtitleGameData(results[0]);
-        setDubbingData(results[1]);
-        setUnofficialGameData(results[2]);
-        setCcData(results[3]);
-        setDescriptionData(results[4]);
-      })
-      .catch((error) => setError(error.message));
+        response = await fetch('/api/hanguk?page=1&pageSize=7&hangukName=dubbing');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        data = await response.json();
+        setDubbingData(data);
+        setDubbingLoading(false);
+
+        response = await fetch('/api/hanguk?page=1&pageSize=5&hangukName=unofficial&categoryName=game');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        data = await response.json();
+        setUnofficialGameData(data);
+        setUnofficialGameLoading(false);
+
+        response = await fetch('/api/hanguk?page=1&pageSize=7&hangukName=cc');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        data = await response.json();
+        setCcData(data);
+        setCcLoading(false);
+
+        response = await fetch('/api/hanguk?page=1&pageSize=7&hangukName=description');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        data = await response.json();
+        setDescriptionData(data);
+        setDescriptionLoading(false);
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError('알 수 없는 오류');
+        }
+        setSubtitleGameLoading(false);
+        setDubbingLoading(false);
+        setUnofficialGameLoading(false);
+        setCcLoading(false);
+        setDescriptionLoading(false);
+      }
+    };
+    fetchData();
   }, []);
 
   return (
@@ -113,14 +144,15 @@ function Hanguk({ subtitleData, subtitleError }: { subtitleData: any; subtitleEr
           <em dangerouslySetInnerHTML={{ __html: '자막/더빙/베리어프리<br />지원 작품!' }} />
         </h1>
       </div>
-      {subtitleError && (
-        <div className={styles.error}>
-          <p>데이터를 불러오는데 실패했습니다.</p>
-          <button type="button" onClick={() => window.location.reload()}>
-            다시 시도
-          </button>
-        </div>
-      )}
+      {subtitleError ||
+        (error && (
+          <div className={styles.error}>
+            <p>데이터를 불러오는데 실패했습니다.</p>
+            <button type="button" onClick={() => window.location.reload()}>
+              다시 시도
+            </button>
+          </div>
+        ))}
       <div className={styles.content}>
         {!subtitleError && subtitleData && (
           <>
@@ -152,151 +184,187 @@ function Hanguk({ subtitleData, subtitleError }: { subtitleData: any; subtitleEr
             </section>
           </>
         )}
-        <div className={styles.headline}>
-          <h2 className="April16thPromise">
-            <Anchor href="/amusement?hanguk=subtitle&category=game&page=1">한글 UI 또는 자막 공식 지원 게임!</Anchor>
-            {process.env.NODE_ENV === 'development' && subtitleGameData && ` ${subtitleGameData.total}개`}
-          </h2>
-          <Anchor href="/amusement?hanguk=subtitle&category=game&page=1">
-            <span>더보기</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z" fill="black" />
-            </svg>
-          </Anchor>
-        </div>
-        <section className={styles.game}>
-          {!error && subtitleGameData ? (
-            <>
-              {Array.isArray(subtitleGameData.data) &&
-                subtitleGameData.data.map((amusement: AmusementData, index: number) => (
-                  <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                    <AmusementItem amusement={amusement} supportLanguage={'subtitle'} isGame={true} />
-                    <strong>
-                      <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
-                    </strong>
-                  </Link>
-                ))}
-            </>
-          ) : (
-            <LoadingIndicator isGame={true} />
-          )}
-        </section>
-        <div className={styles.headline}>
-          <h2 className="April16thPromise">
-            <Anchor href="/amusement?hanguk=dubbing&page=1">한국어 더빙 공식 지원!</Anchor>
-            {process.env.NODE_ENV === 'development' && dubbingData && ` ${dubbingData.total}개`}
-          </h2>
-          <Anchor href="/amusement?hanguk=dubbing&page=1">
-            <span>더보기</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z" fill="black" />
-            </svg>
-          </Anchor>
-        </div>
-        <section>
-          {!error && dubbingData ? (
-            <>
-              {Array.isArray(dubbingData.data) &&
-                dubbingData.data.map((amusement: AmusementData, index: number) => (
-                  <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                    <AmusementItem amusement={amusement} supportLanguage={'dubbing'} />
-                    <strong>
-                      <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
-                    </strong>
-                  </Link>
-                ))}
-            </>
-          ) : (
-            <LoadingIndicator isGame={false} />
-          )}
-        </section>
-        <div className={styles.headline}>
-          <h2 className="April16thPromise">
-            <Anchor href="/amusement?hanguk=unofficial&category=game&page=1">비공식 한글 자막 지원 게임!</Anchor>
-            {process.env.NODE_ENV === 'development' && unofficialGameData && ` ${unofficialGameData.total}개`}
-          </h2>
-          <Anchor href="/amusement?hanguk=unofficial&category=game&page=1">
-            <span>더보기</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z" fill="black" />
-            </svg>
-          </Anchor>
-        </div>
-        <section className={styles.game}>
-          {!error && unofficialGameData ? (
-            <>
-              {Array.isArray(unofficialGameData.data) &&
-                unofficialGameData.data.map((amusement: AmusementData, index: number) => (
-                  <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                    <AmusementItem amusement={amusement} supportLanguage={'unofficial'} isGame={true} />
-                    <strong>
-                      <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
-                    </strong>
-                  </Link>
-                ))}
-            </>
-          ) : (
-            <LoadingIndicator isGame={true} />
-          )}
-        </section>
-        <div className={styles.headline}>
-          <h2 className="April16thPromise">
-            <Anchor href="/amusement?hanguk=cc&page=1">청각 장애인용 자막 지원!</Anchor>
-            {process.env.NODE_ENV === 'development' && ccData && ` ${ccData.total}개`}
-          </h2>
-          <Anchor href="/amusement?hanguk=cc&page=1">
-            <span>더보기</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z" fill="black" />
-            </svg>
-          </Anchor>
-        </div>
-        <section>
-          {!error && ccData ? (
-            <>
-              {Array.isArray(ccData.data) &&
-                ccData.data.map((amusement: AmusementData, index: number) => (
-                  <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                    <AmusementItem amusement={amusement} supportLanguage={'cc'} />
-                    <strong>
-                      <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
-                    </strong>
-                  </Link>
-                ))}
-            </>
-          ) : (
-            <LoadingIndicator isGame={false} />
-          )}
-        </section>
-        <div className={styles.headline}>
-          <h2 className="April16thPromise">
-            <Anchor href="/amusement?hanguk=description&page=1">화면 해설 지원!</Anchor>
-            {process.env.NODE_ENV === 'development' && descriptionData && ` ${descriptionData.total}개`}
-          </h2>
-          <Anchor href="/amusement?hanguk=description&page=1">
-            <span>더보기</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z" fill="black" />
-            </svg>
-          </Anchor>
-        </div>
-        <section>
-          {!error && descriptionData ? (
-            <>
-              {Array.isArray(descriptionData.data) &&
-                descriptionData.data.map((amusement: AmusementData, index: number) => (
-                  <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                    <AmusementItem amusement={amusement} supportLanguage={'description'} />
-                    <strong>
-                      <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
-                    </strong>
-                  </Link>
-                ))}
-            </>
-          ) : (
-            <LoadingIndicator isGame={false} />
-          )}
-        </section>
+        {!error && (
+          <>
+            <div className={styles.headline}>
+              <h2 className="April16thPromise">
+                <Anchor href="/amusement?hanguk=subtitle&category=game&page=1">
+                  한글 UI 또는 자막 공식 지원 게임!
+                </Anchor>
+                {process.env.NODE_ENV === 'development' && subtitleGameData && ` ${subtitleGameData.total}개`}
+              </h2>
+              <Anchor href="/amusement?hanguk=subtitle&category=game&page=1">
+                <span>더보기</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                    fill="black"
+                  />
+                </svg>
+              </Anchor>
+            </div>
+            <section className={styles.game}>
+              {!subtitleGameLoading ? (
+                <>
+                  {subtitleGameData &&
+                    Array.isArray(subtitleGameData.data) &&
+                    subtitleGameData.data.map((amusement: AmusementData, index: number) => (
+                      <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
+                        <AmusementItem amusement={amusement} supportLanguage={'subtitle'} isGame={true} />
+                        <strong>
+                          <span className="seed">
+                            {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                          </span>
+                        </strong>
+                      </Link>
+                    ))}
+                </>
+              ) : (
+                <LoadingIndicator isGame={true} />
+              )}
+            </section>
+            <div className={styles.headline}>
+              <h2 className="April16thPromise">
+                <Anchor href="/amusement?hanguk=dubbing&page=1">한국어 더빙 공식 지원!</Anchor>
+                {process.env.NODE_ENV === 'development' && dubbingData && ` ${dubbingData.total}개`}
+              </h2>
+              <Anchor href="/amusement?hanguk=dubbing&page=1">
+                <span>더보기</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                    fill="black"
+                  />
+                </svg>
+              </Anchor>
+            </div>
+            <section>
+              {!dubbingLoading ? (
+                <>
+                  {dubbingData &&
+                    Array.isArray(dubbingData.data) &&
+                    dubbingData.data.map((amusement: AmusementData, index: number) => (
+                      <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
+                        <AmusementItem amusement={amusement} supportLanguage={'dubbing'} />
+                        <strong>
+                          <span className="seed">
+                            {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                          </span>
+                        </strong>
+                      </Link>
+                    ))}
+                </>
+              ) : (
+                <LoadingIndicator isGame={false} />
+              )}
+            </section>
+            <div className={styles.headline}>
+              <h2 className="April16thPromise">
+                <Anchor href="/amusement?hanguk=unofficial&category=game&page=1">비공식 한글 자막 지원 게임!</Anchor>
+                {process.env.NODE_ENV === 'development' && unofficialGameData && ` ${unofficialGameData.total}개`}
+              </h2>
+              <Anchor href="/amusement?hanguk=unofficial&category=game&page=1">
+                <span>더보기</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                    fill="black"
+                  />
+                </svg>
+              </Anchor>
+            </div>
+            <section className={styles.game}>
+              {!unofficialGameLoading ? (
+                <>
+                  {unofficialGameData &&
+                    Array.isArray(unofficialGameData.data) &&
+                    unofficialGameData.data.map((amusement: AmusementData, index: number) => (
+                      <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
+                        <AmusementItem amusement={amusement} supportLanguage={'unofficial'} isGame={true} />
+                        <strong>
+                          <span className="seed">
+                            {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                          </span>
+                        </strong>
+                      </Link>
+                    ))}
+                </>
+              ) : (
+                <LoadingIndicator isGame={true} />
+              )}
+            </section>
+            <div className={styles.headline}>
+              <h2 className="April16thPromise">
+                <Anchor href="/amusement?hanguk=cc&page=1">청각 장애인용 자막 지원!</Anchor>
+                {process.env.NODE_ENV === 'development' && ccData && ` ${ccData.total}개`}
+              </h2>
+              <Anchor href="/amusement?hanguk=cc&page=1">
+                <span>더보기</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                    fill="black"
+                  />
+                </svg>
+              </Anchor>
+            </div>
+            <section>
+              {!ccLoading ? (
+                <>
+                  {ccData &&
+                    Array.isArray(ccData.data) &&
+                    ccData.data.map((amusement: AmusementData, index: number) => (
+                      <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
+                        <AmusementItem amusement={amusement} supportLanguage={'cc'} />
+                        <strong>
+                          <span className="seed">
+                            {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                          </span>
+                        </strong>
+                      </Link>
+                    ))}
+                </>
+              ) : (
+                <LoadingIndicator isGame={false} />
+              )}
+            </section>
+            <div className={styles.headline}>
+              <h2 className="April16thPromise">
+                <Anchor href="/amusement?hanguk=description&page=1">화면 해설 지원!</Anchor>
+                {process.env.NODE_ENV === 'development' && descriptionData && ` ${descriptionData.total}개`}
+              </h2>
+              <Anchor href="/amusement?hanguk=description&page=1">
+                <span>더보기</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                    fill="black"
+                  />
+                </svg>
+              </Anchor>
+            </div>
+            <section>
+              {!descriptionLoading ? (
+                <>
+                  {descriptionData &&
+                    Array.isArray(descriptionData.data) &&
+                    descriptionData.data.map((amusement: AmusementData, index: number) => (
+                      <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
+                        <AmusementItem amusement={amusement} supportLanguage={'description'} />
+                        <strong>
+                          <span className="seed">
+                            {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                          </span>
+                        </strong>
+                      </Link>
+                    ))}
+                </>
+              ) : (
+                <LoadingIndicator isGame={false} />
+              )}
+            </section>
+          </>
+        )}
         <div className={styles.asides}>
           <HangukBackground />
           <aside>

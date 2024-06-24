@@ -15,19 +15,6 @@ const HangukBackground = styled.div({
   background: `url(${vectors.supportLang}) no-repeat 50% 50%/cover`,
 });
 
-const fetchSequentially = async (urls: any) => {
-  const results = [];
-  for (const url of urls) {
-    const res = await fetch(url);
-    if (!res.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const data = await res.json();
-    results.push(data);
-  }
-  return results;
-};
-
 const LoadingIndicator = () => {
   const loadingBlocks = Array.from({ length: 7 }, (_, index) => index);
   return (
@@ -70,20 +57,40 @@ function BarrierFree({ ccData, ccError }: { ccData: any; ccError: string }) {
 
   const [descriptionData, setDescriptionData] = useState<JejeupAmusementData | null>(null);
   const [bfreeData, setBfreeData] = useState<JejeupAmusementData | null>(null);
-  const [error, setError] = useState(null);
+
+  const [descriptionLoading, setDescriptionLoading] = useState(true);
+  const [bfreeLoading, setBfreeLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const urls = [
-      `/api/subdub?page=1&pageSize=7&subdubName=description`,
-      `/api/subdub?page=1&pageSize=7&subdubName=bfree`,
-    ];
+    const fetchData = async () => {
+      try {
+        let response = await fetch('/api/bfree?page=1&pageSize=7&bfreeName=description');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        let data = await response.json();
+        setDescriptionData(data);
+        setDescriptionLoading(false);
 
-    fetchSequentially(urls)
-      .then((results) => {
-        setDescriptionData(results[0]);
-        setBfreeData(results[1]);
-      })
-      .catch((error) => setError(error.message));
+        response = await fetch('/api/bfree?page=1&pageSize=7&bfreeName=bfree');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        data = await response.json();
+        setBfreeData(data);
+        setBfreeLoading(false);
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError('알 수 없는 오류');
+        }
+        setDescriptionLoading(false);
+        setBfreeLoading(false);
+      }
+    };
+    fetchData();
   }, []);
 
   return (
@@ -100,7 +107,7 @@ function BarrierFree({ ccData, ccError }: { ccData: any; ccError: string }) {
           <em dangerouslySetInnerHTML={{ __html: '베리어프리<br />지원 작품!' }} />
         </h1>
       </div>
-      {ccError && (
+      {(ccError || error) && (
         <div className={styles.error}>
           <p>데이터를 불러오는데 실패했습니다.</p>
           <button type="button" onClick={() => window.location.reload()}>
@@ -139,64 +146,81 @@ function BarrierFree({ ccData, ccError }: { ccData: any; ccError: string }) {
             </section>
           </>
         )}
-        <div className={styles.headline}>
-          <h2 className="April16thPromise">
-            <Anchor href="/amusement?bfree=description&page=1">화면 해설 지원!</Anchor>
-            {process.env.NODE_ENV === 'development' && descriptionData && ` ${descriptionData.total}개`}
-          </h2>
-          <Anchor href="/amusement?bfree=description&page=1">
-            <span>더보기</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z" fill="black" />
-            </svg>
-          </Anchor>
-        </div>
-        <section>
-          {!error && descriptionData ? (
-            <>
-              {Array.isArray(descriptionData.data) &&
-                descriptionData.data.map((amusement: AmusementData, index: number) => (
-                  <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                    <AmusementItem amusement={amusement} supportLanguage={'description'} />
-                    <strong>
-                      <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
-                    </strong>
-                  </Link>
-                ))}
-            </>
-          ) : (
-            <LoadingIndicator />
-          )}
-        </section>
-        <div className={styles.headline}>
-          <h2 className="April16thPromise">
-            <Anchor href="/amusement?bfree=bfree&page=1">CC(SDH)S/AD 둘다 지원하는 작품!</Anchor>
-            {process.env.NODE_ENV === 'development' && bfreeData && ` ${bfreeData.total}개`}
-          </h2>
-          <Anchor href="/amusement?bfree=bfree&page=1">
-            <span>더보기</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z" fill="black" />
-            </svg>
-          </Anchor>
-        </div>
-        <section>
-          {!error && bfreeData ? (
-            <>
-              {Array.isArray(bfreeData.data) &&
-                bfreeData.data.map((amusement: AmusementData, index: number) => (
-                  <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                    <AmusementItem amusement={amusement} supportLanguage={'bfree'} />
-                    <strong>
-                      <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
-                    </strong>
-                  </Link>
-                ))}
-            </>
-          ) : (
-            <LoadingIndicator />
-          )}
-        </section>
+        {!error && (
+          <>
+            <div className={styles.headline}>
+              <h2 className="April16thPromise">
+                <Anchor href="/amusement?bfree=description&page=1">화면 해설 지원!</Anchor>
+                {process.env.NODE_ENV === 'development' && descriptionData && ` ${descriptionData.total}개`}
+              </h2>
+              <Anchor href="/amusement?bfree=description&page=1">
+                <span>더보기</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                    fill="black"
+                  />
+                </svg>
+              </Anchor>
+            </div>
+            <section>
+              {!descriptionLoading ? (
+                <>
+                  {descriptionData &&
+                    Array.isArray(descriptionData.data) &&
+                    descriptionData.data.map((amusement: AmusementData, index: number) => (
+                      <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
+                        <AmusementItem amusement={amusement} supportLanguage={'description'} />
+                        <strong>
+                          <span className="seed">
+                            {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                          </span>
+                        </strong>
+                      </Link>
+                    ))}
+                </>
+              ) : (
+                <LoadingIndicator />
+              )}
+            </section>
+            <div className={styles.headline}>
+              <h2 className="April16thPromise">
+                <Anchor href="/amusement?bfree=bfree&page=1">CC(SDH)S/AD 둘다 지원하는 작품!</Anchor>
+                {process.env.NODE_ENV === 'development' && bfreeData && ` ${bfreeData.total}개`}
+              </h2>
+              <Anchor href="/amusement?bfree=bfree&page=1">
+                <span>더보기</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                    fill="black"
+                  />
+                </svg>
+              </Anchor>
+            </div>
+            <section>
+              {!bfreeLoading ? (
+                <>
+                  {console.log('bfreeData: ', bfreeData)}
+                  {bfreeData &&
+                    Array.isArray(bfreeData.data) &&
+                    bfreeData.data.map((amusement: AmusementData, index: number) => (
+                      <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
+                        <AmusementItem amusement={amusement} supportLanguage={'bfree'} />
+                        <strong>
+                          <span className="seed">
+                            {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                          </span>
+                        </strong>
+                      </Link>
+                    ))}
+                </>
+              ) : (
+                <LoadingIndicator />
+              )}
+            </section>
+          </>
+        )}
         <aside className={styles.hanguk}>
           <HangukBackground />
           <p>자막/더빙 작품 확인!</p>

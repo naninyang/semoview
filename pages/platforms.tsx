@@ -9,19 +9,6 @@ import ChoiceGenre from '@/components/ChoiceGenre';
 import { AmusementItem } from '@/components/AmusementItem';
 import styles from '@/styles/Categories.module.sass';
 
-const fetchSequentially = async (urls: any) => {
-  const results = [];
-  for (const url of urls) {
-    const res = await fetch(url);
-    if (!res.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const data = await res.json();
-    results.push(data);
-  }
-  return results;
-};
-
 const LoadingIndicator = () => {
   const loadingBlocks = Array.from({ length: 7 }, (_, index) => index);
   return (
@@ -66,26 +53,70 @@ function Platforms({ tvingData, tvingError }: { tvingData: any; tvingError: stri
   const [kbsData, setKbsData] = useState<JejeupAmusementData | null>(null);
   const [tvnData, setTvnData] = useState<JejeupAmusementData | null>(null);
   const [jtbcData, setJtbcData] = useState<JejeupAmusementData | null>(null);
-  const [error, setError] = useState(null);
+
+  const [netflixLoading, setNetflixLoading] = useState(true);
+  const [amazonLoading, setAmazonLoading] = useState(true);
+  const [kbsLoading, setKbsLoading] = useState(true);
+  const [tvnLoading, setTvnLoading] = useState(true);
+  const [jtbcLoading, setJtbcLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const urls = [
-      `/api/platform?page=1&pageSize=7&platformName=netflix`,
-      `/api/platform?page=1&pageSize=7&platformName=amazon`,
-      `/api/platform?page=1&pageSize=7&platformName=KBS2`,
-      `/api/platform?page=1&pageSize=7&platformName=tvN`,
-      `/api/platform?page=1&pageSize=7&platformName=JTBC`,
-    ];
+    const fetchData = async () => {
+      try {
+        let response = await fetch('/api/platform?page=1&pageSize=7&platformName=netflix');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        let data = await response.json();
+        setNetflixData(data);
+        setNetflixLoading(false);
 
-    fetchSequentially(urls)
-      .then((results) => {
-        setNetflixData(results[0]);
-        setAmazonData(results[1]);
-        setKbsData(results[2]);
-        setTvnData(results[3]);
-        setJtbcData(results[4]);
-      })
-      .catch((error) => setError(error.message));
+        response = await fetch('/api/platform?page=1&pageSize=7&platformName=amazon');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        data = await response.json();
+        setAmazonData(data);
+        setAmazonLoading(false);
+
+        response = await fetch('/api/platform?page=1&pageSize=7&platformName=KBS2');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        data = await response.json();
+        setKbsData(data);
+        setKbsLoading(false);
+
+        response = await fetch('/api/platform?page=1&pageSize=7&platformName=tvN');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        data = await response.json();
+        setTvnData(data);
+        setTvnLoading(false);
+
+        response = await fetch('/api/platform?page=1&pageSize=7&platformName=JTBC');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        data = await response.json();
+        setJtbcData(data);
+        setJtbcLoading(false);
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError('알 수 없는 오류');
+        }
+        setNetflixLoading(false);
+        setAmazonLoading(false);
+        setKbsLoading(false);
+        setTvnLoading(false);
+        setJtbcLoading(false);
+      }
+    };
+    fetchData();
   }, []);
 
   return (
@@ -102,7 +133,7 @@ function Platforms({ tvingData, tvingError }: { tvingData: any; tvingError: stri
           <em dangerouslySetInnerHTML={{ __html: 'OTT 플랫폼/방송사를<br/>골라보세요!' }} />
         </h1>
       </div>
-      {tvingError && (
+      {(tvingError || error) && (
         <div className={styles.error}>
           <p>데이터를 불러오는데 실패했습니다.</p>
           <button type="button" onClick={() => window.location.reload()}>
@@ -141,151 +172,185 @@ function Platforms({ tvingData, tvingError }: { tvingData: any; tvingError: stri
             </section>
           </>
         )}
-        <div className={styles.headline}>
-          <h2 className="April16thPromise">
-            <Anchor href="/amusement?platform=netflix&page=1">넷플릭스 오리지널 리뷰</Anchor>
-            {process.env.NODE_ENV === 'development' && netflixData && ` ${netflixData.total}개`}
-          </h2>
-          <Anchor href="/amusement?platform=netflix&page=1">
-            <span>더보기</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z" fill="black" />
-            </svg>
-          </Anchor>
-        </div>
-        <section>
-          {!error && netflixData ? (
-            <>
-              {Array.isArray(netflixData.data) &&
-                netflixData.data.map((amusement: AmusementData, index: number) => (
-                  <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                    <AmusementItem amusement={amusement} platform={'netflix'} />
-                    <strong>
-                      <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
-                    </strong>
-                  </Link>
-                ))}
-            </>
-          ) : (
-            <LoadingIndicator />
-          )}
-        </section>
-        <div className={styles.headline}>
-          <h2 className="April16thPromise">
-            <Anchor href="/amusement?platform=amazon&page=1">아마존 프라임비디오 오리지널 리뷰</Anchor>
-            {process.env.NODE_ENV === 'development' && amazonData && ` ${amazonData.total}개`}
-          </h2>
-          <Anchor href="/amusement?platform=amazon&page=1">
-            <span>더보기</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z" fill="black" />
-            </svg>
-          </Anchor>
-        </div>
-        <section>
-          {!error && amazonData ? (
-            <>
-              {Array.isArray(amazonData.data) &&
-                amazonData.data.map((amusement: AmusementData, index: number) => (
-                  <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                    <AmusementItem amusement={amusement} platform={'amazon'} />
-                    <strong>
-                      <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
-                    </strong>
-                  </Link>
-                ))}
-            </>
-          ) : (
-            <LoadingIndicator />
-          )}
-        </section>
-        <div className={styles.headline}>
-          <h2 className="April16thPromise">
-            <Anchor href="/amusement?platform=KBS2&page=1">KBS 2TV 드라마 리뷰</Anchor>
-            {process.env.NODE_ENV === 'development' && kbsData && ` ${kbsData.total}개`}
-          </h2>
-          <Anchor href="/amusement?platform=KBS2&page=1">
-            <span>더보기</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z" fill="black" />
-            </svg>
-          </Anchor>
-        </div>
-        <section>
-          {!error && kbsData ? (
-            <>
-              {Array.isArray(kbsData.data) &&
-                kbsData.data.map((amusement: AmusementData, index: number) => (
-                  <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                    <AmusementItem amusement={amusement} platform={'KBS2'} />
-                    <strong>
-                      <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
-                    </strong>
-                  </Link>
-                ))}
-            </>
-          ) : (
-            <LoadingIndicator />
-          )}
-        </section>
-        <div className={styles.headline}>
-          <h2 className="April16thPromise">
-            <Anchor href="/amusement?platform=tvN&page=1">tvN 드라마 리뷰</Anchor>
-            {process.env.NODE_ENV === 'development' && tvnData && ` ${tvnData.total}개`}
-          </h2>
-          <Anchor href="/amusement?platform=tvN&page=1">
-            <span>더보기</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z" fill="black" />
-            </svg>
-          </Anchor>
-        </div>
-        <section>
-          {!error && tvnData ? (
-            <>
-              {Array.isArray(tvnData.data) &&
-                tvnData.data.map((amusement: AmusementData, index: number) => (
-                  <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                    <AmusementItem amusement={amusement} platform={'tvN'} />
-                    <strong>
-                      <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
-                    </strong>
-                  </Link>
-                ))}
-            </>
-          ) : (
-            <LoadingIndicator />
-          )}
-        </section>
-        <div className={styles.headline}>
-          <h2 className="April16thPromise">
-            <Anchor href="/amusement?platform=JTBC&page=1">JTBC 드라마 리뷰</Anchor>
-            {process.env.NODE_ENV === 'development' && jtbcData && ` ${jtbcData.total}개`}
-          </h2>
-          <Anchor href="/amusement?platform=JTBC&page=1">
-            <span>더보기</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z" fill="black" />
-            </svg>
-          </Anchor>
-        </div>
-        <section>
-          {!error && jtbcData ? (
-            <>
-              {Array.isArray(jtbcData.data) &&
-                jtbcData.data.map((amusement: AmusementData, index: number) => (
-                  <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                    <AmusementItem amusement={amusement} platform={'JTBC'} />
-                    <strong>
-                      <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
-                    </strong>
-                  </Link>
-                ))}
-            </>
-          ) : (
-            <LoadingIndicator />
-          )}
-        </section>
+        {!error && (
+          <>
+            <div className={styles.headline}>
+              <h2 className="April16thPromise">
+                <Anchor href="/amusement?platform=netflix&page=1">넷플릭스 오리지널 리뷰</Anchor>
+                {process.env.NODE_ENV === 'development' && netflixData && ` ${netflixData.total}개`}
+              </h2>
+              <Anchor href="/amusement?platform=netflix&page=1">
+                <span>더보기</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                    fill="black"
+                  />
+                </svg>
+              </Anchor>
+            </div>
+            <section>
+              {!netflixLoading ? (
+                <>
+                  {netflixData &&
+                    Array.isArray(netflixData.data) &&
+                    netflixData.data.map((amusement: AmusementData, index: number) => (
+                      <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
+                        <AmusementItem amusement={amusement} platform={'netflix'} />
+                        <strong>
+                          <span className="seed">
+                            {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                          </span>
+                        </strong>
+                      </Link>
+                    ))}
+                </>
+              ) : (
+                <LoadingIndicator />
+              )}
+            </section>
+            <div className={styles.headline}>
+              <h2 className="April16thPromise">
+                <Anchor href="/amusement?platform=amazon&page=1">아마존 프라임비디오 오리지널 리뷰</Anchor>
+                {process.env.NODE_ENV === 'development' && amazonData && ` ${amazonData.total}개`}
+              </h2>
+              <Anchor href="/amusement?platform=amazon&page=1">
+                <span>더보기</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                    fill="black"
+                  />
+                </svg>
+              </Anchor>
+            </div>
+            <section>
+              {!amazonLoading ? (
+                <>
+                  {amazonData &&
+                    Array.isArray(amazonData.data) &&
+                    amazonData.data.map((amusement: AmusementData, index: number) => (
+                      <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
+                        <AmusementItem amusement={amusement} platform={'amazon'} />
+                        <strong>
+                          <span className="seed">
+                            {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                          </span>
+                        </strong>
+                      </Link>
+                    ))}
+                </>
+              ) : (
+                <LoadingIndicator />
+              )}
+            </section>
+            <div className={styles.headline}>
+              <h2 className="April16thPromise">
+                <Anchor href="/amusement?platform=KBS2&page=1">KBS 2TV 드라마 리뷰</Anchor>
+                {process.env.NODE_ENV === 'development' && kbsData && ` ${kbsData.total}개`}
+              </h2>
+              <Anchor href="/amusement?platform=KBS2&page=1">
+                <span>더보기</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                    fill="black"
+                  />
+                </svg>
+              </Anchor>
+            </div>
+            <section>
+              {!kbsLoading ? (
+                <>
+                  {kbsData &&
+                    Array.isArray(kbsData.data) &&
+                    kbsData.data.map((amusement: AmusementData, index: number) => (
+                      <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
+                        <AmusementItem amusement={amusement} platform={'KBS2'} />
+                        <strong>
+                          <span className="seed">
+                            {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                          </span>
+                        </strong>
+                      </Link>
+                    ))}
+                </>
+              ) : (
+                <LoadingIndicator />
+              )}
+            </section>
+            <div className={styles.headline}>
+              <h2 className="April16thPromise">
+                <Anchor href="/amusement?platform=tvN&page=1">tvN 드라마 리뷰</Anchor>
+                {process.env.NODE_ENV === 'development' && tvnData && ` ${tvnData.total}개`}
+              </h2>
+              <Anchor href="/amusement?platform=tvN&page=1">
+                <span>더보기</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                    fill="black"
+                  />
+                </svg>
+              </Anchor>
+            </div>
+            <section>
+              {!tvnLoading ? (
+                <>
+                  {tvnData &&
+                    Array.isArray(tvnData.data) &&
+                    tvnData.data.map((amusement: AmusementData, index: number) => (
+                      <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
+                        <AmusementItem amusement={amusement} platform={'tvN'} />
+                        <strong>
+                          <span className="seed">
+                            {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                          </span>
+                        </strong>
+                      </Link>
+                    ))}
+                </>
+              ) : (
+                <LoadingIndicator />
+              )}
+            </section>
+            <div className={styles.headline}>
+              <h2 className="April16thPromise">
+                <Anchor href="/amusement?platform=JTBC&page=1">JTBC 드라마 리뷰</Anchor>
+                {process.env.NODE_ENV === 'development' && jtbcData && ` ${jtbcData.total}개`}
+              </h2>
+              <Anchor href="/amusement?platform=JTBC&page=1">
+                <span>더보기</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                    fill="black"
+                  />
+                </svg>
+              </Anchor>
+            </div>
+            <section>
+              {!jtbcLoading ? (
+                <>
+                  {jtbcData &&
+                    Array.isArray(jtbcData.data) &&
+                    jtbcData.data.map((amusement: AmusementData, index: number) => (
+                      <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
+                        <AmusementItem amusement={amusement} platform={'JTBC'} />
+                        <strong>
+                          <span className="seed">
+                            {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                          </span>
+                        </strong>
+                      </Link>
+                    ))}
+                </>
+              ) : (
+                <LoadingIndicator />
+              )}
+            </section>
+          </>
+        )}
         <aside>
           <div className={styles.sideA} />
           <div className={styles.sideB} />

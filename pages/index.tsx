@@ -175,7 +175,7 @@ function Home({ bannerData, bannerError }: { bannerData: any; bannerError: strin
       try {
         let response = await fetch('/api/category?categoryName=game&page=1&pageSize=5');
         if (!response.ok) {
-          throw new Error('API B 호출 실패');
+          throw new Error('Network response was not ok');
         }
         let data = await response.json();
         setGameData(data);
@@ -183,7 +183,7 @@ function Home({ bannerData, bannerError }: { bannerData: any; bannerError: strin
 
         response = await fetch('/api/category?categoryName=ott&page=1&pageSize=7');
         if (!response.ok) {
-          throw new Error('API C 호출 실패');
+          throw new Error('Network response was not ok');
         }
         data = await response.json();
         setOttData(data);
@@ -239,7 +239,7 @@ function Home({ bannerData, bannerError }: { bannerData: any; bannerError: strin
 
         response = await fetch('/api/jejeups?page=1&main=true');
         if (!response.ok) {
-          throw new Error('API A 호출 실패');
+          throw new Error('Network response was not ok');
         }
         data = await response.json();
         setReviewData(data);

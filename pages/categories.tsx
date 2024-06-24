@@ -89,30 +89,74 @@ function Categories({ dramaData, errorDrama }: { dramaData: any; errorDrama: str
   }, []);
 
   const [filmData, setFilmData] = useState<JejeupAmusementData | null>(null);
-  const [gameData, setGameData] = useState<JejeupAmusementData | null>(null);
-  const [fanData, setFanData] = useState<JejeupAmusementData | null>(null);
   const [animeData, setAnimeData] = useState<JejeupAmusementData | null>(null);
   const [ottData, setOttData] = useState<JejeupAmusementData | null>(null);
-  const [error, setError] = useState(null);
+  const [gameData, setGameData] = useState<JejeupAmusementData | null>(null);
+  const [fanData, setFanData] = useState<JejeupAmusementData | null>(null);
+
+  const [filmLoading, setFilmLoading] = useState(true);
+  const [animeLoading, setAnimeLoading] = useState(true);
+  const [ottLoading, setOttLoading] = useState(true);
+  const [gameLoading, setGameLoading] = useState(true);
+  const [fanLoading, setFanLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const urls = [
-      `/api/category?categoryName=film&page=1&pageSize=7`,
-      `/api/category?categoryName=game&page=1&pageSize=5`,
-      `/api/category?categoryName=game_fan&page=1&pageSize=5`,
-      `/api/category?categoryName=anime&page=1&pageSize=7`,
-      `/api/category?categoryName=ott&page=1&pageSize=7`,
-    ];
+    const fetchData = async () => {
+      try {
+        let response = await fetch('/api/category?categoryName=film&page=1&pageSize=7');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        let data = await response.json();
+        setFilmData(data);
+        setFilmLoading(false);
 
-    fetchSequentially(urls)
-      .then((results) => {
-        setFilmData(results[0]);
-        setGameData(results[1]);
-        setFanData(results[2]);
-        setAnimeData(results[3]);
-        setOttData(results[4]);
-      })
-      .catch((error) => setError(error.message));
+        response = await fetch('/api/category?categoryName=anime&page=1&pageSize=5');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        data = await response.json();
+        setAnimeData(data);
+        setAnimeLoading(false);
+
+        response = await fetch('/api/category?categoryName=ott&page=1&pageSize=5');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        data = await response.json();
+        setOttData(data);
+        setOttLoading(false);
+
+        response = await fetch('/api/category?categoryName=game&page=1&pageSize=5');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        data = await response.json();
+        setGameData(data);
+        setGameLoading(false);
+
+        response = await fetch('/api/category?categoryName=game_fan&page=1&pageSize=5');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        data = await response.json();
+        setFanData(data);
+        setFanLoading(false);
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError('알 수 없는 오류');
+        }
+        setFilmLoading(false);
+        setAnimeLoading(false);
+        setOttLoading(false);
+        setGameLoading(false);
+        setFanLoading(false);
+      }
+    };
+    fetchData();
   }, []);
 
   return (
@@ -130,7 +174,7 @@ function Categories({ dramaData, errorDrama }: { dramaData: any; errorDrama: str
           {process.env.NODE_ENV === 'development' && count && <span>({formatNumber(count.amusement)}개 작품)</span>}
         </h1>
       </div>
-      {errorDrama && (
+      {(errorDrama || error) && (
         <div className={styles.error}>
           <p>데이터를 불러오는데 실패했습니다.</p>
           <button type="button" onClick={() => window.location.reload()}>
@@ -169,156 +213,186 @@ function Categories({ dramaData, errorDrama }: { dramaData: any; errorDrama: str
             </section>
           </>
         )}
-        <div className={styles.headline}>
-          <h2 className="April16thPromise">
-            <Anchor href="/amusement?category=film&page=1">영화 리뷰</Anchor>
-            {process.env.NODE_ENV === 'development' && filmData && ` ${filmData.total}개`}
-          </h2>
-          <Anchor href="/amusement?category=film&page=1">
-            <span>더보기</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z" fill="black" />
-            </svg>
-          </Anchor>
-        </div>
-        <section>
-          {!error && filmData ? (
-            <>
-              {Array.isArray(filmData.data) &&
-                filmData.data.map((amusement: AmusementData, index: number) => (
-                  <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                    <AmusementItem amusement={amusement} />
-                    <strong>
-                      <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
-                    </strong>
-                  </Link>
-                ))}
-            </>
-          ) : (
-            <LoadingIndicator isGame={false} />
-          )}
-        </section>
-        <div className={styles.headline}>
-          <h2 className="April16thPromise">
-            <Anchor href="/amusement?category=anime&page=1">애니메이션 리뷰</Anchor>
-            {process.env.NODE_ENV === 'development' && animeData && ` ${animeData.total}개`}
-          </h2>
-          <Anchor href="/amusement?category=anime&page=1">
-            <span>더보기</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z" fill="black" />
-            </svg>
-          </Anchor>
-        </div>
-        <section>
-          {!error && animeData ? (
-            <>
-              {Array.isArray(animeData.data) &&
-                animeData.data.map((amusement: AmusementData, index: number) => (
-                  <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                    <AmusementItem amusement={amusement} />
-                    <strong>
-                      <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
-                    </strong>
-                  </Link>
-                ))}
-            </>
-          ) : (
-            <LoadingIndicator isGame={false} />
-          )}
-        </section>
-        <div className={styles.headline}>
-          <h2 className="April16thPromise">
-            <Anchor href="/amusement?category=ott&page=1">OTT 오리지널 리뷰</Anchor>
-            {process.env.NODE_ENV === 'development' && ottData && ` ${ottData.total}개`}
-          </h2>
-          <Anchor href="/amusement?category=ott&page=1">
-            <span>더보기</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z" fill="black" />
-            </svg>
-          </Anchor>
-        </div>
-        <section>
-          {!error && ottData ? (
-            <>
-              {Array.isArray(ottData.data) &&
-                ottData.data.map((amusement: AmusementData, index: number) => (
-                  <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                    <AmusementItem amusement={amusement} />
-                    <strong>
-                      <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
-                    </strong>
-                  </Link>
-                ))}
-            </>
-          ) : (
-            <LoadingIndicator isGame={false} />
-          )}
-        </section>
-        <div className={styles.headline}>
-          <h2 className="April16thPromise">
-            <Anchor href="/amusement?category=game&page=1">게임 리뷰 & 실황</Anchor>
-            {process.env.NODE_ENV === 'development' && gameData && ` ${gameData.total}개`}
-          </h2>
-          <Anchor href="/amusement?category=game&page=1">
-            <span>더보기</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z" fill="black" />
-            </svg>
-          </Anchor>
-        </div>
-        <section className={styles.game}>
-          {!error && gameData ? (
-            <>
-              {Array.isArray(gameData.data) &&
-                gameData.data.map((amusement: AmusementData, index: number) => (
-                  <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                    <AmusementItem amusement={amusement} isGame={true} />
-                    <strong>
-                      <span className="seed">
-                        {amusement.category === 'game_fan'
-                          ? `'${amusement.title}' 팬 게임 콜렉션`
-                          : amusement.titleKorean
-                            ? amusement.titleKorean
-                            : amusement.title}
-                      </span>
-                    </strong>
-                  </Link>
-                ))}
-            </>
-          ) : (
-            <LoadingIndicator isGame={true} />
-          )}
-        </section>
-        <div className={styles.headline}>
-          <h2 className="April16thPromise">
-            <Anchor href="/amusement?category=game_fan&page=1">팬 게임 콜렉션</Anchor>
-          </h2>
-          <Anchor href="/amusement?category=game_fan&page=1">
-            <span>더보기</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z" fill="black" />
-            </svg>
-          </Anchor>
-        </div>
-        <section className={styles.game}>
-          {!error && fanData ? (
-            <>
-              {Array.isArray(fanData.data) &&
-                fanData.data.map((amusement: AmusementData, index: number) => (
-                  <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                    <AmusementItem amusement={amusement} isGame={true} />
-                    <strong>
-                      <span className="seed">&apos;{amusement.title}&apos; 팬 게임 콜렉션</span>
-                    </strong>
-                  </Link>
-                ))}
-            </>
-          ) : (
-            <LoadingIndicator isGame={true} />
-          )}
-        </section>
+        {!error && (
+          <>
+            <div className={styles.headline}>
+              <h2 className="April16thPromise">
+                <Anchor href="/amusement?category=film&page=1">영화 리뷰</Anchor>
+                {process.env.NODE_ENV === 'development' && filmData && ` ${filmData.total}개`}
+              </h2>
+              <Anchor href="/amusement?category=film&page=1">
+                <span>더보기</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                    fill="black"
+                  />
+                </svg>
+              </Anchor>
+            </div>
+            <section>
+              {!filmLoading ? (
+                <>
+                  {filmData &&
+                    Array.isArray(filmData.data) &&
+                    filmData.data.map((amusement: AmusementData, index: number) => (
+                      <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
+                        <AmusementItem amusement={amusement} />
+                        <strong>
+                          <span className="seed">
+                            {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                          </span>
+                        </strong>
+                      </Link>
+                    ))}
+                </>
+              ) : (
+                <LoadingIndicator isGame={false} />
+              )}
+            </section>
+            <div className={styles.headline}>
+              <h2 className="April16thPromise">
+                <Anchor href="/amusement?category=anime&page=1">애니메이션 리뷰</Anchor>
+                {process.env.NODE_ENV === 'development' && animeData && ` ${animeData.total}개`}
+              </h2>
+              <Anchor href="/amusement?category=anime&page=1">
+                <span>더보기</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                    fill="black"
+                  />
+                </svg>
+              </Anchor>
+            </div>
+            <section>
+              {!animeLoading ? (
+                <>
+                  {animeData &&
+                    Array.isArray(animeData.data) &&
+                    animeData.data.map((amusement: AmusementData, index: number) => (
+                      <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
+                        <AmusementItem amusement={amusement} />
+                        <strong>
+                          <span className="seed">
+                            {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                          </span>
+                        </strong>
+                      </Link>
+                    ))}
+                </>
+              ) : (
+                <LoadingIndicator isGame={false} />
+              )}
+            </section>
+            <div className={styles.headline}>
+              <h2 className="April16thPromise">
+                <Anchor href="/amusement?category=ott&page=1">OTT 오리지널 리뷰</Anchor>
+                {process.env.NODE_ENV === 'development' && ottData && ` ${ottData.total}개`}
+              </h2>
+              <Anchor href="/amusement?category=ott&page=1">
+                <span>더보기</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                    fill="black"
+                  />
+                </svg>
+              </Anchor>
+            </div>
+            <section>
+              {!ottLoading ? (
+                <>
+                  {ottData &&
+                    Array.isArray(ottData.data) &&
+                    ottData.data.map((amusement: AmusementData, index: number) => (
+                      <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
+                        <AmusementItem amusement={amusement} />
+                        <strong>
+                          <span className="seed">
+                            {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                          </span>
+                        </strong>
+                      </Link>
+                    ))}
+                </>
+              ) : (
+                <LoadingIndicator isGame={false} />
+              )}
+            </section>
+            <div className={styles.headline}>
+              <h2 className="April16thPromise">
+                <Anchor href="/amusement?category=game&page=1">게임 리뷰 & 실황</Anchor>
+                {process.env.NODE_ENV === 'development' && gameData && ` ${gameData.total}개`}
+              </h2>
+              <Anchor href="/amusement?category=game&page=1">
+                <span>더보기</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                    fill="black"
+                  />
+                </svg>
+              </Anchor>
+            </div>
+            <section className={styles.game}>
+              {!gameLoading ? (
+                <>
+                  {gameData &&
+                    Array.isArray(gameData.data) &&
+                    gameData.data.map((amusement: AmusementData, index: number) => (
+                      <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
+                        <AmusementItem amusement={amusement} isGame={true} />
+                        <strong>
+                          <span className="seed">
+                            {amusement.category === 'game_fan'
+                              ? `'${amusement.title}' 팬 게임 콜렉션`
+                              : amusement.titleKorean
+                                ? amusement.titleKorean
+                                : amusement.title}
+                          </span>
+                        </strong>
+                      </Link>
+                    ))}
+                </>
+              ) : (
+                <LoadingIndicator isGame={true} />
+              )}
+            </section>
+            <div className={styles.headline}>
+              <h2 className="April16thPromise">
+                <Anchor href="/amusement?category=game_fan&page=1">팬 게임 콜렉션</Anchor>
+              </h2>
+              <Anchor href="/amusement?category=game_fan&page=1">
+                <span>더보기</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                    fill="black"
+                  />
+                </svg>
+              </Anchor>
+            </div>
+            <section className={styles.game}>
+              {!fanLoading ? (
+                <>
+                  {fanData &&
+                    Array.isArray(fanData.data) &&
+                    fanData.data.map((amusement: AmusementData, index: number) => (
+                      <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
+                        <AmusementItem amusement={amusement} isGame={true} />
+                        <strong>
+                          <span className="seed">&apos;{amusement.title}&apos; 팬 게임 콜렉션</span>
+                        </strong>
+                      </Link>
+                    ))}
+                </>
+              ) : (
+                <LoadingIndicator isGame={true} />
+              )}
+            </section>
+          </>
+        )}
         <aside className={styles.hanguk}>
           <Hanguk />
           <p>자막 / 더빙 / 베리어프리 작품 확인!</p>

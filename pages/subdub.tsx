@@ -15,19 +15,6 @@ const HangukBackground = styled.div({
   background: `url(${vectors.supportLang}) no-repeat 50% 50%/cover`,
 });
 
-const fetchSequentially = async (urls: any) => {
-  const results = [];
-  for (const url of urls) {
-    const res = await fetch(url);
-    if (!res.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const data = await res.json();
-    results.push(data);
-  }
-  return results;
-};
-
 const LoadingIndicator = () => {
   const loadingBlocks = Array.from({ length: 7 }, (_, index) => index);
   return (
@@ -70,17 +57,40 @@ function Subdub({ subtitleData, subtitleError }: { subtitleData: any; subtitleEr
 
   const [dubbingData, setDubbingData] = useState<JejeupAmusementData | null>(null);
   const [bothData, setBothData] = useState<JejeupAmusementData | null>(null);
-  const [error, setError] = useState(null);
+
+  const [dubbingLoading, setDubbingLoading] = useState(true);
+  const [bothLoading, setBothLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const urls = [`/api/subdub?page=1&pageSize=7&subdubName=dubbing`, `/api/subdub?page=1&pageSize=7&subdubName=both`];
+    const fetchData = async () => {
+      try {
+        let response = await fetch('/api/subdub?page=1&pageSize=7&subdubName=dubbing');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        let data = await response.json();
+        setDubbingData(data);
+        setDubbingLoading(false);
 
-    fetchSequentially(urls)
-      .then((results) => {
-        setDubbingData(results[0]);
-        setBothData(results[1]);
-      })
-      .catch((error) => setError(error.message));
+        response = await fetch('/api/subdub?page=1&pageSize=7&subdubName=both');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        data = await response.json();
+        setBothData(data);
+        setBothLoading(false);
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError('알 수 없는 오류');
+        }
+        setDubbingLoading(false);
+        setBothLoading(false);
+      }
+    };
+    fetchData();
   }, []);
 
   return (
@@ -97,7 +107,7 @@ function Subdub({ subtitleData, subtitleError }: { subtitleData: any; subtitleEr
           <em dangerouslySetInnerHTML={{ __html: '자막/더빙<br/>지원 작품!' }} />
         </h1>
       </div>
-      {subtitleError && (
+      {(subtitleError || error) && (
         <div className={styles.error}>
           <p>데이터를 불러오는데 실패했습니다.</p>
           <button type="button" onClick={() => window.location.reload()}>
@@ -136,64 +146,80 @@ function Subdub({ subtitleData, subtitleError }: { subtitleData: any; subtitleEr
             </section>
           </>
         )}
-        <div className={styles.headline}>
-          <h2 className="April16thPromise">
-            <Anchor href="/amusement?subdub=dubbing&page=1">한국어 더빙 공식 지원!</Anchor>
-            {process.env.NODE_ENV === 'development' && dubbingData && ` ${dubbingData.total}개`}
-          </h2>
-          <Anchor href="/amusement?subdub=dubbing&page=1">
-            <span>더보기</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z" fill="black" />
-            </svg>
-          </Anchor>
-        </div>
-        <section>
-          {!error && dubbingData ? (
-            <>
-              {Array.isArray(dubbingData.data) &&
-                dubbingData.data.map((amusement: AmusementData, index: number) => (
-                  <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                    <AmusementItem amusement={amusement} supportLanguage={'dubbing'} />
-                    <strong>
-                      <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
-                    </strong>
-                  </Link>
-                ))}
-            </>
-          ) : (
-            <LoadingIndicator />
-          )}
-        </section>
-        <div className={styles.headline}>
-          <h2 className="April16thPromise">
-            <Anchor href="/amusement?subdub=both&page=1">자막/더빙 둘다 지원하는 작품!</Anchor>
-            {process.env.NODE_ENV === 'development' && bothData && ` ${bothData.total}개`}
-          </h2>
-          <Anchor href="/amusement?subdub=both&page=1">
-            <span>더보기</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z" fill="black" />
-            </svg>
-          </Anchor>
-        </div>
-        <section>
-          {!error && bothData ? (
-            <>
-              {Array.isArray(bothData.data) &&
-                bothData.data.map((amusement: AmusementData, index: number) => (
-                  <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                    <AmusementItem amusement={amusement} supportLanguage={'both'} />
-                    <strong>
-                      <span className="seed">{amusement.titleKorean ? amusement.titleKorean : amusement.title}</span>
-                    </strong>
-                  </Link>
-                ))}
-            </>
-          ) : (
-            <LoadingIndicator />
-          )}
-        </section>
+        {!error && (
+          <>
+            <div className={styles.headline}>
+              <h2 className="April16thPromise">
+                <Anchor href="/amusement?subdub=dubbing&page=1">한국어 더빙 공식 지원!</Anchor>
+                {process.env.NODE_ENV === 'development' && dubbingData && ` ${dubbingData.total}개`}
+              </h2>
+              <Anchor href="/amusement?subdub=dubbing&page=1">
+                <span>더보기</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                    fill="black"
+                  />
+                </svg>
+              </Anchor>
+            </div>
+            <section>
+              {!dubbingLoading ? (
+                <>
+                  {dubbingData &&
+                    Array.isArray(dubbingData.data) &&
+                    dubbingData.data.map((amusement: AmusementData, index: number) => (
+                      <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
+                        <AmusementItem amusement={amusement} supportLanguage={'dubbing'} />
+                        <strong>
+                          <span className="seed">
+                            {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                          </span>
+                        </strong>
+                      </Link>
+                    ))}
+                </>
+              ) : (
+                <LoadingIndicator />
+              )}
+            </section>
+            <div className={styles.headline}>
+              <h2 className="April16thPromise">
+                <Anchor href="/amusement?subdub=both&page=1">자막/더빙 둘다 지원하는 작품!</Anchor>
+                {process.env.NODE_ENV === 'development' && bothData && ` ${bothData.total}개`}
+              </h2>
+              <Anchor href="/amusement?subdub=both&page=1">
+                <span>더보기</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
+                    fill="black"
+                  />
+                </svg>
+              </Anchor>
+            </div>
+            <section>
+              {!bothLoading ? (
+                <>
+                  {bothData &&
+                    Array.isArray(bothData.data) &&
+                    bothData.data.map((amusement: AmusementData, index: number) => (
+                      <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
+                        <AmusementItem amusement={amusement} supportLanguage={'both'} />
+                        <strong>
+                          <span className="seed">
+                            {amusement.titleKorean ? amusement.titleKorean : amusement.title}
+                          </span>
+                        </strong>
+                      </Link>
+                    ))}
+                </>
+              ) : (
+                <LoadingIndicator />
+              )}
+            </section>
+          </>
+        )}
         <aside className={styles.hanguk}>
           <HangukBackground />
           <p>베리어프리 작품 확인!</p>
