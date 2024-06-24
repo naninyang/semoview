@@ -1119,9 +1119,9 @@ export async function getBannerData() {
   return banners;
 }
 
-export async function getNoticeData() {
+export async function getNoticeData(page?: number, pageSize?: number) {
   const response = await fetch(
-    `${process.env.STRAPI_URL}/api/notice-nol2trs?sort[0]=id:desc&pagination[page]=1&pagination[pageSize]=100`,
+    `${process.env.STRAPI_URL}/api/notice-nol2trs?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[platform][$eq]=jejeup`,
     {
       method: 'GET',
       headers: {
@@ -1139,8 +1139,8 @@ export async function getNoticeData() {
     description: data.attributes.description,
     created: data.attributes.created,
   }));
-
-  return notices;
+  const pageCount = noticeResponse.meta.pagination.pageCount;
+  return { notices, pageCount: pageCount };
 }
 
 export async function fetchMetadata(url: string) {

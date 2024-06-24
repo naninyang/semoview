@@ -5,19 +5,18 @@ import { isSafari } from 'react-device-detect';
 import { NoticeData } from 'types';
 import Seo, { originTitle } from '@/components/Seo';
 import { BackButton } from '@/components/Icons';
+import { Pagination } from '@/components/Pagination';
 import Anchor from '@/components/Anchor';
 import styles from '@/styles/Notice.module.sass';
 
 interface NoticeProps {
-  notices: NoticeData[];
+  data: NoticeData[];
+  noticesData: any;
+  currentPage: number;
+  error: string;
 }
 
-const Notices: NextPage<NoticeProps> = ({ notices }) => {
-  const [noticesData, setNoticesData] = useState<NoticeData[]>([]);
-  useEffect(() => {
-    setNoticesData(notices);
-  }, [notices]);
-
+const Notices: NextPage<NoticeProps> = ({ noticesData, data, currentPage, error }) => {
   const [deferredPrompt, setDeferredPrompt] = useState<Event | null>(null);
   const [deviceSafari, setDeviceSafari] = useState<string>();
 
@@ -55,6 +54,11 @@ const Notices: NextPage<NoticeProps> = ({ notices }) => {
   }, []);
 
   const router = useRouter();
+
+  useEffect(() => {
+    sessionStorage.setItem('notices', router.asPath);
+  }, [router.asPath]);
+
   const previousPageHandler = () => {
     const previousPage = sessionStorage.getItem('backhistory');
     if (previousPage) {
@@ -97,10 +101,9 @@ const Notices: NextPage<NoticeProps> = ({ notices }) => {
         </div>
         <div className={styles.notices}>
           <hr />
-          <ul>
-            {noticesData
-              .filter((notice) => notice.platform === 'jejeup')
-              .map((notice) => (
+          {data && !error && (
+            <ul>
+              {data.map((notice) => (
                 <li key={notice.idx}>
                   <Anchor key={notice.idx} href={`/notices/${notice.idx}`} scroll={false} shallow={true}>
                     <strong>
@@ -110,19 +113,40 @@ const Notices: NextPage<NoticeProps> = ({ notices }) => {
                   </Anchor>
                 </li>
               ))}
-          </ul>
+            </ul>
+          )}
+          <hr />
+          {noticesData && <Pagination currentPage={currentPage} pageCount={noticesData.pageCount} sorting={'notice'} />}
         </div>
       </div>
     </main>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/notices`);
-  const data = await response.json();
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const currentPage = Number(context.query.page) || 1;
+  let noticesData = null;
+  let data = null;
+  let error = null;
+
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/notices?page=${currentPage}`);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    noticesData = await response.json();
+    data = noticesData.notices;
+  } catch (err) {
+    error = err instanceof Error ? err.message : 'An unknown error occurred';
+  }
 
   return {
-    props: { notices: data },
+    props: {
+      noticesData,
+      data,
+      error,
+      currentPage,
+    },
   };
 };
 

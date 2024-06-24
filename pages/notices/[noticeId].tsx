@@ -1,4 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
 import { NoticePermalinkData } from 'types';
 import Seo, { originTitle } from '@/components/Seo';
 import Anchor from '@/components/Anchor';
@@ -56,6 +57,16 @@ const NoticeContent = ({ data }: { data: any }) => {
 };
 
 const Notice = ({ notice }: { notice: NoticePermalinkData | null }) => {
+  const router = useRouter();
+  const previousPageHandler = () => {
+    const previousPage = sessionStorage.getItem('notices');
+    if (previousPage) {
+      router.push(`${previousPage}`);
+    } else {
+      router.push('/notices');
+    }
+  };
+
   const timestamp = Date.now();
   return (
     <main className={styles.notice}>
@@ -73,10 +84,10 @@ const Notice = ({ notice }: { notice: NoticePermalinkData | null }) => {
             pageImg={`https://semo.dev1stud.io/og-image.webp?ts=${timestamp}`}
           />
           <div className="top-link">
-            <Anchor href="/notices">
+            <button onClick={previousPageHandler} type="button">
               <BackButton />
               <span>뒤로가기</span>
-            </Anchor>
+            </button>
           </div>
           <div className={styles.content}>
             <article>
@@ -86,10 +97,10 @@ const Notice = ({ notice }: { notice: NoticePermalinkData | null }) => {
               </header>
               <NoticeContent data={notice.attributes.content} />
               <div className={styles.button}>
-                <Anchor href="/notices">
+                <button onClick={previousPageHandler} type="button">
                   <BackButton />
                   <span>뒤로가기</span>
-                </Anchor>
+                </button>
               </div>
             </article>
           </div>

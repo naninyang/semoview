@@ -332,6 +332,19 @@ export interface NoticeData {
   subject: string;
   description: string;
   created: string;
+  pageCount: number;
+}
+
+export interface NoticePermalinkData {
+  attributes: {
+    idx: string;
+    platform: string;
+    subject: string;
+    description: string;
+    content: string;
+    created: string;
+    createdAt: string;
+  };
 }
 
 export interface BannerData {
@@ -364,18 +377,6 @@ export interface RecommendParmalinkData {
     fieldName: string;
     fieldValue: string;
     question: string;
-    createdAt: string;
-  };
-}
-
-export interface NoticePermalinkData {
-  attributes: {
-    idx: string;
-    platform: string;
-    subject: string;
-    description: string;
-    content: string;
-    created: string;
     createdAt: string;
   };
 }
