@@ -388,7 +388,7 @@ function Hanguk({ subtitleData, subtitleError }: { subtitleData: any; subtitleEr
 
 export default Hanguk;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async () => {
   let subtitleData = null;
   let subtitleError = null;
 

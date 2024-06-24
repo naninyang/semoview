@@ -394,7 +394,7 @@ function Categories({ dramaData, errorDrama }: { dramaData: any; errorDrama: str
 
 export default Categories;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async () => {
   let dramaData = null;
   let dramaError = null;
 

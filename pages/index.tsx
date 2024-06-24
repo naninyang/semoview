@@ -802,7 +802,7 @@ function Home({ bannerData, bannerError }: { bannerData: any; bannerError: strin
 
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async () => {
   let bannerData = null;
   let bannerError = null;
 

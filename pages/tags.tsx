@@ -386,7 +386,7 @@ function Tags({ horrorDramaData, horrorDramaError }: { horrorDramaData: any; hor
 
 export default Tags;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async () => {
   let horrorDramaData = null;
   let horrorDramaError = null;
 

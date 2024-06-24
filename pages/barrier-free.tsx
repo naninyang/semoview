@@ -235,7 +235,7 @@ function BarrierFree({ ccData, ccError }: { ccData: any; ccError: string }) {
 
 export default BarrierFree;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async () => {
   let ccData = null;
   let ccError = null;
 

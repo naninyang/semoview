@@ -234,7 +234,7 @@ function Subdub({ subtitleData, subtitleError }: { subtitleData: any; subtitleEr
 
 export default Subdub;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async () => {
   let subtitleData = null;
   let bothData = null;
   let subtitleError = null;
