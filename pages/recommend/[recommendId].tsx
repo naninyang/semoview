@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { GetServerSideProps, GetStaticPaths } from 'next';
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import { RecommendParmalinkData } from 'types';
 import { formatDateDetail } from '@/utils/strapi';
@@ -323,7 +323,7 @@ function RecommendDetail({
 
 export default RecommendDetail;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   const recommendId = context.params?.recommendId;
   let recommendData = null;
 
