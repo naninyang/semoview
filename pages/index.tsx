@@ -159,33 +159,25 @@ function Home({ bannerData, bannerError }: { bannerData: any; bannerError: strin
   const [dubbingData, setDubbingData] = useState<JejeupAmusementData | null>(null);
   const [bfreeData, setBfreeData] = useState<JejeupAmusementData | null>(null);
 
-  const [reviewLoading, setReviewLoading] = useState(false);
-  const [gameLoading, setGameLoading] = useState(false);
-  const [ottLoading, setOttLoading] = useState(false);
-  const [healingLoading, setHealingLoading] = useState(false);
-  const [horrorGameLoading, setHorrorGameLoading] = useState(false);
-  const [tvnLoading, setTvnLoading] = useState(false);
-  const [jtbcLoading, setJtbcLoading] = useState(false);
-  const [dubbingLoading, setDubbingLoading] = useState(false);
-  const [bfreeLoading, setBfreeLoading] = useState(false);
+  const [reviewLoading, setReviewLoading] = useState(true);
+  const [gameLoading, setGameLoading] = useState(true);
+  const [ottLoading, setOttLoading] = useState(true);
+  const [healingLoading, setHealingLoading] = useState(true);
+  const [horrorGameLoading, setHorrorGameLoading] = useState(true);
+  const [tvnLoading, setTvnLoading] = useState(true);
+  const [jtbcLoading, setJtbcLoading] = useState(true);
+  const [dubbingLoading, setDubbingLoading] = useState(true);
+  const [bfreeLoading, setBfreeLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let response = await fetch('/api/jejeups?page=1&main=true');
-        if (!response.ok) {
-          throw new Error('API A 호출 실패');
-        }
-        let data = await response.json();
-        setReviewData(data);
-        setReviewLoading(false);
-
-        response = await fetch('/api/category?categoryName=game&page=1&pageSize=5');
+        let response = await fetch('/api/category?categoryName=game&page=1&pageSize=5');
         if (!response.ok) {
           throw new Error('API B 호출 실패');
         }
-        data = await response.json();
+        let data = await response.json();
         setGameData(data);
         setGameLoading(false);
 
@@ -244,13 +236,20 @@ function Home({ bannerData, bannerError }: { bannerData: any; bannerError: strin
         data = await response.json();
         setBfreeData(data);
         setBfreeLoading(false);
+
+        response = await fetch('/api/jejeups?page=1&main=true');
+        if (!response.ok) {
+          throw new Error('API A 호출 실패');
+        }
+        data = await response.json();
+        setReviewData(data);
+        setReviewLoading(false);
       } catch (error) {
         if (error instanceof Error) {
           setError(error.message);
         } else {
           setError('알 수 없는 오류');
         }
-        setReviewLoading(false);
         setGameLoading(false);
         setOttLoading(false);
         setHealingLoading(false);
@@ -259,6 +258,7 @@ function Home({ bannerData, bannerError }: { bannerData: any; bannerError: strin
         setJtbcLoading(false);
         setDubbingLoading(false);
         setBfreeLoading(false);
+        setReviewLoading(false);
       }
     };
     fetchData();
@@ -271,7 +271,7 @@ function Home({ bannerData, bannerError }: { bannerData: any; bannerError: strin
         pageDescription="세상의 모든 리뷰를 수집한다"
         pageImg={`https://semo.dev1stud.io/og-image.webp?ts=${timestamp}`}
       />
-      {bannerError && (
+      {(bannerError || error) && (
         <div className={styles.error}>
           <p>데이터를 불러오는데 실패했습니다.</p>
           <button type="button" onClick={() => window.location.reload()}>
@@ -279,7 +279,7 @@ function Home({ bannerData, bannerError }: { bannerData: any; bannerError: strin
           </button>
         </div>
       )}
-      {!bannerError && (
+      {(!bannerError || !error) && (
         <>
           <div className={styles.content}>
             {bannerData && (
@@ -384,9 +384,10 @@ function Home({ bannerData, bannerError }: { bannerData: any; bannerError: strin
               </Anchor>
             </div>
             <section>
-              {!error && ottData ? (
+              {!ottLoading ? (
                 <>
-                  {Array.isArray(ottData.data) &&
+                  {ottData &&
+                    Array.isArray(ottData.data) &&
                     ottData.data.map((amusement: AmusementData, index: number) => (
                       <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                         <AmusementItem amusement={amusement} />
@@ -418,9 +419,10 @@ function Home({ bannerData, bannerError }: { bannerData: any; bannerError: strin
               </Anchor>
             </div>
             <section className={styles.game}>
-              {!error && gameData ? (
+              {!gameLoading ? (
                 <>
-                  {Array.isArray(gameData.data) &&
+                  {gameData &&
+                    Array.isArray(gameData.data) &&
                     gameData.data.map((amusement: AmusementData, index: number) => (
                       <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                         <AmusementItem amusement={amusement} isGame={true} />
@@ -461,9 +463,10 @@ function Home({ bannerData, bannerError }: { bannerData: any; bannerError: strin
               </Anchor>
             </div>
             <section>
-              {!error && healingData ? (
+              {!healingLoading ? (
                 <>
-                  {Array.isArray(healingData.data) &&
+                  {healingData &&
+                    Array.isArray(healingData.data) &&
                     healingData.data.map((amusement: AmusementData, index: number) => (
                       <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                         <AmusementItem amusement={amusement} />
@@ -498,9 +501,10 @@ function Home({ bannerData, bannerError }: { bannerData: any; bannerError: strin
               </Anchor>
             </div>
             <section className={styles.game}>
-              {!error && horrorGameData ? (
+              {!horrorGameLoading ? (
                 <>
-                  {Array.isArray(horrorGameData.data) &&
+                  {horrorGameData &&
+                    Array.isArray(horrorGameData.data) &&
                     horrorGameData.data.map((amusement: AmusementData, index: number) => (
                       <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                         <AmusementItem amusement={amusement} isGame={true} />
@@ -532,9 +536,10 @@ function Home({ bannerData, bannerError }: { bannerData: any; bannerError: strin
               </Anchor>
             </div>
             <section>
-              {!error && tvnData ? (
+              {!tvnLoading ? (
                 <>
-                  {Array.isArray(tvnData.data) &&
+                  {tvnData &&
+                    Array.isArray(tvnData.data) &&
                     tvnData.data.map((amusement: AmusementData, index: number) => (
                       <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                         <AmusementItem amusement={amusement} platform={'tvN'} />
@@ -566,9 +571,10 @@ function Home({ bannerData, bannerError }: { bannerData: any; bannerError: strin
               </Anchor>
             </div>
             <section>
-              {!error && jtbcData ? (
+              {!jtbcLoading ? (
                 <>
-                  {Array.isArray(jtbcData.data) &&
+                  {jtbcData &&
+                    Array.isArray(jtbcData.data) &&
                     jtbcData.data.map((amusement: AmusementData, index: number) => (
                       <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                         <AmusementItem amusement={amusement} platform={'JTBC'} />
@@ -600,9 +606,10 @@ function Home({ bannerData, bannerError }: { bannerData: any; bannerError: strin
               </Anchor>
             </div>
             <section>
-              {!error && dubbingData ? (
+              {!dubbingLoading ? (
                 <>
-                  {Array.isArray(dubbingData.data) &&
+                  {dubbingData &&
+                    Array.isArray(dubbingData.data) &&
                     dubbingData.data.map((amusement: AmusementData, index: number) => (
                       <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                         <AmusementItem amusement={amusement} supportLanguage={'dubbing'} />
@@ -634,9 +641,10 @@ function Home({ bannerData, bannerError }: { bannerData: any; bannerError: strin
               </Anchor>
             </div>
             <section>
-              {!error && bfreeData ? (
+              {!bfreeLoading ? (
                 <>
-                  {Array.isArray(bfreeData.data) &&
+                  {bfreeData &&
+                    Array.isArray(bfreeData.data) &&
                     bfreeData.data.map((amusement: AmusementData, index: number) => (
                       <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                         <AmusementItem amusement={amusement} supportLanguage={'bfree'} />
@@ -656,7 +664,7 @@ function Home({ bannerData, bannerError }: { bannerData: any; bannerError: strin
           <div className={styles['review-content']}>
             <div className={styles.headline}>
               <h2 className="April16thPromise">
-                <Anchor href="/reviews?page=1">리뷰 & 요약 영상</Anchor>
+                <Anchor href="/reviews?page=1">리뷰/실황 & 요약 영상</Anchor>
                 {process.env.NODE_ENV === 'development' && count && reviewData && ` ${count.total}개`}
               </h2>
               <Anchor href="/reviews?page=1">
@@ -670,9 +678,10 @@ function Home({ bannerData, bannerError }: { bannerData: any; bannerError: strin
               </Anchor>
             </div>
             <section>
-              {!error && reviewData ? (
+              {!reviewLoading ? (
                 <>
-                  {Array.isArray(reviewData.jejeups) &&
+                  {reviewData &&
+                    Array.isArray(reviewData.jejeups) &&
                     reviewData.jejeups.map((jejeup: JejeupData) => (
                       <div className={styles.item} key={jejeup.id}>
                         <ReviewItem jejeup={jejeup} />
