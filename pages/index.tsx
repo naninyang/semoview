@@ -41,19 +41,6 @@ export function useMobile() {
   return isMobile;
 }
 
-const fetchSequentially = async (urls: any) => {
-  const results = [];
-  for (const url of urls) {
-    const res = await fetch(url);
-    if (!res.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const data = await res.json();
-    results.push(data);
-  }
-  return results;
-};
-
 const LoadingIndicator = ({ isGame }: { isGame: boolean }) => {
   const loadingBlocks = Array.from({ length: isGame ? 5 : 7 }, (_, index) => index);
   return (
@@ -171,34 +158,110 @@ function Home({ bannerData, bannerError }: { bannerData: any; bannerError: strin
   const [jtbcData, setJtbcData] = useState<JejeupAmusementData | null>(null);
   const [dubbingData, setDubbingData] = useState<JejeupAmusementData | null>(null);
   const [bfreeData, setBfreeData] = useState<JejeupAmusementData | null>(null);
-  const [error, setError] = useState(null);
+
+  const [reviewLoading, setReviewLoading] = useState(false);
+  const [gameLoading, setGameLoading] = useState(false);
+  const [ottLoading, setOttLoading] = useState(false);
+  const [healingLoading, setHealingLoading] = useState(false);
+  const [horrorGameLoading, setHorrorGameLoading] = useState(false);
+  const [tvnLoading, setTvnLoading] = useState(false);
+  const [jtbcLoading, setJtbcLoading] = useState(false);
+  const [dubbingLoading, setDubbingLoading] = useState(false);
+  const [bfreeLoading, setBfreeLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const urls = [
-      `/api/jejeups?page=1&main=true`,
-      `/api/category?categoryName=game&page=1&pageSize=5`,
-      `/api/category?categoryName=ott&page=1&pageSize=7`,
-      `/api/tag?page=1&pageSize=7&tagName=healing`,
-      `/api/tag?page=1&pageSize=5&tagName=horror&categoryName=game`,
-      `/api/platform?page=1&pageSize=7&platformName=tvN`,
-      `/api/platform?page=1&pageSize=7&platformName=JTBC`,
-      `/api/subdub?page=1&pageSize=7&subdubName=dubbing`,
-      `/api/bfree?page=1&pageSize=7&bfreeName=bfree`,
-    ];
+    const fetchData = async () => {
+      try {
+        let response = await fetch('/api/jejeups?page=1&main=true');
+        if (!response.ok) {
+          throw new Error('API A 호출 실패');
+        }
+        let data = await response.json();
+        setReviewData(data);
+        setReviewLoading(false);
 
-    fetchSequentially(urls)
-      .then((results) => {
-        setReviewData(results[0]);
-        setGameData(results[1]);
-        setOttData(results[2]);
-        setHealingData(results[3]);
-        setHorrorGameData(results[4]);
-        setTvnData(results[5]);
-        setJtbcData(results[6]);
-        setDubbingData(results[7]);
-        setBfreeData(results[8]);
-      })
-      .catch((error) => setError(error.message));
+        response = await fetch('/api/category?categoryName=game&page=1&pageSize=5');
+        if (!response.ok) {
+          throw new Error('API B 호출 실패');
+        }
+        data = await response.json();
+        setGameData(data);
+        setGameLoading(false);
+
+        response = await fetch('/api/category?categoryName=ott&page=1&pageSize=7');
+        if (!response.ok) {
+          throw new Error('API C 호출 실패');
+        }
+        data = await response.json();
+        setOttData(data);
+        setOttLoading(false);
+
+        response = await fetch('/api/tag?page=1&pageSize=7&tagName=healing');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        data = await response.json();
+        setHealingData(data);
+        setHealingLoading(false);
+
+        response = await fetch('/api/tag?page=1&pageSize=5&tagName=horror&categoryName=game');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        data = await response.json();
+        setHorrorGameData(data);
+        setHorrorGameLoading(false);
+
+        response = await fetch('/api/platform?page=1&pageSize=7&platformName=tvN');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        data = await response.json();
+        setTvnData(data);
+        setTvnLoading(false);
+
+        response = await fetch('/api/platform?page=1&pageSize=7&platformName=JTBC');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        data = await response.json();
+        setJtbcData(data);
+        setJtbcLoading(false);
+
+        response = await fetch('/api/subdub?page=1&pageSize=7&subdubName=dubbing');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        data = await response.json();
+        setDubbingData(data);
+        setDubbingLoading(false);
+
+        response = await fetch('/api/bfree?page=1&pageSize=7&bfreeName=bfree');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        data = await response.json();
+        setBfreeData(data);
+        setBfreeLoading(false);
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError('알 수 없는 오류');
+        }
+        setReviewLoading(false);
+        setGameLoading(false);
+        setOttLoading(false);
+        setHealingLoading(false);
+        setHorrorGameLoading(false);
+        setTvnLoading(false);
+        setJtbcLoading(false);
+        setDubbingLoading(false);
+        setBfreeLoading(false);
+      }
+    };
+    fetchData();
   }, []);
 
   return (
