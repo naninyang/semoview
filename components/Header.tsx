@@ -19,35 +19,7 @@ const SemoviewDefault = styled.i({
 
 export default function Header() {
   const router = useRouter();
-  const [deferredPrompt, setDeferredPrompt] = useState<Event | null>(null);
 
-  useEffect(() => {
-    const handleBeforeInstallPrompt = (e: any) => {
-      e.preventDefault();
-      setDeferredPrompt(e);
-    };
-
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-
-    return () => {
-      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-    };
-  }, []);
-
-  const onInstallPWA = () => {
-    if (deferredPrompt) {
-      const promptEvent = deferredPrompt as any;
-      promptEvent.prompt();
-      promptEvent.userChoice.then((choiceResult: any) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('User accepted the install prompt');
-        } else {
-          console.log('User dismissed the install prompt');
-        }
-        setDeferredPrompt(null);
-      });
-    }
-  };
   return (
     <header
       className={`${styles.header} ${router.pathname === '/amusement/[amusementId]' || router.pathname === '/recommend/[recommendId]' || router.pathname === '/open-sources' ? styles.dark : router.pathname === '/' ? styles.main : ''}`}
