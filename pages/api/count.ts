@@ -15,16 +15,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const totalJson = await totalData.json();
     const totalCount = totalJson.meta.pagination.total;
 
-    if (zip === 'false') {
-      filterQuery += '?filters[$or][0][isZip]=false';
-      filterQuery += '&filters[$or][1][isZip][$null]=true';
-    } else if (zip === 'true') {
+    if (zip === 'true') {
       filterQuery += '?filters[isZip]=true';
-    }
-    if (live === 'false') {
-      filterQuery += '?filters[$or][0][isLive]=false';
-      filterQuery += '&filters[$or][1][isLive][$null]=true';
-    } else if (zip === 'true') {
+    } else if (live === 'true') {
       filterQuery += '?filters[isLive]=true';
     }
     const typeData = await fetch(filterQuery, {
