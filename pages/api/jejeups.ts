@@ -7,9 +7,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const main = req.query.main as string;
   const zip = req.query.zip as string;
   const live = req.query.live as string;
+  const both = req.query.both as string;
 
   if (!id && !main) {
-    if (zip !== undefined && live === undefined) {
+    if (zip) {
       try {
         const data = await getJejeupData(page, 12, zip, 'isZip');
         res.status(200).json(data);
@@ -18,9 +19,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         res.status(500).json({ message: 'Internal Server Error' });
       }
     }
-    if (live !== undefined && zip === undefined) {
+    if (live) {
       try {
         const data = await getJejeupData(page, 12, live, 'isLive');
+        res.status(200).json(data);
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+      }
+    }
+    if (both) {
+      try {
+        const data = await getJejeupData(page, 12, 'false', 'isBoth');
         res.status(200).json(data);
       } catch (error) {
         console.error(error);

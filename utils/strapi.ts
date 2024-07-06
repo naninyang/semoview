@@ -41,41 +41,34 @@ export async function getRenew(page?: number) {
   return { renew: jejeupsRenew };
 }
 
-export async function getJejeupData(page?: number, pageSize?: number, zip?: string, live?: string, type?: string) {
+export async function getJejeupData(page?: number, pageSize?: number, type?: string, isType?: string) {
   let filterQuery = `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`;
   if (isProduction) {
-    if (zip === 'false' && type === 'isZip') {
+    if (type === 'false') {
       filterQuery += '&filters[$and][0][$or][0][isPublish][$null]=true';
       filterQuery += '&filters[$and][0][$or][1][isPublish]=true';
-      filterQuery += '&filters[$and][1][$or][0][isZip]=false';
-      filterQuery += '&filters[$and][1][$or][1][isZip][$null]=true';
-    } else if (zip === 'true' && type === 'isZip') {
+      filterQuery += `&filters[$and][1][$or][0][${isType}]=false`;
+      filterQuery += `&filters[$and][1][$or][1][${isType}][$null]=true`;
+    } else if (type === 'true') {
       filterQuery += '&filters[$and][0][$or][0][isPublish][$null]=true';
       filterQuery += '&filters[$and][0][$or][1][isPublish]=true';
-      filterQuery += '&filters[$and][1][isZip]=true';
-    }
-    if (live === 'false' && type === 'isLive') {
-      filterQuery += '&filters[$and][0][$or][0][isPublish][$null]=true';
-      filterQuery += '&filters[$and][0][$or][1][isPublish]=true';
-      filterQuery += '&filters[$and][1][$or][0][isLive]=false';
-      filterQuery += '&filters[$and][1][$or][1][isLive][$null]=true';
-    } else if (live === 'true' && type === 'isLive') {
-      filterQuery += '&filters[$and][0][$or][0][isPublish][$null]=true';
-      filterQuery += '&filters[$and][0][$or][1][isPublish]=true';
-      filterQuery += '&filters[$and][1][isLive]=true';
+      filterQuery += `&filters[$and][1][${isType}]=true`;
     }
   } else {
-    if (zip === 'false' && type === 'isZip') {
-      filterQuery += '&filters[$or][0][isZip]=false';
-      filterQuery += '&filters[$or][1][isZip][$null]=true';
-    } else if (zip === 'true' && type === 'isZip') {
-      filterQuery += '&filters[isZip]=true';
-    }
-    if (live === 'false' && type === 'isLive') {
-      filterQuery += '&filters[$or][0][isLive]=false';
-      filterQuery += '&filters[$or][1][isLive][$null]=true';
-    } else if (live === 'true' && type === 'isLive') {
-      filterQuery += '&filters[isLive]=true';
+    if (isType === 'isBoth') {
+      if (type === 'false') {
+        filterQuery += `&filters[$and][0][$or][0][isZip]=false`;
+        filterQuery += `&filters[$and][0][$or][1][isZip][$null]=true`;
+        filterQuery += `&filters[$and][1][$or][0][isLive]=false`;
+        filterQuery += `&filters[$and][1][$or][1][isLive][$null]=true`;
+      }
+    } else {
+      if (type === 'false') {
+        filterQuery += `&filters[$or][0][${isType}]=false`;
+        filterQuery += `&filters[$or][1][${isType}][$null]=true`;
+      } else if (type === 'true') {
+        filterQuery += `&filters[${isType}]=true`;
+      }
     }
   }
   const response = await fetch(filterQuery, {

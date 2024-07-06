@@ -82,7 +82,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let error = null;
 
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/jejeups?page=${currentPage}&zip=false`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/jejeups?page=${currentPage}&both=false`);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
