@@ -8,7 +8,7 @@ import { Pagination } from '@/components/Pagination';
 import { ReviewItem } from '@/components/ReviewItem';
 import styles from '@/styles/Reviews.module.sass';
 
-function Zip({ data, error, currentPage }: { data: any; error: string; currentPage: number }) {
+function Live({ data, error, currentPage }: { data: any; error: string; currentPage: number }) {
   const router = useRouter();
   const timestamp = Date.now();
 
@@ -23,7 +23,7 @@ function Zip({ data, error, currentPage }: { data: any; error: string; currentPa
 
   async function fetchCountData() {
     try {
-      const response = await fetch(`/api/count?zip=true`);
+      const response = await fetch(`/api/count?live=true`);
       const data = await response.json();
       setCount(data);
     } catch (err: any) {
@@ -45,7 +45,7 @@ function Zip({ data, error, currentPage }: { data: any; error: string; currentPa
       <ChoiceReview />
       <div className="headline">
         <h1 className="April16thPromise">
-          <em dangerouslySetInnerHTML={{ __html: '방송사 공식 채널<br/>요약 보기' }} />{' '}
+          <em dangerouslySetInnerHTML={{ __html: '유튜브<br/>게임 실황 보기' }} />{' '}
           {count && process.env.NODE_ENV === 'development' && (
             <span>
               ({count.count} 개 / {count.total} 개 요약)
@@ -78,7 +78,7 @@ function Zip({ data, error, currentPage }: { data: any; error: string; currentPa
   );
 }
 
-export default Zip;
+export default Live;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const currentPage = Number(context.query.page) || 1;
@@ -86,7 +86,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let error = null;
 
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/jejeups?page=${currentPage}&zip=true`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/jejeups?page=${currentPage}&live=true`);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }

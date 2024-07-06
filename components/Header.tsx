@@ -55,6 +55,7 @@ export default function Header() {
       <div className={styles.container}>
         {router.pathname === '/' ||
         router.pathname === '/reviews' ||
+        router.pathname === '/live' ||
         router.pathname === '/zip' ||
         router.pathname === '/categories' ||
         router.pathname === '/tags' ||
@@ -70,6 +71,7 @@ export default function Header() {
               <SemoviewDark />
             ) : router.pathname === '/' ||
               router.pathname === '/reviews' ||
+              router.pathname === '/live' ||
               router.pathname === '/zip' ||
               router.pathname === '/categories' ||
               router.pathname === '/tags' ||
@@ -96,6 +98,7 @@ export default function Header() {
         </nav>
       </div>
       {(router.pathname === '/reviews' ||
+        router.pathname === '/live' ||
         router.pathname === '/zip' ||
         router.pathname === '/categories' ||
         router.pathname === '/tags' ||
@@ -107,7 +110,13 @@ export default function Header() {
         <div className={styles.tab}>
           <nav>
             <ol>
-              <li className={router.pathname === '/reviews' || router.pathname === '/zip' ? styles.current : ''}>
+              <li
+                className={
+                  router.pathname === '/reviews' || router.pathname === '/live' || router.pathname === '/zip'
+                    ? styles.current
+                    : ''
+                }
+              >
                 <Anchor href="/reviews">
                   <span>리뷰보기</span>
                 </Anchor>

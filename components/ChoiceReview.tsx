@@ -19,6 +19,9 @@ export default function ChoiceReview() {
         <li className={router.pathname === '/reviews' ? styles.current : ''}>
           <Anchor href="/reviews">리뷰 모아보기</Anchor>
         </li>
+        <li className={router.pathname === '/live' ? styles.current : ''}>
+          <Anchor href="/live">게임실황 모아보기</Anchor>
+        </li>
         <li className={router.pathname === '/zip' ? styles.current : ''}>
           <Anchor href="/zip">요약 모아보기</Anchor>
         </li>

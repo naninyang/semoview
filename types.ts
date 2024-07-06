@@ -383,7 +383,7 @@ export interface RecommendParmalinkData {
 
 export interface Counts {
   total: number;
-  zip: number;
+  count: number;
   amusement: number;
 }
 

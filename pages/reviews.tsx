@@ -23,7 +23,7 @@ function Review({ data, error, currentPage }: { data: any; error: string; curren
 
   async function fetchCountData() {
     try {
-      const response = await fetch(`/api/count?zip=false`);
+      const response = await fetch(`/api/count`);
       const data = await response.json();
       setCount(data);
     } catch (err: any) {
@@ -45,12 +45,8 @@ function Review({ data, error, currentPage }: { data: any; error: string; curren
       <ChoiceReview />
       <div className="headline">
         <h1 className="April16thPromise">
-          <em dangerouslySetInnerHTML={{ __html: '유튜브<br/>리뷰/실황 보기' }} />{' '}
-          {count && process.env.NODE_ENV === 'development' && (
-            <span>
-              ({count.zip} / {count.total} 개 리뷰/실황)
-            </span>
-          )}
+          <em dangerouslySetInnerHTML={{ __html: '유튜브<br/>리뷰 보기' }} />{' '}
+          {count && process.env.NODE_ENV === 'development' && <span>({count.total} 개 리뷰/실황)</span>}
         </h1>
       </div>
       <div className={styles.list}>

@@ -41,25 +41,41 @@ export async function getRenew(page?: number) {
   return { renew: jejeupsRenew };
 }
 
-export async function getJejeupData(page?: number, pageSize?: number, zip?: string) {
+export async function getJejeupData(page?: number, pageSize?: number, zip?: string, live?: string, type?: string) {
   let filterQuery = `${process.env.STRAPI_URL}/api/jejeup-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`;
   if (isProduction) {
-    if (zip === 'false') {
+    if (zip === 'false' && type === 'isZip') {
       filterQuery += '&filters[$and][0][$or][0][isPublish][$null]=true';
       filterQuery += '&filters[$and][0][$or][1][isPublish]=true';
       filterQuery += '&filters[$and][1][$or][0][isZip]=false';
       filterQuery += '&filters[$and][1][$or][1][isZip][$null]=true';
-    } else if (zip === 'true') {
+    } else if (zip === 'true' && type === 'isZip') {
       filterQuery += '&filters[$and][0][$or][0][isPublish][$null]=true';
       filterQuery += '&filters[$and][0][$or][1][isPublish]=true';
       filterQuery += '&filters[$and][1][isZip]=true';
     }
+    if (live === 'false' && type === 'isLive') {
+      filterQuery += '&filters[$and][0][$or][0][isPublish][$null]=true';
+      filterQuery += '&filters[$and][0][$or][1][isPublish]=true';
+      filterQuery += '&filters[$and][1][$or][0][isLive]=false';
+      filterQuery += '&filters[$and][1][$or][1][isLive][$null]=true';
+    } else if (live === 'true' && type === 'isLive') {
+      filterQuery += '&filters[$and][0][$or][0][isPublish][$null]=true';
+      filterQuery += '&filters[$and][0][$or][1][isPublish]=true';
+      filterQuery += '&filters[$and][1][isLive]=true';
+    }
   } else {
-    if (zip === 'false') {
+    if (zip === 'false' && type === 'isZip') {
       filterQuery += '&filters[$or][0][isZip]=false';
       filterQuery += '&filters[$or][1][isZip][$null]=true';
-    } else if (zip === 'true') {
+    } else if (zip === 'true' && type === 'isZip') {
       filterQuery += '&filters[isZip]=true';
+    }
+    if (live === 'false' && type === 'isLive') {
+      filterQuery += '&filters[$or][0][isLive]=false';
+      filterQuery += '&filters[$or][1][isLive][$null]=true';
+    } else if (live === 'true' && type === 'isLive') {
+      filterQuery += '&filters[isLive]=true';
     }
   }
   const response = await fetch(filterQuery, {
@@ -85,6 +101,7 @@ export async function getJejeupData(page?: number, pageSize?: number, zip?: stri
     embeddingOff: data.attributes.embeddingOff,
     isPublish: data.attributes.isPublish,
     isZip: data.attributes.isZip,
+    isLive: data.attributes.isLive,
   }));
   const pageCount = jejeupResponse.meta.pagination.pageCount;
   const jejeups = await Promise.all(
