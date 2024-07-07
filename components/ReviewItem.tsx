@@ -104,6 +104,7 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
     fetchMetadata().finally(() => setIsLoading(false));
   }, []);
 
+  const isDevelopment = process.env.NODE_ENV === 'development';
   const handleReport = async (event: React.MouseEvent<HTMLButtonElement>) => {
     const jejeupVideo = event.currentTarget.getAttribute('data-video');
     const jejeupID = event.currentTarget.getAttribute('data-id');
@@ -118,7 +119,7 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
       });
 
       if (response.ok) {
-        alert('제보 성공! 감사합니다 ☺️');
+        alert(isDevelopment ? '비공개 처리됨.' : '제보 성공! 감사합니다 ☺️');
       } else {
         const errorData = await response.json();
         console.log(errorData.error);
@@ -147,9 +148,12 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
                         data-id={jejeup.idx.substring(14)}
                         onClick={handleReport}
                       >
-                        세모뷰 운영자에게 제보
+                        {isDevelopment ? '비공개 처리하기' : '세모뷰 운영자에게 제보해 주세요.'}
                       </button>
-                      해 주세요. {process.env.NODE_ENV === 'development' && `${jejeup.idx.substring(14)}`}
+                    </p>
+                    <p>
+                      {process.env.NODE_ENV === 'development' &&
+                        `${jejeup.idx} / ${jejeup.idx.substring(14)} / ${jejeup.video}`}
                     </p>
                   </div>
                   <div className={styles['preview-container']}>
