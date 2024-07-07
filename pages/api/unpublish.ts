@@ -2,13 +2,14 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 interface PostData {
   jejeupVideo: string;
+  jejeupID: string;
   jejeupAmusement: string;
   site: string;
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
-    const { jejeupVideo, jejeupAmusement } = req.body as PostData;
+    const { jejeupVideo, jejeupID, jejeupAmusement } = req.body as PostData;
 
     try {
       const response = await fetch(`${process.env.STRAPI_URL}/api/unpublish-jejeups`, {
@@ -20,8 +21,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         body: JSON.stringify({
           data: {
             videoId: jejeupVideo,
+            reviewId: jejeupID,
             amusementId: jejeupAmusement,
-            site: 'jejeup',
+            site: 'semoview',
           },
         }),
       });

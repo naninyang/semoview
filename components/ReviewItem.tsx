@@ -106,6 +106,7 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
 
   const handleReport = async (event: React.MouseEvent<HTMLButtonElement>) => {
     const jejeupVideo = event.currentTarget.getAttribute('data-video');
+    const jejeupID = event.currentTarget.getAttribute('data-id');
 
     try {
       const response = await fetch('/api/unpublish', {
@@ -113,7 +114,7 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ jejeupVideo: jejeupVideo }),
+        body: JSON.stringify({ jejeupVideo: jejeupVideo, jejeupID: jejeupID }),
       });
 
       if (response.ok) {
@@ -140,10 +141,15 @@ export function JejeupMeta({ jejeup }: { jejeup: any }) {
                   <div className={styles.notice}>
                     <p>유튜버가 삭제했거나 비공개 처리한 영상입니다.</p>
                     <p>
-                      <button type="button" data-video={jejeup.video} onClick={handleReport}>
+                      <button
+                        type="button"
+                        data-video={jejeup.video}
+                        data-id={jejeup.idx.substring(14)}
+                        onClick={handleReport}
+                      >
                         세모뷰 운영자에게 제보
                       </button>
-                      해 주세요. {process.env.NODE_ENV === 'development' && jejeup.idx}
+                      해 주세요. {process.env.NODE_ENV === 'development' && `${jejeup.idx.substring(14)}`}
                     </p>
                   </div>
                   <div className={styles['preview-container']}>
