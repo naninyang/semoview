@@ -1,8 +1,8 @@
-import { vectors } from './vectors';
-import styles from '@/styles/Footer.module.sass';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import Anchor from './Anchor';
-import { useRouter } from 'next/router';
+import { vectors } from './vectors';
+import styles from '@/styles/Footer.module.sass';
 
 const StudioDefault = styled.i({
   background: `url(${vectors.studioDefault}) no-repeat 50% 50%/contain`,
