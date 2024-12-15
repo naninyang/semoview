@@ -201,7 +201,6 @@ function BarrierFree({ ccData, ccError }: { ccData: any; ccError: string }) {
             <section>
               {!bfreeLoading ? (
                 <>
-                  {console.log('bfreeData: ', bfreeData)}
                   {bfreeData &&
                     Array.isArray(bfreeData.data) &&
                     bfreeData.data.map((amusement: AmusementData, index: number) => (

@@ -76,13 +76,11 @@ function Categories({ dramaData, errorDrama }: { dramaData: any; errorDrama: str
   }, []);
 
   const [filmData, setFilmData] = useState<JejeupAmusementData | null>(null);
-  const [animeData, setAnimeData] = useState<JejeupAmusementData | null>(null);
   const [ottData, setOttData] = useState<JejeupAmusementData | null>(null);
   const [gameData, setGameData] = useState<JejeupAmusementData | null>(null);
   const [fanData, setFanData] = useState<JejeupAmusementData | null>(null);
 
   const [filmLoading, setFilmLoading] = useState(true);
-  const [animeLoading, setAnimeLoading] = useState(true);
   const [ottLoading, setOttLoading] = useState(true);
   const [gameLoading, setGameLoading] = useState(true);
   const [fanLoading, setFanLoading] = useState(true);
@@ -98,14 +96,6 @@ function Categories({ dramaData, errorDrama }: { dramaData: any; errorDrama: str
         let data = await response.json();
         setFilmData(data);
         setFilmLoading(false);
-
-        response = await fetch('/api/category?categoryName=anime&page=1&pageSize=7');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        data = await response.json();
-        setAnimeData(data);
-        setAnimeLoading(false);
 
         response = await fetch('/api/category?categoryName=ott&page=1&pageSize=7');
         if (!response.ok) {
@@ -137,7 +127,6 @@ function Categories({ dramaData, errorDrama }: { dramaData: any; errorDrama: str
           setError('알 수 없는 오류');
         }
         setFilmLoading(false);
-        setAnimeLoading(false);
         setOttLoading(false);
         setGameLoading(false);
         setFanLoading(false);
@@ -223,41 +212,6 @@ function Categories({ dramaData, errorDrama }: { dramaData: any; errorDrama: str
                   {filmData &&
                     Array.isArray(filmData.data) &&
                     filmData.data.map((amusement: AmusementData, index: number) => (
-                      <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
-                        <AmusementItem amusement={amusement} />
-                        <strong>
-                          <span className="seed">
-                            {amusement.titleKorean ? amusement.titleKorean : amusement.title}
-                          </span>
-                        </strong>
-                      </Link>
-                    ))}
-                </>
-              ) : (
-                <LoadingIndicator isGame={false} />
-              )}
-            </section>
-            <div className={styles.headline}>
-              <h2 className="April16thPromise">
-                <Anchor href="/amusement?category=anime&page=1">애니메이션 리뷰</Anchor>
-                {process.env.NODE_ENV === 'development' && animeData && ` ${animeData.total}개`}
-              </h2>
-              <Anchor href="/amusement?category=anime&page=1">
-                <span>더보기</span>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M10 5.92969L8.5 7.42969L13.0703 12L8.5 16.5703L10 18.0703L16.0703 12L10 5.92969Z"
-                    fill="black"
-                  />
-                </svg>
-              </Anchor>
-            </div>
-            <section>
-              {!animeLoading ? (
-                <>
-                  {animeData &&
-                    Array.isArray(animeData.data) &&
-                    animeData.data.map((amusement: AmusementData, index: number) => (
                       <Link key={index} href={`/amusement/${amusement.idx}`} scroll={false} shallow={true}>
                         <AmusementItem amusement={amusement} />
                         <strong>

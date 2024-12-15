@@ -223,21 +223,6 @@ function Amusement({
       platform === 'OCN' ||
       platform === 'JTBC' ||
       platform === 'ENA';
-    const platformAnime1 =
-      platform === 'tokyomx' ||
-      platform === 'tvtokyo' ||
-      platform === 'fujitv' ||
-      platform === 'mbs' ||
-      platform === 'tbs' ||
-      platform === 'atx' ||
-      platform === 'nippontv' ||
-      platform === 'wowow';
-    const platformAnime2 =
-      platform === 'aniplus' ||
-      platform === 'daewon' ||
-      platform === 'anibox' ||
-      platform === 'tooniverse' ||
-      platform === 'animax';
     return (
       <div className={`${styles.thumbnail} ${category === 'game' || category === 'game_fan' ? styles.game : ''}`}>
         <Image
@@ -252,89 +237,6 @@ function Amusement({
           <dl>
             {platform ? (
               <>
-                {amusement.animeBroadcast2 && !platformAnime2 && (
-                  <div
-                    className={`${styles.anime2} ${amusement.animeBroadcast1 === null || platformAnime1 ? styles.anime2only : ''}`}
-                  >
-                    <dt>한국 방송사</dt>
-                    <dd>
-                      {amusement.animeBroadcast2 === 'aniplus' && (
-                        <>
-                          <AniplusIcon /> <span>애니플러스</span>
-                        </>
-                      )}
-                      {amusement.animeBroadcast2 === 'daewon' && (
-                        <>
-                          <DaewonIcon /> <span>애니원</span>
-                        </>
-                      )}
-                      {amusement.animeBroadcast2 === 'anibox' && (
-                        <>
-                          <AniboxIcon /> <span>애니박스</span>
-                        </>
-                      )}
-                      {amusement.animeBroadcast2 === 'tooniverse' && (
-                        <>
-                          <TooniverseIcon /> <span>투니버스</span>
-                        </>
-                      )}
-                      {amusement.animeBroadcast2 === 'animax' && (
-                        <>
-                          <AnimaxIcon /> <span>애니맥스 코리아</span>
-                        </>
-                      )}
-                    </dd>
-                  </div>
-                )}
-                {amusement.animeBroadcast1 && !platformAnime1 && (
-                  <div
-                    className={`${styles.anime1} ${amusement.animeBroadcast1 ? styles.anime1 : ''} ${amusement.ott && !platformOtt && !platformAnime1 ? styles.broadcasts : ''}`}
-                  >
-                    <dt>일본 방송사</dt>
-                    <dd>
-                      {amusement.animeBroadcast1 === 'tokyomx' && (
-                        <>
-                          <TokyomxIcon /> <span>도쿄MX</span>
-                        </>
-                      )}
-                      {amusement.animeBroadcast1 === 'tvtokyo' && (
-                        <>
-                          <TvtokyoIcon /> <span>테레토</span>
-                        </>
-                      )}
-                      {amusement.animeBroadcast1 === 'fujitv' && (
-                        <>
-                          <FujitvIcon /> <span>후지테레비</span>
-                        </>
-                      )}
-                      {amusement.animeBroadcast1 === 'mbs' && (
-                        <>
-                          <MbsIcon /> <span>MBS</span>
-                        </>
-                      )}
-                      {amusement.animeBroadcast1 === 'tbs' && (
-                        <>
-                          <TbsIcon /> <span>TBS</span>
-                        </>
-                      )}
-                      {amusement.animeBroadcast1 === 'atx' && (
-                        <>
-                          <AtxIcon /> <span>AT-X</span>
-                        </>
-                      )}
-                      {amusement.animeBroadcast1 === 'nippontv' && (
-                        <>
-                          <NippontvIcon /> <span>닛테레</span>
-                        </>
-                      )}
-                      {amusement.animeBroadcast1 === 'wowow' && (
-                        <>
-                          <WowowIcon /> <span>WOWOW</span>
-                        </>
-                      )}
-                    </dd>
-                  </div>
-                )}
                 {(amusement.broadcast || amusement.wavveSeries) && !platformDrama && (
                   <div className={`${styles.broadcast} ${amusement.ott && !platformOtt ? styles.broadcasts : ''}`}>
                     <dt>방송사</dt>
@@ -514,87 +416,6 @@ function Amusement({
               </>
             ) : (
               <>
-                {amusement.animeBroadcast2 && (
-                  <div className={`${styles.anime2} ${amusement.animeBroadcast1 === null ? styles.anime2only : ''}`}>
-                    <dt>한국 방송사</dt>
-                    <dd>
-                      {amusement.animeBroadcast2 === 'aniplus' && (
-                        <>
-                          <AniplusIcon /> <span>애니플러스</span>
-                        </>
-                      )}
-                      {amusement.animeBroadcast2 === 'daewon' && (
-                        <>
-                          <DaewonIcon /> <span>애니원</span>
-                        </>
-                      )}
-                      {amusement.animeBroadcast2 === 'anibox' && (
-                        <>
-                          <AniboxIcon /> <span>애니박스</span>
-                        </>
-                      )}
-                      {amusement.animeBroadcast2 === 'tooniverse' && (
-                        <>
-                          <TooniverseIcon /> <span>투니버스</span>
-                        </>
-                      )}
-                      {amusement.animeBroadcast2 === 'animax' && (
-                        <>
-                          <AnimaxIcon /> <span>애니맥스 코리아</span>
-                        </>
-                      )}
-                    </dd>
-                  </div>
-                )}
-                {amusement.animeBroadcast1 && (
-                  <div
-                    className={`${styles.anime1} ${amusement.animeBroadcast1 ? styles.anime1 : ''} ${amusement.ott ? styles.broadcasts : ''}`}
-                  >
-                    <dt>일본 방송사</dt>
-                    <dd>
-                      {amusement.animeBroadcast1 === 'tokyomx' && (
-                        <>
-                          <TokyomxIcon /> <span>도쿄MX</span>
-                        </>
-                      )}
-                      {amusement.animeBroadcast1 === 'tvtokyo' && (
-                        <>
-                          <TvtokyoIcon /> <span>테레토</span>
-                        </>
-                      )}
-                      {amusement.animeBroadcast1 === 'fujitv' && (
-                        <>
-                          <FujitvIcon /> <span>후지테레비</span>
-                        </>
-                      )}
-                      {amusement.animeBroadcast1 === 'mbs' && (
-                        <>
-                          <MbsIcon /> <span>MBS</span>
-                        </>
-                      )}
-                      {amusement.animeBroadcast1 === 'tbs' && (
-                        <>
-                          <TbsIcon /> <span>TBS</span>
-                        </>
-                      )}
-                      {amusement.animeBroadcast1 === 'atx' && (
-                        <>
-                          <AtxIcon /> <span>AT-X</span>
-                        </>
-                      )}
-                      {amusement.animeBroadcast1 === 'nippontv' && (
-                        <>
-                          <NippontvIcon /> <span>닛테레</span>
-                        </>
-                      )}
-                      {amusement.animeBroadcast1 === 'wowow' && (
-                        <>
-                          <WowowIcon /> <span>WOWOW</span>
-                        </>
-                      )}
-                    </dd>
-                  </div>
-                )}
                 {(amusement.broadcast || amusement.wavveSeries) && (
                   <div className={`${styles.broadcast} ${amusement.ott ? styles.broadcasts : ''}`}>
                     <dt>방송사</dt>
@@ -781,10 +602,7 @@ function Amusement({
                   <>
                     {(amusement.category === 'drama' ||
                       amusement.category === 'ott_drama' ||
-                      amusement.category === 'ott_anime' ||
-                      amusement.category === 'ott_documentary' ||
-                      amusement.anime === 'tva' ||
-                      amusement.anime === 'ova') && (
+                      amusement.category === 'ott_documentary') && (
                       <>
                         {amusement.rating === 'all' ? (
                           <>
@@ -811,8 +629,6 @@ function Amusement({
                       </>
                     )}
                     {(amusement.category === 'film' ||
-                      amusement.category === 'anime_film' ||
-                      amusement.category === 'ott_anime_film' ||
                       amusement.category === 'ott_documentary_film' ||
                       amusement.category === 'ott_film' ||
                       amusement.anime === 'film') && (
@@ -1007,23 +823,6 @@ function Amusement({
                       <option value="JTBC">JTBC</option>
                       <option value="ENA">ENA</option>
                     </optgroup>
-                    <optgroup label="애니메이션 방영 일본 방송국">
-                      <option value="tokyomx">도쿄MX</option>
-                      <option value="tvtokyo">테레토</option>
-                      <option value="fujitv">후지테레비</option>
-                      <option value="mbs">MBS</option>
-                      <option value="tbs">TBS</option>
-                      <option value="atx">AT-X</option>
-                      <option value="nippontv">닛테레</option>
-                      <option value="wowow">wowow</option>
-                    </optgroup>
-                    <optgroup label="애니메이션 방영 한국 방송국">
-                      <option value="aniplus">애니플러스</option>
-                      <option value="daewon">애니원</option>
-                      <option value="anibox">애니박스</option>
-                      <option value="tooniverse">투니버스</option>
-                      <option value="animax">애니맥스 코리아</option>
-                    </optgroup>
                   </select>
                   <button onClick={handlePlatformSubmit}>선택</button>
                 </div>
@@ -1052,7 +851,6 @@ function Amusement({
                   <option value="ott">오직 OTT에서</option>
                   <option value="film">영화</option>
                   <option value="drama">드라마</option>
-                  <option value="anime">애니메이션</option>
                   <option value="game">게임</option>
                   <option value="game_fan">팬 게임</option>
                 </select>
@@ -1078,23 +876,6 @@ function Amusement({
                     <option value="OCN">OCN</option>
                     <option value="JTBC">JTBC</option>
                     <option value="ENA">ENA</option>
-                  </optgroup>
-                  <optgroup label="애니메이션 방영 일본 방송국">
-                    <option value="tokyomx">도쿄MX</option>
-                    <option value="tvtokyo">테레토</option>
-                    <option value="fujitv">후지테레비</option>
-                    <option value="mbs">MBS</option>
-                    <option value="tbs">TBS</option>
-                    <option value="atx">AT-X</option>
-                    <option value="nippontv">닛테레</option>
-                    <option value="wowow">wowow</option>
-                  </optgroup>
-                  <optgroup label="애니메이션 방영 한국 방송국">
-                    <option value="aniplus">애니플러스</option>
-                    <option value="daewon">애니원</option>
-                    <option value="anibox">애니박스</option>
-                    <option value="tooniverse">투니버스</option>
-                    <option value="animax">애니맥스 코리아</option>
                   </optgroup>
                 </select>
                 <button onClick={handlePlatformSubmit}>플랫폼 선택</button>
@@ -1162,11 +943,6 @@ function Amusement({
                   <li>
                     <Anchor href="/amusement?tag=yuri&page=1">
                       <span>#백합</span> <span>#레즈</span>
-                    </Anchor>
-                  </li>
-                  <li>
-                    <Anchor href="/amusement?tag=horror&category=anime&page=1">
-                      <span>#공포</span> <span>#호러</span> <span>#애니</span>
                     </Anchor>
                   </li>
                   <li>
@@ -1441,7 +1217,6 @@ function Amusement({
                     <option value="ott">오직 OTT에서</option>
                     <option value="film">영화</option>
                     <option value="drama">드라마</option>
-                    <option value="anime">애니메이션</option>
                     <option value="game">게임</option>
                     <option value="game_fan">팬 게임</option>
                   </select>
@@ -1662,23 +1437,6 @@ function Amusement({
                       <option value="OCN">OCN</option>
                       <option value="JTBC">JTBC</option>
                       <option value="ENA">ENA</option>
-                    </optgroup>
-                    <optgroup label="애니메이션 방영 일본 방송국">
-                      <option value="tokyomx">도쿄MX</option>
-                      <option value="tvtokyo">테레토</option>
-                      <option value="fujitv">후지테레비</option>
-                      <option value="mbs">MBS</option>
-                      <option value="tbs">TBS</option>
-                      <option value="atx">AT-X</option>
-                      <option value="nippontv">닛테레</option>
-                      <option value="wowow">wowow</option>
-                    </optgroup>
-                    <optgroup label="애니메이션 방영 한국 방송국">
-                      <option value="aniplus">애니플러스</option>
-                      <option value="daewon">애니원</option>
-                      <option value="anibox">애니박스</option>
-                      <option value="tooniverse">투니버스</option>
-                      <option value="animax">애니맥스 코리아</option>
                     </optgroup>
                   </select>
                   <button onClick={handlePlatformSubmit}>선택</button>
@@ -1988,19 +1746,6 @@ function PlatformTitle(platform: keyof typeof PlatformTitle): string {
     wavve: '웨이브\n온리/오리지널 리뷰',
     wave: '웨이브\n해외시리즈 리뷰',
     paramount: '파라마운트+\n오리지널 리뷰',
-    tokyomx: '도쿄MX\n東京MX\n방영 애니메이션',
-    tvtokyo: '테레토\nテレ東\n방영 애니메이션',
-    fujitv: '후지테레비\nフジテレビ\n방영 애니메이션',
-    mbs: 'MBS\n방영 애니메이션',
-    tbs: 'TBS\n방영 애니메이션',
-    atx: 'AT-X\n방영 애니메이션',
-    nippontv: '닛테레\n日テレ 방영 애니메이션',
-    wowow: 'WOWOW\n방영 애니메이션',
-    aniplus: '애니플러스\n방영 애니메이션',
-    daewon: '애니원\n방영 애니메이션',
-    anibox: '애니박스\n방영 애니메이션',
-    tooniverse: '투니버스\n방영 애니메이션',
-    animax: '애니맥스 코리아\n방영 애니메이션',
   };
   return platformTitles[platform] || '플랫폼을 찾을 수 없어요';
 }

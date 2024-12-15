@@ -126,12 +126,10 @@ export async function getCategoryData(page?: number, pageSize?: number, category
   if (
     categoryName === 'ott_drama' ||
     categoryName === 'ott_film' ||
-    categoryName === 'ott_anime' ||
-    categoryName === 'ott_anime_film' ||
     categoryName === 'ott_documentary' ||
     categoryName === 'ott_documentary_film'
   ) {
-    let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[ott][$null]=false`;
+    let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[ott][$null]=false&filters[category][$notContainsi]=anime`;
     if (isProduction) {
       filterQuery += '&filters[$or][0][isPublish][$null]=true';
       filterQuery += '&filters[$or][1][isPublish]=true';
@@ -179,7 +177,7 @@ export async function getCategoryData(page?: number, pageSize?: number, category
     const total = categoryResponse.meta.pagination.total;
     return { data, pageCount: pageCount, total: total };
   } else {
-    let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[category][$contains]=${categoryName}`;
+    let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[category][$contains]=${categoryName}&filters[category][$notContainsi]=anime`;
     if (isProduction) {
       filterQuery += '&filters[$or][0][isPublish][$null]=true';
       filterQuery += '&filters[$or][1][isPublish]=true';
@@ -232,7 +230,7 @@ export async function getCategoryData(page?: number, pageSize?: number, category
 
 export async function getTagData(page?: number, pageSize?: number, tagName?: string, categoryName?: string) {
   if (categoryName) {
-    let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][tags][$contains]=${tagName}&filters[$and][1][tags][$contains]=${categoryName}`;
+    let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][tags][$contains]=${tagName}&filters[$and][1][tags][$contains]=${categoryName}&filters[$and][2][category][$notContainsi]=anime`;
     if (isProduction) {
       filterQuery += '&filters[$or][0][isPublish][$null]=true';
       filterQuery += '&filters[$or][1][isPublish]=true';
@@ -280,7 +278,7 @@ export async function getTagData(page?: number, pageSize?: number, tagName?: str
     const total = tagResponse.meta.pagination.total;
     return { data, pageCount: pageCount, total: total };
   } else {
-    let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][tags][$contains]=${tagName}&filters[$and][1][tags][$not][$contains]=game`;
+    let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][tags][$contains]=${tagName}&filters[$and][1][tags][$not][$contains]=game&filters[category][$notContainsi]=anime`;
     if (isProduction) {
       filterQuery += '&filters[$or][0][isPublish][$null]=true';
       filterQuery += '&filters[$or][1][isPublish]=true';
@@ -389,115 +387,6 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
     const total = platformResponse.meta.pagination.total;
     return { data, pageCount: pageCount, total: total };
   } else if (
-    platformName === 'tokyomx' ||
-    platformName === 'tvtokyo' ||
-    platformName === 'fujitv' ||
-    platformName === 'mbs' ||
-    platformName === 'tbs' ||
-    platformName === 'atx' ||
-    platformName === 'nippontv' ||
-    platformName === 'wowow'
-  ) {
-    let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[animeBroadcast1][$eq]=${platformName}`;
-    if (isProduction) {
-      filterQuery += '&filters[$or][0][isPublish][$null]=true';
-      filterQuery += '&filters[$or][1][isPublish]=true';
-    }
-    const response = await fetch(filterQuery, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
-      },
-    });
-    const platformResponse = await response.json();
-    const platformResponseData = platformResponse.data;
-    const data: AmusementData = platformResponseData.map((data: any) => ({
-      id: `${data.id}`,
-      idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
-      title: data.attributes.title,
-      lang: data.attributes.lang,
-      titleKorean: data.attributes.titleKorean,
-      titleOther: data.attributes.titleOther,
-      etc: data.attributes.etc,
-      release: data.attributes.release,
-      original: data.attributes.original,
-      originalAuthor: data.attributes.originalAuthor,
-      originTitle: data.attributes.originTitle,
-      rating: data.attributes.rating,
-      country: data.attributes.country,
-      category: data.attributes.category,
-      isMobile: data.attributes.isMobile,
-      genre: data.attributes.genre,
-      anime: data.attributes.anime,
-      animeBroadcast1: data.attributes.animeBroadcast1,
-      animeBroadcast2: data.attributes.animeBroadcast2,
-      ott: data.attributes.ott,
-      broadcast: data.attributes.broadcast,
-      publisher: data.attributes.publisher,
-      creator: data.attributes.creator,
-      cast: data.attributes.cast,
-      posterDefault: data.attributes.posterDefault,
-      posterOther: data.attributes.posterOther,
-      supportLang: data.attributes.supportLang,
-      isPublish: data.attributes.isPublish,
-    }));
-    const pageCount = platformResponse.meta.pagination.pageCount;
-    const total = platformResponse.meta.pagination.total;
-    return { data, pageCount: pageCount, total: total };
-  } else if (
-    platformName === 'aniplus' ||
-    platformName === 'daewon' ||
-    platformName === 'anibox' ||
-    platformName === 'tooniverse' ||
-    platformName === 'animax'
-  ) {
-    let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[animeBroadcast2][$eq]=${platformName}`;
-    if (isProduction) {
-      filterQuery += '&filters[$or][0][isPublish][$null]=true';
-      filterQuery += '&filters[$or][1][isPublish]=true';
-    }
-    const response = await fetch(filterQuery, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
-      },
-    });
-    const platformResponse = await response.json();
-    const platformResponseData = platformResponse.data;
-    const data: AmusementData = platformResponseData.map((data: any) => ({
-      id: `${data.id}`,
-      idx: `${formatDate(data.attributes.createdAt)}${data.id}`,
-      title: data.attributes.title,
-      lang: data.attributes.lang,
-      titleKorean: data.attributes.titleKorean,
-      titleOther: data.attributes.titleOther,
-      etc: data.attributes.etc,
-      release: data.attributes.release,
-      original: data.attributes.original,
-      originalAuthor: data.attributes.originalAuthor,
-      originTitle: data.attributes.originTitle,
-      rating: data.attributes.rating,
-      country: data.attributes.country,
-      category: data.attributes.category,
-      isMobile: data.attributes.isMobile,
-      genre: data.attributes.genre,
-      anime: data.attributes.anime,
-      animeBroadcast1: data.attributes.animeBroadcast1,
-      animeBroadcast2: data.attributes.animeBroadcast2,
-      ott: data.attributes.ott,
-      broadcast: data.attributes.broadcast,
-      publisher: data.attributes.publisher,
-      creator: data.attributes.creator,
-      cast: data.attributes.cast,
-      posterDefault: data.attributes.posterDefault,
-      posterOther: data.attributes.posterOther,
-      supportLang: data.attributes.supportLang,
-      isPublish: data.attributes.isPublish,
-    }));
-    const pageCount = platformResponse.meta.pagination.pageCount;
-    const total = platformResponse.meta.pagination.total;
-    return { data, pageCount: pageCount, total: total };
-  } else if (
     platformName === 'amazon' ||
     platformName === 'apple' ||
     platformName === 'disney' ||
@@ -507,7 +396,7 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
     platformName === 'wavve' ||
     platformName === 'paramount'
   ) {
-    let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[ott][$contains]=${platformName}`;
+    let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[ott][$contains]=${platformName}&filters[category][$notContainsi]=anime`;
     if (isProduction) {
       filterQuery += '&filters[$or][0][isPublish][$null]=true';
       filterQuery += '&filters[$or][1][isPublish]=true';
@@ -608,7 +497,7 @@ export async function getPlatformData(page?: number, pageSize?: number, platform
 export async function getHangukData(page?: number, pageSize?: number, hangukName?: string, categoryName?: string) {
   if (hangukName !== 'anything') {
     if (categoryName) {
-      let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][supportLang][$contains]=${hangukName}&filters[$and][1][category][$contains]=game`;
+      let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][supportLang][$contains]=${hangukName}&filters[$and][1][category][$contains]=game&filters[$and][2][category][$notContainsi]=anime`;
       if (isProduction) {
         filterQuery += '&filters[$or][0][isPublish][$null]=true';
         filterQuery += '&filters[$or][1][isPublish]=true';
@@ -656,7 +545,7 @@ export async function getHangukData(page?: number, pageSize?: number, hangukName
       const total = hangukResponse.meta.pagination.total;
       return { data, pageCount: pageCount, total: total };
     } else {
-      let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][supportLang][$contains]=${hangukName}&filters[$and][1][category][$notContains]=game`;
+      let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][supportLang][$contains]=${hangukName}&filters[$and][1][category][$notContains]=game&filters[$and][2][category][$notContainsi]=anime`;
       if (isProduction) {
         filterQuery += '&filters[$or][0][isPublish][$null]=true';
         filterQuery += '&filters[$or][1][isPublish]=true';
@@ -706,7 +595,7 @@ export async function getHangukData(page?: number, pageSize?: number, hangukName
     }
   } else {
     if (categoryName) {
-      let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][supportLang][$null]=false&filters[$and][1][category][$contains]=game`;
+      let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][supportLang][$null]=false&filters[$and][1][category][$contains]=game&filters[$and][2][category][$notContainsi]=anime`;
       if (isProduction) {
         filterQuery += '&filters[$or][0][isPublish][$null]=true';
         filterQuery += '&filters[$or][1][isPublish]=true';
@@ -754,7 +643,7 @@ export async function getHangukData(page?: number, pageSize?: number, hangukName
       const total = hangukResponse.meta.pagination.total;
       return { data, pageCount: pageCount, total: total };
     } else {
-      let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[supportLang][$null]=false&filters[$and][1][category][$notContains]=game`;
+      let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[supportLang][$null]=false&filters[$and][1][category][$notContains]=game&filters[$and][2][category][$notContainsi]=anime`;
       if (isProduction) {
         filterQuery += '&filters[$or][0][isPublish][$null]=true';
         filterQuery += '&filters[$or][1][isPublish]=true';
@@ -807,7 +696,7 @@ export async function getHangukData(page?: number, pageSize?: number, hangukName
 
 export async function getSubdubData(page?: number, pageSize?: number, subdubName?: string) {
   if (subdubName !== 'both') {
-    let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][supportLang][$contains]=${subdubName}&filters[$and][1][category][$notContains]=game`;
+    let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][supportLang][$contains]=${subdubName}&filters[$and][1][category][$notContains]=game&filters[$and][2][category][$notContainsi]=anime`;
     if (isProduction) {
       filterQuery += '&filters[$or][0][isPublish][$null]=true';
       filterQuery += '&filters[$or][1][isPublish]=true';
@@ -855,7 +744,7 @@ export async function getSubdubData(page?: number, pageSize?: number, subdubName
     const total = hangukResponse.meta.pagination.total;
     return { data, pageCount: pageCount, total: total };
   } else {
-    let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][supportLang][$contains]=subtitle&filters[$and][1][supportLang][$contains]=dubbing&filters[$and][2][category][$notContains]=game`;
+    let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][supportLang][$contains]=subtitle&filters[$and][1][supportLang][$contains]=dubbing&filters[$and][2][category][$notContains]=game&filters[$and][2][category][$notContainsi]=anime`;
     if (isProduction) {
       filterQuery += '&filters[$or][0][isPublish][$null]=true';
       filterQuery += '&filters[$or][1][isPublish]=true';
@@ -907,7 +796,7 @@ export async function getSubdubData(page?: number, pageSize?: number, subdubName
 
 export async function getBarrierFreeData(page?: number, pageSize?: number, bfreeName?: string) {
   if (bfreeName !== 'bfree') {
-    let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][supportLang][$contains]=${bfreeName}&filters[$and][1][category][$notContains]=game`;
+    let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][supportLang][$contains]=${bfreeName}&filters[$and][1][category][$notContains]=game&filters[$and][2][category][$notContainsi]=anime`;
     if (isProduction) {
       filterQuery += '&filters[$or][0][isPublish][$null]=true';
       filterQuery += '&filters[$or][1][isPublish]=true';
@@ -955,7 +844,7 @@ export async function getBarrierFreeData(page?: number, pageSize?: number, bfree
     const total = hangukResponse.meta.pagination.total;
     return { data, pageCount: pageCount, total: total };
   } else {
-    let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][supportLang][$contains]=cc&filters[$and][1][supportLang][$contains]=description&filters[$and][2][category][$notContains]=game`;
+    let filterQuery = `${process.env.STRAPI_URL}/api/amusement-jejeups?sort[0]=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[$and][0][supportLang][$contains]=cc&filters[$and][1][supportLang][$contains]=description&filters[$and][2][category][$notContains]=game&filters[$and][3][category][$notContainsi]=anime`;
     if (isProduction) {
       filterQuery += '&filters[$or][0][isPublish][$null]=true';
       filterQuery += '&filters[$or][1][isPublish]=true';
