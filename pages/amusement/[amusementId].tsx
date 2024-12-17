@@ -696,13 +696,9 @@ export default function Amusement({
         if (
           amusementData.attributes.category === 'ott_drama' ||
           amusementData.attributes.category === 'ott_drama_enter' ||
-          amusementData.attributes.category === 'ott_anime' ||
-          amusementData.attributes.category === 'ott_anime_film' ||
           amusementData.attributes.category === 'ott_film'
         )
           router.push('/amusement?category=ott');
-        else if (amusementData.attributes.category === 'anime' || amusementData.attributes.category === 'anime_film')
-          router.push('/amusement?category=anime');
         else router.push(`/amusement?category=${amusementData.attributes.category}`);
       }
     } else if (previousPage) {
@@ -712,13 +708,9 @@ export default function Amusement({
         if (
           amusementData.attributes.category === 'ott_drama' ||
           amusementData.attributes.category === 'ott_drama_enter' ||
-          amusementData.attributes.category === 'ott_anime' ||
-          amusementData.attributes.category === 'ott_anime_film' ||
           amusementData.attributes.category === 'ott_film'
         )
           router.push('/amusement?category=ott');
-        else if (amusementData.attributes.category === 'anime' || amusementData.attributes.category === 'anime_film')
-          router.push('/amusement?category=anime');
         else router.push(`/amusement?category=${amusementData.attributes.category}`);
       }
     }
@@ -949,9 +941,7 @@ export default function Amusement({
           <dt>
             {amusementData.attributes.category === 'drama' ||
             amusementData.attributes.category === 'ott_drama_enter' ||
-            amusementData.attributes.category === 'ott_drama' ||
-            amusementData.attributes.category === 'anime' ||
-            amusementData.attributes.category === 'ott_anime'
+            amusementData.attributes.category === 'ott_drama'
               ? '시즌'
               : '시리즈'}{' '}
             선택
@@ -1552,9 +1542,7 @@ export default function Amusement({
                   <dt>
                     {amusementData.attributes.category === 'drama' ||
                     amusementData.attributes.category === 'ott_drama_enter' ||
-                    amusementData.attributes.category === 'ott_drama' ||
-                    amusementData.attributes.category === 'anime' ||
-                    amusementData.attributes.category === 'ott_anime'
+                    amusementData.attributes.category === 'ott_drama'
                       ? '시즌'
                       : '시리즈'}{' '}
                     선택
@@ -1585,11 +1573,9 @@ export default function Amusement({
                       {(amusementData.attributes.category === 'drama' ||
                         amusementData.attributes.category === 'film' ||
                         amusementData.attributes.category === 'game' ||
-                        amusementData.attributes.category === 'anime' ||
                         amusementData.attributes.category === 'ott_drama_enter' ||
                         amusementData.attributes.category === 'ott_drama' ||
-                        amusementData.attributes.category === 'ott_film' ||
-                        amusementData.attributes.category === 'ott_anime') && (
+                        amusementData.attributes.category === 'ott_film') && (
                         <em>
                           {amusementData.attributes.broadcast === 'ENA' && (
                             <>
@@ -1672,81 +1658,6 @@ export default function Amusement({
                                 )}
                               </React.Fragment>
                             ))}
-                          {(amusementData.attributes.animeBroadcast1 !== null ||
-                            amusementData.attributes.animeBroadcast2 !== null) && (
-                            <>
-                              {amusementData.attributes.animeBroadcast1 === 'tokyomx' && (
-                                <>
-                                  <TokyomxWhite /> <span>도쿄MX</span>
-                                </>
-                              )}
-                              {amusementData.attributes.animeBroadcast1 === 'tvtokyo' && (
-                                <>
-                                  <TvtokyoWhite /> <span>테레토</span>
-                                </>
-                              )}
-                              {amusementData.attributes.animeBroadcast1 === 'fujitv' && (
-                                <>
-                                  <FujitvWhite /> <span>후지테레비</span>
-                                </>
-                              )}
-                              {amusementData.attributes.animeBroadcast1 === 'mbs' && (
-                                <>
-                                  <MbsWhite /> <span>MBS</span>
-                                </>
-                              )}
-                              {amusementData.attributes.animeBroadcast1 === 'tbs' && (
-                                <>
-                                  <TbsWhite /> <span>TBS</span>
-                                </>
-                              )}
-                              {amusementData.attributes.animeBroadcast1 === 'atx' && (
-                                <>
-                                  <AtxWhite /> <span>AT-X</span>
-                                </>
-                              )}
-                              {amusementData.attributes.animeBroadcast1 === 'nippontv' && (
-                                <>
-                                  <NippontvWhite /> <span>닛테레</span>
-                                </>
-                              )}
-                              {amusementData.attributes.animeBroadcast1 === 'wowow' && (
-                                <>
-                                  <WowowWhite /> <span>WOWOW</span>
-                                </>
-                              )}
-                              {amusementData.attributes.animeBroadcast2 === 'aniplus' && (
-                                <>
-                                  {amusementData.attributes.animeBroadcast1 !== null && '|'}
-                                  <AniplusWhite /> <span>애니플러스</span> 방영{' '}
-                                </>
-                              )}
-                              {amusementData.attributes.animeBroadcast2 === 'daewon' && (
-                                <>
-                                  {amusementData.attributes.animeBroadcast1 !== null && '|'}
-                                  <DaewonWhite /> <span>애니원</span> 방영{' '}
-                                </>
-                              )}
-                              {amusementData.attributes.animeBroadcast2 === 'anibox' && (
-                                <>
-                                  {amusementData.attributes.animeBroadcast1 !== null && '|'}
-                                  <AniboxWhite /> <span>애니박스</span> 방영{' '}
-                                </>
-                              )}
-                              {amusementData.attributes.animeBroadcast2 === 'tooniverse' && (
-                                <>
-                                  {amusementData.attributes.animeBroadcast1 !== null && '|'}
-                                  <TooniverseWhite /> <span>투니버스</span> 방영{' '}
-                                </>
-                              )}
-                              {amusementData.attributes.animeBroadcast2 === 'animax' && (
-                                <>
-                                  {amusementData.attributes.animeBroadcast1 !== null && '|'}
-                                  <AnimaxWhite /> <span>애니맥스 코리아</span> 방영{' '}
-                                </>
-                              )}
-                            </>
-                          )}
                           {((amusementData.attributes.category as Category) === 'game' ||
                             (amusementData.attributes.category as Category) === 'game_fan') &&
                             amusementData.attributes.isMobile &&
@@ -1754,12 +1665,6 @@ export default function Amusement({
                           {CategoryName(amusementData.attributes.category)}
                           {(amusementData.attributes.category as Category) === 'game_fan' && '팬 게임'}
                         </em>
-                      )}
-                      {amusementData.attributes.category === 'ott_anime_film' && (
-                        <>
-                          <em>애니메이션</em>
-                          <em>영화</em>
-                        </>
                       )}
                       {amusementData.attributes.category === 'ott_documentary_film' && (
                         <>
@@ -1770,12 +1675,6 @@ export default function Amusement({
                     </>
                   ) : (
                     <>
-                      {(amusementData.attributes.category as Category) === 'anime_film' && (
-                        <>
-                          <em>애니메이션</em>
-                          <em>영화</em>
-                        </>
-                      )}
                       {(amusementData.attributes.category as Category) === 'documentary_film' && (
                         <>
                           <em>다큐멘터리</em>
@@ -1791,7 +1690,6 @@ export default function Amusement({
                   {amusementData.attributes.ott === null &&
                     amusementData.attributes.category !== 'game_fan' &&
                     amusementData.attributes.ottAddr !== null && <em>단편영화</em>}
-                  {amusementData.attributes.anime !== null && <em>{AnimeName(amusementData.attributes.anime)}</em>}
                 </dd>
               </div>
               {amusementData.attributes.runningTime && (
@@ -1819,18 +1717,12 @@ export default function Amusement({
                   <dt>
                     {(amusementData.attributes.category === 'drama' ||
                       amusementData.attributes.category === 'ott_drama_enter' ||
-                      amusementData.attributes.category === 'ott_drama' ||
-                      amusementData.attributes.category === 'ott_anime' ||
-                      amusementData.attributes.anime === 'tva') &&
+                      amusementData.attributes.category === 'ott_drama') &&
                       '방영'}
                     {(amusementData.attributes.category === 'film' ||
-                      amusementData.attributes.category === 'anime_film' ||
-                      amusementData.attributes.category === 'ott_anime_film' ||
-                      amusementData.attributes.category === 'ott_film' ||
-                      amusementData.attributes.anime === 'film') &&
+                      amusementData.attributes.category === 'ott_film') &&
                       '상영'}
-                    {(amusementData.attributes.category === 'game' || amusementData.attributes.anime === 'ova') &&
-                      '출시'}
+                    {amusementData.attributes.category === 'game' && '출시'}
                     년도
                   </dt>
                   <dd>{amusementData.attributes.release}년</dd>
@@ -1855,10 +1747,7 @@ export default function Amusement({
                       <>
                         {(amusementData.attributes.category === 'drama' ||
                           amusementData.attributes.category === 'ott_drama_enter' ||
-                          amusementData.attributes.category === 'ott_drama' ||
-                          amusementData.attributes.category === 'ott_anime' ||
-                          amusementData.attributes.anime === 'tva' ||
-                          amusementData.attributes.anime === 'ova') && (
+                          amusementData.attributes.category === 'ott_drama') && (
                           <>
                             {amusementData.attributes.rating === 'all' ? (
                               <>
@@ -1889,11 +1778,8 @@ export default function Amusement({
                           </>
                         )}
                         {(amusementData.attributes.category === 'film' ||
-                          amusementData.attributes.category === 'anime_film' ||
-                          amusementData.attributes.category === 'ott_anime_film' ||
                           amusementData.attributes.category === 'ott_film' ||
-                          amusementData.attributes.category === 'ott_documentary_film' ||
-                          amusementData.attributes.anime === 'film') && (
+                          amusementData.attributes.category === 'ott_documentary_film') && (
                           <>
                             {amusementData.attributes.rating === 'all' && (
                               <>
@@ -2019,15 +1905,7 @@ export default function Amusement({
               <>
                 {amusementData.attributes.cast !== null && (
                   <div>
-                    {amusementData.attributes.category !== 'anime' &&
-                    amusementData.attributes.category !== 'anime_film' &&
-                    amusementData.attributes.category !== 'ott_anime' &&
-                    amusementData.attributes.category !== 'ott_anime_film' &&
-                    amusementData.attributes.category !== 'game' ? (
-                      <dt>주요 출연자</dt>
-                    ) : (
-                      <dt>주요 성우</dt>
-                    )}
+                    {amusementData.attributes.category !== 'game' ? <dt>주요 출연자</dt> : <dt>주요 성우</dt>}
                     <dd className="seed">{truncateString(amusementData.attributes.cast, 72)}</dd>
                   </div>
                 )}

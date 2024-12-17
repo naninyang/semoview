@@ -124,89 +124,6 @@ export function AmusementItem({
         <dl>
           {platform ? (
             <>
-              {amusement.animeBroadcast2 && !platformAnime2 && (
-                <div
-                  className={`${styles.anime2} ${amusement.animeBroadcast1 === null || platformAnime1 ? styles.anime2only : ''}`}
-                >
-                  <dt>한국 방송사</dt>
-                  <dd>
-                    {amusement.animeBroadcast2 === 'aniplus' && (
-                      <>
-                        <AniplusIcon /> <span>애니플러스</span>
-                      </>
-                    )}
-                    {amusement.animeBroadcast2 === 'daewon' && (
-                      <>
-                        <DaewonIcon /> <span>애니원</span>
-                      </>
-                    )}
-                    {amusement.animeBroadcast2 === 'anibox' && (
-                      <>
-                        <AniboxIcon /> <span>애니박스</span>
-                      </>
-                    )}
-                    {amusement.animeBroadcast2 === 'tooniverse' && (
-                      <>
-                        <TooniverseIcon /> <span>투니버스</span>
-                      </>
-                    )}
-                    {amusement.animeBroadcast2 === 'animax' && (
-                      <>
-                        <AnimaxIcon /> <span>애니맥스 코리아</span>
-                      </>
-                    )}
-                  </dd>
-                </div>
-              )}
-              {amusement.animeBroadcast1 && !platformAnime1 && (
-                <div
-                  className={`${styles.anime1} ${amusement.animeBroadcast1 ? styles.anime1 : ''} ${amusement.ott && !platformOtt && !platformAnime1 ? styles.broadcasts : ''}`}
-                >
-                  <dt>일본 방송사</dt>
-                  <dd>
-                    {amusement.animeBroadcast1 === 'tokyomx' && (
-                      <>
-                        <TokyomxIcon /> <span>도쿄MX</span>
-                      </>
-                    )}
-                    {amusement.animeBroadcast1 === 'tvtokyo' && (
-                      <>
-                        <TvtokyoIcon /> <span>테레토</span>
-                      </>
-                    )}
-                    {amusement.animeBroadcast1 === 'fujitv' && (
-                      <>
-                        <FujitvIcon /> <span>후지테레비</span>
-                      </>
-                    )}
-                    {amusement.animeBroadcast1 === 'mbs' && (
-                      <>
-                        <MbsIcon /> <span>MBS</span>
-                      </>
-                    )}
-                    {amusement.animeBroadcast1 === 'tbs' && (
-                      <>
-                        <TbsIcon /> <span>TBS</span>
-                      </>
-                    )}
-                    {amusement.animeBroadcast1 === 'atx' && (
-                      <>
-                        <AtxIcon /> <span>AT-X</span>
-                      </>
-                    )}
-                    {amusement.animeBroadcast1 === 'nippontv' && (
-                      <>
-                        <NippontvIcon /> <span>닛테레</span>
-                      </>
-                    )}
-                    {amusement.animeBroadcast1 === 'wowow' && (
-                      <>
-                        <WowowIcon /> <span>WOWOW</span>
-                      </>
-                    )}
-                  </dd>
-                </div>
-              )}
               {(amusement.broadcast || amusement.wavveSeries) && !platformDrama && (
                 <div className={`${styles.broadcast} ${amusement.ott && !platformOtt ? styles.broadcasts : ''}`}>
                   <dt>방송사</dt>
@@ -318,20 +235,14 @@ export function AmusementItem({
                       amusement.ott === 'netflixPresents' ||
                       amusement.ott === 'netflixOriginal' ||
                       amusement.ott === 'netflixFilm' ||
-                      amusement.ott === 'netflixAnime' ||
                       amusement.ott === 'netflixAnimeFilm' ||
                       amusement.ott === 'netflixDocumentary') && (
                       <>
                         <NetflixIcon />
                         <span>
-                          {(amusement.ott === 'netflixSeries' ||
-                            amusement.ott === 'netflixOriginal' ||
-                            amusement.ott === 'netflixAnime') &&
+                          {(amusement.ott === 'netflixSeries' || amusement.ott === 'netflixOriginal') &&
                             '넷플릭스 시리즈'}
-                          {(amusement.ott === 'netflixPresents' ||
-                            amusement.ott === 'netflixFilm' ||
-                            amusement.ott === 'netflixAnimeFilm') &&
-                            '넷플릭스 영화'}
+                          {(amusement.ott === 'netflixPresents' || amusement.ott === 'netflixFilm') && '넷플릭스 영화'}
                           {amusement.ott === 'netflixDocumentary' && '넷플릭스 다큐멘터리'}
                         </span>
                       </>
@@ -386,87 +297,6 @@ export function AmusementItem({
             </>
           ) : (
             <>
-              {amusement.animeBroadcast2 && (
-                <div className={`${styles.anime2} ${amusement.animeBroadcast1 === null ? styles.anime2only : ''}`}>
-                  <dt>한국 방송사</dt>
-                  <dd>
-                    {amusement.animeBroadcast2 === 'aniplus' && (
-                      <>
-                        <AniplusIcon /> <span>애니플러스</span>
-                      </>
-                    )}
-                    {amusement.animeBroadcast2 === 'daewon' && (
-                      <>
-                        <DaewonIcon /> <span>애니원</span>
-                      </>
-                    )}
-                    {amusement.animeBroadcast2 === 'anibox' && (
-                      <>
-                        <AniboxIcon /> <span>애니박스</span>
-                      </>
-                    )}
-                    {amusement.animeBroadcast2 === 'tooniverse' && (
-                      <>
-                        <TooniverseIcon /> <span>투니버스</span>
-                      </>
-                    )}
-                    {amusement.animeBroadcast2 === 'animax' && (
-                      <>
-                        <AnimaxIcon /> <span>애니맥스 코리아</span>
-                      </>
-                    )}
-                  </dd>
-                </div>
-              )}
-              {amusement.animeBroadcast1 && (
-                <div
-                  className={`${styles.anime1} ${amusement.animeBroadcast1 ? styles.anime1 : ''} ${amusement.ott ? styles.broadcasts : ''}`}
-                >
-                  <dt>일본 방송사</dt>
-                  <dd>
-                    {amusement.animeBroadcast1 === 'tokyomx' && (
-                      <>
-                        <TokyomxIcon /> <span>도쿄MX</span>
-                      </>
-                    )}
-                    {amusement.animeBroadcast1 === 'tvtokyo' && (
-                      <>
-                        <TvtokyoIcon /> <span>테레토</span>
-                      </>
-                    )}
-                    {amusement.animeBroadcast1 === 'fujitv' && (
-                      <>
-                        <FujitvIcon /> <span>후지테레비</span>
-                      </>
-                    )}
-                    {amusement.animeBroadcast1 === 'mbs' && (
-                      <>
-                        <MbsIcon /> <span>MBS</span>
-                      </>
-                    )}
-                    {amusement.animeBroadcast1 === 'tbs' && (
-                      <>
-                        <TbsIcon /> <span>TBS</span>
-                      </>
-                    )}
-                    {amusement.animeBroadcast1 === 'atx' && (
-                      <>
-                        <AtxIcon /> <span>AT-X</span>
-                      </>
-                    )}
-                    {amusement.animeBroadcast1 === 'nippontv' && (
-                      <>
-                        <NippontvIcon /> <span>닛테레</span>
-                      </>
-                    )}
-                    {amusement.animeBroadcast1 === 'wowow' && (
-                      <>
-                        <WowowIcon /> <span>WOWOW</span>
-                      </>
-                    )}
-                  </dd>
-                </div>
-              )}
               {(amusement.broadcast || amusement.wavveSeries) && (
                 <div className={`${styles.broadcast} ${amusement.ott ? styles.broadcasts : ''}`}>
                   <dt>방송사</dt>
@@ -588,20 +418,13 @@ export function AmusementItem({
                       amusement.ott === 'netflixPresents' ||
                       amusement.ott === 'netflixOriginal' ||
                       amusement.ott === 'netflixFilm' ||
-                      amusement.ott === 'netflixAnime' ||
-                      amusement.ott === 'netflixAnimeFilm' ||
                       amusement.ott === 'netflixDocumentary') && (
                       <>
                         <NetflixIcon />
                         <span>
-                          {(amusement.ott === 'netflixSeries' ||
-                            amusement.ott === 'netflixOriginal' ||
-                            amusement.ott === 'netflixAnime') &&
+                          {(amusement.ott === 'netflixSeries' || amusement.ott === 'netflixOriginal') &&
                             '넷플릭스 시리즈'}
-                          {(amusement.ott === 'netflixPresents' ||
-                            amusement.ott === 'netflixFilm' ||
-                            amusement.ott === 'netflixAnimeFilm') &&
-                            '넷플릭스 영화'}
+                          {(amusement.ott === 'netflixPresents' || amusement.ott === 'netflixFilm') && '넷플릭스 영화'}
                           {amusement.ott === 'netflixDocumentary' && '넷플릭스 다큐멘터리'}
                         </span>
                       </>
@@ -653,10 +476,7 @@ export function AmusementItem({
                 <>
                   {(amusement.category === 'drama' ||
                     amusement.category === 'ott_drama' ||
-                    amusement.category === 'ott_anime' ||
-                    amusement.category === 'ott_documentary' ||
-                    amusement.anime === 'tva' ||
-                    amusement.anime === 'ova') && (
+                    amusement.category === 'ott_documentary') && (
                     <>
                       {amusement.rating === 'all' ? (
                         <>
@@ -681,11 +501,8 @@ export function AmusementItem({
                     </>
                   )}
                   {(amusement.category === 'film' ||
-                    amusement.category === 'anime_film' ||
-                    amusement.category === 'ott_anime_film' ||
                     amusement.category === 'ott_documentary_film' ||
-                    amusement.category === 'ott_film' ||
-                    amusement.anime === 'film') && (
+                    amusement.category === 'ott_film') && (
                     <>
                       {amusement.rating === 'all' && (
                         <>

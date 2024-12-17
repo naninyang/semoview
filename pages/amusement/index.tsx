@@ -630,8 +630,7 @@ function Amusement({
                     )}
                     {(amusement.category === 'film' ||
                       amusement.category === 'ott_documentary_film' ||
-                      amusement.category === 'ott_film' ||
-                      amusement.anime === 'film') && (
+                      amusement.category === 'ott_film') && (
                       <>
                         {amusement.rating === 'all' && (
                           <>
@@ -1310,11 +1309,6 @@ function Amusement({
                       <span>#백합</span> <span>#레즈</span>
                     </Anchor>
                   </li>
-                  <li className={router.query.tag === 'horror' && category === 'anime' ? styles.current : ''}>
-                    <Anchor href="/amusement?tag=horror&category=anime&page=1">
-                      <span>#공포</span> <span>#호러</span> <span>#애니</span>
-                    </Anchor>
-                  </li>
                   <li className={router.query.tag === 'anomalies' && category === 'game' ? styles.current : ''}>
                     <Anchor href="amusement?tag=anomalies&category=game&page=1">
                       <span>#이상현상</span> <span>#아노말리</span> <span>#게임</span>
@@ -1693,7 +1687,6 @@ function CategoryTitle(category: keyof typeof CategoryTitle): string {
     film: '영화 사회에서는\n영원한 우방도, 영원한 적도 없다!',
     game: '게임은 끝날 때까지\n끝난 게 아니다!',
     game_fan: '이세계\n팬 게임 모음',
-    anime: '애니입니다만,\n문제라도?',
     ott: '퇴근 후,\n이세계 OTT에서만\n볼 수 있는 작품을.',
   };
   return categoryTitles[category] || '카테고리를 찾을 수 없어요';
@@ -1718,11 +1711,9 @@ function TagTitle(tag: keyof typeof TagTitle, category?: string): string {
     horror:
       category === 'drama'
         ? '심신미약자, 임산부, 노약자\n시청금지 공포 드라마!'
-        : category === 'anime'
-          ? '심신미약자, 임산부, 노약자\n시청금지 공포 애니!'
-          : category === 'film'
-            ? '심신미약자, 임산부, 노약자\n시청금지 공포 영화!'
-            : '심신미약자, 임산부, 노약자\n시청금지 공포 게임!',
+        : category === 'film'
+          ? '심신미약자, 임산부, 노약자\n시청금지 공포 영화!'
+          : '심신미약자, 임산부, 노약자\n시청금지 공포 게임!',
   };
   return tagTitles[tag] || '해시태그를 찾을 수 없어요';
 }

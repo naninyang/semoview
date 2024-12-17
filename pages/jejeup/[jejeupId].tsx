@@ -908,11 +908,9 @@ export default function JejeupDetail({
                 {(amusementData.category === 'drama' ||
                   amusementData.category === 'film' ||
                   amusementData.category === 'game' ||
-                  amusementData.category === 'anime' ||
                   amusementData.category === 'ott_drama_enter' ||
                   amusementData.category === 'ott_drama' ||
-                  amusementData.category === 'ott_film' ||
-                  amusementData.category === 'ott_anime') && (
+                  amusementData.category === 'ott_film') && (
                   <em className={styles[amusementData.broadcast]}>
                     {amusementData.broadcast === 'ENA' && (
                       <>
@@ -995,91 +993,10 @@ export default function JejeupDetail({
                           )}
                         </React.Fragment>
                       ))}
-                    {(amusementData.animeBroadcast1 !== null || amusementData.animeBroadcast2 !== null) && (
-                      <>
-                        {amusementData.animeBroadcast1 === 'tokyomx' && (
-                          <>
-                            <Tokyomx /> <span>도쿄MX</span>
-                          </>
-                        )}
-                        {amusementData.animeBroadcast1 === 'tvtokyo' && (
-                          <>
-                            <Tvtokyo /> <span>테레토</span>
-                          </>
-                        )}
-                        {amusementData.animeBroadcast1 === 'fujitv' && (
-                          <>
-                            <Fujitv /> <span>후지테레비</span>
-                          </>
-                        )}
-                        {amusementData.animeBroadcast1 === 'mbs' && (
-                          <>
-                            <Mbs /> <span>MBS</span>
-                          </>
-                        )}
-                        {amusementData.animeBroadcast1 === 'tbs' && (
-                          <>
-                            <Tbs /> <span>TBS</span>
-                          </>
-                        )}
-                        {amusementData.animeBroadcast1 === 'atx' && (
-                          <>
-                            <Atx /> <span>AT-X</span>
-                          </>
-                        )}
-                        {amusementData.animeBroadcast1 === 'nippontv' && (
-                          <>
-                            <Nippontv /> <span>닛테레</span>
-                          </>
-                        )}
-                        {amusementData.animeBroadcast1 === 'wowow' && (
-                          <>
-                            <Wowow /> <span>WOWOW</span>
-                          </>
-                        )}
-                        {amusementData.animeBroadcast2 === 'aniplus' && (
-                          <>
-                            {amusementData.animeBroadcast1 !== null && '|'}
-                            <Aniplus />
-                            <span>애니플러스</span> 방영{' '}
-                          </>
-                        )}
-                        {amusementData.animeBroadcast2 === 'daewon' && (
-                          <>
-                            {amusementData.animeBroadcast1 !== null && '|'}
-                            <Daewon /> <span>애니원</span> 방영{' '}
-                          </>
-                        )}
-                        {amusementData.animeBroadcast2 === 'anibox' && (
-                          <>
-                            {amusementData.animeBroadcast1 !== null && '|'}
-                            <Anibox /> <span>애니박스</span> 방영{' '}
-                          </>
-                        )}
-                        {amusementData.animeBroadcast2 === 'tooniverse' && (
-                          <>
-                            {amusementData.animeBroadcast1 !== null && '|'}
-                            <Tooniverse /> <span>투니버스</span> 방영{' '}
-                          </>
-                        )}
-                        {amusementData.animeBroadcast2 === 'animax' && (
-                          <>
-                            {amusementData.animeBroadcast1 !== null && '|'}
-                            <Animax /> <span>애니맥스</span> 방영{' '}
-                          </>
-                        )}
-                      </>
-                    )}
                     {amusementData.category === 'game' && amusementData.isMobile && '모바일 '}
                     {CategoryName(amusementData.category)}
                     {amusementData.ott === null && amusementData.ottAddr !== null && ' | 단편영화'}
                   </em>
-                )}
-                {amusementData.category === 'ott_anime_film' && (
-                  <>
-                    <em>애니메이션</em>
-                    <em>영화</em>
-                  </>
                 )}
                 {amusementData.category === 'ott_documentary_film' && (
                   <>
@@ -1130,15 +1047,8 @@ export default function JejeupDetail({
                     드라마
                   </em>
                 )}
-                {amusementData.category === 'anime_film' && (
-                  <>
-                    <em>애니메이션</em>
-                    <em>영화</em>
-                  </>
-                )}
               </>
             )}
-            {amusementData.category === 'anime' && <em>{AnimeName(amusementData.anime)}</em>}
             {amusementData.ott === 'amazonOriginal' && (
               <cite>
                 <AmazonOriginal /> AMAZON ORIGINAL
@@ -1164,16 +1074,12 @@ export default function JejeupDetail({
                 <StarOriginal /> Star Original
               </cite>
             )}
-            {(amusementData.ott === 'netflixSeries' ||
-              amusementData.ott === 'netflixOriginal' ||
-              amusementData.ott === 'netflixAnime') && (
+            {(amusementData.ott === 'netflixSeries' || amusementData.ott === 'netflixOriginal') && (
               <cite>
                 <NetflixOriginal /> A NETFLIX Series
               </cite>
             )}
-            {(amusementData.ott === 'netflixPresents' ||
-              amusementData.ott === 'netflixFilm' ||
-              amusementData.ott === 'netflixAnimeFilm') && (
+            {(amusementData.ott === 'netflixPresents' || amusementData.ott === 'netflixFilm') && (
               <cite>
                 <NetflixOriginal /> NETFLIX Presents
               </cite>
@@ -1240,10 +1146,7 @@ export default function JejeupDetail({
               <>
                 {(amusementData.category === 'drama' ||
                   amusementData.category === 'ott_drama_enter' ||
-                  amusementData.category === 'ott_drama' ||
-                  amusementData.category === 'ott_anime' ||
-                  amusementData.anime === 'tva' ||
-                  amusementData.anime === 'ova') && (
+                  amusementData.category === 'ott_drama') && (
                   <>
                     {amusementData.rating === 'all' ? (
                       <>
@@ -1270,11 +1173,8 @@ export default function JejeupDetail({
                   </>
                 )}
                 {(amusementData.category === 'film' ||
-                  amusementData.category === 'anime_film' ||
-                  amusementData.category === 'ott_anime_film' ||
                   amusementData.category === 'ott_film' ||
-                  amusementData.category === 'ott_documentary_film' ||
-                  amusementData.anime === 'film') && (
+                  amusementData.category === 'ott_documentary_film') && (
                   <>
                     {amusementData.rating === 'all' && (
                       <>
@@ -1406,17 +1306,9 @@ export default function JejeupDetail({
               <dt>
                 {(amusementData.category === 'drama' ||
                   amusementData.category === 'ott_drama_enter' ||
-                  amusementData.category === 'ott_drama' ||
-                  amusementData.category === 'ott_anime' ||
-                  amusementData.anime === 'tva' ||
-                  amusementData.anime === 'ova') &&
+                  amusementData.category === 'ott_drama') &&
                   '방영년도'}
-                {(amusementData.category === 'film' ||
-                  amusementData.category === 'anime_film' ||
-                  amusementData.category === 'ott_anime_film' ||
-                  amusementData.category === 'ott_film' ||
-                  amusementData.anime === 'film') &&
-                  '상영년도'}
+                {(amusementData.category === 'film' || amusementData.category === 'ott_film') && '상영년도'}
                 {amusementData.category === 'game' && '출시년도'}
               </dt>
               <dd className="seed">{amusementData.release}년</dd>

@@ -140,7 +140,7 @@ function Categories({ dramaData, errorDrama }: { dramaData: any; errorDrama: str
       <Seo
         pageTitles={`리뷰 카테고리 선택하기 - ${originTitle}`}
         pageTitle={`리뷰 카테고리 선택하기`}
-        pageDescription="OTT / 영화 / 애니메이션 / 드라마 / 게임"
+        pageDescription="OTT / 영화 / 드라마 / 게임"
         pageImg={`https://semo.dev1stud.io/og-categories.webp?ts=${timestamp}`}
       />
       <ChoiceGenre />

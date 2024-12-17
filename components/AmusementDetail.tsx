@@ -199,71 +199,21 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                           {(amusement.category === 'drama' ||
                             amusement.category === 'film' ||
                             amusement.category === 'game' ||
-                            amusement.category === 'anime' ||
                             amusement.category === 'ott_drama_enter' ||
                             amusement.category === 'ott_drama' ||
-                            amusement.category === 'ott_film' ||
-                            amusement.category === 'ott_anime') && (
+                            amusement.category === 'ott_film') && (
                             <em>
                               {amusement.broadcast
                                 ? amusement.broadcast === 'KBS2'
                                   ? 'KBS 2TV '
                                   : `${amusement.broadcast} `
                                 : ''}
-                              {(amusement.animeBroadcast1 !== null || amusement.animeBroadcast2 !== null) && (
-                                <>
-                                  {amusement.animeBroadcast1 === 'tokyomx' && <span>도쿄MX</span>}
-                                  {amusement.animeBroadcast1 === 'tvtokyo' && <span>테레토</span>}
-                                  {amusement.animeBroadcast1 === 'fujitv' && <span>후지테레비</span>}
-                                  {amusement.animeBroadcast1 === 'mbs' && <span>MBS</span>}
-                                  {amusement.animeBroadcast1 === 'tbs' && <span>TBS</span>}
-                                  {amusement.animeBroadcast1 === 'atx' && <span>AT-X</span>}
-                                  {amusement.animeBroadcast1 === 'nippontv' && <span>닛테레</span>}
-                                  {amusement.animeBroadcast1 === 'wowow' && <span>WOWOW</span>}
-                                  {amusement.animeBroadcast2 === 'aniplus' && (
-                                    <>
-                                      {amusement.animeBroadcast1 !== null && '& '}
-                                      <span>애니플러스</span> 방영{' '}
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast2 === 'daewon' && (
-                                    <>
-                                      {amusement.animeBroadcast1 !== null && '& '}
-                                      <span>애니원</span> 방영{' '}
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast2 === 'anibox' && (
-                                    <>
-                                      {amusement.animeBroadcast1 !== null && '& '}
-                                      <span>애니박스</span> 방영{' '}
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast2 === 'tooniverse' && (
-                                    <>
-                                      {amusement.animeBroadcast1 !== null && '& '}
-                                      <span>투니버스</span> 방영{' '}
-                                    </>
-                                  )}
-                                  {amusement.animeBroadcast2 === 'animax' && (
-                                    <>
-                                      {amusement.animeBroadcast1 !== null && '& '}
-                                      <span>애니맥스 코리아</span> 방영{' '}
-                                    </>
-                                  )}
-                                </>
-                              )}
                               {((amusement.category as Category) === 'game' ||
                                 (amusement.category as Category) === 'game_fan') &&
                                 amusement.isMobile &&
                                 '모바일 '}
                               {CategoryName(amusement.category)}
                             </em>
-                          )}
-                          {amusement.category === 'ott_anime_film' && (
-                            <>
-                              <em>애니메이션</em>
-                              <em>영화</em>
-                            </>
                           )}
                           {amusement.category === 'ott_documentary_film' && (
                             <>
@@ -274,12 +224,6 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                         </>
                       ) : (
                         <>
-                          {(amusement.category as Category) === 'anime_film' && (
-                            <>
-                              <em>애니메이션</em>
-                              <em>영화</em>
-                            </>
-                          )}
                           {(amusement.category as Category) === 'documentary_film' && (
                             <>
                               <em>다큐멘터리</em>
@@ -295,19 +239,13 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                       {amusement.ott === null && amusement.category !== 'game_fan' && amusement.ottAddr !== null && (
                         <em>단편영화</em>
                       )}
-                      {amusement.anime !== null && <em>{AnimeName(amusement.anime)}</em>}
                     </dd>
                   </div>
                   {((!isMobile &&
-                    (amusement.category === 'ott_film' ||
-                      amusement.category === 'ott_anime_film' ||
-                      amusement.category === 'ott_documentary_film')) ||
+                    (amusement.category === 'ott_film' || amusement.category === 'ott_documentary_film')) ||
                     amusement.category === 'drama' ||
                     amusement.category === 'game' ||
-                    amusement.category === 'anime' ||
-                    amusement.category === 'anime_film' ||
                     amusement.category === 'ott_drama_enter' ||
-                    amusement.category === 'ott_anime' ||
                     amusement.category === 'ott_drama' ||
                     amusement.category === 'ott_documentary' ||
                     amusement.category === 'game' ||
@@ -336,27 +274,24 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                     </>
                   )}
                 </div>
-                {isMobile &&
-                  (amusement.category === 'ott_film' ||
-                    amusement.category === 'ott_anime_film' ||
-                    amusement.category === 'ott_documentary_film') && (
-                    <div className={styles.item}>
-                      {amusement.runningTime && (
-                        <div className={styles.country}>
-                          <dt>재생시간</dt>
-                          <dd className="seed">
-                            {amusement.runningTime}분{formatTime(amusement.runningTime)}
-                          </dd>
-                        </div>
-                      )}
-                      {amusement.country !== '?' && (
-                        <div className={styles.country}>
-                          <dt>제작국가</dt>
-                          <dd className="seed">{amusement.country}</dd>
-                        </div>
-                      )}
-                    </div>
-                  )}
+                {isMobile && (amusement.category === 'ott_film' || amusement.category === 'ott_documentary_film') && (
+                  <div className={styles.item}>
+                    {amusement.runningTime && (
+                      <div className={styles.country}>
+                        <dt>재생시간</dt>
+                        <dd className="seed">
+                          {amusement.runningTime}분{formatTime(amusement.runningTime)}
+                        </dd>
+                      </div>
+                    )}
+                    {amusement.country !== '?' && (
+                      <div className={styles.country}>
+                        <dt>제작국가</dt>
+                        <dd className="seed">{amusement.country}</dd>
+                      </div>
+                    )}
+                  </div>
+                )}
                 <div className={styles.item}>
                   {amusement.supportLang !== null && <ADCC items={amusement.supportLang} />}
                   {amusement.release !== '?' && (
@@ -368,17 +303,10 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                       <dt>
                         {(amusement.category === 'drama' ||
                           amusement.category === 'ott_drama_enter' ||
-                          amusement.category === 'ott_drama' ||
-                          amusement.category === 'ott_anime' ||
-                          amusement.anime === 'tva') &&
+                          amusement.category === 'ott_drama') &&
                           '방영'}
-                        {(amusement.category === 'film' ||
-                          amusement.category === 'anime_film' ||
-                          amusement.category === 'ott_anime_film' ||
-                          amusement.category === 'ott_film' ||
-                          amusement.anime === 'film') &&
-                          '상영'}
-                        {(amusement.category === 'game' || amusement.anime === 'ova') && '출시'}
+                        {(amusement.category === 'film' || amusement.category === 'ott_film') && '상영'}
+                        {amusement.category === 'game' && '출시'}
                         년도
                       </dt>
                       <dd className="seed">{amusement.release}년</dd>
@@ -400,10 +328,7 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                           <>
                             {(amusement.category === 'drama' ||
                               amusement.category === 'ott_drama_enter' ||
-                              amusement.category === 'ott_drama' ||
-                              amusement.category === 'ott_anime' ||
-                              amusement.anime === 'tva' ||
-                              amusement.anime === 'ova') && (
+                              amusement.category === 'ott_drama') && (
                               <>
                                 {amusement.rating === 'all' ? (
                                   <span>전체 이용가</span>
@@ -416,11 +341,8 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                               </>
                             )}
                             {(amusement.category === 'film' ||
-                              amusement.category === 'anime_film' ||
-                              amusement.category === 'ott_anime_film' ||
                               amusement.category === 'ott_film' ||
-                              amusement.category === 'ott_documentary_film' ||
-                              amusement.anime === 'film') && (
+                              amusement.category === 'ott_documentary_film') && (
                               <>
                                 {amusement.rating === 'all' && <span>전체 이용가</span>}
                                 {amusement.rating === 'b12' && <span>12세 이용가</span>}
@@ -469,10 +391,7 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                           <>
                             {(amusement.category === 'drama' ||
                               amusement.category === 'ott_drama_enter' ||
-                              amusement.category === 'ott_drama' ||
-                              amusement.category === 'ott_anime' ||
-                              amusement.anime === 'tva' ||
-                              amusement.anime === 'ova') && (
+                              amusement.category === 'ott_drama') && (
                               <>
                                 {amusement.rating === 'all' ? (
                                   <span>전체 이용가</span>
@@ -485,11 +404,8 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                               </>
                             )}
                             {(amusement.category === 'film' ||
-                              amusement.category === 'anime_film' ||
-                              amusement.category === 'ott_anime_film' ||
                               amusement.category === 'ott_film' ||
-                              amusement.category === 'ott_documentary_film' ||
-                              amusement.anime === 'film') && (
+                              amusement.category === 'ott_documentary_film') && (
                               <>
                                 {amusement.rating === 'all' && <span>전체 이용가</span>}
                                 {amusement.rating === 'b12' && <span>12세 이용가</span>}
@@ -575,11 +491,7 @@ const AmusementDetail: React.FC<AmusementDetailProps> = ({ amusement, sorting, o
                   <>
                     {amusement.cast !== null && (
                       <div>
-                        {amusement.category !== 'anime' &&
-                        amusement.category !== 'anime_film' &&
-                        amusement.category !== 'ott_anime' &&
-                        amusement.category !== 'ott_anime_film' &&
-                        amusement.category !== 'game' ? (
+                        {amusement.category !== 'game' ? (
                           <dt>주요 출연자</dt>
                         ) : amusement.dubbing !== null ? (
                           <dt>원어 성우</dt>

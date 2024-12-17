@@ -77,14 +77,6 @@ function Tags({ horrorDramaData, horrorDramaError }: { horrorDramaData: any; hor
         setHorrorFilmData(data);
         setHorrorFilmLoading(false);
 
-        response = await fetch('/api/tag?page=1&pageSize=7&tagName=horror&categoryName=anime');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        data = await response.json();
-        setHorrorAnimeData(data);
-        setHorrorAnimeLoading(false);
-
         response = await fetch('/api/tag?page=1&pageSize=5&tagName=horror&categoryName=game');
         if (!response.ok) {
           throw new Error('Network response was not ok');
