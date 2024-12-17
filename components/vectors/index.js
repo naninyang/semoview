@@ -1,6 +1,7 @@
 export const vectors = {
   backward: require('./backward.svg'),
   backwardLight: require('./backwardLight.svg'),
+  moeview: require('./moeview.svg'),
   semoview: require('./semoview.svg'),
   semoviewDark: require('./semoviewDark.svg'),
   semoviewDefault: require('./semoviewDefault.svg'),
@@ -50,7 +51,6 @@ export const vectors = {
     watchaOrigin: require('./ott/watcha-original.svg'),
     watchaOnly2: require('./ott/watcha-only2.svg'),
     watchaOrigin2: require('./ott/watcha-original2.svg'),
-    wavveIcon: require('./ott/wavve-icon.svg'),
     wavveOnly: require('./ott/wavve-only.svg'),
     wavveOrigin: require('./ott/wavve-original.svg'),
     wavveOnly2: require('./ott/wavve-only2.svg'),
@@ -121,9 +121,6 @@ export const vectors = {
     },
   },
   anime: {
-    aniboxIcon: require('./anime/anibox-icon.svg'),
-    anibox: require('./anime/anibox.svg'),
-    anibox2: require('./anime/anibox2.svg'),
     tvtokyoIcon: require('./anime/tvtokyo-icon.svg'),
     tvtokyo: require('./anime/tvtokyo.svg'),
     tvtokyo2: require('./anime/tvtokyo2.svg'),

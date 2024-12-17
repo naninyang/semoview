@@ -9,6 +9,10 @@ import { vectors } from '@/components/vectors';
 import Image from 'next/image';
 import Anchor from '@/components/Anchor';
 
+const MoeviewLogo = styled.i({
+  background: `url(${vectors.moeview}) no-repeat 50% 50%/contain`,
+});
+
 const SemoviewLogo = styled.i({
   background: `url(${vectors.semoview}) no-repeat 50% 50%/contain`,
 });
@@ -52,15 +56,23 @@ function Usage() {
         <div className={`${styles.about} seed`}>
           <section className={deviceSafari !== 'isSafari' ? styles.safari : ''}>
             <div className={styles.primary}>
-              <h1>
-                <span>
-                  <em>세</em>상의 <em>모</em>든 <i>리뷰</i>
-                </span>
-                <SemoviewLogo />
-              </h1>
+              <div className={styles.head}>
+                <h1>
+                  <span>
+                    <em>세</em>상의 <em>모</em>든 <i>리뷰</i>
+                  </span>
+                  <SemoviewLogo />
+                </h1>
+                <h1>
+                  <span>
+                    <em>모</em>듬 <em>애</em>니 리<i>뷰</i>
+                  </span>
+                  <MoeviewLogo />
+                </h1>
+              </div>
               <p>
-                세모뷰는 유튜브에 올라온 리뷰 영상들을 <span>눌러보지 않고도 어떤 작품인지 작품 정보를</span> 알 수 있게
-                해보자는 생각으로 탄생한 리뷰 전용 서비스입니다.
+                세모뷰와 애모뷰는 유튜브에 올라온 리뷰 영상들을 <span>눌러보지 않고도 어떤 작품인지 작품 정보를</span>{' '}
+                알 수 있게 해보자는 생각으로 탄생한 리뷰 전용 서비스입니다.
               </p>
             </div>
           </section>
@@ -92,6 +104,9 @@ function Usage() {
                 <p>
                   당신의 라이프에 맞춰서 골라 보세요! <span>영화, 드라마, 애니메이션, </span> 그리고 방송사 공식
                   요약본에 게임 실황까지!
+                </p>
+                <p>
+                  *세모뷰에서는 애니메이션 취급하지 않습니다. <span>(모애뷰에서는 애니메이션만 취급합니다.)</span>
                 </p>
               </div>
               <div className={styles.dummies}>
