@@ -9,15 +9,6 @@
   "background_color": "#eef5ff",
   "display": "standalone",
   "orientation": "portrait",
-  "screenshots": [
-    {
-      "src": "/screenshots/screenshot-0.png",
-      "sizes": "1276x1836",
-      "type": "image/png",
-      "platform": "narrow",
-      "label": "스모디 앱의 홈스크린"
-    }
-  ],
   "icons": [
     {
       "src": "/favicon/android-chrome-192x192.png",
