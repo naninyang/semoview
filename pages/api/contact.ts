@@ -24,7 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         },
         body: JSON.stringify({
           data: {
-            site: 'jejeup',
+            site: 'semoview',
             subject,
             guestName,
             guestEmail,
