@@ -1296,6 +1296,9 @@ export async function getWorksData(page?: number, pageSize?: number) {
   if (isProduction) {
     filterQuery += '&filters[$or][0][isPublish][$null]=true';
     filterQuery += '&filters[$or][1][isPublish]=true';
+    filterQuery += '&filters[category][$notContains]=anime';
+  } else {
+    filterQuery += '&filters[category][$notContains]=anime';
   }
   const response = await fetch(filterQuery, {
     method: 'GET',
